@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class DoctorController {
-    @Resource(name = "doctorservice")
+    @Resource(name = "doctorService")
     private DoctorService doctorService;
 }
