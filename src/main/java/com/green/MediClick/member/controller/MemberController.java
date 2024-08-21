@@ -1,12 +1,15 @@
 package com.green.MediClick.member.controller;
 
-import lombok.Data;
 
-@Data
+import com.green.MediClick.member.service.MemberService;
+import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/member")
 public class MemberController {
-    private int memNum;
-    private String memName;
-    private String memTel;
-    private String memRrn;
-    private String memRole;
+
+    @Resource(name = "memberService")
+    private MemberService memberService;
 }
