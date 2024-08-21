@@ -4,7 +4,7 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="member">
     <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
-        <result column="MEM_NUM" property="memNum" />
+        <id column="MEM_NUM" property="memNum" />
         <result column="MEM_NAME" property="memName" />
         <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
