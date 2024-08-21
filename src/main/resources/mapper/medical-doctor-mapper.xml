@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="doctorMapper">
+    <resultMap id="doctor" type="com.green.MediClick.medicaldortor.vo.DoctorVO">
+        <result column="DOC_NUM" property="docNum" />
+        <result column="DOC_NAME" property="docName" />
+        <result column="DEPT_NUM" property="deptNum" />
+    </resultMap>
+    <resultMap id="dept" type="com.green.MediClick.medicaldortor.vo.MedicalDept">
+        <result column="DEPT_NUM" property="deptNum" />
+        <result column="DEPT_NAME" property="deptName" />
+    </resultMap>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
