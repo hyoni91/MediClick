@@ -1,4 +1,4 @@
-package com.green.MediClick.medicaldortor.vo;
+package com.green.MediClick.medicaldoctor.vo;
 
 import lombok.Data;
 

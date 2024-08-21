@@ -3,12 +3,12 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="doctorMapper">
-    <resultMap id="doctor" type="com.green.MediClick.medicaldortor.vo.DoctorVO">
+    <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
         <result column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
         <result column="DEPT_NUM" property="deptNum" />
     </resultMap>
-    <resultMap id="dept" type="com.green.MediClick.medicaldortor.vo.MedicalDept">
+    <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
         <result column="DEPT_NUM" property="deptNum" />
         <result column="DEPT_NAME" property="deptName" />
     </resultMap>

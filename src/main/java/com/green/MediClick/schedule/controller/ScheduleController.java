@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/scedule")
-public class SceduleController {
+public class ScheduleController {
     @Resource(name = "scheduleService")
     private ScheduleService scheduleService;
 }
