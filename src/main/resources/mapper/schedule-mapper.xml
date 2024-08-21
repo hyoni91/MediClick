@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="scheduleMapper">
+	<resultMap id="schedule" type="com.green.MediClick.schedule.vo.ScheduleVO">
+        <id column="SCH_NUM" property="schNum"/>
+        <result column="DOC_NUM" property="docNum"/>
+        <result column="MEM_NUM" property="memNum"/>
+        <result column="REH_DATE" property="rehDate"/>
+        <result column="SCH_DATE" property="schDate"/>
+        <result column="DETAIL" property="detail"/>
+        <result column="SCH_STATUS" property="schStatus"/>
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
