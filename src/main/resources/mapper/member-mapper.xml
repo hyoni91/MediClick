@@ -11,7 +11,22 @@
         <result column="MEM_ROLE" property="memRole" />
 
     </resultMap>
-	
+    <!--회원 가입-->
+    <insert id="insertMember">
+    INSERT INTO MEDICAL_MEMBER (
+        MEM_NAME,
+        MEM_TEL,
+        MEM_RRN,
+        MEM_ROLE
+        ) VALUES(
+        #{memName},
+        #{memTel},
+        #{memRrn},
+        #{memRole}
+        )
+    </insert>
+
+
 </mapper>
 
 
