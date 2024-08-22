@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import './reset.css';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import LoginForm from './user/LoginForm';
 
 function App() {
+  const navigate=useNavigate()
+
+  
 
 
   return (
@@ -11,9 +16,9 @@ function App() {
       <div className='main'>
         <div className='header'>
           {/* 헤더 */}
-          <div className='logo'>MediClick</div>
+          <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
           <ul>
-            <li><span>로그인</span></li>
+            <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
             <li><span>회원가입</span></li>
           </ul>
 
@@ -29,14 +34,29 @@ function App() {
           </ul>
         </div>
   
-        <div className='main-img'>
-          {/* 메인이미지 */}
-          <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
-        </div>
+
       </div>
+
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/loginForm' element={<LoginForm/>}/>
+
+      </Routes>
 
     </div>
   );
+}
+
+const Home=()=>{
+  return(
+
+    <div className='main-img'>
+      {/* 메인이미지 */}
+      <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+    </div>
+
+
+  )
 }
 
 export default App;
