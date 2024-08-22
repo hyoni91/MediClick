@@ -12,25 +12,6 @@
         <id column="DEPT_NUM" property="deptNum" />
         <result column="DEPT_NAME" property="deptName" />
     </resultMap>
-    <!--의료진 insert-->
-    <insert id="insertDoctor">
-        INSERT INTO MEDICAL_DOCTOR (
-            DOC_NAME
-            , DEPT_NUM
-        ) VALUES (
-            #{docName}
-            , #{deptNum}
-        )
-    </insert>
-
-    <!--의료진 select-->
-    <select id="selectDoctor">
-        SELECT DOC_NUM
-        FROM MEDICAL_DOCTOR
-    </select>
-
-
-    
 </mapper>
 
 
