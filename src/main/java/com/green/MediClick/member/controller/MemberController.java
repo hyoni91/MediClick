@@ -16,6 +16,7 @@ public class MemberController {
     @Resource(name = "memberService")
     private MemberService memberService;
 
+    //회원가입
     @PostMapping("/insertMember")
     public void insertMember(@RequestBody MemberVO memberVO){
         memberService.insertMember(memberVO);
