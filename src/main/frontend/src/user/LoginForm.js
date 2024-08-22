@@ -37,8 +37,8 @@ const LoginForm = () => {
         }
       }
 
-      window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
-      setLoginInfo(loginInfo)
+      // window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
+      // setLoginInfo(loginInfo)
 
     })
     .catch((error)=>{
