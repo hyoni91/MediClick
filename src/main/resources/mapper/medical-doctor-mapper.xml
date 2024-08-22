@@ -12,7 +12,6 @@
         <id column="DEPT_NUM" property="deptNum" />
         <result column="DEPT_NAME" property="deptName" />
     </resultMap>
-	
 </mapper>
 
 
