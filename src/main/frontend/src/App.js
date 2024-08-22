@@ -3,6 +3,7 @@ import './App.css';
 import './reset.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginForm from './user/LoginForm';
+import UserLayout from './user/UserLayout';
 
 function App() {
   const navigate=useNavigate()
@@ -24,23 +25,16 @@ function App() {
 
         </div>
   
-        <div className='menu-bar'>
-          {/* 메뉴 바 */}
-          <ul>
-            <li><span>병원안내</span></li>
-            <li><span>진료과/의료진</span></li>
-            <li><span>진료예약</span></li>
-            <li><span>고객서비스</span></li>
-          </ul>
-        </div>
+        
   
 
       </div>
 
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/loginForm' element={<LoginForm/>}/>
-
+        {/* 유저용 */}
+        <Route path='/' element={<UserLayout/>}>
+          <Route path='/loginForm' element={<LoginForm/>}/>
+        </Route>
       </Routes>
 
     </div>
@@ -49,14 +43,10 @@ function App() {
 
 const Home=()=>{
   return(
-
     <div className='main-img'>
       {/* 메인이미지 */}
       <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
     </div>
-
-
   )
 }
-
 export default App;
