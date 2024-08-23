@@ -44,7 +44,14 @@ function App() {
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
           <Route path='loginForm' element={<LoginForm/>}/>
-          
+
+          {/* 진료과/의료진 페이지 */}
+          <Route path='medicalDoctor' element={<MedicalDoctor/>}/>
+          {/* 회원가입 페이지 */}
+          <Route path='joinForm' element={<JoinForm/>}/>
+          {/* 예약 화면 페이지 */}
+          <Route path='scheduleForm' element={<Schedule/>}/>
+
         </Route>
 
 
