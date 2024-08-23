@@ -5,12 +5,10 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginForm from './user/LoginForm';
 import UserLayout from './user/UserLayout';
 import AdminLayout from './admin/AdminLayout';
+import MedicalDoctor from './user/MedicalDoctor';
 
 function App() {
-  const navigate=useNavigate()
-
-  
-
+  const navigate=useNavigate();
 
   return (
     <div className="container">
@@ -44,7 +42,12 @@ function App() {
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
           <Route path='loginForm' element={<LoginForm/>}/>
-
+          {/* 진료과/의료진 페이지 */}
+          <Route path='medicalDoctor' element={<MedicalDoctor/>}/>
+          {/* 회원가입 페이지 */}
+          {/* <Route path='joinForm' element={<JoinForm/>}/> */}
+          {/* 예약 화면 페이지 */}
+          {/* <Route path='scheduleForm' element={<Schedule/>}/> */}
         </Route>
 
 
