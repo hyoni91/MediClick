@@ -4,7 +4,7 @@ import './reset.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginForm from './user/LoginForm';
 import UserLayout from './user/UserLayout';
-gimport AdminLayout from './admin/AdminLayout';
+import AdminLayout from './admin/AdminLayout';
 
 function App() {
   const navigate=useNavigate()
