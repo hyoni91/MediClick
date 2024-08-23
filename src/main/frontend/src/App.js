@@ -50,6 +50,7 @@ function App() {
           <Route path='joinForm' element={<JoinForm/>}/>
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
+
         </Route>
 
 
