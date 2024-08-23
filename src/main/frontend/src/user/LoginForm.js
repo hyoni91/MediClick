@@ -3,7 +3,7 @@ import './LoginForm.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({loginInfo,setLoginInfo}) => {
   const navigate=useNavigate()
   const [inputData,setInputData]=useState({
     memName:'',
@@ -43,7 +43,7 @@ const LoginForm = () => {
         window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
 
 
-        // setLoginInfo(loginInfo)
+        setLoginInfo(loginInfo)
 
         alert('로그인 성공')
 

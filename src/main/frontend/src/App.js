@@ -8,11 +8,41 @@ import AdminLayout from './admin/AdminLayout';
 import MedicalDoctor from './user/MedicalDoctor';
 import JoinForm from './user/JoinForm';
 import Schedule from './user/Schedule';
+import { useEffect, useState } from 'react';
 
 function App() {
   const navigate=useNavigate()
 
+  //로그인 정보를 저장할 수 있는 state변수
+  const [loginInfo,setLoginInfo]=useState({})
+
+
+  const loginInfoString=window.sessionStorage.getItem('loginIninfo')
+
+  useEffect(()=>{
+    if(loginInfoString!=null){
+      setLoginInfo(JSON.parse(window.sessionStorage.getItem('loginInfo')))
+    }
+
+  },[])
   
+  //로그아웃
+  function goLogout(){
+    window.sessionStorage.removeItem('loginInfo')
+    setLoginInfo({})
+    alert('로그아웃되었습니다.')
+    navigate('/')
+  }
+
+  //관리자 계정
+  function adminInfo(){
+    if(loginInfo.memRole=='ADMIN'){
+      navigate('/admin')
+    }
+    else{
+
+    }
+  }
 
 
   return (
@@ -46,7 +76,7 @@ function App() {
           {/* 메인페이지 */}
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
-          <Route path='loginForm' element={<LoginForm/>}/>
+          <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
 
           {/* 진료과/의료진 페이지 */}
           <Route path='medicalDoctor' element={<MedicalDoctor />}/>
