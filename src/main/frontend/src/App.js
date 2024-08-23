@@ -6,6 +6,8 @@ import LoginForm from './user/LoginForm';
 import UserLayout from './user/UserLayout';
 import AdminLayout from './admin/AdminLayout';
 import MedicalDoctor from './user/MedicalDoctor';
+import JoinForm from './user/JoinForm';
+import Schedule from './user/Schedule';
 
 function App() {
   const navigate=useNavigate();
@@ -45,9 +47,9 @@ function App() {
           {/* 진료과/의료진 페이지 */}
           <Route path='medicalDoctor' element={<MedicalDoctor/>}/>
           {/* 회원가입 페이지 */}
-          {/* <Route path='joinForm' element={<JoinForm/>}/> */}
+          <Route path='joinForm' element={<JoinForm/>}/>
           {/* 예약 화면 페이지 */}
-          {/* <Route path='scheduleForm' element={<Schedule/>}/> */}
+          <Route path='scheduleForm' element={<Schedule/>}/>
         </Route>
 
 
