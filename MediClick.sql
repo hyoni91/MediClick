@@ -11,8 +11,15 @@ CREATE TABLE MEDICAL_MEMBER(
 CREATE TABLE MEDICAL_DEPT(
 	DEPT_NUM INT PRIMARY KEY
 	,DEPT_NAME VARCHAR(30) NOT NULL
-	
 );
+
+-- 진료과 insert
+INSERT INTO medical_dept(DEPT_NAME) VALUES('유방암');
+INSERT INTO medical_dept(DEPT_NAME) VALUES('뇌종양');
+INSERT INTO medical_dept(DEPT_NAME) VALUES('갑상선암');
+INSERT INTO medical_dept(DEPT_NAME) VALUES('간암');
+INSERT INTO medical_dept(DEPT_NAME) VALUES('폐암');
+INSERT INTO medical_dept(DEPT_NAME) VALUES('혈액암');
 
 -- 의료진
 CREATE TABLE MEDICAL_DOCTOR(
@@ -21,6 +28,28 @@ CREATE TABLE MEDICAL_DOCTOR(
 	,DEPT_NUM INT REFERENCES MEDICAL_DEPT(DEPT_NUM)
 	
 );
+SELECT * FROM medical_dept;
+SELECT * FROM medical_doctor;
+
+DELETE FROM medical_doctor;
+
+UPDATE medical_doctor
+SET DOC_NAME = '정다영'
+WHERE DOC_NUM = 12;
+
+-- 의료진 insert
+INSERT INTO medical_doctor VALUES (7,'김현경', 1);
+INSERT INTO medical_doctor VALUES (8,'민정흠', 2);
+INSERT INTO medical_doctor VALUES (9,'유지현', 3);
+INSERT INTO medical_doctor VALUES (10,'서은송', 4);
+INSERT INTO medical_doctor VALUES (11,'김형진', 5);
+INSERT INTO medical_doctor VALUES (12,'김하루', 6);
+
+-- 의료진, 의사 JOIN select
+SELECT DOC_NAME, DEPT_NAME
+FROM medical_dept, medical_doctor
+WHERE medical_dept.DEPT_NUM = medical_doctor.DEPT_NUM;
+
 -- 예약
 CREATE TABLE (
 	SCH_NUM INT PRIMARY KEY AUTO_INCREMENT
@@ -31,3 +60,6 @@ CREATE TABLE (
 	,DETAIL VARCHAR(100)
 	,SCH_STATUS VARCHAR(10) DEFAULT('Y')
 );
+
+
+
