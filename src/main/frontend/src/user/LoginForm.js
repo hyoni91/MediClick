@@ -5,8 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate=useNavigate()
+  
   const [inputData,setInputData]=useState({
-
+    memName:'',
+    memRrn:'',
+    memRole:''
   })
 
 
@@ -15,8 +18,8 @@ const LoginForm = () => {
       ...inputData,
       [e.target.name]:e.target.value
     })
-    
   }
+
 
 
   function goLogin(){
@@ -27,18 +30,29 @@ const LoginForm = () => {
     }
 
     axios
-    .put('',inputData)
+    .put('/member/goLogin',inputData)
     .then((res)=>{
-
+      console.log(res.data)
       if(res.data!=''){
         const loginInfo={
           memName:res.data.memName,
-          memRrn:res.data.memRrn
+          memRrn:res.data.memRrn,
+          memRole:res.data.memRole
         }
+
+        //로그인정보 저장
+        window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
+        
+        // setLoginInfo(loginInfo)
+
+        alert('로그인 성공')
+  
+
+      }
+      else{
+        
       }
 
-      // window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
-      // setLoginInfo(loginInfo)
 
     })
     .catch((error)=>{

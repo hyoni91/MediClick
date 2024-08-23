@@ -33,7 +33,7 @@
             ,MEM_ROLE
         FROM MEDICAL_MEMBER
         WHERE MEM_NAME=#{memName}
-            ,MEM_RRN=#{memRrn}
+        AND MEM_RRN=#{memRrn}
     </select>
 
 
