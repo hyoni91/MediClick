@@ -10,6 +10,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
     memRrn:'',
     memRole:''
   })
+  
+
 
 
   function insertData(e){
@@ -45,7 +47,17 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
 
         setLoginInfo(loginInfo)
 
-        alert('로그인 성공')
+        alert(`${loginInfo.memName}님 반갑습니다.`)
+
+        
+
+        if(loginInfo.memRole=='USER'){
+          navigate('/')
+        }
+        else if(loginInfo.memRole=='ADMIN'){
+          navigate('/admin')
+        }
+        
 
       }
       else{
@@ -58,8 +70,6 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
     })
 
 
-    navigate('/')
-    
 
   }
 

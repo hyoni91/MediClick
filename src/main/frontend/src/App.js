@@ -17,7 +17,7 @@ function App() {
   const [loginInfo,setLoginInfo]=useState({})
 
 
-  const loginInfoString=window.sessionStorage.getItem('loginIninfo')
+  const loginInfoString=window.sessionStorage.getItem('loginInfo')
 
   useEffect(()=>{
     if(loginInfoString!=null){
@@ -34,15 +34,7 @@ function App() {
     navigate('/')
   }
 
-  //관리자 계정
-  function adminInfo(){
-    if(loginInfo.memRole=='ADMIN'){
-      navigate('/admin')
-    }
-    else{
 
-    }
-  }
 
 
   return (
@@ -52,13 +44,23 @@ function App() {
         <div className='header'>
           {/* 헤더 */}
           
-          
           <div className='mid-header'>
             <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
-            <ul>
-              <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
-              <li><span onClick={()=>{navigate('/JoinForm')}}>회원가입</span></li>
-            </ul>
+
+            {
+              Object.keys(loginInfo).length==0
+              ?
+              <ul>
+                <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
+                <li><span onClick={()=>{navigate('/JoinForm')}}>회원가입</span></li>
+              </ul>
+              :
+              <ul>
+                <li><span>{loginInfo.memName}님</span></li>
+                <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
+              </ul>
+            }
+            
           </div>
 
         </div>
