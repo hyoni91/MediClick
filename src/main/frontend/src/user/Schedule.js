@@ -16,7 +16,13 @@ const Schedule = () => {
       </div>
       <div>
         예약시간 선택
-        <div>예약시간 띄우기</div>
+        <div className='sch-btn'>예약시간 띄우기</div>
+        <button>10:00</button>
+        <button>11:00</button>
+        <button>12:00</button>
+        <button>15:00</button>
+        <button>16:00</button>
+        <button>17:00</button>
       </div>
       <div className='schedule-table'>
         <table>
@@ -47,7 +53,7 @@ const Schedule = () => {
       </div>
       <div>상기 내용으로 예약하시겠습니까?</div>
       <div>
-        <button type='button'>예약 확정</button>
+        <button  type='button'>예약 확정</button>
       </div>
     </div>
   )
