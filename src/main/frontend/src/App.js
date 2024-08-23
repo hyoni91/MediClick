@@ -8,9 +8,34 @@ import AdminLayout from './admin/AdminLayout';
 import MedicalDoctor from './user/MedicalDoctor';
 import JoinForm from './user/JoinForm';
 import Schedule from './user/Schedule';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const navigate=useNavigate();
+  const navigate=useNavigate()
+
+  //로그인 정보를 저장할 수 있는 state변수
+  const [loginInfo,setLoginInfo]=useState({})
+
+
+  const loginInfoString=window.sessionStorage.getItem('loginInfo')
+
+  useEffect(()=>{
+    if(loginInfoString!=null){
+      setLoginInfo(JSON.parse(window.sessionStorage.getItem('loginInfo')))
+    }
+
+  },[])
+  
+  //로그아웃
+  function goLogout(){
+    window.sessionStorage.removeItem('loginInfo')
+    setLoginInfo({})
+    alert('로그아웃되었습니다.')
+    navigate('/')
+  }
+
+
+
 
   return (
     <div className="container">
@@ -19,13 +44,23 @@ function App() {
         <div className='header'>
           {/* 헤더 */}
           
-          
           <div className='mid-header'>
             <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
-            <ul>
-              <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
-              <li><span onClick={()=>{navigate('/JoinForm')}}>회원가입</span></li>
-            </ul>
+
+            {
+              Object.keys(loginInfo).length==0
+              ?
+              <ul>
+                <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
+                <li><span onClick={()=>{navigate('/JoinForm')}}>회원가입</span></li>
+              </ul>
+              :
+              <ul>
+                <li><span>{loginInfo.memName}님</span></li>
+                <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
+              </ul>
+            }
+            
           </div>
 
         </div>
@@ -43,13 +78,15 @@ function App() {
           {/* 메인페이지 */}
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
-          <Route path='loginForm' element={<LoginForm/>}/>
+          <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+
           {/* 진료과/의료진 페이지 */}
-          <Route path='medicalDoctor' element={<MedicalDoctor/>}/>
+          <Route path='medicalDoctor' element={<MedicalDoctor />}/>
           {/* 회원가입 페이지 */}
           <Route path='joinForm' element={<JoinForm/>}/>
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
+
         </Route>
 
 
