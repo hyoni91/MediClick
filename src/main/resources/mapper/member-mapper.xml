@@ -26,6 +26,16 @@
         )
     </insert>
 
+    <!--로그인-->
+    <select id="goLogin" resultMap="member">
+        SELECT MEM_NAME
+            ,MEM_RRN
+            ,MEM_ROLE
+        FROM MEDICAL_MEMBER
+        WHERE MEM_NAME=#{memName}
+        AND MEM_RRN=#{memRrn}
+    </select>
+
 
 </mapper>
 
