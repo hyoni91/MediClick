@@ -1,6 +1,8 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const UserLayout = () => {
+  
   return (
     <div>
       <div className='menu-bar'>
@@ -12,6 +14,9 @@ const UserLayout = () => {
             <li><span>고객서비스</span></li>
           </ul>
         </div>
+
+
+        <Outlet/>
     </div>
   )
 }

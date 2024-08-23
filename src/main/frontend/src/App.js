@@ -4,6 +4,7 @@ import './reset.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginForm from './user/LoginForm';
 import UserLayout from './user/UserLayout';
+import AdminLayout from './admin/AdminLayout';
 
 function App() {
   const navigate=useNavigate()
@@ -17,11 +18,15 @@ function App() {
       <div className='main'>
         <div className='header'>
           {/* 헤더 */}
-          <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
-          <ul>
-            <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
-            <li><span>회원가입</span></li>
-          </ul>
+          
+          
+          <div className='mid-header'>
+            <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
+            <ul>
+              <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
+              <li><span>회원가입</span></li>
+            </ul>
+          </div>
 
         </div>
   
@@ -31,10 +36,20 @@ function App() {
       </div>
 
       <Routes>
+        
+
         {/* 유저용 */}
         <Route path='/' element={<UserLayout/>}>
-          <Route path='/loginForm' element={<LoginForm/>}/>
+          {/* 메인페이지 */}
+          <Route path='/' element={<Home/>}/>
+          {/* 로그인 페이지 */}
+          <Route path='loginForm' element={<LoginForm/>}/>
+
         </Route>
+
+
+        {/* 관리자용 */}
+        <Route path='/admin' element={<AdminLayout/>}/>
       </Routes>
 
     </div>
