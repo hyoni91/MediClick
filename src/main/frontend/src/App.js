@@ -44,6 +44,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
           <Route path='loginForm' element={<LoginForm/>}/>
+          
         </Route>
 
 
