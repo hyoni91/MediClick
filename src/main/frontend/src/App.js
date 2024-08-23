@@ -24,7 +24,7 @@ function App() {
             <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
             <ul>
               <li><span onClick={(e)=>{navigate('/loginForm')}}>로그인</span></li>
-              <li><span>회원가입</span></li>
+              <li><span onClick={()=>{navigate('/JoinForm')}}>회원가입</span></li>
             </ul>
           </div>
 
