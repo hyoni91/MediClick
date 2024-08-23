@@ -1,0 +1,21 @@
+img{
+  width: 250px;
+  height: 330px;
+  margin-left: 30px;
+  margin-top: 45px;
+}
+.doctorMem div{
+  margin: 50px;
+  margin-right: 75px;
+}
+.doctorIntro{
+  display: flex;
+  border: 1px solid ;
+}
+.doctorIntro > div{
+  display: flex;
+  width: 50%;
+}
+.cancer{
+  background-color: rgba(0, 0, 0, 0.04);
+}
