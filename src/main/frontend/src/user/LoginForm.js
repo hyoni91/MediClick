@@ -3,11 +3,15 @@ import './LoginForm.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({loginInfo,setLoginInfo}) => {
   const navigate=useNavigate()
   const [inputData,setInputData]=useState({
-
+    memName:'',
+    memRrn:'',
+    memRole:''
   })
+  
+
 
 
   function insertData(e){
@@ -27,18 +31,38 @@ const LoginForm = () => {
     }
 
     axios
-    .put('',inputData)
+    .put('/member/goLogin',inputData)
     .then((res)=>{
 
       if(res.data!=''){
         const loginInfo={
           memName:res.data.memName,
-          memRrn:res.data.memRrn
+          memRrn:res.data.memRrn,
+          memRole:res.data.memRole
         }
-      }
 
-      // window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
-      // setLoginInfo(loginInfo)
+        //로그인정보 저장
+        window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
+
+
+        setLoginInfo(loginInfo)
+
+        alert(`${loginInfo.memName}님 반갑습니다.`)
+
+        
+
+        if(loginInfo.memRole=='USER'){
+          navigate('/')
+        }
+        else if(loginInfo.memRole=='ADMIN'){
+          navigate('/admin')
+        }
+        
+
+      }
+      else{
+
+      }
 
     })
     .catch((error)=>{
@@ -46,8 +70,6 @@ const LoginForm = () => {
     })
 
 
-    navigate('/')
-    
 
   }
 

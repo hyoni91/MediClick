@@ -4,10 +4,7 @@ package com.green.MediClick.member.controller;
 import com.green.MediClick.member.service.MemberService;
 import com.green.MediClick.member.vo.MemberVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
@@ -20,5 +17,11 @@ public class MemberController {
     @PostMapping("/insertMember")
     public void insertMember(@RequestBody MemberVO memberVO){
         memberService.insertMember(memberVO);
+    }
+
+    //로그인
+    @PutMapping("/goLogin")
+    public MemberVO goLogin(@RequestBody MemberVO memberVO){
+        return memberService.goLogin(memberVO);
     }
 }

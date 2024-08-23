@@ -16,4 +16,9 @@ public class MemberServiceImpl implements MemberService{
     public void insertMember(MemberVO memberVO) {
         sqlSession.insert("member.insertMember",memberVO);
     }
+
+    @Override
+    public MemberVO goLogin(MemberVO memberVO) {
+        return sqlSession.selectOne("member.goLogin",memberVO);
+    }
 }
