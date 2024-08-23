@@ -24,6 +24,4 @@ public class MemberController {
     public MemberVO goLogin(@RequestBody MemberVO memberVO){
         return memberService.goLogin(memberVO);
     }
-
-
 }
