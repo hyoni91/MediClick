@@ -7,13 +7,13 @@ import './Schedule.css'
 const Schedule = () => {
   
   const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
-  console.log(value)
+  console.log(moment(value).format('YYYYMMDD'))
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     memNum: '',
     docNum : '',
-    schData: '',
+    schData: moment(value).format('YYYYMMDD'),
     detail:'',
     time : ''
   })
@@ -22,7 +22,6 @@ const Schedule = () => {
   const timeInput = useRef();
   // 환자가 선택한 시간
   const choseData = useRef()
-
 
   // 시간을 클릭 
   function clickTime(e){
@@ -65,7 +64,7 @@ const Schedule = () => {
           <tbody>
             <tr>
               <td>예약날짜</td>
-              <td><input  type='text' readOnly value={moment(value).format("YYYY-MM-DD")} name={appo.schData} ref={choseData}/></td>
+              <td><input  type='text' readOnly value={moment(value).format("YYYY-MM-DD")} name='schDate' ref={choseData}/></td>
             </tr>
             <tr>
               <td>예약시간</td>
