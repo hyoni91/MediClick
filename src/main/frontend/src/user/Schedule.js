@@ -30,6 +30,13 @@ const Schedule = () => {
     })
   }
 
+  // 증상 onchange
+  function changeDetail(e){
+    setAppo({...appo,
+      [e.target.name] : e.target.value
+    })
+  }
+
   console.log(appo)
 
   return (
@@ -37,24 +44,30 @@ const Schedule = () => {
       <div className='sch-flex'>
       <h3>예약날짜</h3>
         <div className='sch-calendar'>
-          <Calendar onChange={onChange} value={value} showNeighboringMonth={false} />
+          <Calendar 
+          onChange={onChange} 
+          value={value} 
+          showNeighboringMonth={false} 
+          next2Label={null}
+          prev2Label={null}
+          minDetail="year"
+          />
         </div>
         <div className='sch-time'>
           <hr />
           <h3>예약시간</h3>
           <div className='sch-btn'>
-            <button type='button' value={'09:00'} onClick={(e)=>{clickTime(e)}} >09:00</button>
-            <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}>10:00</button>
-            <button type='button'value={'11:00'}  onClick={(e)=>{clickTime(e)}}>11:00</button>
-            <button type='button'value={'12:00'}  onClick={(e)=>{clickTime(e)}}>12:00</button>
-            <button type='button'value={'15:00'}  onClick={(e)=>{clickTime(e)}}>15:00</button>
-            <button type='button'value={'16:00'}  onClick={(e)=>{clickTime(e)}}>16:00</button>
-            <button type='button'value={'17:00'}  onClick={(e)=>{clickTime(e)}}>17:00</button>
+            <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
+            <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}> 10:00</button>
+            <button type='button' value={'11:00'}  onClick={(e)=>{clickTime(e)}}> 11:00</button>
+            <button type='button' value={'12:00'}  onClick={(e)=>{clickTime(e)}}> 12:00</button>
+            <button type='button' value={'15:00'}  onClick={(e)=>{clickTime(e)}}> 15:00</button>
+            <button type='button' value={'16:00'}  onClick={(e)=>{clickTime(e)}}> 16:00</button>
+            <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button>
           </div>
           <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
         </div>
       </div>
-
       <div className='schedule-table'>
         <table>
           <colgroup>
@@ -64,7 +77,11 @@ const Schedule = () => {
           <tbody>
             <tr>
               <td>예약날짜</td>
-              <td><input  type='text' readOnly value={moment(value).format("YYYY-MM-DD")} name='schDate' ref={choseData}/></td>
+              <td>
+                <input  type='text' readOnly 
+              value={moment(value).format("YYYY-MM-DD")}
+              name='schDate' ref={choseData}/>
+              </td>
             </tr>
             <tr>
               <td>예약시간</td>
@@ -80,11 +97,11 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>주민번호</td>
-              <td><input type='tel' name=''value={'예)123456-123456'}/></td>
+              <td><input type='tel' name='' value={'예)123456-123456'}/></td>
             </tr>
             <tr>
               <td>증상</td>
-              <td><textarea rows={5} cols={41} name='detail'/></td>
+              <td><textarea rows={5} cols={41} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
             </tr>
           </tbody>
         </table>
