@@ -7,7 +7,6 @@ import './Schedule.css'
 const Schedule = () => {
   
   const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
-  console.log(moment(value).format('YYYYMMDD'))
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
@@ -85,19 +84,19 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>예약시간</td>
-              <td><input type='text' name='time' value={appo.time}  ref={timeInput} /></td>
+              <td><input type='text' name='time' value={appo.time}  ref={timeInput} onChange={(e)=>{}}/></td>
             </tr>
             <tr>
               <td>예약자명</td>
-              <td><input type='text' name='memName' value={'예)김아무개'}/> </td>
+              <td><input type='text' name='memName' readOnly value={'예)김아무개'}/> </td>
             </tr>
             <tr>
               <td>진료과목</td>
-              <td><input type='text' name='' value={'예)산부인과'} / ></td>
+              <td><input type='text' name='' value={'예)산부인과'} onChange={(e)=>{}} / ></td>
             </tr>
             <tr>
               <td>주민번호</td>
-              <td><input type='tel' name='' value={'예)123456-123456'}/></td>
+              <td><input type='tel' name='' readOnly value={'예)123456-123456'}/></td>
             </tr>
             <tr>
               <td>증상</td>
