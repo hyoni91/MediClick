@@ -1,5 +1,7 @@
 package com.green.MediClick.schedule.vo;
 
+import com.green.MediClick.medicaldoctor.vo.DoctorVO;
+import com.green.MediClick.member.vo.MemberVO;
 import lombok.Data;
 
 @Data
@@ -11,4 +13,6 @@ public class ScheduleVO {
     private String schDate;
     private String detail;
     private String schStatus;
+    private MemberVO memberVO;
+    private DoctorVO doctorVO;
 }
