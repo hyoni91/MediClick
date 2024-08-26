@@ -9,5 +9,4 @@ public class DoctorVO {
     private int docNum;
     private String docName;
     private List<MedicalDept> medicalDept;
-
 }
