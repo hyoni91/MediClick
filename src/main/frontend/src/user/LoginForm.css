@@ -22,3 +22,18 @@
 }
 
 
+
+.loginBtn{
+  background-color: #11999E;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.loginBtn:hover{
+  background-color:#0f8b8f ;
+}
+
+

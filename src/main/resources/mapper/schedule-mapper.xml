@@ -12,6 +12,40 @@
         <result column="DETAIL" property="detail"/>
         <result column="SCH_STATUS" property="schStatus"/>
     </resultMap>
+
+    <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
+        <id column="MEM_NUM" property="memNum" />
+        <result column="MEM_NAME" property="memName" />
+        <result column="MEM_TEL" property="memTel" />
+        <result column="MEM_RRN" property="memRrn" />
+        <result column="MEM_ROLE" property="memRole" />
+    </resultMap>
+
+    <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
+        <id column="DOC_NUM" property="docNum" />
+        <result column="DOC_NAME" property="docName" />
+        <result column="DEPT_NUM" property="deptNum" />
+    </resultMap>
+
+    <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
+        <id column="DEPT_NUM" property="deptNum" />
+        <result column="DEPT_NAME" property="deptName" />
+    </resultMap>
+
+
+
+        <!--관리자 : 담당의별 환자 차트-->
+     <select id="docMemChart" resultMap="schedule">
+        SELECT SCH_DATE
+                ,DOC_NAME
+                ,MEM_NAME
+                ,DETAIL
+                ,SCH_STATUS
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
+        WHERE S.DOC_NUM=#{docNum}
+        AND S.DOC_NUM=D.DOC_NUM
+        AND S.MEM_NUM=M.MEM_NUM
+     </select>
 </mapper>
 
 

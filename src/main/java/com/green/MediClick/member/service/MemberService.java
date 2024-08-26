@@ -8,4 +8,6 @@ public interface MemberService {
 
     //로그인
     MemberVO goLogin(MemberVO memberVO);
+
+    // 회원가입할 다음숫자
 }

@@ -6,5 +6,6 @@ import lombok.Data;
 public class DoctorVO {
     private int docNum;
     private String docName;
-    private int deptNum;
+    private MedicalDept medicalDept;
+
 }
