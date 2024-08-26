@@ -17,7 +17,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
 
-    @GetMapping("/getDocMemList")
+    @GetMapping("/getDocMemList/{docNum}")
     public List<ScheduleVO> getDocMemList(@PathVariable("docNum")int docNum){
         return scheduleService.getDocMem(docNum);
     }

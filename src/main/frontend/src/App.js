@@ -93,7 +93,7 @@ function App() {
 
         {/* 관리자용 */}
         <Route path='/admin' element={<AdminLayout/>}>
-            <Route path='docMemList' element={<DocMemList/>}/>
+            <Route path='docMemList/:docNum' element={<DocMemList/>}/>
         </Route>
       </Routes>
 

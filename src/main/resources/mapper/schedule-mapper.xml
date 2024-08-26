@@ -11,6 +11,8 @@
         <result column="SCH_DATE" property="schDate"/>
         <result column="DETAIL" property="detail"/>
         <result column="SCH_STATUS" property="schStatus"/>
+        <association property="doctorVO" resultMap="doctor"/>
+        <collection property="memberVO" resultMap="member"/>
     </resultMap>
 
     <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
@@ -25,6 +27,7 @@
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
         <result column="DEPT_NUM" property="deptNum" />
+        <association property="deptVO" resultMap="dept"/>
     </resultMap>
 
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
@@ -38,14 +41,18 @@
      <select id="docMemChart" resultMap="schedule">
         SELECT SCH_DATE
                 ,DOC_NAME
+                ,DEPT_NAME
                 ,MEM_NAME
                 ,DETAIL
                 ,SCH_STATUS
-        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M,MEDICAL_DEPT P
         WHERE S.DOC_NUM=#{docNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
+        AND D.DEPT_NUM=P.DEPT_NUM
      </select>
+
+
 </mapper>
 
 
