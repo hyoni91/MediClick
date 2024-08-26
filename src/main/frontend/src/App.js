@@ -9,6 +9,7 @@ import MedicalDoctor from './user/MedicalDoctor';
 import JoinForm from './user/JoinForm';
 import Schedule from './user/Schedule';
 import { useEffect, useState } from 'react';
+import DocMemList from './admin/DocMemList';
 
 function App() {
   const navigate=useNavigate()
@@ -91,7 +92,9 @@ function App() {
 
 
         {/* 관리자용 */}
-        <Route path='/admin' element={<AdminLayout/>}/>
+        <Route path='/admin' element={<AdminLayout/>}>
+            <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+        </Route>
       </Routes>
 
     </div>
