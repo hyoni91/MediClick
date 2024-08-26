@@ -9,7 +9,7 @@
         <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
         <result column="MEM_ROLE" property="memRole" />
-
+    <association property=""
     </resultMap>
     <!--회원 가입-->
     <insert id="insertMember">
@@ -17,13 +17,10 @@
         MEM_NAME,
         MEM_TEL,
         MEM_RRN,
-        MEM_ROLE
         ) VALUES(
         #{memName},
         #{memTel},
         #{memRrn},
-        #{memRole}
-        )
     </insert>
 
     <select id="goLogin" resultMap="member">
@@ -35,7 +32,12 @@
         AND MEM_RRN=#{memRrn}
     </select>
 
-
+    <!-- 다음에 들어갈 회원 가입 번호 -->
+    <select id="" re>
+    SELECT CONCAT('DOC_',LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0'))
+    FROM medical_member
+    WHERE MEM_ROLE = 'ADMIN'
+    </select>
 </mapper>
 
 
