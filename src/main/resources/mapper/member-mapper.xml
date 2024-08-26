@@ -9,7 +9,6 @@
         <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
         <result column="MEM_ROLE" property="memRole" />
-
     </resultMap>
     <!--회원 가입-->
     <insert id="insertMember">
