@@ -73,6 +73,7 @@ body{
 .main-img img{
   width: 100%;
   height: 800px;
+  margin: 0 auto;
   object-fit: cover;
   object-position: top; 
 }
