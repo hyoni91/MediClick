@@ -102,7 +102,7 @@ const Schedule = () => {
   return (
     <div className='sch-container'>
       <div className='sch-flex'>
-      <h3>예약날짜</h3>
+      {/* <h3>예약날짜</h3> */}
         <div className='sch-calendar'>
           <Calendar 
           onChange={onChange} 
@@ -116,79 +116,78 @@ const Schedule = () => {
           />
         </div>
         <div className='sch-time'>
-          <hr />
-          <h3>예약시간</h3>
           <div className='sch-btn'>
             <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
             <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}> 10:00</button>
             <button type='button' value={'11:00'}  onClick={(e)=>{clickTime(e)}}> 11:00</button>
             <button type='button' value={'12:00'}  onClick={(e)=>{clickTime(e)}}> 12:00</button>
+            <button type='button' value={'14:00'}  onClick={(e)=>{clickTime(e)}}> 14:00</button>
             <button type='button' value={'15:00'}  onClick={(e)=>{clickTime(e)}}> 15:00</button>
             <button type='button' value={'16:00'}  onClick={(e)=>{clickTime(e)}}> 16:00</button>
             <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button>
           </div>
           <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
         </div>
-      </div>
-      <div className='schedule-table'>
-        <table>
-          <colgroup>
-          <col width={'25%'}/>
-          <col width={'*'}/>
-          </colgroup>
-          <tbody>
-            <tr>
-              <td>예약날짜</td>
-              <td>
-                <input  type='text' readOnly 
-              value={moment(value).format("YYYY-MM-DD")}
-              name='schDate' ref={choseData}/>
-              </td>
-            </tr>
-            <tr>
-              <td>예약시간</td>
-              <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
-            </tr>
-            <tr>
-              <td>예약자명</td>
-              <td>
-                <input type='text' name='memName' readOnly 
-                value={loginInfo? loginInfo.memName : null}/> 
+      
+        <div className='schedule-table'>
+          <table>
+            <colgroup>
+            <col width={'23%'}/>
+            <col width={'*'}/>
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>예약날짜</td>
+                <td>
+                  <input  type='text' readOnly 
+                value={moment(value).format("YYYY-MM-DD")}
+                name='schDate' ref={choseData}/>
                 </td>
-            </tr>
-            <tr>
-              <td>진료과목</td>
-              <td>
-                <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}}>
-                  {
-                    docInfo.map((doc,i)=>{
-                      return(
-                        // <option key={i} 
-                        // value={doc.docNum} > {doc.medicalDept[0].deptName}
-                        // </option> 
-                        <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
-                          {doc.medicalDept[0].deptName}
-                        </option>
-                      )
-                    })
-                  }
-                </select>
+              </tr>
+              <tr>
+                <td>예약시간</td>
+                <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
+              </tr>
+              <tr>
+                <td>예약자명</td>
+                <td>
+                  <input type='text' name='memName' readOnly 
+                  value={loginInfo? loginInfo.memName : null}/> 
+                  </td>
+              </tr>
+              <tr>
+                <td>진료과목</td>
+                <td>
+                  <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+                    {
+                      docInfo.map((doc,i)=>{
+                        return(
+                          // <option key={i} 
+                          // value={doc.docNum} > {doc.medicalDept[0].deptName}
+                          // </option> 
+                          <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
+                            {doc.medicalDept[0].deptName}
+                          </option>
+                        )
+                      })
+                    }
+                  </select>
+                  </td>
+              </tr>
+              <tr>
+                <td>주민번호</td>
+                <td>
+                  <input type='tel' name='' readOnly 
+                value={loginInfo? loginInfo.memRrn:null}/>
                 </td>
-            </tr>
-            <tr>
-              <td>주민번호</td>
-              <td>
-                <input type='tel' name='' readOnly 
-              value={loginInfo? loginInfo.memRrn:null}/>
-              </td>
-            </tr>
-            <tr>
-              <td>증상</td>
-              <td><textarea rows={5} cols={41} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
-            </tr>
-          </tbody>
-        </table>
-        
+              </tr>
+              <tr>
+                <td>증상</td>
+                <td><textarea rows={5} cols={28} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
