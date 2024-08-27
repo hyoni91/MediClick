@@ -9,15 +9,10 @@ import { now } from 'moment/moment';
 const Schedule = () => {
   const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
   
-  const [startDate, setStartDate] = useState(new Date());
-  
-  // 오늘 날짜 기준으로 3개월 후의 날짜를 계산합니다.
+  // 오늘 날짜 기준으로 3개월 후의 날짜를 계산
   const minDate = new Date(); // 현재 날짜
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
-
-  // 예약 유무에 따른 시간 버튼 색상 변경
-  const [availableTimes, setAvailableTimes] = useState({});
 
   // member정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
@@ -59,8 +54,7 @@ const Schedule = () => {
     })
   }
 
-
-  // 의료진과 진료과 번호 동시에 받기
+  // 의료진과 진료과 정보 동시에 받기
   function changeDocInfo(e){
     const selectedValue = e.target.value; // JSON 문자열
     const { deptNum, docNum } = JSON.parse(selectedValue); // JSON 파싱
@@ -71,7 +65,7 @@ const Schedule = () => {
     })
   }
 
-  // 증상  onchange
+  // 증상 정보 받기
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
@@ -198,8 +192,7 @@ const Schedule = () => {
             </tbody>
           </table>
         </div>
-      
-      <div>상기 내용으로 예약하시겠습니까?</div>
+      <div className='sch-footer'>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
         <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
       </div>
