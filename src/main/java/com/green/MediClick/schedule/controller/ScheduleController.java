@@ -40,4 +40,10 @@ public class ScheduleController {
         scheduleService.schInput(scheduleVO);
     }
 
+    // 예약 유무 확인
+    @PostMapping("/checkAppo")
+    public ScheduleVO checkAppo(@RequestBody ScheduleVO scheduleVO){
+        return scheduleService.checkAppo(scheduleVO);
+    }
+
 }

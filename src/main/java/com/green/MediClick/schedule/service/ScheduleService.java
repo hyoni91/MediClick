@@ -18,7 +18,8 @@ public interface ScheduleService {
     // 예약 insert
     void schInput(ScheduleVO scheduleVO);
 
-
+    //예약 유무 확인
+    ScheduleVO checkAppo(ScheduleVO scheduleVO);
 
 
 
