@@ -22,7 +22,19 @@ const DocMemList = () => {
 
 
   function goDelete(){
+    // 예약상태를 Y에서 N로 바꾸는 그거  ㅇ
+    // update쿼리  ㅇ
+    // map돌린거에서 schNum 빼오기 
+    // 예약취소하면 취소버튼이 취소되었습니다 텍스트로 변하기
+    // 아니면 취소버튼 막기 !! 
+    // 아니면 취소버튼 클릭했을 때 이미 취소된 예약입니다 띄우기 
+    axios
+    .put(``)
+    .then((res)=>{
 
+    })
+    .catch((error)=>{console.log(error)})
+    
   }
 
 
@@ -57,12 +69,11 @@ const DocMemList = () => {
         <h4>| 담당 환자 정보</h4>
         <table className='chart-table'>
           <colgroup>
-            <col width='12%'/>
+            <col width='20%'/>
             <col width='10%'/>
-            <col width='25%'/>
             <col width='30%'/>
-            <col width='6%'/>
-            <col width='12%'/>
+            <col width='30%'/>
+            <col width='10%'/>
           </colgroup>
 
           <thead>
@@ -72,7 +83,6 @@ const DocMemList = () => {
               <td>증상</td>
               <td>처방</td>
               <td>예약 상태</td>
-              <td>다음 예약일</td>
             </tr>
           </thead>
           <tbody>
@@ -82,7 +92,6 @@ const DocMemList = () => {
               <td>홧병</td>
               <td>휴식</td>
               <td><button type='button' onClick={(e)=>{goDelete()}}>취소</button></td>
-              <td>-</td>
             </tr>
           </tbody>
 

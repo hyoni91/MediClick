@@ -3,10 +3,7 @@ package com.green.MediClick.schedule.controller;
 import com.green.MediClick.schedule.service.ScheduleService;
 import com.green.MediClick.schedule.vo.ScheduleVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,12 @@ public class ScheduleController {
     @GetMapping("/getDocMemList/{docNum}")
     public List<ScheduleVO> getDocMemList(@PathVariable("docNum")int docNum){
         return scheduleService.getDocMem(docNum);
+    }
+
+    // 예약상태를 Y>N로 바꿔야함
+    @PutMapping("/updateSchStatus")
+    public void updateSchStatus(@PathVariable("schNum")int schNum){
+        scheduleService.updateSchStatus(schNum);
     }
 
 }

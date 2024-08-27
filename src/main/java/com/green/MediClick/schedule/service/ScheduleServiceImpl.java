@@ -16,4 +16,9 @@ public class ScheduleServiceImpl implements ScheduleService{
     public List<ScheduleVO> getDocMem(int docNum) {
         return sqlSession.selectList("scheduleMapper.docMemChart",docNum);
     }
+
+    @Override
+    public void updateSchStatus(int schNum) {
+        sqlSession.update("scheduleMapper.updateSchStatus",schNum);
+    }
 }

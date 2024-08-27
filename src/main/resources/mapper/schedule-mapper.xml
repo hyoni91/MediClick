@@ -26,8 +26,7 @@
     <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
-        <result column="DEPT_NUM" property="deptNum" />
-        <association property="medicalDept" resultMap="dept"/>
+        <collection property="medicalDept" resultMap="dept"/>
     </resultMap>
 
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
@@ -39,7 +38,8 @@
 
         <!--관리자 : 담당의별 환자 차트-->
      <select id="docMemChart" resultMap="schedule">
-        SELECT SCH_DATE
+        SELECT SCH_NUM
+                ,SCH_DATE
                 ,DOC_NAME
                 ,DEPT_NAME
                 ,MEM_NAME
@@ -50,7 +50,15 @@
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
         AND D.DEPT_NUM=P.DEPT_NUM
+        ORDER BY SCH_NUM DESC
      </select>
+
+    <!--예약취소 : SCH_STATUS='N'로 변경-->
+    <update id="updateSchStatus">
+        UPDATE MEDICAL_SCHEDULE
+        SET SCH_STATUS='N'
+        WHERE SCH_NUM=#{schNum}
+    </update>
 
 </mapper>
 

@@ -8,4 +8,6 @@ public interface ScheduleService {
 
     List<ScheduleVO> getDocMem(int docNum);
 
+    void updateSchStatus(int schNum);
+
 }
