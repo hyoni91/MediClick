@@ -63,6 +63,10 @@ const DocMemList = () => {
       <div className='docInfo-div'>
         <h4>| 나의 정보</h4>
         <table className='docInfo-table'>
+          <colgroup>
+            <col width='50%'/>
+            <col width='50%'/>
+          </colgroup>
           <thead>
             <tr>
               <td>이름</td>
