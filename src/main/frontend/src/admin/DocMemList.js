@@ -21,7 +21,7 @@ const DocMemList = () => {
 
 
 
-  function goDelete(){
+  function goDelete(schNum){
     // 예약상태를 Y에서 N로 바꾸는 그거  ㅇ
     // update쿼리  ㅇ
     // map돌린거에서 schNum 빼오기 
@@ -29,7 +29,7 @@ const DocMemList = () => {
     // 아니면 취소버튼 막기 !! 
     // 아니면 취소버튼 클릭했을 때 이미 취소된 예약입니다 띄우기 
     axios
-    .put(``)
+    .put(`/schedule/updateSchStatus/${schNum}`)
     .then((res)=>{
 
     })
