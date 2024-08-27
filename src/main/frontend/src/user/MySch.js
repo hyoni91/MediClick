@@ -7,6 +7,11 @@ const MySch = () => {
   // 환자가 보는 나의 예약페이지
   const {memNum} = useParams();
   const [memSchInfo,setMemSchInfo]=useState({
+    schDate:'',
+    schTime:'',
+    memberVO:{
+      memName:''
+    }
 
   })
 
@@ -21,6 +26,7 @@ const MySch = () => {
 
   },[])
 
+  // console.log(memSchInfo[0])
 
 
   return (
@@ -54,7 +60,8 @@ const MySch = () => {
         <h4>| 예약정보</h4>
         <table className='mySch-table'>
           <colgroup>
-            <col width='20%'/>
+            <col width='10%'/>
+            <col width='10%'/>
             <col width='10%'/>
             <col width='30%'/>
             <col width='30%'/>
@@ -64,6 +71,7 @@ const MySch = () => {
           <thead>
             <tr>
               <td>예약일</td>
+              <td>예약시간</td>
               <td>환자명</td>
               <td>진료과</td>
               <td>담당 의사</td>
@@ -72,19 +80,21 @@ const MySch = () => {
           </thead>
           <tbody>
             {
-              Object.keys(memSchInfo)==0?
-              <tr>
+              memSchInfo.memName==''?
+              (<tr>
                 <td colSpan={5}>예약정보가 없습니다.</td>
-              </tr>
+              </tr>)
               :
-              <tr>
+              (<tr>
                 <td>{memSchInfo.schDate}</td>
-                <td>{memSchInfo.memberVO.memName}</td>
+                <td>{memSchInfo.schTime}</td>
+                {/* <td>{memSchInfo.memberVO.memName}</td> */}
                 <td>{memSchInfo.schDate}</td>
-                <td>{memSchInfo.medicalDept[0].deptName}</td>
+                {/* <td>{memSchInfo.doctorVO.medicalDept[0].deptName}</td> */}
                 <td>{memSchInfo.schStatus}</td>
-              </tr>
+              </tr>)
             }
+            
           </tbody>
         </table>
       </div>

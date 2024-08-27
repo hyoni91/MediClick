@@ -121,7 +121,7 @@ const DocMemList = () => {
                   <td>휴식</td>
                   <td>
                     {
-                      info.schStatus===0?
+                      info.schStatus==='Y'?
                       (<button type='button' onClick={(e)=>{goDelete(info.schNum)}}>취소</button>)
                       :
                       (<p className='cancel'>취소</p>)

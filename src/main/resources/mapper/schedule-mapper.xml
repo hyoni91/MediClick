@@ -68,6 +68,7 @@
     <select id="getMemSch" resultMap="schedule">
         SELECT SCH_NUM
         ,SCH_DATE
+        ,SCH_TIME
         ,DOC_NAME
         ,( SELECT DEPT_NAME
         FROM medical_dept P
