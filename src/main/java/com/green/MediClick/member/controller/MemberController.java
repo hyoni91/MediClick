@@ -24,4 +24,10 @@ public class MemberController {
     public MemberVO goLogin(@RequestBody MemberVO memberVO){
         return memberService.goLogin(memberVO);
     }
+
+    //환자조회
+    @GetMapping("/getOneMem/{memNum}")
+    public MemberVO getOneMem(@PathVariable("memNum")int memNum){
+        return memberService.getOneMem(memNum);
+    }
 }

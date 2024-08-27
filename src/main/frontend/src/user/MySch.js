@@ -6,16 +6,30 @@ import axios from 'axios';
 const MySch = () => {
   // 환자가 보는 나의 예약페이지
   const {memNum} = useParams();
-  const [memSchInfo,setMemSchInfo]=useState({
-    schDate:'',
+  const [oneMem,setOneMem]=useState({})
+  const [memSchInfo,setMemSchInfo]=useState([
+    {schDate:'',
     schTime:'',
     memberVO:{
       memName:''
+    },
+    doctorVO:{
+      medicalDept:[{
+        deptName:''
+      }]
     }
-
-  })
+    }
+  ])
 
   useEffect(()=>{
+    axios
+    .get(`/member/getOneMem/${memNum}`)
+    .then((res)=>{
+      setOneMem(res.data)
+    })
+    .catch((error)=>{console.log(error)})
+
+
     axios
     .get(`/schedule/getMemSch/${memNum}`)
     .then((res)=>{
@@ -25,9 +39,6 @@ const MySch = () => {
     .catch((error)=>{console.log(error)})
 
   },[])
-
-  // console.log(memSchInfo[0])
-
 
   return (
     <div>
@@ -49,8 +60,8 @@ const MySch = () => {
           </thead>
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
+              <td>{oneMem.memName}</td>
+              <td>{oneMem.memRrn}</td>
             </tr>
           </tbody>
         </table>
@@ -60,11 +71,11 @@ const MySch = () => {
         <h4>| 예약정보</h4>
         <table className='mySch-table'>
           <colgroup>
-            <col width='10%'/>
-            <col width='10%'/>
-            <col width='10%'/>
-            <col width='30%'/>
-            <col width='30%'/>
+            <col width='15%'/>
+            <col width='15%'/>
+            <col width='20%'/>
+            <col width='25%'/>
+            <col width='15%'/>
             <col width='10%'/>
           </colgroup>
 
@@ -86,12 +97,12 @@ const MySch = () => {
               </tr>)
               :
               (<tr>
-                <td>{memSchInfo.schDate}</td>
-                <td>{memSchInfo.schTime}</td>
-                {/* <td>{memSchInfo.memberVO.memName}</td> */}
-                <td>{memSchInfo.schDate}</td>
-                {/* <td>{memSchInfo.doctorVO.medicalDept[0].deptName}</td> */}
-                <td>{memSchInfo.schStatus}</td>
+                <td>{memSchInfo[0].schDate}</td>
+                <td>{memSchInfo[0].schTime}</td>
+                <td>{memSchInfo[0].memberVO.memName}</td>
+                <td>{memSchInfo[0].doctorVO.medicalDept[0].deptName}</td>
+                <td>{memSchInfo[0].doctorVO.docName}</td>
+                <td>{memSchInfo[0].schStatus}</td>
               </tr>)
             }
             

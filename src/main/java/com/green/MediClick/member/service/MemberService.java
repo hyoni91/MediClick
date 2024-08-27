@@ -9,5 +9,8 @@ public interface MemberService {
     //로그인
     MemberVO goLogin(MemberVO memberVO);
 
+    //환자 조회
+    MemberVO getOneMem(int memNum);
+
     // 회원가입할 다음숫자
 }
