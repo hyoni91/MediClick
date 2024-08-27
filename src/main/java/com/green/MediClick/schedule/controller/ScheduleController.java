@@ -22,6 +22,12 @@ public class ScheduleController {
         return scheduleService.getDocMem(docNum);
     }
 
+    //환자가 보는 나의 예약페이지
+    @GetMapping("/getMemSch/{memNum}")
+    public List<ScheduleVO> getMemSch(@PathVariable("memNum")int memNum){
+        return scheduleService.getMemSch(memNum);
+    }
+
     //예약상태 취소버튼을 누르면 예약상태를 Y > N로 변경
     @PutMapping("/updateSchStatus/{schNum}")
     public void updateSchStatus(@PathVariable("schNum")int schNum){

@@ -1,0 +1,25 @@
+.mySch-div{
+  width: 800px;
+  border-bottom: 1px solid #eeeeee;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+.mySch-div h4{
+  text-align: left;
+}
+
+.mySch-table{
+  width: 800px;
+  margin: 10px auto;
+}
+
+.mySch-table thead tr{
+  border-top: 2px solid black;
+  background-color: #eeeeee;
+  font-weight: bold;
+}
+
+.mySch-table thead td{
+  padding: 5px;
+}
