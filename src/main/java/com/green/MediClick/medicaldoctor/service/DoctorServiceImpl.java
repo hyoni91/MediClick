@@ -17,4 +17,9 @@ public class DoctorServiceImpl implements DoctorService{
     public List<DoctorVO> getDoctorList() {
         return sqlSession.selectList("doctorMapper.medicalDoctorList");
     }
+
+    @Override
+    public DoctorVO getOneDoctor(int docNum) {
+        return sqlSession.selectOne("doctorMapper.oneDoctor",docNum);
+    }
 }

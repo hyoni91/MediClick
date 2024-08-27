@@ -4,6 +4,7 @@ import com.green.MediClick.medicaldoctor.service.DoctorService;
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,4 +21,10 @@ public class DoctorController {
     public List<DoctorVO> getDoctorList(){
         return doctorService.getDoctorList();
     }
+
+    @GetMapping("/oneDoctor/{docNum}")
+    public DoctorVO getOneDoctor(@PathVariable("docNum")int docNum){
+        return doctorService.getOneDoctor(docNum);
+    }
+
 }

@@ -4,12 +4,20 @@ import './DocMemList.css';
 import { useParams } from 'react-router-dom';
 
 const DocMemList = () => {
-  const [infoList,setInfoList]=useState([
+  const [infoList,setInfoList]=useState([])
 
-  ])
   const {docNum}=useParams()
 
+  // 예약이 없는 의사는 조회가 안되어서 
+  // 의사 리스트를 다시 불러와야 할 것 같은데 .. 
+
+
   useEffect(()=>{
+    axios
+    .get('')
+    .then((res)=>{})
+    .catch((error)=>{console.log(error)})
+
     axios
     .get(`/schedule/getDocMemList/${docNum}`)
     .then((res)=>{
@@ -25,18 +33,10 @@ const DocMemList = () => {
 
 
   function goDelete(schNum){
-    // 예약상태를 Y에서 N로 바꾸는 그거  ㅇ
-    // update쿼리  ㅇ
-    // map돌린거에서 schNum 빼오기 ㅇ
-    // 예약취소하면 취소버튼이 취소되었습니다 텍스트로 변하기
-    // ㄴ 이렇게 할거면 삼항연산자로 {info.schStatus}='Y'?취소버튼:<p>취소
-    // ㄴㄴ 왜 안 되지 
-    // 아니면 취소버튼 막기 !! 
-    // 아니면 취소버튼 클릭했을 때 이미 취소된 예약입니다 띄우기 
+
     axios
     .put(`/schedule/updateSchStatus/${schNum}`)
     .then((res)=>{
-      console.log(schNum)
       alert('예약이 취소되었습니다.')
 
     })

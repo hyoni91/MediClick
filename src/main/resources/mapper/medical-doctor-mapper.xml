@@ -21,6 +21,17 @@
         FROM medical_dept, medical_doctor
         WHERE medical_dept.DEPT_NUM = medical_doctor.DEPT_NUM
     </select>
+
+    <select id="oneDoctor" resultMap="doctor">
+        SELECT DOC_NUM,DOC_NAME,
+            ( SELECT DEPT_NAME
+            FROM medical_dept P
+            WHERE D.DEPT_NUM=P.DEPT_NUM
+            ) AS DEPT_NAME
+        FROM MEDICAL_DOCTOR
+        WHERE DOC_NUM=#{docNum}
+    </select>
+
 </mapper>
 
 
