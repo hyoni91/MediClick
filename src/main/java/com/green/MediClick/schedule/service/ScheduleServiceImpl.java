@@ -35,4 +35,12 @@ public class ScheduleServiceImpl implements ScheduleService{
     public void schInput(ScheduleVO scheduleVO) {
         sqlSession.insert("scheduleMapper.insertsch", scheduleVO);
     }
+
+    //예약 유무 확인
+    @Override
+    public ScheduleVO checkAppo(ScheduleVO scheduleVO) {
+        return sqlSession.selectOne("scheduleMapper.checkAppo", scheduleVO);
+    }
+
+
 }

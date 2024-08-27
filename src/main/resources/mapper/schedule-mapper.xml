@@ -91,6 +91,14 @@
         )
     </insert>
 
+    <!-- 예약유무 확인 (수정확률 높음)-->
+    <select id="checkAppo" resultMap="schedule">
+        SELECT SCH_NUM
+        FROM medical_schedule
+        WHERE DOC_NUM = #{docNum}
+        AND SCH_DATE = #{schDate}
+        AND SCH_TIME = #{schTime}
+    </select>
 </mapper>
 
 

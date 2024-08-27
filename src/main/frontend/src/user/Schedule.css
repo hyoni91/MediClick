@@ -77,6 +77,9 @@
   
 }
 
+button{
+  cursor: pointer;
+}
 
 
 
@@ -90,6 +93,7 @@
 .react-calendar__navigation{
   background-color: lightblue;
 }
+
 
 .react-calendar__navigation__label  {
   /* // 달력 상단 년 월 글씨 커스텀 */
@@ -148,3 +152,7 @@
 }
 
 
+.react-calendar__tile:disabled {
+  background-color: white; /* 비활성 날짜 배경색 */
+  color: darkgrey; /* 비활성 날짜 글자색 */
+}
