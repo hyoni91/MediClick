@@ -42,15 +42,17 @@
         SELECT SCH_NUM
                 ,SCH_DATE
                 ,DOC_NAME
-                ,DEPT_NAME
+                ,( SELECT DEPT_NAME
+                 FROM medical_dept P
+                 WHERE D.DEPT_NUM=P.DEPT_NUM
+                 ) AS DEPT_NAME
                 ,MEM_NAME
                 ,DETAIL
                 ,SCH_STATUS
-        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M,MEDICAL_DEPT P
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE S.DOC_NUM=#{docNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
-        AND D.DEPT_NUM=P.DEPT_NUM
         ORDER BY SCH_NUM DESC
      </select>
 

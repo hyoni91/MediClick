@@ -24,7 +24,8 @@
     </insert>
 
     <select id="goLogin" resultMap="member">
-        SELECT MEM_NAME
+        SELECT MEM_NUM
+            ,MEM_NAME
             ,MEM_RRN
             ,MEM_ROLE
         FROM MEDICAL_MEMBER
