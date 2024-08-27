@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = ({loginInfo,setLoginInfo}) => {
   const navigate=useNavigate()
   const [inputData,setInputData]=useState({
+    memNum:0,
     memName:'',
     memRrn:'',
     memRole:''
