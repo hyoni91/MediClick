@@ -63,14 +63,14 @@
 
 
     <!-- 멤버 정보 불러오기 -->
-    <select id="">
+    <select id="member" resultMap="member">
         SELECT MEM_NAME, MEM_NUM, MEM_RRN
         FROM medical_member
         WHERE MEM_NUM = #{memNum}
     </select>
 
     <!-- 의사 진료과 불러오기 -->
-    <select id="">
+    <select id="doctor" resultMap="doctor">
         SELECT DOC_NUM, DOC_NAME, D.DEPT_NUM , DEPT_NAME
         FROM  medical_doctor D, medical_dept T
         WHERE D.DEPT_NUM = T.DEPT_NUM
@@ -78,7 +78,7 @@
     </select>
 
     <!-- 예약 insert -->
-    <insert id="">
+    <insert id="schedule">
         INSERT INTO medical_schedule(
         DOC_NUM
         ,MEM_NUM
