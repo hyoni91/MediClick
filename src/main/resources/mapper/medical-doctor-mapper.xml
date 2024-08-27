@@ -6,7 +6,7 @@
     <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
-        <association property="MedicalDept" resultMap="dept">
+        <association property="medicalDept" resultMap="dept">
            <id property="deptId" column="dept_id"/>
             <result property="deptName" column="dept_name"/>
         </association>
@@ -28,7 +28,7 @@
             FROM medical_dept P
             WHERE D.DEPT_NUM=P.DEPT_NUM
             ) AS DEPT_NAME
-        FROM MEDICAL_DOCTOR
+        FROM MEDICAL_DOCTOR D
         WHERE DOC_NUM=#{docNum}
     </select>
 

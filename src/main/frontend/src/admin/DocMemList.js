@@ -5,6 +5,12 @@ import { useParams } from 'react-router-dom';
 
 const DocMemList = () => {
   const [infoList,setInfoList]=useState([])
+  const [oneDoc,setOneDoc]=useState({
+    docName:'',
+    medicalDept:[{
+      deptName:''
+    }]
+  })
 
   const {docNum}=useParams()
 
@@ -14,9 +20,13 @@ const DocMemList = () => {
 
   useEffect(()=>{
     axios
-    .get('')
-    .then((res)=>{})
+    .get(`/oneDoctor/${docNum}`)
+    .then((res)=>{
+      setOneDoc(res.data)
+    })
     .catch((error)=>{console.log(error)})
+    
+    
 
     axios
     .get(`/schedule/getDocMemList/${docNum}`)
@@ -30,7 +40,7 @@ const DocMemList = () => {
   },[])
 
   // console.log(infoList)
-
+  // console.log(oneDoc)
 
   function goDelete(schNum){
 
@@ -60,16 +70,11 @@ const DocMemList = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              infoList.map((info,i)=>{
-                return(
-                <tr key={i}>
-                  <td>{info.doctorVO.docName}</td>
-                  <td>{info.doctorVO.medicalDept[0].deptName}</td>
-                </tr>
-                )
-              })
-            }
+            <tr>
+              <td>{oneDoc.docName}</td>
+              <td>{oneDoc.medicalDept[0].deptName}</td>
+            </tr>
+                
           </tbody>
         </table>
       </div>
