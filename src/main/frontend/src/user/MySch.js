@@ -81,8 +81,8 @@ const MySch = () => {
                 <td>{memSchInfo.schDate}</td>
                 <td>{memSchInfo.memberVO.memName}</td>
                 <td>{memSchInfo.schDate}</td>
-                <td>{memSchInfo.deptName}</td>
-                <td>{memSchInfo.medicalDept[0].schStatus}</td>
+                <td>{memSchInfo.medicalDept[0].deptName}</td>
+                <td>{memSchInfo.schStatus}</td>
               </tr>
             }
           </tbody>
