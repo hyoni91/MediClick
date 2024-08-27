@@ -1,5 +1,5 @@
 .sch-container{
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 0, 0); */
   width: 100%;
   margin: auto;
 
@@ -7,11 +7,12 @@
 
 /* 달력과 시간버튼 플렉스 */ 
 .sch-flex{
-  width: 90%;
+  width: 70%;
   display: flex;
   align-items: center;
   margin: auto;
-  /* border: 1px solid red; */
+  /* border: 1px solid darkgray; */
+  border-radius: 10px;
 }
 
 
@@ -24,12 +25,12 @@
   /* border: 1px solid blue; */
   margin-right: 150px;
   display: grid;
-  grid-template-columns: repeat(3,33%);
+  grid-template-columns: repeat(3,32%);
 }
 .sch-btn button {
-  background-color: lightblue;
-  color: black;
-  width: 90px;
+  background-color: #ff8b48;
+  color: rgb(255, 255, 255);
+  width: 70px;
   padding: 10px;
   font-size: 15px;
   font-weight: 500;
@@ -46,6 +47,7 @@
 /* 예약 상태(가능 불가능 안내) */
 .sch-status{
   /* border: 1px solid black; */
+  margin-right: 75px;
   font-size: 13px;
   display: inline-block;
 }
@@ -53,29 +55,29 @@
 
 /* 예약상세내용 테이블 */
 .schedule-table{
-  margin: 20px 0px;
-  display: inline-block;
-  width: 35%;
+  /* display: inline-block; */
+  width: 100%;
   text-align: left;
+  margin: auto;
+  margin-top: 50px;
   /* border: 1px solid rgb(25, 0, 255); */
 }
 
 .schedule-table>table{
-  display: inline-block;
-  width: 100%;
   /* border: 1px solid red; */
+  margin: auto;
 }
 
 .schedule-table input{
   /* margin-left: 15px; */
-  width: 200px;
+  width: 300px;
   padding: 4px;
   margin-bottom: 3px;
   font-size: 14px;
 }
 
 .sch-select{
-  width: 212px;
+  width: 312px;
   padding: 4px;
   margin-bottom: 3px;
   font-size: 14px;
@@ -93,9 +95,11 @@ input:focus, select:focus, textarea:focus{
   width: 150px;
   padding: 8px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 18px;
+  background-color: #11999E;
+  color: white;
   
 }
 
