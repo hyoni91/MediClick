@@ -10,4 +10,5 @@ public interface MemberService {
     MemberVO goLogin(MemberVO memberVO);
 
     // 회원가입할 다음숫자
+    String nextInsert(String memRole);
 }

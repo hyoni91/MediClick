@@ -5,9 +5,11 @@ import { useNavigate, useNavigation } from 'react-router-dom'
 const JoinForm = () => {
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({
+    memNum : '',
     memName : '',
     memRrn : '',
-    memTel : ''
+    memTel : '',
+    memRole : 'USER'
   })
 
   //이동페이지 할수있게 네비게이션

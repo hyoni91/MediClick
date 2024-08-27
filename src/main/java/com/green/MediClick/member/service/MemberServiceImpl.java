@@ -21,4 +21,9 @@ public class MemberServiceImpl implements MemberService{
     public MemberVO goLogin(MemberVO memberVO) {
         return sqlSession.selectOne("member.goLogin",memberVO);
     }
+
+    @Override
+    public String nextInsert(String memRole) {
+        return sqlSession.selectOne("member.nextNumber",memRole);
+    }
 }
