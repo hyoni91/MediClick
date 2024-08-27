@@ -6,6 +6,8 @@ import './Schedule.css'
 import axios from 'axios';
 
 const Schedule = () => {
+  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
+
   // member정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   // 진료과 의사 정보 불러오기
@@ -14,22 +16,17 @@ const Schedule = () => {
   useEffect(()=>{
     axios.get('/schedule/getDocInfo')
     .then((res)=>{
-      console.log(res.data)
       setDocInfo(res.data)
     })
     .catch()
   },[])
   
 
-
-
-  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
-
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     memNum:loginInfo.memNum,
     docNum : '',
-    deptNum : '',
+    deptNum : 1,
     schData: moment(value).format('YYYY-MM-DD'),
     detail:'',
     time : ''
@@ -55,6 +52,15 @@ const Schedule = () => {
   }
 
   console.log(appo)
+
+  //클릭하면 예약 실행
+  function goAppo(){
+    axios.post('/schedule/schInput', appo)
+    .then((res)=>{})
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
   return (
     <div className='sch-container'>
@@ -111,12 +117,12 @@ const Schedule = () => {
             <tr>
               <td>진료과목</td>
               <td>
-                <select name='deptNum'>
+                <select name='docNum' onChange={(e)=>{changeDetail(e)}}>
                   {
                     docInfo.map((doc,i)=>{
                       return(
-                        <option key={i} name='deptNum' 
-                        value={doc.medicalDept[0].deptNum} onChange={(e)=>{changeDetail(e)}}> {doc.medicalDept[0].deptName}
+                        <option key={i} 
+                        value={doc.docNum} > {doc.medicalDept[0].deptName}
                         </option> 
                         
                       )
