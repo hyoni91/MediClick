@@ -6,8 +6,8 @@
     <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
         <id column="MEM_NUM" property="memNum" />
         <result column="MEM_NAME" property="memName" />
-        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
+        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_ROLE" property="memRole" />
 
     </resultMap>
@@ -15,12 +15,13 @@
     <insert id="insertMember">
     INSERT INTO MEDICAL_MEMBER (
         MEM_NAME,
-        MEM_TEL,
         MEM_RRN,
+        MEM_TEL
         ) VALUES(
         #{memName},
-        #{memTel},
         #{memRrn},
+        #{memTel}
+        )
     </insert>
 
     <select id="goLogin" resultMap="member">

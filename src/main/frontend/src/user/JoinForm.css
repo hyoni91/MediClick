@@ -9,6 +9,12 @@
 
 .join-btn{
   margin: 10px;
+  background-color: #11999E;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
 }
 .join-table{
   width: 300px;
@@ -17,9 +23,18 @@
 
 .join-table td{
   padding: 5px;
+  
 }
 
-.login-table td:nth-child(1){
+.login-table tr td:nth-child(odd){
   text-align: left;
 }
+.loginBtn{
+  
+}
 
+.join-btn:hover{
+  background-color:#0f8b8f ;
+}
+.join-div>div:nth-child(){
+}
