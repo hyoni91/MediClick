@@ -10,6 +10,8 @@ public interface ScheduleService {
 
     List<ScheduleVO> getDocMem(int docNum);
 
+    List<ScheduleVO> getMemSch(int memNum);
+
     void updateSchStatus(int schNum);
 
     // 예약을 위한 의사 진료과 정보 불러오기
