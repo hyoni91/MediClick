@@ -26,9 +26,9 @@ const Schedule = () => {
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
-    docNum : '',
+    docNum : 7,
     memNum:loginInfo.memNum,
-    deptNum :'' ,
+    deptNum :1 ,
     schDate: moment(value).format('YYYY-MM-DD'),
     schTime : '',
     detail:''

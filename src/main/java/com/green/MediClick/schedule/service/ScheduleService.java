@@ -12,9 +12,7 @@ public interface ScheduleService {
 
     void updateSchStatus(int schNum);
 
-    // 예약을 위한 멤버와 의사 진료과 정보 불러오기
-    MemberVO getMemInfo(int memNum);
-
+    // 예약을 위한 의사 진료과 정보 불러오기
     List<DoctorVO> getDocInfo();
 
     // 예약 insert

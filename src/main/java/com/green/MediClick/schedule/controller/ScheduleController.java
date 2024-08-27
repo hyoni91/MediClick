@@ -28,12 +28,7 @@ public class ScheduleController {
         scheduleService.updateSchStatus(schNum);
     }
 
-    //예약을 위한 멤버와 의사/ 진료과 정보
-    @GetMapping("/getMemInfo/{memNum}")
-    public MemberVO getMemInfo(@PathVariable("memNum")int memNum){
-        return scheduleService.getMemInfo(memNum);
-    }
-
+    //예약을 위한  의사/ 진료과 정보
     @GetMapping("/getDocInfo")
     public List<DoctorVO> getDocInfo(){
         return scheduleService.getDocInfo();
