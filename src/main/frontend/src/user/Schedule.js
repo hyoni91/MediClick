@@ -16,6 +16,9 @@ const Schedule = () => {
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
+  // 예약 유무에 따른 시간 버튼 색상 변경
+  const [availableTimes, setAvailableTimes] = useState({});
+
   // member정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   // 진료과 의사 정보를 담을 변수 선언
@@ -35,13 +38,14 @@ const Schedule = () => {
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     docNum : 7,
-    memNum: loginInfo ? loginInfo.memNum : null,
+    memNum: loginInfo ? loginInfo.memNum : "",
     deptNum :1 ,
-    schDate: moment(value).format('YYYY-MM-DD'),
+    schDate: moment().format('YYYY-MM-DD'),
     schTime : '',
     detail:''
-    
   })
+
+  console.log(appo)
 
   // 예약 시간 input
   const timeInput = useRef();
@@ -117,18 +121,24 @@ const Schedule = () => {
         </div>
         <div className='sch-time'>
           <div className='sch-btn'>
-            <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
+                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map(time => (
+                  <button
+                  key={time} type='button' value={time} onClick={clickTime}>
+                {time}</button>))
+                }
+    
+            {/* <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
             <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}> 10:00</button>
             <button type='button' value={'11:00'}  onClick={(e)=>{clickTime(e)}}> 11:00</button>
             <button type='button' value={'12:00'}  onClick={(e)=>{clickTime(e)}}> 12:00</button>
             <button type='button' value={'14:00'}  onClick={(e)=>{clickTime(e)}}> 14:00</button>
             <button type='button' value={'15:00'}  onClick={(e)=>{clickTime(e)}}> 15:00</button>
             <button type='button' value={'16:00'}  onClick={(e)=>{clickTime(e)}}> 16:00</button>
-            <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button>
+            <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button> */}
           </div>
           <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
         </div>
-      
+        </div>
         <div className='schedule-table'>
           <table>
             <colgroup>
@@ -152,7 +162,7 @@ const Schedule = () => {
                 <td>예약자명</td>
                 <td>
                   <input type='text' name='memName' readOnly 
-                  value={loginInfo? loginInfo.memName : null}/> 
+                  value={loginInfo? loginInfo.memName : ""}/> 
                   </td>
               </tr>
               <tr>
@@ -178,17 +188,17 @@ const Schedule = () => {
                 <td>주민번호</td>
                 <td>
                   <input type='tel' name='' readOnly 
-                value={loginInfo? loginInfo.memRrn:null}/>
+                value={loginInfo? loginInfo.memRrn:""}/>
                 </td>
               </tr>
               <tr>
                 <td>증상</td>
-                <td><textarea rows={5} cols={28} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+                <td><textarea rows={5} cols={40} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
+      
       <div>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
         <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
