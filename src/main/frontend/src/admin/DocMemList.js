@@ -4,20 +4,23 @@ import './DocMemList.css';
 import { useParams } from 'react-router-dom';
 
 const DocMemList = () => {
-  const [infoList,setInfoList]=useState([])
+  const [infoList,setInfoList]=useState([
+
+  ])
   const {docNum}=useParams()
 
   useEffect(()=>{
     axios
     .get(`/schedule/getDocMemList/${docNum}`)
     .then((res)=>{
-      console.log(res.data)
       setInfoList(res.data)
+
     })
     .catch((error)=>{
       console.log(error)
     })
   },[])
+
 
 
 
@@ -56,7 +59,7 @@ const DocMemList = () => {
               infoList.map((info,i)=>{
                 <tr>
                   <td>{info.doctorVO.docName}</td>
-                  <td>{info.deptName}</td>
+                  <td>{info.doctorVO.medicalDept[0].deptName}</td>
                 </tr>
 
               })
@@ -86,13 +89,24 @@ const DocMemList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {
+              infoList.map((info,i)=>{
+                <tr>
+                  <td>{info.schDate}</td>
+                  <td>{info.memberVO.memName}</td>
+                  <td>{info.detail}</td>
+                  <td>휴식</td>
+                  <td><button type='button' onClick={(e)=>{goDelete(info.schNum)}}>취소</button></td>
+                </tr>
+              })
+            }
+            {/* <tr>
               <td>2024-08-26</td>
               <td>고길동</td>
               <td>홧병</td>
               <td>휴식</td>
               <td><button type='button' onClick={(e)=>{goDelete()}}>취소</button></td>
-            </tr>
+            </tr> */}
           </tbody>
 
         </table>
