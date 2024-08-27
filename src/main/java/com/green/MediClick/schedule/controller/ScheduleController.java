@@ -1,10 +1,13 @@
 package com.green.MediClick.schedule.controller;
 
+import com.green.MediClick.medicaldoctor.vo.DoctorVO;
+import com.green.MediClick.member.vo.MemberVO;
 import com.green.MediClick.schedule.service.ScheduleService;
 import com.green.MediClick.schedule.vo.ScheduleVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 
 @RestController
@@ -25,6 +28,21 @@ public class ScheduleController {
         scheduleService.updateSchStatus(schNum);
     }
 
+    //예약을 위한 멤버와 의사/ 진료과 정보
+    @GetMapping("/getMemInfo/{memNum}")
+    public MemberVO getMemInfo(@PathVariable("memNum")int memNum){
+        return scheduleService.getMemInfo(memNum);
+    }
 
+    @GetMapping("/getDocInfo/{deptNum}")
+    public DoctorVO getDocInfo(@PathVariable("deptNum")int deptNum){
+        return scheduleService.getDocInfo(deptNum);
+    }
+
+    // 예약 실행
+    @PostMapping("/schInput")
+    public void schInput(@RequestBody ScheduleVO scheduleVO){
+        scheduleService.schInput(scheduleVO);
+    }
 
 }

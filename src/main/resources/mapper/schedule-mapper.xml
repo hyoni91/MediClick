@@ -78,7 +78,7 @@
     </select>
 
     <!-- 예약 insert -->
-    <insert id="schedule">
+    <insert id="insertsch">
         INSERT INTO medical_schedule(
         DOC_NUM
         ,MEM_NUM
