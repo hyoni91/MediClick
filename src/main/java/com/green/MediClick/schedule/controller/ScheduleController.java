@@ -34,9 +34,9 @@ public class ScheduleController {
         return scheduleService.getMemInfo(memNum);
     }
 
-    @GetMapping("/getDocInfo/{deptNum}")
-    public DoctorVO getDocInfo(@PathVariable("deptNum")int deptNum){
-        return scheduleService.getDocInfo(deptNum);
+    @GetMapping("/getDocInfo")
+    public List<DoctorVO> getDocInfo(){
+        return scheduleService.getDocInfo();
     }
 
     // 예약 실행

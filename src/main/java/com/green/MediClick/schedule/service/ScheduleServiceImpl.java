@@ -32,8 +32,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     // 예약을 위한 의사 및 진료과 정보
     @Override
-    public DoctorVO getDocInfo(int deptNum) {
-        return sqlSession.selectOne("scheduleMapper.doctor", deptNum);
+    public List<DoctorVO> getDocInfo() {
+        return sqlSession.selectList("scheduleMapper.doctor");
     }
 
     // 예약 실행

@@ -15,7 +15,7 @@ public interface ScheduleService {
     // 예약을 위한 멤버와 의사 진료과 정보 불러오기
     MemberVO getMemInfo(int memNum);
 
-    DoctorVO getDocInfo(int deptNum);
+    List<DoctorVO> getDocInfo();
 
     // 예약 insert
     void schInput(ScheduleVO scheduleVO);

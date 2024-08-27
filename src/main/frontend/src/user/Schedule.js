@@ -1,18 +1,34 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import moment from "moment";
 import './Schedule.css'
+import axios from 'axios';
 
 const Schedule = () => {
+  // member정보 불러오기
+  const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
+  console.log(loginInfo)
+  // 진료과 의사 정보 불러오기
+  useEffect(()=>{
+    axios.get('/schedule/getDocInfo')
+    .then((res)=>{
+      console.log(res.data)
+    })
+    .catch()
+  },[])
   
+
+
+
   const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
-    memNum: '',
+    memNum:loginInfo.memNum,
     docNum : '',
-    schData: moment(value).format('YYYYMMDD'),
+    deptNum : '',
+    schData: moment(value).format('YYYY-MM-DD'),
     detail:'',
     time : ''
   })
@@ -88,7 +104,7 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>예약자명</td>
-              <td><input type='text' name='memName' readOnly value={'예)김아무개'}/> </td>
+              <td><input type='text' name='memName' readOnly value={loginInfo.memName}/> </td>
             </tr>
             <tr>
               <td>진료과목</td>
@@ -96,7 +112,7 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>주민번호</td>
-              <td><input type='tel' name='' readOnly value={'예)123456-123456'}/></td>
+              <td><input type='tel' name='' readOnly value={loginInfo.memRrn}/></td>
             </tr>
             <tr>
               <td>증상</td>
