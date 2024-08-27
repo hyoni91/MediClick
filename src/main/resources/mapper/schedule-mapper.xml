@@ -52,7 +52,10 @@
         AND D.DEPT_NUM=P.DEPT_NUM
      </select>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 </mapper>
 
 
