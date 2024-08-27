@@ -27,7 +27,7 @@
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
         <result column="DEPT_NUM" property="deptNum" />
-        <association property="deptVO" resultMap="dept"/>
+        <association property="medicalDept" resultMap="dept"/>
     </resultMap>
 
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
@@ -41,16 +41,6 @@
      <select id="docMemChart" resultMap="schedule">
         SELECT SCH_DATE
                 ,DOC_NAME
-<<<<<<< HEAD
-                ,MEM_NAME
-                ,DETAIL
-                ,SCH_STATUS
-        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
-        WHERE S.DOC_NUM=#{docNum}
-        AND S.DOC_NUM=D.DOC_NUM
-        AND S.MEM_NUM=M.MEM_NUM
-     </select>
-=======
                 ,DEPT_NAME
                 ,MEM_NAME
                 ,DETAIL
@@ -63,7 +53,6 @@
      </select>
 
 
->>>>>>> e7d9067c758fb05f4d91551e3b1230668f97b4b0
 </mapper>
 
 
