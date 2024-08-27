@@ -35,13 +35,13 @@ const JoinForm = () => {
   }
   return (
     <div>
+        <div><h1>회원가입</h1></div>
       <div className='join-div'>
-        <div>회원가입</div>
         <div>
           <div>회원이름</div>
           <div><input name='memName' type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)}}/></div>
           <div>회원주민번호</div>
-          <div><input name='memRrn' type='password' placeholder="전화번호를 입력하세요" onChange={(e) => {changeData(e)}}/></div>
+          <div><input name='memRrn' type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></div>
           <div>전화번호</div>
           <div>
           
@@ -51,12 +51,14 @@ const JoinForm = () => {
         </div>
         
       </div>
-      <button className='join-btn' onClick={() => {
-        setMemberData({...memberData,memRole : 'USER'})
-      }}>고객용</button>
-      <button className='join-btn' onClick={() => {
-        setMemberData({...memberData,memRole : 'ADMIN'})
-      }}>관리자용</button>
+        <div className='relative-container'>
+        <button className='join-btn btn-user' onClick={() => {
+          setMemberData({...memberData,memRole : 'USER'})
+        }}>고객용</button>
+        <button className='join-btn btn-admin' onClick={() => {
+          setMemberData({...memberData,memRole : 'ADMIN'})
+        }}>관리자용</button>
+      </div>
     </div>
   )
 }
