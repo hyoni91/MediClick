@@ -83,12 +83,12 @@ button{
 
 
 
-/* 달력 커스텀 */
+/* -------------달력 커스텀 -------------*/
 
 .react-calendar{
   width: 50%;
   margin: 20px auto;
-  /* background-color:lightseagreen; */
+  border:1px solid darkgrey;
 }
 .react-calendar__navigation{
   background-color: lightblue;
@@ -96,10 +96,9 @@ button{
 
 
 .react-calendar__navigation__label  {
-  /* // 달력 상단 년 월 글씨 커스텀 */
-  /* height: 1.375rem; */
-  font-size: 18px;
-  font-weight: 700;
+  /*  달력 상단 년 월 글씨 커스텀 */
+  font-size: 19px;
+  font-weight: 600;
   color: rgb(0, 0, 0);
 }
 
