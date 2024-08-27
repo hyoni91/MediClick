@@ -36,7 +36,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         const loginInfo={
           memName:res.data.memName,
           memRrn:res.data.memRrn,
-          memRole:res.data.memRole
+          memRole:res.data.memRole,
+          memNum:res.data.memNum
         }
 
         //로그인정보 저장

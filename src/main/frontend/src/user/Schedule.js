@@ -8,12 +8,14 @@ import axios from 'axios';
 const Schedule = () => {
   // member정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
-  console.log(loginInfo)
   // 진료과 의사 정보 불러오기
+  const [docInfo, setDocInfo] = useState([])
+
   useEffect(()=>{
     axios.get('/schedule/getDocInfo')
     .then((res)=>{
       console.log(res.data)
+      setDocInfo(res.data)
     })
     .catch()
   },[])
@@ -45,7 +47,7 @@ const Schedule = () => {
     })
   }
 
-  // 증상 onchange
+  // 증상 및 진료과 onchange
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
@@ -108,7 +110,21 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>진료과목</td>
-              <td><input type='text' name='' value={'예)산부인과'} onChange={(e)=>{}} / ></td>
+              <td>
+                <select name='deptNum'>
+                  {
+                    docInfo.map((doc,i)=>{
+                      return(
+                        <option key={i} name='deptNum' 
+                        value={doc.medicalDept[0].deptNum} onChange={(e)=>{changeDetail(e)}}> {doc.medicalDept[0].deptName}
+                        </option> 
+                        
+                      )
+                    })
+                  }
+                </select>
+                {/* <input type='text' name='' value={'예)산부인과'} onChange={(e)=>{}} / > */}
+                </td>
             </tr>
             <tr>
               <td>주민번호</td>
