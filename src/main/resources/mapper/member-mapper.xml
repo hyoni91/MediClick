@@ -6,8 +6,8 @@
     <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
         <id column="MEM_NUM" property="memNum" />
         <result column="MEM_NAME" property="memName" />
-        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
+        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_ROLE" property="memRole" />
 
     </resultMap>
@@ -15,12 +15,13 @@
     <insert id="insertMember">
     INSERT INTO MEDICAL_MEMBER (
         MEM_NAME,
-        MEM_TEL,
         MEM_RRN,
+        MEM_TEL
         ) VALUES(
         #{memName},
-        #{memTel},
         #{memRrn},
+        #{memTel}
+        )
     </insert>
 
     <select id="goLogin" resultMap="member">
@@ -35,18 +36,18 @@
 
     <!-- 다음에 들어갈 회원 가입 번호 -->
 
-    <select id="checkNumber" resultType="string">
-        SELECT CONCAT(
-            CASE
-                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
-                WHEN MEM_ROLE = 'USER' THEN 'CLT_'
-                ELSE 'UNKNOWN_'
-            END,
-            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
-            )
-    FROM medical_member
-    WHERE MEM_ROLE = 'ADMIN'
-    </select>
+<!--    <select id="checkNumber" resultType="string">-->
+<!--        SELECT CONCAT(-->
+<!--            CASE-->
+<!--                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'-->
+<!--                WHEN MEM_ROLE = 'USER' THEN 'CLT_'-->
+<!--                ELSE 'UNKNOWN_'-->
+<!--            END,-->
+<!--            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')-->
+<!--            )-->
+<!--    FROM medical_member-->
+<!--    WHERE MEM_ROLE = #{memRole}-->
+<!--    </select>-->
 </mapper>
 
 
