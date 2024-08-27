@@ -8,8 +8,5 @@ import java.util.List;
 public class DoctorVO {
     private int docNum;
     private String docName;
-    private MedicalDept medicalDept;
-    private int deptNum;
-    private MedicalDept deptVO;
     private List<MedicalDept> medicalDept;
 }
