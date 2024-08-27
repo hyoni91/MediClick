@@ -11,6 +11,7 @@ public class ScheduleVO {
     private int memNum;
     private String regDate;
     private String schDate;
+    private String schTime; //시간 추가 0827
     private String detail;
     private String schStatus;
     private MemberVO memberVO;

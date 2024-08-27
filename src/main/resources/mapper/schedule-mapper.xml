@@ -9,6 +9,7 @@
         <result column="MEM_NUM" property="memNum"/>
         <result column="REH_DATE" property="rehDate"/>
         <result column="SCH_DATE" property="schDate"/>
+        <result column="SCH_TIME" property="schTime"/>
         <result column="DETAIL" property="detail"/>
         <result column="SCH_STATUS" property="schStatus"/>
         <association property="doctorVO" resultMap="doctor"/>
