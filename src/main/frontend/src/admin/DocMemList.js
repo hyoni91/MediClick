@@ -21,25 +21,30 @@ const DocMemList = () => {
     })
   },[])
 
-
+  // console.log(infoList)
 
 
   function goDelete(schNum){
     // 예약상태를 Y에서 N로 바꾸는 그거  ㅇ
     // update쿼리  ㅇ
-    // map돌린거에서 schNum 빼오기 
+    // map돌린거에서 schNum 빼오기 ㅇ
     // 예약취소하면 취소버튼이 취소되었습니다 텍스트로 변하기
+    // ㄴ 이렇게 할거면 삼항연산자로 {info.schStatus}='Y'?취소버튼:<p>취소
+    // ㄴㄴ 왜 안 되지 
     // 아니면 취소버튼 막기 !! 
     // 아니면 취소버튼 클릭했을 때 이미 취소된 예약입니다 띄우기 
     axios
     .put(`/schedule/updateSchStatus/${schNum}`)
     .then((res)=>{
+      console.log(schNum)
+      alert('예약이 취소되었습니다.')
 
     })
     .catch((error)=>{console.log(error)})
     
   }
 
+  
 
   return (
     <div>
@@ -57,11 +62,12 @@ const DocMemList = () => {
           <tbody>
             {
               infoList.map((info,i)=>{
-                <tr>
+                return(
+                <tr key={i}>
                   <td>{info.doctorVO.docName}</td>
                   <td>{info.doctorVO.medicalDept[0].deptName}</td>
                 </tr>
-
+                )
               })
             }
           </tbody>
@@ -90,14 +96,30 @@ const DocMemList = () => {
           </thead>
           <tbody>
             {
+              infoList.length==0?
+              <tr>
+                <td colSpan={5}>
+                  <p>예약 환자가 없습니다.</p>
+                </td>
+              </tr>
+              :
               infoList.map((info,i)=>{
-                <tr>
+                return(
+                <tr key={i}>
                   <td>{info.schDate}</td>
                   <td>{info.memberVO.memName}</td>
                   <td>{info.detail}</td>
                   <td>휴식</td>
-                  <td><button type='button' onClick={(e)=>{goDelete(info.schNum)}}>취소</button></td>
+                  <td>
+                    {
+                      info.schStatus===0?
+                      (<button type='button' onClick={(e)=>{goDelete(info.schNum)}}>취소</button>)
+                      :
+                      (<p className='cancel'>취소</p>)
+                    }
+                  </td>
                 </tr>
+                )
               })
             }
             {/* <tr>
