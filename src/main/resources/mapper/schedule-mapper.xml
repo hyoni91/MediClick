@@ -7,6 +7,7 @@
         <id column="SCH_NUM" property="schNum"/>
         <result column="DOC_NUM" property="docNum"/>
         <result column="MEM_NUM" property="memNum"/>
+        <result column="DEPT_NUM" property="deptNum"/>
         <result column="REH_DATE" property="rehDate"/>
         <result column="SCH_DATE" property="schDate"/>
         <result column="SCH_TIME" property="schTime"/>

@@ -20,16 +20,19 @@ const Schedule = () => {
     })
     .catch()
   },[])
-  
+
+  const [getDeptNum, setDeptNum] = useState()
+  const [getDocNum, setDocNum] = useState()
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
-    memNum:loginInfo.memNum,
     docNum : '',
-    deptNum : 1,
-    schData: moment(value).format('YYYY-MM-DD'),
-    detail:'',
-    time : ''
+    memNum:loginInfo.memNum,
+    deptNum :'' ,
+    schDate: moment(value).format('YYYY-MM-DD'),
+    schTime : '',
+    detail:''
+    
   })
 
   // 예약 시간 input
@@ -44,7 +47,19 @@ const Schedule = () => {
     })
   }
 
-  // 증상 및 진료과 onchange
+
+  // 의료진과 진료과 번호 동시에 받기
+  function changeDocInfo(e){
+    const selectedValue = e.target.value; // JSON 문자열
+    const { deptNum, docNum } = JSON.parse(selectedValue); // JSON 파싱
+    setAppo({
+      ...appo,
+      deptNum : deptNum,
+      docNum : docNum
+    })
+  }
+
+  // 증상  onchange
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
@@ -108,7 +123,7 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>예약시간</td>
-              <td><input type='text' name='time' value={appo.time}  ref={timeInput} onChange={(e)=>{}}/></td>
+              <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
             </tr>
             <tr>
               <td>예약자명</td>
@@ -117,19 +132,20 @@ const Schedule = () => {
             <tr>
               <td>진료과목</td>
               <td>
-                <select name='docNum' onChange={(e)=>{changeDetail(e)}}>
+                <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}}>
                   {
                     docInfo.map((doc,i)=>{
                       return(
-                        <option key={i} 
-                        value={doc.docNum} > {doc.medicalDept[0].deptName}
-                        </option> 
-                        
+                        // <option key={i} 
+                        // value={doc.docNum} > {doc.medicalDept[0].deptName}
+                        // </option> 
+                        <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
+                          {doc.medicalDept[0].deptName}
+                        </option>
                       )
                     })
                   }
                 </select>
-                {/* <input type='text' name='' value={'예)산부인과'} onChange={(e)=>{}} / > */}
                 </td>
             </tr>
             <tr>
@@ -146,7 +162,7 @@ const Schedule = () => {
       </div>
       <div>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
-        <button  type='button'>예약하기 </button>
+        <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
       </div>
     </div>
   )
