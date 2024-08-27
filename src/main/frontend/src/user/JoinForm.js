@@ -5,10 +5,9 @@ import { useNavigate, useNavigation } from 'react-router-dom'
 const JoinForm = () => {
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({
-    memName: '',
-    memRrn: '',
-    memTel: '',
-    memRole : 'USER'
+    memName : '',
+    memRrn : '',
+    memTel : ''
   })
 
   //이동페이지 할수있게 네비게이션
@@ -23,14 +22,16 @@ const JoinForm = () => {
   }
   const regex = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])[-]\d{7}$/
   //전화번호 정규식
-  const [memTel, setMemTel] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const autoHyphen2 = (e) => {
     const value = e.target.value
       .replace(/[^0-9]/g, '')
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
       .replace(/(\-{1,2})$/g, "");
     
-      setMemTel(value);
+    setPhoneNumber(value);
+    // 저장된 전화번호를 memberData에 저장
+    setMemberData({...memberData,memTel :phoneNumber})
   };
   const insertJoin = () => {
     console.log(memberData)
@@ -60,7 +61,7 @@ const JoinForm = () => {
               
         <input name='memTel' type="text" onChange={(e)=>{
           autoHyphen2(e)
-          }} value={memTel} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
+          }} value={phoneNumber} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
           </tbody>
         </table>
