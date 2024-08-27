@@ -7,12 +7,28 @@ CREATE TABLE MEDICAL_MEMBER(
 	,MEM_ROLE VARCHAR(30) DEFAULT('USER')
 );
 
+INSERT INTO medical_member (
+  MEM_NAME
+  ,MEM_TEL
+  ,MEM_RRN
+)VALUES (
+  '김수한무'
+  ,'01011112222'
+  ,'9604232222222'
+);
+
+SELECT *FROM medical_member; 
+
 -- 진료과
 CREATE TABLE MEDICAL_DEPT(
 	DEPT_NUM INT PRIMARY KEY
 	,DEPT_NAME VARCHAR(30) NOT NULL
 );
 
+UPDATE medical_dept
+SET
+DEPT_NAME = '자궁암'
+WHERE DEPT_NAME = '간암';
 -- 진료과 insert
 INSERT INTO medical_dept(DEPT_NAME) VALUES('유방암');
 INSERT INTO medical_dept(DEPT_NAME) VALUES('뇌종양');

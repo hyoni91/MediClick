@@ -1,8 +1,86 @@
+.sch-container{
+  /* border: 1px solid rgb(255, 0, 0); */
+  width: 80%;
+  margin: auto;
+}
+
+/* 달력과 시간버튼 플렉스 */
+/* .sch-flex{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+
+
+.sch-time > h3{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.sch-btn button {
+  background-color: lightblue;
+  color: black;
+  width: 100px;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.sch-btn button:hover{
+  background-color: rgb(103, 207, 241);
+}
+
+/* 예약 상태(가능 불가능 안내) */
+.sch-status{
+  /* border: 1px solid black; */
+  font-size: 13px;
+  display: inline-block;
+}
+
+
+/* 예약상세내용 테이블 */
+.schedule-table{
+  margin: 20px 0px;
+  display: inline-block;
+  /* width: 50%; */
+  text-align: left;
+  /* border: 1px solid rgb(25, 0, 255); */
+
+}
+
+.schedule-table input{
+  /* margin-left: 15px; */
+  width: 300px;
+  padding: 4px;
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+.sch-footer{
+  margin-top: 20px;
+}
+
+.sch-footer >button{
+  width: 150px;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+
+
+/* 달력 커스텀 */
+
 .react-calendar{
-  width: 35%;
+  width: 50%;
   margin: 20px auto;
   /* background-color:lightseagreen; */
-
 }
 .react-calendar__navigation{
   background-color: lightblue;
@@ -14,14 +92,12 @@
   font-size: 18px;
   font-weight: 700;
   color: rgb(0, 0, 0);
-  
 }
 
 .react-calendar__month-view__weekdays__weekday {
   /* 요일 css */
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-  
 }
 
 .react-calendar__month-view__weekdays__weekday abbr {
@@ -40,7 +116,7 @@
 .react-calendar__month-view__days__day-names,
   .react-calendar__month-view__days__day {
     font-family: 'Arial', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
   }
 
 .react-calendar__tile--now {
@@ -51,7 +127,6 @@
     color:red;
   }
 }
-
 
 .react-calendar__tile--active {
   /* 현재 선택된 날짜  */
@@ -67,22 +142,4 @@
   border-radius: 15px;
 }
 
-
-
-.schedule-table{
-  margin-top: 50px;
-  display: inline-block;
-  width: 50%;
-  /* border: 1px solid black; */
-  display: inline-block;
-  text-align: left;
-}
-
-.schedule-table input{
-  margin-left: 15px;
-}
-
-.sch-btn button {
-  background-color: lightcyan;
-}
 

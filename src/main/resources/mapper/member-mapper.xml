@@ -17,17 +17,15 @@
         MEM_NAME,
         MEM_TEL,
         MEM_RRN,
-        MEM_ROLE
         ) VALUES(
         #{memName},
         #{memTel},
         #{memRrn},
-        #{memRole}
-        )
     </insert>
 
     <select id="goLogin" resultMap="member">
-        SELECT MEM_NAME
+        SELECT MEM_NUM
+            ,MEM_NAME
             ,MEM_RRN
             ,MEM_ROLE
         FROM MEDICAL_MEMBER
@@ -35,7 +33,20 @@
         AND MEM_RRN=#{memRrn}
     </select>
 
+    <!-- 다음에 들어갈 회원 가입 번호 -->
 
+    <select id="checkNumber" resultType="string">
+        SELECT CONCAT(
+            CASE
+                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
+                WHEN MEM_ROLE = 'USER' THEN 'CLT_'
+                ELSE 'UNKNOWN_'
+            END,
+            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
+            )
+    FROM medical_member
+    WHERE MEM_ROLE = 'ADMIN'
+    </select>
 </mapper>
 
 

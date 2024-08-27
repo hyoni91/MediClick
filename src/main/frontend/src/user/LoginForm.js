@@ -12,8 +12,6 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
   })
   
 
-
-
   function insertData(e){
     setInputData({
       ...inputData,
@@ -95,7 +93,7 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
           </tbody>
         </table>
 
-        <button type='button' onClick={(e)=>{goLogin()}}>로그인</button>
+        <button type='button' className='loginBtn' onClick={(e)=>{goLogin()}}>로그인</button>
 
       </div>
     </div>

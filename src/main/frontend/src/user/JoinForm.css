@@ -1,6 +1,7 @@
+
 .join-div{
   width: 800px;
-  border: 1px solid #000000;
+  border: 1px solid #eeeeee;
   border-radius: 10px;
   padding: 20px;
   margin: 10px auto;
@@ -9,3 +10,16 @@
 .join-btn{
   margin: 10px;
 }
+.join-table{
+  width: 300px;
+  margin: 50px auto;
+}
+
+.join-table td{
+  padding: 5px;
+}
+
+.login-table td:nth-child(1){
+  text-align: left;
+}
+
