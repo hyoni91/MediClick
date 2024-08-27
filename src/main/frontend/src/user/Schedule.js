@@ -6,31 +6,33 @@ import './Schedule.css'
 import axios from 'axios';
 
 const Schedule = () => {
+  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
+
   // member정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
-  console.log(loginInfo)
   // 진료과 의사 정보 불러오기
+  const [docInfo, setDocInfo] = useState([])
+
   useEffect(()=>{
     axios.get('/schedule/getDocInfo')
     .then((res)=>{
-      console.log(res.data)
+      setDocInfo(res.data)
     })
     .catch()
   },[])
-  
 
-
-
-  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
+  const [getDeptNum, setDeptNum] = useState()
+  const [getDocNum, setDocNum] = useState()
 
   // 예약 내용 저장할 변수
   const [appo, setAppo] = useState({
+    docNum : 7,
     memNum:loginInfo.memNum,
-    docNum : '',
-    deptNum : '',
-    schData: moment(value).format('YYYY-MM-DD'),
-    detail:'',
-    time : ''
+    deptNum :1 ,
+    schDate: moment(value).format('YYYY-MM-DD'),
+    schTime : '',
+    detail:''
+    
   })
 
   // 예약 시간 input
@@ -45,7 +47,19 @@ const Schedule = () => {
     })
   }
 
-  // 증상 onchange
+
+  // 의료진과 진료과 번호 동시에 받기
+  function changeDocInfo(e){
+    const selectedValue = e.target.value; // JSON 문자열
+    const { deptNum, docNum } = JSON.parse(selectedValue); // JSON 파싱
+    setAppo({
+      ...appo,
+      deptNum : deptNum,
+      docNum : docNum
+    })
+  }
+
+  // 증상  onchange
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
@@ -53,6 +67,15 @@ const Schedule = () => {
   }
 
   console.log(appo)
+
+  //클릭하면 예약 실행
+  function goAppo(){
+    axios.post('/schedule/schInput', appo)
+    .then((res)=>{})
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
   return (
     <div className='sch-container'>
@@ -100,7 +123,7 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>예약시간</td>
-              <td><input type='text' name='time' value={appo.time}  ref={timeInput} onChange={(e)=>{}}/></td>
+              <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
             </tr>
             <tr>
               <td>예약자명</td>
@@ -108,7 +131,22 @@ const Schedule = () => {
             </tr>
             <tr>
               <td>진료과목</td>
-              <td><input type='text' name='' value={'예)산부인과'} onChange={(e)=>{}} / ></td>
+              <td>
+                <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}}>
+                  {
+                    docInfo.map((doc,i)=>{
+                      return(
+                        // <option key={i} 
+                        // value={doc.docNum} > {doc.medicalDept[0].deptName}
+                        // </option> 
+                        <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
+                          {doc.medicalDept[0].deptName}
+                        </option>
+                      )
+                    })
+                  }
+                </select>
+                </td>
             </tr>
             <tr>
               <td>주민번호</td>
@@ -124,7 +162,7 @@ const Schedule = () => {
       </div>
       <div>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
-        <button  type='button'>예약하기 </button>
+        <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
       </div>
     </div>
   )

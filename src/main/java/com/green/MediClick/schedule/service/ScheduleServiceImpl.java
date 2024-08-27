@@ -24,12 +24,6 @@ public class ScheduleServiceImpl implements ScheduleService{
         sqlSession.update("scheduleMapper.updateSchStatus",schNum);
     }
 
-    // 예약을 위한 멤버 정보
-    @Override
-    public MemberVO getMemInfo(int memNum) {
-        return sqlSession.selectOne("scheduleMapper.member", memNum);
-    }
-
     // 예약을 위한 의사 및 진료과 정보
     @Override
     public List<DoctorVO> getDocInfo() {
