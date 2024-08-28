@@ -37,7 +37,8 @@ const Schedule = () => {
     deptNum :1 ,
     schDate: moment().format('YYYY-MM-DD'),
     schTime : '',
-    detail:''
+    detail:'',
+    deptName:'유방암 외과'
   })
 
   console.log(appo)
@@ -57,14 +58,14 @@ const Schedule = () => {
   // 의료진과 진료과 정보 동시에 받기
   function changeDocInfo(e){
     const selectedValue = e.target.value; // JSON 문자열
-    const { deptNum, docNum } = JSON.parse(selectedValue); // JSON 파싱
+    const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
     setAppo({
       ...appo,
       deptNum : deptNum,
-      docNum : docNum
+      docNum : docNum,
+      deptName: deptName
     })
   }
-
   // 증상 정보 받기
   function changeDetail(e){
     setAppo({...appo,
@@ -96,12 +97,26 @@ const Schedule = () => {
     })
   },[appo])
 
-
   return (
     <div className='sch-container'>
       <div className='sch-flex'>
       {/* <h3>예약날짜</h3> */}
         <div className='sch-calendar'>
+        <div>진료과 선택</div>
+          <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+            {
+              docInfo.map((doc,i)=>{
+                return(
+                  // <option key={i} 
+                  // value={doc.docNum} > {doc.medicalDept[0].deptName}
+                  // </option> 
+                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                    {doc.medicalDept[0].deptName}
+                  </option>
+                )
+              })
+            }
+            </select>
           <Calendar 
           onChange={onChange} 
           value={value} 
@@ -162,7 +177,8 @@ const Schedule = () => {
               <tr>
                 <td>진료과목</td>
                 <td>
-                  <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+                  <input type='text' readOnly  value={appo.deptName}/>
+                  {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
                     {
                       docInfo.map((doc,i)=>{
                         return(
@@ -175,7 +191,7 @@ const Schedule = () => {
                         )
                       })
                     }
-                  </select>
+                  </select> */}
                   </td>
               </tr>
               <tr>
