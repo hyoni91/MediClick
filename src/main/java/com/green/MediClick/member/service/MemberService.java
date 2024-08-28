@@ -13,4 +13,5 @@ public interface MemberService {
     MemberVO getOneMem(int memNum);
 
     // 회원가입할 다음숫자
+    String nextInsert(String memRole);
 }

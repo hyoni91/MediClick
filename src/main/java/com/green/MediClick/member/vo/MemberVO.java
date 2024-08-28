@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
-    private int memNum;
+    private String memNum;
     private String memName;
     private String memTel;
     private String memRrn;

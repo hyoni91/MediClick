@@ -5,9 +5,11 @@ import { useNavigate, useNavigation } from 'react-router-dom'
 const JoinForm = () => {
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({
+    memNum : '',
     memName : '',
     memRrn : '',
-    memTel : ''
+    memTel : '',
+    memRole : 'USER'
   })
   
   //이동페이지 할수있게 네비게이션
@@ -53,7 +55,7 @@ const JoinForm = () => {
             </tr>
             <tr>
               <td>회원주민번호</td>
-              <td><input name='memRrn' type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
+              <td><input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
             </tr>
             <tr>
               <td>전화번호</td>
