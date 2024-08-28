@@ -38,3 +38,9 @@
 }
 .join-div>div:nth-child(){
 }
+.error{
+  font-size: 0.7rem;
+  text-align: left;
+  color: red;
+  margin: 0px;
+}
