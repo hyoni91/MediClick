@@ -46,10 +46,16 @@ public class ScheduleController {
         scheduleService.schInput(scheduleVO);
     }
 
-    // 예약 유무 확인
+    // 예약 유무 확인(모든 조건)
     @PostMapping("/checkAppo")
     public ScheduleVO checkAppo(@RequestBody ScheduleVO scheduleVO){
         return scheduleService.checkAppo(scheduleVO);
+    }
+
+    //예약 유무 확인(진료과와 날짜선택)
+    @PostMapping("/checkSchTime")
+    public ScheduleVO checkSchTime(@RequestBody ScheduleVO scheduleVO){
+        return scheduleService.checkSchtime(scheduleVO);
     }
 
 }

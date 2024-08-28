@@ -20,9 +20,10 @@ public interface ScheduleService {
     // 예약 insert
     void schInput(ScheduleVO scheduleVO);
 
-    //예약 유무 확인
+    //예약 유무 확인(모든 조건을 선택했을때)
     ScheduleVO checkAppo(ScheduleVO scheduleVO);
 
-
+    //예약 유무 확인 (진료과와 날짜만 선택했을때)
+    ScheduleVO checkSchtime(ScheduleVO scheduleVO);
 
 }
