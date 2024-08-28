@@ -40,6 +40,33 @@ body{
   cursor: pointer;
 }
 
+.footer{
+  background-color: #7b92ad4d;
+  width: 100%;
+  height: 200px;
+  font-size: 0.8rem;
+}
+
+.footer-div{
+  margin: 0 auto;
+  width: 1440px;
+  text-align: left;
+}
+
+.footer-div{
+  padding: 5px;
+}
+
+.footer-div div{
+  margin: 10px 0px;
+}
+
+.footer-div div:nth-child(1){
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+
 /* User/Admin Layout */
 
 .layout-bar{
