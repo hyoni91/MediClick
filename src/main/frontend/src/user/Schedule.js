@@ -7,14 +7,15 @@ import axios from 'axios';
 import { now } from 'moment/moment';
 
 const Schedule = () => {
+  // 선택한 날짜 update
   const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
   
-  // 오늘 날짜 기준으로 3개월 후의 날짜를 계산
+  // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
-  // member정보 불러오기
+  // 환자정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   // 진료과 의사 정보를 담을 변수 선언
   const [docInfo, setDocInfo] = useState([])
@@ -30,17 +31,25 @@ const Schedule = () => {
     })
   },[])
 
-  // 예약 내용 저장할 변수
+  //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     docNum : 7,
     memNum: loginInfo ? loginInfo.memNum : "",
     deptNum :1 ,
-    schDate: moment().format('YYYY-MM-DD'),
+    schDate: moment(value).format("YYYY-MM-DD"),
     schTime : '',
-    detail:''
+    detail:'',
+    deptName:'유방암 외과'
   })
 
-  console.log(appo)
+  // schDate를 선택하면 appo정보도 바뀌도록 설정(실시간으로 schDate갱신)
+  useEffect(() => {
+    setAppo(prevAppo => ({
+      ...prevAppo,
+      schDate: moment(value).format("YYYY-MM-DD")
+    }));
+  }, [value])
+
 
   // 예약 시간 input
   const timeInput = useRef();
@@ -57,14 +66,14 @@ const Schedule = () => {
   // 의료진과 진료과 정보 동시에 받기
   function changeDocInfo(e){
     const selectedValue = e.target.value; // JSON 문자열
-    const { deptNum, docNum } = JSON.parse(selectedValue); // JSON 파싱
+    const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
     setAppo({
       ...appo,
       deptNum : deptNum,
-      docNum : docNum
+      docNum : docNum,
+      deptName: deptName
     })
   }
-
   // 증상 정보 받기
   function changeDetail(e){
     setAppo({...appo,
@@ -75,33 +84,51 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     axios.post('/schedule/schInput', appo)
-    .then((res)=>{})
+    .then((res)=>{
+      console.log(res.data)
+    })
     .catch((error)=>{
       console.log(error)
     })
   }
 
-  //예약유무확인
-  const [chkAppo, setChkAppo] = useState(false)
+  //예약유무확인(타임버튼 비활성화를 위한)
+  const availableTimes = [false,false,false,false,false,false,false,false]
+  const [chkAppoTime, setChkAppoTime] = useState([availableTimes])
   useEffect(()=>{
-    axios.post('/schedule/checkAppo',appo)
+    axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
       console.log(res.data)
-        if(res.data != ''){
-          alert('스케줄 중복')
-        }return;
+      // 예약 가능 여부 배열로 저장
+      res.data.forEach((time, i)=>{
+        time == '' ? availableTimes[i]=false: availableTimes[i]=true
+        setChkAppoTime(availableTimes)
       })
+    })
     .catch((error)=>{
       console.log(error)
     })
   },[appo])
 
+  console.log(chkAppoTime)
 
   return (
     <div className='sch-container'>
       <div className='sch-flex'>
       {/* <h3>예약날짜</h3> */}
         <div className='sch-calendar'>
+        <div>진료과 선택</div>
+          <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+            {
+              docInfo.map((doc,i)=>{
+                return(
+                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                    {doc.medicalDept[0].deptName}
+                  </option>
+                )
+              })
+            }
+            </select>
           <Calendar 
           onChange={onChange} 
           value={value} 
@@ -115,20 +142,11 @@ const Schedule = () => {
         </div>
         <div className='sch-time'>
           <div className='sch-btn'>
-                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map(time => (
+                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map((time,i) => (
                   <button
-                  key={time} type='button' value={time} onClick={clickTime}>
+                  key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                 {time}</button>))
                 }
-    
-            {/* <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
-            <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}> 10:00</button>
-            <button type='button' value={'11:00'}  onClick={(e)=>{clickTime(e)}}> 11:00</button>
-            <button type='button' value={'12:00'}  onClick={(e)=>{clickTime(e)}}> 12:00</button>
-            <button type='button' value={'14:00'}  onClick={(e)=>{clickTime(e)}}> 14:00</button>
-            <button type='button' value={'15:00'}  onClick={(e)=>{clickTime(e)}}> 15:00</button>
-            <button type='button' value={'16:00'}  onClick={(e)=>{clickTime(e)}}> 16:00</button>
-            <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button> */}
           </div>
           <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
         </div>
@@ -145,7 +163,7 @@ const Schedule = () => {
                 <td>
                   <input  type='text' readOnly 
                 value={moment(value).format("YYYY-MM-DD")}
-                name='schDate' ref={choseData}/>
+                name='schDate' ref={choseData} />
                 </td>
               </tr>
               <tr>
@@ -162,20 +180,7 @@ const Schedule = () => {
               <tr>
                 <td>진료과목</td>
                 <td>
-                  <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
-                    {
-                      docInfo.map((doc,i)=>{
-                        return(
-                          // <option key={i} 
-                          // value={doc.docNum} > {doc.medicalDept[0].deptName}
-                          // </option> 
-                          <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
-                            {doc.medicalDept[0].deptName}
-                          </option>
-                        )
-                      })
-                    }
-                  </select>
+                  <input type='text' readOnly  value={appo.deptName}/>
                   </td>
               </tr>
               <tr>
@@ -201,3 +206,40 @@ const Schedule = () => {
 }
 
 export default Schedule;
+
+
+
+
+
+
+  // //예약유무확인
+  // const [chkAppo, setChkAppo] = useState(false)
+  // useEffect(()=>{
+  //   axios.post('/schedule/checkAppo',appo)
+  //   .then((res)=>{
+  //     console.log(res.data)
+  //       if(res.data != ''){
+  //         alert('스케줄 중복')
+  //       }return;
+  //     })
+  //   .catch((error)=>{
+  //     console.log(error)
+  //   })
+  // },[appo])
+
+
+
+                    {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+                    {
+                      docInfo.map((doc,i)=>{
+                        return(
+                          // <option key={i} 
+                          // value={doc.docNum} > {doc.medicalDept[0].deptName}
+                          // </option> 
+                          <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
+                            {doc.medicalDept[0].deptName}
+                          </option>
+                        )
+                      })
+                    }
+                  </select> */}
