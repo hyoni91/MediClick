@@ -12,6 +12,7 @@ const Schedule = () => {
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
+  minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
@@ -92,25 +93,33 @@ const Schedule = () => {
     })
   }
 
+  // time 데이터
+  const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
   //예약유무확인(타임버튼 비활성화를 위한)
-  const availableTimes = [false,false,false,false,false,false,false,false]
-  const [chkAppoTime, setChkAppoTime] = useState([availableTimes])
+  //해당 날짜에 예약된 시간을 저장하는 리스트 
+  const times = []
+  // schTimes길이 만큼 false값주기
+  const [chkAppoTime, setChkAppoTime] = useState(new Array(schTimes.length).fill(false))
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
-      console.log(res.data)
-      // 예약 가능 여부 배열로 저장
-      res.data.forEach((time, i)=>{
-        time == '' ? availableTimes[i]=false: availableTimes[i]=true
-        setChkAppoTime(availableTimes)
-      })
+      // 예약가능한 시간을 저장하는 변수
+      const availableTimes = res.data.map(time => {
+        // 초를 제외하고 분 단위만 남기기
+        const [hours, minutes] = time.schTime.split(':')
+        return `${hours}:${minutes}`})
+
+      //schTimes와 비교하여 예약가능한 시간이 있는지 체크
+      const updatedChkAppoTime = schTimes.map(time => availableTimes.includes(time));
+      // console.log(`updateTime: ` + updatedChkAppoTime)
+      //체크를 끝냈으면 chkAppoTime을 갱신 
+      setChkAppoTime(updatedChkAppoTime)
     })
     .catch((error)=>{
       console.log(error)
     })
   },[appo])
-
-  console.log(chkAppoTime)
+  
 
   return (
     <div className='sch-container'>
@@ -139,10 +148,11 @@ const Schedule = () => {
           minDate={minDate}
           maxDate={maxDate}
           />
+          <h5>*당일 예약은 전화로 문의주세요</h5>
         </div>
         <div className='sch-time'>
           <div className='sch-btn'>
-                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map((time,i) => (
+                {schTimes.map((time,i) => (
                   <button
                   key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                 {time}</button>))

@@ -162,8 +162,13 @@ button{
   width: 50px;
   border-radius: 15px;
   abbr{
-    color:red;
+    color:rgb(241, 97, 97);
   }
+}
+
+.react-calendar__tile--now::before{
+  content: '*';
+  color: red;
 }
 
 .react-calendar__tile--active {
