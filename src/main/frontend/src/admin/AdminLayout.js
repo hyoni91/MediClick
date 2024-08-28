@@ -9,14 +9,17 @@ const AdminLayout = () => {
     <div>
 
       <div className='layout-bar'>
-        <div onClick={(e)=>{navigate('/')}}><img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/></div>
+        <div className='logoimg-div' onClick={(e)=>{navigate('/')}}>
+          <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/>
+        </div>
+
         <div className='menu-bar'>
   
           <ul>
-            <li onClick={(e)=>{navigate(`/admin/docMemList/${docNum}`)}}>예약환자</li>
-            <li>2</li>
-            <li>3</li>
-            <li>마이페이지</li>
+            <li><span onClick={(e)=>{navigate(`/admin/docMemList/${docNum}`)}}>예약환자</span></li>
+            <li><span>2</span></li>
+            <li><span>3</span></li>
+            <li><span>마이페이지</span></li>
           </ul>
   
         </div>

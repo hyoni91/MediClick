@@ -9,7 +9,8 @@ const UserLayout = () => {
     <div>
 
       <div className='layout-bar'>
-        <div><img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/></div>
+        <div className='logoimg-div' onClick={(e)=>{navigate('/')}}>
+          <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/></div>
         <div className='menu-bar'>
             {/* 메뉴 바 */}
             <ul>
