@@ -4,36 +4,52 @@
   width: 800px;
   border: 1px solid #eeeeee;
   border-radius: 10px;
-  padding: 20px;
+  padding: 50px;
   margin: 10px auto;
+  
+}
+
+.login-info{
+  font-size: 0.8rem;
+  margin: 20px 0px;
+}
+
+.login-table-div{
+  width: 300px;
+  /* border: 1px solid black; */
+  margin: 0 auto;
 }
 
 .login-table{
-  width: 300px;
-  margin: 50px auto;
+  width: 100%;
+  margin: 5px auto;
+  /* border: 1px solid red; */
 }
 
 .login-table td{
-  padding: 5px;
+  padding: 5px 0px;
 }
 
-.login-table td:nth-child(1){
-  text-align: left;
+.login-table td input{
+  /* padding: 5px; */
+  width: 290px;
+  height: 28px;
 }
-
 
 
 .loginBtn{
-  background-color: #11999E;
+  background-color: #0254AF;
+  width: 100%;
+  height: 34px;
   border: none;
   color: white;
-  border-radius: 5px;
+  font-weight: bold;
   padding: 4px 10px;
   cursor: pointer;
 }
 
 .loginBtn:hover{
-  background-color:#0f8b8f ;
+  background-color:#013d81 ;
 }
 
 

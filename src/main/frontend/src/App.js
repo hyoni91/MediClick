@@ -11,6 +11,7 @@ import Schedule from './user/Schedule';
 import { useEffect, useState } from 'react';
 import DocMemList from './admin/DocMemList';
 import MySch from './user/MySch';
+import DocMemInfo from './admin/DocMemInfo';
 
 function App() {
   const navigate=useNavigate()
@@ -95,6 +96,8 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           {/* 의사별 담당환자 확인 */}
           <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+          {/* 담당환자 상세정보/수정 */}
+          <Route path='docMemInfo/:memNum' element={<DocMemInfo/>}/>
         </Route>
       </Routes>
 

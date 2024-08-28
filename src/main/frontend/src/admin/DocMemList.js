@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './DocMemList.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DocMemList = () => {
+  const navigate=useNavigate()
   // 예약 리스트 담을 변수
   const [infoList,setInfoList]=useState([])
   // 의사 하나의 환자예약정보 담을 변수
@@ -16,9 +17,6 @@ const DocMemList = () => {
   })
 
   const {docNum}=useParams()
-
-  // 예약이 없는 의사는 조회가 안되어서 
-  // 의사 리스트를 다시 불러와야 할 것 같은데 .. 
 
 
   useEffect(()=>{
@@ -104,7 +102,7 @@ const DocMemList = () => {
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
-              <td>처방</td>
+              <td>특이사항</td>
               <td>예약 상태</td>
             </tr>
           </thead>
@@ -121,9 +119,9 @@ const DocMemList = () => {
                 return(
                 <tr key={i}>
                   <td>{info.schDate}</td>
-                  <td>{info.memberVO.memName}</td>
+                  <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.memNum}`)}}>{info.memberVO.memName}</span></td>
                   <td>{info.detail}</td>
-                  <td>휴식</td>
+                  <td>-</td>
                   <td>
                     {
                       info.schStatus==='Y'?
