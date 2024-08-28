@@ -10,4 +10,5 @@ public class DoctorVO {
     private String docNum;
     private String docName;
     private List<MedicalDept> medicalDept;
+    private DoctorImgVO imgVO;
 }

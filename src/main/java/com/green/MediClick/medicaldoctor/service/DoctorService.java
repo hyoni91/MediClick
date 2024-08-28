@@ -9,4 +9,9 @@ public interface DoctorService {
     List<DoctorVO> getDoctorList();
 
     DoctorVO getOneDoctor(int docNum);
+
+    // 다음에 들어갈 의사 이미지 조회
+    String nextDoctorImg();
+
+
 }
