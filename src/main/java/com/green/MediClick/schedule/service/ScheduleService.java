@@ -24,6 +24,6 @@ public interface ScheduleService {
     ScheduleVO checkAppo(ScheduleVO scheduleVO);
 
     //예약 유무 확인 (진료과와 날짜만 선택했을때)
-    ScheduleVO checkSchtime(ScheduleVO scheduleVO);
+    List<ScheduleVO> checkSchtime(ScheduleVO scheduleVO);
 
 }

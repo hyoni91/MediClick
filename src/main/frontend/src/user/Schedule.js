@@ -83,19 +83,40 @@ const Schedule = () => {
   }
 
   //예약유무확인
-  const [chkAppo, setChkAppo] = useState(false)
-  useEffect(()=>{
-    axios.post('/schedule/checkAppo',appo)
-    .then((res)=>{
-      console.log(res.data)
-        if(res.data != ''){
-          alert('스케줄 중복')
-        }return;
-      })
-    .catch((error)=>{
-      console.log(error)
-    })
-  },[appo])
+  // const [chkAppo, setChkAppo] = useState(false)
+  // useEffect(()=>{
+  //   axios.post('/schedule/checkAppo',appo)
+  //   .then((res)=>{
+  //     console.log(res.data)
+  //       if(res.data != ''){
+  //         alert('스케줄 중복')
+  //       }return;
+  //     })
+  //   .catch((error)=>{
+  //     console.log(error)
+  //   })
+  // },[appo])
+
+  //예약유무확인(타임버튼 비활성화를 위한)
+const [chkTime , setChkTime] = useState([])
+function chkAppoTime (){
+  axios.post('schedule/checkSchTime',appo)
+  .then((res)=>{
+    console.log(res.data.schTime)
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+// useEffect(()=>{
+//   axios.post('schedule/checkSchTime',appo)
+//   .then((res)=>{
+//     console.log(res.data)
+//   })
+//   .catch((error)=>{
+//     console.log(error)
+//   })
+// },[])
 
   return (
     <div className='sch-container'>
@@ -126,6 +147,7 @@ const Schedule = () => {
           minDetail="year"
           minDate={minDate}
           maxDate={maxDate}
+          onClickDay={chkAppoTime}
           />
         </div>
         <div className='sch-time'>

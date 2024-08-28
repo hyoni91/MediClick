@@ -49,8 +49,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     //예약 유무 확인(진료과와 날짜 선택)
     @Override
-    public ScheduleVO checkSchtime(ScheduleVO scheduleVO) {
-        return sqlSession.selectOne("scheduleMapper.checkSchTime", scheduleVO);
+    public List<ScheduleVO> checkSchtime(ScheduleVO scheduleVO) {
+        return sqlSession.selectList("scheduleMapper.checkSchtime", scheduleVO);
     }
 
 

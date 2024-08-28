@@ -54,7 +54,7 @@ public class ScheduleController {
 
     //예약 유무 확인(진료과와 날짜선택)
     @PostMapping("/checkSchTime")
-    public ScheduleVO checkSchTime(@RequestBody ScheduleVO scheduleVO){
+    public List<ScheduleVO> checkSchTime(@RequestBody ScheduleVO scheduleVO){
         return scheduleService.checkSchtime(scheduleVO);
     }
 
