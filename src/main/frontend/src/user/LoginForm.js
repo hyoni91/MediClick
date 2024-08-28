@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = ({loginInfo,setLoginInfo}) => {
   const navigate=useNavigate()
   const [inputData,setInputData]=useState({
+    memNum:0,
     memName:'',
     memRrn:'',
     memRole:''
@@ -56,11 +57,11 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         else if(loginInfo.memRole=='ADMIN'){
           navigate('/admin')
         }
-        
+
 
       }
       else{
-
+        alert('성함과 주민번호를 확인하세요.')
       }
 
     })
@@ -88,7 +89,7 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
 
             <tr>
               <td>주민등록번호</td>
-              <td><input type='text' name='memRrn' placeholder='주민등록번호를 입력하세요.'
+              <td><input type='password' name='memRrn' placeholder='주민등록번호를 입력하세요.'
               onChange={(e)=>{insertData(e)}}></input></td>
             </tr>
           </tbody>

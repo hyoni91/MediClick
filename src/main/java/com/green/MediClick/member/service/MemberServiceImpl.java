@@ -26,4 +26,8 @@ public class MemberServiceImpl implements MemberService{
     public String nextInsert(String memRole) {
         return sqlSession.selectOne("member.nextNumber",memRole);
     }
+
+    public MemberVO getOneMem(int memNum) {
+        return sqlSession.selectOne("member.getOneMem",memNum);
+    }
 }

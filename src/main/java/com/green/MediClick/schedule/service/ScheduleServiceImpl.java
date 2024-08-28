@@ -20,6 +20,11 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
+    public List<ScheduleVO> getMemSch(int memNum) {
+        return sqlSession.selectList("scheduleMapper.getMemSch",memNum);
+    }
+
+    @Override
     public void updateSchStatus(int schNum) {
         sqlSession.update("scheduleMapper.updateSchStatus",schNum);
     }

@@ -64,6 +64,24 @@
         WHERE SCH_NUM=#{schNum}
     </update>
 
+    <!--환자가 보는 나의 예약페이지-->
+    <select id="getMemSch" resultMap="schedule">
+        SELECT SCH_NUM
+        ,SCH_DATE
+        ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
+        ,DOC_NAME
+        ,( SELECT DEPT_NAME
+        FROM medical_dept P
+        WHERE D.DEPT_NUM=P.DEPT_NUM
+        ) AS DEPT_NAME
+        ,MEM_NAME
+        ,SCH_STATUS
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
+        WHERE M.MEM_NUM=#{memNum}
+        AND S.DOC_NUM=D.DOC_NUM
+        ORDER BY SCH_NUM DESC
+    </select>
+
     <!-- 의사 진료과 불러오기 -->
     <select id="doctor" resultMap="doctor">
         SELECT DOC_NUM, DOC_NAME, D.DEPT_NUM , DEPT_NAME
