@@ -53,10 +53,9 @@
             CASE
                 WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
                 WHEN MEM_ROLE = 'USER' THEN 'CLT_'
-                ELSE 'UNKNOWN_'
             END,
             LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
-            )
+            ) AS mem_num
     FROM medical_member
     WHERE MEM_ROLE = #{memRole}
     </select>
