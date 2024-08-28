@@ -47,6 +47,7 @@
                  FROM medical_dept P
                  WHERE D.DEPT_NUM=P.DEPT_NUM
                  ) AS DEPT_NAME
+                ,M.MEM_NUM
                 ,MEM_NAME
                 ,DETAIL
                 ,SCH_STATUS

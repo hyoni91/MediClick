@@ -1,0 +1,60 @@
+.meminfo-div{
+  width: 800px;
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+
+}
+
+.meminfo-div h3{
+  text-align: center;
+  width: 210px;
+  margin: 20px auto;
+}
+
+.meminfo-table{
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  margin: 20px auto;
+  font-size: 0.9rem;
+  width: 40%;
+}
+
+.meminfo-table td{
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.meminfo-table input{
+  width: 90%;
+  height: 18px;
+
+}
+
+.meminfo-table textarea{
+  width: 90%;
+  height: 50px;
+
+}
+
+.infoBtns{
+  margin: 15px auto;
+  width: 270px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.infoBtn{
+  background-color: #0254AF;
+  color: white;
+  border: none;
+  height: 34px;
+  width: 100px;
+  font-weight: bold;
+}
+
+.infoBtn:hover{
+  background-color: #013d81;
+}

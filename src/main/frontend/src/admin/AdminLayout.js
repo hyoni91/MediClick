@@ -16,9 +16,9 @@ const AdminLayout = () => {
         <div className='menu-bar'>
   
           <ul>
-            <li><span onClick={(e)=>{navigate(`/admin/docMemList/${docNum}`)}}>예약환자</span></li>
-            <li><span>2</span></li>
-            <li><span>3</span></li>
+            <li><span onClick={(e)=>{navigate(`/admin/docMemList/${docNum}`)}}>예약차트</span></li>
+            <li><span>환자차트</span></li>
+            <li><span>스케줄 관리</span></li>
             <li><span>마이페이지</span></li>
           </ul>
   
