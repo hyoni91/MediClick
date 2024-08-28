@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="boardMapper">
+    <resultMap id="board" type="com.green.Board.vo.BoardVO">
+        <id column="BOARD_NUM"          property="boardNum"/>
+        <result column="TITLE"          property="title"/>
+        <result column="CONTENT"        property="content"/>
+        <result column="MEM_ID"         property="memId"/>
+        <result column="CREATE_DATE"    property="createDate"/>
+    </resultMap>
+
+    <!--게시글 목록 조회-->
+    <select id="getBoardList" resultMap="board">
+        SELECT BOARD_NUM
+        , TITLE
+        , MEM_ID
+        , CREATE_DATE
+        FROM board 
+        ORDER BY BOARD_NUM DESC
+        LIMIT #{displayDataCnt} OFFSET ${displayDataCnt * (nowPage - 1)}
+    </select>
+
+    <insert id="insertBoard">
+        INSERT INTO BOARD (
+            TITLE
+            , CONTENT
+            , MEM_ID
+        ) VALUES (
+            #{title}
+            , #{content}
+            , #{memId}
+        )
+    </insert>
+
+    <!--게시글 상세 조회-->
+    <select id="getBoardDetail" resultMap="board">
+        SELECT BOARD_NUM
+            ,TITLE
+            , CONTENT
+            , MEM_ID
+            , CREATE_DATE
+        FROM board
+        WHERE BOARD_NUM = #{boardNum}
+    </select>
+
+    <delete id="deleteBoard">
+        DELETE FROM BOARD
+        WHERE BOARD_NUM = #{boardNum}
+    </delete>
+
+    <update id="updateBoard">
+        UPDATE BOARD
+        SET
+        TITLE = #{title},
+        CONTENT = #{content}
+        WHERE BOARD_NUM = #{boardNum}
+    </update>
+
+    <!-- 전체 게시글 수 조회 -->
+    <select id="getBoardCnt" resultType="int">
+        SELECT COUNT(BOARD_NUM)
+        FROM BOARD
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

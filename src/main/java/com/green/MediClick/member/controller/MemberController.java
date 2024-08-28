@@ -16,6 +16,9 @@ public class MemberController {
     //회원가입
     @PostMapping("/insertMember")
     public void insertMember(@RequestBody MemberVO memberVO){
+        String nextNum = memberService.nextInsert(memberVO.getMemRole());
+        memberVO.setMemNum(nextNum);
+
         memberService.insertMember(memberVO);
     }
 

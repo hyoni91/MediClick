@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class ScheduleVO {
     private int schNum;
-    private int docNum;
-    private int memNum;
+    private String docNum;
+    private String memNum;
     private int deptNum; // 진료과 추가
     private String regDate;
     private String schDate;

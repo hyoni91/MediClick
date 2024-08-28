@@ -14,10 +14,12 @@
     <!--회원 가입-->
     <insert id="insertMember">
     INSERT INTO MEDICAL_MEMBER (
+        MEM_NUM,
         MEM_NAME,
         MEM_RRN,
         MEM_TEL
         ) VALUES(
+        #{memNum},
         #{memName},
         #{memRrn},
         #{memTel}
@@ -46,18 +48,17 @@
 
     <!-- 다음에 들어갈 회원 가입 번호 -->
 
-<!--    <select id="checkNumber" resultType="string">-->
-<!--        SELECT CONCAT(-->
-<!--            CASE-->
-<!--                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'-->
-<!--                WHEN MEM_ROLE = 'USER' THEN 'CLT_'-->
-<!--                ELSE 'UNKNOWN_'-->
-<!--            END,-->
-<!--            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')-->
-<!--            )-->
-<!--    FROM medical_member-->
-<!--    WHERE MEM_ROLE = #{memRole}-->
-<!--    </select>-->
+    <select id="nextNumber" resultType="string">
+        SELECT CONCAT(
+            CASE
+                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
+                WHEN MEM_ROLE = 'USER' THEN 'CLT_'
+            END,
+            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
+            ) AS mem_num
+    FROM medical_member
+    WHERE MEM_ROLE = #{memRole}
+    </select>
 </mapper>
 
 
