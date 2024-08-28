@@ -4,8 +4,11 @@ import './DocMemList.css';
 import { useParams } from 'react-router-dom';
 
 const DocMemList = () => {
+  // 예약 리스트 담을 변수
   const [infoList,setInfoList]=useState([])
+  // 의사 하나의 환자예약정보 담을 변수
   const [oneDoc,setOneDoc]=useState({
+    docNum : '',
     docName:'',
     medicalDept:[{
       deptName:''
@@ -23,6 +26,7 @@ const DocMemList = () => {
     .get(`/oneDoctor/${docNum}`)
     .then((res)=>{
       setOneDoc(res.data)
+      console.log(oneDoc)
     })
     .catch((error)=>{console.log(error)})
     
@@ -37,13 +41,14 @@ const DocMemList = () => {
     .catch((error)=>{
       console.log(error)
     })
+    
   },[])
 
   // console.log(infoList)
   // console.log(oneDoc)
 
+  // 예약취소
   function goDelete(schNum){
-
     axios
     .put(`/schedule/updateSchStatus/${schNum}`)
     .then((res)=>{

@@ -55,7 +55,7 @@ const JoinForm = () => {
             </tr>
             <tr>
               <td>회원주민번호</td>
-              <td><input name='memRrn' type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
+              <td><input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
             </tr>
             <tr>
               <td>전화번호</td>
