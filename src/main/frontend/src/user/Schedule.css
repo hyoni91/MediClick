@@ -7,14 +7,14 @@
 
 /* 달력과 시간버튼 플렉스 */ 
 .sch-flex{
-  width: 70%;
+  width: 80%;
   display: flex;
-  align-items: center;
-  margin: auto;
-  /* border: 1px solid darkgray; */
+  justify-content: space-around;
+  border: 1px solid darkgray;
   border-radius: 10px;
-}
+  margin: auto;
 
+}
 
 .sch-time > h3{
   margin-top: 20px;
@@ -22,10 +22,12 @@
 }
 
 .sch-btn{
-  /* border: 1px solid blue; */
+  border: 1px solid blue;
   margin-right: 150px;
   display: grid;
   grid-template-columns: repeat(3,32%);
+  margin: auto;
+  
 }
 .sch-btn button {
   background-color: #ff8b48;
@@ -37,15 +39,14 @@
   margin: 5px;
   margin-bottom: 10px;
   border: none;
-  border-radius: 10px;
 }
 
 .sch-btn button:disabled{
-  background-color: #F2F2F2;
+  background-color: #e4e3e3;
 }
 
 .sch-btn button:hover{
-  background-color: rgb(103, 207, 241);
+  background-color: #fd6812;
 }
 
 /* 예약 상태(가능 불가능 안내) */
@@ -101,8 +102,7 @@ input:focus, select:focus, textarea:focus{
   font-size: 16px;
   font-weight: 600;
   border: none;
-  border-radius: 18px;
-  background-color: #11999E;
+  background-color: #0050B5;
   color: white;
   
 }
@@ -110,6 +110,39 @@ input:focus, select:focus, textarea:focus{
 button{
   cursor: pointer;
 }
+
+
+.doc-icon-div img{
+  cursor: pointer;
+  width: 50px;
+  border: 1px solid darkgrey;
+}
+
+/* 진료과 플렉스 */
+.doc-icon-div{
+  display: grid;
+  grid-template-columns: repeat(3,30%);
+  margin: auto;
+  margin-left: 50px;
+  
+}
+
+/* 아이콘 진료과 선택 버튼 */
+.doc-icon-div button{
+  border: none;
+  background-color: white;
+}
+
+.doc-icon-div button:hover{
+  font-weight: 600;
+}
+
+
+/* 글씨체 */
+
+
+
+
 
 
 
@@ -127,6 +160,7 @@ button{
 
 .react-calendar__navigation__label  {
   /*  달력 상단 년 월 글씨 커스텀 */
+
   font-size: 19px;
   font-weight: 600;
   color: rgb(0, 0, 0);
@@ -145,6 +179,9 @@ button{
 .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"]{
   color: red;
 } 
+.react-calendar__month-view__weekdays__weekday--weekend abbr[title="토요일"]{
+  color: blue;
+} 
 
 .react-calendar__tile {
   color: black;
@@ -159,10 +196,9 @@ button{
 
 .react-calendar__tile--now {
  /* 오늘 날짜 하이라이트 커스텀 */
-  width: 50px;
-  border-radius: 15px;
+ 
   abbr{
-    color:rgb(241, 97, 97);
+    color:rgb(255, 101, 101);
   }
 }
 
