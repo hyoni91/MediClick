@@ -9,7 +9,7 @@ const JoinForm = () => {
     memRrn : '',
     memTel : ''
   })
-
+  
   //이동페이지 할수있게 네비게이션
   const navigate = useNavigate()
   //데이터가 바뀔때마다 저장되는 함수
@@ -24,14 +24,14 @@ const JoinForm = () => {
   //전화번호 정규식
   const [phoneNumber, setPhoneNumber] = useState('');
   const autoHyphen2 = (e) => {
+    setMemberData({...memberData,memTel :e.target.value})
     const value = e.target.value
       .replace(/[^0-9]/g, '')
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
       .replace(/(\-{1,2})$/g, "");
     
-    setPhoneNumber(value);
-    // 저장된 전화번호를 memberData에 저장
-    setMemberData({...memberData,memTel :phoneNumber})
+      setPhoneNumber(value);
+      // 저장된 전화번호를 memberData에 저장
   };
   const insertJoin = () => {
     console.log(memberData)
@@ -73,7 +73,9 @@ const JoinForm = () => {
           setMemberData({...memberData,memRole : 'USER'})
         }}>고객용</button>
         <button className='join-btn btn-admin' onClick={() => {
+          console.log(memberData)
           setMemberData({...memberData,memRole : 'ADMIN'})
+          console.log(memberData)
         }}>관리자용</button>
       </div>
     </div>
