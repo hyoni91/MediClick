@@ -75,20 +75,19 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
 
   return (
     <div className='login-div'>
-      <div>
+      <div className='login-table-div'>
 
-        <div>메디클릭 로그인</div>
+        <h2>로그인</h2>
+        <div className='login-info'>회원 서비스는 로그인 이후 이용하실 수 있습니다.</div>
         <table className='login-table'>
           <thead></thead>
           <tbody>
             <tr>
-              <td>성명</td>
               <td><input type='text' name='memName' placeholder='성함을 입력하세요.' 
               onChange={(e)=>{insertData(e)}}></input></td>
             </tr>
 
             <tr>
-              <td>주민등록번호</td>
               <td><input type='password' name='memRrn' placeholder='주민등록번호를 입력하세요.'
               onChange={(e)=>{insertData(e)}}></input></td>
             </tr>
