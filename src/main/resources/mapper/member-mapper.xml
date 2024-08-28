@@ -49,15 +49,22 @@
     <!-- 다음에 들어갈 회원 가입 번호 -->
 
     <select id="nextNumber" resultType="string">
+<!--        SELECT CONCAT(-->
+<!--            CASE-->
+<!--                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'-->
+<!--                WHEN MEM_ROLE = 'USER' THEN 'CLT_'-->
+<!--            END,-->
+<!--            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED) + 1),0), 5, '0')-->
+<!--            ) AS mem_num-->
+<!--    FROM medical_member-->
+<!--    WHERE MEM_ROLE = #{memRole}-->
+
         SELECT CONCAT(
-            CASE
-                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
-                WHEN MEM_ROLE = 'USER' THEN 'CLT_'
-            END,
-            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
-            ) AS mem_num
-    FROM medical_member
-    WHERE MEM_ROLE = #{memRole}
+            IF('USER' = #{memRole}, 'CTL_', 'DOC_'),
+            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0')
+        ) AS mem_num
+        FROM medical_member
+        WHERE MEM_ROLE = #{memRole}
     </select>
 
     <!--회원가입하는 롤이 ADMIN이면 의사정보 등록 쿼리-->
@@ -65,9 +72,8 @@
         INSERT INTO medical_doctor (
         DOC_NUM,
         DOC_NAME
-
         ) VALUES(
-        #{docNum}
+        #{docNum},
         #{docName}
         )
     </insert>

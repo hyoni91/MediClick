@@ -16,6 +16,17 @@ const JoinForm = () => {
   const navigate = useNavigate()
   //데이터가 바뀔때마다 저장되는 함수
   const changeData = (e) => {
+    const {name} = e.target;
+    // 입력 값 변경 시 오류 리셋
+    setErrors((e) => ({
+      ...e,
+      [name]: ''
+    }));
+    // 상태 업데이트
+    setMemberData((e) => ({
+      ...e,
+      [name]: e.target
+    }));
     setMemberData({
       ...memberData
       
@@ -34,14 +45,46 @@ const JoinForm = () => {
     
       setPhoneNumber(value);
       // 저장된 전화번호를 memberData에 저장
+      // 전화번호 변경 시 오류 리셋
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      memTel: ''
+    }));
   };
+   // 오류 메시지를 관리하기 위한 상태
+  const [errors, setErrors] = useState({});
+  const validate = () => {
+    let isValid = true;
+    let errors = {};
+    // 이름 검사
+    if (!memberData.memName) {
+      isValid = false;
+      errors.memName = '이름을 입력해주세요.';
+    }
+    // 주민 검사
+    if (!memberData.memRrn) {
+      isValid = false;
+      errors.memRrn = '주민번호를 입력해주세요.';
+    }
+    // 전화번호 검사
+    if (!memberData.memTel) {
+      isValid = false;
+      errors.memTel = '전화번호을 입력해주세요.';
+    }
+    setErrors(errors);
+    return isValid;
+  }
   const insertJoin = () => {
+
     console.log(memberData)
+    // 유효성 검사
+    if (validate()){
     axios.post('/member/insertMember',memberData)
     .then((res) => {
       navigate('/')
     })
     .catch((error)=>{console.log(error)})
+    }
   }
   return (
     <div>
@@ -53,18 +96,27 @@ const JoinForm = () => {
               <td>회원이름</td>
               <td><input name='memName' type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)}}/></td>
             </tr>
+            {/* 데이터가 빈값일때 나타나는 변수 */}
+            {/* 데이터가 다시 바뀌면 사라짐 */}
+              {errors.memName && <tr className='error'><td></td><td >{errors.memName}</td></tr>}
             <tr>
               <td>회원주민번호</td>
               <td><input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
             </tr>
+            {/* 데이터가 빈값일때 나타나는 변수 */}
+            {/* 데이터가 다시 바뀌면 사라짐 */}
+            {errors.memRrn && <tr className='error'><td></td><td >{errors.memRrn}</td></tr>}
             <tr>
               <td>전화번호</td>
               <td>
               
         <input name='memTel' type="text" onChange={(e)=>{
           autoHyphen2(e)
-          }} value={phoneNumber} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
+        }} value={memberData.memTel} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
+            {/* 데이터가 빈값일때 나타나는 변수 */}
+            {/* 데이터가 다시 바뀌면 사라짐 */}
+            {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>}
           </tbody>
         </table>
           <div><button className='join-btn' onClick={() => {insertJoin()}}>가입하기</button></div>
