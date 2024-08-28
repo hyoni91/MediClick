@@ -47,8 +47,6 @@ function App() {
           {/* 헤더 */}
           
           <div className='mid-header'>
-            <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
-
             {
               Object.keys(loginInfo).length==0
               ?

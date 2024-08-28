@@ -24,11 +24,6 @@ body{
   margin: 0 auto;
 }
 
-.logo{
-  width: 120px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 .header ul{
   display: flex;
@@ -45,10 +40,31 @@ body{
   cursor: pointer;
 }
 
-/* UserLayout */
+/* User/Admin Layout */
+
+.layout-bar{
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 1440px;
+  height: 100px;
+  justify-content: space-evenly;
+}
+
+.logo{
+  border: 1px solid blue;
+  width: 120px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  width: 40%;
+  height: 100%;
+  
+}
 
 .menu-bar{
+  border: 1px solid red;
   font-size: 1.1rem;
+  width: 60%;
   padding: 30px;
   display: flex;
   justify-content: center;
