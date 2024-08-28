@@ -59,6 +59,18 @@
     FROM medical_member
     WHERE MEM_ROLE = #{memRole}
     </select>
+
+    <!--회원가입하는 롤이 ADMIN이면 의사정보 등록 쿼리-->
+    <insert id="insertDoctor">
+        INSERT INTO medical_doctor (
+        DOC_NUM,
+        DOC_NAME
+
+        ) VALUES(
+        #{docNum}
+        #{docName}
+        )
+    </insert>
 </mapper>
 
 
