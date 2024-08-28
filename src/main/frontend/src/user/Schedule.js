@@ -12,6 +12,7 @@ const Schedule = () => {
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
+  minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
@@ -63,7 +64,7 @@ const Schedule = () => {
     })
   }
 
-  // 의료진과 진료과 정보 동시에 받기
+  // 진료과 클릭 선택(의사,진료과정보 넘기기)
   function changeDocInfo(e){
     const selectedValue = e.target.value; // JSON 문자열
     const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
@@ -74,6 +75,7 @@ const Schedule = () => {
       deptName: deptName
     })
   }
+
   // 증상 정보 받기
   function changeDetail(e){
     setAppo({...appo,
@@ -83,6 +85,11 @@ const Schedule = () => {
 
   //클릭하면 예약 실행
   function goAppo(){
+    //증상 이외의 정보가 다 들어가 있는지 확인
+    if(appo.memNum == '' || appo.memRrn || appo.schTime){
+      alert('예약 정보를 확인하여 주세요.')
+    }else{
+        //다 들어가 있으면 쿼리실행
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
       console.log(res.data)
@@ -90,45 +97,61 @@ const Schedule = () => {
     .catch((error)=>{
       console.log(error)
     })
+    }
   }
 
+  // time 데이터
+  const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
   //예약유무확인(타임버튼 비활성화를 위한)
-  const availableTimes = [false,false,false,false,false,false,false,false]
-  const [chkAppoTime, setChkAppoTime] = useState([availableTimes])
+  //해당 날짜에 예약된 시간을 저장하는 리스트 
+  const times = []
+  // schTimes길이 만큼 false값주기
+  const [chkAppoTime, setChkAppoTime] = useState(new Array(schTimes.length).fill(false))
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
-      console.log(res.data)
-      // 예약 가능 여부 배열로 저장
-      res.data.forEach((time, i)=>{
-        time == '' ? availableTimes[i]=false: availableTimes[i]=true
-        setChkAppoTime(availableTimes)
-      })
+      // 예약가능한 시간을 저장하는 변수
+      const availableTimes = res.data.map(time => {
+        // 초를 제외하고 분 단위만 남기기
+        const [hours, minutes] = time.schTime.split(':')
+        return `${hours}:${minutes}`})
+
+      //schTimes와 비교하여 예약가능한 시간이 있는지 체크
+      const updatedChkAppoTime = schTimes.map(time => availableTimes.includes(time));
+      // console.log(`updateTime: ` + updatedChkAppoTime)
+      //체크를 끝냈으면 chkAppoTime을 갱신 
+      setChkAppoTime(updatedChkAppoTime)
     })
     .catch((error)=>{
       console.log(error)
     })
   },[appo])
-
-  console.log(chkAppoTime)
-
+  
+  console.log(appo)
   return (
     <div className='sch-container'>
       <div className='sch-flex'>
       {/* <h3>예약날짜</h3> */}
+        <div  className='doc-icon-div'>
+          {
+            docInfo.map((doc,i)=>{
+              return(
+                  <div key={i}>
+                    <img src={(`http://localhost:8080/images/${i}.png`)}/>
+                    <button type='button' onClick={(e)=>{
+                      changeDocInfo(e)
+                      }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                      {doc.medicalDept[0].deptName}
+                      </button>
+                  </div>
+              )
+              
+            })
+          }
+          
+        </div>
         <div className='sch-calendar'>
-        <div>진료과 선택</div>
-          <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
-            {
-              docInfo.map((doc,i)=>{
-                return(
-                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
-                    {doc.medicalDept[0].deptName}
-                  </option>
-                )
-              })
-            }
-            </select>
+        
           <Calendar 
           onChange={onChange} 
           value={value} 
@@ -138,11 +161,14 @@ const Schedule = () => {
           minDetail="year"
           minDate={minDate}
           maxDate={maxDate}
+          //날짜 칸에 보여지는 컨텐츠
+          tileContent={''}
           />
+          <h5>*당일 예약은 전화로 문의주세요</h5>
         </div>
         <div className='sch-time'>
           <div className='sch-btn'>
-                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map((time,i) => (
+                {schTimes.map((time,i) => (
                   <button
                   key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                 {time}</button>))
@@ -204,42 +230,36 @@ const Schedule = () => {
     </div>
   )
 }
-
-export default Schedule;
-
+export default Schedule
 
 
+// select로 진료과 정보 가져오기
+
+          {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
+            {
+              docInfo.map((doc,i)=>{
+                return(
+                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                    {doc.medicalDept[0].deptName}
+                  </option>
+                )
+              })
+            }
+            </select> */}
 
 
-
-  // //예약유무확인
-  // const [chkAppo, setChkAppo] = useState(false)
-  // useEffect(()=>{
-  //   axios.post('/schedule/checkAppo',appo)
-  //   .then((res)=>{
-  //     console.log(res.data)
-  //       if(res.data != ''){
-  //         alert('스케줄 중복')
-  //       }return;
-  //     })
-  //   .catch((error)=>{
-  //     console.log(error)
-  //   })
-  // },[appo])
-
-
-
-                    {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
-                    {
-                      docInfo.map((doc,i)=>{
-                        return(
-                          // <option key={i} 
-                          // value={doc.docNum} > {doc.medicalDept[0].deptName}
-                          // </option> 
-                          <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum })} >
-                            {doc.medicalDept[0].deptName}
-                          </option>
-                        )
-                      })
-                    }
-                  </select> */}
+// 모든 예약 정보를 입력했을때 예약정보 확인
+// //예약유무확인
+// const [chkAppo, setChkAppo] = useState(false)
+// useEffect(()=>{
+//   axios.post('/schedule/checkAppo',appo)
+//   .then((res)=>{
+//     console.log(res.data)
+//       if(res.data != ''){
+//         alert('스케줄 중복')
+//       }return;
+//     })
+//   .catch((error)=>{
+//     console.log(error)
+//   })
+// },[appo])
