@@ -40,6 +40,10 @@
   border-radius: 10px;
 }
 
+.sch-btn button:disabled{
+  background-color: #F2F2F2;
+}
+
 .sch-btn button:hover{
   background-color: rgb(103, 207, 241);
 }

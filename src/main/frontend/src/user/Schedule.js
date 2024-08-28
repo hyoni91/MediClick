@@ -35,11 +35,19 @@ const Schedule = () => {
     docNum : 7,
     memNum: loginInfo ? loginInfo.memNum : "",
     deptNum :1 ,
-    schDate: moment().format('YYYY-MM-DD'),
+    schDate: moment(value).format("YYYY-MM-DD"),
     schTime : '',
     detail:'',
     deptName:'유방암 외과'
   })
+
+  // schDate를 선택하면 appo정보도 바뀌도록 설정
+  useEffect(() => {
+    setAppo(prevAppo => ({
+      ...prevAppo,
+      schDate: moment(value).format("YYYY-MM-DD")
+    }));
+  }, [value])
 
   console.log(appo)
 
@@ -76,13 +84,15 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     axios.post('/schedule/schInput', appo)
-    .then((res)=>{})
+    .then((res)=>{
+      console.log(res.data)
+    })
     .catch((error)=>{
       console.log(error)
     })
   }
 
-  //예약유무확인
+  // //예약유무확인
   // const [chkAppo, setChkAppo] = useState(false)
   // useEffect(()=>{
   //   axios.post('/schedule/checkAppo',appo)
@@ -98,25 +108,27 @@ const Schedule = () => {
   // },[appo])
 
   //예약유무확인(타임버튼 비활성화를 위한)
-const [chkTime , setChkTime] = useState([])
-function chkAppoTime (){
-  axios.post('schedule/checkSchTime',appo)
-  .then((res)=>{
-    console.log(res.data.schTime)
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
-}
-// useEffect(()=>{
-//   axios.post('schedule/checkSchTime',appo)
-//   .then((res)=>{
-//     console.log(res.data)
-//   })
-//   .catch((error)=>{
-//     console.log(error)
-//   })
-// },[])
+  const availableTimes = [false,false,false,false,false,false,false,false]
+  const [chkAppoTime, setChkAppoTime] = useState([availableTimes])
+  useEffect(()=>{
+    axios.post('schedule/checkSchTime',appo)
+    .then((res)=>{
+      console.log(res.data)
+      // 예약 가능 여부 배열로 저장
+      res.data.forEach((time, i)=>{
+        if(time != ''){
+          availableTimes[i]= true
+          setChkAppoTime(availableTimes)
+          
+        }
+      })
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  },[appo])
+
+  console.log(chkAppoTime)
 
   return (
     <div className='sch-container'>
@@ -147,25 +159,15 @@ function chkAppoTime (){
           minDetail="year"
           minDate={minDate}
           maxDate={maxDate}
-          onClickDay={chkAppoTime}
           />
         </div>
         <div className='sch-time'>
           <div className='sch-btn'>
-                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map(time => (
+                {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'].map((time,i) => (
                   <button
-                  key={time} type='button' value={time} onClick={clickTime}>
+                  key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                 {time}</button>))
                 }
-    
-            {/* <button type='button' value={'09:00'}  onClick={(e)=>{clickTime(e)}}> 09:00</button>
-            <button type='button' value={'10:00'}  onClick={(e)=>{clickTime(e)}}> 10:00</button>
-            <button type='button' value={'11:00'}  onClick={(e)=>{clickTime(e)}}> 11:00</button>
-            <button type='button' value={'12:00'}  onClick={(e)=>{clickTime(e)}}> 12:00</button>
-            <button type='button' value={'14:00'}  onClick={(e)=>{clickTime(e)}}> 14:00</button>
-            <button type='button' value={'15:00'}  onClick={(e)=>{clickTime(e)}}> 15:00</button>
-            <button type='button' value={'16:00'}  onClick={(e)=>{clickTime(e)}}> 16:00</button>
-            <button type='button' value={'17:00'}  onClick={(e)=>{clickTime(e)}}> 17:00</button> */}
           </div>
           <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
         </div>
@@ -182,7 +184,7 @@ function chkAppoTime (){
                 <td>
                   <input  type='text' readOnly 
                 value={moment(value).format("YYYY-MM-DD")}
-                name='schDate' ref={choseData}/>
+                name='schDate' ref={choseData} />
                 </td>
               </tr>
               <tr>
