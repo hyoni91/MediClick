@@ -1,18 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './AdminJoinForm.css'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 const AdminJoinForm = () => {
-
+  // 의사데이터 저장할 변수
+  const [docData, setDocData] = useState({
+    docNum : '',
+    docName : ''
+  })
+  // 의사 번호
+  const {docNum} = useParams()
+  console.log(docNum)
   // 의사 데이터 가져오기
-  
+  useEffect(() => {
+    axios.get(`/selectDoctor/${docNum}`)
+    .then((res) => {
+      setDocData(res.data)
+      console.log(res.data)
+    })
+    .catch((error) => {console.log(error)})
+  },[])
   return (
     <div>
-        <div><h1>회원가입</h1></div>
+        <div><h1 className='join-head'>의사 정보</h1></div>
       <div className='join-div'>
         <table className='join-table'>
           <tbody>
             <tr>
               <td>회원이름</td>
-              <td><input name='memName' type='text' placeholder="이름을 입력하세요"/></td>
+              <td><input className='adminJoin-input' name='memName' value={docData.docName} type='text' readOnly/></td>
             </tr>
             <tr>
               <td>회원주민번호</td>
@@ -31,7 +47,7 @@ const AdminJoinForm = () => {
             {/* {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>} */}
           </tbody>
         </table>
-          <div><button className='join-btn' onClick={() => {}}>가입하기</button></div>
+          <div><button className='join-btn' onClick={() => {}}>취</button></div>
         
       </div>
     </div>

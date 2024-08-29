@@ -34,7 +34,7 @@ public class DoctorController {
 
     // 회원가입 후 의사 정보 조회
     @GetMapping("/selectDoctor/{docNum}")
-    public DoctorVO selectDoctor(@PathVariable("docNum") int docNum){
+    public DoctorVO selectDoctor(@PathVariable("docNum") String docNum){
         return doctorService.selectDoctor(docNum);
     }
 
