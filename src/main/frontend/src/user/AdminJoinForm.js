@@ -8,6 +8,7 @@ const AdminJoinForm = () => {
     docNum : '',
     docName : ''
   })
+  /// 이건 아님지우기
   // 의사 번호
   const {docNum} = useParams()
   console.log(docNum)
