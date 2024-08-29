@@ -18,14 +18,14 @@ public class ScheduleController {
 
     //의사별 담당환자 리스트
     @GetMapping("/getDocMemList/{docNum}")
-    public List<ScheduleVO> getDocMemList(@PathVariable("docNum")int docNum){
+    public List<ScheduleVO> getDocMemList(@PathVariable("docNum")String docNum){
         return scheduleService.getDocMem(docNum);
     }
 
     //의사별 담당환자 차트
-    @GetMapping("/getMemChart/{memNum}")
-    public ScheduleVO getMemChart(@PathVariable("memNum")int memNum){
-        return scheduleService.getMemChart(memNum);
+    @GetMapping("/getMemChart/{schNum}")
+    public ScheduleVO getMemChart(@PathVariable("schNum")String schNum){
+        return scheduleService.getMemChart(schNum);
     }
 
     //담당환자 차트에서 예약정보 변경
@@ -36,7 +36,7 @@ public class ScheduleController {
 
     //환자가 보는 나의 예약페이지
     @GetMapping("/getMemSch/{memNum}")
-    public List<ScheduleVO> getMemSch(@PathVariable("memNum")int memNum){
+    public List<ScheduleVO> getMemSch(@PathVariable("memNum")String memNum){
         return scheduleService.getMemSch(memNum);
     }
 

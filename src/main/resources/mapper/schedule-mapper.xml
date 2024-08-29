@@ -50,13 +50,22 @@
                 ,M.MEM_NUM
                 ,MEM_NAME
                 ,DETAIL
+                ,NOTES
                 ,SCH_STATUS
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE S.DOC_NUM=#{docNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
         ORDER BY SCH_NUM DESC
+        LIMIT #{displayDataCnt} OFFSET #{displayDataCnt} * (#{nowPage} - 1);
      </select>
+
+    <!-- 총 게시글 수 조회하는 쿼리 -->
+    <select id="getChartCnt" resultType="int">
+        SELECT COUNT(SCH_NUM)
+        FROM MEDICAL_SCHEDULE
+    </select>
+
 
     <!--의사별 담당환자 차트-->
     <select id="getMemChart" resultMap="schedule">
@@ -83,21 +92,21 @@
             ) AS MEM_TEL
             ,DETAIL
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
-        WHERE S.MEM_NUM=#{memNum}
+        WHERE SCH_NUM=#{schNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM;
     </select>
 
     <!--담당환자 차트에서 예약정보 변경-->
-    <update id="updateSchCart">
-        UPDATE medical_schedule
-        SET SCH_DATE=#{schDate}
-            ,SCH_TIME=#{schTime}
-            ,DETAIL=#{detail}
-            ,DOC_NUM=#{docNum}
-            ,DEPT_NUM=#{deptNum}
-        WHERE MEM_NUM=#{memNum}
-    </update>
+<!--    <update id="updateSchCart">-->
+<!--        UPDATE medical_schedule-->
+<!--        SET SCH_DATE=#{schDate}-->
+<!--            ,SCH_TIME=#{schTime}-->
+<!--            ,DETAIL=#{detail}-->
+<!--            ,DOC_NUM=#{docNum}-->
+<!--            ,DEPT_NUM=#{deptNum}-->
+<!--        WHERE MEM_NUM=#{memNum}-->
+<!--    </update>-->
 
     <!--예약취소 : SCH_STATUS='N'로 변경-->
     <update id="updateSchStatus">
@@ -119,7 +128,8 @@
             ,MEM_NAME
             ,SCH_STATUS
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
-        WHERE M.MEM_NUM=#{memNum}
+        WHERE S.MEM_NUM=#{memNum}
+        AND S.MEM_NUM=M.MEM_NUM
         AND S.DOC_NUM=D.DOC_NUM
         ORDER BY SCH_NUM DESC
     </select>

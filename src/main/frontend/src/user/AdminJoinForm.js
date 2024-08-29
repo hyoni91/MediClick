@@ -20,6 +20,8 @@ const AdminJoinForm = () => {
     })
     .catch((error) => {console.log(error)})
   },[])
+
+  
   return (
     <div>
         <div><h1 className='join-head'>의사 정보</h1></div>
@@ -31,14 +33,23 @@ const AdminJoinForm = () => {
               <td><input className='adminJoin-input' name='memName' value={docData.docName} type='text' readOnly/></td>
             </tr>
             <tr>
-              <td>회원주민번호</td>
-              <td><input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {}}/></td>
+              <td>진료과</td>
+              <td>
+                <select >
+                  <option>유방암 외과</option>
+                  <option>신경외과</option>
+                  <option>갑상선외과</option>
+                  <option>산부인과</option>
+                  <option>흉부외과</option>
+                  <option>혈액 종양 내과</option>
+                </select>
+                <input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {}}/></td>
             </tr>
             <tr>
               <td>전화번호</td>
-              <td>
+              <td >
               
-        <input name='memTel' type="text" onChange={(e)=>{
+        <input name='memTel' type="text" value={docData.docNum} readOnly onChange={(e)=>{
           // autoHyphen2(e)
         }}  maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
@@ -47,7 +58,10 @@ const AdminJoinForm = () => {
             {/* {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>} */}
           </tbody>
         </table>
-          <div><button className='join-btn' onClick={() => {}}>취</button></div>
+          <div>
+            <button className='join-btn' onClick={() => {}}>취소</button>
+            <button className='join-btn' onClick={() => {}}>저장</button>
+          </div>
         
       </div>
     </div>

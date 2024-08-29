@@ -91,9 +91,8 @@ const DocMemList = () => {
         <table className='chart-table'>
           <colgroup>
             <col width='20%'/>
-            <col width='10%'/>
-            <col width='30%'/>
-            <col width='30%'/>
+            <col width='20%'/>
+            <col width='50%'/>
             <col width='10%'/>
           </colgroup>
 
@@ -102,7 +101,6 @@ const DocMemList = () => {
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
-              <td>특이사항</td>
               <td>예약 상태</td>
             </tr>
           </thead>
@@ -110,7 +108,7 @@ const DocMemList = () => {
             {
               infoList.length==0?
               <tr>
-                <td colSpan={5}>
+                <td colSpan={4}>
                   <p>예약 환자가 없습니다.</p>
                 </td>
               </tr>
@@ -119,9 +117,8 @@ const DocMemList = () => {
                 return(
                 <tr key={i}>
                   <td>{info.schDate}</td>
-                  <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.memNum}`)}}>{info.memberVO.memName}</span></td>
+                  <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span></td>
                   <td>{info.detail}</td>
-                  <td>-</td>
                   <td>
                     {
                       info.schStatus==='Y'?

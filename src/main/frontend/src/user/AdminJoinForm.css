@@ -1,4 +1,5 @@
 .adminJoin-input{
   background-color: rgba(0, 0,  0, 0.1);
-  
+  /* border: none; */
+  border-radius: 5px;
 }
