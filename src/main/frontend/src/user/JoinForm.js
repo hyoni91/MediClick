@@ -15,47 +15,55 @@ const JoinForm = () => {
   
   //이동페이지 할수있게 네비게이션
   const navigate = useNavigate()
+
   //데이터가 바뀔때마다 저장되는 함수
   const changeData = (e) => {
-    const {name} = e.target;
+    const {name, value} = e.target;
+    // 상태 업데이트
+    setMemberData((e) => ({
+      ...e,
+      [name]: value,
+    }));
+
     // 입력 값 변경 시 오류 리셋
     setErrors((e) => ({
       ...e,
       [name]: ''
     }));
-    // 상태 업데이트
-    setMemberData((e) => ({
-      ...e,
-      [name]: e.target
-    }));
-    setMemberData({
-      ...memberData
-      
-      , [e.target.name] : e.target.value
-    })
   }
-  const regex = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])[-]\d{7}$/
-  //전화번호 정규식
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const autoHyphen2 = (e) => {
-    setMemberData({...memberData,memTel :e.target.value})
-    const value = e.target.value
-      .replace(/[^0-9]/g, '')
-      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-      .replace(/(\-{1,2})$/g, "");
+  // 전화번호 입력 시 자동 하이픈 기능
+  const formatPhoneNumber = (value) => {
+    // 입력값에서 숫자만 추출
+    const rawValue = value.replace(/[^0-9]/g, '');
+  
+    // 숫자 길이에 따라 하이픈 추가
+    let formattedValue = '';
+  
+    if (rawValue.length <= 3) {
+      formattedValue = rawValue;
+    } else if (rawValue.length <= 7) {
+      formattedValue = rawValue.slice(0, 3) + '-' + rawValue.slice(3);
+    } else {
+      formattedValue = rawValue.slice(0, 3) + '-' + rawValue.slice(3, 7) + '-' + rawValue.slice(7);
+    }
     
-      setPhoneNumber(value);
-      // 저장된 전화번호를 memberData에 저장
-      setMemberData((e) => ({
-        ...e,
-        memTel: value
-      }));
-      // 전화번호 변경 시 오류 리셋
+    // 오류 리셋
     setErrors((e) => ({
       ...e,
-      memTel: ''
-    }));
+      memTel: '',
+  }));
+    return formattedValue;
   };
+// 전화번호 입력 중 하이픈 추가
+const handlePhoneChange = (e) => {
+  if (e && e.target) {
+    const { value } = e.target;
+    setMemberData((prevData) => ({
+      ...prevData,
+      memTel: formatPhoneNumber(value),
+    }));
+  }
+};
    // 오류 메시지를 관리하기 위한 상태
   const [errors, setErrors] = useState({});
   const validate = () => {
@@ -86,14 +94,18 @@ const JoinForm = () => {
     if (validate()){
     axios.post('/member/insertMember',memberData)
     .then((res) => {
-      navigate(`/adminJoinForm/${memberData.memNum}`)
+      console.log(res.data)
+      if(res.data.memRole === 'ADMIN'){
+      navigate(`/adminJoinForm/${res.data.memNum}`)
+      }
+      else{navigate('/')}
     })
     .catch((error)=>{console.log(error)})
     }
   }
   
   useEffect(() => {
-  }, [memberData]);
+  }, [memberData])
   return (
     <div>
         <div><h1>회원가입</h1></div>
@@ -124,8 +136,8 @@ const JoinForm = () => {
               <td>
               
         <input name='memTel' type="text" onChange={(e)=>{
-          autoHyphen2(e)
-        }} value={phoneNumber} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
+          handlePhoneChange(e)
+        }} value={memberData.memTel} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
             {/* 데이터가 빈값일때 나타나는 변수 */}
             {/* 데이터가 다시 바뀌면 사라짐 */}
