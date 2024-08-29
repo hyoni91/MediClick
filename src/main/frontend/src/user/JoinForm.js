@@ -10,6 +10,7 @@ const JoinForm = () => {
     memRrn : '',
     memTel : '',
     memRole : 'USER'
+    
   })
   
   //이동페이지 할수있게 네비게이션
@@ -86,6 +87,9 @@ const JoinForm = () => {
     .catch((error)=>{console.log(error)})
     }
   }
+  
+  useEffect(() => {
+  }, [memberData]);
   return (
     <div>
         <div><h1>회원가입</h1></div>
@@ -94,7 +98,12 @@ const JoinForm = () => {
           <tbody>
             <tr>
               <td>회원이름</td>
-              <td><input name='memName' type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)}}/></td>
+              <td><input name='memName' type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)
+                console.log(memberData)
+
+              }
+              
+            }/></td>
             </tr>
             {/* 데이터가 빈값일때 나타나는 변수 */}
             {/* 데이터가 다시 바뀌면 사라짐 */}

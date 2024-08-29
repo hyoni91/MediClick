@@ -17,12 +17,14 @@
         MEM_NUM,
         MEM_NAME,
         MEM_RRN,
-        MEM_TEL
+        MEM_TEL,
+        MEM_ROLE
         ) VALUES(
         #{memNum},
         #{memName},
         #{memRrn},
-        #{memTel}
+        #{memTel},
+        #{memRole}
         )
     </insert>
 
@@ -60,8 +62,8 @@
 <!--    WHERE MEM_ROLE = #{memRole}-->
 
         SELECT CONCAT(
-            IF('USER' = #{memRole}, 'CTL_', 'DOC_'),
-            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0')
+            IF(#{memRole} = 'USER', 'CTL_', 'DOC_'),
+        LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0')
         ) AS mem_num
         FROM medical_member
         WHERE MEM_ROLE = #{memRole}
