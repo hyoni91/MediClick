@@ -46,6 +46,10 @@ const JoinForm = () => {
     
       setPhoneNumber(value);
       // 저장된 전화번호를 memberData에 저장
+      setMemberData((e) => ({
+        ...e,
+        memTel: value
+      }));
       // 전화번호 변경 시 오류 리셋
     setErrors((e) => ({
       ...e,
@@ -121,7 +125,7 @@ const JoinForm = () => {
               
         <input name='memTel' type="text" onChange={(e)=>{
           autoHyphen2(e)
-        }} value={memberData.memTel} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
+        }} value={phoneNumber} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
             {/* 데이터가 빈값일때 나타나는 변수 */}
             {/* 데이터가 다시 바뀌면 사라짐 */}
