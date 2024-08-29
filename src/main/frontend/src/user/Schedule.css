@@ -1,34 +1,43 @@
 .sch-container{
-  /* border: 1px solid rgb(0, 0, 0); */
-  width: 100%;
+  width: 85%;
   margin: auto;
-
 }
+
+h3{
+  margin-bottom: 20px;
+}
+
+.sch-container-flex{
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  margin-right: 50px;
+}
+
 
 /* 달력과 시간버튼 플렉스 */ 
 .sch-flex{
-  width: 80%;
+  width: 90%;
+  height: 600px;
   display: flex;
-  justify-content: space-around;
-  border: 1px solid darkgray;
-  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-
 }
 
-.sch-time > h3{
-  margin-top: 20px;
-  margin-bottom: 10px;
+.sch-time{
+  width: 30%;
 }
 
 .sch-btn{
-  border: 1px solid blue;
-  margin-right: 150px;
-  display: grid;
-  grid-template-columns: repeat(3,32%);
-  margin: auto;
-  
+display: flex;
+justify-content: center;
+  /* display: grid;
+  grid-template-columns: repeat(8,40%); */
+
 }
+
 .sch-btn button {
   background-color: #ff8b48;
   color: rgb(255, 255, 255);
@@ -37,7 +46,7 @@
   font-size: 15px;
   font-weight: 500;
   margin: 5px;
-  margin-bottom: 10px;
+  border-radius: 10px;
   border: none;
 }
 
@@ -51,33 +60,40 @@
 
 /* 예약 상태(가능 불가능 안내) */
 .sch-status{
-  /* border: 1px solid black; */
-  margin-right: 75px;
   font-size: 13px;
-  display: inline-block;
 }
 
 
 /* 예약상세내용 테이블 */
 .schedule-table{
-  /* display: inline-block; */
-  width: 100%;
-  text-align: left;
+  width: 50%;
+  text-align: center;
   margin: auto;
   margin-top: 50px;
-  /* border: 1px solid rgb(25, 0, 255); */
+  margin:auto;
+  margin-right: 100px;
 }
 
 .schedule-table>table{
   /* border: 1px solid red; */
+  border-collapse: collapse;
   margin: auto;
 }
+
+.schedule-table>table td{
+  padding: 2px;
+}
+
+
+/* .schedule-table>table tr td{
+  border: 1px solid black;
+} */
 
 .schedule-table input{
   /* margin-left: 15px; */
   width: 300px;
   padding: 4px;
-  margin-bottom: 3px;
+  /* margin-bottom: 3px; */
   font-size: 14px;
 }
 
@@ -104,14 +120,12 @@ input:focus, select:focus, textarea:focus{
   border: none;
   background-color: #0050B5;
   color: white;
-  
 }
-
 button{
   cursor: pointer;
 }
 
-
+/* 진료과목 이미지 */
 .doc-icon-div img{
   cursor: pointer;
   width: 50px;
@@ -120,11 +134,15 @@ button{
 
 /* 진료과 플렉스 */
 .doc-icon-div{
-  display: grid;
-  grid-template-columns: repeat(3,30%);
-  margin: auto;
-  margin-left: 50px;
-  
+  /* border: 1px solid greenyellow; */
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  /* display: grid;
+  grid-template-columns: repeat(6,35%); */
+  /* margin: auto; */
+  margin-right: 50px;
 }
 
 /* 아이콘 진료과 선택 버튼 */
@@ -148,27 +166,30 @@ button{
 
 /* -------------달력 커스텀 -------------*/
 
-.react-calendar{
-  width:50%;
-  margin: 20px auto;
-  border:1px solid darkgrey;
-}
-.react-calendar__navigation{
-  background-color: lightblue;
+.sch-calendar{
+  width: 36%;
 }
 
+.react-calendar{
+  width:100%;
+  margin: 20px auto;
+  /* border: none; */
+  border:1px solid darkgrey;
+  /* box-shadow: 1px 1px 1px 1px rgb(238, 236, 236); */
+  border-radius: 10px;
+}
 
 .react-calendar__navigation__label  {
   /*  달력 상단 년 월 글씨 커스텀 */
-
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 600;
   color: rgb(0, 0, 0);
 }
 
+
 .react-calendar__month-view__weekdays__weekday {
   /* 요일 css */
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -227,4 +248,5 @@ button{
 .react-calendar__tile:disabled {
   background-color: rgb(250, 247, 247); 
   color: darkgrey; 
+  border-radius: 15px;
 }
