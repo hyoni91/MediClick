@@ -1,5 +1,6 @@
 .sch-container{
   width: 85%;
+  height: 710px;
   margin: auto;
   border: 1px solid lightgrey;
   margin-bottom: 10px;
@@ -16,14 +17,42 @@
   text-align: center;
   margin-bottom: 10px;
   color: red;
+  margin-top: 60px;
 }
 
 .sch-container-flex{
   width: 100%;
   display: flex;
   margin-right: 50px;
-  margin-bottom: 20px;
   margin: auto;
+}
+
+
+/* 진료과목 이미지 */
+.doc-icon-div img{
+  /* cursor: pointer; */
+  width: 50px;
+  border: 1px solid darkgrey;
+}
+
+/* 진료과 플렉스 */
+.doc-icon-div{
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-right: 50px;
+}
+
+/* 아이콘 진료과 선택 버튼 */
+.doc-icon-div button{
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.doc-icon-div button:hover{
+  font-weight: 600;
 }
 
 
@@ -57,9 +86,15 @@ justify-content: center;
   margin: 5px;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 }
+
 .sch-btn button:hover{
-  background-color: #fd6812;
+  background-color: #fa6a16;
+}
+
+.sch-btn button:focus{
+  background-color: #e4e3e3;
 }
 
 
@@ -81,12 +116,13 @@ justify-content: center;
 /* 예약상세내용 테이블 */
 .schedule-table{
   width: 50%;
-  height: 500px;
+  height: 600px;
   text-align: left;
   margin: auto;
   /* margin-top: 60px; */
   margin-right: 200px;
   border: 1px solid lightgray;
+  margin-top: 50px;
   /* border-radius: 10px; */
 }
 
@@ -94,7 +130,7 @@ justify-content: center;
   /* border: 1px solid red; */
   border-collapse: collapse;
   margin: auto;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .schedule-table>table tr,td{
@@ -119,12 +155,10 @@ input:focus, select:focus, textarea:focus{
   outline: none;
 }
 
-.sch-footer{
-  margin-top: 30px;
-  margin: auto;
-  text-align: center;
-}
 
+
+
+/* 예약 상세내용 확인 버튼(예약버튼) */
 .sch-footer >button{
   width: 250px;
   padding: 8px;
@@ -133,38 +167,21 @@ input:focus, select:focus, textarea:focus{
   border: none;
   background-color: #0050B5;
   color: white;
-  margin-top: 20px;
-  margin-bottom: 10px;
   cursor: pointer;
+  text-align: center;
+  margin-top: 30px;
 }
 
-
-/* 진료과목 이미지 */
-.doc-icon-div img{
-  /* cursor: pointer; */
-  width: 50px;
-  border: 1px solid darkgrey;
+.sch-footer >div{
+  text-align: center;
 }
 
-/* 진료과 플렉스 */
-.doc-icon-div{
-  width: 33%;
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  margin-right: 50px;
+.sch-footer{
+  margin: auto;
+  text-align: center;
+  /* margin-top: 100px; */
 }
 
-/* 아이콘 진료과 선택 버튼 */
-.doc-icon-div button{
-  border: none;
-  background-color: white;
-  cursor: pointer;
-}
-
-.doc-icon-div button:hover{
-  font-weight: 600;
-}
 
 
 /* 글씨체 */
