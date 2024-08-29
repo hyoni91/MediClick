@@ -6,8 +6,9 @@
   border-radius: 10px;
 }
 
-h3{
+.h3tag{
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .sch-container-flex{
@@ -26,7 +27,6 @@ h3{
   justify-content: center;
   align-items: center;
   margin: auto;
-  /* border: 1px solid grey; */
 }
 
 .sch-time{
@@ -73,17 +73,22 @@ justify-content: center;
 /* 예약상세내용 테이블 */
 .schedule-table{
   width: 50%;
+  height: 400px;
   text-align: center;
   margin: auto;
   margin-top: 50px;
   margin:auto;
   margin-right: 100px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+
 }
 
 .schedule-table>table{
   /* border: 1px solid red; */
   border-collapse: collapse;
   margin: auto;
+  margin-top: 50px;
 }
 
 .schedule-table>table td{
@@ -131,10 +136,9 @@ input:focus, select:focus, textarea:focus{
   color: white;
   margin-top: 20px;
   margin-bottom: 10px;
-}
-button{
   cursor: pointer;
 }
+
 
 /* 진료과목 이미지 */
 .doc-icon-div img{
@@ -167,12 +171,7 @@ button{
 }
 
 
-
 /* 글씨체 */
-
-
-
-
 
 
 

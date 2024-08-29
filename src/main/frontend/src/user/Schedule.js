@@ -144,7 +144,7 @@ const Schedule = () => {
     <div className='sch-container'>
       <div className='sch-container-flex'>
         <div className='sch-flex'>
-          <h3>|진료과 선택</h3>
+          <h3 className='h3tag'>|진료과 선택</h3>
           <div  className='doc-icon-div'>
             {
               docInfo.map((doc,i)=>{
@@ -162,7 +162,7 @@ const Schedule = () => {
             }
             </div>
             <div className='sch-calendar'>
-            <h3>|진료일 선택</h3>
+            <h3  className='h3tag'>|진료일 선택</h3>
               <Calendar 
               onChange={onChange} 
               value={value} 
@@ -190,7 +190,7 @@ const Schedule = () => {
             </div>
           </div>
           <div className='schedule-table'>
-            <h3>|예약 내용 확인</h3>
+            <h3  className='h3tag'>|예약 내용 확인</h3>
             <table>
               <colgroup>
               <col width={'23%'}/>
