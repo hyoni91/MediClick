@@ -6,7 +6,11 @@ import axios from 'axios';
 const MySch = () => {
   // 환자가 보는 나의 예약페이지
   const {memNum} = useParams();
-  const [oneMem,setOneMem]=useState({})
+  const [oneMem,setOneMem]=useState({
+    memNum:'',
+    memName:'',
+    memRrn:''
+  })
   const [memSchInfo,setMemSchInfo]=useState([
     {schDate:'',
     schTime:'',
@@ -25,6 +29,7 @@ const MySch = () => {
     axios
     .get(`/member/getOneMem/${memNum}`)
     .then((res)=>{
+      console.log(res.data)
       setOneMem(res.data)
     })
     .catch((error)=>{console.log(error)})
@@ -33,6 +38,7 @@ const MySch = () => {
     axios
     .get(`/schedule/getMemSch/${memNum}`)
     .then((res)=>{
+      console.log(res.data)
       setMemSchInfo(res.data)
 
     })
@@ -96,14 +102,18 @@ const MySch = () => {
                 <td colSpan={5}>예약정보가 없습니다.</td>
               </tr>)
               :
-              (<tr>
-                <td>{memSchInfo[0].schDate}</td>
-                <td>{memSchInfo[0].schTime}</td>
-                <td>{memSchInfo[0].memberVO.memName}</td>
-                <td>{memSchInfo[0].doctorVO.medicalDept[0].deptName}</td>
-                <td>{memSchInfo[0].doctorVO.docName}</td>
-                <td>{memSchInfo[0].schStatus}</td>
-              </tr>)
+              memSchInfo.map((mem,i)=>{
+                return(
+                  (<tr>
+                    <td>{mem.schDate}</td>
+                    <td>{mem.schTime}</td>
+                    <td>{mem.memberVO.memName}</td>
+                    <td>{mem.doctorVO.medicalDept[0].deptName}</td>
+                    <td>{mem.doctorVO.docName}</td>
+                    <td>{mem.schStatus}</td>
+                  </tr>)
+                )
+              })
             }
             
           </tbody>

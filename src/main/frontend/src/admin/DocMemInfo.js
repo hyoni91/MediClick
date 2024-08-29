@@ -6,6 +6,7 @@ import axios from 'axios';
 const DocMemInfo = () => {
   const navigate=useNavigate()
   const [memInfo,setMemInfo]=useState({
+    schNum:'',
     doctorVO:{
       docNum:'',
       docName:'',
@@ -22,12 +23,12 @@ const DocMemInfo = () => {
 
 
   
-  const {memNum}=useParams();
+  const {schNum}=useParams();
 
   useEffect(()=>{
 
     axios
-    .get(`/schedule/getMemChart/${memNum}`)
+    .get(`/schedule/getMemChart/${schNum}`)
     .then((res)=>{setMemInfo(res.data)})
     .catch((error)=>{console.log(error)})
         
@@ -124,10 +125,6 @@ const DocMemInfo = () => {
             <tr>
               <td>증상</td>
               <td>{memInfo.detail}</td>
-            </tr>
-            <tr>
-              <td>특이사항</td>
-              <td>-</td>
             </tr>
           </tbody>
         </table>

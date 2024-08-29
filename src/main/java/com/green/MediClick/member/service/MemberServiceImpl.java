@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService{
         sqlSession.insert("doctorMapper.insertDoctor",doctorVO);
     }
 
-    public MemberVO getOneMem(int memNum) {
+    public MemberVO getOneMem(String memNum) {
         return sqlSession.selectOne("member.getOneMem",memNum);
     }
 }
