@@ -5,7 +5,7 @@ const DoctorUpdate = () => {
     <div>
       <table>
         <tr>
-          <td>아이디</td>
+          {/* <td>${loginInfo.memName}</td> */}
           <td></td>
         </tr>
         <tr>
