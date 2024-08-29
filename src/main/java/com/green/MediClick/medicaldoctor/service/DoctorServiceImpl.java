@@ -32,8 +32,8 @@ public class DoctorServiceImpl implements DoctorService{
 
     // 회원가입할때 의사 정보 조회
     @Override
-    public DoctorVO selectDoctor(int docNum) {
-        return sqlSession.selectOne("doctorMapper.selectDoctor");
+    public DoctorVO selectDoctor(String docNum) {
+        return sqlSession.selectOne("doctorMapper.selectDoctor",docNum);
     }
 
     // 회원가입할때 "ADMIN"이면 의사정보도 추가

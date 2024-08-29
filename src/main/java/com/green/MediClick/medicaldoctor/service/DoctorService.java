@@ -17,7 +17,7 @@ public interface DoctorService {
     void insertDoctor(DoctorVO doctorVO);
 
     // 회원가입할때 의사 정보 조회
-    DoctorVO selectDoctor(int docNum);
+    DoctorVO selectDoctor(String docNum);
 
 
 }
