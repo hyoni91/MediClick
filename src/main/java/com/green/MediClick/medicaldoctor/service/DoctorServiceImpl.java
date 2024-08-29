@@ -17,4 +17,15 @@ public class DoctorServiceImpl implements DoctorService{
     public List<DoctorVO> getDoctorList() {
         return sqlSession.selectList("doctorMapper.medicalDoctorList");
     }
+
+    @Override
+    public DoctorVO getOneDoctor(int docNum) {
+        return sqlSession.selectOne("doctorMapper.oneDoctor",docNum);
+    }
+
+    //다음에 들어갈 의사 이미지 조회
+    @Override
+    public String nextDoctorImg() {
+        return sqlSession.selectOne("doctorMapper.nextDoctorImg");
+    }
 }

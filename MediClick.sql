@@ -17,7 +17,9 @@ INSERT INTO medical_member (
   ,'9604232222222'
 );
 
-SELECT *FROM medical_member; 
+SELECT * FROM medical_member; 
+
+DROP TABLE medical_dept;
 
 -- 진료과
 CREATE TABLE MEDICAL_DEPT(
@@ -27,8 +29,34 @@ CREATE TABLE MEDICAL_DEPT(
 
 UPDATE medical_dept
 SET
-DEPT_NAME = '자궁암'
-WHERE DEPT_NAME = '간암';
+DEPT_NAME = '유방암 외과'
+WHERE DEPT_NAME = '유방암';
+
+UPDATE medical_dept
+SET
+DEPT_NAME = '신경외과'
+WHERE DEPT_NAME = '뇌종양';
+
+UPDATE medical_dept
+SET
+DEPT_NAME = '갑상선 외과'
+WHERE DEPT_NAME = '갑상선암';
+
+UPDATE medical_dept
+SET
+DEPT_NAME = '산부인과'
+WHERE DEPT_NAME = '자궁암';
+
+UPDATE medical_dept
+SET
+DEPT_NAME = '흉부외과'
+WHERE DEPT_NAME = '폐암';
+
+UPDATE medical_dept
+SET
+DEPT_NAME = '혈액 종양 내과'
+WHERE DEPT_NAME = '혈액암';
+
 -- 진료과 insert
 INSERT INTO medical_dept(DEPT_NAME) VALUES('유방암');
 INSERT INTO medical_dept(DEPT_NAME) VALUES('뇌종양');

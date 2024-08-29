@@ -22,8 +22,6 @@
 
 .docInfo-table thead td{
   padding: 5px;
-
-  
 }
 
 
@@ -53,6 +51,14 @@
 .chart-table thead td{
   padding: 5px;
 
-  
+}
+
+.cart-table tbody td span{
+  cursor: pointer;
+}
+
+.cancel{
+  font-weight: bold;
+  color: red;
 }
 

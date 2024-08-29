@@ -10,6 +10,8 @@ import JoinForm from './user/JoinForm';
 import Schedule from './user/Schedule';
 import { useEffect, useState } from 'react';
 import DocMemList from './admin/DocMemList';
+import MySch from './user/MySch';
+import DocMemInfo from './admin/DocMemInfo';
 
 function App() {
   const navigate=useNavigate()
@@ -46,8 +48,6 @@ function App() {
           {/* 헤더 */}
           
           <div className='mid-header'>
-            <div className='logo' onClick={(e)=>{navigate('/')}}>MediClick</div>
-
             {
               Object.keys(loginInfo).length==0
               ?
@@ -57,7 +57,7 @@ function App() {
               </ul>
               :
               <ul>
-                <li><span>{loginInfo.memName}님</span></li>
+                <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
             }
@@ -80,7 +80,8 @@ function App() {
           <Route path='/' element={<Home/>}/>
           {/* 로그인 페이지 */}
           <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-
+          {/* 환자별 예약확인 페이지 */}
+          <Route path='mySch/:memNum' element={<MySch/>}/>
           {/* 진료과/의료진 페이지 */}
           <Route path='medicalDoctor' element={<MedicalDoctor />}/>
           {/* 회원가입 페이지 */}
@@ -93,9 +94,31 @@ function App() {
 
         {/* 관리자용 */}
         <Route path='/admin' element={<AdminLayout/>}>
-            <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+          {/* 의사별 담당환자 확인 */}
+          <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+          {/* 담당환자 상세정보/수정 */}
+          <Route path='docMemInfo/:memNum' element={<DocMemInfo/>}/>
         </Route>
       </Routes>
+
+      <div className='mid'>
+
+      </div>
+
+      <div className='footer'>
+
+        <div className='footer-div'>
+          <div>
+            <span>이용약관 |</span>
+            <span> 개인정보처리방침 |</span>
+            <span> 환자권리장전</span>
+          </div>
+          <div>
+            <p>주소 : 울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
+          </div>
+        </div>
+
+      </div>
 
     </div>
   );

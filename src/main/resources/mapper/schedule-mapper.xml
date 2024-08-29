@@ -7,8 +7,10 @@
         <id column="SCH_NUM" property="schNum"/>
         <result column="DOC_NUM" property="docNum"/>
         <result column="MEM_NUM" property="memNum"/>
+        <result column="DEPT_NUM" property="deptNum"/>
         <result column="REH_DATE" property="rehDate"/>
         <result column="SCH_DATE" property="schDate"/>
+        <result column="SCH_TIME" property="schTime"/>
         <result column="DETAIL" property="detail"/>
         <result column="SCH_STATUS" property="schStatus"/>
         <association property="doctorVO" resultMap="doctor"/>
@@ -26,8 +28,7 @@
     <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
-        <result column="DEPT_NUM" property="deptNum" />
-        <association property="deptVO" resultMap="dept"/>
+        <collection property="medicalDept" resultMap="dept"/>
     </resultMap>
 
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
@@ -39,9 +40,14 @@
 
         <!--관리자 : 담당의별 환자 차트-->
      <select id="docMemChart" resultMap="schedule">
-        SELECT SCH_DATE
+        SELECT SCH_NUM
+                ,SCH_DATE
                 ,DOC_NAME
-<<<<<<< HEAD
+                ,( SELECT DEPT_NAME
+                 FROM medical_dept P
+                 WHERE D.DEPT_NUM=P.DEPT_NUM
+                 ) AS DEPT_NAME
+                ,M.MEM_NUM
                 ,MEM_NAME
                 ,DETAIL
                 ,SCH_STATUS
@@ -49,21 +55,77 @@
         WHERE S.DOC_NUM=#{docNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
+        ORDER BY SCH_NUM DESC
      </select>
-=======
-                ,DEPT_NAME
-                ,MEM_NAME
-                ,DETAIL
-                ,SCH_STATUS
-        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M,MEDICAL_DEPT P
-        WHERE S.DOC_NUM=#{docNum}
+
+    <!--예약취소 : SCH_STATUS='N'로 변경-->
+    <update id="updateSchStatus">
+        UPDATE MEDICAL_SCHEDULE
+        SET SCH_STATUS='N'
+        WHERE SCH_NUM=#{schNum}
+    </update>
+
+    <!--환자가 보는 나의 예약페이지-->
+    <select id="getMemSch" resultMap="schedule">
+        SELECT SCH_NUM
+        ,SCH_DATE
+        ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
+        ,DOC_NAME
+        ,( SELECT DEPT_NAME
+        FROM medical_dept P
+        WHERE D.DEPT_NUM=P.DEPT_NUM
+        ) AS DEPT_NAME
+        ,MEM_NAME
+        ,SCH_STATUS
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
+        WHERE M.MEM_NUM=#{memNum}
         AND S.DOC_NUM=D.DOC_NUM
-        AND S.MEM_NUM=M.MEM_NUM
-        AND D.DEPT_NUM=P.DEPT_NUM
-     </select>
+        ORDER BY SCH_NUM DESC
+    </select>
 
+    <!-- 의사 진료과 불러오기 -->
+    <select id="doctor" resultMap="doctor">
+        SELECT DOC_NUM, DOC_NAME, D.DEPT_NUM , DEPT_NAME
+        FROM  medical_doctor D, medical_dept T
+        WHERE D.DEPT_NUM = T.DEPT_NUM
+        ORDER BY DOC_NUM
+    </select>
 
->>>>>>> e7d9067c758fb05f4d91551e3b1230668f97b4b0
+    <!-- 예약 insert -->
+    <insert id="insertsch">
+        INSERT INTO medical_schedule(
+        DOC_NUM
+        ,MEM_NUM
+        ,DEPT_NUM
+        ,SCH_DATE
+        ,SCH_TIME
+        ,DETAIL
+        ) VALUES(
+        #{docNum}
+        ,#{memNum}
+        ,#{deptNum}
+        ,#{schDate}
+        ,#{schTime}
+        ,#{detail}
+        )
+    </insert>
+
+    <!-- 예약유무 확인 (모든 조건 선택했을때)-->
+    <select id="checkAppo" resultMap="schedule">
+        SELECT SCH_NUM
+        FROM medical_schedule
+        WHERE DOC_NUM = #{docNum}
+        AND SCH_DATE = #{schDate}
+        AND SCH_TIME = #{schTime}
+    </select>
+
+    <!-- 예약유무 확인 (진료과와 날짜를 선택했을때) -->
+    <select id="checkSchtime" resultMap="schedule">
+        SELECT SCH_TIME
+        FROM medical_schedule
+        WHERE DEPT_NUM = #{deptNum}
+        AND SCH_DATE = #{schDate}
+    </select>
 </mapper>
 
 

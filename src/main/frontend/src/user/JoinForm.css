@@ -1,5 +1,4 @@
 
-
 .join-div{
   width: 800px;
   border: 1px solid #eeeeee;
@@ -8,6 +7,15 @@
   margin: 10px auto;
 }
 
+.join-btn{
+  margin: 10px;
+  background-color: #11999E;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
 .join-table{
   width: 300px;
   margin: 50px auto;
@@ -15,9 +23,24 @@
 
 .join-table td{
   padding: 5px;
+  
 }
 
-.login-table td:nth-child(1){
+.login-table tr td:nth-child(odd){
   text-align: left;
 }
+.loginBtn{
+  
+}
 
+.join-btn:hover{
+  background-color:#0f8b8f ;
+}
+.join-div>div:nth-child(){
+}
+.error{
+  font-size: 0.7rem;
+  text-align: left;
+  color: red;
+  margin: 0px;
+}

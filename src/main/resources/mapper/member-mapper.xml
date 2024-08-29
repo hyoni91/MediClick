@@ -6,25 +6,29 @@
     <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
         <id column="MEM_NUM" property="memNum" />
         <result column="MEM_NAME" property="memName" />
-        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_RRN" property="memRrn" />
+        <result column="MEM_TEL" property="memTel" />
         <result column="MEM_ROLE" property="memRole" />
 
     </resultMap>
     <!--회원 가입-->
     <insert id="insertMember">
     INSERT INTO MEDICAL_MEMBER (
+        MEM_NUM,
         MEM_NAME,
-        MEM_TEL,
         MEM_RRN,
+        MEM_TEL
         ) VALUES(
+        #{memNum},
         #{memName},
-        #{memTel},
         #{memRrn},
+        #{memTel}
+        )
     </insert>
 
     <select id="goLogin" resultMap="member">
-        SELECT MEM_NAME
+        SELECT MEM_NUM
+            ,MEM_NAME
             ,MEM_RRN
             ,MEM_ROLE
         FROM MEDICAL_MEMBER
@@ -32,20 +36,47 @@
         AND MEM_RRN=#{memRrn}
     </select>
 
+    <!--환자 조회-->
+    <select id="getOneMem" resultMap="member">
+        SELECT MEM_NUM
+            ,MEM_NAME
+            ,SUBSTRING(MEM_RRN,1,6) AS MEM_RRN
+            ,MEM_TEL
+        FROM MEDICAL_MEMBER
+        WHERE MEM_NUM=#{memNum}
+    </select>
+
     <!-- 다음에 들어갈 회원 가입 번호 -->
 
-    <select id="checkNumber" resultType="string">
+    <select id="nextNumber" resultType="string">
+<!--        SELECT CONCAT(-->
+<!--            CASE-->
+<!--                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'-->
+<!--                WHEN MEM_ROLE = 'USER' THEN 'CLT_'-->
+<!--            END,-->
+<!--            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED) + 1),0), 5, '0')-->
+<!--            ) AS mem_num-->
+<!--    FROM medical_member-->
+<!--    WHERE MEM_ROLE = #{memRole}-->
+
         SELECT CONCAT(
-            CASE
-                WHEN MEM_ROLE = 'ADMIN' THEN 'DOC_'
-                WHEN MEM_ROLE = 'USER' THEN 'CLT_'
-                ELSE 'UNKNOWN_'
-            END,
-            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, LOCATE('_', MEM_NUM) + 1) AS UNSIGNED)), 0) + 1, 5, '0')
-            )
-    FROM medical_member
-    WHERE MEM_ROLE = 'ADMIN'
+            IF('USER' = #{memRole}, 'CTL_', 'DOC_'),
+            LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0')
+        ) AS mem_num
+        FROM medical_member
+        WHERE MEM_ROLE = #{memRole}
     </select>
+
+    <!--회원가입하는 롤이 ADMIN이면 의사정보 등록 쿼리-->
+    <insert id="insertDoctor">
+        INSERT INTO medical_doctor (
+        DOC_NUM,
+        DOC_NAME
+        ) VALUES(
+        #{docNum},
+        #{docName}
+        )
+    </insert>
 </mapper>
 
 

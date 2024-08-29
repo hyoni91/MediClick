@@ -16,6 +16,9 @@ public class MemberController {
     //회원가입
     @PostMapping("/insertMember")
     public void insertMember(@RequestBody MemberVO memberVO){
+        String nextNum = memberService.nextInsert(memberVO.getMemRole());
+        System.out.println(memberVO);
+        memberVO.setMemNum(nextNum);
         memberService.insertMember(memberVO);
     }
 
@@ -23,5 +26,11 @@ public class MemberController {
     @PutMapping("/goLogin")
     public MemberVO goLogin(@RequestBody MemberVO memberVO){
         return memberService.goLogin(memberVO);
+    }
+
+    //환자조회
+    @GetMapping("/getOneMem/{memNum}")
+    public MemberVO getOneMem(@PathVariable("memNum")int memNum){
+        return memberService.getOneMem(memNum);
     }
 }

@@ -10,9 +10,9 @@ body{
 
 .header{
   width: 100%;
-  height: 25px;
+  height: 28px;
   line-height: 25px;
-  background-color: #11999E;
+  background-color: #0254AF;
   color: white;
   font-size: 0.9rem;
 
@@ -24,11 +24,6 @@ body{
   margin: 0 auto;
 }
 
-.logo{
-  width: 120px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 .header ul{
   display: flex;
@@ -45,13 +40,65 @@ body{
   cursor: pointer;
 }
 
-/* UserLayout */
+.footer{
+  background-color: #7b92ad4d;
+  width: 100%;
+  height: 200px;
+  font-size: 0.8rem;
+}
+
+.footer-div{
+  margin: 0 auto;
+  width: 1440px;
+  text-align: left;
+}
+
+.footer-div{
+  padding: 5px;
+}
+
+.footer-div div{
+  margin: 10px 0px;
+}
+
+.footer-div div:nth-child(1){
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+
+/* User/Admin Layout */
+
+.layout-bar{
+  display: flex;
+  margin: 0 auto;
+  width: 1440px;
+  height: 100px;
+  justify-content: space-evenly;
+}
+
+.logoimg-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100px;
+}
+
+.logo{
+  /* font-weight: bold; */
+  cursor: pointer;
+  height: 60%;
+  margin-right: 120px;
+}
 
 .menu-bar{
   font-size: 1.1rem;
+  width: 60%;
   padding: 30px;
   display: flex;
   justify-content: center;
+  font-weight: bold;
 }
 
 .menu-bar>ul{
@@ -73,6 +120,7 @@ body{
 .main-img img{
   width: 100%;
   height: 800px;
+  margin: 0 auto;
   object-fit: cover;
   object-position: top; 
 }
