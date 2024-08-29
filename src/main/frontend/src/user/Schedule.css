@@ -11,6 +11,13 @@
   margin-bottom: 10px;
   text-align: center;
   margin-top: 10px;
+  /* background-color: #0050B5; */
+  /* color: white; */
+  font-size: 17px;
+  font-weight: 600;
+  width: 200px;
+  margin: auto;
+  padding: 2px;
 }
 
 .h5tag{
@@ -77,24 +84,28 @@ justify-content: center;
 }
 
 .sch-btn button {
-  background-color: #ff8b48;
-  color: rgb(255, 255, 255);
+  /* background-color: #ff8b48; */
+  background-color: white;
+  color: rgb(0, 0, 0);
   width: 70px;
   padding: 10px;
   font-size: 15px;
   font-weight: 500;
   margin: 5px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: none;
   cursor: pointer;
 }
 
 .sch-btn button:hover{
   background-color: #fa6a16;
+  background-color: #0254AF;
+  color: white;
 }
 
 .sch-btn button:focus{
-  background-color: #e4e3e3;
+  background-color: #0254AF;
+  color: white;
 }
 
 
@@ -102,6 +113,7 @@ justify-content: center;
 .sch-btn button:disabled,
 .sch-btn button:disabled:hover{
   background-color: #e4e3e3;
+  color: grey;
 }
 
 
@@ -160,7 +172,7 @@ input:focus, select:focus, textarea:focus{
 
 /* 예약 상세내용 확인 버튼(예약버튼) */
 .sch-footer >button{
-  width: 250px;
+  width: 200px;
   padding: 8px;
   font-size: 16px;
   font-weight: 600;
@@ -276,15 +288,17 @@ input:focus, select:focus, textarea:focus{
 
 .react-calendar__tile--active {
   /* 현재 선택된 날짜  */
-  background: var(--festie-primary-orange, #0090DA);
+  background: var( #0050B5);
+  color: white;
   border-radius: 15px;
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   /* hover 했을 때 색상 변경 */
-  background: var(--festie-primary-orange, #0090DA);
+  background: var(--festie-primary-orange, #0050B5);
   border-radius: 15px;
+  color: white;
 }
 
 

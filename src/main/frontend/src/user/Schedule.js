@@ -102,7 +102,8 @@ const Schedule = () => {
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
     if(appo.memNum == ''){
-      alert('로그인이 필요합니다.')
+      alert('로그인 후 이용해 주세요.')
+      navigate('/loginForm')
     }else if(appo.memRrn == '' || appo.schTime ==''){
       alert('예약 내용을 다시 확인해 주세요.')
     }else{
@@ -150,7 +151,7 @@ const Schedule = () => {
     <div className='sch-container'>
       <div className='sch-container-flex'>
         <div className='sch-flex'>
-          <h3 className='h3tag'>|진료과 선택</h3>
+          <div className='h3tag'>|진료과 선택</div>
           <div  className='doc-icon-div'>
             {
               docInfo.map((doc,i)=>{
@@ -168,7 +169,7 @@ const Schedule = () => {
             }
             </div>
             <div className='sch-calendar'>
-            <h3  className='h3tag'>|진료일 선택</h3>
+            <div  className='h3tag'>|진료일 선택</div>
               <Calendar 
               onChange={onChange} 
               value={value} 
@@ -191,7 +192,7 @@ const Schedule = () => {
                     {time}</button>))
                     }
               </div>
-              <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
+              <div className='sch-status'> 🟦선택중  ⬜예약불가능</div>
               
             </div>
           </div>
