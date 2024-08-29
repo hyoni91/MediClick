@@ -31,7 +31,7 @@ public class MemberController {
 
     //환자조회
     @GetMapping("/getOneMem/{memNum}")
-    public MemberVO getOneMem(@PathVariable("memNum")int memNum){
+    public MemberVO getOneMem(@PathVariable("memNum")String memNum){
         return memberService.getOneMem(memNum);
     }
 }
