@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService{
     // 회원가입할때 "ADMIN"이면 의사정보도 추가
     @Override
     public void insertDoctor(DoctorVO doctorVO) {
-        sqlSession.insert("member.insertDoctor",doctorVO);
+        sqlSession.insert("doctorMapper.insertDoctor",doctorVO);
     }
 
     public MemberVO getOneMem(int memNum) {

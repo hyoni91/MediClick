@@ -32,5 +32,17 @@ public class DoctorController {
         doctorVO.setDocNum(doctorService.nextDoctorImg());
     }
 
+    // 회원가입 후 의사 정보 조회
+    @GetMapping("/selectDoctor/{docNum}")
+    public DoctorVO selectDoctor(@PathVariable("docNum") int docNum){
+        return doctorService.selectDoctor(docNum);
+    }
+
+    // 회원가입 후 관리자면 의사정보 추가
+    @PostMapping("/insertDoctor/{docNum}")
+    public void insertDoctor(@RequestBody DoctorVO doctorVO){
+    }
+
+
 
 }
