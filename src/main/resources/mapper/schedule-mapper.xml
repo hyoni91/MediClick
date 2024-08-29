@@ -57,8 +57,14 @@
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
         ORDER BY SCH_NUM DESC
-<!--         LIMIT #{displayDataCnt} OFFSET #{displayDataCnt} * (#{nowPage} - 1);-->
+        LIMIT #{displayDataCnt} OFFSET #{displayDataCnt} * (#{nowPage} - 1);
      </select>
+
+    <!-- 총 게시글 수 조회하는 쿼리 -->
+    <select id="getChartCnt" resultType="int">
+        SELECT COUNT(SCH_NUM)
+        FROM MEDICAL_SCHEDULE
+    </select>
 
 
     <!--의사별 담당환자 차트-->
