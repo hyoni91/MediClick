@@ -186,6 +186,7 @@ const Schedule = () => {
                     }
               </div>
               <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
+              
             </div>
           </div>
           <div className='schedule-table'>
