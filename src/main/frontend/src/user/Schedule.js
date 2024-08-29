@@ -197,7 +197,7 @@ const Schedule = () => {
             </div>
           </div>
           <div className='schedule-table'>
-            <h3  className='h3tag'>예약내용</h3>
+            <div  className='h3tag'>예약내용</div>
             <table>
               {/* <colgroup>
               <col width={'23%'}/>

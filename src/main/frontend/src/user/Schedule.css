@@ -4,14 +4,13 @@
   margin: auto;
   border: 1px solid rgb(179, 179, 179);
   margin-bottom: 10px;
-  /* box-shadow: 0.5px 1px 0.5px 1px   rgb(226, 226, 226); */
   /* border-radius: 10px; */
 }
 
 .h3tag{
-  margin-bottom: 13px;
+  margin-bottom: 10px;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
   /* background-color: #0050B5; */
   /* color: white; */
   font-size: 17px;
@@ -48,15 +47,17 @@
   width: 33%;
   display: flex;
   justify-content: center;
-  gap: 35px;
+  gap: 28px;
   margin-right: 50px;
 }
 
 /* 아이콘 진료과 선택 버튼 */
 .doc-icon-div button{
+  /* width: 100px; */
   border: none;
   background-color: white;
   cursor: pointer;
+  text-align: center;
 }
 
 .doc-icon-div button:hover{
@@ -150,11 +151,6 @@ justify-content: center;
   padding: 4px;
 }
 
-.schedule-table>table tr {
-  /* border: 1px solid lightgray; */
-}
-
-
 .schedule-table input{
   width: 300px;
   padding: 4px;
@@ -171,8 +167,6 @@ justify-content: center;
 input:focus, select:focus, textarea:focus{
   outline: none;
 }
-
-
 
 
 /* 예약 상세내용 확인 버튼(예약버튼) */
