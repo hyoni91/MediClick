@@ -99,8 +99,8 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
-    if(appo.memNum == '' || appo.memRrn || appo.schTime){
-      alert('예약 정보를 확인하여 주세요.')
+    if(appo.memNum == '' || appo.memRrn == '' || appo.schTime ==''){
+      alert('예약 내용을 다시 확인해 주세요.')
     }else{
         //다 들어가 있으면 쿼리실행
     axios.post('/schedule/schInput', appo)
@@ -115,11 +115,11 @@ const Schedule = () => {
 
   // time 데이터
   const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
+
   //예약유무확인(타임버튼 비활성화를 위한)
-  //해당 날짜에 예약된 시간을 저장하는 리스트 
-  const times = []
   // schTimes길이 만큼 false값주기
   const [chkAppoTime, setChkAppoTime] = useState(new Array(schTimes.length).fill(false))
+
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
@@ -140,7 +140,6 @@ const Schedule = () => {
     })
   },[appo])
   
-  console.log(appo)
   return (
     <div className='sch-container'>
       <div className='sch-container-flex'>
@@ -153,8 +152,8 @@ const Schedule = () => {
                   <div key={i}>
                     <img src={(`http://localhost:8080/images/${i}.png`)}/>
                     <button type='button' onClick={(e)=>{
-                      changeDocInfo(e)
-                      }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                    changeDocInfo(e)
+                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
                       {doc.medicalDept[0].deptName}
                       </button>
                   </div>
