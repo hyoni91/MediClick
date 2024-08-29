@@ -5,8 +5,10 @@ import moment from "moment";
 import './Schedule.css'
 import axios from 'axios';
 import { now } from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 const Schedule = () => {
+  const navigate = useNavigate()
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
@@ -99,13 +101,18 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
-    if(appo.memNum == '' || appo.memRrn == '' || appo.schTime ==''){
+    if(appo.memNum == ''){
+      alert('로그인 후 이용해 주세요.')
+      navigate('/loginForm')
+    }else if(appo.memRrn == '' || appo.schTime ==''){
       alert('예약 내용을 다시 확인해 주세요.')
     }else{
         //다 들어가 있으면 쿼리실행
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
-      console.log(res.data)
+      alert('예약이 완료되었습니다.')
+      //본인 예약 확인페이지로 넘어가기
+      navigate('')
     })
     .catch((error)=>{
       console.log(error)
@@ -114,7 +121,7 @@ const Schedule = () => {
   }
 
   // time 데이터
-  const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
+  const schTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
 
   //예약유무확인(타임버튼 비활성화를 위한)
   // schTimes길이 만큼 false값주기
@@ -144,7 +151,7 @@ const Schedule = () => {
     <div className='sch-container'>
       <div className='sch-container-flex'>
         <div className='sch-flex'>
-          <h3>|진료과 선택</h3>
+          <div className='h3tag'>|진료과 선택</div>
           <div  className='doc-icon-div'>
             {
               docInfo.map((doc,i)=>{
@@ -162,7 +169,7 @@ const Schedule = () => {
             }
             </div>
             <div className='sch-calendar'>
-            <h3>|진료일 선택</h3>
+            <div  className='h3tag'>|진료일 선택</div>
               <Calendar 
               onChange={onChange} 
               value={value} 
@@ -185,16 +192,17 @@ const Schedule = () => {
                     {time}</button>))
                     }
               </div>
-              <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
+              <div className='sch-status'> 🟦선택중  ⬜예약불가능</div>
+              
             </div>
           </div>
           <div className='schedule-table'>
-            <h3>|예약 내용 확인</h3>
+            <h3  className='h3tag'>|예약내용</h3>
             <table>
-              <colgroup>
+              {/* <colgroup>
               <col width={'23%'}/>
               <col width={'*'}/>
-              </colgroup>
+              </colgroup> */}
               <tbody>
                 <tr>
                   <td>예약날짜</td>
@@ -234,13 +242,15 @@ const Schedule = () => {
                 </tr>
               </tbody>
             </table>
+            <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
+            
+            <div className='sch-footer'>
+              <div>상기 내용으로 예약하시겠습니까?</div>
+              <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
+            </div>
           </div>
       </div>
-      <h5>*당일 예약은 전화로 문의주세요</h5>
-      <div className='sch-footer'>상기 내용으로 예약하시겠습니까?</div>
-      <div className='sch-footer'>
-        <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
-      </div>
+      
     </div>
   )
 }

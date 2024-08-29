@@ -1,19 +1,65 @@
 .sch-container{
   width: 85%;
+  height: 710px;
   margin: auto;
   border: 1px solid lightgrey;
   margin-bottom: 10px;
   border-radius: 10px;
 }
 
-h3{
+.h3tag{
   margin-bottom: 10px;
+  text-align: center;
+  margin-top: 10px;
+  /* background-color: #0050B5; */
+  /* color: white; */
+  font-size: 17px;
+  font-weight: 600;
+  width: 200px;
+  margin: auto;
+  padding: 2px;
+}
+
+.h5tag{
+  text-align: center;
+  margin-bottom: 10px;
+  color: red;
+  margin-top: 60px;
 }
 
 .sch-container-flex{
   width: 100%;
   display: flex;
   margin-right: 50px;
+  margin: auto;
+}
+
+
+/* 진료과목 이미지 */
+.doc-icon-div img{
+  /* cursor: pointer; */
+  width: 50px;
+  border: 1px solid darkgrey;
+}
+
+/* 진료과 플렉스 */
+.doc-icon-div{
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-right: 50px;
+}
+
+/* 아이콘 진료과 선택 버튼 */
+.doc-icon-div button{
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.doc-icon-div button:hover{
+  font-weight: 600;
 }
 
 
@@ -26,7 +72,6 @@ h3{
   justify-content: center;
   align-items: center;
   margin: auto;
-  /* border: 1px solid grey; */
 }
 
 .sch-time{
@@ -36,24 +81,31 @@ h3{
 .sch-btn{
 display: flex;
 justify-content: center;
-  /* display: grid;
-  grid-template-columns: repeat(8,40%); */
-
 }
 
 .sch-btn button {
-  background-color: #ff8b48;
-  color: rgb(255, 255, 255);
+  /* background-color: #ff8b48; */
+  background-color: white;
+  color: rgb(0, 0, 0);
   width: 70px;
   padding: 10px;
   font-size: 15px;
   font-weight: 500;
   margin: 5px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: none;
+  cursor: pointer;
 }
+
 .sch-btn button:hover{
-  background-color: #fd6812;
+  background-color: #fa6a16;
+  background-color: #0254AF;
+  color: white;
+}
+
+.sch-btn button:focus{
+  background-color: #0254AF;
+  color: white;
 }
 
 
@@ -61,45 +113,46 @@ justify-content: center;
 .sch-btn button:disabled,
 .sch-btn button:disabled:hover{
   background-color: #e4e3e3;
+  color: grey;
 }
 
 
 /* 예약 가능 여부 안내문구*/
 .sch-status{
   font-size: 13px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 
 /* 예약상세내용 테이블 */
 .schedule-table{
   width: 50%;
-  text-align: center;
+  height: 600px;
+  text-align: left;
   margin: auto;
+  /* margin-top: 60px; */
+  margin-right: 200px;
+  border: 1px solid lightgray;
   margin-top: 50px;
-  margin:auto;
-  margin-right: 100px;
+  /* border-radius: 10px; */
 }
 
 .schedule-table>table{
   /* border: 1px solid red; */
   border-collapse: collapse;
   margin: auto;
+  /* margin-top: 50px; */
 }
 
-.schedule-table>table td{
-  padding: 2px;
+.schedule-table>table tr,td{
+  padding: 4px;
 }
 
-
-/* .schedule-table>table tr td{
-  border: 1px solid black;
-} */
 
 .schedule-table input{
-  /* margin-left: 15px; */
   width: 300px;
   padding: 4px;
-  /* margin-bottom: 3px; */
   font-size: 14px;
 }
 
@@ -114,67 +167,43 @@ input:focus, select:focus, textarea:focus{
   outline: none;
 }
 
-.sch-footer{
-  margin-top: 30px;
-}
 
+
+
+/* 예약 상세내용 확인 버튼(예약버튼) */
 .sch-footer >button{
-  width: 250px;
+  width: 200px;
   padding: 8px;
   font-size: 16px;
   font-weight: 600;
   border: none;
   background-color: #0050B5;
   color: white;
-  margin-bottom: 10px;
-}
-button{
   cursor: pointer;
+  text-align: center;
+  margin-top: 30px;
 }
 
-/* 진료과목 이미지 */
-.doc-icon-div img{
-  /* cursor: pointer; */
-  width: 50px;
-  border: 1px solid darkgrey;
+.sch-footer >div{
+  text-align: center;
 }
 
-/* 진료과 플렉스 */
-.doc-icon-div{
-  /* border: 1px solid greenyellow; */
-  width: 33%;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  /* display: grid;
-  grid-template-columns: repeat(6,35%); */
-  /* margin: auto; */
-  margin-right: 50px;
+.sch-footer{
+  margin: auto;
+  text-align: center;
+  /* margin-top: 100px; */
 }
 
-/* 아이콘 진료과 선택 버튼 */
-.doc-icon-div button{
-  border: none;
-  background-color: white;
-}
-
-.doc-icon-div button:hover{
-  font-weight: 600;
-}
 
 
 /* 글씨체 */
 
 
 
-
-
-
-
 /* -------------달력 커스텀 -------------*/
 
 .sch-calendar{
-  width: 36%;
+  width: 39%;
 }
 
 .react-calendar{
@@ -259,15 +288,17 @@ button{
 
 .react-calendar__tile--active {
   /* 현재 선택된 날짜  */
-  background: var(--festie-primary-orange, #0090DA);
+  background: var( #0050B5);
+  color: white;
   border-radius: 15px;
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   /* hover 했을 때 색상 변경 */
-  background: var(--festie-primary-orange, #0090DA);
+  background: var(--festie-primary-orange, #0050B5);
   border-radius: 15px;
+  color: white;
 }
 
 
