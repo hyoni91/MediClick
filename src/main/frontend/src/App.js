@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import DocMemList from './admin/DocMemList';
 import MySch from './user/MySch';
 import DocMemInfo from './admin/DocMemInfo';
+import AdminJoinForm from './user/AdminJoinForm';
 
 function App() {
   const navigate=useNavigate()
@@ -58,6 +59,7 @@ function App() {
               :
               <ul>
                 <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                <li><span>정보수정하기</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
             }
@@ -86,6 +88,8 @@ function App() {
           <Route path='medicalDoctor' element={<MedicalDoctor />}/>
           {/* 회원가입 페이지 */}
           <Route path='joinForm' element={<JoinForm/>}/>
+          {/* 회원가입 시 관리자일 경우 정보 추가 */}
+          <Route path='adminJoinForm' element={<AdminJoinForm />} />
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
 
