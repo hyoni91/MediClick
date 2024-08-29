@@ -183,6 +183,10 @@ button{
   color: blue;
 } 
 
+.react-calendar__month-view__weekdays__weekday--weekend {
+  color: #0050B5;
+}
+
 .react-calendar__tile {
   color: black;
   text-align: center;
@@ -196,7 +200,6 @@ button{
 
 .react-calendar__tile--now {
  /* 오늘 날짜 하이라이트 커스텀 */
- 
   abbr{
     color:rgb(255, 101, 101);
   }
@@ -213,16 +216,15 @@ button{
   border-radius: 15px;
 }
 
-
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  /* //hover 했을 때 색상 변경 */
+  /* hover 했을 때 색상 변경 */
   background: var(--festie-primary-orange, lightblue);
   border-radius: 15px;
 }
 
-
+/* 비활성화 날짜 커스텀 */
 .react-calendar__tile:disabled {
-  background-color: white; /* 비활성 날짜 배경색 */
-  color: darkgrey; /* 비활성 날짜 글자색 */
+  background-color: rgb(250, 247, 247); 
+  color: darkgrey; 
 }

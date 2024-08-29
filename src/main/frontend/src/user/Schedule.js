@@ -7,14 +7,27 @@ import axios from 'axios';
 import { now } from 'moment/moment';
 
 const Schedule = () => {
-  // 선택한 날짜 update
-  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
   minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
+  // 선택한 날짜 update
+  const [value, onChange] = useState(minDate) //초기값은 현재 날짜
+
+  //주말만 가져오기 
+  const isWeekend = (date) => {
+    const day = date.getDay();
+    return day == 6 || day == 0; // 6: Saturday, 0: Sunday
+  };
+
+   // tileDisabled 속성을 사용하여 주말 날짜를 비활성화
+  const tileDisabled = ({ date }) => {
+    return isWeekend(date); // 주말 날짜를 비활성화
+  };
+
+
 
   // 환자정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
@@ -162,7 +175,9 @@ const Schedule = () => {
           minDate={minDate}
           maxDate={maxDate}
           //날짜 칸에 보여지는 컨텐츠
-          tileContent={''}
+          tileDisabled={tileDisabled}
+          //비활성화 날짜 목록
+          
           />
           <h5>*당일 예약은 전화로 문의주세요</h5>
         </div>
