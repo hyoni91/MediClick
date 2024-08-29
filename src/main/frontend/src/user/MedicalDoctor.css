@@ -1,8 +1,8 @@
 .doctorMemImg{
   width: 250px;
   height: 330px;
-  margin-left: 30px;
-  margin-top: 45px;
+  margin-left: 40px;
+  margin-top: 60px;
 }
 .doctorMem div{
   margin: 50px;
@@ -10,7 +10,6 @@
 }
 .doctorIntro{
   display: flex;
-  border: 1px solid ;
 }
 .doctorIntro > div{
   display: flex;
@@ -21,4 +20,29 @@
 }
 div{
   text-align: left;
+}
+.introDoctorName{
+  color: darkslategrey;
+  font-size: 25px;
+}
+.introDoctorDept{
+  color: rgb(58, 100, 100);
+  font-size: 18px;
+}
+.doctorIntro p{
+  font-size: 18px;
+  text-align: end;
+  color: rgb(14, 56, 14);
+}
+p > span{
+  padding: 15px;
+}
+p > span:hover{
+  cursor: pointer;
+}
+p > i:hover{
+  cursor: pointer;
+}
+p > i{
+  font-size: 20px;
 }
