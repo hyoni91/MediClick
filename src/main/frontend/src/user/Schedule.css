@@ -52,16 +52,19 @@ justify-content: center;
   border-radius: 10px;
   border: none;
 }
-
-.sch-btn button:disabled{
-  background-color: #e4e3e3;
-}
-
 .sch-btn button:hover{
   background-color: #fd6812;
 }
 
-/* 예약 상태(가능 불가능 안내) */
+
+/* 예약이 있는 버튼 비활성화 및 hover */
+.sch-btn button:disabled,
+.sch-btn button:disabled:hover{
+  background-color: #e4e3e3;
+}
+
+
+/* 예약 가능 여부 안내문구*/
 .sch-status{
   font-size: 13px;
 }
