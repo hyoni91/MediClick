@@ -29,10 +29,12 @@
 .login-table tr td:nth-child(odd){
   text-align: left;
 }
-.loginBtn{
-  
+.join-div > div{
+  text-align: center;
 }
-
+.relative-container{
+  text-align: center;
+}
 .join-btn:hover{
   background-color:#0f8b8f ;
 }
@@ -43,4 +45,9 @@
   text-align: left;
   color: red;
   margin: 0px;
+}
+
+.join-head{
+  margin: auto;
+  text-align: center;
 }

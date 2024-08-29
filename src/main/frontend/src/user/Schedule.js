@@ -5,16 +5,31 @@ import moment from "moment";
 import './Schedule.css'
 import axios from 'axios';
 import { now } from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 const Schedule = () => {
-  // 선택한 날짜 update
-  const [value, onChange] = useState(new Date()) //초기값은 현재 날짜
+  const navigate = useNavigate()
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
   minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
+  // 선택한 날짜 update
+  const [value, onChange] = useState(minDate) //초기값은 현재 날짜
+
+  //주말만 가져오기 
+  const isWeekend = (date) => {
+    const day = date.getDay();
+    return day == 6 || day == 0; // 6: Saturday, 0: Sunday
+  };
+
+   // tileDisabled 속성을 사용하여 주말 날짜를 비활성화
+  const tileDisabled = ({ date }) => {
+    return isWeekend(date); // 주말 날짜를 비활성화
+  };
+
+
 
   // 환자정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
@@ -86,13 +101,18 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
-    if(appo.memNum == '' || appo.memRrn || appo.schTime){
-      alert('예약 정보를 확인하여 주세요.')
+    if(appo.memNum == ''){
+      alert('로그인 후 이용해 주세요.')
+      navigate('/loginForm')
+    }else if(appo.memRrn == '' || appo.schTime ==''){
+      alert('예약 내용을 다시 확인해 주세요.')
     }else{
         //다 들어가 있으면 쿼리실행
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
-      console.log(res.data)
+      alert('예약이 완료되었습니다.')
+      //본인 예약 확인페이지로 넘어가기
+      navigate('')
     })
     .catch((error)=>{
       console.log(error)
@@ -101,12 +121,12 @@ const Schedule = () => {
   }
 
   // time 데이터
-  const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
+  const schTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
+
   //예약유무확인(타임버튼 비활성화를 위한)
-  //해당 날짜에 예약된 시간을 저장하는 리스트 
-  const times = []
   // schTimes길이 만큼 false값주기
   const [chkAppoTime, setChkAppoTime] = useState(new Array(schTimes.length).fill(false))
+
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
@@ -127,106 +147,110 @@ const Schedule = () => {
     })
   },[appo])
   
-  console.log(appo)
   return (
     <div className='sch-container'>
-      <div className='sch-flex'>
-      {/* <h3>예약날짜</h3> */}
-        <div  className='doc-icon-div'>
-          {
-            docInfo.map((doc,i)=>{
-              return(
+      <div className='sch-container-flex'>
+        <div className='sch-flex'>
+          <div className='h3tag'>|진료과 선택</div>
+          <div  className='doc-icon-div'>
+            {
+              docInfo.map((doc,i)=>{
+                return(
                   <div key={i}>
                     <img src={(`http://localhost:8080/images/${i}.png`)}/>
                     <button type='button' onClick={(e)=>{
-                      changeDocInfo(e)
-                      }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
+                    changeDocInfo(e)
+                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
                       {doc.medicalDept[0].deptName}
                       </button>
                   </div>
-              )
+                )
+              })
+            }
+            </div>
+            <div className='sch-calendar'>
+            <div  className='h3tag'>|진료일 선택</div>
+              <Calendar 
+              onChange={onChange} 
+              value={value} 
+              showNeighboringMonth={false} 
+              next2Label={null}
+              prev2Label={null}
+              minDetail="year"
+              minDate={minDate}
+              maxDate={maxDate}
+              //날짜 칸에 보여지는 컨텐츠
+              tileDisabled={tileDisabled}
+              //비활성화 날짜 목록
+              />
+            </div>                      
+            <div className='sch-time'>
+              <div className='sch-btn'>
+                    {schTimes.map((time,i) => (
+                      <button
+                      key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
+                    {time}</button>))
+                    }
+              </div>
+              <div className='sch-status'> 🟦선택중  ⬜예약불가능</div>
               
-            })
-          }
-          
-        </div>
-        <div className='sch-calendar'>
-        
-          <Calendar 
-          onChange={onChange} 
-          value={value} 
-          showNeighboringMonth={false} 
-          next2Label={null}
-          prev2Label={null}
-          minDetail="year"
-          minDate={minDate}
-          maxDate={maxDate}
-          //날짜 칸에 보여지는 컨텐츠
-          tileContent={''}
-          />
-          <h5>*당일 예약은 전화로 문의주세요</h5>
-        </div>
-        <div className='sch-time'>
-          <div className='sch-btn'>
-                {schTimes.map((time,i) => (
-                  <button
-                  key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
-                {time}</button>))
-                }
+            </div>
           </div>
-          <div className='sch-status'>🟧예약가능 ⬜ 예약불가능</div>
-        </div>
-        </div>
-        <div className='schedule-table'>
-          <table>
-            <colgroup>
-            <col width={'23%'}/>
-            <col width={'*'}/>
-            </colgroup>
-            <tbody>
-              <tr>
-                <td>예약날짜</td>
-                <td>
-                  <input  type='text' readOnly 
-                value={moment(value).format("YYYY-MM-DD")}
-                name='schDate' ref={choseData} />
-                </td>
-              </tr>
-              <tr>
-                <td>예약시간</td>
-                <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
-              </tr>
-              <tr>
-                <td>예약자명</td>
-                <td>
-                  <input type='text' name='memName' readOnly 
-                  value={loginInfo? loginInfo.memName : ""}/> 
+          <div className='schedule-table'>
+            <h3  className='h3tag'>|예약내용</h3>
+            <table>
+              {/* <colgroup>
+              <col width={'23%'}/>
+              <col width={'*'}/>
+              </colgroup> */}
+              <tbody>
+                <tr>
+                  <td>예약날짜</td>
+                  <td>
+                    <input  type='text' readOnly 
+                  value={moment(value).format("YYYY-MM-DD")}
+                  name='schDate' ref={choseData} />
                   </td>
-              </tr>
-              <tr>
-                <td>진료과목</td>
-                <td>
-                  <input type='text' readOnly  value={appo.deptName}/>
+                </tr>
+                <tr>
+                  <td>예약시간</td>
+                  <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
+                </tr>
+                <tr>
+                  <td>예약자명</td>
+                  <td>
+                    <input type='text' name='memName' readOnly 
+                    value={loginInfo? loginInfo.memName : ""}/> 
+                    </td>
+                </tr>
+                <tr>
+                  <td>진료과목</td>
+                  <td>
+                    <input type='text' readOnly  value={appo.deptName}/>
+                    </td>
+                </tr>
+                <tr>
+                  <td>주민번호</td>
+                  <td>
+                    <input type='tel' name='' readOnly 
+                  value={loginInfo? loginInfo.memRrn:""}/>
                   </td>
-              </tr>
-              <tr>
-                <td>주민번호</td>
-                <td>
-                  <input type='tel' name='' readOnly 
-                value={loginInfo? loginInfo.memRrn:""}/>
-                </td>
-              </tr>
-              <tr>
-                <td>증상</td>
-                <td><textarea rows={5} cols={40} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      <div className='sch-footer'>상기 내용으로 예약하시겠습니까?</div>
-      <div className='sch-footer'>
-        <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
+                </tr>
+                <tr>
+                  <td>증상</td>
+                  <td><textarea rows={6} cols={41} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
+            
+            <div className='sch-footer'>
+              <div>상기 내용으로 예약하시겠습니까?</div>
+              <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
+            </div>
+          </div>
       </div>
+      
     </div>
   )
 }

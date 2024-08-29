@@ -15,11 +15,12 @@ public class MemberController {
 
     //회원가입
     @PostMapping("/insertMember")
-    public void insertMember(@RequestBody MemberVO memberVO){
+    public MemberVO insertMember(@RequestBody MemberVO memberVO){
         String nextNum = memberService.nextInsert(memberVO.getMemRole());
         System.out.println(memberVO);
         memberVO.setMemNum(nextNum);
         memberService.insertMember(memberVO);
+        return memberVO;
     }
 
     //로그인
