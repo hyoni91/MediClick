@@ -38,7 +38,7 @@
 
 
 
-        <!--관리자 : 담당의별 환자 차트-->
+        <!--관리자 : 의사별 담당환자 리스트-->
      <select id="docMemChart" resultMap="schedule">
         SELECT SCH_NUM
                 ,SCH_DATE
@@ -58,6 +58,47 @@
         ORDER BY SCH_NUM DESC
      </select>
 
+    <!--의사별 담당환자 차트-->
+    <select id="getMemChart" resultMap="schedule">
+        SELECT SCH_NUM
+            ,SCH_DATE
+            ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
+            ,D.DOC_NUM
+            ,DOC_NAME
+            ,(
+            SELECT DEPT_NAME
+            FROM medical_dept P
+            WHERE D.DEPT_NUM=P.DEPT_NUM
+            ) AS DEPT_NAME
+            ,M.MEM_NUM
+            ,MEM_NAME
+            ,CONCAT(
+                SUBSTRING(MEM_RRN, 1, 6), '-',
+                REPEAT('*', LENGTH(MEM_RRN) - 6)
+                ) AS MEM_RRN
+            ,CONCAT(
+            SUBSTRING(MEM_TEL, 1, 3), '-',
+            SUBSTRING(MEM_TEL, 4, 4), '-',
+            SUBSTRING(MEM_TEL, 8, 4)
+            ) AS MEM_TEL
+            ,DETAIL
+        FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
+        WHERE S.MEM_NUM=#{memNum}
+        AND S.DOC_NUM=D.DOC_NUM
+        AND S.MEM_NUM=M.MEM_NUM;
+    </select>
+
+    <!--담당환자 차트에서 예약정보 변경-->
+    <update id="updateSchCart">
+        UPDATE medical_schedule
+        SET SCH_DATE=#{schDate}
+            ,SCH_TIME=#{schTime}
+            ,DETAIL=#{detail}
+            ,DOC_NUM=#{docNum}
+            ,DEPT_NUM=#{deptNum}
+        WHERE MEM_NUM=#{memNum}
+    </update>
+
     <!--예약취소 : SCH_STATUS='N'로 변경-->
     <update id="updateSchStatus">
         UPDATE MEDICAL_SCHEDULE
@@ -68,15 +109,15 @@
     <!--환자가 보는 나의 예약페이지-->
     <select id="getMemSch" resultMap="schedule">
         SELECT SCH_NUM
-        ,SCH_DATE
-        ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
-        ,DOC_NAME
-        ,( SELECT DEPT_NAME
-        FROM medical_dept P
-        WHERE D.DEPT_NUM=P.DEPT_NUM
-        ) AS DEPT_NAME
-        ,MEM_NAME
-        ,SCH_STATUS
+            ,SCH_DATE
+            ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
+            ,DOC_NAME
+            ,( SELECT DEPT_NAME
+            FROM medical_dept P
+            WHERE D.DEPT_NUM=P.DEPT_NUM
+            ) AS DEPT_NAME
+            ,MEM_NAME
+            ,SCH_STATUS
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE M.MEM_NUM=#{memNum}
         AND S.DOC_NUM=D.DOC_NUM

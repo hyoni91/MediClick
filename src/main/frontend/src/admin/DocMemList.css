@@ -5,6 +5,11 @@
   margin: 20px auto;
 }
 
+.docInfo-div h2{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .docInfo-div h4{
   text-align: left;
 }

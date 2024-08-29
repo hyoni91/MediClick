@@ -24,7 +24,7 @@ const DocMemList = () => {
     .get(`/oneDoctor/${docNum}`)
     .then((res)=>{
       setOneDoc(res.data)
-      console.log(oneDoc)
+      // console.log(oneDoc)
     })
     .catch((error)=>{console.log(error)})
     
@@ -61,9 +61,9 @@ const DocMemList = () => {
 
   return (
     <div>
-      <h2>의료진 정보</h2>
 
       <div className='docInfo-div'>
+        <h2>의료진 정보</h2>
         <h4>| 나의 정보</h4>
         <table className='docInfo-table'>
           <colgroup>

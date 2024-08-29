@@ -14,11 +14,26 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    //의사별 담당환자 리스트
     @Override
     public List<ScheduleVO> getDocMem(int docNum) {
         return sqlSession.selectList("scheduleMapper.docMemChart",docNum);
     }
 
+    //의사별 담당환자 차트
+    @Override
+    public ScheduleVO getMemChart(int memNum) {
+        return sqlSession.selectOne("scheduleMapper.getMemChart",memNum);
+    }
+
+    @Override
+    public void updateSchChart(ScheduleVO scheduleVO) {
+        sqlSession.update("schduleMapper.updateSchChart",scheduleVO);
+    }
+
+    //담당환자 차트에서 예약정보 변경
+
+    //환자가보는 나의 예약페이지
     @Override
     public List<ScheduleVO> getMemSch(int memNum) {
         return sqlSession.selectList("scheduleMapper.getMemSch",memNum);
