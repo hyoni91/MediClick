@@ -2,13 +2,14 @@
   width: 85%;
   height: 710px;
   margin: auto;
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(179, 179, 179);
   margin-bottom: 10px;
-  border-radius: 10px;
+  /* box-shadow: 0.5px 1px 0.5px 1px   rgb(226, 226, 226); */
+  /* border-radius: 10px; */
 }
 
 .h3tag{
-  margin-bottom: 10px;
+  margin-bottom: 13px;
   text-align: center;
   margin-top: 10px;
   /* background-color: #0050B5; */
@@ -39,7 +40,7 @@
 .doc-icon-div img{
   /* cursor: pointer; */
   width: 50px;
-  border: 1px solid darkgrey;
+  /* border: 1px solid darkgrey; */
 }
 
 /* 진료과 플렉스 */
@@ -147,6 +148,10 @@ justify-content: center;
 
 .schedule-table>table tr,td{
   padding: 4px;
+}
+
+.schedule-table>table tr {
+  /* border: 1px solid lightgray; */
 }
 
 
