@@ -4,11 +4,11 @@
 }
 
 h3{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .sch-container-flex{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   display: flex;
   margin-right: 50px;
@@ -24,6 +24,7 @@ h3{
   justify-content: center;
   align-items: center;
   margin: auto;
+  border: 1px solid grey;
 }
 
 .sch-time{
@@ -233,20 +234,20 @@ button{
 
 .react-calendar__tile--active {
   /* 현재 선택된 날짜  */
-  background: var(--festie-primary-orange, lightblue);
+  background: var(--festie-primary-orange, #0090DA);
   border-radius: 15px;
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   /* hover 했을 때 색상 변경 */
-  background: var(--festie-primary-orange, lightblue);
+  background: var(--festie-primary-orange, #0090DA);
   border-radius: 15px;
 }
 
 /* 비활성화 날짜 커스텀 */
 .react-calendar__tile:disabled {
-  background-color: rgb(250, 247, 247); 
+  background-color:white; 
   color: darkgrey; 
   border-radius: 15px;
 }
