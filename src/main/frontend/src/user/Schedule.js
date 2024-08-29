@@ -114,7 +114,7 @@ const Schedule = () => {
   }
 
   // time 데이터
-  const schTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']
+  const schTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
 
   //예약유무확인(타임버튼 비활성화를 위한)
   // schTimes길이 만큼 false값주기
@@ -192,10 +192,10 @@ const Schedule = () => {
           <div className='schedule-table'>
             <h3  className='h3tag'>|예약 내용 확인</h3>
             <table>
-              <colgroup>
+              {/* <colgroup>
               <col width={'23%'}/>
               <col width={'*'}/>
-              </colgroup>
+              </colgroup> */}
               <tbody>
                 <tr>
                   <td>예약날짜</td>
@@ -237,7 +237,7 @@ const Schedule = () => {
             </table>
           </div>
       </div>
-      <h5>*당일 예약은 전화로 문의주세요</h5>
+      <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
       <div className='sch-footer'>상기 내용으로 예약하시겠습니까?</div>
       <div className='sch-footer'>
         <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>

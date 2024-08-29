@@ -9,12 +9,21 @@
 .h3tag{
   margin-bottom: 10px;
   text-align: center;
+  margin-top: 10px;
+}
+
+.h5tag{
+  text-align: center;
+  margin-bottom: 10px;
+  color: red;
 }
 
 .sch-container-flex{
   width: 100%;
   display: flex;
   margin-right: 50px;
+  margin-bottom: 20px;
+  margin: auto;
 }
 
 
@@ -36,9 +45,6 @@
 .sch-btn{
 display: flex;
 justify-content: center;
-  /* display: grid;
-  grid-template-columns: repeat(8,40%); */
-
 }
 
 .sch-btn button {
@@ -67,21 +73,21 @@ justify-content: center;
 /* 예약 가능 여부 안내문구*/
 .sch-status{
   font-size: 13px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 
 /* 예약상세내용 테이블 */
 .schedule-table{
   width: 50%;
-  height: 400px;
-  text-align: center;
+  height: 500px;
+  text-align: left;
   margin: auto;
-  margin-top: 50px;
-  margin:auto;
-  margin-right: 100px;
+  /* margin-top: 60px; */
+  margin-right: 200px;
   border: 1px solid lightgray;
-  border-radius: 10px;
-
+  /* border-radius: 10px; */
 }
 
 .schedule-table>table{
@@ -91,20 +97,14 @@ justify-content: center;
   margin-top: 50px;
 }
 
-.schedule-table>table td{
-  padding: 2px;
+.schedule-table>table tr,td{
+  padding: 4px;
 }
 
 
-/* .schedule-table>table tr td{
-  border: 1px solid black;
-} */
-
 .schedule-table input{
-  /* margin-left: 15px; */
   width: 300px;
   padding: 4px;
-  /* margin-bottom: 3px; */
   font-size: 14px;
 }
 
@@ -124,7 +124,6 @@ input:focus, select:focus, textarea:focus{
   margin: auto;
   text-align: center;
 }
-
 
 .sch-footer >button{
   width: 250px;
@@ -149,14 +148,10 @@ input:focus, select:focus, textarea:focus{
 
 /* 진료과 플렉스 */
 .doc-icon-div{
-  /* border: 1px solid greenyellow; */
   width: 33%;
   display: flex;
   justify-content: center;
-  gap: 25px;
-  /* display: grid;
-  grid-template-columns: repeat(6,35%); */
-  /* margin: auto; */
+  gap: 35px;
   margin-right: 50px;
 }
 
@@ -164,6 +159,7 @@ input:focus, select:focus, textarea:focus{
 .doc-icon-div button{
   border: none;
   background-color: white;
+  cursor: pointer;
 }
 
 .doc-icon-div button:hover{
@@ -178,7 +174,7 @@ input:focus, select:focus, textarea:focus{
 /* -------------달력 커스텀 -------------*/
 
 .sch-calendar{
-  width: 36%;
+  width: 39%;
 }
 
 .react-calendar{
