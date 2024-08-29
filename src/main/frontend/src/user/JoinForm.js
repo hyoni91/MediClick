@@ -47,8 +47,8 @@ const JoinForm = () => {
       setPhoneNumber(value);
       // 저장된 전화번호를 memberData에 저장
       // 전화번호 변경 시 오류 리셋
-    setErrors(prevErrors => ({
-      ...prevErrors,
+    setErrors((e) => ({
+      ...e,
       memTel: ''
     }));
   };
@@ -82,7 +82,7 @@ const JoinForm = () => {
     if (validate()){
     axios.post('/member/insertMember',memberData)
     .then((res) => {
-      navigate('/')
+      navigate(`/adminJoinForm/${memberData.memNum}`)
     })
     .catch((error)=>{console.log(error)})
     }

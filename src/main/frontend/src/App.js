@@ -89,7 +89,7 @@ function App() {
           {/* 회원가입 페이지 */}
           <Route path='joinForm' element={<JoinForm/>}/>
           {/* 회원가입 시 관리자일 경우 정보 추가 */}
-          <Route path='adminJoinForm' element={<AdminJoinForm />} />
+          <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
 

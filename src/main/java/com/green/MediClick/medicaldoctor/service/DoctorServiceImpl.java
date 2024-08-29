@@ -28,4 +28,18 @@ public class DoctorServiceImpl implements DoctorService{
     public String nextDoctorImg() {
         return sqlSession.selectOne("doctorMapper.nextDoctorImg");
     }
+
+
+    // 회원가입할때 의사 정보 조회
+    @Override
+    public DoctorVO selectDoctor(int docNum) {
+        return sqlSession.selectOne("doctorMapper.selectDoctor");
+    }
+
+    // 회원가입할때 "ADMIN"이면 의사정보도 추가
+    @Override
+    public void insertDoctor1(DoctorVO doctorVO) {
+        sqlSession.insert("doctorMapper.insertDoctor1");
+    }
+
 }
