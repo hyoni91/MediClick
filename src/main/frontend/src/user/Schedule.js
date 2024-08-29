@@ -5,8 +5,10 @@ import moment from "moment";
 import './Schedule.css'
 import axios from 'axios';
 import { now } from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 const Schedule = () => {
+  const navigate = useNavigate()
   
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
@@ -99,13 +101,17 @@ const Schedule = () => {
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
-    if(appo.memNum == '' || appo.memRrn == '' || appo.schTime ==''){
+    if(appo.memNum == ''){
+      alert('로그인이 필요합니다.')
+    }else if(appo.memRrn == '' || appo.schTime ==''){
       alert('예약 내용을 다시 확인해 주세요.')
     }else{
         //다 들어가 있으면 쿼리실행
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
-      console.log(res.data)
+      alert('예약이 완료되었습니다.')
+      //본인 예약 확인페이지로 넘어가기
+      navigate('')
     })
     .catch((error)=>{
       console.log(error)
