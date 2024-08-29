@@ -105,24 +105,6 @@ function App() {
         </Route>
       </Routes>
 
-      <div className='mid'>
-
-      </div>
-
-      <div className='footer'>
-
-        <div className='footer-div'>
-          <div>
-            <span>이용약관 |</span>
-            <span> 개인정보처리방침 |</span>
-            <span> 환자권리장전</span>
-          </div>
-          <div>
-            <p>주소 : 울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
-          </div>
-        </div>
-
-      </div>
 
     </div>
   );
