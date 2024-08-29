@@ -13,6 +13,7 @@ import DocMemList from './admin/DocMemList';
 import MySch from './user/MySch';
 import DocMemInfo from './admin/DocMemInfo';
 import AdminJoinForm from './user/AdminJoinForm';
+import DoctorUpdate from './admin/DoctorUpdate';
 
 function App() {
   const navigate=useNavigate()
@@ -59,7 +60,7 @@ function App() {
               :
               <ul>
                 <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
-                <li><span>정보수정하기</span></li>
+                <li><span onClick={(e)=>{navigate('/admin/doctorUpdate')}}>정보수정하기</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
             }
@@ -102,6 +103,8 @@ function App() {
           <Route path='docMemList/:docNum' element={<DocMemList/>}/>
           {/* 담당환자 상세정보/수정 */}
           <Route path='docMemInfo/:memNum' element={<DocMemInfo/>}/>
+          {/* 의사 정보수정 페이지 */}
+          <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
         </Route>
       </Routes>
 

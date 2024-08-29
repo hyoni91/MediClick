@@ -18,7 +18,7 @@
 .cancer{
   background-color: rgba(0, 0, 0, 0.04);
 }
-div{
+.cancer{
   text-align: left;
 }
 .introDoctorName{
@@ -34,15 +34,15 @@ div{
   text-align: end;
   color: rgb(14, 56, 14);
 }
-p > span{
+.goSchedule > span{
   padding: 15px;
 }
-p > span:hover{
+.goSchedule > span:hover{
   cursor: pointer;
 }
-p > i:hover{
+.goSchedule > i:hover{
   cursor: pointer;
 }
-p > i{
+.goSchedule > i{
   font-size: 20px;
 }
