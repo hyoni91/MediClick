@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './AdminJoinForm.css'
 import axios from 'axios'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 const AdminJoinForm = () => {
   const {docNum} = useParams()
   //조회를 했을때 닥넘이랑,닥네임,디이피티넘
+  const navigate = useNavigate()
   //
   const [memData , setMemData] =useState({})
   // 의사데이터 저장할 변수
@@ -31,12 +32,16 @@ const AdminJoinForm = () => {
     setDocData({...docData,docName : memData.memName, [e.target.name] :value})
     console.log(docData)
   }
+
   const insertDoctor = (e) => {
     axios.post('/insertDoctor', docData)
-    .then((res) => {console.log(res.data)})
+    .then((res) => {
+      console.log(res.data)
+      navigate('/loginForm')
+    })
     .catch((error) => {console.log(error)})
   }
-  // setDocData({...docData ,})
+
   return (
     <div>
         <div><h1 className='join-head'>의사 정보</h1></div>
