@@ -69,10 +69,12 @@
     <insert id="insertDoctor">
         INSERT INTO medical_doctor (
         DOC_NUM,
-        DOC_NAME
+        DOC_NAME,
+        DEPT_NUM  <!-- DEPT_NUM 컬럼 사용 -->
         ) VALUES (
         #{docNum},  <!-- DOC_NUM 필드 추가 -->
-        #{docName}
+        #{docName},
+        #{deptNum}
         )
     </insert>
 </mapper>

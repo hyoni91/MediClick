@@ -17,17 +17,6 @@ public class MemberServiceImpl implements MemberService{
     public void insertMember(MemberVO memberVO) {
         sqlSession.insert("member.insertMember",memberVO);
 
-        // 회원가입할때 "ADMIN"이면 의사정보도 추가
-        if("ADMIN".equals(memberVO.getMemRole())){
-            //의사 클래스 생성
-            DoctorVO doctorVO = new DoctorVO();
-            //의사 데이터 삽입
-            doctorVO.setDocNum(memberVO.getMemNum());
-            doctorVO.setDocName(memberVO.getMemName());
-
-            //의사데이터를 회원에 저장
-            insertDoctor(doctorVO);
-        }
     }
 
     @Override
