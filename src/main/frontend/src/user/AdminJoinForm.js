@@ -7,6 +7,7 @@ const AdminJoinForm = () => {
   //조회를 했을때 닥넘이랑,닥네임,디이피티넘
   const navigate = useNavigate()
   //
+  const navigate = useNavigate()
   const [memData , setMemData] =useState({})
   // 의사데이터 저장할 변수
   const [docData, setDocData] = useState({
@@ -23,13 +24,14 @@ const AdminJoinForm = () => {
     .then((res) => {
       console.log(res.data)
       setMemData(res.data)
+      setDocData({...docData,docName : res.data.memName})
     })
     .catch((error) => {console.log(error)})
   },[])
   // 의사 진료과 선택
   const onChangeDept = (e) => {
     let value = e.target.value
-    setDocData({...docData,docName : memData.memName, [e.target.name] :value})
+    setDocData({...docData, [e.target.name] :value})
     console.log(docData)
   }
 
