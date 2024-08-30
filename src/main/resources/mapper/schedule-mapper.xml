@@ -51,7 +51,6 @@
                 ,M.MEM_NUM
                 ,MEM_NAME
                 ,DETAIL
-                ,NOTES
                 ,SCH_STATUS
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE S.DOC_NUM=#{docNum}

@@ -21,7 +21,7 @@ public class DoctorController {
     }
 
     @GetMapping("/oneDoctor/{docNum}")
-    public DoctorVO getOneDoctor(@PathVariable("docNum")int docNum){
+    public DoctorVO getOneDoctor(@PathVariable("docNum")String docNum){
         return doctorService.getOneDoctor(docNum);
     }
 
