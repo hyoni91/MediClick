@@ -7,7 +7,9 @@ import axios from 'axios';
 import { now } from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 
+
 const Schedule = () => {
+
   const navigate = useNavigate()
   
   // 날짜를 계산
@@ -91,6 +93,8 @@ const Schedule = () => {
     })
   }
 
+  console.log()
+
   // 증상 정보 받기
   function changeDetail(e){
     setAppo({...appo,
@@ -146,6 +150,8 @@ const Schedule = () => {
       console.log(error)
     })
   },[appo])
+
+  console.log(appo)
   
   return (
     <div className='sch-container'>
