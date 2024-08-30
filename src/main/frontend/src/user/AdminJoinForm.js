@@ -43,6 +43,9 @@ const AdminJoinForm = () => {
     .catch((error) => {console.log(error)})
   }
 
+  const deleteDoctor = (e) => {
+    axios.get('')
+  }
   return (
     <div>
         <div><h1 className='join-head'>의사 정보</h1></div>
@@ -81,7 +84,7 @@ const AdminJoinForm = () => {
           </tbody>
         </table>
           <div>
-            <button className='join-btn' onClick={() => {Navigate('/joinForm')}}>취소</button>
+            <button className='join-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
             <button className='join-btn' onClick={() => {insertDoctor()}}>저장</button>
             
           </div>

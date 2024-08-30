@@ -36,6 +36,14 @@ public class DoctorServiceImpl implements DoctorService{
         return sqlSession.selectOne("doctorMapper.selectDoctor",docNum);
     }
 
+    @Override
+    public void deleteDoctor(String docNum) {
+        // 의사 정보 삭제
+        sqlSession.delete("doctorMapper.deleteDoctor",docNum);
+        // 멤버 정보 삭제
+        sqlSession.delete("doctorMapper.deleteMember",docNum);
+    }
+
     // 회원가입할때 "ADMIN"이면 의사정보도 추가
     @Override
     public void insertDoctor(DoctorVO doctorVO) {

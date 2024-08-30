@@ -77,6 +77,16 @@
         #{deptNum}
         )
     </insert>
+    <!--의사 삭제 -->
+    <delete id="deleteDoctor" >
+        DELETE FROM MEDICAL_DOCTOR
+        WHERE DOC_NUM = #{docNum}
+    </delete>
+    <!--멤버 삭제-->
+    <delete id="deleteMember">
+        DELETE FROM MEDICAL_MEMBER
+        WHERE MEM_NUM = #{memNum}
+    </delete>
 </mapper>
 
 

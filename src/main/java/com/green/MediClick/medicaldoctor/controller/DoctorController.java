@@ -44,6 +44,11 @@ public class DoctorController {
         doctorService.insertDoctor(doctorVO);
     }
 
+    // 관리자 입력상태에서 취소시 삭제
+    @GetMapping("/deleteDoctor/{docNum")
+    public void deleteDoctor(@PathVariable ("docNum") String docNum){
+        doctorService.deleteDoctor(docNum);
+    }
 
 
 }

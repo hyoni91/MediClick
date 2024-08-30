@@ -19,5 +19,7 @@ public interface DoctorService {
     // 회원가입할때 의사 정보 조회
     DoctorVO selectDoctor(String docNum);
 
+    // 회원가입 취소시 삭제되는 데이터
+    void deleteDoctor(String docNum);
 
 }
