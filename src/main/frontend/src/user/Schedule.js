@@ -38,7 +38,7 @@ const Schedule = () => {
   // 진료과 의사 정보를 담을 변수 선언
   const [docInfo, setDocInfo] = useState([])
 
-  //의료진 진료과 정보 불러오기
+  // //의료진 진료과 정보 불러오기
   useEffect(()=>{
     axios.get('/schedule/getDocInfo')
     .then((res)=>{
@@ -48,6 +48,7 @@ const Schedule = () => {
       console.log(error)
     })
   },[])
+
 
   //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
@@ -93,7 +94,6 @@ const Schedule = () => {
     })
   }
 
-  console.log()
 
   // 증상 정보 받기
   function changeDetail(e){
@@ -166,8 +166,8 @@ const Schedule = () => {
                     <img src={(`http://localhost:8080/images/${i}.png`)}/>
                     <button type='button' onClick={(e)=>{
                     changeDocInfo(e)
-                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
-                      {doc.medicalDept[0].deptName}
+                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
+                      {doc.medicalDept.deptName}
                       </button>
                   </div>
                 )

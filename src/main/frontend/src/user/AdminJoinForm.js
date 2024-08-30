@@ -28,7 +28,7 @@ const AdminJoinForm = () => {
   // 의사 진료과 선택
   const onChangeDept = (e) => {
     let value = e.target.value
-    setDocData({...docData,docName : memData.memName, [e.target.name] :value})
+    setDocData({...docData, docName : memData.memName, [e.target.name] :value})
     console.log(docData)
   }
   const insertDoctor = (e) => {
