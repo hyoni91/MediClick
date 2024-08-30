@@ -13,9 +13,9 @@ const DocMemList = () => {
   const [oneDoc,setOneDoc]=useState({
     docNum : '',
     docName:'',
-    medicalDept:[{
+    medicalDept:{
       deptName:''
-    }]
+    }
   })
 
   const {docNum}=useParams()
@@ -90,8 +90,9 @@ const DocMemList = () => {
     axios
     .get(`/oneDoctor/${docNum}`)
     .then((res)=>{
+      console.log(res.data)
       setOneDoc(res.data)
-      // console.log(oneDoc)
+      
     })
     .catch((error)=>{console.log(error)})
     
@@ -136,7 +137,7 @@ const DocMemList = () => {
           <tbody>
             <tr>
               <td>{oneDoc.docName}</td>
-              <td>{oneDoc.medicalDept[0].deptName}</td>
+              <td>{oneDoc.medicalDept.deptName}</td>
             </tr>
                 
           </tbody>

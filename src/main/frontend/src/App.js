@@ -41,7 +41,6 @@ function App() {
 
 
 
-
   return (
     <div className="container">
 
@@ -59,7 +58,19 @@ function App() {
               </ul>
               :
               <ul>
-                <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                {/* MEM_NUM에 DOC가 포함이 되면 관리자로 인식해서 
+                관리자 의료진이면 의료진정보/예약페이지로 
+
+                포함이 안되면
+                일반 환자 회원이면 회원 예약 정보 보여주고
+                */}
+                {
+                  loginInfo.memNum.includes('DOC')?
+                  <li><span onClick={(e)=>{navigate(`/admin/DocMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                  :
+                  <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                }
+                
                 <li><span onClick={(e)=>{navigate('/admin/doctorUpdate')}}>정보수정하기</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
