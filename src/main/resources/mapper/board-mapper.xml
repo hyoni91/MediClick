@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="boardMapper">
+    <resultMap id="board" type="com.green.MediClick.medicaldoctor.vo.DoctorImgVO">
+        <id column="BOARD_NUM" property="boardNum"/>
+        <result column="TITLE" property="title"/>
+        <result column="WRITER" property="writer"/>
+        <result column="CONTENT" property="content"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="MEM_NUM" property="memNum"/>
+        <association property="memberVO" resultMap="member"/>
+    </resultMap>
+    <!--게시글 등록-->
+    <insert id="insertBoard">
+        INSERT INTO BOARD (
+            TITLE
+            , CONTENT
+            , MEM_NUM
+        ) VALUES (
+            #{title}
+            , #{content}
+            , #{memNum}
+        )
+    </insert>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

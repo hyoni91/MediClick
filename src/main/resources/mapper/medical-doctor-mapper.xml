@@ -11,18 +11,18 @@
            <result property="deptName" column="dept_name"/>
         </association>
         <!--의사 이미지 데이터-->
-        <association property="imgVO" resultMap="img" />
+<!--        <association property="imgVO" resultMap="img" />-->
     </resultMap>
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
         <id column="DEPT_NUM" property="deptNum" />
         <result column="DEPT_NAME" property="deptName" />
     </resultMap>
-    <resultMap id="img" type="com.green.MediClick.medicaldoctor.vo.DoctorImgVO">
-        <id column="IMG_NUM" property="imgNum" />
-        <result column="ORIGIN_FILE_NAME" property="originFileName" />
-        <result column="ATTACHED_FILE_NAME" property="attachedFileName" />
-        <result column="DOC_NUM" property="docNum" />
-    </resultMap>
+<!--    <resultMap id="img" type="com.green.MediClick.medicaldoctor.vo.DoctorImgVO">-->
+<!--        <id column="IMG_NUM" property="imgNum" />-->
+<!--        <result column="ORIGIN_FILE_NAME" property="originFileName" />-->
+<!--        <result column="ATTACHED_FILE_NAME" property="attachedFileName" />-->
+<!--        <result column="DOC_NUM" property="docNum" />-->
+<!--    </resultMap>-->
     <select id="medicalDoctorList" resultMap="doctor">
         SELECT DOC_NAME, DEPT_NAME
         FROM medical_dept, medical_doctor
@@ -45,20 +45,6 @@
         SELECT CONCAT(DOC_ ,LPAD(IFNULL(MAX(CAST(SUBSTRING(IMG_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0'))
         FROM MEDICAL_DOCTOR
     </select>
-<!--    &lt;!&ndash;의사 이미지 등록&ndash;&gt;-->
-<!--    <insert id="insetDoctorImg">-->
-<!--        INSERT INTO DOCTOR_IMG(-->
-<!--            IMG_NUM-->
-<!--            , ORIGIN_FILE_NAME-->
-<!--            , ATTACHED_FILE_NAME-->
-<!--            , DOC_NUM-->
-<!--        ) VALUES(-->
-<!--            #{imgNum}-->
-<!--            #{originFileName}-->
-<!--            #{attachedFileName}-->
-<!--            #{docNum}-->
-<!--        )-->
-<!--    </insert>-->
 <!--    의사 정보 추가-->
     <select id="selectDoctor" resultMap="doctor" >
         SELECT * FROM MEDICAL_DOCTOR
