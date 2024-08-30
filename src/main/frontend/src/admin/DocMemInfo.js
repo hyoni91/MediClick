@@ -130,7 +130,7 @@ const DocMemInfo = () => {
         </table>
 
         <div className='infoBtns'>
-          <div><button type='button' className='infoBtn'>수정</button></div>
+          {/* <div><button type='button' className='infoBtn'>수정</button></div> */}
           <div><button type='button' className='infoBtn'
           onClick={(e)=>{navigate(-1)}}>확인</button></div>
         </div>

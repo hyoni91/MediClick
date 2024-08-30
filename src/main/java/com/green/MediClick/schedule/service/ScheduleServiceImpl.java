@@ -35,12 +35,11 @@ public class ScheduleServiceImpl implements ScheduleService{
         return sqlSession.selectOne("scheduleMapper.getMemChart",schNum);
     }
 
-    @Override
-    public void updateSchChart(ScheduleVO scheduleVO) {
-        sqlSession.update("scheduleMapper.updateSchChart",scheduleVO);
-    }
-
     //담당환자 차트에서 예약정보 변경
+//    @Override
+//    public void updateSchChart(ScheduleVO scheduleVO) {
+//        sqlSession.update("scheduleMapper.updateSchChart",scheduleVO);
+//    }
 
     //환자가보는 나의 예약페이지
     @Override
