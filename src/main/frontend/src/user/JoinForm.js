@@ -98,7 +98,7 @@ const handlePhoneChange = (e) => {
       if(res.data.memRole === 'ADMIN'){
       navigate(`/adminJoinForm/${res.data.memNum}`)
       }
-      else{navigate('/')}
+      else{navigate('/loginForm')}
     })
     .catch((error)=>{console.log(error)})
     }
