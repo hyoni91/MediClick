@@ -2,6 +2,7 @@ package com.green.MediClick.schedule.service;
 
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
 import com.green.MediClick.member.vo.MemberVO;
+import com.green.MediClick.schedule.vo.PageVO;
 import com.green.MediClick.schedule.vo.ScheduleVO;
 
 import java.util.List;
@@ -9,7 +10,10 @@ import java.util.List;
 public interface ScheduleService {
 
     //의사별 담당환자 리스트
-    List<ScheduleVO> getDocMem(String docNum);
+    List<ScheduleVO> getDocMem(String docNum, PageVO pageVO);
+
+    //총 예약 환자 수
+    int getChartCnt(String docNum);
 
     //의사별 담당환자 차트
     ScheduleVO getMemChart(String schNum);

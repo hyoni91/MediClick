@@ -2,12 +2,14 @@ package com.green.MediClick.schedule.service;
 
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
 import com.green.MediClick.member.vo.MemberVO;
+import com.green.MediClick.schedule.vo.PageVO;
 import com.green.MediClick.schedule.vo.ScheduleVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("scheduleService")
 public class ScheduleServiceImpl implements ScheduleService{
@@ -16,9 +18,16 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     //의사별 담당환자 리스트
     @Override
-    public List<ScheduleVO> getDocMem(String docNum) {
-        return sqlSession.selectList("scheduleMapper.docMemChart",docNum);
+    public List<ScheduleVO> getDocMem(String docNum,PageVO pageVO) {
+        return sqlSession.selectList("scheduleMapper.docMemChart", Map.of("docNum", docNum, "pageVO", pageVO));
     }
+
+    //총 예약 환자 수
+    @Override
+    public int getChartCnt(String docNum) {
+        return sqlSession.selectOne("scheduleMapper.getChartCnt",docNum);
+    }
+
 
     //의사별 담당환자 차트
     @Override
@@ -28,7 +37,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public void updateSchChart(ScheduleVO scheduleVO) {
-        sqlSession.update("schduleMapper.updateSchChart",scheduleVO);
+        sqlSession.update("scheduleMapper.updateSchChart",scheduleVO);
     }
 
     //담당환자 차트에서 예약정보 변경

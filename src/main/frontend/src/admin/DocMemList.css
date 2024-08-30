@@ -30,6 +30,7 @@
 }
 
 
+
 .chart-div{
   width: 800px;
   border-bottom: 1px solid #eeeeee;
@@ -62,8 +63,32 @@
   cursor: pointer;
 }
 
+.chart-table tbody button{
+  background-color: #0254AF;
+  width: 80%;
+  height: 27px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  /* padding: 3px 8px; */
+  cursor: pointer;
+}
+
+.chart-table tbody button:hover{
+  background-color:#013d81
+}
+
 .cancel{
   font-weight: bold;
   color: red;
+}
+
+.page-spans{
+  margin-top: 10px;
+}
+
+.page-span{
+  cursor: pointer;
+  margin-left: 5px;
 }
 

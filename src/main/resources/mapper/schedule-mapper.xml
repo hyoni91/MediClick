@@ -42,6 +42,7 @@
      <select id="docMemChart" resultMap="schedule">
         SELECT SCH_NUM
                 ,SCH_DATE
+                ,S.DOC_NUM
                 ,DOC_NAME
                 ,( SELECT DEPT_NAME
                  FROM medical_dept P
@@ -57,14 +58,15 @@
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
         ORDER BY SCH_NUM DESC
-<!--        LIMIT #{displayDataCnt} OFFSET #{displayDataCnt} * (#{nowPage} - 1);-->
+         LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
      </select>
 
     <!-- 총 게시글 수 조회하는 쿼리 -->
-<!--    <select id="getChartCnt" resultType="int">-->
-<!--        SELECT COUNT(SCH_NUM)-->
-<!--        FROM MEDICAL_SCHEDULE-->
-<!--    </select>-->
+    <select id="getChartCnt" resultType="int">
+        SELECT COUNT(SCH_NUM)
+        FROM MEDICAL_SCHEDULE
+        WHERE DOC_NUM=#{docNum}
+    </select>
 
 
     <!--의사별 담당환자 차트-->

@@ -3,12 +3,15 @@ package com.green.MediClick.schedule.controller;
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
 import com.green.MediClick.member.vo.MemberVO;
 import com.green.MediClick.schedule.service.ScheduleService;
+import com.green.MediClick.schedule.vo.PageVO;
 import com.green.MediClick.schedule.vo.ScheduleVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/schedule")
@@ -17,9 +20,35 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     //의사별 담당환자 리스트
-    @GetMapping("/getDocMemList/{docNum}")
-    public List<ScheduleVO> getDocMemList(@PathVariable("docNum")String docNum){
-        return scheduleService.getDocMem(docNum);
+    @PostMapping("/getDocMemList")
+    public Map<String,Object> getDocMemList(@RequestBody DoctorVO doctorVO){
+
+        System.out.println("!!@@!!!!!!!!!!!! "+doctorVO);
+        //전체 환자 수
+        scheduleService.getChartCnt(doctorVO.getDocNum());
+
+        //페이지 정보를 담을 수 있는 PageVO 생성
+        PageVO pageInfo=new PageVO(scheduleService.getChartCnt(doctorVO.getDocNum()));
+
+        //화면상에 나타나는 현재 페이지 번호
+        if(doctorVO.getPageNo()!=0){
+            pageInfo.setNowPage(doctorVO.getPageNo());
+        }
+
+        pageInfo.setPageInfo();
+
+        System.out.println("@@@@!!!!!!"+pageInfo);
+
+        List<ScheduleVO> scheduleList=scheduleService.getDocMem(doctorVO.getDocNum(),pageInfo);
+
+        //리액트로 가져갈 모든 데이터를 담을 변수
+        Map<String,Object> mapData=new HashMap<>();
+        //페이징 정보가 담긴 데이터
+        mapData.put("pageInfo",pageInfo);
+        mapData.put("scheduleList",scheduleList);
+
+
+        return mapData;
     }
 
     //의사별 담당환자 차트

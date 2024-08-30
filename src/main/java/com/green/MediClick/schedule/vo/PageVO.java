@@ -1,5 +1,8 @@
 package com.green.MediClick.schedule.vo;
 
+import lombok.Data;
+
+@Data
 public class PageVO {
 
     //전체 데이터 수
@@ -31,6 +34,40 @@ public class PageVO {
     private boolean next;
 
     private int offset;
+
+
+
+    //기본 생성자
+    public PageVO(){
+    }
+
+    //생성자 초기값 설정
+    //매개변수 : DB에서 조회한 전체 데이터 수
+    public PageVO(int totalDataCnt){
+        this.nowPage=1;
+        this.displayPageCnt=5;
+        this.displayDataCnt=5;
+        this.totalDataCnt=totalDataCnt;
+    }
+
+    //모든 페이지 정보를 세팅하는 메서드
+    public void setPageInfo(){
+        //화면에 보이는 마지막 페이지 번호
+        endPage=(int)Math.ceil(nowPage/(double)displayPageCnt)*displayPageCnt;
+
+        beginPage=endPage-displayPageCnt+1;
+
+        totalPageCnt=(int)Math.ceil(totalDataCnt/(double)displayDataCnt);
+
+        endPage=endPage>totalPageCnt?totalPageCnt:endPage;
+
+        prev= beginPage!=1;
+
+        next= endPage!=totalDataCnt;
+
+        offset=displayDataCnt*(nowPage-1);
+
+    }
 
 
 

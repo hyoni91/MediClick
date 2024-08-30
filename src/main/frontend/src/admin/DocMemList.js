@@ -4,7 +4,9 @@ import './DocMemList.css';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const DocMemList = () => {
+
   const navigate=useNavigate()
+  const [page,setPage]=useState({})
   // 예약 리스트 담을 변수
   const [infoList,setInfoList]=useState([])
   // 의사 하나의 환자예약정보 담을 변수
@@ -19,28 +21,6 @@ const DocMemList = () => {
   const {docNum}=useParams()
 
 
-  useEffect(()=>{
-    axios
-    .get(`/oneDoctor/${docNum}`)
-    .then((res)=>{
-      setOneDoc(res.data)
-      // console.log(oneDoc)
-    })
-    .catch((error)=>{console.log(error)})
-    
-    
-
-    axios
-    .get(`/schedule/getDocMemList/${docNum}`)
-    .then((res)=>{
-      setInfoList(res.data)
-
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-    
-  },[])
 
   // console.log(infoList)
   // console.log(oneDoc)
@@ -54,8 +34,69 @@ const DocMemList = () => {
 
     })
     .catch((error)=>{console.log(error)})
-    
   }
+
+  //페이징 그리기
+  function drawPagination(){
+    const pagesArr=[];
+    if(page.prev){
+      pagesArr.push(<span className='page-span' 
+        onClick={(e)=>{getList(page.beginPage-1)}}> 이전 </span>)
+    }
+
+    //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
+    function getList(pageNo){
+      axios
+      .post(`/schedule/getDocMemList`,{pageNo,docNum})
+      .then((res)=>{
+        setInfoList(res.data.scheduleList)
+        setPage(res.data.pageInfo)
+      })
+      .catch((error)=>{console.log(error)})
+    }
+
+    for(let a=page.beginPage; a<=page.endPage; a++){
+      pagesArr.push(<span key={a} className='page-span' 
+        onClick={(e)=>{getList(a)}}>{a}</span>)
+    }
+
+    if(!page.next){
+      pagesArr.push(<span className='page-span' 
+        onClick={(e)=>{getList(page.endPage+1)}}> 다음 </span>)
+    }
+
+    return pagesArr
+
+  }
+
+  //의사정보
+  useEffect(()=>{
+    axios
+    .get(`/oneDoctor/${docNum}`)
+    .then((res)=>{
+      setOneDoc(res.data)
+      // console.log(oneDoc)
+    })
+    .catch((error)=>{console.log(error)})
+    
+  },[])
+
+
+  //의사별 담당환자 리스트  
+  useEffect(()=>{
+
+    axios
+    .post(`/schedule/getDocMemList`,{'docNum':docNum})
+    .then((res)=>{
+      setInfoList(res.data.scheduleList)
+      setPage(res.data.pageInfo)
+
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+    
+  },[])
 
   
 
@@ -90,14 +131,17 @@ const DocMemList = () => {
         <h4>| 담당 환자 정보</h4>
         <table className='chart-table'>
           <colgroup>
-            <col width='20%'/>
+            <col width='2%'/>
+            <col width='18%'/>
             <col width='20%'/>
             <col width='50%'/>
             <col width='10%'/>
+
           </colgroup>
 
           <thead>
             <tr>
+              <td>No</td>
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
@@ -116,6 +160,7 @@ const DocMemList = () => {
               infoList.map((info,i)=>{
                 return(
                 <tr key={i}>
+                  <td>{info.schNum}</td>
                   <td>{info.schDate}</td>
                   <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span></td>
                   <td>{info.detail}</td>
@@ -131,18 +176,19 @@ const DocMemList = () => {
                 )
               })
             }
-            {/* <tr>
-              <td>2024-08-26</td>
-              <td>고길동</td>
-              <td>홧병</td>
-              <td>휴식</td>
-              <td><button type='button' onClick={(e)=>{goDelete()}}>취소</button></td>
-            </tr> */}
           </tbody>
 
         </table>
 
+        
+
       </div>
+
+      <div className='page-spans'>
+          {
+            drawPagination()
+          }
+        </div>
 
     </div>
   )
