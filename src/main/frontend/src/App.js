@@ -101,11 +101,10 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           {/* 의사별 담당환자 확인 */}
           <Route path='docMemList/:docNum' element={<DocMemList/>}/>
-          {/* 담당환자 상세정보/수정 */}
+          {/* 담당환자 상세정보 */}
           <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
           {/* 의사 정보수정 페이지 */}
           <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
-          
         </Route>
       </Routes>
 
