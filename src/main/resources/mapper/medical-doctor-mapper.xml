@@ -6,6 +6,7 @@
     <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
+        <result column="DEPT_NUM" property="deptNum" />
         <association property="medicalDept" resultMap="dept">
            <id property="deptId" column="dept_id"/>
            <result property="deptName" column="dept_name"/>
@@ -69,8 +70,8 @@
         INSERT INTO medical_doctor (
         DOC_NUM,
         DOC_NAME
-        ) VALUES(
-        #{docNum},
+        ) VALUES (
+        #{docNum},  <!-- DOC_NUM 필드 추가 -->
         #{docName}
         )
     </insert>

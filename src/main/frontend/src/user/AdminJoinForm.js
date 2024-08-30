@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom'
 const AdminJoinForm = () => {
   // 의사데이터 저장할 변수
   const [docData, setDocData] = useState({
-    docNum : '',
-    docName : ''
+    docNum: '',
+    docName: '',
+    deptNum : '',
+    medicalDept: {}, 
+    imgVO: {}
   })
-  /// 이건 아님지우기
   // 의사 번호
   const {docNum} = useParams()
   console.log(docNum)
@@ -16,13 +18,22 @@ const AdminJoinForm = () => {
   useEffect(() => {
     axios.get(`/selectDoctor/${docNum}`)
     .then((res) => {
-      setDocData(res.data)
       console.log(res.data)
+      setDocData(res.data)
     })
     .catch((error) => {console.log(error)})
   },[])
-
-  
+  // 의사 진료과 선택
+  const onChangeDept = (e) => {
+    let value = e.target.value
+    setDocData({...docData, [e.target.name] :value})
+    console.log(docData)
+  }
+  const insertDoctor = (e) => {
+    axios.post('/insertDoctor', docData)
+    .then((res) => {console.log(res.data)})
+    .catch((error) => {console.log(error)})
+  }
   return (
     <div>
         <div><h1 className='join-head'>의사 정보</h1></div>
@@ -31,20 +42,21 @@ const AdminJoinForm = () => {
           <tbody>
             <tr>
               <td>회원이름</td>
-              <td><input className='adminJoin-input' name='memName' value={docData.docName} type='text' readOnly/></td>
+              <td><input className='adminJoin-input' name='memName' defaultValue={docData.docName} type='text' /></td>
+              
             </tr>
             <tr>
               <td>진료과</td>
               <td>
-                <select >
-                  <option>유방암 외과</option>
-                  <option>신경외과</option>
-                  <option>갑상선외과</option>
-                  <option>산부인과</option>
-                  <option>흉부외과</option>
-                  <option>혈액 종양 내과</option>
+                <select name='deptNum' onChange={(e) => {onChangeDept(e)}}>
+                  <option value={'1'}>유방암 외과</option>
+                  <option value={'2'}>신경외과</option>
+                  <option value={'3'}>갑상선외과</option>
+                  <option value={'4'}>산부인과</option>
+                  <option value={'5'}>흉부외과</option>
+                  <option value={'6'}>혈액 종양 내과</option>
                 </select>
-                <input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {}}/></td>
+                </td>
             </tr>
             <tr>
               <td>전화번호</td>
@@ -61,7 +73,7 @@ const AdminJoinForm = () => {
         </table>
           <div>
             <button className='join-btn' onClick={() => {}}>취소</button>
-            <button className='join-btn' onClick={() => {}}>저장</button>
+            <button className='join-btn' onClick={() => {insertDoctor()}}>저장</button>
           </div>
         
       </div>
