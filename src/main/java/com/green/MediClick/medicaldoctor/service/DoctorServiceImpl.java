@@ -39,7 +39,7 @@ public class DoctorServiceImpl implements DoctorService{
     // 회원가입할때 "ADMIN"이면 의사정보도 추가
     @Override
     public void insertDoctor(DoctorVO doctorVO) {
-        sqlSession.insert("doctorMapper.insertDoctor1");
+        sqlSession.insert("doctorMapper.insertDoctor",doctorVO);
     }
 
 }

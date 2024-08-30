@@ -39,8 +39,9 @@ public class DoctorController {
     }
 
     // 회원가입 후 관리자면 의사정보 추가
-    @PostMapping("/insertDoctor/{docNum}")
+    @PostMapping("/insertDoctor")
     public void insertDoctor(@RequestBody DoctorVO doctorVO){
+        doctorService.insertDoctor(doctorVO);
     }
 
 
