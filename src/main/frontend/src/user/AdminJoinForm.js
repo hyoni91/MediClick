@@ -7,7 +7,6 @@ const AdminJoinForm = () => {
   //조회를 했을때 닥넘이랑,닥네임,디이피티넘
   const navigate = useNavigate()
   //
-  const navigate = useNavigate()
   const [memData , setMemData] =useState({})
   // 의사데이터 저장할 변수
   const [docData, setDocData] = useState({
