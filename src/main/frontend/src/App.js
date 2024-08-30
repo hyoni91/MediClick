@@ -102,13 +102,10 @@ function App() {
           {/* 의사별 담당환자 확인 */}
           <Route path='docMemList/:docNum' element={<DocMemList/>}/>
           {/* 담당환자 상세정보/수정 */}
-<<<<<<< HEAD
-          <Route path='docMemInfo/:memNum' element={<DocMemInfo/>}/>
+          <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
           {/* 의사 정보수정 페이지 */}
           <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
-=======
-          <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
->>>>>>> 11be3b91ff856229c9192e8e69cf1d49732a31d9
+          
         </Route>
       </Routes>
 
