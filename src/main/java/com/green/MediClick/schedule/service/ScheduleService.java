@@ -19,7 +19,7 @@ public interface ScheduleService {
     ScheduleVO getMemChart(String schNum);
 
     //담당환자 차트에서 예약정보 변경
-    void updateSchChart(ScheduleVO scheduleVO);
+//    void updateSchChart(ScheduleVO scheduleVO);
 
     //환자가보는 나의 예약페이지
     List<ScheduleVO> getMemSch(String memNum);

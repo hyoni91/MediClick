@@ -23,7 +23,6 @@ public class ScheduleController {
     @PostMapping("/getDocMemList")
     public Map<String,Object> getDocMemList(@RequestBody DoctorVO doctorVO){
 
-        System.out.println("!!@@!!!!!!!!!!!! "+doctorVO);
         //전체 환자 수
         scheduleService.getChartCnt(doctorVO.getDocNum());
 
@@ -36,8 +35,6 @@ public class ScheduleController {
         }
 
         pageInfo.setPageInfo();
-
-        System.out.println("@@@@!!!!!!"+pageInfo);
 
         List<ScheduleVO> scheduleList=scheduleService.getDocMem(doctorVO.getDocNum(),pageInfo);
 
@@ -58,10 +55,10 @@ public class ScheduleController {
     }
 
     //담당환자 차트에서 예약정보 변경
-    @PutMapping("/updateSchChart")
-    public void updateSchChart(@RequestBody ScheduleVO scheduleVO){
-        scheduleService.updateSchChart(scheduleVO);
-    }
+//    @PutMapping("/updateSchChart")
+//    public void updateSchChart(@RequestBody ScheduleVO scheduleVO){
+//        scheduleService.updateSchChart(scheduleVO);
+//    }
 
     //환자가 보는 나의 예약페이지
     @GetMapping("/getMemSch/{memNum}")

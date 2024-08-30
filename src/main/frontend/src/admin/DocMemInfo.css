@@ -57,4 +57,5 @@
 
 .infoBtn:hover{
   background-color: #013d81;
+  cursor: pointer;
 }
