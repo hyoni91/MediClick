@@ -21,6 +21,20 @@ const DocMemList = () => {
   const {docNum}=useParams()
 
 
+  //선택한 페이지 bold 유지
+  function changeBold(e){
+
+    let bb=document.querySelectorAll('.num')
+    bb.forEach((b,i)=>{
+      if(e.currentTarget==b){
+        b.classList.add('active')
+      }
+      else{
+        b.classList.remove('active')
+      }
+    })
+  }
+
 
   // console.log(infoList)
   // console.log(oneDoc)
@@ -40,7 +54,7 @@ const DocMemList = () => {
   function drawPagination(){
     const pagesArr=[];
     if(page.prev){
-      pagesArr.push(<span className='page-span' 
+      pagesArr.push(<span key="prev" className='page-span' 
         onClick={(e)=>{getList(page.beginPage-1)}}> 이전 </span>)
     }
 
@@ -56,12 +70,14 @@ const DocMemList = () => {
     }
 
     for(let a=page.beginPage; a<=page.endPage; a++){
-      pagesArr.push(<span key={a} className='page-span' 
-        onClick={(e)=>{getList(a)}}>{a}</span>)
+      pagesArr.push(<span key={`page-${a}`} className='page-span num' 
+        onClick={(e)=>{
+          changeBold(e)
+          getList(a)}}>{a}</span>)
     }
 
     if(!page.next){
-      pagesArr.push(<span className='page-span' 
+      pagesArr.push(<span className='page-span' key="next"
         onClick={(e)=>{getList(page.endPage+1)}}> 다음 </span>)
     }
 
