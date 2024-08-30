@@ -19,7 +19,7 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public DoctorVO getOneDoctor(int docNum) {
+    public DoctorVO getOneDoctor(String docNum) {
         return sqlSession.selectOne("doctorMapper.oneDoctor",docNum);
     }
 

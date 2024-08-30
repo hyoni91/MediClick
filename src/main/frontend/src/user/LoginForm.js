@@ -50,6 +50,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         alert(`${loginInfo.memName}님 반갑습니다.`)
 
         
+
+        
         navigate('/')
 
         // if(loginInfo.memRole=='USER'){

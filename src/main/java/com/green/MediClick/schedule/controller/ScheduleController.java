@@ -23,6 +23,7 @@ public class ScheduleController {
     @PostMapping("/getDocMemList")
     public Map<String,Object> getDocMemList(@RequestBody DoctorVO doctorVO){
 
+        System.out.println("112222222222222222222"+doctorVO);
         //전체 환자 수
         scheduleService.getChartCnt(doctorVO.getDocNum());
 
