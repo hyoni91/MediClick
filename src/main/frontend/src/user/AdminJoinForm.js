@@ -33,9 +33,27 @@ const AdminJoinForm = () => {
     setDocData({...docData, [e.target.name] :value})
     console.log(docData)
   }
+  const [docImg , setDocImg] = useState(null);
 
+  //의사 등록 버튼
   const insertDoctor = (e) => {
-    axios.post('/insertDoctor', docData)
+    //의사 이미지 등록
+
+    const fileConfig = {
+      headers : {'Content-Type' : 'multipart/form-data'}
+    }
+    //form 객체 생성
+    const docimgForm = new FormData();
+
+    //2. form 객체에 데이터 추가
+
+    docimgForm.append('docNum', docData.docNum );
+    docimgForm.append('docNum', docData.docName );
+    docimgForm.append('docNum', docData.deptNum );
+    docimgForm.append('docImg', docImg );
+
+
+    axios.post('/insertDoctor', docData,fileConfig)
     .then((res) => {
       console.log(res.data)
       navigate('/loginForm')
@@ -46,6 +64,7 @@ const AdminJoinForm = () => {
   const deleteDoctor = (e) => {
     axios.get('')
   }
+  //반드시 아래의 설정 코드를 axios에 추가!!!
   return (
     <div>
         <div><h1 className='join-head'>의사 정보</h1></div>
@@ -83,6 +102,12 @@ const AdminJoinForm = () => {
             {/* {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>} */}
           </tbody>
         </table>
+        {/* 의사 이미지 */}
+        <div>ddd
+          <input type='file' onChange={(e) => {
+            setDocImg(e.target.files[0])
+          }}/>
+        </div>
           <div>
             <button className='join-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
             <button className='join-btn' onClick={() => {insertDoctor()}}>저장</button>

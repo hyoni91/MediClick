@@ -28,11 +28,6 @@ public class FileUploadUtil {
             //첨부될 파일명을 랜덤하게 생성
             String uuid = UUID.randomUUID().toString();
 
-            //원본 파일에서 확장자만 추출
-            String a = "abc.jpg";
-            String b = "ab.cd.ef.jpg";
-            a.substring(3);
-
             //indexOf : 찾는 문자의 index(위치)
             int dotIndex = originFileName.lastIndexOf("."); //
             String extension = originFileName.substring(dotIndex);
