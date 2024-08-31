@@ -17,7 +17,7 @@ public class FileUploadUtil {
 
         //input 태그에 파일을 선택했을 때만 첨부기능 실행
         if (!uploadFile.isEmpty()) {
-            //imgVO 객체 생성
+            //doctorImgVO 객체 생성
             doctorImgVO = new DoctorImgVO();
             //업로드 될 경로
             String uploadPath = "D:\\01-STUDY\\dev\\MediClick\\src\\main\\resources\\static\\upload\\";

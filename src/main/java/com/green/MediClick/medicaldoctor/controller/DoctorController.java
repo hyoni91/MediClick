@@ -47,19 +47,25 @@ public class DoctorController {
                             @RequestParam("docImg") MultipartFile docImg){
 
         //-------파일 업로드-----------//
-        //메인이 되는 이미지 첨부 후 첨부된 원본 파일명, 첨부된 파일명을 리턴 받음
-        DoctorImgVO mainImgVO = FileUploadUtil.fileUpload(docImg);
+        //파일 빈객체로 설정
+        DoctorImgVO mainImgVO = null;
 
-        //다음에 들어갈 item_code 조회
+        //파일이 들어있을 경우 업로드
+        if (docImg != null && docImg.isEmpty()) {
+            //메인이 되는 이미지 첨부 후 첨부된 원본 파일명, 첨부된 파일명을 리턴 받음
+            mainImgVO = FileUploadUtil.fileUpload(docImg);
+        }
+        //다음에 들어갈 이미지 번호 조회
         String nextDoctorImg = doctorService.nextDoctorImg();
 
-        //다음에 들억갈 이미지 번호 조회
+        //다음에 들억갈 이미지 번호 저장
         doctorVO.setDocNum(nextDoctorImg);
 
         //의사 정보 등록
         //-----DoctorImgVO 이미지 저장-----//
-        doctorVO.setImgVO(mainImgVO);
-
+        if(mainImgVO != null) {
+            doctorVO.setImgVO(mainImgVO);
+        }
         // 의사 등록
         doctorService.insertDoctor(doctorVO);
     }
