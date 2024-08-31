@@ -138,17 +138,15 @@ const AdminJoinForm = () => {
           <div className="file-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
         )}
           </div>
-          <div>
-            <babel className='file-label'>사진등록
-              <input className='file-input' type='file' accept='image/*' onChange={(e) => {
-                setDocImg(e.target.files[0])
-              }}/>
-            </babel>
-          </div>
+          <babel className='file-label'>사진등록
+            <input className='file-input' type='file' accept='image/*' onChange={(e) => {
+              setDocImg(e.target.files[0])
+            }}/>
+          </babel>
         </div>
           <div>
-            <button className='joadminJoinin-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
-            <button className='join-btn' onClick={() => {insertDoctor()}}>저장</button>
+            <button className='adminJoin-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
+            <button className='adminJoin-btn' onClick={() => {insertDoctor()}}>저장</button>
             
           </div>
         
