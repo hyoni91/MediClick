@@ -39,10 +39,44 @@ body{
 .header li>span{
   cursor: pointer;
 }
-
+/* 
 .main-routers{
   margin-bottom: 100px;
+} */
+
+.mid-main{
+  width: 100%;
+  margin: 50px auto;
+
 }
+
+.mid-main>div{
+  width: 800px;
+  display: flex;
+  margin: 10px auto;
+
+}
+
+.mid-divs>div{
+  margin: auto;
+  text-align: center;
+  border:1px solid #eeeeee;
+  background-color: #eeeeee6b;
+  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mid-divs>div:hover{
+  background-color: #eeeeee;
+}
+
 
 .footer-mid{
   background-color: #eeeeee;

@@ -59,12 +59,6 @@ function App() {
               </ul>
               :
               <ul>
-                {/* MEM_NUM에 DOC가 포함이 되면 관리자로 인식해서 
-                관리자 의료진이면 의료진정보/예약페이지로 
-
-                포함이 안되면
-                일반 환자 회원이면 회원 예약 정보 보여주고
-                */}
                 {
                   loginInfo.memNum.includes('DOC')?
                   <li><span onClick={(e)=>{navigate(`/admin/DocMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
@@ -93,7 +87,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* 메인페이지 */}
-            <Route path='/' element={<Home/>}/>
+            <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
             <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 환자별 예약확인 페이지 */}
@@ -149,12 +143,52 @@ function App() {
   );
 }
 
-const Home=()=>{
+const Home=({loginInfo})=>{
+  const navigate=useNavigate()
+
+
   return(
-    <div className='main-img'>
-      {/* 메인이미지 */}
-      <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+
+    <div>
+      <div className='main-img'>
+        {/* 메인이미지 */}
+        <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+      </div>
+  
+      
+      <div className='mid-main'>
+        <h3>주요 서비스</h3>
+    
+        <div className='mid-divs'>
+          <div onClick={(e)=>{navigate('/medicalDoctor')}}>
+            <div><i class="bi bi-hospital"></i></div>
+            <div>진료과목</div>
+          </div>
+    
+          <div>
+            <div><i class="bi bi-search"></i></div>
+            <div>진료안내</div>
+          </div>
+    
+          <div onClick={(e)=>{
+            {
+              Object.keys(loginInfo).length==0
+              ?
+              navigate('/loginForm')
+              :
+              navigate(`/mySch/${loginInfo.memNum}`)
+            }
+          }}>
+            <div><i class="bi bi-clipboard-data"></i></div>
+            <div>나의 차트</div>
+          </div>
+          
+        </div>
+      </div>
+  
     </div>
+
+    
   )
 }
 export default App;

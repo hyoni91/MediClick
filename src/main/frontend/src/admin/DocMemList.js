@@ -133,7 +133,7 @@ const DocMemList = () => {
   
 
   return (
-    <div className='content-main'>
+    <div>
 
       <div className='docInfo-div'>
         <h2>의료진 정보</h2>
@@ -220,7 +220,7 @@ const DocMemList = () => {
           {
             drawPagination()
           }
-        </div>
+      </div>
 
     </div>
   )
