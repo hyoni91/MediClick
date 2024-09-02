@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router-dom'
 const UserLayout = () => {
   const navigate = useNavigate();
 
-
   return (
   <div className='int'>
     <div className='layout-bar'>
