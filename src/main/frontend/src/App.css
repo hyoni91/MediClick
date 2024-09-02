@@ -77,6 +77,10 @@ body{
   background-color: #eeeeee;
 }
 
+#map{
+  width: 500px;
+  height: 400px;
+}
 
 .footer-mid{
   background-color: #eeeeee;

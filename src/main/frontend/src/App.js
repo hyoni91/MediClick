@@ -18,6 +18,7 @@ import UserService from './user/UserService';
 
 function App() {
   const navigate=useNavigate()
+  const {kakao}=window;
 
   //로그인 정보를 저장할 수 있는 state변수
   const [loginInfo,setLoginInfo]=useState({})
@@ -39,6 +40,8 @@ function App() {
     alert('로그아웃되었습니다.')
     navigate('/')
   }
+
+  
 
 
 
@@ -143,6 +146,25 @@ function App() {
   );
 }
 
+function Kakao(){
+  const {kakao}=window
+
+  useEffect(()=>{
+    const container=document.getElementById('map')
+    const options={
+      // center:new.kakao.maps.
+      level : 3
+    }
+  },[])
+
+  return(
+    <div id='map'>
+
+    </div>
+  )
+
+}
+
 const Home=({loginInfo})=>{
   const navigate=useNavigate()
 
@@ -180,10 +202,16 @@ const Home=({loginInfo})=>{
             }
           }}>
             <div><i class="bi bi-clipboard-data"></i></div>
-            <div>나의 차트</div>
+            <div>예약 조회</div>
           </div>
           
         </div>
+
+        <div className='miniMap'>
+          <div id='map'><Kakao/></div>
+
+        </div>
+
       </div>
   
     </div>
