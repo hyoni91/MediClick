@@ -1,6 +1,8 @@
 package com.green.MediClick.medicaldoctor.service;
 
+import com.green.MediClick.medicaldoctor.vo.DoctorImgVO;
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
+import com.green.MediClick.medicaldoctor.vo.MedicalDept;
 
 import java.util.List;
 
@@ -21,5 +23,10 @@ public interface DoctorService {
 
     // 회원가입 취소시 삭제되는 데이터
     void deleteDoctor(String docNum);
+
+    // 진료과 데이터 추가
+    void insertDept(MedicalDept medicalDept);
+    // 이미지 저장
+    void insertDocImg(DoctorImgVO imgVO);
 
 }

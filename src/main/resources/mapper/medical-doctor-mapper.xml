@@ -25,9 +25,10 @@
         <result column="DOC_NUM" property="docNum" />
     </resultMap>
     <select id="medicalDoctorList" resultMap="doctor">
-        SELECT DOC_NAME, DEPT_NAME
-        FROM medical_dept, medical_doctor
+        SELECT *
+        FROM medical_dept, medical_doctor , DOCTOR_IMG
         WHERE medical_dept.DEPT_NUM = medical_doctor.DEPT_NUM
+        and doctor_img.doc_num = medical_doctor.doc_num
     </select>
 
     <select id="oneDoctor" resultMap="doctor">
@@ -43,13 +44,13 @@
 
     <!--이미지 들어갈 자리 조회 0이면 1로 해서-->
     <select id="nextDoctorImg" resultType="String">
-        SELECT CONCAT(DOC_ ,LPAD(IFNULL(MAX(CAST(SUBSTRING(IMG_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0'))
-        FROM MEDICAL_DOCTOR
+        SELECT IFNULL(MAX(IMG_NUM), 0) + 1
+        FROM DOCTOR_IMG
     </select>
     <!--의사 이미지 등록-->
-    <insert id="insetDoctorImg">
+    <insert id="insertDocImg">
         INSERT INTO DOCTOR_IMG(
-        , ORIGIN_FILE_NAME
+        ORIGIN_FILE_NAME
         , ATTACHED_FILE_NAME
         , DOC_NUM
         ) VALUES(
@@ -73,6 +74,15 @@
         #{docNum},  <!-- DOC_NUM 필드 추가 -->
         #{docName},
         #{deptNum}
+        )
+    </insert>
+    <insert id="insertDept">
+        INSERT INTO medical_dept (
+        DEPT_NUM,
+        DEPT_NAME
+        ) VALUES (
+        #{deptNum},
+        #{deptName}
         )
     </insert>
     <!--의사 삭제 -->
