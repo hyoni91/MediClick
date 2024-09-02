@@ -10,9 +10,9 @@ const DocMemInfo = () => {
     doctorVO:{
       docNum:'',
       docName:'',
-      medicalDept:[{
+      medicalDept:{
         deptName:''
-      }]
+      }
     },
     memberVO:{
       memNum:'',
@@ -116,7 +116,7 @@ const DocMemInfo = () => {
             </tr>
             <tr>
               <td>진료과</td>
-              <td>{memInfo.doctorVO.medicalDept[0].deptName}</td>
+              <td>{memInfo.doctorVO.medicalDept.deptName}</td>
             </tr>
             <tr>
               <td>담당의</td>

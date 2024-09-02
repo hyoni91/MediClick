@@ -8,35 +8,46 @@
 }
 
 .join-btn{
-  margin: 10px;
-  background-color: #11999E;
+  width: 50%;
+  height: 34px;
+  background-color: #0254AF;
   border: none;
   color: white;
-  border-radius: 5px;
-  padding: 4px 10px;
+  font-weight: bold;
+  padding: 5px 10px;
   cursor: pointer;
 }
+
+.btn-user,
+.btn-admin{
+  width: 100px;
+  margin-left: 5px;
+  margin-top: 20px;
+  font-weight: normal;
+}
+
 .join-table{
   width: 300px;
+  font-size: 0.9rem;
   margin: 50px auto;
 }
 
 .join-table td{
   padding: 5px;
-  
-}
-
-.login-table tr td:nth-child(odd){
   text-align: left;
 }
+
+
 .join-div > div{
+  margin: 0 auto;
   text-align: center;
+  width: 300px;
 }
 .relative-container{
   text-align: center;
 }
 .join-btn:hover{
-  background-color:#0f8b8f ;
+  background-color:#013d81 ;
 }
 .error{
   font-size: 0.7rem;
