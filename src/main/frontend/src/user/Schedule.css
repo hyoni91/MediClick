@@ -156,6 +156,7 @@ justify-content: center;
 
 .schedule-table>table tr,td{
   padding: 4px;
+  vertical-align : middle
 }
 
 .schedule-table input{

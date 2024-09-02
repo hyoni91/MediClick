@@ -14,7 +14,6 @@ public class PatientChartController {
     private PatientChartService patientChartService;
 
     //진료차트에 표시할 정보 조회
-
     @GetMapping("/p_select/{schNum}")
     PatientChartVO pSelect(@PathVariable("schNum") int schNum){
         System.out.println("//////////////////////////////////////" + schNum);

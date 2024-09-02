@@ -11,29 +11,31 @@ const PatientChart = () => {
   const formatDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`
 
   const [pselect , setPselect] = useState({
-    chartNum  : '',
-    chartDate : formatDate,
-    schList : [{
-      doctorVO :{
-        docName : '',
-        medicalDept : {
-          deptName : ''
-        }},
-        memberVO :{
-          memName : '',
-          memRrn : '',
-          memNum :'',
+    chartNum: 0,
+    chartDate: formatDate,
+    schList: [
+      {
+        memberVO: {
+          memNum: '',
+          memName: '',
+          memRrn: '',
+        },
+        doctorVO: {
+          docName: '',
+          medicalDept: {
+            deptName: ''
+          },
         }
-      }    
-  ]
+      }
+    ]
   })
-  console.log(pselect)
+
 
   useEffect(()=>{
     axios.get(`/patientChart/p_select/${schNum}`)
     .then((res)=>{
-      console.log(res.data)
-
+      setPselect(res.data)
+      console.log(pselect)
     })
     .catch((error)=>{
       console.log(error)
@@ -41,7 +43,6 @@ const PatientChart = () => {
 
   },[])
 
-  console.log(pselect.schList[0].doctorVO.medicalDept.deptName)
 
   return (
     <div className='p-chart-container'>
@@ -57,7 +58,7 @@ const PatientChart = () => {
           <tbody>
             <tr>
               <td>진료번호</td>
-              <td>{pselect.chartNum + 1}</td>
+              <td>{pselect.chartNum +1}</td>
               <td>진료날짜</td>
               <td>{formatDate}</td>
             </tr>
@@ -65,45 +66,45 @@ const PatientChart = () => {
               <td>진료과</td>
               <td>{pselect.schList[0].doctorVO.medicalDept.deptName}</td>
               <td>담당의사</td>
-              <td>{}</td>
+              <td>{pselect.schList[0].doctorVO.docName}</td>
             </tr>
             <tr>
-              <td colSpan={4}>환자정보</td>
+              <td className='td-style' colSpan={4}>환자정보</td>
             </tr>
             <tr>
               <td>환자번호</td>
-              <td colSpan={3}>{}</td>
+              <td colSpan={3}>{pselect.schList[0].memberVO.memNum}</td>
             </tr>
             <tr>
               <td>환자이름</td>
-              <td colSpan={3}>{}</td>
+              <td colSpan={3}>{pselect.schList[0].memberVO.memName}</td>
             </tr>
             <tr>
               <td>주민번호</td>
-              <td colSpan={3}>{}</td>
+              <td colSpan={3}>{pselect.schList[0].memberVO.memRrn}</td>
             </tr>
             <tr>
-              <td colSpan={4}>진료내용</td>
+              <td className='td-style' colSpan={4}>진료내용</td>
             </tr>
             <tr rowSpan={2}>
               <td>증상</td>
-              <td colSpan={3}><input type='text' name=''/></td>
+              <td colSpan={3}><textarea cols={40} rows={7}/></td>
             </tr>
             <tr>
-              <td colSpan={4}>검사내용</td>
+              <td className='td-style' colSpan={4}>검사내용</td>
             </tr>
             <tr >
-              <td colSpan={4}><input type='text' name=''/></td>
+              <td colSpan={4}><textarea cols={50} rows={7}/></td>
             </tr>
             <tr>
               <td>병명</td>
               <td colSpan={3}><input type='text' name=''/></td>
             </tr>
             <tr>
-              <td colSpan={4}>처방내용</td>
+              <td className='td-style' colSpan={4}>처방내용</td>
             </tr>
             <tr>
-              <td colSpan={4}><input type='text' name=''/></td>
+              <td colSpan={4}><textarea cols={50} rows={7}/></td>
             </tr>
           </tbody>
         </table>
