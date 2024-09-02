@@ -17,7 +17,7 @@ public class FileUploadUtil {
 
         //input 태그에 파일을 선택했을 때만 첨부기능 실행
         if (!uploadFile.isEmpty()) {
-            //imgVO 객체 생성
+            //doctorImgVO 객체 생성
             doctorImgVO = new DoctorImgVO();
             //업로드 될 경로
             String uploadPath = "D:\\01-STUDY\\dev\\MediClick\\src\\main\\resources\\static\\upload\\";
@@ -27,11 +27,6 @@ public class FileUploadUtil {
 
             //첨부될 파일명을 랜덤하게 생성
             String uuid = UUID.randomUUID().toString();
-
-            //원본 파일에서 확장자만 추출
-            String a = "abc.jpg";
-            String b = "ab.cd.ef.jpg";
-            a.substring(3);
 
             //indexOf : 찾는 문자의 index(위치)
             int dotIndex = originFileName.lastIndexOf("."); //

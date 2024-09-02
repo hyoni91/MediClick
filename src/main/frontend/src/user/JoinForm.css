@@ -38,8 +38,6 @@
 .join-btn:hover{
   background-color:#0f8b8f ;
 }
-.join-div>div:nth-child(){
-}
 .error{
   font-size: 0.7rem;
   text-align: left;
@@ -50,4 +48,8 @@
 .join-head{
   margin: auto;
   text-align: center;
+}
+.error1{
+  height: 15px;
+  margin: 0px;
 }
