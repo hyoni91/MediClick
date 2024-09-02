@@ -1,0 +1,55 @@
+.user-service-div{
+  width: 800px;;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px auto;
+}
+.userService-btn{
+  margin: 10px;
+  background-color: #11999e;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.user-service-div table{
+  width: 800px;
+  margin: 50px auto;
+}
+.user-service-div table input{
+  width: 99%;
+  border: none;
+  font-size: 16px;
+}
+.user-service-div table td{
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+.userService-btn:hover{
+  background-color:#0f8b8f ;
+}
+/* .user-service-div table tr td{
+  text-align: left;
+} */
+.user-service-div textarea{
+  height: 500px;
+  width: 99%;
+  border: none;
+  font-size: 20px;
+}
+.userService-content{
+  vertical-align: middle;
+}
+.userService-btn2{
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.userService-btn2:hover{
+  background-color: white;
+  text-decoration-line: underline;
+  text-underline-offset: 5px;
+}
