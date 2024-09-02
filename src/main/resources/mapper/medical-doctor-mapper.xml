@@ -7,23 +7,25 @@
         <id column="DOC_NUM" property="docNum" />
         <result column="DOC_NAME" property="docName" />
         <result column="DEPT_NUM" property="deptNum" />
-        <association property="medicalDept" resultMap="dept">
-           <id property="deptId" column="dept_id"/>
-           <result property="deptName" column="dept_name"/>
-        </association>
+        <!--진료과 데이터-->
+        <association property="medicalDept" resultMap="doctorMapper.dept" />
         <!--의사 이미지 데이터-->
         <association property="imgVO" resultMap="doctorMapper.img" />
     </resultMap>
+    <!--진료과 데이터-->
     <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
         <id column="DEPT_NUM" property="deptNum" />
         <result column="DEPT_NAME" property="deptName" />
     </resultMap>
+
+    <!--의사 이미지-->
     <resultMap id="img" type="com.green.MediClick.medicaldoctor.vo.DoctorImgVO">
         <id column="IMG_NUM" property="imgNum" />
         <result column="ORIGIN_FILE_NAME" property="originFileName" />
         <result column="ATTACHED_FILE_NAME" property="attachedFileName" />
         <result column="DOC_NUM" property="docNum" />
     </resultMap>
+
     <select id="medicalDoctorList" resultMap="doctor">
         SELECT *
         FROM medical_dept, medical_doctor , DOCTOR_IMG

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './JoinForm.css'
 import axios from 'axios'
-import { useNavigate, useNavigation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const JoinForm = () => {
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({

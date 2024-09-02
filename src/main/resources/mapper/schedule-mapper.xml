@@ -13,30 +13,11 @@
         <result column="SCH_TIME" property="schTime"/>
         <result column="DETAIL" property="detail"/>
         <result column="SCH_STATUS" property="schStatus"/>
-        <association property="doctorVO" resultMap="doctor"/>
-        <collection property="memberVO" resultMap="member"/>
+        <!--medical-doctor-mapper에 있슴-->
+        <association property="doctorVO" resultMap="doctorMapper.doctor"/>
+        <!--member-mapper에 있슴-->
+        <collection property="memberVO" resultMap="member.member"/>
     </resultMap>
-
-    <resultMap id="member" type="com.green.MediClick.member.vo.MemberVO">
-        <id column="MEM_NUM" property="memNum" />
-        <result column="MEM_NAME" property="memName" />
-        <result column="MEM_TEL" property="memTel" />
-        <result column="MEM_RRN" property="memRrn" />
-        <result column="MEM_ROLE" property="memRole" />
-    </resultMap>
-
-    <resultMap id="doctor" type="com.green.MediClick.medicaldoctor.vo.DoctorVO">
-        <id column="DOC_NUM" property="docNum" />
-        <result column="DOC_NAME" property="docName" />
-        <collection property="medicalDept" resultMap="dept"/>
-    </resultMap>
-
-    <resultMap id="dept" type="com.green.MediClick.medicaldoctor.vo.MedicalDept">
-        <id column="DEPT_NUM" property="deptNum" />
-        <result column="DEPT_NAME" property="deptName" />
-    </resultMap>
-
-
 
         <!--관리자 : 의사별 담당환자 리스트-->
      <select id="docMemChart" resultMap="schedule">
@@ -136,7 +117,7 @@
     </select>
 
     <!-- 의사 진료과 불러오기 -->
-    <select id="doctor" resultMap="doctor">
+    <select id="doctor" resultMap="doctorMapper.doctor">
         SELECT DOC_NUM, DOC_NAME, D.DEPT_NUM , DEPT_NAME
         FROM  medical_doctor D, medical_dept T
         WHERE D.DEPT_NUM = T.DEPT_NUM
