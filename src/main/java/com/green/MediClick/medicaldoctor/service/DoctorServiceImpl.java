@@ -1,6 +1,8 @@
 package com.green.MediClick.medicaldoctor.service;
 
+import com.green.MediClick.medicaldoctor.vo.DoctorImgVO;
 import com.green.MediClick.medicaldoctor.vo.DoctorVO;
+import com.green.MediClick.medicaldoctor.vo.MedicalDept;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,18 @@ public class DoctorServiceImpl implements DoctorService{
         sqlSession.delete("doctorMapper.deleteDoctor",docNum);
         // 멤버 정보 삭제
         sqlSession.delete("doctorMapper.deleteMember",docNum);
+    }
+
+    //진료과 선택후 저장
+    @Override
+    public void insertDept(MedicalDept medicalDept) {
+        sqlSession.insert("doctorMapper.insertDept",medicalDept);
+    }
+
+    //이미지 저장
+    @Override
+    public void insertDocImg(DoctorImgVO imgVO) {
+        sqlSession.insert("doctorMapper.insertDocImg",imgVO);
     }
 
     // 회원가입할때 "ADMIN"이면 의사정보도 추가

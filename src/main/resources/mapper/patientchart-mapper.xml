@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="patientChartMapper">
+	<resultMap id="P_Chart" type="com.green.MediClick.patientchart.vo.PatientChart">
+        <id column="CHART_NUM" property="chartNum"/>
+        <result column="CHART_DATE" property="chartDate"/>
+        <result column="" property="docNum"/>
+        <result column="" property="memNum"/>
+        <result column="" property="deptNum"/>
+        <result column="" property="symptom"/>
+        <result column="" property="checkUp"/>
+        <result column="" property="disease"/>
+        <result column="" property="prescription"/>
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,7 +21,7 @@ const AdminJoinForm = () => {
       imgNum: '', // 기본값
       originFileName: '', // 기본값
       attachedFileName: '', // 기본값
-      docNum: '' // 기본값
+      docNum: docNum // 기본값
     }
   })
   
@@ -30,9 +30,9 @@ const AdminJoinForm = () => {
   useEffect(() => {
     axios.get(`/member/getOneMem/${docNum}`)
     .then((res) => {
-      console.log(res.data)
+      console.log(docData)
       setMemData(res.data)
-      setDocData({...docData,docName : res.data.memName})
+      setDocData({...docData,docName : res.data.memName })
     })
     .catch((error) => {console.log(error)})
   },[])
@@ -53,8 +53,16 @@ const AdminJoinForm = () => {
   }, [docImg]);
   // 의사 진료과 선택
   const onChangeDept = (e) => {
-    let value = e.target.value
-    setDocData({...docData, [e.target.name] :value})
+    const selectedDeptNum = e.target.value;
+    const selectedDeptName = e.target.options[e.target.selectedIndex].text;
+    setDocData({
+      ...docData,
+      deptNum: e.target.value,
+      medicalDept: {
+        deptNum: selectedDeptNum,
+        deptName: selectedDeptName // Set department name
+      }
+    });
     console.log(docData)
   }
 
@@ -69,10 +77,10 @@ const AdminJoinForm = () => {
     const docForm = new FormData();
 
     //2. form 객체에 데이터 추가
-
     docForm.append('docNum', docData.docNum );
     docForm.append('docName', docData.docName );
     docForm.append('deptNum', docData.deptNum );
+    docForm.append('deptName', docData.medicalDept.deptName);
     // 파일이 있을 경우에만 추가
     if (docImg) {
       docForm.append('docImg', docImg);
@@ -140,7 +148,7 @@ const AdminJoinForm = () => {
           </div>
           <babel className='file-label'>사진등록
             <input className='file-input' type='file' accept='image/*' onChange={(e) => {
-              setDocImg(e.target.files[0])
+              setDocImg(e.target.files[0]) 
             }}/>
           </babel>
         </div>

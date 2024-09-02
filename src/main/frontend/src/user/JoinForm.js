@@ -141,7 +141,9 @@ const handlePhoneChange = (e) => {
   }
   
   useEffect(() => {
+    axios.get('/doctorList').then((res) => {console.log(res.data)}).catch()
   }, [memberData])
+  
   return (
     <div>
         <div><h1>회원가입</h1></div>
