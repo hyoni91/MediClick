@@ -62,8 +62,11 @@
   text-align: center;
 }
 
-.doc-icon-div button:hover{
-  font-weight: 600;
+.button:hover,
+.button.active {
+  font-weight: 700;
+  /* background-color: #0254AF;
+  color: white; */
 }
 
 
@@ -75,6 +78,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2px;
   margin: auto;
 }
 
@@ -88,7 +92,6 @@ justify-content: center;
 }
 
 .sch-btn button {
-  /* background-color: #ff8b48; */
   background-color: white;
   color: rgb(0, 0, 0);
   width: 70px;
@@ -96,18 +99,18 @@ justify-content: center;
   font-size: 15px;
   font-weight: 500;
   margin: 5px;
-  /* border-radius: 10px; */
   border: none;
   cursor: pointer;
 }
 
-.sch-btn button:hover{
+.sch-button:hover{
   background-color: #fa6a16;
   background-color: #0254AF;
   color: white;
 }
 
-.sch-btn button:focus{
+.sch-button:focus,
+.sch-button.active{
   background-color: #0254AF;
   color: white;
 }

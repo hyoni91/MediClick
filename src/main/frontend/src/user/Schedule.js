@@ -77,6 +77,16 @@ const Schedule = () => {
 
   // 예약 시간 선택
   function clickTime(e){
+    //선택한 버튼 효과 유지
+    var btns = document.querySelectorAll('.sch-button');
+    btns.forEach(function (btn, i) {
+      if (e.currentTarget == btn) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    // 선택한 시간 정보 저장
     setAppo({...appo,
     [timeInput.current.name] : e.target.value
     })
@@ -84,6 +94,16 @@ const Schedule = () => {
 
   // 진료과 클릭 선택(의사,진료과정보 넘기기)
   function changeDocInfo(e){
+    //선택한 버튼 효과 유지
+    var btns = document.querySelectorAll('.button');
+    btns.forEach(function (btn, i) {
+      if (e.currentTarget == btn) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    //선택한 진료과와 의사선택 
     const selectedValue = e.target.value; // JSON 문자열
     const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
     setAppo({
@@ -93,6 +113,8 @@ const Schedule = () => {
       deptName: deptName
     })
   }
+
+
 
 
   // 증상 정보 받기
@@ -166,7 +188,7 @@ const Schedule = () => {
                     <img src={(`http://localhost:8080/images/${i}.png`)}/>
                     <button type='button' onClick={(e)=>{
                     changeDocInfo(e)
-                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
+                    }}  name='docInfo' className='button' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
                       {doc.medicalDept.deptName}
                       </button>
                   </div>
@@ -194,7 +216,7 @@ const Schedule = () => {
               <div className='sch-btn'>
                     {schTimes.map((time,i) => (
                       <button
-                      key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
+                      key={time} type='button' className='sch-button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                     {time}</button>))
                     }
               </div>
