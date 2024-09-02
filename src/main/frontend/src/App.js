@@ -15,6 +15,7 @@ import DocMemInfo from './admin/DocMemInfo';
 import AdminJoinForm from './user/AdminJoinForm';
 import DoctorUpdate from './admin/DoctorUpdate';
 import UserService from './user/UserService';
+import PatientChart from './admin/PatientChart';
 
 function App() {
   const navigate=useNavigate()
@@ -120,6 +121,8 @@ function App() {
           <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
           {/* 의사 정보수정 페이지 */}
           <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
+          {/* 진료차트 */}
+          <Route path='patientChart/:schNum' element={<PatientChart/>}/>
         </Route>
       </Routes>
 
