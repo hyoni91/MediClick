@@ -49,15 +49,17 @@ const Schedule = () => {
   },[])
 
 
+
+
   //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
-    docNum : 7,
+    docNum :'',
     memNum: loginInfo ? loginInfo.memNum : "",
     deptNum :1 ,
     schDate: moment(value).format("YYYY-MM-DD"),
     schTime : '',
     detail:'',
-    deptName:'유방암 외과'
+    deptName:''
   })
 
   // schDate를 선택하면 appo정보도 바뀌도록 설정(실시간으로 schDate갱신)
@@ -128,7 +130,7 @@ const Schedule = () => {
     if(appo.memNum == ''){
       alert('로그인 후 이용해 주세요.')
       navigate('/loginForm')
-    }else if(appo.memRrn == '' || appo.schTime ==''){
+    }else if(appo.memRrn == '' || appo.schTime =='' || appo.docNum == ''){
       alert('예약 내용을 다시 확인해 주세요.')
     }else{
         //다 들어가 있으면 쿼리실행
