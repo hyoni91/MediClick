@@ -136,7 +136,7 @@ const Schedule = () => {
     .then((res)=>{
       alert('예약이 완료되었습니다.')
       //본인 예약 확인페이지로 넘어가기
-      navigate('')
+      navigate(`/mySch/${appo.memNum}`)
     })
     .catch((error)=>{
       console.log(error)
@@ -175,6 +175,10 @@ const Schedule = () => {
   
   return (
     <div className='sch-container'>
+      <div className='h1-flex'>
+        <h1 className='h1tag'>1.진료과와 진료날짜를 선택해 주세요.</h1>
+        <h1 className='h1tag'>2.예약내용을 확인해 주세요.</h1>
+      </div>
       <div className='sch-container-flex'>
         <div className='sch-flex'>
           <div className='h3tag'>진료과 선택</div>
@@ -223,11 +227,11 @@ const Schedule = () => {
             </div>
           </div>
           <div className='schedule-table'>
-            <div  className='h3tag'>예약내용</div>
+            {/* <div  className='h3tag'>예약내용</div> */}
             <table>
               <tbody>
                 <tr>
-                  <td>예약날짜</td>
+                  <td>예약날짜 : </td>
                   <td>
                     <input  type='text' readOnly 
                   value={moment(value).format("YYYY-MM-DD")}
@@ -235,32 +239,32 @@ const Schedule = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>예약시간</td>
+                  <td>예약시간 : </td>
                   <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
                 </tr>
                 <tr>
-                  <td>예약자명</td>
+                  <td>예약자명 : </td>
                   <td>
                     <input type='text' name='memName' readOnly 
                     value={loginInfo? loginInfo.memName : ""}/> 
                     </td>
                 </tr>
                 <tr>
-                  <td>진료과목</td>
+                  <td>진료과목 : </td>
                   <td>
                     <input type='text' readOnly  value={appo.deptName}/>
                     </td>
                 </tr>
                 <tr>
-                  <td>주민번호</td>
+                  <td>주민번호 : </td>
                   <td>
                     <input type='tel' name='' readOnly 
                   value={loginInfo? loginInfo.memRrn:""}/>
                   </td>
                 </tr>
                 <tr>
-                  <td>증상</td>
-                  <td><textarea rows={6} cols={41} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+                  <td>증상 : </td>
+                  <td><textarea placeholder='특이사항이나 증상을 자세히 기입바랍니다.' rows={10} cols={40} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
                 </tr>
               </tbody>
             </table>
@@ -268,7 +272,7 @@ const Schedule = () => {
             
             <div className='sch-footer'>
               <div>상기 내용으로 예약하시겠습니까?</div>
-              <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
+              <button  type='button' onClick={()=>{goAppo(appo.memNum)}}>예약하기 </button>
             </div>
           </div>
       </div>
