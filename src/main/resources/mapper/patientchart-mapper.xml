@@ -3,17 +3,28 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="patientChartMapper">
-	<resultMap id="P_Chart" type="com.green.MediClick.patientchart.vo.PatientChart">
+	<resultMap id="p_chart" type="com.green.MediClick.patientchart.vo.PatientChartVO">
         <id column="CHART_NUM" property="chartNum"/>
         <result column="CHART_DATE" property="chartDate"/>
-        <result column="" property="docNum"/>
-        <result column="" property="memNum"/>
-        <result column="" property="deptNum"/>
-        <result column="" property="symptom"/>
-        <result column="" property="checkUp"/>
-        <result column="" property="disease"/>
-        <result column="" property="prescription"/>
+        <result column="DOC_NUM" property="docNum"/>
+        <result column="MEM_NUM" property="memNum"/>
+        <result column="DEPT_NUM" property="deptNum"/>
+        <result column="SYMPTOM" property="symptom"/>
+        <result column="CHECKUP" property="checkUp"/>
+        <result column="DISEASE" property="disease"/>
+        <result column="PRESCRIPTION" property="prescription"/>
+        <association property="schList" resultMap="scheduleMapper.schedule"></association>
     </resultMap>
+
+        <!-- 진료차트 정보 조회 -->
+        <select id="p-select" resultMap="p_chart">
+                SELECT E.DEPT_NAME, D.DOC_NAME, M.MEM_NAME, M.MEM_NUM, M.MEM_RRN
+                FROM medical_member M , medical_dept E, medical_doctor D, medical_schedule S
+                WHERE S.MEM_NUM = M.MEM_NUM
+                AND S.DEPT_NUM = D.DEPT_NUM
+                AND S.DEPT_NUM = E.DEPT_NUM
+                AND SCH_NUM = #{schNum}
+        </select>
 </mapper>
 
 
