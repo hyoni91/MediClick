@@ -1,0 +1,10 @@
+.board-list-div table tr td{
+border: 1px solid;
+}
+.board-list-div table{
+  margin: 100px auto;
+}
+.go-userServiceDetail:hover{
+  cursor: pointer;
+  font-weight: bold;
+}

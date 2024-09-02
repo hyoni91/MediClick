@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
     @Autowired
@@ -14,6 +16,18 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void insertBoard(BoardVO boardVO) {
         sqlSession.insert("boardMapper.insertBoard", boardVO);
+    }
+
+    // 게시글 목록 조회
+    @Override
+    public List<BoardVO> getBoardList() {
+        return sqlSession.selectList("boardMapper.getBoardList");
+    }
+
+    // 게시글 상세 정보
+    @Override
+    public BoardVO selectBoard(int boardNum) {
+        return sqlSession.selectOne("boardMapper.selectBoard", boardNum);
     }
 
 }

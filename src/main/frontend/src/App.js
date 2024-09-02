@@ -15,6 +15,8 @@ import DocMemInfo from './admin/DocMemInfo';
 import AdminJoinForm from './user/AdminJoinForm';
 import DoctorUpdate from './admin/DoctorUpdate';
 import UserService from './user/UserService';
+import UserServiceMain from './user/UserServiceMain';
+import UserServiceDetail from './user/UserServiceDetail';
 
 function App() {
   const navigate=useNavigate()
@@ -106,7 +108,11 @@ function App() {
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
           {/* 고객서비스 페이지 */}
+          <Route path='userServiceMain' element={<UserServiceMain loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+          {/* 고객서비스 글 작성 화면 페이지 */}
           <Route path='userService' element={<UserService/>}/>
+          {/* 고객서비스 게시글 상세 페이지 */}
+          <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
         </Route>
 
 
