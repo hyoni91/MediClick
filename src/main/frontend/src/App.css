@@ -40,36 +40,65 @@ body{
   cursor: pointer;
 }
 
-.footer{
-  background-color: #7b92ad4d;
-  width: 100%;
-  height: 200px;
-  font-size: 0.8rem;
+.main-routers{
+  margin-bottom: 100px;
 }
 
-.footer-div{
-  margin: 0 auto;
-  width: 1440px;
+.footer-mid{
+  background-color: #eeeeee;
+  width: 100%;
+  height: 120px;
+  display: flex;
   text-align: left;
 }
 
-.footer-div{
-  padding: 5px;
+.mid-div{
+  width: 50%;
+  margin: auto;
+  display: flex;
 }
 
-.footer-div div{
-  margin: 10px 0px;
+.footer-mid>div>div{
+  width: 100%;
+  margin: auto;
 }
 
-.footer-div div:nth-child(1){
-  border-bottom: 1px solid #eeeeee;
+.footer-mid>div>div:first-child p{
+  font-size: 1.5rem;
+  color: #799DB7;
+  font-weight: bold;
 }
+
+
+.footer-mid>div>div:nth-child(2) p{
+  font-size: 0.8rem;
+}
+
+
+.footer-bottom{
+  background-color: #686868be;
+  width: 100%;
+  height: 75px;
+  font-size: 0.8rem;
+}
+
+
+.footer-bottom div{
+  width: 100%;
+
+  line-height: 75px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
 
 .int{
   width: 100%;
   box-shadow: 0px 0px 1px  0px;
 
 }
+
 
 /* User/Admin Layout */
 
@@ -123,9 +152,12 @@ body{
 }
 
 
+
+/* Home */
+
 .main-img img{
   width: 100%;
-  height: 800px;
+  height: 680px;
   margin: 0 auto;
   object-fit: cover;
   object-position: top; 

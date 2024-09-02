@@ -88,6 +88,11 @@ const DocMemInfo = () => {
       <div>
         <div><h3>{memInfo.memberVO.memName}님 예약 정보</h3></div>
         <table className='meminfo-table'>
+          <colgroup>
+            <col width='35%'/>
+            <col width='*'/>
+          </colgroup>
+
           <thead></thead>
           <tbody>
             <tr>

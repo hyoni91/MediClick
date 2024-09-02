@@ -133,7 +133,7 @@ const DocMemList = () => {
   
 
   return (
-    <div>
+    <div className='content-main'>
 
       <div className='docInfo-div'>
         <h2>의료진 정보</h2>

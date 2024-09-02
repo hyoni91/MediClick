@@ -85,44 +85,65 @@ function App() {
   
 
       </div>
+      <div className='main-routers'>
+  
+        <Routes>
+          
+  
+          {/* 유저용 */}
+          <Route path='/' element={<UserLayout/>}>
+            {/* 메인페이지 */}
+            <Route path='/' element={<Home/>}/>
+            {/* 로그인 페이지 */}
+            <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 환자별 예약확인 페이지 */}
+            <Route path='mySch/:memNum' element={<MySch/>}/>
+            {/* 진료과/의료진 페이지 */}
+            <Route path='medicalDoctor' element={<MedicalDoctor />}/>
+            {/* 회원가입 페이지 */}
+            <Route path='joinForm' element={<JoinForm/>}/>
+            {/* 회원가입 시 관리자일 경우 정보 추가 */}
+            <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
+            {/* 예약 화면 페이지 */}
+            <Route path='scheduleForm' element={<Schedule/>}/>
+            {/* 고객서비스 페이지 */}
+            <Route path='userService' element={<UserService/>}/>
+          </Route>
+  
+  
+          {/* 관리자용 */}
+          <Route path='/admin' element={<AdminLayout/>}>
+            {/* 의사별 담당환자 확인 */}
+            <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+  
+            {/* 담당환자 상세정보 */}
+  
+            <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
+            {/* 의사 정보수정 페이지 */}
+            {/* 의사 정보수정 페이지 */}
+            <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
+          </Route>
+        </Routes>
+      </div>
 
-      <Routes>
-        
 
-        {/* 유저용 */}
-        <Route path='/' element={<UserLayout/>}>
-          {/* 메인페이지 */}
-          <Route path='/' element={<Home/>}/>
-          {/* 로그인 페이지 */}
-          <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-          {/* 환자별 예약확인 페이지 */}
-          <Route path='mySch/:memNum' element={<MySch/>}/>
-          {/* 진료과/의료진 페이지 */}
-          <Route path='medicalDoctor' element={<MedicalDoctor />}/>
-          {/* 회원가입 페이지 */}
-          <Route path='joinForm' element={<JoinForm/>}/>
-          {/* 회원가입 시 관리자일 경우 정보 추가 */}
-          <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
-          {/* 예약 화면 페이지 */}
-          <Route path='scheduleForm' element={<Schedule/>}/>
-          {/* 고객서비스 페이지 */}
-          <Route path='userService' element={<UserService/>}/>
-        </Route>
+      <div className='footer-mid'>
 
+          <div className='mid-div'>
+            <div>
+              <h3>대표전화</h3>
+              <p>052-716-3199</p>
+            </div>
+            <div>
+              <h4>ㅇㅇ 병원</h4>
+              <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
+            </div>
+          </div>
 
-        {/* 관리자용 */}
-        <Route path='/admin' element={<AdminLayout/>}>
-          {/* 의사별 담당환자 확인 */}
-          <Route path='docMemList/:docNum' element={<DocMemList/>}/>
-
-          {/* 담당환자 상세정보 */}
-
-          <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
-          {/* 의사 정보수정 페이지 */}
-          <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
-        </Route>
-      </Routes>
-
+      </div>
+      <div className='footer-bottom'>
+        <div>환자의 권리와 의무 | 개인정보처리방침 | 웹 이용약관</div>
+      </div>
 
     </div>
   );
