@@ -4,6 +4,7 @@
   margin: auto;
   border: 1px solid rgb(179, 179, 179);
   margin-bottom: 10px;
+  margin-top: 50px;
   /* border-radius: 10px; */
 }
 
@@ -13,7 +14,7 @@
   margin-top: 15px;
   /* background-color: #0050B5; */
   /* color: white; */
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   width: 200px;
   margin: auto;
@@ -47,13 +48,14 @@
   width: 33%;
   display: flex;
   justify-content: center;
-  gap: 28px;
+  /* gap: 1px; */
   margin-right: 50px;
+  margin-bottom: 5px;
 }
 
 /* 아이콘 진료과 선택 버튼 */
 .doc-icon-div button{
-  /* width: 100px; */
+  width: 100px;
   border: none;
   background-color: white;
   cursor: pointer;
@@ -135,8 +137,10 @@ justify-content: center;
   margin: auto;
   /* margin-top: 60px; */
   margin-right: 200px;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   margin-top: 50px;
+  border: 1px solid rgb(179, 179, 179);
+
   /* border-radius: 10px; */
 }
 
