@@ -6,7 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 const MedicalDoctor = () => {
   // 의사 정보를 저장할 state 변수
-  const [docotrList, setDoctorList] = useState([]);
+  const [docotrList, setDoctorList] = useState([{
+    docName : '', medicalDept:[{deptName : ''}]}
+  ,{docName : '', medicalDept:[{deptName : ''}]}
+  ,{docName : '', medicalDept:[{deptName : ''}]}
+  ,{docName : '', medicalDept:[{deptName : ''}]}
+  ,{docName : '', medicalDept:[{deptName : ''}]}
+  ,{docName : '', medicalDept:[{deptName : ''}]}]);
 
   // 의사 정보 조회
   useEffect(()=>{
@@ -22,7 +28,7 @@ const MedicalDoctor = () => {
   const navigate = useNavigate();
   return (
     <div>
-    {/* <div className='doctorMem'>
+    <div className='doctorMem'>
         <div className='doctorIntro'>
           <div className='cancer'>
             <img className='doctorMemImg' src='http://localhost:8080/images/김현경 프로필.png'/>
@@ -129,7 +135,7 @@ const MedicalDoctor = () => {
             </div>
           </div>
         </div>
-    </div> */}
+    </div>
     </div>
   )
 }
