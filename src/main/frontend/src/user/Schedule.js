@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Schedule = () => {
-
   const navigate = useNavigate()
   
   // 날짜를 계산
@@ -77,6 +76,16 @@ const Schedule = () => {
 
   // 예약 시간 선택
   function clickTime(e){
+    //선택한 버튼 효과 유지
+    var btns = document.querySelectorAll('.sch-button');
+    btns.forEach(function (btn, i) {
+      if (e.currentTarget == btn) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    // 선택한 시간 정보 저장
     setAppo({...appo,
     [timeInput.current.name] : e.target.value
     })
@@ -84,6 +93,16 @@ const Schedule = () => {
 
   // 진료과 클릭 선택(의사,진료과정보 넘기기)
   function changeDocInfo(e){
+    //선택한 버튼 효과 유지
+    var btns = document.querySelectorAll('.button');
+    btns.forEach(function (btn, i) {
+      if (e.currentTarget == btn) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    //선택한 진료과와 의사 정보 저장
     const selectedValue = e.target.value; // JSON 문자열
     const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
     setAppo({
@@ -95,12 +114,13 @@ const Schedule = () => {
   }
 
 
-  // 증상 정보 받기
+  // 증상(detail) 정보 저장
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
     })
   }
+
 
   //클릭하면 예약 실행
   function goAppo(){
@@ -116,7 +136,7 @@ const Schedule = () => {
     .then((res)=>{
       alert('예약이 완료되었습니다.')
       //본인 예약 확인페이지로 넘어가기
-      navigate('')
+      navigate(`/mySch/${appo.memNum}`)
     })
     .catch((error)=>{
       console.log(error)
@@ -155,6 +175,10 @@ const Schedule = () => {
   
   return (
     <div className='sch-container'>
+      <div className='h1-flex'>
+        <h1 className='h1tag'>1.진료과와 진료날짜를 선택해 주세요.</h1>
+        <h1 className='h1tag'>2.예약내용을 확인해 주세요.</h1>
+      </div>
       <div className='sch-container-flex'>
         <div className='sch-flex'>
           <div className='h3tag'>진료과 선택</div>
@@ -166,7 +190,7 @@ const Schedule = () => {
                     <img src={(`http://localhost:8080/images/${i}.png`)}/>
                     <button type='button' onClick={(e)=>{
                     changeDocInfo(e)
-                    }}  name='docInfo' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
+                    }}  name='docInfo' className='button' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
                       {doc.medicalDept.deptName}
                       </button>
                   </div>
@@ -194,7 +218,7 @@ const Schedule = () => {
               <div className='sch-btn'>
                     {schTimes.map((time,i) => (
                       <button
-                      key={time} type='button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
+                      key={time} type='button' className='sch-button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
                     {time}</button>))
                     }
               </div>
@@ -203,15 +227,11 @@ const Schedule = () => {
             </div>
           </div>
           <div className='schedule-table'>
-            <div  className='h3tag'>예약내용</div>
+            {/* <div  className='h3tag'>예약내용</div> */}
             <table>
-              {/* <colgroup>
-              <col width={'23%'}/>
-              <col width={'*'}/>
-              </colgroup> */}
               <tbody>
                 <tr>
-                  <td>예약날짜</td>
+                  <td>예약날짜 : </td>
                   <td>
                     <input  type='text' readOnly 
                   value={moment(value).format("YYYY-MM-DD")}
@@ -219,32 +239,32 @@ const Schedule = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>예약시간</td>
+                  <td>예약시간 : </td>
                   <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
                 </tr>
                 <tr>
-                  <td>예약자명</td>
+                  <td>예약자명 : </td>
                   <td>
                     <input type='text' name='memName' readOnly 
                     value={loginInfo? loginInfo.memName : ""}/> 
                     </td>
                 </tr>
                 <tr>
-                  <td>진료과목</td>
+                  <td>진료과목 : </td>
                   <td>
                     <input type='text' readOnly  value={appo.deptName}/>
                     </td>
                 </tr>
                 <tr>
-                  <td>주민번호</td>
+                  <td>주민번호 : </td>
                   <td>
                     <input type='tel' name='' readOnly 
                   value={loginInfo? loginInfo.memRrn:""}/>
                   </td>
                 </tr>
                 <tr>
-                  <td>증상</td>
-                  <td><textarea rows={6} cols={41} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+                  <td>증상 : </td>
+                  <td><textarea placeholder='특이사항이나 증상을 자세히 기입바랍니다.' rows={10} cols={40} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
                 </tr>
               </tbody>
             </table>
@@ -252,7 +272,7 @@ const Schedule = () => {
             
             <div className='sch-footer'>
               <div>상기 내용으로 예약하시겠습니까?</div>
-              <button  type='button' onClick={()=>{goAppo()}}>예약하기 </button>
+              <button  type='button' onClick={()=>{goAppo(appo.memNum)}}>예약하기 </button>
             </div>
           </div>
       </div>
@@ -261,35 +281,3 @@ const Schedule = () => {
   )
 }
 export default Schedule
-
-
-// select로 진료과 정보 가져오기
-
-          {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
-            {
-              docInfo.map((doc,i)=>{
-                return(
-                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
-                    {doc.medicalDept[0].deptName}
-                  </option>
-                )
-              })
-            }
-            </select> */}
-
-
-// 모든 예약 정보를 입력했을때 예약정보 확인
-// //예약유무확인
-// const [chkAppo, setChkAppo] = useState(false)
-// useEffect(()=>{
-//   axios.post('/schedule/checkAppo',appo)
-//   .then((res)=>{
-//     console.log(res.data)
-//       if(res.data != ''){
-//         alert('스케줄 중복')
-//       }return;
-//     })
-//   .catch((error)=>{
-//     console.log(error)
-//   })
-// },[appo])

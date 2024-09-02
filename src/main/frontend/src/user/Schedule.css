@@ -1,45 +1,57 @@
 .sch-container{
-  width: 85%;
-  height: 710px;
+  width: 100%;
+  height: 100vh;
   margin: auto;
-  border: 1px solid rgb(179, 179, 179);
   margin-bottom: 10px;
-  /* border-radius: 10px; */
+  margin-top: 20px;
+  /* margin: auto; */
 }
 
+.h1tag{
+  text-align: left;
+  font-size: 23px;
+  margin-left: 10px;
+  color: #000000;
+}
+
+.h1-flex{
+  display: flex;
+  justify-content: center;
+  gap: 600px;
+  /* margin-left: 10px; */
+}
+
+
 .h3tag{
-  margin-bottom: 10px;
   text-align: center;
-  margin-top: 15px;
-  /* background-color: #0050B5; */
-  /* color: white; */
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
-  width: 200px;
+  /* width: 200px; */
   margin: auto;
-  padding: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
 }
 
 .h5tag{
   text-align: center;
   margin-bottom: 10px;
   color: red;
-  margin-top: 60px;
+  margin-top: 55px;
 }
 
 .sch-container-flex{
-  width: 100%;
+  width: 80%;
   display: flex;
-  margin-right: 50px;
+  align-items: center;
+  /* border: 1px solid red; */
   margin: auto;
 }
 
 
 /* 진료과목 이미지 */
 .doc-icon-div img{
-  /* cursor: pointer; */
   width: 50px;
-  /* border: 1px solid darkgrey; */
 }
 
 /* 진료과 플렉스 */
@@ -47,33 +59,35 @@
   width: 33%;
   display: flex;
   justify-content: center;
-  gap: 28px;
   margin-right: 50px;
+  margin-bottom: 5px;
 }
 
 /* 아이콘 진료과 선택 버튼 */
 .doc-icon-div button{
-  /* width: 100px; */
+  width: 100px;
   border: none;
   background-color: white;
   cursor: pointer;
   text-align: center;
 }
 
-.doc-icon-div button:hover{
-  font-weight: 600;
+.button:hover,
+.button.active {
+  font-weight: 700;
 }
 
 
 /* 달력과 시간버튼 플렉스 */ 
 .sch-flex{
-  width: 90%;
-  height: 600px;
+  width: 59%;
+  height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
+  gap: 6px;
 }
 
 .sch-time{
@@ -86,7 +100,6 @@ justify-content: center;
 }
 
 .sch-btn button {
-  /* background-color: #ff8b48; */
   background-color: white;
   color: rgb(0, 0, 0);
   width: 70px;
@@ -94,18 +107,18 @@ justify-content: center;
   font-size: 15px;
   font-weight: 500;
   margin: 5px;
-  /* border-radius: 10px; */
   border: none;
   cursor: pointer;
 }
 
-.sch-btn button:hover{
+.sch-button:hover{
   background-color: #fa6a16;
   background-color: #0254AF;
   color: white;
 }
 
-.sch-btn button:focus{
+.sch-button:focus,
+.sch-button.active{
   background-color: #0254AF;
   color: white;
 }
@@ -129,32 +142,29 @@ justify-content: center;
 
 /* 예약상세내용 테이블 */
 .schedule-table{
-  width: 50%;
-  height: 600px;
+  width: 38%;
+  height: 100%;
   text-align: left;
-  margin: auto;
-  /* margin-top: 60px; */
-  margin-right: 200px;
-  border: 1px solid lightgray;
-  margin-top: 50px;
-  /* border-radius: 10px; */
+  background-color: white;
 }
 
 .schedule-table>table{
-  /* border: 1px solid red; */
+  width: 75%;
+  /* height: 100%; */
   border-collapse: collapse;
   margin: auto;
-  /* margin-top: 50px; */
 }
 
 .schedule-table>table tr,td{
   padding: 4px;
+  vertical-align : middle;
+  border-bottom: 1px solid lightgray;
 }
 
 .schedule-table input{
-  width: 300px;
-  padding: 4px;
+  padding: 2px;
   font-size: 14px;
+  border: none;
 }
 
 .sch-select{
@@ -180,7 +190,8 @@ input:focus, select:focus, textarea:focus{
   color: white;
   cursor: pointer;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .sch-footer >div{
