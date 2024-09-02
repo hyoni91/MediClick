@@ -14,6 +14,7 @@ import MySch from './user/MySch';
 import DocMemInfo from './admin/DocMemInfo';
 import AdminJoinForm from './user/AdminJoinForm';
 import DoctorUpdate from './admin/DoctorUpdate';
+import UserService from './user/UserService';
 
 function App() {
   const navigate=useNavigate()
@@ -104,7 +105,8 @@ function App() {
           <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
           {/* 예약 화면 페이지 */}
           <Route path='scheduleForm' element={<Schedule/>}/>
-
+          {/* 고객서비스 페이지 */}
+          <Route path='userService' element={<UserService/>}/>
         </Route>
 
 
@@ -112,7 +114,9 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           {/* 의사별 담당환자 확인 */}
           <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+
           {/* 담당환자 상세정보 */}
+
           <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
           {/* 의사 정보수정 페이지 */}
           <Route path='doctorUpdate' element={<DoctorUpdate/>}/>

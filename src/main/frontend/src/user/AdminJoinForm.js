@@ -13,9 +13,18 @@ const AdminJoinForm = () => {
     docNum: docNum,
     docName: '',
     deptNum : '1',
-    medicalDept: {}, 
-    imgVO: {}
+    medicalDept: {
+      deptNum: '', // 기본값
+      deptName: '' // 기본값
+    },
+    imgVO: {
+      imgNum: '', // 기본값
+      originFileName: '', // 기본값
+      attachedFileName: '', // 기본값
+      docNum: '' // 기본값
+    }
   })
+  
   // 의사 번호
   // 의사 데이터 가져오기
   useEffect(() => {
@@ -27,6 +36,21 @@ const AdminJoinForm = () => {
     })
     .catch((error) => {console.log(error)})
   },[])
+  //이미지 미리보기
+  const [previewUrl, setPreviewUrl] = useState('')
+  // 이미지 생성
+  const [docImg , setDocImg] = useState(null);
+
+  // 이미지 미리보기
+  useEffect(() => {
+    if (docImg) {
+      const objectUrl = URL.createObjectURL(docImg);
+      setPreviewUrl(objectUrl);
+
+      // Cleanup
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [docImg]);
   // 의사 진료과 선택
   const onChangeDept = (e) => {
     let value = e.target.value
@@ -34,8 +58,28 @@ const AdminJoinForm = () => {
     console.log(docData)
   }
 
+  //의사 등록 버튼
   const insertDoctor = (e) => {
-    axios.post('/insertDoctor', docData)
+    //의사 이미지 등록
+
+    const fileConfig = {
+      headers : {'Content-Type' : 'multipart/form-data'}
+    }
+    //form 객체 생성
+    const docForm = new FormData();
+
+    //2. form 객체에 데이터 추가
+
+    docForm.append('docNum', docData.docNum );
+    docForm.append('docName', docData.docName );
+    docForm.append('deptNum', docData.deptNum );
+    // 파일이 있을 경우에만 추가
+    if (docImg) {
+      docForm.append('docImg', docImg);
+    }
+
+
+    axios.post('/insertDoctor', docForm,fileConfig)
     .then((res) => {
       console.log(res.data)
       navigate('/loginForm')
@@ -43,11 +87,15 @@ const AdminJoinForm = () => {
     .catch((error) => {console.log(error)})
   }
 
+  const deleteDoctor = (e) => {
+    axios.get('')
+  }
+  //반드시 아래의 설정 코드를 axios에 추가!!!
   return (
     <div>
-        <div><h1 className='join-head'>의사 정보</h1></div>
-      <div className='join-div'>
-        <table className='join-table'>
+        <div><h1 className='adminJoin-head'>의사 정보</h1></div>
+      <div className='adminJoin-div'>
+        <table className='adminJoin-table'>
           <tbody>
             <tr>
               <td>회원이름</td>
@@ -57,7 +105,7 @@ const AdminJoinForm = () => {
             <tr>
               <td>진료과</td>
               <td>
-                <select name='deptNum' onChange={(e) => {onChangeDept(e)}}>
+                <select className='adminJoin-select' name='deptNum' onChange={(e) => {onChangeDept(e)}}>
                   <option value={'1'}>유방암 외과</option>
                   <option value={'2'}>신경외과</option>
                   <option value={'3'}>갑상선외과</option>
@@ -80,9 +128,25 @@ const AdminJoinForm = () => {
             {/* {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>} */}
           </tbody>
         </table>
+        {/* 의사 이미지 */}
+        <div className='file-div'>
+          
           <div>
-            <button className='join-btn' onClick={() => {Navigate('/joinForm')}}>취소</button>
-            <button className='join-btn' onClick={() => {insertDoctor()}}>저장</button>
+            {previewUrl ? (
+            <img className="file-img" src={previewUrl} alt="미리보기" />
+          ) : (
+          <div className="file-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
+        )}
+          </div>
+          <babel className='file-label'>사진등록
+            <input className='file-input' type='file' accept='image/*' onChange={(e) => {
+              setDocImg(e.target.files[0])
+            }}/>
+          </babel>
+        </div>
+          <div>
+            <button className='adminJoin-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
+            <button className='adminJoin-btn' onClick={() => {insertDoctor()}}>저장</button>
             
           </div>
         

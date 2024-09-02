@@ -25,11 +25,47 @@ const JoinForm = () => {
       [name]: value,
     }));
 
+    //입력 값 변경시 유효성 검사 수행
+    //이름 유효성 검사
+    if(name =='memName'){
+      // 이름 입력시 한글과 영어만 나오게
+      const koEnRegex = /^[가-힣a-zA-Z]*$/;
+
+      if(!koEnRegex.test(value)){
+        setErrors((e) => ({
+          ...e,
+          [name]: '한글 또는 영어로만 입력하세요'
+        }));
+      }
+      else {
+        setErrors((e) => ({
+          ...e,
+          [name]: ''
+        }));
+      }
+    }
+    //주민번호 유효성 검사
+    else if (name === 'memRrn') {
+      const rrnRegex = /^\d{13}$/; // 13자리 숫자만 허용
+      if (!rrnRegex.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: '주민번호가 올바르지 않습니다.',
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: '',
+        }));
+      }
+    } 
     // 입력 값 변경 시 오류 리셋
-    setErrors((e) => ({
-      ...e,
-      [name]: ''
-    }));
+    else {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: '',
+      }));
+    }
   }
   // 전화번호 입력 시 자동 하이픈 기능
   const formatPhoneNumber = (value) => {
@@ -121,16 +157,22 @@ const handlePhoneChange = (e) => {
               
             }/></td>
             </tr>
-            {/* 데이터가 빈값일때 나타나는 변수 */}
-            {/* 데이터가 다시 바뀌면 사라짐 */}
-              {errors.memName && <tr className='error'><td></td><td >{errors.memName}</td></tr>}
+            <tr >
+              <td></td>
+              {/* 데이터가 빈값일때 나타나는 변수 */}
+              {/* 데이터가 다시 바뀌면 사라짐 */}
+                <td className='error1'>{errors.memName && <><td ></td><td className='error '>{errors.memName}</td></>}</td>
+            </tr>
             <tr>
               <td>회원주민번호</td>
               <td><input name='memRrn' maxLength={13} type='password' placeholder="주민번호를 입력하세요" onChange={(e) => {changeData(e)}}/></td>
             </tr>
-            {/* 데이터가 빈값일때 나타나는 변수 */}
-            {/* 데이터가 다시 바뀌면 사라짐 */}
-            {errors.memRrn && <tr className='error'><td></td><td >{errors.memRrn}</td></tr>}
+            <tr >
+              <td></td>
+              {/* 데이터가 빈값일때 나타나는 변수 */}
+              {/* 데이터가 다시 바뀌면 사라짐 */}
+                <td className='error1'>{errors.memRrn && <><td ></td><td className='error '>{errors.memRrn}</td></>}</td>
+            </tr>
             <tr>
               <td>전화번호</td>
               <td>
@@ -139,9 +181,12 @@ const handlePhoneChange = (e) => {
           handlePhoneChange(e)
         }} value={memberData.memTel} maxLength='13' placeholder="전화번호를 입력하세요" /></td>
             </tr>
-            {/* 데이터가 빈값일때 나타나는 변수 */}
-            {/* 데이터가 다시 바뀌면 사라짐 */}
-            {errors.memTel && <tr className='error'><td></td><td >{errors.memTel}</td></tr>}
+            <tr >
+              <td></td>
+              {/* 데이터가 빈값일때 나타나는 변수 */}
+              {/* 데이터가 다시 바뀌면 사라짐 */}
+                <td className='error1'>{errors.memTel && <><td ></td><td className='error '>{errors.memTel}</td></>}</td>
+            </tr>
           </tbody>
         </table>
           <div><button className='join-btn' onClick={() => {insertJoin()}}>가입하기</button></div>
