@@ -7,10 +7,16 @@ const DocMemList = () => {
 
   const navigate=useNavigate()
   const [page,setPage]=useState({})
+
+
   // 예약 리스트 담을 변수
   const [infoList,setInfoList]=useState([])
+
+
   // 의사 하나의 환자예약정보 담을 변수
   const [oneDoc,setOneDoc]=useState({
+    schNum:'',
+    schStatus:'',
     docNum : '',
     docName:'',
     medicalDept:{
@@ -46,6 +52,14 @@ const DocMemList = () => {
     .then((res)=>{
       alert('예약이 취소되었습니다.')
 
+      // 예약 취소 후 상태를 업데이트
+      setInfoList((prevList)=>
+        prevList.map((item)=>
+          item.schNum === schNum ? 
+          {...item, schStatus:'N'} : item
+        )
+      )
+
     })
     .catch((error)=>{console.log(error)})
   }
@@ -76,7 +90,7 @@ const DocMemList = () => {
           getList(a)}}>{a}</span>)
     }
 
-    if(!page.next){
+    if(page.next){
       pagesArr.push(<span className='page-span' key="next"
         onClick={(e)=>{getList(page.endPage+1)}}> 다음 </span>)
     }
@@ -91,12 +105,13 @@ const DocMemList = () => {
     .get(`/oneDoctor/${docNum}`)
     .then((res)=>{
       console.log(res.data)
-      setOneDoc(res.data)
+      setOneDoc(res.data||
+        {docNum:'',docName:'',medicalDept:{deptName:''}})
       
     })
     .catch((error)=>{console.log(error)})
     
-  },[])
+  },[docNum])
 
 
   //의사별 담당환자 리스트  
@@ -113,7 +128,7 @@ const DocMemList = () => {
       console.log(error)
     })
     
-  },[])
+  },[docNum])
 
   
 
@@ -167,7 +182,7 @@ const DocMemList = () => {
           </thead>
           <tbody>
             {
-              infoList.length==0?
+              infoList.length===0?
               <tr>
                 <td colSpan={4}>
                   <p>예약 환자가 없습니다.</p>
@@ -205,7 +220,7 @@ const DocMemList = () => {
           {
             drawPagination()
           }
-        </div>
+      </div>
 
     </div>
   )
