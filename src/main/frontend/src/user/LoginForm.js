@@ -79,8 +79,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
   return (
     <div className='login-div'>
       <div className='login-table-div'>
-
-        <h2>로그인</h2>
+        <div><i class="bi bi-person-fill"></i></div>
+        <h1>로그인</h1>
         <div className='login-info'>회원 서비스는 로그인 이후 이용하실 수 있습니다.</div>
         <table className='login-table'>
           <thead></thead>
@@ -98,6 +98,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         </table>
 
         <button type='button' className='loginBtn' onClick={(e)=>{goLogin()}}>로그인</button>
+
+        <p onClick={(e)=>{navigate('/joinForm')}}>회원가입</p>
 
       </div>
     </div>

@@ -2,7 +2,7 @@
   width: 800px;
   border-bottom: 1px solid #eeeeee;
   border-radius: 5px;
-  margin: 20px auto;
+  margin: 50px auto;
 }
 
 .docInfo-div h2{
@@ -61,7 +61,8 @@
 
 .chart-table tbody td{
   border-bottom: 1px solid #eeeeee;
-
+  height: 30px;
+  line-height: 30px;
 }
 
 .chart-table tbody td span{
@@ -89,7 +90,7 @@
 }
 
 .page-spans{
-  margin-top: 10px;
+  margin: 50px 0px;
 }
 
 .page-span{

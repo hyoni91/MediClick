@@ -2,8 +2,13 @@
   width: 800px;
   /* border-bottom: 1px solid #eeeeee; */
   border-radius: 5px;
-  margin: 20px auto;
+  margin: 80px auto;
 }
+
+.mySch-div h2{
+  margin-bottom: 20px;
+}
+
 
 .mySch-div h4{
   text-align: left;

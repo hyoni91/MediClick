@@ -18,9 +18,9 @@ const MySch = () => {
       memName:''
     },
     doctorVO:{
-      medicalDept:[{
+      medicalDept:{
         deptName:''
-      }]
+      }
     }
     }
   ])
@@ -48,9 +48,11 @@ const MySch = () => {
 
   return (
     <div>
-      <h2>예약 확인</h2>
+      
       
       <div className='mySch-div'>
+        <h2>예약 확인</h2>
+
         <h4>| 회원 정보</h4>
         <table className='mySch-table'>
           <colgroup>
@@ -108,7 +110,7 @@ const MySch = () => {
                     <td>{mem.schDate}</td>
                     <td>{mem.schTime}</td>
                     <td>{mem.memberVO.memName}</td>
-                    <td>{mem.doctorVO.medicalDept[0].deptName}</td>
+                    <td>{mem.doctorVO.medicalDept.deptName}</td>
                     <td>{mem.doctorVO.docName}</td>
                     <td>{mem.schStatus}</td>
                   </tr>)
