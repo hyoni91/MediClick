@@ -1,0 +1,13 @@
+.p-chart-table{
+  border-collapse: collapse;
+  margin: auto;
+  width: 30%;
+}
+
+.p-chart-table  tr td {
+  border: 1px solid;
+}
+
+.p-chart-table input{
+  width: 150px;
+}

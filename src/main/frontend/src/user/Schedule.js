@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Schedule = () => {
-
   const navigate = useNavigate()
   
   // 날짜를 계산
@@ -103,7 +102,7 @@ const Schedule = () => {
         btn.classList.remove("active");
       }
     });
-    //선택한 진료과와 의사선택 
+    //선택한 진료과와 의사 정보 저장
     const selectedValue = e.target.value; // JSON 문자열
     const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
     setAppo({
@@ -115,14 +114,13 @@ const Schedule = () => {
   }
 
 
-
-
-  // 증상 정보 받기
+  // 증상(detail) 정보 저장
   function changeDetail(e){
     setAppo({...appo,
       [e.target.name] : e.target.value
     })
   }
+
 
   //클릭하면 예약 실행
   function goAppo(){
@@ -227,10 +225,6 @@ const Schedule = () => {
           <div className='schedule-table'>
             <div  className='h3tag'>예약내용</div>
             <table>
-              {/* <colgroup>
-              <col width={'23%'}/>
-              <col width={'*'}/>
-              </colgroup> */}
               <tbody>
                 <tr>
                   <td>예약날짜</td>
@@ -283,35 +277,3 @@ const Schedule = () => {
   )
 }
 export default Schedule
-
-
-// select로 진료과 정보 가져오기
-
-          {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} className='sch-select'>
-            {
-              docInfo.map((doc,i)=>{
-                return(
-                  <option key={i} value={JSON.stringify({deptNum :doc.medicalDept[0].deptNum, docNum : doc.docNum, deptName : doc.medicalDept[0].deptName })} >
-                    {doc.medicalDept[0].deptName}
-                  </option>
-                )
-              })
-            }
-            </select> */}
-
-
-// 모든 예약 정보를 입력했을때 예약정보 확인
-// //예약유무확인
-// const [chkAppo, setChkAppo] = useState(false)
-// useEffect(()=>{
-//   axios.post('/schedule/checkAppo',appo)
-//   .then((res)=>{
-//     console.log(res.data)
-//       if(res.data != ''){
-//         alert('스케줄 중복')
-//       }return;
-//     })
-//   .catch((error)=>{
-//     console.log(error)
-//   })
-// },[appo])
