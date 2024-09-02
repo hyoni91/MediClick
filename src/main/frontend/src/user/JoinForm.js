@@ -58,7 +58,7 @@ const JoinForm = () => {
           [name]: '',
         }));
       }
-    } 
+    }
     // 입력 값 변경 시 오류 리셋
     else {
       setErrors((prev) => ({

@@ -42,12 +42,12 @@
 
 
     <!--이미지 들어갈 자리 조회 0이면 1로 해서-->
-    <select id="nextDoctorImg" resultType="String">
-        SELECT CONCAT(DOC_ ,LPAD(IFNULL(MAX(CAST(SUBSTRING(IMG_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0'))
+    <select id="nextDoctorImg" resultType="int">
+        SELECT IFNULL(MAX(IMG_NUM), 0) + 1
         FROM MEDICAL_DOCTOR
     </select>
     <!--의사 이미지 등록-->
-    <insert id="insetDoctorImg">
+    <insert id="insertDoctorImg">
         INSERT INTO DOCTOR_IMG(
         , ORIGIN_FILE_NAME
         , ATTACHED_FILE_NAME

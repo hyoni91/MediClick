@@ -11,7 +11,7 @@ public interface DoctorService {
     DoctorVO getOneDoctor(String docNum);
 
     // 다음에 들어갈 의사 이미지 조회
-    String nextDoctorImg();
+    int nextDoctorImg(int docImg);
 
     // 회원가입할때 "ADMIN"이면 의사정보도 추가
     void insertDoctor(DoctorVO doctorVO);

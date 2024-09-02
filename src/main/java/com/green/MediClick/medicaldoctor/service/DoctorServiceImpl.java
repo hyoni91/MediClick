@@ -25,9 +25,10 @@ public class DoctorServiceImpl implements DoctorService{
 
     //다음에 들어갈 의사 이미지 조회
     @Override
-    public String nextDoctorImg() {
-        return sqlSession.selectOne("doctorMapper.nextDoctorImg");
+    public int nextDoctorImg(int docImg) {
+        return sqlSession.selectOne("doctorMapper.nextDoctorImg",docImg);
     }
+
 
 
     // 회원가입할때 의사 정보 조회

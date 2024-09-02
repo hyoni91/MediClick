@@ -30,10 +30,10 @@ public class DoctorController {
 
     // 다음에 들어갈 이미지 조회한후
     // 상세정보 눌러서 이미지 수정하기
-    @PostMapping("/insertDoctorImg/{docNum}")
-    public void insertDoctorImg(@RequestBody DoctorVO doctorVO){
-        doctorVO.setDocNum(doctorService.nextDoctorImg());
-    }
+//    @PostMapping("/insertDoctorImg/{docNum}")
+//    public void insertDoctorImg(@RequestBody DoctorVO doctorVO){
+//        doctorVO.setDocNum(doctorService.nextDoctorImg());
+//    }
 
     // 회원가입 후 의사 정보 조회
     @GetMapping("/selectDoctor/{docNum}")
@@ -56,10 +56,10 @@ public class DoctorController {
             mainImgVO = FileUploadUtil.fileUpload(docImg);
         }
         //다음에 들어갈 이미지 번호 조회
-        String nextDoctorImg = doctorService.nextDoctorImg();
+        int nextDoctorImg = doctorService.nextDoctorImg(doctorVO.getImgVO().getImgNum());
 
         //다음에 들억갈 이미지 번호 저장
-        doctorVO.setDocNum(nextDoctorImg);
+        doctorVO.getImgVO().setImgNum(nextDoctorImg);
 
         //의사 정보 등록
         //-----DoctorImgVO 이미지 저장-----//
