@@ -132,6 +132,8 @@ function App() {
           </Route>
 
       </Routes>
+
+
       </div>
 
 
@@ -143,7 +145,7 @@ function App() {
               <p>052-716-3199</p>
             </div>
             <div>
-              <h4>ㅇㅇ 병원</h4>
+              <h4>그린삼산병원</h4>
               <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
             </div>
           </div>
@@ -218,35 +220,38 @@ const Home=({loginInfo})=>{
     
         <div className='mid-divs'>
 
-          <h3>주요 서비스</h3>
-          <div onClick={(e)=>{navigate('/medicalDoctor')}}>
-            <div><i class="bi bi-hospital"></i></div>
-            <div>진료과목</div>
-          </div>
-    
+          {/* <h1>주요 서비스</h1> */}
+
           <div>
-            <div><i class="bi bi-search"></i></div>
-            <div>진료안내</div>
-          </div>
-    
-          <div onClick={(e)=>{
-            {
-              Object.keys(loginInfo).length==0
-              ?
-              navigate('/loginForm')
-              :
-              navigate(`/mySch/${loginInfo.memNum}`)
-            }
-          }}>
-            <div><i class="bi bi-clipboard-data"></i></div>
-            <div>예약 조회</div>
+            <div onClick={(e)=>{navigate('/medicalDoctor')}}>
+              <div><i class="bi bi-hospital"></i></div>
+              <div>진료과목</div>
+            </div>
+      
+            <div>
+              <div><i class="bi bi-search"></i></div>
+              <div>진료안내</div>
+            </div>
+      
+            <div onClick={(e)=>{
+              {
+                Object.keys(loginInfo).length==0
+                ?
+                navigate('/loginForm')
+                :
+                navigate(`/mySch/${loginInfo.memNum}`)
+              }
+            }}>
+              <div><i class="bi bi-clipboard-data"></i></div>
+              <div>예약 조회</div>
+            </div>
           </div>
           
         </div>
 
         <div className='miniMap'>
 
-          <h3>오시는 길</h3>
+          <h1>오시는 길</h1>
           <div id='map'><KakaoMap/></div>
 
         </div>
