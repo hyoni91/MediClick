@@ -1,0 +1,30 @@
+.p-chart-table{
+  border-collapse: collapse;
+  margin: auto;
+  width: 30%;
+}
+
+.p-chart-table  tr td {
+  border: 1px solid rgb(241, 234, 234);
+  text-align: center;
+  padding: 5px;
+  vertical-align : middle
+}
+
+.p-chart-table input{
+  width: 98%;
+  padding: 5px;
+  border: none;
+}
+
+.p-chart-table textarea{
+  border: none;
+}
+
+.p-chart-table td:nth-child(odd){
+  background-color: lightgrey;
+}
+
+.p-chart-table td:last-child{
+  background-color: white;
+}

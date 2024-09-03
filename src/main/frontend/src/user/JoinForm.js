@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './JoinForm.css'
 import axios from 'axios'
-import { useNavigate, useNavigation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const JoinForm = () => {
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({
@@ -141,11 +141,15 @@ const handlePhoneChange = (e) => {
   }
   
   useEffect(() => {
+    axios.get('/doctorList').then((res) => {console.log(res.data)}).catch()
   }, [memberData])
+  
   return (
     <div>
-        <div><h1>회원가입</h1></div>
+        
       <div className='join-div'>
+        <div><i class="bi bi-people-fill"></i></div>
+        <div><h1>회원가입</h1></div>
         <table className='join-table'>
           <tbody>
             <tr>
@@ -190,18 +194,22 @@ const handlePhoneChange = (e) => {
           </tbody>
         </table>
           <div><button className='join-btn' onClick={() => {insertJoin()}}>가입하기</button></div>
+
+        <div className='relative-container'>
+          <button className='join-btn btn-user' onClick={() => {
+            setMemberData({...memberData,memRole : 'USER'})
+          }}>고객용</button>
+          <button className='join-btn btn-admin' onClick={() => {
+            console.log(memberData)
+            setMemberData({...memberData,memRole : 'ADMIN'})
+            console.log(memberData)
+          }}>관리자용</button>
+        </div>
+
+
         
       </div>
-        <div className='relative-container'>
-        <button className='join-btn btn-user' onClick={() => {
-          setMemberData({...memberData,memRole : 'USER'})
-        }}>고객용</button>
-        <button className='join-btn btn-admin' onClick={() => {
-          console.log(memberData)
-          setMemberData({...memberData,memRole : 'ADMIN'})
-          console.log(memberData)
-        }}>관리자용</button>
-      </div>
+
     </div>
   )
 }

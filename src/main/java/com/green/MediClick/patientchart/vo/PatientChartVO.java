@@ -1,9 +1,12 @@
 package com.green.MediClick.patientchart.vo;
 
+import com.green.MediClick.schedule.vo.ScheduleVO;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class PatientChart {
+public class PatientChartVO {
     private int chartNum;
     private String chartDate;
     private String docNum;
@@ -13,4 +16,5 @@ public class PatientChart {
     private String checkUp; //검사
     private String disease; //병명
     private String prescription; //처방
+    private List<ScheduleVO> schList; // 스케줄 정보
 }

@@ -15,12 +15,15 @@ import DocMemInfo from './admin/DocMemInfo';
 import AdminJoinForm from './user/AdminJoinForm';
 import DoctorUpdate from './admin/DoctorUpdate';
 import UserService from './user/UserService';
+import PatientChart from './admin/PatientChart';
 import UserServiceMain from './user/UserServiceMain';
 import UserServiceDetail from './user/UserServiceDetail';
 import UserServiceUpdate from './user/UserServiceUpdate';
+import markerImage from './assets/marker.png';
 
 function App() {
   const navigate=useNavigate()
+  const {kakao}=window;
 
   //로그인 정보를 저장할 수 있는 state변수
   const [loginInfo,setLoginInfo]=useState({})
@@ -43,6 +46,8 @@ function App() {
     navigate('/')
   }
 
+  
+
 
 
   return (
@@ -62,12 +67,6 @@ function App() {
               </ul>
               :
               <ul>
-                {/* MEM_NUM에 DOC가 포함이 되면 관리자로 인식해서 
-                관리자 의료진이면 의료진정보/예약페이지로 
-
-                포함이 안되면
-                일반 환자 회원이면 회원 예약 정보 보여주고
-                */}
                 {
                   loginInfo.memNum.includes('DOC')?
                   <li><span onClick={(e)=>{navigate(`/admin/DocMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
@@ -89,60 +88,178 @@ function App() {
 
       </div>
 
-      <Routes>
-        
+      <div className='main-routers'>
+  
+        <Routes>
+          {/* 유저용 */}
+          <Route path='/' element={<UserLayout/>}>
+            {/* 메인페이지 */}
+            <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
+            {/* 로그인 페이지 */}
+            <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 환자별 예약확인 페이지 */}
+            <Route path='mySch/:memNum' element={<MySch/>}/>
+            {/* 진료과/의료진 페이지 */}
+            <Route path='medicalDoctor' element={<MedicalDoctor />}/>
+            {/* 회원가입 페이지 */}
+            <Route path='joinForm' element={<JoinForm/>}/>
+            {/* 회원가입 시 관리자일 경우 정보 추가 */}
+            <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
+            {/* 예약 화면 페이지 */}
+            <Route path='scheduleForm' element={<Schedule/>}/>
+            {/* 고객서비스 페이지 */}
+            <Route path='userService' element={<UserService/>}/>
+            <Route path='userServiceMain' element={<UserServiceMain loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 고객서비스 글 작성 화면 페이지 */}
+            <Route path='userService' element={<UserService/>}/>
+            {/* 고객서비스 게시글 상세 페이지 */}
+            <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 고객서비스 게시글 수정 페이지 */}
+            <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+          </Route>
+  
+  
+          {/* 관리자용 */}
+          <Route path='/admin' element={<AdminLayout/>}>
+            {/* 의사별 담당환자 확인 */}
+            <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+            {/* 담당환자 상세정보 */}
+            <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
+            {/* 의사 정보수정 페이지 */}
+            <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
+            {/* 진료차트 */}
+            <Route path='patientChart/:schNum' element={<PatientChart/>}/>
+          </Route>
+        </Routes>
 
-        {/* 유저용 */}
-        <Route path='/' element={<UserLayout/>}>
-          {/* 메인페이지 */}
-          <Route path='/' element={<Home/>}/>
-          {/* 로그인 페이지 */}
-          <Route path='loginForm' element={<LoginForm loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-          {/* 환자별 예약확인 페이지 */}
-          <Route path='mySch/:memNum' element={<MySch/>}/>
-          {/* 진료과/의료진 페이지 */}
-          <Route path='medicalDoctor' element={<MedicalDoctor />}/>
-          {/* 회원가입 페이지 */}
-          <Route path='joinForm' element={<JoinForm/>}/>
-          {/* 회원가입 시 관리자일 경우 정보 추가 */}
-          <Route path='adminJoinForm/:docNum' element={<AdminJoinForm />} />
-          {/* 예약 화면 페이지 */}
-          <Route path='scheduleForm' element={<Schedule/>}/>
-          {/* 고객서비스 페이지 */}
-          <Route path='userServiceMain' element={<UserServiceMain loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-          {/* 고객서비스 글 작성 화면 페이지 */}
-          <Route path='userService' element={<UserService/>}/>
-          {/* 고객서비스 게시글 상세 페이지 */}
-          <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-          {/* 고객서비스 게시글 수정 페이지 */}
-          <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
-        </Route>
+
+      </div>
 
 
-        {/* 관리자용 */}
-        <Route path='/admin' element={<AdminLayout/>}>
-          {/* 의사별 담당환자 확인 */}
-          <Route path='docMemList/:docNum' element={<DocMemList/>}/>
+      <div className='footer-mid'>
 
-          {/* 담당환자 상세정보 */}
+          <div className='mid-div'>
+            <div>
+              <h3>대표전화</h3>
+              <p>052-716-3199</p>
+            </div>
+            <div>
+              <h4>그린삼산병원</h4>
+              <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
+            </div>
+          </div>
 
-          <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
-          {/* 의사 정보수정 페이지 */}
-          <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
-        </Route>
-      </Routes>
 
+      </div>
+      <div className='footer-bottom'>
+        <div>환자의 권리와 의무 | 개인정보처리방침 | 웹 이용약관</div>
+      </div>
 
     </div>
   );
 }
 
-const Home=()=>{
+//카카오 맵 띄우기
+function KakaoMap(){
+  
+  const {kakao}=window
+
+  useEffect(()=>{
+    const container=document.getElementById('map')
+
+    //현재 위치를 가져오는 함수
+    navigator.geolocation.getCurrentPosition((position)=>{
+      const {latitude,longitude}=position.coords
+
+      const options={
+        center:new kakao.maps.Latlng(latitude,longitude),
+        level:3,
+      }
+
+    })
+
+    const options={
+      center:new kakao.maps.LatLng(35.54210, 129.3382),
+      level : 3
+    }
+
+    //지도 생성
+    const map=new kakao.maps.Map(container,options)
+
+    //현재 위치 표시 마커
+    const usermarker=new kakao.maps.Marker({
+      position:new kakao.maps.LatLng(35.54210, 129.3382),
+      image:new kakao.maps.MarkerImage(markerImage,new kakao.maps.Size(50,50),{
+        offset:new kakao.maps.Point(25,50),
+      })
+    })
+  
+    usermarker.setMap(map)
+
+  },[])
+
+
+}
+
+const Home=({loginInfo})=>{
+  const navigate=useNavigate()
+
+
   return(
-    <div className='main-img'>
-      {/* 메인이미지 */}
-      <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+
+    <div>
+      <div className='main-img'>
+        {/* 메인이미지 */}
+        <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+      </div>
+  
+      
+      <div className='mid-main'>
+        
+    
+        <div className='mid-divs'>
+
+          {/* <h1>주요 서비스</h1> */}
+
+          <div>
+            <div onClick={(e)=>{navigate('/medicalDoctor')}}>
+              <div><i class="bi bi-hospital"></i></div>
+              <div>진료과목</div>
+            </div>
+      
+            <div>
+              <div><i class="bi bi-search"></i></div>
+              <div>진료안내</div>
+            </div>
+      
+            <div onClick={(e)=>{
+              {
+                Object.keys(loginInfo).length==0
+                ?
+                navigate('/loginForm')
+                :
+                navigate(`/mySch/${loginInfo.memNum}`)
+              }
+            }}>
+              <div><i class="bi bi-clipboard-data"></i></div>
+              <div>예약 조회</div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div className='miniMap'>
+
+          <h1>오시는 길</h1>
+          <div id='map'><KakaoMap/></div>
+
+        </div>
+
+      </div>
+  
     </div>
+
+    
   )
 }
 export default App;

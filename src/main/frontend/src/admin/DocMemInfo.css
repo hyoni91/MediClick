@@ -27,7 +27,13 @@
   border-bottom: 1px solid #eeeeee;
 }
 
+.meminfo-table tbody tr td:first-child{
+  font-weight: bold;
+  background-color: #eeeeee52;
+}
+
 .meminfo-table input{
+  
   width: 90%;
   height: 18px;
 
