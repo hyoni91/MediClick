@@ -9,7 +9,10 @@ const UserLayout = () => {
     <div className='layout-bar'>
       <div className='logoimg-div' onClick={(e)=>{navigate('/')}}>
         <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/>
-        <div>그린삼산병원</div>
+        <div>
+          <p>그린 최고 암센터</p>
+          <p>GREENCHOIGO CANCER CENTER</p>
+        </div>
       </div>
       
     <div className='menu-bar'>
