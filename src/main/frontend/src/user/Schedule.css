@@ -5,6 +5,7 @@
   margin-bottom: 10px;
   margin-top: 20px;
   /* margin: auto; */
+
 }
 
 .h1tag{
@@ -17,8 +18,7 @@
 .h1-flex{
   display: flex;
   justify-content: center;
-  gap: 600px;
-  /* margin-left: 10px; */
+  gap:40%;
 }
 
 
@@ -26,7 +26,6 @@
   text-align: center;
   font-size: 19px;
   font-weight: 600;
-  /* width: 200px; */
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -41,17 +40,18 @@
 }
 
 .sch-container-flex{
-  width: 90%;
+  width: 100%;
   display: flex;
   align-items: center;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
   margin: auto;
+  gap: 2px;
 }
 
 
 /* 진료과목 이미지 */
 .doc-icon-div img{
-  width: 50px;
+  width: 50%;
 }
 
 /* 진료과 플렉스 */
@@ -81,7 +81,7 @@
 /* 달력과 시간버튼 플렉스 */ 
 .sch-flex{
   width: 59%;
-  height: 650px;
+  /* height: 650px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -134,22 +134,23 @@ justify-content: center;
 
 /* 예약 가능 여부 안내문구*/
 .sch-status{
+  width: 100%;
   font-size: 13px;
-  margin-top: 5px;
   text-align: center;
 }
 
 
 /* 예약상세내용 테이블 */
 .schedule-table{
-  width: 38%;
+  border: 1px solid gold;
+  width: 35%;
   text-align: left;
   background-color: white;
 }
 
 .schedule-table>table{
   width: 75%;
-  /* height: 100%; */
+  height: 100%;
   border-collapse: collapse;
   margin: auto;
 }
@@ -173,6 +174,8 @@ justify-content: center;
   font-size: 14px;
 }
 
+
+
 input:focus, select:focus, textarea:focus{
   outline: none;
 }
@@ -181,6 +184,7 @@ input:focus, select:focus, textarea:focus{
 /* 예약 상세내용 확인 버튼(예약버튼) */
 .sch-footer >button{
   width: 200px;
+  width: 50%;
   padding: 8px;
   font-size: 16px;
   font-weight: 600;
@@ -200,6 +204,7 @@ input:focus, select:focus, textarea:focus{
 .sch-footer{
   margin: auto;
   text-align: center;
+  border: 1px solid red;
   /* margin-top: 100px; */
 }
 
