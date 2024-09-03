@@ -172,7 +172,7 @@ function KakaoMap(){
       const {latitude,longitude}=position.coords
 
       const options={
-        center:new kakao.maps.Latlng(latitude,longitude),
+        center:new kakao.maps.LatLng(latitude,longitude),
         level:3,
       }
 

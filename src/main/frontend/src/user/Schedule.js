@@ -197,12 +197,12 @@ const Schedule = () => {
       </div>
       <div >
         <div className='h1-flex'>
-          <h1 className='h1tag'>step1-진료예약</h1>
+          <h1 className='h1tag'>step1-진료과 및 날짜선택</h1>
           <h1 className='h1tag'>step2-예약확정</h1>
         </div>
         <div className='sch-container-flex'>
           <div className='sch-flex'>
-            <div className='h3tag'>진료과 </div>
+            {/* <div className='h3tag'>진료과 </div> */}
             <div  className='doc-icon-div'>
               {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} >
                 {
@@ -231,7 +231,7 @@ const Schedule = () => {
                 }
               </div>
               <div className='sch-calendar'>
-              <div  className='h3tag'>진료날짜</div>
+              {/* <div  className='h3tag'>진료날짜</div> */}
                 <Calendar 
                 onChange={onChange} 
                 value={value} 
