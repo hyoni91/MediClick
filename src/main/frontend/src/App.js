@@ -212,8 +212,9 @@ const Home=({loginInfo})=>{
         {/* 메인이미지 */}
         <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
         <div>
-          <p>뭘 넣어야 할까?</p>
-          <p>뭐가 써져있어야 기깔날까?</p>
+          {/* 언젠가 텍스트 추가할 예정 */}
+          <p></p>
+          <p></p>
         </div>
       </div>
   
@@ -257,10 +258,15 @@ const Home=({loginInfo})=>{
           
         </div>
 
-        <div className='miniMap'>
+        <div>
+          <div className='miniMap'>
+            <h1>오시는 길</h1>
+            <div id='map'><KakaoMap/></div>
+          </div>
 
-          <h1>오시는 길</h1>
-          <div id='map'><KakaoMap/></div>
+          {/* 버스 */}
+          {/* 게시판 */}
+          {/* 차트 */}
 
         </div>
 
