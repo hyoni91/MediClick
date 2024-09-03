@@ -229,8 +229,11 @@ const Schedule = () => {
             </div>
           </div>
           <div className='schedule-table'>
-            {/* <div  className='h3tag'>예약내용</div> */}
             <table>
+              <colgroup>
+                <col width={'35%'}/>
+                <col width={'*'}/>
+              </colgroup>
               <tbody>
                 <tr>
                   <td>예약날짜 : </td>
