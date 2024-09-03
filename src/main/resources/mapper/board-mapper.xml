@@ -45,7 +45,19 @@
         FROM USER_BOARD
         WHERE BOARD_NUM = #{boardNum};
     </select>
-
+    <!--게시글 삭제-->
+    <delete id="deletePost">
+        DELETE FROM USER_BOARD
+        WHERE BOARD_NUM = #{boardNum}
+    </delete>
+    <!--게시글 수정-->
+    <update id="updateBoard">
+        UPDATE USER_BOARD
+        SET
+        TITLE = #{title},
+        CONTENT = #{content}
+        WHERE BOARD_NUM = #{boardNum}
+    </update>
 
 </mapper>
 

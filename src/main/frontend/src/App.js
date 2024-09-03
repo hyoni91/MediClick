@@ -17,6 +17,7 @@ import DoctorUpdate from './admin/DoctorUpdate';
 import UserService from './user/UserService';
 import UserServiceMain from './user/UserServiceMain';
 import UserServiceDetail from './user/UserServiceDetail';
+import UserServiceUpdate from './user/UserServiceUpdate';
 
 function App() {
   const navigate=useNavigate()
@@ -113,6 +114,8 @@ function App() {
           <Route path='userService' element={<UserService/>}/>
           {/* 고객서비스 게시글 상세 페이지 */}
           <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+          {/* 고객서비스 게시글 수정 페이지 */}
+          <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
         </Route>
 
 
