@@ -16,6 +16,7 @@ import AdminJoinForm from './user/AdminJoinForm';
 import DoctorUpdate from './admin/DoctorUpdate';
 import UserService from './user/UserService';
 import PatientChart from './admin/PatientChart';
+import markerImage from './assets/marker.png';
 
 function App() {
   const navigate=useNavigate()
@@ -147,22 +148,45 @@ function App() {
   );
 }
 
-function Kakao(){
+//카카오 맵 띄우기
+function KakaoMap(){
+  
   const {kakao}=window
 
   useEffect(()=>{
     const container=document.getElementById('map')
+
+    //현재 위치를 가져오는 함수
+    navigator.geolocation.getCurrentPosition((position)=>{
+      const {latitude,longitude}=position.coords
+
+      const options={
+        center:new kakao.maps.Latlng(latitude,longitude),
+        level:3,
+      }
+
+    })
+
     const options={
-      // center:new.kakao.maps.
+      center:new kakao.maps.LatLng(35.54210, 129.3382),
       level : 3
     }
+
+    //지도 생성
+    const map=new kakao.maps.Map(container,options)
+
+    //현재 위치 표시 마커
+    const usermarker=new kakao.maps.Marker({
+      position:new kakao.maps.LatLng(35.54210, 129.3382),
+      image:new kakao.maps.MarkerImage(markerImage,new kakao.maps.Size(50,50),{
+        offset:new kakao.maps.Point(25,50),
+      })
+    })
+  
+    usermarker.setMap(map)
+
   },[])
 
-  return(
-    <div id='map'>
-
-    </div>
-  )
 
 }
 
@@ -180,9 +204,11 @@ const Home=({loginInfo})=>{
   
       
       <div className='mid-main'>
-        <h3>주요 서비스</h3>
+        
     
         <div className='mid-divs'>
+
+          <h3>주요 서비스</h3>
           <div onClick={(e)=>{navigate('/medicalDoctor')}}>
             <div><i class="bi bi-hospital"></i></div>
             <div>진료과목</div>
@@ -209,7 +235,9 @@ const Home=({loginInfo})=>{
         </div>
 
         <div className='miniMap'>
-          <div id='map'><Kakao/></div>
+
+          <h3>오시는 길</h3>
+          <div id='map'><KakaoMap/></div>
 
         </div>
 
