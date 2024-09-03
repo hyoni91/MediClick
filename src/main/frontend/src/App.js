@@ -144,7 +144,7 @@ function App() {
               <p>052-716-3199</p>
             </div>
             <div>
-              <h4>그린삼산병원</h4>
+              <h4>그린 최고 암센터</h4>
               <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
             </div>
           </div>
@@ -172,7 +172,7 @@ function KakaoMap(){
       const {latitude,longitude}=position.coords
 
       const options={
-        center:new kakao.maps.Latlng(latitude,longitude),
+        center:new kakao.maps.LatLng(latitude,longitude),
         level:3,
       }
 
@@ -211,17 +211,21 @@ const Home=({loginInfo})=>{
       <div className='main-img'>
         {/* 메인이미지 */}
         <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+        <div>
+          <p>뭘 넣어야 할까?</p>
+          <p>뭐가 써져있어야 기깔날까?</p>
+        </div>
       </div>
   
       
       <div className='mid-main'>
         
     
-        <div className='mid-divs'>
+        <div className='mid-container'>
 
           {/* <h1>주요 서비스</h1> */}
 
-          <div>
+          <div className='mid-divs'>
             <div onClick={(e)=>{navigate('/medicalDoctor')}}>
               <div><i class="bi bi-hospital"></i></div>
               <div>진료과목</div>
@@ -230,6 +234,11 @@ const Home=({loginInfo})=>{
             <div>
               <div><i class="bi bi-search"></i></div>
               <div>진료안내</div>
+            </div>
+
+            <div>
+              <div><i class="bi bi-heart-pulse"></i></div>
+              <div>건강검진</div>
             </div>
       
             <div onClick={(e)=>{
