@@ -23,25 +23,29 @@ const UserService = () => {
   }
   // 글 등록
   function regBoard(){
-    axios.post('/board/insert', insertBoardData)
-    .then((res)=>{alert('글 등록'); console.log(insertBoardData);navigate('/userServiceMain');})
-    .catch((error)=>{console.log(error);})
+    if(insertBoardData.title == '' || insertBoardData.writer == '' || insertBoardData.content == ''){
+      alert('게시글 내용을 다시 확인해 주세요.')
+    }else{
+      axios.post('/board/insert', insertBoardData)
+      .then((res)=>{alert('글 등록'); console.log(insertBoardData);navigate('/userServiceMain');})
+      .catch((error)=>{console.log(error);})
+    }
   }
   return (
     <div className='user-service-div'>
       <table>
         <tbody>
           <tr>
-            <td>제목</td>
-            <td><input type='text' name='title' onChange={(e)=>{changeInsertBoardData(e)}}/></td>
+            <td>제목 <span className='userService-notNull'>*</span></td>
+            <td><input type='text' maxLength={20} name='title' onChange={(e)=>{changeInsertBoardData(e)}}/></td>
           </tr>
           <tr>
-            <td>작성자</td>
-            <td><input type='text' name='writer' onChange={(e)=>{changeInsertBoardData(e)}}/></td>
+            <td>작성자 <span className='userService-notNull'>*</span></td>
+            <td><input type='text' name='writer' maxLength={10} onChange={(e)=>{changeInsertBoardData(e)}}/></td>
           </tr>
           <tr>
-            <td className='userService-content'>내용</td>
-            <td><textarea name='content' onChange={(e)=>{changeInsertBoardData(e)}} /></td>
+            <td className='userService-content'>내용 <span className='userService-notNull'>*</span></td>
+            <td><textarea name='content' onChange={(e)=>{changeInsertBoardData(e)}} maxLength={1000} /></td>
           </tr>
         </tbody>
       </table>

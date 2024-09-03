@@ -54,7 +54,6 @@
     <update id="updateBoard">
         UPDATE USER_BOARD
         SET
-        TITLE = #{title},
         CONTENT = #{content}
         WHERE BOARD_NUM = #{boardNum}
     </update>
