@@ -189,10 +189,11 @@ const Schedule = () => {
           <p>평일 09:00~18:00</p>
           <p>주말 휴무</p>
         </div>
-        <div>
+        <div className='sch-header-content'>
           <hr />
           <p>◾인터넷예약은 로그인 후 이용가능합니다.</p>
           <p>◾인터넷예약은 당일예약이  불가합니다.</p>
+          <p>◾당일예약은 전화로 문의주세요.</p>
         </div>
       </div>
       <div >
@@ -202,19 +203,7 @@ const Schedule = () => {
         </div>
         <div className='sch-container-flex'>
           <div className='sch-flex'>
-            {/* <div className='h3tag'>진료과 </div> */}
             <div  className='doc-icon-div'>
-              {/* <select name='docInfo' onChange={(e)=>{changeDocInfo(e)}} >
-                {
-                  docInfo.map((doc,i)=>{
-                    return(
-                      <option value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })}> {doc.medicalDept.deptName}</option>
-                    )
-                  })
-                  
-                }
-                
-              </select> */}
               {
                 docInfo.map((doc,i)=>{
                   return(
