@@ -124,6 +124,7 @@
         ORDER BY DOC_NUM
     </select>
 
+
     <!-- 예약 insert -->
     <insert id="insertsch">
         INSERT INTO medical_schedule(
