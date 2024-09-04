@@ -49,8 +49,6 @@ const Schedule = () => {
   },[])
 
 
-
-
   //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     docNum :'',
@@ -95,7 +93,7 @@ const Schedule = () => {
 
   // 진료과 클릭 선택(의사,진료과정보 넘기기)
   function changeDocInfo(e){
-    //선택한 버튼 효과 유지
+    //선택한 진료과 버튼 효과 유지
     var btns = document.querySelectorAll('.button');
     btns.forEach(function (btn, i) {
       if (e.currentTarget == btn) {
@@ -105,8 +103,8 @@ const Schedule = () => {
       }
     });
     //선택한 진료과와 의사 정보 저장
-    const selectedValue = e.target.value; // JSON문자열
-    const { deptNum, docNum , deptName } = JSON.parse(selectedValue); //JSON 파싱
+    const selectedValue = e.target.value; //밸류값 문자열로 받기
+    const { deptNum, docNum , deptName } = JSON.parse (selectedValue); //JSON 파싱 (객체로 다시 바꾸기)
     setAppo({
       ...appo,
       deptNum : deptNum,
@@ -114,6 +112,7 @@ const Schedule = () => {
       deptName: deptName
     })
   }
+
 
 
   // 증상(detail) 정보 저장
@@ -176,7 +175,6 @@ const Schedule = () => {
     })
     }
   }
-
 
   
   return (
@@ -248,6 +246,10 @@ const Schedule = () => {
             </div>
             <div className='schedule-table'>
               <table>
+                <colgroup>
+                  <col width={'25%'}/>
+                  <col width={'*'}/>
+                </colgroup>
                 <tbody>
                   <tr>
                     <td>예약날짜 : </td>
