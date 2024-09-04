@@ -20,6 +20,7 @@ import UserServiceMain from './user/board/UserServiceMain';
 import UserServiceDetail from './user/board/UserServiceDetail';
 import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
+import StatChart from './user/StatChart';
 
 function App() {
   const navigate=useNavigate()
@@ -93,6 +94,8 @@ function App() {
         <Routes>
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
+            {/* ?? */}
+            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
@@ -116,6 +119,8 @@ function App() {
             <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 고객서비스 게시글 수정 페이지 */}
             <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 차트 */}
+            <Route path='statChart' element={<StatChart/>}/>
           </Route>
   
   
@@ -267,6 +272,9 @@ const Home=({loginInfo})=>{
           {/* 버스 */}
           {/* 게시판 */}
           {/* 차트 */}
+          <div>
+            <div><StatChart/></div>
+          </div>
 
         </div>
 

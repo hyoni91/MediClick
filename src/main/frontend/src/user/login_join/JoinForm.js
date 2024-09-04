@@ -50,7 +50,7 @@ const JoinForm = () => {
       if (!rrnRegex.test(value)) {
         setErrors((prev) => ({
           ...prev,
-          [name]: '주민번호가 올바르지 않습니다.',
+          [name]: '주민번호 13자리 입력해주세요.',
         }));
       } else {
         setErrors((prev) => ({

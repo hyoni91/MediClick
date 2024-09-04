@@ -37,7 +37,7 @@
         WHERE S.DOC_NUM=#{docNum}
         AND S.DOC_NUM=D.DOC_NUM
         AND S.MEM_NUM=M.MEM_NUM
-        ORDER BY SCH_NUM DESC
+        ORDER BY SCH_DATE ASC
          LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
      </select>
 
@@ -67,11 +67,7 @@
                 SUBSTRING(MEM_RRN, 1, 6), '-',
                 REPEAT('*', LENGTH(MEM_RRN) - 6)
                 ) AS MEM_RRN
-            ,CONCAT(
-            SUBSTRING(MEM_TEL, 1, 3), '-',
-            SUBSTRING(MEM_TEL, 4, 4), '-',
-            SUBSTRING(MEM_TEL, 8, 4)
-            ) AS MEM_TEL
+            ,MEM_TEL
             ,DETAIL
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE SCH_NUM=#{schNum}
@@ -90,12 +86,16 @@
 <!--        WHERE MEM_NUM=#{memNum}-->
 <!--    </update>-->
 
-    <!--예약취소 : SCH_STATUS='N'로 변경-->
+    <!--예약취소-->
     <update id="updateSchStatus">
         UPDATE MEDICAL_SCHEDULE
         SET SCH_STATUS='N'
         WHERE SCH_NUM=#{schNum}
     </update>
+<!--    <delete id="deleteSch">-->
+<!--        DELETE FROM MEDICAL_SCHEDULE-->
+<!--        WHERE SCH_NUM=#{schNum}-->
+<!--    </delete>-->
 
     <!--환자가 보는 나의 예약페이지-->
     <select id="getMemSch" resultMap="schedule">
@@ -113,7 +113,7 @@
         WHERE S.MEM_NUM=#{memNum}
         AND S.MEM_NUM=M.MEM_NUM
         AND S.DOC_NUM=D.DOC_NUM
-        ORDER BY SCH_DATE DESC, SCH_TIME DESC
+        ORDER BY SCH_DATE ASC, SCH_TIME ASC
         LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
     </select>
 
