@@ -46,15 +46,20 @@ public class ScheduleServiceImpl implements ScheduleService{
         return sqlSession.selectList("scheduleMapper.getMemSch",Map.of("memNum",memNum,"pageVO",pageVO));
     }
 
+    //환자페이지 총 예약개수
     @Override
     public int getMyChartCnt(String memNum) {
         return sqlSession.selectOne("scheduleMapper.getMyChartCnt",memNum);
     }
 
+    //예약취소
     @Override
     public void updateSchStatus(int schNum) {
         sqlSession.update("scheduleMapper.updateSchStatus",schNum);
     }
+//    public void deleteSch(int schNum){
+//        sqlSession.delete("scheduleMapper.deleteSch",schNum);
+//    }
 
     // 예약을 위한 의사 및 진료과 정보
     @Override
