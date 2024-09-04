@@ -20,6 +20,7 @@ import UserServiceMain from './user/UserServiceMain';
 import UserServiceDetail from './user/UserServiceDetail';
 import UserServiceUpdate from './user/UserServiceUpdate';
 import markerImage from './assets/marker.png';
+import ExampleComponent from './user/test';
 
 function App() {
   const navigate=useNavigate()
@@ -93,6 +94,8 @@ function App() {
         <Routes>
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
+            {/* ?? */}
+            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
