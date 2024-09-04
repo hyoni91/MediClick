@@ -5,6 +5,7 @@ import com.green.MediClick.board.vo.BoardVO;
 import jakarta.annotation.Resource;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,16 @@ public class BoardController {
     @GetMapping("detail/{boardNum}")
     public BoardVO boardDetail(@PathVariable("boardNum")int boardNum){
         return boardService.selectBoard(boardNum);
+    }
+    // 게시글 삭제
+    @DeleteMapping("delete/{boardNum}")
+    public void deletePost(@PathVariable("boardNum")int boardNum){
+        boardService.deletePost(boardNum);
+    }
+    // 게시글 수정
+    @PutMapping("/update")
+    public void updateBoard(@RequestBody BoardVO boardVO){
+        boardService.updateBoard(boardVO);
     }
 
 }

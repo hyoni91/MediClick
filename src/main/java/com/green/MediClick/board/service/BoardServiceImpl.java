@@ -30,4 +30,15 @@ public class BoardServiceImpl implements BoardService {
         return sqlSession.selectOne("boardMapper.selectBoard", boardNum);
     }
 
+    // 게시글 삭제
+    @Override
+    public void deletePost(int boardNum) {
+        sqlSession.delete("boardMapper.deletePost", boardNum);
+    }
+
+    @Override
+    public void updateBoard(BoardVO boardVO) {
+        sqlSession.update("boardMapper.updateBoard", boardVO);
+    }
+
 }

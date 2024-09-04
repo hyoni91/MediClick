@@ -18,6 +18,8 @@ import UserService from './user/UserService';
 import PatientChart from './admin/PatientChart';
 import UserServiceMain from './user/UserServiceMain';
 import UserServiceDetail from './user/UserServiceDetail';
+import UserServiceUpdate from './user/UserServiceUpdate';
+import markerImage from './assets/marker.png';
 
 function App() {
   const navigate=useNavigate()
@@ -89,8 +91,6 @@ function App() {
       <div className='main-routers'>
   
         <Routes>
-          
-  
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* 메인페이지 */}
@@ -114,6 +114,8 @@ function App() {
             <Route path='userService' element={<UserService/>}/>
             {/* 고객서비스 게시글 상세 페이지 */}
             <Route path='detail/:boardNum' element={<UserServiceDetail loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
+            {/* 고객서비스 게시글 수정 페이지 */}
+            <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
           </Route>
   
   
@@ -128,8 +130,9 @@ function App() {
             {/* 진료차트 */}
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
           </Route>
+        </Routes>
 
-      </Routes>
+
       </div>
 
 
@@ -141,7 +144,7 @@ function App() {
               <p>052-716-3199</p>
             </div>
             <div>
-              <h4>ㅇㅇ 병원</h4>
+              <h4>그린 최고 암센터</h4>
               <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
             </div>
           </div>
@@ -156,22 +159,45 @@ function App() {
   );
 }
 
-function Kakao(){
+//카카오 맵 띄우기
+function KakaoMap(){
+  
   const {kakao}=window
 
   useEffect(()=>{
     const container=document.getElementById('map')
+
+    //현재 위치를 가져오는 함수
+    navigator.geolocation.getCurrentPosition((position)=>{
+      const {latitude,longitude}=position.coords
+
+      const options={
+        center:new kakao.maps.LatLng(latitude,longitude),
+        level:3,
+      }
+
+    })
+
     const options={
-      // center:new.kakao.maps.
+      center:new kakao.maps.LatLng(35.54210, 129.3382),
       level : 3
     }
+
+    //지도 생성
+    const map=new kakao.maps.Map(container,options)
+
+    //현재 위치 표시 마커
+    const usermarker=new kakao.maps.Marker({
+      position:new kakao.maps.LatLng(35.54210, 129.3382),
+      image:new kakao.maps.MarkerImage(markerImage,new kakao.maps.Size(50,50),{
+        offset:new kakao.maps.Point(25,50),
+      })
+    })
+  
+    usermarker.setMap(map)
+
   },[])
 
-  return(
-    <div id='map'>
-
-    </div>
-  )
 
 }
 
@@ -185,40 +211,62 @@ const Home=({loginInfo})=>{
       <div className='main-img'>
         {/* 메인이미지 */}
         <img src='http://localhost:8080/images/IMG_2611.jpeg'/>
+        <div>
+          {/* 언젠가 텍스트 추가할 예정 */}
+          <p></p>
+          <p></p>
+        </div>
       </div>
   
       
       <div className='mid-main'>
-        <h3>주요 서비스</h3>
+        
     
-        <div className='mid-divs'>
-          <div onClick={(e)=>{navigate('/medicalDoctor')}}>
-            <div><i class="bi bi-hospital"></i></div>
-            <div>진료과목</div>
-          </div>
-    
-          <div>
-            <div><i class="bi bi-search"></i></div>
-            <div>진료안내</div>
-          </div>
-    
-          <div onClick={(e)=>{
-            {
-              Object.keys(loginInfo).length==0
-              ?
-              navigate('/loginForm')
-              :
-              navigate(`/mySch/${loginInfo.memNum}`)
-            }
-          }}>
-            <div><i class="bi bi-clipboard-data"></i></div>
-            <div>예약 조회</div>
+        <div className='mid-container'>
+
+          {/* <h1>주요 서비스</h1> */}
+
+          <div className='mid-divs'>
+            <div onClick={(e)=>{navigate('/medicalDoctor')}}>
+              <div><i class="bi bi-hospital"></i></div>
+              <div>진료과목</div>
+            </div>
+      
+            <div>
+              <div><i class="bi bi-search"></i></div>
+              <div>진료안내</div>
+            </div>
+
+            <div>
+              <div><i class="bi bi-heart-pulse"></i></div>
+              <div>건강검진</div>
+            </div>
+      
+            <div onClick={(e)=>{
+              {
+                Object.keys(loginInfo).length==0
+                ?
+                navigate('/loginForm')
+                :
+                navigate(`/mySch/${loginInfo.memNum}`)
+              }
+            }}>
+              <div><i class="bi bi-clipboard-data"></i></div>
+              <div>예약 조회</div>
+            </div>
           </div>
           
         </div>
 
-        <div className='miniMap'>
-          <div id='map'><Kakao/></div>
+        <div>
+          <div className='miniMap'>
+            <h1>오시는 길</h1>
+            <div id='map'><KakaoMap/></div>
+          </div>
+
+          {/* 버스 */}
+          {/* 게시판 */}
+          {/* 차트 */}
 
         </div>
 

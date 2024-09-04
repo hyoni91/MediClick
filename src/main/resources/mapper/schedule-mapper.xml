@@ -113,7 +113,7 @@
         WHERE S.MEM_NUM=#{memNum}
         AND S.MEM_NUM=M.MEM_NUM
         AND S.DOC_NUM=D.DOC_NUM
-        ORDER BY SCH_NUM DESC
+        ORDER BY SCH_DATE DESC, SCH_TIME DESC
     </select>
 
     <!-- 의사 진료과 불러오기 -->

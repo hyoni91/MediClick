@@ -4,8 +4,19 @@
   height: 400px;
   border: 1px solid #eeeeee;
   border-radius: 10px;
-  padding: 50px;
+  padding: 100px 50px;
   margin: 100px auto;
+}
+
+.join-div>div:first-child{
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.join-div>div:first-child>i{
+  margin: 0 auto;
+  font-size: 42px;
+  color: #0254AF;
 }
 
 .join-btn{

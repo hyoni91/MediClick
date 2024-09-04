@@ -14,4 +14,10 @@ public interface BoardService {
 
     // 게시글 상세정보
     BoardVO selectBoard(int boardNum);
+
+    // 게시글 삭제
+    void deletePost(int boardNum);
+
+    // 게시글 수정
+    void updateBoard(BoardVO boardVO);
 }
