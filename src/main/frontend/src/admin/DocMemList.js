@@ -7,7 +7,7 @@ const DocMemList = () => {
 
   const navigate=useNavigate()
   const [page,setPage]=useState({})
-
+  const [currentPage,setCurrentPage]=useState(1)
 
   // 예약 리스트 담을 변수
   const [infoList,setInfoList]=useState([])
@@ -27,19 +27,6 @@ const DocMemList = () => {
   const {docNum}=useParams()
 
 
-  //선택한 페이지 bold 유지
-  function changeBold(e){
-
-    let bb=document.querySelectorAll('.num')
-    bb.forEach((b,i)=>{
-      if(e.currentTarget==b){
-        b.classList.add('active')
-      }
-      else{
-        b.classList.remove('active')
-      }
-    })
-  }
 
 
   // console.log(infoList)
@@ -75,22 +62,9 @@ const DocMemList = () => {
         onClick={(e)=>{getList(page.beginPage-1)}}> 이전 </span>)
     }
 
-    //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
-    function getList(pageNo=1){
-      axios
-      .post(`/schedule/getDocMemList`,{pageNo,docNum})
-      .then((res)=>{
-        setInfoList(res.data.scheduleList)
-        setPage(res.data.pageInfo)
-      })
-      .catch((error)=>{console.log(error)})
-    }
-
     for(let a=page.beginPage; a<=page.endPage; a++){
-      pagesArr.push(<span key={`page-${a}`} className='page-span num' 
-        onClick={(e)=>{
-          changeBold(e)
-          getList(a)}}>{a}</span>)
+      pagesArr.push(<span key={`page-${a}`} className={`page-span num ${a === currentPage ? 'active' : ''}`}
+        onClick={() => getList(a)}>{a}</span>)
     }
 
     if(page.next){
@@ -101,6 +75,33 @@ const DocMemList = () => {
     return pagesArr
 
   }
+
+  //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
+  function getList(pageNo=1){
+    axios
+    .post(`/schedule/getDocMemList`,{pageNo,docNum})
+    .then((res)=>{
+      setInfoList(res.data.scheduleList)
+      setPage(res.data.pageInfo)
+      setCurrentPage(pageNo)
+    })
+    .catch((error)=>{console.log(error)})
+  }
+
+  
+  //선택한 페이지 bold 유지
+  // function changeBold(e){
+
+  //   let bb=document.querySelectorAll('.num')
+  //   bb.forEach((b,i)=>{
+  //     if(e.currentTarget==b){
+  //       b.classList.add('active')
+  //     }
+  //     else{
+  //       b.classList.remove('active')
+  //     }
+  //   })
+  // }
 
   //의사정보
   useEffect(()=>{
@@ -119,18 +120,7 @@ const DocMemList = () => {
 
   //의사별 담당환자 리스트  
   useEffect(()=>{
-
-    axios
-    .post(`/schedule/getDocMemList`,{'docNum':docNum})
-    .then((res)=>{
-      setInfoList(res.data.scheduleList)
-      setPage(res.data.pageInfo)
-
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-    
+    getList(1)
   },[docNum])
 
   

@@ -8,6 +8,7 @@ const MySch = () => {
 
   const {memNum} = useParams();
   const [page,setPage]=useState({})
+  const [currentPage,setCurrentPage]=useState(1)
 
   const [oneMem,setOneMem]=useState({
     memNum:'',
@@ -57,24 +58,9 @@ const MySch = () => {
       onClick={(e)=>{getList(page.beginPage-1)}}>이전</span>)
     }
 
-    //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
-    function getList(pageNo=1){
-      axios
-      .post(`/schedule/getMemSch`,{pageNo,memNum})
-      .then((res)=>{
-        setMemSchInfo(res.data.scheduleList)
-        // setPage(res.data.pageInfo)
-      })
-      .catch((error)=>{console.log(error)})  
-      
-    }
-
     for(let a=page.beginPage; a<=page.endPage; a++){
-      pagesArr.push(<span key={`page-${a}`} className='page-span num'
-      onClick={(e)=>{
-        cheangeBold(e)
-        getList(a)
-      }}>{a}</span>)
+      pagesArr.push(<span key={`page-${a}`} className={`page-span num ${a === currentPage ? 'active' : ''}`}
+        onClick={() => getList(a)}>{a}</span>)
     }
 
     if(page.next){
@@ -86,20 +72,33 @@ const MySch = () => {
 
   }
 
-  //선택한 페이지 bold 유지
-  function cheangeBold(e){
-    let bb=document.querySelectorAll('.num')
-    bb.forEach((b,i)=>{
-      if(e.currentTarget==b){
-        b.classList.add('active')
-      }
-      else{
-        b.classList.remove('active')
-      }
+  //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
+  function getList(pageNo=1){
+    axios
+    .post(`/schedule/getMemSch`,{pageNo,memNum})
+    .then((res)=>{
+      setMemSchInfo(res.data.scheduleList)
+      setPage(res.data.pageInfo)
+      setCurrentPage(pageNo)
     })
+    .catch((error)=>{console.log(error)})  
+    
   }
 
+  //선택한 페이지 bold 유지
+  // function cheangeBold(e){
+  //   let bb=document.querySelectorAll('.num')
+  //   bb.forEach((b,i)=>{
+  //     if(e.currentTarget==b){
+  //       b.classList.add('active')
+  //     }
+  //     else{
+  //       b.classList.remove('active')
+  //     }
+  //   })
+  // }
 
+  //환자정보
   useEffect(()=>{
     axios
     .get(`/member/getOneMem/${memNum}`)
@@ -109,16 +108,11 @@ const MySch = () => {
     })
     .catch((error)=>{console.log(error)})
 
+  },[memNum])
 
-    axios
-    .post(`/schedule/getMemSch`,{memNum})
-    .then((res)=>{
-      console.log(res.data)
-      setMemSchInfo(res.data.scheduleList)
-      setPage(res.data.pageInfo)
-    })
-    .catch((error)=>{console.log(error)})
-
+  //예약리스트 
+  useEffect(()=>{
+    getList(1)
   },[memNum])
 
   return (
