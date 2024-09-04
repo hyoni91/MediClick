@@ -92,7 +92,7 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
 
             <tr>
               <td><input type='password' name='memRrn' 
-              placeholder='주민등록번호를 입력하세요.' minLength={13} maxLength={13}
+              placeholder='주민등록번호를 입력하세요.' maxLength={13}
               onChange={(e)=>{insertData(e)}}></input></td>
             </tr>
           </tbody>
