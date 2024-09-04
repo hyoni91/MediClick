@@ -24,10 +24,14 @@ public class ScheduleController {
     public Map<String,Object> getDocMemList(@RequestBody DoctorVO doctorVO){
 
         //전체 환자 수
-        scheduleService.getChartCnt(doctorVO.getDocNum());
+        //scheduleService.getChartCnt(doctorVO.getDocNum());
 
         //페이지 정보를 담을 수 있는 PageVO 생성
         PageVO pageInfo=new PageVO(scheduleService.getChartCnt(doctorVO.getDocNum()));
+
+        pageInfo.setPageInfo();
+
+        System.out.println(pageInfo);
 
         //화면상에 나타나는 현재 페이지 번호
         if(doctorVO.getPageNo()!=0){
