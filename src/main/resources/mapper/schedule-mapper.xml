@@ -67,11 +67,7 @@
                 SUBSTRING(MEM_RRN, 1, 6), '-',
                 REPEAT('*', LENGTH(MEM_RRN) - 6)
                 ) AS MEM_RRN
-            ,CONCAT(
-            SUBSTRING(MEM_TEL, 1, 3), '-',
-            SUBSTRING(MEM_TEL, 4, 4), '-',
-            SUBSTRING(MEM_TEL, 8, 4)
-            ) AS MEM_TEL
+            ,MEM_TEL
             ,DETAIL
         FROM MEDICAL_SCHEDULE S,MEDICAL_DOCTOR D,MEDICAL_MEMBER M
         WHERE SCH_NUM=#{schNum}
