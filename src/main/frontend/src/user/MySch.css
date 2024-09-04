@@ -26,11 +26,26 @@
 }
 
 .mySch-table thead td{
+  
   padding: 5px;
 }
 
 .mySch-table tbody td{
   padding: 5px;
-  font-size: 0.95rem;
   border-bottom: 1px solid #eeeeee;
+}
+
+.mySch-table tbody button{
+  background-color: #0254AF;
+  width: 80%;
+  height: 27px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.mySch-table tbody button:hover{
+  background-color:#013d81
 }

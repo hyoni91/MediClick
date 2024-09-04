@@ -45,6 +45,9 @@ const DocMemList = () => {
   // console.log(infoList)
   // console.log(oneDoc)
 
+  //예약상태가 N일때 tr 텍스트 변경
+  const cancelLine={color:'lightgray'}
+
   // 예약취소
   function goDelete(schNum){
     axios
@@ -177,7 +180,7 @@ const DocMemList = () => {
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
-              <td>예약 상태</td>
+              <td>취소</td>
             </tr>
           </thead>
           <tbody>
@@ -192,10 +195,12 @@ const DocMemList = () => {
               infoList.map((info,i)=>{
                 return(
                 <tr key={i}>
-                  <td>{info.schNum}</td>
-                  <td>{info.schDate}</td>
-                  <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span></td>
-                  <td>{info.detail}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.schNum}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.schDate}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>
+                    <span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span>
+                  </td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.detail}</td>
                   <td>
                     {
                       info.schStatus==='Y'?
