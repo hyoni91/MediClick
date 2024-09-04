@@ -11,7 +11,6 @@ const UserServiceUpdate = () => {
   // 수정 쿼리 실행 빈 값 채워줄 데이터
   const [updateData, setUpdateData] = useState({
     boardNum : boardNum,
-    title : '',
     content : ''
   });
 
@@ -29,7 +28,6 @@ const UserServiceUpdate = () => {
       setBoardDetail(res.data);
       setUpdateData({
         ...updateData,
-        title : res.data.title,
         content : res.data.content
       });
     })
@@ -39,12 +37,16 @@ const UserServiceUpdate = () => {
   const navigate = useNavigate();
   // 게시글 수정 쿼리 실행
   function updateBoard(){
-    axios.put('/board/update', updateData)
-    .then((res)=>{
-      alert('게시글이 수정 되었습니다.');
-      navigate(`/detail/${boardNum}`);
-    })
-    .catch((error)=>{console.log(error);});
+    if(updateData.content == ''){
+      alert('게시글 내용을 다시 확인해 주세요.')
+    }else{
+      axios.put('/board/update', updateData)
+      .then((res)=>{
+        alert('게시글이 수정 되었습니다.');
+        navigate(`/detail/${boardNum}`);
+      })
+      .catch((error)=>{console.log(error);});
+    }
   }
   return (
     <div>
@@ -66,15 +68,15 @@ const UserServiceUpdate = () => {
               </tr>
               <tr>
                 {/* <td>{BoardDetail.boardNum}</td> */}
-                <td><input type='text' defaultValue={BoardDetail.title} name='title' onChange={(e)=>{changeUpdateData(e)}}/></td>
+                <td>{BoardDetail.title}</td>
                 <td>{BoardDetail.writer}</td>
                 <td>{BoardDetail.createDate}</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>내용</td>
-                <td><textarea value={updateData.content} name='content' onChange={(e)=>{changeUpdateData(e)}}/></td>
+                <td>내용 <span className='userService-notNull'>*</span></td>
+                <td><textarea value={updateData.content} maxLength={1000} name='content' onChange={(e)=>{changeUpdateData(e)}}/></td>
               </tr>
             </tbody>
           </table>
