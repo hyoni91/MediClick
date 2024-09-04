@@ -30,7 +30,6 @@
 }
 
 
-
 .chart-div{
   width: 800px;
   /* border-bottom: 1px solid #eeeeee; */
@@ -45,7 +44,6 @@
 .chart-table{
   width: 800px;
   margin: 10px auto;
-  font-size: 0.9rem;
 }
 
 .chart-table thead tr{
@@ -76,7 +74,7 @@
   border: none;
   color: white;
   font-weight: bold;
-  /* padding: 3px 8px; */
+  border-radius: 50px;
   cursor: pointer;
 }
 
@@ -87,6 +85,7 @@
 .cancel{
   font-weight: bold;
   color: red;
+  font-size: 0.9rem;
 }
 
 .page-spans{
