@@ -114,7 +114,7 @@
         AND S.MEM_NUM=M.MEM_NUM
         AND S.DOC_NUM=D.DOC_NUM
         ORDER BY SCH_DATE DESC, SCH_TIME DESC
-<!--        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}-->
+        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
     </select>
 
     <!--환자: 총 게시글 수 조회하는 쿼리 -->

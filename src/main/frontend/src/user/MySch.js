@@ -53,27 +53,33 @@ const MySch = () => {
   function drawPagination(){
     const pagesArr=[]
     if(page.prev){
-      pagesArr.push()
+      pagesArr.push(<span key="prev" className='page-span'
+      onClick={(e)=>{getList(page.beginPage-1)}}>이전</span>)
     }
 
     //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
-    function getList(pageNo){
+    function getList(pageNo=1){
       axios
-      .post()
+      .post(`/schedule/getMemSch`,{pageNo,memNum})
       .then((res)=>{
-  
+        setMemSchInfo(res.data.scheduleList)
+        // setPage(res.data.pageInfo)
       })
       .catch((error)=>{console.log(error)})  
       
     }
 
     for(let a=page.beginPage; a<=page.endPage; a++){
-      pagesArr.push()
+      pagesArr.push(<span key={`page-${a}`} className='page-span num'
+      onClick={(e)=>{
+        cheangeBold(e)
+        getList(a)
+      }}>{a}</span>)
     }
 
     if(page.next){
-      pagesArr.push()
-
+      pagesArr.push(<span key="next" className='page-span'
+      onClick={(e)=>{getList(page.endPage+1)}}>다음</span>)
     }
 
     return pagesArr
@@ -82,10 +88,16 @@ const MySch = () => {
 
   //선택한 페이지 bold 유지
   function cheangeBold(e){
-
+    let bb=document.querySelectorAll('.num')
+    bb.forEach((b,i)=>{
+      if(e.currentTarget==b){
+        b.classList.add('active')
+      }
+      else{
+        b.classList.remove('active')
+      }
+    })
   }
-
-
 
 
   useEffect(()=>{
@@ -99,15 +111,15 @@ const MySch = () => {
 
 
     axios
-    .get(`/schedule/getMemSch/${memNum}`)
+    .post(`/schedule/getMemSch`,{memNum})
     .then((res)=>{
       console.log(res.data)
-      setMemSchInfo(res.data)
-
+      setMemSchInfo(res.data.scheduleList)
+      setPage(res.data.pageInfo)
     })
     .catch((error)=>{console.log(error)})
 
-  },[])
+  },[memNum])
 
   return (
     <div>
@@ -191,6 +203,12 @@ const MySch = () => {
             
           </tbody>
         </table>
+      </div>
+
+      <div className='page-spans'>
+        {
+          drawPagination()
+        }
       </div>
     
     </div>

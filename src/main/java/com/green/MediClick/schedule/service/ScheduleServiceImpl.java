@@ -28,7 +28,6 @@ public class ScheduleServiceImpl implements ScheduleService{
         return sqlSession.selectOne("scheduleMapper.getChartCnt",docNum);
     }
 
-
     //의사별 담당환자 차트
     @Override
     public ScheduleVO getMemChart(String schNum) {
@@ -43,8 +42,13 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     //환자가보는 나의 예약페이지
     @Override
-    public List<ScheduleVO> getMemSch(String memNum) {
-        return sqlSession.selectList("scheduleMapper.getMemSch",memNum);
+    public List<ScheduleVO> getMemSch(String memNum,PageVO pageVO) {
+        return sqlSession.selectList("scheduleMapper.getMemSch",Map.of("memNum",memNum,"pageVO",pageVO));
+    }
+
+    @Override
+    public int getMyChartCnt(String memNum) {
+        return sqlSession.selectOne("scheduleMapper.getMyChartCnt",memNum);
     }
 
     @Override

@@ -76,7 +76,7 @@ const DocMemList = () => {
     }
 
     //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
-    function getList(pageNo){
+    function getList(pageNo=1){
       axios
       .post(`/schedule/getDocMemList`,{pageNo,docNum})
       .then((res)=>{
@@ -166,17 +166,17 @@ const DocMemList = () => {
         <h4>| 담당 환자 정보</h4>
         <table className='chart-table'>
           <colgroup>
-            <col width='2%'/>
-            <col width='18%'/>
-            <col width='20%'/>
-            <col width='50%'/>
+            <col width='10%'/>
+            <col width='10%'/>
+            <col width='10%'/>
+            <col width='45%'/>
             <col width='10%'/>
 
           </colgroup>
 
           <thead>
             <tr>
-              <td>No</td>
+              <td>예약번호</td>
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
