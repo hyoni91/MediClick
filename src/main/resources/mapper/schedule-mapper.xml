@@ -41,7 +41,7 @@
          LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
      </select>
 
-    <!-- 총 게시글 수 조회하는 쿼리 -->
+    <!--의사: 총 게시글 수 조회하는 쿼리 -->
     <select id="getChartCnt" resultType="int">
         SELECT COUNT(SCH_NUM)
         FROM MEDICAL_SCHEDULE
@@ -114,6 +114,14 @@
         AND S.MEM_NUM=M.MEM_NUM
         AND S.DOC_NUM=D.DOC_NUM
         ORDER BY SCH_DATE DESC, SCH_TIME DESC
+        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
+    </select>
+
+    <!--환자: 총 게시글 수 조회하는 쿼리 -->
+    <select id="getMyChartCnt" resultType="int">
+        SELECT COUNT(SCH_NUM)
+        FROM MEDICAL_SCHEDULE
+        WHERE MEM_NUM=#{memNum}
     </select>
 
     <!-- 의사 진료과 불러오기 -->

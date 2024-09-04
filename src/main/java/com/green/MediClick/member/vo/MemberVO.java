@@ -9,5 +9,6 @@ public class MemberVO {
     private String memTel;
     private String memRrn;
     private String memRole;
+    private int pageNo;
 }
 

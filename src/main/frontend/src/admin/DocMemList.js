@@ -45,6 +45,9 @@ const DocMemList = () => {
   // console.log(infoList)
   // console.log(oneDoc)
 
+  //예약상태가 N일때 tr 텍스트 변경
+  const cancelLine={color:'lightgray'}
+
   // 예약취소
   function goDelete(schNum){
     axios
@@ -73,7 +76,7 @@ const DocMemList = () => {
     }
 
     //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
-    function getList(pageNo){
+    function getList(pageNo=1){
       axios
       .post(`/schedule/getDocMemList`,{pageNo,docNum})
       .then((res)=>{
@@ -163,21 +166,21 @@ const DocMemList = () => {
         <h4>| 담당 환자 정보</h4>
         <table className='chart-table'>
           <colgroup>
-            <col width='2%'/>
-            <col width='18%'/>
-            <col width='20%'/>
-            <col width='50%'/>
+            <col width='10%'/>
+            <col width='10%'/>
+            <col width='10%'/>
+            <col width='45%'/>
             <col width='10%'/>
 
           </colgroup>
 
           <thead>
             <tr>
-              <td>No</td>
+              <td>예약번호</td>
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
-              <td>예약 상태</td>
+              <td>취소</td>
             </tr>
           </thead>
           <tbody>
@@ -192,10 +195,12 @@ const DocMemList = () => {
               infoList.map((info,i)=>{
                 return(
                 <tr key={i}>
-                  <td>{info.schNum}</td>
-                  <td>{info.schDate}</td>
-                  <td><span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span></td>
-                  <td>{info.detail}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.schNum}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.schDate}</td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>
+                    <span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span>
+                  </td>
+                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.detail}</td>
                   <td>
                     {
                       info.schStatus==='Y'?

@@ -23,7 +23,6 @@ public class ScheduleController {
     @PostMapping("/getDocMemList")
     public Map<String,Object> getDocMemList(@RequestBody DoctorVO doctorVO){
 
-        System.out.println("112222222222222222222"+doctorVO);
         //전체 환자 수
         scheduleService.getChartCnt(doctorVO.getDocNum());
 
@@ -62,9 +61,33 @@ public class ScheduleController {
 //    }
 
     //환자가 보는 나의 예약페이지
-    @GetMapping("/getMemSch/{memNum}")
-    public List<ScheduleVO> getMemSch(@PathVariable("memNum")String memNum){
-        return scheduleService.getMemSch(memNum);
+    @PostMapping("/getMemSch")
+    public Map<String,Object> getMemSch(@RequestBody MemberVO memberVO){
+        //페이징처리 예정
+
+        //전체 예약 수
+        scheduleService.getMyChartCnt(memberVO.getMemNum());
+
+        //페이지 정보를 담을 수 있는 PageVO 생성
+        PageVO pageInfo=new PageVO(scheduleService.getMyChartCnt(memberVO.getMemNum()));
+
+        //화면상에 나타나는 현재 페이지 번호
+        if(memberVO.getPageNo()!=0){
+            pageInfo.setNowPage(memberVO.getPageNo());
+        }
+
+        pageInfo.setPageInfo();
+
+        List<ScheduleVO> scheduleList=scheduleService.getMemSch(memberVO.getMemNum(),pageInfo);
+
+        //리액트로 가져갈 모든 데이터를 담을 변수
+        Map<String,Object> mapData=new HashMap<>();
+        //페이징 정보가 담긴 데이터
+        mapData.put("pageInfo",pageInfo);
+        mapData.put("scheduleList",scheduleList);
+        return mapData;
+
+
     }
 
     //예약상태 취소버튼을 누르면 예약상태를 Y > N로 변경

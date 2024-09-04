@@ -22,7 +22,10 @@ public interface ScheduleService {
 //    void updateSchChart(ScheduleVO scheduleVO);
 
     //환자가보는 나의 예약페이지
-    List<ScheduleVO> getMemSch(String memNum);
+    List<ScheduleVO> getMemSch(String memNum,PageVO pageVO);
+
+    //환자 총 예약 수
+    int getMyChartCnt(String memNum);
 
     void updateSchStatus(int schNum);
 

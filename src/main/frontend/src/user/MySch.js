@@ -5,7 +5,10 @@ import axios from 'axios';
 
 const MySch = () => {
   // 환자가 보는 나의 예약페이지
+
   const {memNum} = useParams();
+  const [page,setPage]=useState({})
+
   const [oneMem,setOneMem]=useState({
     memNum:'',
     memName:'',
@@ -25,6 +28,78 @@ const MySch = () => {
     }
   ])
 
+  //예약상태가 N일때 tr 텍스트 변경
+  const cancelLine={color:'lightgray'}
+
+  //예약취소 
+  function goDelete(schNum){
+    axios
+    .put(`/schedule/updateSchStatus/${schNum}`)
+    .then((res)=>{
+      alert('예약이 취소되었습니다.')
+
+      //예약 취소 후 상태 업데이트
+      setMemSchInfo((prevList)=>
+        prevList.map((item)=>
+          item.schNum === schNum?
+          {...item,schStatus:'N'}:item
+        )
+      )
+    })
+    .catch((error)=>{console.log(error)})
+  }
+
+  //페이징 그리기
+  function drawPagination(){
+    const pagesArr=[]
+    if(page.prev){
+      pagesArr.push(<span key="prev" className='page-span'
+      onClick={(e)=>{getList(page.beginPage-1)}}>이전</span>)
+    }
+
+    //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
+    function getList(pageNo=1){
+      axios
+      .post(`/schedule/getMemSch`,{pageNo,memNum})
+      .then((res)=>{
+        setMemSchInfo(res.data.scheduleList)
+        // setPage(res.data.pageInfo)
+      })
+      .catch((error)=>{console.log(error)})  
+      
+    }
+
+    for(let a=page.beginPage; a<=page.endPage; a++){
+      pagesArr.push(<span key={`page-${a}`} className='page-span num'
+      onClick={(e)=>{
+        cheangeBold(e)
+        getList(a)
+      }}>{a}</span>)
+    }
+
+    if(page.next){
+      pagesArr.push(<span key="next" className='page-span'
+      onClick={(e)=>{getList(page.endPage+1)}}>다음</span>)
+    }
+
+    return pagesArr
+
+  }
+
+  //선택한 페이지 bold 유지
+  function cheangeBold(e){
+    let bb=document.querySelectorAll('.num')
+    bb.forEach((b,i)=>{
+      if(e.currentTarget==b){
+        b.classList.add('active')
+      }
+      else{
+        b.classList.remove('active')
+      }
+    })
+  }
+
+
   useEffect(()=>{
     axios
     .get(`/member/getOneMem/${memNum}`)
@@ -36,15 +111,15 @@ const MySch = () => {
 
 
     axios
-    .get(`/schedule/getMemSch/${memNum}`)
+    .post(`/schedule/getMemSch`,{memNum})
     .then((res)=>{
       console.log(res.data)
-      setMemSchInfo(res.data)
-
+      setMemSchInfo(res.data.scheduleList)
+      setPage(res.data.pageInfo)
     })
     .catch((error)=>{console.log(error)})
 
-  },[])
+  },[memNum])
 
   return (
     <div>
@@ -101,18 +176,26 @@ const MySch = () => {
             {
               memSchInfo.memName==''?
               (<tr>
-                <td colSpan={5}>예약정보가 없습니다.</td>
+                <td colSpan={6}>예약정보가 없습니다.</td>
               </tr>)
               :
               memSchInfo.map((mem,i)=>{
                 return(
-                  (<tr>
-                    <td>{mem.schDate}</td>
-                    <td>{mem.schTime}</td>
-                    <td>{mem.memberVO.memName}</td>
-                    <td>{mem.doctorVO.medicalDept.deptName}</td>
-                    <td>{mem.doctorVO.docName}</td>
-                    <td>{mem.schStatus}</td>
+                  (<tr key={i}>
+                    <td style={mem.schStatus === 'N'?cancelLine:null}>{mem.schDate}</td>
+                    <td style={mem.schStatus === 'N'?cancelLine:null}>{mem.schTime}</td>
+                    <td style={mem.schStatus === 'N'?cancelLine:null}>{mem.memberVO.memName}</td>
+                    <td style={mem.schStatus === 'N'?cancelLine:null}>{mem.doctorVO.medicalDept.deptName}</td>
+                    <td style={mem.schStatus === 'N'?cancelLine:null}>{mem.doctorVO.docName}</td>
+                    <td>
+                      {
+                        mem.schStatus=='N'?
+                        (<p className='cancel'>취소</p>)
+                        :
+                        (<p><button type='button' onClick={(e)=>{goDelete(mem.schNum)}}>취소</button></p>)
+                      }
+                      
+                      </td>
                   </tr>)
                 )
               })
@@ -120,6 +203,12 @@ const MySch = () => {
             
           </tbody>
         </table>
+      </div>
+
+      <div className='page-spans'>
+        {
+          drawPagination()
+        }
       </div>
     
     </div>
