@@ -63,7 +63,7 @@ public class PageVO {
 
         prev= beginPage!=1;
 
-        next= endPage!=totalDataCnt;
+        next= endPage!=totalPageCnt;
 
         offset=displayDataCnt*(nowPage-1);
 
