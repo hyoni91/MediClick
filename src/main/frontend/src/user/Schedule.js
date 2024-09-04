@@ -54,9 +54,9 @@ const Schedule = () => {
   //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     docNum :'',
-    memNum: loginInfo ? loginInfo.memNum : "",
-    deptNum :1 ,
-    schDate: moment(value).format("YYYY-MM-DD"),
+    memNum: loginInfo ? loginInfo.memNum : "", //로그인 회원 정보
+    deptNum :1 , //진료과 테이블 오름차순기준으로 초기값 설정
+    schDate: moment(value).format("YYYY-MM-DD"), //다음날을 기준일로 초기값
     schTime : '',
     detail:'',
     deptName:''
@@ -105,8 +105,8 @@ const Schedule = () => {
       }
     });
     //선택한 진료과와 의사 정보 저장
-    const selectedValue = e.target.value; // JSON 문자열
-    const { deptNum, docNum , deptName } = JSON.parse(selectedValue); // JSON 파싱
+    const selectedValue = e.target.value; // JSON문자열
+    const { deptNum, docNum , deptName } = JSON.parse(selectedValue); //JSON 파싱
     setAppo({
       ...appo,
       deptNum : deptNum,
@@ -126,11 +126,10 @@ const Schedule = () => {
   // time 데이터
   const schTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
 
-  //예약유무확인(타임버튼 비활성화를 위한)
   // schTimes길이 만큼 false값주기
   const [chkAppoTime, setChkAppoTime] = useState(new Array(schTimes.length).fill(false))
 
-
+  //예약 유무 확인(예약된 시간 True -> 버튼 비활성화)
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
@@ -144,7 +143,7 @@ const Schedule = () => {
       //있으면 true 없으면 false
       const updatedChkAppoTime = schTimes.map(time => availableTimes.includes(time));
       // console.log(`updateTime: ` + updatedChkAppoTime)
-      //체크를 끝냈으면 chkAppoTime을 갱신 
+      //체크를 끝났으면 chkAppoTime을 갱신 
       setChkAppoTime(updatedChkAppoTime)
     })
     .catch((error)=>{
@@ -152,23 +151,24 @@ const Schedule = () => {
     })
   },[appo])
 
+  //예약정보 console
   console.log(appo)
 
 
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
-    if(appo.memNum == ''){
-      alert('로그인 후 이용해 주세요.')
+    if(appo.memNum == ''){  //회원 번호가 없으면 로그인 페이지로 이동
+      alert('로그인 후 이용해 주세요.') 
       navigate('/loginForm')
     }else if(appo.memRrn == '' || appo.schTime =='' || appo.docNum == ''){
-      alert('예약 내용을 다시 확인해 주세요.')
+      alert('예약 내용을 다시 확인해 주세요.') //빈 값이 있는 경우 예약버튼 실행안됨
     }else{
-        //다 들어가 있으면 쿼리실행
+        //문제없으면 예약 테이블에 insert
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
       alert('예약이 완료되었습니다.')
-      //본인 예약 확인페이지로 넘어가기
+      //예약 완료 후 본인 예약 확인페이지로 넘어가기
       navigate(`/mySch/${appo.memNum}`)
     })
     .catch((error)=>{
@@ -182,7 +182,6 @@ const Schedule = () => {
   return (
     <div className='sch-container'>
       <div className='sch-header'>
-        {/* <h2>진료안내</h2> */}
         <div>
           <h3>진료예약</h3>
           <span>1234-1234</span>
@@ -220,7 +219,6 @@ const Schedule = () => {
                 }
               </div>
               <div className='sch-calendar'>
-              {/* <div  className='h3tag'>진료날짜</div> */}
                 <Calendar 
                 onChange={onChange} 
                 value={value} 
@@ -228,7 +226,9 @@ const Schedule = () => {
                 next2Label={null}
                 prev2Label={null}
                 minDetail="year"
+                // 오늘기준 과거는 클릭 비활성화
                 minDate={minDate}
+                // 오늘기준 3개월 까지만 클릭 활성화
                 maxDate={maxDate}
                 //날짜 칸에 보여지는 컨텐츠
                 tileDisabled={tileDisabled}
@@ -244,7 +244,6 @@ const Schedule = () => {
                       }
                 </div>
                 <div className='sch-status'> 🟦선택중  ⬜예약불가능</div>
-                
               </div>
             </div>
             <div className='schedule-table'>
@@ -288,8 +287,6 @@ const Schedule = () => {
                   </tr>
                 </tbody>
               </table>
-              
-              
               <div className='sch-footer'>
                 <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
                 <div>상기 내용으로 예약하시겠습니까?</div>
