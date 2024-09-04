@@ -77,7 +77,7 @@ const MedicalDoctor = () => {
               <div className='introDoctorDept'>
                 {docotrList[2].medicalDept.deptName}
               </div>
-              <div className='introDoctor'>갑상선암의 방사성 요오드 치료, 진행성 갑상선암의 <br/>수술적 치료</div>
+              <div className='introDoctor'>갑상선암의 핵의학적 진단, 두경부암, 인후두암, 갑상선암의 수술적 치료</div>
               <p className='goSchedule'>
                 <span onClick={()=>{navigate('/scheduleForm')}}>진료 예약 신청</span>
                 <i class="bi bi-arrow-right-circle-fill" onClick={()=>{navigate('/scheduleForm')}}></i>
@@ -111,7 +111,7 @@ const MedicalDoctor = () => {
               <div className='introDoctorDept'>
                 {docotrList[4].medicalDept.deptName}
               </div>
-              <div className='introDoctor'>폐암, 식도암의 수술적 치료, 폐암의 새로운 치료법 개발을 위한 임상시험 및 <br/> 약물 유전체 연구</div>
+              <div className='introDoctor'>폐암의 수술적 치료, 폐암의 새로운 치료법 개발을 위한 임상시험 및 유전체 연구</div>
               <p className='goSchedule'>
                 <span onClick={()=>{navigate('/scheduleForm')}}>진료 예약 신청</span>
                 <i class="bi bi-arrow-right-circle-fill" onClick={()=>{navigate('/scheduleForm')}}></i>
@@ -127,7 +127,7 @@ const MedicalDoctor = () => {
               <div className='introDoctorDept'>
                 {docotrList[5].medicalDept.deptName}
               </div>
-              <div className='introDoctor'>악성림프종, 백혈병, 혈소판 감소증, 조혈모세포이식, <br/>혈전지혈질환 치료와 연구</div>
+              <div className='introDoctor'>악성림프종, 다발골수종, <br/> 백혈병, 조혈모세포이식,  <br/>혈전지혈질환 치료와 연구</div>
               <p className='goSchedule'>
                 <span onClick={()=>{navigate('/scheduleForm')}}>진료 예약 신청</span>
                 <i class="bi bi-arrow-right-circle-fill" onClick={()=>{navigate('/scheduleForm')}}></i>
