@@ -9,7 +9,7 @@
 
 }
 
-/* 디자인 연습 */
+/* 왼쪽 하단의 진료예약 안내 */
 .sch-container{
   display: flex;
   /* border: 1px solid; */
@@ -17,15 +17,17 @@
 }
 
 .sch-header{
-  padding-top:250px ;
+  padding-top:200px ;
   /* padding-bottom:150px ; */
   padding-left: 10px;
-  padding-right: 10px;
   margin: auto;
   /* border: 1px solid rgb(192, 192, 192); */
   line-height: 25px;
 }
 
+.sch-header-content > p{
+  line-height: 20px;
+}
 
 .sch-header > div{
   margin-bottom: 15px;
@@ -98,36 +100,32 @@
 
 /* 진료과목 이미지 */
 .doc-icon-div img{
-  width: 33%;
+  width: 32%;
 }
 
 /* 진료과 플렉스 */
 .doc-icon-div{
-  width: 33%;
+  width: 32%;
   display: flex;
   justify-content: center;
-  margin-right: 50px;
+  margin-right: 52px;
   margin-bottom: 5px;
+  /* margin: auto; */
 }
 
 /* 아이콘 진료과 선택 버튼 */
 .doc-icon-div button{
-  width: 100px;
-  /* padding: 5px; */
+  width: 110px;
   border: none;
   background-color: white;
   cursor: pointer;
   margin: auto;
   text-align: center;
-  /* border: 1px solid ; */
-  margin-right: 2px;
 }
 
 .button:hover,
 .button.active {
   font-weight: 800;
-/* color: white;
-background-color: #0254AF; */
 }
 
 
