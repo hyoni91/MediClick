@@ -2,7 +2,10 @@ import React from 'react'
 
 const StatChart = () => {
   return (
-    <div>StatChart</div>
+    <div>
+
+      
+    </div>
   )
 }
 

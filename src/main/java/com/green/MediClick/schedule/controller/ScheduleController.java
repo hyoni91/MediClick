@@ -94,11 +94,14 @@ public class ScheduleController {
 
     }
 
-    //예약상태 취소버튼을 누르면 예약상태를 Y > N로 변경
+    //예약상태 취소버튼을 누르면 예약상태를 Y > N로 변경 //바꿀예정
     @PutMapping("/updateSchStatus/{schNum}")
     public void updateSchStatus(@PathVariable("schNum")int schNum){
         scheduleService.updateSchStatus(schNum);
     }
+//    public void deleteSch(@PathVariable("schNum")int schNum){
+//        scheduleService.deleteSch(schNum);
+//    }
 
     //예약을 위한  의사/ 진료과 정보
     @GetMapping("/getDocInfo")
