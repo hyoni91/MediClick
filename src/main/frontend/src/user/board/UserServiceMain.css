@@ -1,8 +1,17 @@
 .board-list-div table tr td{
-border: 1px solid;
+border: 2.5px solid white;
+padding: 10px;
+}
+.board-list-div-tbody{
+  background-color: #04686b27;
+  color: black;
 }
 .board-list-div table{
   margin: 100px auto;
+}
+.board-list-div-thead{
+  background-color: #11999e;
+  color: white;
 }
 .go-userServiceDetail:hover{
   cursor: pointer;

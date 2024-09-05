@@ -1,7 +1,7 @@
 import { type } from '@testing-library/user-event/dist/type'
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { Line } from 'react-chartjs-2'
+// import { Line } from 'react-chartjs-2'
 
 const StatChart = () => {
 

@@ -40,12 +40,12 @@ const UserServiceMain = ({loginInfo}) => {
       <div className='board-list-div'>
         <table>
           <colgroup>
-            <col width='10%'/>
-            <col width='*'/>
-            <col width='20%'/>
-            <col width='25%'/>
+            <col width='70px'/>
+            <col width='400px'/>
+            <col width='150px'/>
+            <col width='300px'/>
           </colgroup>
-          <thead>
+          <thead className='board-list-div-thead'>
             <tr>
               <td>No</td>
               <td>제 목</td>
@@ -53,7 +53,7 @@ const UserServiceMain = ({loginInfo}) => {
               <td>작성일</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='board-list-div-tbody'>
             {
               boardList.map((board, i) => {
                 return (
@@ -62,7 +62,7 @@ const UserServiceMain = ({loginInfo}) => {
                     <td>
                       <span className='go-userServiceDetail' onClick={(e)=>{navigate(`/detail/${board.boardNum}`)}}>{board.title}</span>
                     </td>
-                    <td>{board.writer}</td>
+                    <td className='go-userServiceDetail-wirter'>{board.writer}</td>
                     <td>{board.createDate}</td>
                   </tr>
                 );
