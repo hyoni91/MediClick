@@ -96,7 +96,12 @@ const AdminJoinForm = () => {
   }
 
   const deleteDoctor = (e) => {
-    axios.get('')
+    axios.get(`/deleteDoctor/${docNum}`)
+      .then((res) => {
+        navigate('/joinForm')})
+      .catch((error) => {
+        console.log(error)})
+    
   }
   //반드시 아래의 설정 코드를 axios에 추가!!!
   return (
@@ -153,7 +158,7 @@ const AdminJoinForm = () => {
           </babel>
         </div>
           <div>
-            <button className='adminJoin-btn' onClick={() => {navigate('/joinForm')}}>취소</button>
+            <button className='adminJoin-btn' onClick={() => {deleteDoctor()}}>취소</button>
             <button className='adminJoin-btn' onClick={() => {insertDoctor()}}>저장</button>
             
           </div>

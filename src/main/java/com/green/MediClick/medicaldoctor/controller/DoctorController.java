@@ -9,6 +9,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class DoctorController {
     // 관리자 입력상태에서 취소시 삭제
     @GetMapping("/deleteDoctor/{docNum}")
     public void deleteDoctor(@PathVariable ("docNum") String docNum){
-
+        System.out.println(docNum);
         doctorService.deleteDoctor(docNum);
     }
 }
