@@ -21,6 +21,7 @@ import UserServiceDetail from './user/board/UserServiceDetail';
 import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
+import KakaoTest from './user/schedule/KakaoTest';
 
 function App() {
   const navigate=useNavigate()
@@ -121,6 +122,8 @@ function App() {
             <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 차트 */}
             <Route path='statChart' element={<StatChart/>}/>
+            {/* 카카오 문자 */}
+            <Route path='message' element={<KakaoTest />}/>
           </Route>
   
   
