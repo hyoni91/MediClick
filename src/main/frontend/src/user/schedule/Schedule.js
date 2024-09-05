@@ -16,6 +16,7 @@ const Schedule = () => {
   minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
+
   // 선택한 날짜 update
   const [value, onChange] = useState(minDate) //초기값은 내일 날짜
 
@@ -27,13 +28,26 @@ const Schedule = () => {
 
    // tileDisabled 속성을 사용하여 주말 날짜를 비활성화
   const tileDisabled = ({ date }) => {
+    
     return isWeekend(date); // 주말 날짜를 비활성화
   };
 
-
-
   // 환자정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
+  
+
+  //예약 내용 저장할 변수
+  const [appo, setAppo] = useState({
+    docNum :'',
+    memNum: loginInfo ? loginInfo.memNum : "", //로그인 회원 정보
+    deptNum :1 , //진료과 테이블 오름차순기준으로 초기값 설정
+    schDate: moment(value).format("YYYY-MM-DD"), //다음날을 기준일로 초기값
+    schTime : '',
+    detail:'',
+    deptName:''
+  })
+
+
   // 진료과 의사 정보를 담을 변수 선언
   const [docInfo, setDocInfo] = useState([])
 
@@ -49,16 +63,6 @@ const Schedule = () => {
   },[])
 
 
-  //예약 내용 저장할 변수
-  const [appo, setAppo] = useState({
-    docNum :'',
-    memNum: loginInfo ? loginInfo.memNum : "", //로그인 회원 정보
-    deptNum :1 , //진료과 테이블 오름차순기준으로 초기값 설정
-    schDate: moment(value).format("YYYY-MM-DD"), //다음날을 기준일로 초기값
-    schTime : '',
-    detail:'',
-    deptName:''
-  })
 
   // schDate를 선택하면 appo정보도 바뀌도록 설정(실시간으로 schDate갱신)
   useEffect(() => {
