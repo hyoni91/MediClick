@@ -273,7 +273,7 @@ const Home=({loginInfo})=>{
           {/* 게시판 */}
           {/* 차트 */}
           <div>
-            <div><StatChart/></div>
+            <div></div>
           </div>
 
         </div>
