@@ -18,7 +18,8 @@ const Schedule = () => {
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
   // 선택한 날짜 update
-  const [value, onChange] = useState(minDate) //초기값은 내일 날짜
+  const [value, onChange] = useState(minDate) //초기값은 현재날짜
+
 
   //주말만 가져오기 
   const isWeekend = (date) => {
@@ -256,14 +257,12 @@ const Schedule = () => {
                 </colgroup>
                 <tbody>
                   <tr>
-
                     <td>예약날짜 : </td>
                     <td>
                       <input  type='text' readOnly 
                     value={moment(value).format("YYYY-MM-DD")}
                     name='schDate' ref={choseData} />
                     </td>
-                    
                   </tr>
                   <tr>
                     <td>예약시간 : </td>
