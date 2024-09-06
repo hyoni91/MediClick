@@ -1,4 +1,6 @@
 .statChart{
+  /* border: 1px solid black; */
   margin: 100px auto;
   width: 500px;
+  height: 500px;
 }

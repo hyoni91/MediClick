@@ -12,6 +12,7 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
     memRole:''
   })
   
+  const regex_memName=/^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/
 
   function insertData(e){
     setInputData({

@@ -34,20 +34,32 @@ const MySch = () => {
 
   //예약취소 
   function goDelete(schNum){
-    axios
-    .put(`/schedule/updateSchStatus/${schNum}`)
-    .then((res)=>{
-      alert('예약이 취소되었습니다.')
+    if(window.confirm(`예약을 취소하시겠습니까?`)){
+      axios
+      .delete(`/schedule/updateSchStatus/${schNum}`)
+      .then((res)=>{
+        alert('예약이 취소되었습니다.')
 
-      //예약 취소 후 상태 업데이트
-      setMemSchInfo((prevList)=>
-        prevList.map((item)=>
-          item.schNum === schNum?
-          {...item,schStatus:'N'}:item
-        )
-      )
-    })
-    .catch((error)=>{console.log(error)})
+        //예약 취소 후 스케줄 삭제
+        memSchInfo.forEach((sch,i)=>{
+          if(sch.schNum==schNum){
+            memSchInfo.splice(i,1)
+          }
+        })
+        setMemSchInfo([...memSchInfo])
+  
+        //예약 취소 후 상태 업데이트
+        // setMemSchInfo((prevList)=>
+        //   prevList.map((item)=>
+        //     item.schNum === schNum?
+        //     {...item,schStatus:'N'}:item
+        //   )
+        // )
+      })
+      .catch((error)=>{console.log(error)})
+    }
+
+
   }
 
   //페이징 그리기

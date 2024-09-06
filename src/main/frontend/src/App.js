@@ -266,7 +266,7 @@ const Home=({loginInfo})=>{
           
         </div>
 
-        <div>
+        <div className='main-plus'>
           <div className='miniMap'>
             <h1>오시는 길</h1>
             <div id='map'><KakaoMap/></div>

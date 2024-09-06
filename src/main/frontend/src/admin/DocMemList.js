@@ -37,21 +37,34 @@ const DocMemList = () => {
 
   // 예약취소
   function goDelete(schNum){
-    axios
-    .put(`/schedule/updateSchStatus/${schNum}`)
-    .then((res)=>{
-      alert('예약이 취소되었습니다.')
+    if(window.confirm('예약을 취소하시겠습니까?')){
+      axios
+      .delete(`/schedule/updateSchStatus/${schNum}`)
+      .then((res)=>{
 
-      // 예약 취소 후 상태를 업데이트
-      setInfoList((prevList)=>
-        prevList.map((item)=>
-          item.schNum === schNum ? 
-          {...item, schStatus:'N'} : item
-        )
-      )
+        alert('예약이 취소되었습니다.')
+        
+        // 예약 취소 후 스케줄 삭제
+        infoList.forEach((info,i)=>{
+          if(info.schNum==schNum){
+            infoList.splice(i,1)
+          }
+        })
+        setInfoList([...infoList])
 
-    })
-    .catch((error)=>{console.log(error)})
+      // // 예약 취소 후 상태를 업데이트 (delete가 아니라 update로 Y > N로 상태만 변경할 때)
+      // setInfoList((prevList)=>
+      //   prevList.map((item)=>
+      //     item.schNum === schNum ? 
+      //     {...item, schStatus:'N'} : item
+      //   )
+      // )
+  
+      })
+      .catch((error)=>{console.log(error)})
+    }
+
+
   }
 
   //페이징 그리기
@@ -156,9 +169,9 @@ const DocMemList = () => {
         <h4>| 담당 환자 정보</h4>
         <table className='chart-table'>
           <colgroup>
-            <col width='10%'/>
-            <col width='10%'/>
-            <col width='10%'/>
+            {/* <col width='10%'/> */}
+            <col width='15%'/>
+            <col width='15%'/>
             <col width='45%'/>
             <col width='10%'/>
 
@@ -166,7 +179,7 @@ const DocMemList = () => {
 
           <thead>
             <tr>
-              <td>예약번호</td>
+              {/* <td>예약번호</td> */}
               <td>진료일</td>
               <td>환자명</td>
               <td>증상</td>
@@ -185,7 +198,7 @@ const DocMemList = () => {
               infoList.map((info,i)=>{
                 return(
                 <tr key={i}>
-                  <td style={info.schStatus === 'N'?cancelLine:null}>{info.schNum}</td>
+                  {/* <td style={info.schStatus === 'N'?cancelLine:null}>{info.schNum}</td> */}
                   <td style={info.schStatus === 'N'?cancelLine:null}>{info.schDate}</td>
                   <td style={info.schStatus === 'N'?cancelLine:null}>
                     <span onClick={(e)=>{navigate(`/admin/docMemInfo/${info.schNum}`)}}>{info.memberVO.memName}</span>
