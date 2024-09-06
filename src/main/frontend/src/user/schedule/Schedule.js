@@ -1,3 +1,4 @@
+import emailjs from '@emailjs/browser';
 import React, { useEffect, useRef, useState } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
@@ -9,6 +10,35 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Schedule = () => {
+  //이메일 보내기 추가 20240906
+  useEffect(()=>{
+    //메일
+    emailjs.init(process.env.REACT_APP_Public_key)
+  },[]);
+
+    //(수정중)이메일 보내기 ////////////////////////////////////////////////////////
+    const form = useRef();
+    const sendEmail = (e) => {
+      e.preventDefault();
+  
+      emailjs.sendForm('service_opia6hi', 'mediClick_tamplate', form.current, {
+          publicKey: process.env.REACT_APP_Public_key,
+        })
+        .then(
+          () => {
+            console.log('SUCCESS!');
+          },
+          (error) => {
+            console.log('FAILED...')
+            console.log(error);
+          },
+        );
+    };
+  
+    console.log(form.current)
+
+    ////////////////////////////////////////////////////////////////////////
+
   const navigate = useNavigate()
   
   // 날짜를 계산
@@ -250,7 +280,7 @@ const Schedule = () => {
               </div>
             </div>
             <div className='schedule-table'>
-              <table>
+              <table  >
                 <colgroup>
                   <col width={'25%'}/>
                   <col width={'*'}/>
@@ -297,11 +327,26 @@ const Schedule = () => {
               <div className='sch-footer'>
                 <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
                 <div>상기 내용으로 예약하시겠습니까?</div>
-                <button  type='button' onClick={()=>{goAppo(appo.memNum)}}>예약하기 </button>
+                <button  type='button' onClick={()=>{goAppo(appo.memNum) }}>예약하기 </button>
               </div>
             </div>
         </div>
       </div>
+      
+      {/* 확정 메일 from */}
+      <form ref={form}>
+        <input type='hidden' name='memName' value={loginInfo? loginInfo.memName : ""}/>
+        <input type='hidden' name='regDate' value={'오늘날짜'}/>
+        <input type='hidden' name='schDate' value={appo.schDate}/>
+        <input type='hidden' name='schTime'  value={appo.schTime}/>
+        <input type='hidden' name='deptName' value={appo.deptName}/>
+        <input type='hidden' name='memRrn' value={loginInfo? loginInfo.memRrn : ""}/>
+        <input type='hidden' name='from_name' value={'그린최고암센터'}/>
+        <input type='hidden' name='reply_to' value={'MediClick@mail'}/>
+        <input type='hidden' name='to_email' value={'hyoni.green@gmail.com'}/>
+      </form>
+
+
     </div>
   )
 }
