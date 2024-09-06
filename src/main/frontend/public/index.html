@@ -27,11 +27,20 @@
     -->
     <title>Medi Click</title>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.js" integrity="sha384-4isBVZ02Sicjf8XHbphmDqKPF9IdtDHzQm7IdcIhsBHx14UU9s4FrOKdDrjDCm9M" crossorigin="anonymous"></script>
-    <script>
-      kakao.init('4efa41168cbd61da600f3efe717305a8')
-      console.log(Kakao.isInitialized())
-    </script>
+    <!-- 카카오 -->
     <script type="text/JavaScript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=67e09421d9760103777bb4b3bfeb66c4"></script>
+    <!-- 이메일 -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    // (function(){
+    //   emailjs.init({
+    //     publicKey: process.env.REACT_APP_Public_key,
+    //   });
+    // })();
+    </script>
+    
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
