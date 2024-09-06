@@ -273,10 +273,19 @@ const Home=({loginInfo})=>{
           </div>
 
           {/* 버스 */}
-          {/* 게시판 */}
-          {/* 차트 */}
+
           <div>
-            <div></div>
+            
+            {/* 게시판 */}
+            <div>
+              <h3>게시판</h3>
+              <div></div>
+            </div>
+            {/* 차트 */}
+            <div>
+              <h3>보건의료통계</h3>
+              <div><StatChart/></div>
+            </div>
           </div>
 
         </div>

@@ -17,6 +17,7 @@ const StatChart = () => {
         label:'발생자수',
         data:[21839,2015,26051,3416,1535,25780],
         backgroundColor:'#0254AF',
+        borderColor:'#0254AF',
         order:2,
         yAxisID:'y1'
       },
@@ -25,7 +26,8 @@ const StatChart = () => {
         label:'조발생률',
         data:[9.5,0.9,11.4,1.5,0.7,11.2],
         fill:false,
-        borderColor:'#FCDE70',
+        backgroundColor:'#CEDF9F',
+        borderColor:'#CEDF9F',
         tension:0.1,
         order:1,
         yAxisID:'y2'
@@ -103,7 +105,6 @@ const StatChart = () => {
       //     return label + '/n' + value + '%'
       //   }
       // },
-
       tooltip:{
         backgroundColor:'rgba(0, 0, 0, 0.6)',
         padding:10,
@@ -123,7 +124,7 @@ const StatChart = () => {
   return (
     <div className='statChart'>
 
-      <Chart type='bar' data={data} options={options}/>
+      <div><Chart type='bar' data={data} options={options}/></div>
       <p>보건복지부 암발생률 통계 2016</p>
     </div>
   )
