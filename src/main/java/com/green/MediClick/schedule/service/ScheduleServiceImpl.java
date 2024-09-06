@@ -54,12 +54,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     //예약취소
     @Override
-    public void updateSchStatus(int schNum) {
-        sqlSession.update("scheduleMapper.updateSchStatus",schNum);
-    }
-//    public void deleteSch(int schNum){
-//        sqlSession.delete("scheduleMapper.deleteSch",schNum);
+//    public void updateSchStatus(int schNum) {
+//        sqlSession.update("scheduleMapper.updateSchStatus",schNum);
 //    }
+    public void deleteSch(int schNum){
+        sqlSession.delete("scheduleMapper.deleteSch",schNum);
+    }
 
     // 예약을 위한 의사 및 진료과 정보
     @Override
