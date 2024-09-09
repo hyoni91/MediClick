@@ -1,4 +1,17 @@
 .statChart{
+  /* border: 1px solid black; */
   margin: 100px auto;
-  width: 500px;
+  width: 550px;
+  height: 400px;
+}
+
+/* .statChart>div{
+  border: 1px solid red;
+  
+} */
+
+.statChart>p{
+  font-size: 0.7rem;
+  color: gray;
+  text-align: right;
 }

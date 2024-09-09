@@ -251,6 +251,12 @@ body{
   font-family: 'TheJamsil5Bold';
 }
 
+.main-plus{
+  display: flex;
+  /* border: 1px solid black; */
+  justify-content: space-around;
+  /* align-items: center; */
+}
 
 .miniMap>div{
   margin-top: 40px;

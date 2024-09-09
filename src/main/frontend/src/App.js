@@ -267,17 +267,26 @@ const Home=({loginInfo})=>{
           
         </div>
 
-        <div>
+        <div className='main-plus'>
           <div className='miniMap'>
             <h1>오시는 길</h1>
             <div id='map'><KakaoMap/></div>
           </div>
 
           {/* 버스 */}
-          {/* 게시판 */}
-          {/* 차트 */}
+
           <div>
-            <div></div>
+            
+            {/* 게시판 */}
+            <div>
+              <h3>게시판</h3>
+              <div></div>
+            </div>
+            {/* 차트 */}
+            <div>
+              <h3>보건의료통계</h3>
+              <div><StatChart/></div>
+            </div>
           </div>
 
         </div>

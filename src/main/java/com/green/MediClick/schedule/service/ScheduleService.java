@@ -28,8 +28,8 @@ public interface ScheduleService {
     int getMyChartCnt(String memNum);
 
     //예약 취소
-    void updateSchStatus(int schNum);
-//    void deleteSch(int schNum);
+//    void updateSchStatus(int schNum);
+    void deleteSch(int schNum);
 
     // 예약을 위한 의사 진료과 정보 불러오기
     List<DoctorVO> getDocInfo();
