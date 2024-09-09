@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './BloodRefrigerator.css'
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { json } from 'react-router-dom'
+import axios from 'axios';
+
 
 const BloodRefrigerator = () => {
+
+    //날씨 api
+    const cityName = 'Seoul'
+    const apiKey = process.env.REACT_APP_Weather_Key
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+
+    // 날씨 정보 담을 변수 
+    const [weather, setWeather] = useState({})
+
+      //마운트시, 날씨 api에서 정보 받아오기
+      useEffect(()=>{
+        axios.get(url)
+        .then((res)=>{
+          console.log(res.data)
+          const weather = {
+            cityName : res.data.name,
+            temp : res.data.main.temp,
+            maxTemp : res.data.main.temp_max,
+            minTemp : res.data.main.temp_min
+          }
+          console.log(weather)
+          setWeather(weather)
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      },[])
+      
   return (
     <div className='graph-container'>
       <div className='graph-headerr'>
-        <h1>BLOOD STORAGE</h1>
+        <h1>BLOOD REFRIGERATOR</h1>
       </div>
       <div className='graph-header'>
         <div className='header-content'>
@@ -22,13 +52,15 @@ const BloodRefrigerator = () => {
             </div>
             <div>
               <p>
-                <span>날씨</span>
+                <span>날씨 ({weather.cityName})</span>
                 <span className='icon-span'>
                 <i class="fa-solid fa-cloud-sun"></i>
                 </span>
               </p>
-              <span>현재: /최저: /최고
-              </span>
+              <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
+                최저:{(weather.minTemp -273.15).toFixed(0)}°C 
+                / 최고: {(weather.maxTemp-273.15).toFixed(0)}°C
+              
             </div>
             <div>
               <p>
@@ -51,7 +83,7 @@ const BloodRefrigerator = () => {
           </div>
         <div className='header-graph'>
         <div>
-          평균온도랑 현재온도 그래프로 나타내기
+          평균온도랑 현재온도 그래프로 나타내기 <i class="fa-solid fa-rotate-right"></i>
         </div>
         </div>
       </div>
@@ -70,30 +102,6 @@ const BloodRefrigerator = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
               <tr>
                 <td>10:00</td>
                 <td>2.2</td>

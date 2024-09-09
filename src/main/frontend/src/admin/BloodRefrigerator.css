@@ -59,31 +59,39 @@
 }
 
 .graph-div{
-  width: 55%;
-  height: 350px;
+  width: 65%;
+  height: 380px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
 }
 
 
 .graph-table{
-  width: 730px;
+  width: 550px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
 }
 
 .graph-table > thead{
-  background-color: #FFFFFF;
-  color: rgb(24, 1, 1);
+  color: rgb(255, 255, 255);
+  background-color:#0050B5;
   border: none;
-  background-color: lightblue;
+  font-weight: 600;
 }
+
+.graph-table > thead td,
+.graph-table > tbody td{
+  padding: 21px;
+  text-align: center;
+}
+
+/* .graph-table > tbody tr:nth-child(even){
+  background-color: #dfe7fd;
+} */
 
 .graph-table > tbody{
   border: none;
 }
-
-
 
 .icon-span > i{
   font-size: 20px;
