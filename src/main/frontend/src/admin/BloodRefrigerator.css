@@ -1,0 +1,125 @@
+
+
+.graph-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FAFBFE;
+  text-align: left;
+} 
+
+.graph-headerr{
+  text-align: center;
+  color: black;
+  padding: 25px;
+  text-decoration: underline;
+}
+
+.graph-header{
+  display: flex;
+  width: 90%;
+  gap: 50px;
+}
+
+.header-content{
+  width: 45%;
+  display: grid;
+  grid-template-columns: repeat(2,50%); 
+  gap: 12px;
+}
+
+.header-content > div{
+  color: #6C757D;
+  height:60px;
+  padding:31px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+}
+
+.header-graph{
+  width: 52%;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+  color: #6C757D;
+}
+
+.graph-mainbar > div{
+  background-color:#F5FAFE;
+  color:#6C757D;
+  width: 25%;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.graph-content{
+  display: flex;
+  width: 90%;
+  gap: 50px;
+  margin-top: 50px;
+}
+
+.graph-div{
+  width: 65%;
+  height: 380px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+}
+
+
+.graph-table{
+  width: 550px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+}
+
+.graph-table > thead{
+  color: rgb(255, 255, 255);
+  background-color:#0050B5;
+  border: none;
+  font-weight: 600;
+}
+
+.graph-table > thead td,
+.graph-table > tbody td{
+  padding: 21px;
+  text-align: center;
+}
+
+/* .graph-table > tbody tr:nth-child(even){
+  background-color: #dfe7fd;
+} */
+
+.graph-table > tbody{
+  border: none;
+}
+
+.icon-span > i{
+  font-size: 20px;
+}
+
+.header-content p{
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.header-content div > span:nth-child(2){
+  font-size: 1.4rem;
+  font-weight: bolder;
+}
+
+
+.weather-div{
+  width: 40%;
+  height: 300px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+}
+
+.graph-weather{
+  width: 60%;
+  height: 300px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+  margin-bottom: 50px;
+}
