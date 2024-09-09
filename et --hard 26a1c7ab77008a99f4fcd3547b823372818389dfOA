@@ -1,0 +1,2201 @@
+[33mcommit ce653996a31cec66c603fbff2ac8eded914e5f01[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mmJH[m[33m)[m
+Merge: 26a1c7a 64908c2
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 9 09:31:22 2024 +0900
+
+    Merge branch 'main' into mJH
+
+[33mcommit 26a1c7ab77008a99f4fcd3547b823372818389df[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 9 09:28:05 2024 +0900
+
+    dlfkdkd
+
+[33mcommit 64908c289dc5c4f14f26b66f115bedfb571b8fb3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: f3371f3 358ff4c
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Sep 6 17:25:15 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit f3371f38cc58f3e18aea48d1cf06bc9dba7ad7f5[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Sep 6 17:23:10 2024 +0900
+
+    heyyy
+
+[33mcommit 358ff4ce052c362e5e70d90e89652b4250d2f3a6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Sep 6 17:22:50 2024 +0900
+
+    커밋
+
+[33mcommit 3147b1321482badfc7e15d4d6813373d39ed92cd[m
+Merge: bdaa561 75d3aa0
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Sep 6 11:38:45 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 75d3aa0e6dc839d837fb8b6273656acfc660f71d[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Sep 6 11:38:28 2024 +0900
+
+    chart
+
+[33mcommit 3efa45c7140bdd905d107712e353a696dbc998b5[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Sep 6 09:05:52 2024 +0900
+
+    커밋
+
+[33mcommit bdaa561303ab07d5ac43fea944cfa2f3e9b72fa5[m
+Merge: e738114 91677aa
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Sep 5 17:46:40 2024 +0900
+
+     00
+
+[33mcommit e7381145d7dde85d2395274ac0aaefbf1f6ac805[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Sep 5 17:43:06 2024 +0900
+
+    0905
+
+[33mcommit 91677aa18fff6cdf013432ab781760a066f2e22a[m
+Merge: 785556c 6613ced
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Sep 5 17:38:24 2024 +0900
+
+    충돌
+
+[33mcommit 6613ced3c1a75ec1c003262d2f25bb41957e6dbd[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Sep 5 17:37:06 2024 +0900
+
+    0905 카톡 실험?중
+
+[33mcommit 785556ce10467c7111718fc8b5ff3c947b9759da[m[33m ([m[1;31morigin/MJH[m[33m)[m
+Merge: 9724b14 15ca4dd
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Sep 5 17:36:55 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 15ca4dda4d0fd1bdad7ac3ae07834e97b5295305[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Sep 5 17:36:43 2024 +0900
+
+    dkfjdivmev
+
+[33mcommit 9724b1477532039e3569d81948c632ba5bb34ce9[m
+Merge: bbb5ed1 ca1c538
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Sep 5 09:45:57 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit ca1c53830e886f67080416894a09b8b401bc0e83[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Sep 5 09:45:45 2024 +0900
+
+    chart
+
+[33mcommit 2afe5697811af914fbb7f43e236f22489770bf56[m
+Merge: 712711c bbb5ed1
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Sep 5 09:20:34 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit bbb5ed15aa32e8f70673b4c844ba9a7a0c63ba75[m
+Merge: e8c4c3f 819fe5f
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Sep 5 09:19:36 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 819fe5fa4e9e67dd5ec3d4e1eed308466b3b89b7[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Sep 5 09:19:18 2024 +0900
+
+    컷밋
+
+[33mcommit 712711c4aab615dc262d96b870d8b32c3fc8add5[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Sep 5 09:05:34 2024 +0900
+
+    0905
+
+[33mcommit e8c4c3fa356a464a04475bbdf31b291dd3c71d95[m
+Merge: 8ecf82c abe272f
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 17:37:49 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit abe272fa67f17c864bccb973c93dd9bf57fd801e[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 17:37:39 2024 +0900
+
+    0904
+
+[33mcommit 8ecf82cd8969e67744ceb652880247b1b2deb44f[m
+Merge: 2c6423c 2aa76b4
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 17:35:51 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 2aa76b475ef9edd069b631482468a794ef7cf67e[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 17:35:15 2024 +0900
+
+    dkfjdivjdv
+
+[33mcommit 2c6423c3e9cc7eb000465265996976e11f0812e4[m
+Merge: 1669ecc 975c0ac
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 17:26:05 2024 +0900
+
+    Mergt branch 'khk'
+
+[33mcommit 1669ecc62326a1418735dcf9397525fa641c3264[m
+Merge: 3762f43 bc10598
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 17:25:50 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 975c0ac701a428fe366db4fa8044b7797fb09d40[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 17:25:40 2024 +0900
+
+    최종
+
+[33mcommit bc10598fcc9e3901f136f129c72cef003af7d3cd[m
+Merge: 13369e9 6cbe454
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 16:43:28 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+    
+    :exit# the commit.
+
+[33mcommit 13369e97fd14f950a72c80222cabf72a87e291b6[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 16:43:10 2024 +0900
+
+    ê리액트 수정
+
+[33mcommit 6cbe454a077f635d9d0540b835133c9c7ed02990[m
+Merge: fefc871 00d037f
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 15:42:27 2024 +0900
+
+    dkfjkjfidv
+
+[33mcommit fefc8710ffe33cdcb1fe0035b740045491fbc894[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 15:41:37 2024 +0900
+
+    kdjdivd
+
+[33mcommit 3762f43e91b6ff9d3482913f10b9e284be8bcd2f[m
+Merge: 1c31180 00d037f
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 15:36:19 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 00d037f688c89288b809ca9aefc054f1b862ef99[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 15:35:40 2024 +0900
+
+    loginmemrrn
+
+[33mcommit 1c31180b56f971da0bc9a922b9c9cba806fea8cb[m
+Merge: 89b9750 ab0a13f
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 15:07:22 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 89b9750fb0bf70c098e42ccfde65e7aa1a1e4892[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 15:07:03 2024 +0900
+
+    중ê°저장
+
+[33mcommit ab0a13feb9c8babefcc75d356d5b6740ef935f9e[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 15:06:19 2024 +0900
+
+    asc
+
+[33mcommit 698b4d947e475bffa872f8a806e3e6881f8f9261[m
+Merge: 75283ea b89d5b1
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 15:02:06 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 75283ea5b21d2bad47d35f2f4892ba15b33e2907[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 15:01:50 2024 +0900
+
+    88
+
+[33mcommit d7909e6d51d493d67ea5ea57f24ba93df765a884[m
+Merge: 8d0438e b89d5b1
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 14:26:09 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit b89d5b1471a1ad68e98477eb5526d8bf2096d246[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 12:24:30 2024 +0900
+
+    schList
+
+[33mcommit 7d82cbcaa7eb2c5e9aa23001cee1f899e5fb7e9f[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 12:11:31 2024 +0900
+
+    pagination
+
+[33mcommit 8d0438e290d42a5bd53aa2488cc8a4d77233d1d7[m
+Merge: d0a4608 23f8ee0
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 11:34:01 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 7fbefea429b2b7cbd3055a6ad5887b2745873196[m
+Merge: d0a4608 c43eb61
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 11:33:58 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit c43eb616d7f4d171c340dd3d63913f3e8099b2e7[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 11:33:44 2024 +0900
+
+    mySchPagination
+
+[33mcommit 23f8ee0628aa9a379b0b705a6bfd792255e2c329[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 11:33:43 2024 +0900
+
+    중간저장
+
+[33mcommit d0a460836d60f9b1bdb7fd6548028fb2372bd559[m
+Merge: ef3fc09 fa0f6f9
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 10:41:18 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit ef3fc09f9c3679318e6a57f88650863c024aabb8[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Sep 4 10:40:42 2024 +0900
+
+    ddddd
+
+[33mcommit 7ad6dbcb3902067a60f3b52a4c1634f5bbb43519[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Sep 4 10:37:07 2024 +0900
+
+    cancelline
+
+[33mcommit b7983736f2adafb5bbd6f2d08fdb6f05dc141317[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Sep 4 09:27:52 2024 +0900
+
+    ì최종 css 작업중
+
+[33mcommit fa0f6f90a9f07cfaa0948fb981572d1d81f9bcc1[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 09:09:18 2024 +0900
+
+    진료과 의료진 소개
+
+[33mcommit c851273dae81f3651980d4fe888c0a9aa2be84dc[m
+Merge: 176d530 2609b21
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Sep 4 09:01:05 2024 +0900
+
+    Merge branch 'SES'
+
+[33mcommit 2609b21e6a6f734aabca3ffa9d6cb65de0ffc66d[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Tue Sep 3 17:41:29 2024 +0900
+
+    0903
+
+[33mcommit 176d530a24dd9c92bac1f46c78bc1f36ccce16c4[m
+Merge: 8a1c262 cc21424
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 17:16:45 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 8a1c262fd9cd8e2fed5646fba0e54c5dbce0e977[m
+Merge: 6a9b46a b905081
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 17:16:11 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit b90508108124ad1acffa2ecee82953d39adc1bad[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 17:14:27 2024 +0900
+
+    ummmmm
+
+[33mcommit cc214249f1cf552b5c12016164143f891c40d777[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 17:14:25 2024 +0900
+
+    거의 최종
+
+[33mcommit 6a9b46afb795f92312b048b40eb8ebf0cca071a5[m
+Merge: d29c736 e94a121
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 15:49:33 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit e94a1213983305e82c985af91951905f43851ba6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 15:49:19 2024 +0900
+
+    저장
+
+[33mcommit d29c7361dc3151391440075d43d5ba4ba8a376fc[m
+Merge: 55521c2 321e839
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 15:48:04 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 321e8395bb032094803857da817a1f0c4bb491e0[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 15:47:54 2024 +0900
+
+    mapupdate
+
+[33mcommit 55521c261ba24d201299fca3dbf0d808ab2c3dbe[m
+Merge: 4b3d8f2 325e0bc
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 15:41:13 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 325e0bce8cc220c74d198d3b25cebdb0cba3fa47[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 15:40:54 2024 +0900
+
+    중간저장
+
+[33mcommit 4b3d8f23eae979ca90e5c1ce5c880dd83fab5618[m
+Merge: 3d5dae2 ca3ab23
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Tue Sep 3 15:16:45 2024 +0900
+
+    ê게ì시판 기능 완료
+
+[33mcommit 3d5dae269e101f2881101ee82a30182ac1535b01[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Tue Sep 3 15:11:50 2024 +0900
+
+    게시판 ㅇ기능 완성
+
+[33mcommit 982c6a4c4a9889f5522eb764be99f88923a944d0[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 14:36:46 2024 +0900
+
+    중간 저장
+
+[33mcommit ca3ab2382372393c5e96580ac392ac929f3f0656[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 12:49:10 2024 +0900
+
+    main
+
+[33mcommit 8c9e129dae1c9faa44e51f121ffa89635fd79cd0[m
+Merge: d0f9bab 0344e57
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 11:38:31 2024 +0900
+
+    map
+
+[33mcommit 0344e57a26d9ab0594c145ef32b1cec60d15ebc8[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Sep 3 10:05:21 2024 +0900
+
+    map
+
+[33mcommit 6619ec64b26613779f1fc945de97f5a2e893414a[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 09:38:05 2024 +0900
+
+    layout
+
+[33mcommit bfdeb6122ea07e57fe8b2de52631c2e7870d79a4[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Sep 3 09:17:58 2024 +0900
+
+    layout
+
+[33mcommit 0a9d47ad366889e88f09cee031700a22320c4b5f[m
+Merge: 866d072 d0f9bab
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 17:49:58 2024 +0900
+
+    Merge branch 'main' into MJH
+
+[33mcommit d0f9bab88223ed895240ea58cde469a44a38599b[m
+Merge: cb503f0 5ab56cd
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 17:49:02 2024 +0900
+
+    09-02 서은송
+
+[33mcommit cb503f04afc8b5357b0a2787bd06f3a011bfc4e9[m
+Merge: c1ad11a b592002
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 17:44:49 2024 +0900
+
+    09-02 서은송 게시판
+
+[33mcommit 5ab56cdffa9df8e4c87611f2959e4eea185ff7c2[m
+Merge: c1ad11a d0bb99d
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Sep 2 17:44:29 2024 +0900
+
+    map
+
+[33mcommit b5920023699c87ab0f648a99807f5f753e4f1ba7[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 17:43:08 2024 +0900
+
+    09-02 서은송
+
+[33mcommit d0bb99da87eee56e24fe94258a93bfb1a7874f55[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Sep 2 17:41:36 2024 +0900
+
+    map
+
+[33mcommit c1ad11ab476ae9bacd9c152b84d43ea1fdc757a7[m
+Merge: 225d590 566d012
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 17:39:46 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 225d5903f8e39cd7adda24440e72eadd3c788ee0[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 17:39:17 2024 +0900
+
+    진료과 필수 선택
+
+[33mcommit 866d072f759326037333fca89a1c12d54b22b43a[m
+Merge: 6a4ebd8 566d012
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 17:24:48 2024 +0900
+
+    Merge branch 'main' into MJH
+
+[33mcommit 566d012fe26819cf7a8b68d1626c327cbb58defe[m
+Merge: 5ce482d fc4bf4d
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 17:24:25 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit fc4bf4d67a0dc95f0c72375ede23ecccfaa3a667[m
+Merge: f569a00 6b1eb11
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 17:24:06 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 5ce482d48a56e6ac2162f1e8a0142a0eac04b137[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 17:23:55 2024 +0900
+
+    dkfjskfjsdljvdsj
+
+[33mcommit 6b1eb11a4f950f6e89256a25c6ba22f4abc41be6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 17:23:47 2024 +0900
+
+    중간저장
+
+[33mcommit 030b7e40d7cf98458b4674b542ac50e828e3bacb[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Sep 2 17:10:12 2024 +0900
+
+    mainbun
+
+[33mcommit 79ed33cfaad2565d8605c7f8965a88b484d18aef[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Sep 2 16:26:23 2024 +0900
+
+    footer
+
+[33mcommit 6a4ebd82bd00372e82b20de2c9ff8394bb9496b2[m
+Merge: f0abaac f569a00
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 15:39:18 2024 +0900
+
+    dkfjskfjskdjf
+
+[33mcommit f569a00d0f9423a3bfa422bcad113e38c08f0bdd[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 15:36:26 2024 +0900
+
+    kdjfkdjfjv
+
+[33mcommit d6b072f0a18002a884d777c052f255f841175cfd[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 15:10:28 2024 +0900
+
+    중간저장
+
+[33mcommit 7599f179c7106629c9e9d9b8c96ae54d6d9829fb[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 14:27:21 2024 +0900
+
+    진료차트
+
+[33mcommit ece45e69e41afc9570f7f614b5189b7e2ade8a0c[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Sep 2 14:17:17 2024 +0900
+
+    list
+
+[33mcommit 49f8a5f158e328417c34b6ab51d8cb626ab0752e[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 11:25:18 2024 +0900
+
+    선택한 정보 ㅊcss 유지시키기
+
+[33mcommit f0abaacc3d947a5d5f0eddbb0465f8501e4534b4[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 11:01:20 2024 +0900
+
+    kfjdkfjdkfj
+
+[33mcommit 9051af41f854a3cc943e8a7e831cf6ca2e9fc4e6[m
+Merge: 7d9d8db 60e591f
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 10:57:34 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick into SES
+
+[33mcommit 7d9d8db49d3812a1486a8f2abb5402f418cc8055[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 10:57:23 2024 +0900
+
+    list 수정
+
+[33mcommit 643c06b2bd2fb4ae49aa3c74dd4b19394641a323[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 10:56:34 2024 +0900
+
+    deprt 자료 오류 해결
+
+[33mcommit 2c64d1b5acc71e659945193cf06598f124160b90[m
+Merge: b5e6231 bd1a63e
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 10:44:26 2024 +0900
+
+    0902_1
+
+[33mcommit 60e591fae50470f14a700eba8ea7ced12019ac93[m
+Merge: 2c52d3f bd1a63e
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Sep 2 10:37:15 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit b5e6231a243c321ebf42a41195b4231bf839eca2[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Sep 2 09:19:36 2024 +0900
+
+    0902 시작
+
+[33mcommit bd1a63e4553757ca43c5c2d38be0645bf237c7ac[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Sep 2 07:59:33 2024 +0900
+
+    aksjdjddVC
+
+[33mcommit 369167ddb681873f9e49955ebc87994a5b78f6a7[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Sun Sep 1 01:06:11 2024 +0900
+
+    dfkjdive아나
+
+[33mcommit a9a837714eb908348874feadfb23208f1676284f[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Sun Sep 1 00:56:28 2024 +0900
+
+    페이지 수정
+
+[33mcommit 2d204ba98d2e1064c028eaf359f9c6a9e5d9c8c3[m
+Merge: 5fea2b4 6357166
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Sat Aug 31 20:02:30 2024 +0900
+
+    dkfjdkjfkd
+
+[33mcommit 6357166e40b37a42f43127ed58b30754a09b288f[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Sat Aug 31 20:00:37 2024 +0900
+
+    dkfjkdjfkdfidv
+
+[33mcommit 5fea2b40b5e6f3131a7b5a3c739bf5d1f1991f1b[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Sat Aug 31 19:57:45 2024 +0900
+
+    kdjkfjdkjfd
+
+[33mcommit 1c7c12d4f5cb003d8999771e361e5e60e1afc915[m
+Merge: 559b27f c5dd6c2
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 30 17:48:58 2024 +0900
+
+    0830은송
+
+[33mcommit c5dd6c2539583bec9652a275ded5d25c7f345c40[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 30 17:46:11 2024 +0900
+
+    08-30 서은송
+
+[33mcommit 559b27f9452e6050288df7ad88f8f6b87c152edd[m
+Merge: 3355532 0b9584b
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 17:41:42 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 33555322c5d3a59f80cc458543fb2aa547d19651[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 17:41:21 2024 +0900
+
+    삭제버튼
+
+[33mcommit 2c52d3fb7879177233000a1b1596f21390c74fb6[m
+Merge: 057eca0 0b9584b
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 17:23:55 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 057eca01a97e6ef38940e2a951156c6a99ee7d4c[m
+Merge: 884736a 23e591e
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 17:23:18 2024 +0900
+
+    충돌 해결
+
+[33mcommit 0b9584b1a802d3cf6d78112c93938e7a908394eb[m
+Merge: 6834c10 761124d
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 17:22:12 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 761124de4cf5eb6821ab42d80b19f469695dd7ca[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 17:21:57 2024 +0900
+
+    hihi
+
+[33mcommit 884736aa9517c213271879bfe5952bddf8c6c445[m
+Merge: bd33cdb 6834c10
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 17:21:06 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 23e591ea6043353e458c9058b5234f03f35a48c5[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 17:20:39 2024 +0900
+
+    수정고침
+
+[33mcommit 6834c102603e3648d48b8a285a2d203346613994[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 17:20:08 2024 +0900
+
+    kdjkjkdjf
+
+[33mcommit 2f7d99cba2303170214d3c157a1afe7244915adf[m
+Merge: 5a02568 f228206
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 17:19:25 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit f228206d56671be2a04f215fa84c0bc849175f44[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 17:19:11 2024 +0900
+
+    나몰라라
+
+[33mcommit 5a02568e42b3e392ea41a4bbae2d8f8a7bbb33a4[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 16:24:00 2024 +0900
+
+    dkfjdkfjkdjfsdkljf
+
+[33mcommit bd33cdbd16d6350c03d5ee0e968e05e72c617e78[m
+Merge: f9f3850 cff384c
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 16:05:37 2024 +0900
+
+    Merg branch 'khk'
+
+[33mcommit cff384c206c66924bf08a7f2bf1e34461ef393c8[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 16:04:44 2024 +0900
+
+    커밋
+
+[33mcommit f9f3850a5e40bd5bbc93c83c94244e6fbeec6f2d[m
+Merge: 2c560e4 615371d
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 15:45:51 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 615371d4f92989411c1f9f1decd070462ac0686d[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 15:45:32 2024 +0900
+
+    aa
+
+[33mcommit 2c560e4d38ce0b98c6845db85ea53b78458e0a7f[m
+Merge: 4c8330c 27d060f
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 15:45:05 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 27d060fa77579090c76cb0e073a8caf4e17bcbd0[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 15:44:44 2024 +0900
+
+    dkjdidjfddd
+
+[33mcommit 50cf3cbb36e6e2d26e5da7243ea05a7fc383102a[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 14:14:05 2024 +0900
+
+    진료내용을 적을 수 있는 테이블과 MVC작성
+
+[33mcommit 19f0421ee56c51a1c414d552a0ff41b0f06662cb[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 30 14:09:57 2024 +0900
+
+    dakfdfjkdf
+
+[33mcommit 4c8330ccb86e68a92766d2cc34f8386949d854a3[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 14:08:01 2024 +0900
+
+    pagination
+
+[33mcommit ac2b3f10315699f19e39af68b2e2fd0fb56f1893[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 12:24:59 2024 +0900
+
+    pagination
+
+[33mcommit 5b2aac72a4629bce0ce6f487818b98a6fd9fd140[m
+Merge: 3bd0ce3 3c182b2
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 09:20:04 2024 +0900
+
+    schNum
+
+[33mcommit 3c182b2be279ed47199ed5e2c5dafd60c2368c4a[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 30 09:18:29 2024 +0900
+
+    smapper
+
+[33mcommit 3bd0ce38a464005dbc0adea495a3ce642a7deca2[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 30 09:15:21 2024 +0900
+
+    충돌
+
+[33mcommit 5347ce23262d9b839860ab426dd6d95bd76dd858[m
+Merge: a79739e 11be3b9
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 17:44:57 2024 +0900
+
+    08-29
+
+[33mcommit a79739e07043dc0cc58daa88fde9ba72042870b8[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 17:43:04 2024 +0900
+
+    08-29 서은송
+
+[33mcommit 11be3b91ff856229c9192e8e69cf1d49732a31d9[m
+Merge: ba7f018 bb814b1
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 17:40:42 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit bb814b1ea744332aa9266d494b5e17e6281ee9fe[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 17:40:25 2024 +0900
+
+    ggg
+
+[33mcommit ba7f018f7f64cd56c1fff9e0d44a1b6482ab9f2d[m
+Merge: 7f41fb7 219d83a
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 17:38:08 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 219d83a094455d357b247ead35caf64a8c3a16f8[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 17:37:18 2024 +0900
+
+    cccccccccccccccccc
+
+[33mcommit 7f41fb74de0b53ab184e3793c43ce3ee7eef19e7[m
+Merge: 0f58c1e 1a51ee1
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 17:31:25 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 0f58c1e72579300e5a7a3707fcff34faeb49d137[m
+Merge: d67d2a4 ddfddbe
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 17:30:39 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit ddfddbe75acf3dce2bd39703332c1efb03fe4649[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 17:30:27 2024 +0900
+
+    eee
+
+[33mcommit 1a51ee1fa5157e5439e53ffb8f3276d987669ad8[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 17:26:49 2024 +0900
+
+    20240809 예약ì² 전반적 완료
+
+[33mcommit 3dda8975f9b9b28f7fed503a8e4d6f27f3736bb1[m
+Merge: 5c83974 d67d2a4
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 16:43:29 2024 +0900
+
+    k
+
+[33mcommit 5c8397440ce08a4a950db95dba42f4ae224beb67[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 16:39:28 2024 +0900
+
+    냥
+
+[33mcommit d67d2a418652dbfefda78bec19b14af1d46fbe2a[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 16:38:58 2024 +0900
+
+    kdjdfkjdfijsfksdv
+
+[33mcommit 77f9f46d9c28b0fc3d1651b069683186ffb472d0[m
+Merge: 0f042df 04cfed4
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 16:34:06 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 04cfed4f8e6b3b4df28537f458f8f818cc88a9e4[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 16:33:40 2024 +0900
+
+    임시파일 저장
+
+[33mcommit b24ed9e050346af4d1de809594f902341b67ece0[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 16:25:01 2024 +0900
+
+    ë중간커밋
+
+[33mcommit 0f042df4d6d649b1f7914c689681f900073c8184[m
+Merge: 5de4659 30a5ba7
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 16:19:34 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 30a5ba7c984db980ed9a6655883740712f22e98c[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 16:19:14 2024 +0900
+
+    ddd
+
+[33mcommit 5de4659d9e766c622e50ec2139c7e684a3f8b54a[m
+Merge: 5518073 0f1c6e3
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 15:49:24 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 0f1c6e3e2e5bc69ca2c899df6257edd78d3047b4[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 15:48:59 2024 +0900
+
+    11ì°예약페이지 1차적 완료
+
+[33mcommit 55180734056a0c39f1d23ecf6abb511b21865f6e[m
+Merge: 1cca861 00ae5dd
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 15:30:14 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 00ae5ddca02973d98f2d83c4a9951398ef3d93d8[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 15:29:13 2024 +0900
+
+    회원가입 마지막완료
+
+[33mcommit d746d7cbf8945caaf66ace22bd4230602ccaaded[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 15:09:43 2024 +0900
+
+    기능 구현 완료??
+
+[33mcommit e91f2d98a88d2e0459e34b0e4f3556b0fbda371f[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 14:45:47 2024 +0900
+
+    1차 디자인 완료
+
+[33mcommit 0df53b5d96bc52081545c1ec80fa9ac657e2f936[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 14:26:59 2024 +0900
+
+    예약 확인 내용 레이아웃
+
+[33mcommit 88dfe8323b01750206eed9f10dfb96d84d6f345c[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 14:11:48 2024 +0900
+
+    중css명 수정
+
+[33mcommit 170706a04da4fdb358106c54a08e7b014dbff415[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 14:04:23 2024 +0900
+
+    아직까지완성되지 않은 데이터
+
+[33mcommit 1cca8610f74d522ac8ad48c27202bbbe471447eb[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 29 14:02:47 2024 +0900
+
+    dd
+
+[33mcommit a1d939dec58383c1751cc916eec1a87dc5e1b469[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 12:44:13 2024 +0900
+
+    점심 전 ì»중간 저장
+
+[33mcommit 093e93d1eda9c6a3fd5ab484a826593b8a4344f0[m
+Merge: 230fd8c 4d581e2
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 12:37:15 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 1f8d578701fa84c0390f5cd0979e0651cda0e74e[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 12:36:58 2024 +0900
+
+    임시저장파일
+
+[33mcommit 4d581e2141d3869fa561cc6032d4c9b027f0c8b3[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 12:36:45 2024 +0900
+
+    버튼 커스텀 완료
+
+[33mcommit 3ed960ceec4618d779d6889bee27fa5c66056177[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 12:14:35 2024 +0900
+
+    중간 커스텀
+
+[33mcommit 637de38dd91cd8a12cea84ceee58b1a7f46f1208[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 11:29:55 2024 +0900
+
+    ì예약 화면  커스텀
+
+[33mcommit 8caad12707c7ac03377372bca57723e12640f993[m
+Merge: 599cff2 230fd8c
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 11:13:30 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 230fd8cc9c74efce26562cd9ebb5d829ab144270[m
+Merge: 8b2a8ce 85f2953
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 11:13:04 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 85f2953b540b11c7d66c0e6ac1c4783ccd472e9e[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 11:12:42 2024 +0900
+
+    dkdjfksdjfksdfjsd
+
+[33mcommit 57b9f5cf659cf53dc25d63f5874b5fc4d74f7e9e[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 11:12:38 2024 +0900
+
+    중간 저장
+
+[33mcommit 599cff29586c5958ee242ecdf9d8ffdc68ecbf96[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 10:37:26 2024 +0900
+
+    진료과 ë§페이지 마무리?
+
+[33mcommit 079cec7013446109b88e1f4b8bb79d221f5a5c41[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 29 09:40:41 2024 +0900
+
+    토일 비활성화
+
+[33mcommit 8b2a8ce014cb00e7e7757b06ff1a7b95f5feb344[m
+Merge: ce09330 babf3e7
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 29 09:08:31 2024 +0900
+
+    00
+
+[33mcommit babf3e76afab401a4492f511a42f06f1278dfbcd[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 29 00:58:42 2024 +0900
+
+    의사 이미지 넣는거 가이드라인
+
+[33mcommit 03cef4ab00b9c56e0537f2306f6e1ca33d558cbb[m
+Merge: f85e58c 136f17e
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 17:50:37 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 136f17e8a05ec6247e3475deea869d5fd363bac1[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 17:50:21 2024 +0900
+
+    eeeee
+
+[33mcommit f85e58c43fc4a077717b0d286e613569ebd0f8cf[m
+Merge: fe894b2 c19385c
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 17:38:00 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit c19385c9d86a3ebdccf007c13bbb5ef1f10392d6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 17:37:34 2024 +0900
+
+    예약 기능 및 커스텀 아이콘 추가
+
+[33mcommit fe894b26d8e876ddee6b937a657176445b2da603[m
+Merge: 8d051f8 b4a46a5
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 17:36:40 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 8d051f8f2a25e12ccfe0dad322498e80fbb3231e[m
+Merge: 02a1b2e 42124c4
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 17:36:31 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 42124c46e7a1daa1646cba7443b2d6ed5c81e84f[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 17:34:46 2024 +0900
+
+    eeee
+
+[33mcommit b4a46a537054bec1708958283ca0b375fe3d00f7[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 17:34:40 2024 +0900
+
+    회원가입 일단 ì 완료 관리자용 추가해야함
+
+[33mcommit 02a1b2ed2f96c374210508292e6e43520ddaba70[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 15:28:00 2024 +0900
+
+    safkdjsdkljfsdklfjs잘못들어옴
+
+[33mcommit 6bf49ce11a4c6f9525058659db8128a0ead0234b[m
+Merge: b0a04f5 c993073
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 15:05:02 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit b0a04f596bde4ee0af94324b14651b84d1b68ef0[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 15:04:46 2024 +0900
+
+    hihi
+
+[33mcommit c993073cd118b46bddeff045842712cb3a11e686[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 15:03:25 2024 +0900
+
+    skdfjdkjfskdjf
+
+[33mcommit 39354e428c9fe1f851b60fffc20c2133d1cd9fce[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 14:45:40 2024 +0900
+
+    예약 기능 구현 완료?
+
+[33mcommit a7c4b980ec18cc233c38426f65c5a8104595d43f[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 14:21:07 2024 +0900
+
+    VO클래스 문자로 변환 수정
+
+[33mcommit be60d65a364faad987e64ec74e1d18b98a1bf7f7[m
+Merge: eca0e0e 1e97468
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 14:18:21 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 1e97468c576808435ebf05682437c2d8612d0180[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 14:17:48 2024 +0900
+
+    아직만드는중임
+
+[33mcommit eca0e0e201abee1f7f37f79bb4730efc769e6ff5[m
+Merge: 91f78dd adf3735
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 11:51:21 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit adf3735a18217e8354c565e034076e2e3b2aca9a[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 11:50:47 2024 +0900
+
+    버튼색상 오ë¥잡는중
+
+[33mcommit ed9345e98ec86145c3f6a57775181ad15a608b38[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 11:24:29 2024 +0900
+
+    버튼 색상 변경
+
+[33mcommit a6046f6af7e3945e2efe5ad3d2b2b77e8a97e80b[m
+Merge: 647c0bc 91f78dd
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 10:31:30 2024 +0900
+
+    dkfjslfjsdklfjskdljfsdkljf
+
+[33mcommit 91f78ddac84d3998442780f4e6ce2f50a079d466[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 28 10:28:03 2024 +0900
+
+    dkfjdkfjkddfdfd
+
+[33mcommit 2a411dea6639b76776d3c42b657c5b4623e1f90c[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 10:26:36 2024 +0900
+
+    layoutupdate
+
+[33mcommit 1a6467ef6ea3583a5f447045b8fe015ebd689eea[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 10:21:02 2024 +0900
+
+    중간 저장
+
+[33mcommit 389dcf9d0f603b4294a0a4b5b947a8373634c1e6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 09:46:24 2024 +0900
+
+    시간 버튼 비활성화를 위해  기능 추가
+
+[33mcommit ee628d99a03f92e3a10a871c56e8316d2dbdc4f7[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 28 09:41:50 2024 +0900
+
+    no
+
+[33mcommit a25aff06953d83b014a96ea797adb7ffc156ba21[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 28 09:40:43 2024 +0900
+
+    버튼 비활성화 기능 구현중
+
+[33mcommit ec7d26fb6dd2271128b66872cfa15aa5a7fc2103[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 18:08:55 2024 +0900
+
+    mySch
+
+[33mcommit 2ad690dd1a8bc5344dc52cd43215a6fe12196720[m
+Merge: 0d06da7 573144c
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 17:43:40 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 573144cf0ce093ebe413a4f1d52a29199cd15fcf[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 17:43:20 2024 +0900
+
+    mySch
+
+[33mcommit 0d06da7e0a38e6c13ec42024c83fc11aee6c776e[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 17:28:04 2024 +0900
+
+    css 작업
+
+[33mcommit 1a324a96a82bdf72890990d0299ef698f7302732[m
+Merge: 6ff843f 0f5d006
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 17:14:57 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 0f5d006977218b62d7f51c35a7d443f5585d76a2[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 17:14:34 2024 +0900
+
+    예약시간 버튼 기능 구현중(예약유무에 따른 색상변화
+
+[33mcommit 6ff843fb1a877a5e1ac7d38f009fd3d52d7d0cb1[m
+Merge: 599718e 159034d
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 16:43:35 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 159034de7a6ea10df079882304672ecad6496534[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 16:39:52 2024 +0900
+
+    memSch111
+
+[33mcommit 6c9cade8396d6c589095ed545ab90675762f2157[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 16:38:49 2024 +0900
+
+    memSch11
+
+[33mcommit 647c0bc603b905d82cd015ee5c4ce4032474a477[m
+Merge: 0b20977 1c97a5b
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 16:12:17 2024 +0900
+
+    Merge branch 'main' into MJH
+
+[33mcommit 0b20977f883f6a3a9c5712115db7cb5fcf316229[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 16:07:04 2024 +0900
+
+    일단 로회원가입 기본
+
+[33mcommit 599718e0bde93000e40719dab0c57190e0226bf3[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 16:02:48 2024 +0900
+
+    커스텀
+
+[33mcommit b19608c755f5d979b3a1080dad4eb4c5df18199f[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 15:25:43 2024 +0900
+
+    memSch
+
+[33mcommit 1c97a5ba5be076586160d3fe8634e2c7d45f7d75[m
+Merge: f2e4b22 58c0e0c
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 15:18:26 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit f2e4b22f28a7afc57bc57d3b7b0dfcf47ade823e[m
+Merge: 7bf8c62 9aa39d5
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 15:18:02 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 9aa39d5a83ec8d233692147669de741297fc8d9f[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 15:17:44 2024 +0900
+
+    ã중간 점검
+
+[33mcommit 58c0e0c723af49133c3cab13b3c68454c3d387b4[m
+Merge: 7bf8c62 9fc0d95
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 15:17:38 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 9fc0d958d869466e23eff73cdc38afaa5cb5e075[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 15:17:04 2024 +0900
+
+    ë 회원가입 임시완료
+
+[33mcommit 7bf8c62a8c4503670e9331b69b82bdd0ec8dc13c[m
+Merge: 2e9a59b 9badadd
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 15:15:13 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 9badaddb8b774c53b1134e8f150fe6d055b53715[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 15:14:51 2024 +0900
+
+    dd
+
+[33mcommit a6e91778e8f7d77d62e282bce1e417c11d3657ac[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 15:06:48 2024 +0900
+
+    예약 유효성 검ì사중
+
+[33mcommit 6101881669043140825e4f380787d0e80b565823[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 15:05:59 2024 +0900
+
+    회원가입 완료
+
+[33mcommit 2e9a59b332ecb767f726f45a42405c780efc8e2f[m
+Merge: d6f77c1 514fde9
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 12:42:17 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit 514fde903e8b109267a238a477b6134a9f6de28c[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 12:41:47 2024 +0900
+
+    필요없는 ë§맴맵퍼와 서비스 삭제
+
+[33mcommit d6f77c1c43ef51ef72011260a84a6d008db33123[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 12:39:31 2024 +0900
+
+    gooood
+
+[33mcommit ad32807d09c9540803a9bfd4e445975b868c90f9[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 12:37:07 2024 +0900
+
+    예약 insert실행
+
+[33mcommit b7264c133537c4e374335906a3cf371af7a5d6cc[m
+Merge: 59c78bc 434c5ba
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 12:25:40 2024 +0900
+
+    ìì충돌 해제 완료
+
+[33mcommit 59c78bce5c3cfd4b52bceaa71b9c239b5f4fbab7[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Tue Aug 27 12:22:23 2024 +0900
+
+    아직 수정중입니다
+
+[33mcommit 434c5ba48f04cdd914a490e825230e6dfc8337bb[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 12:13:43 2024 +0900
+
+    docselect
+
+[33mcommit 793364fc782627d11ac9b04061c8a03d32747073[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 11:51:11 2024 +0900
+
+    중간 저장
+
+[33mcommit 2c8ed8f3fb66ace8c189de60fb56db9cc62ba1c9[m
+Merge: 052143b 4c9d9c5
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 11:49:55 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 4c9d9c5bdba216e3f4632afdce199944bfc62f89[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 11:49:22 2024 +0900
+
+    ãㅖ약완jomangan
+
+[33mcommit e9df39a7b2800680e499f2654dd3f10bd7ef1991[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 11:36:42 2024 +0900
+
+    예약 정보 넘기는 중
+
+[33mcommit 052143bd00191c8e5b95757c8a7aa2e4f7af57fa[m
+Merge: c4d6a49 67341c7
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 11:14:13 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit c4d6a492b9b8e048850097ce3b5f331e61c3af99[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 11:13:58 2024 +0900
+
+    중간 저장(예약화면 정보띄우는중)
+
+[33mcommit 67341c721207fceccee600769f5fda32c15a74bb[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 11:05:54 2024 +0900
+
+    nomornin
+
+[33mcommit 72c8644f51182ad4682ea4b221afc7d85f04e784[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 10:43:32 2024 +0900
+
+    예약 기능을 위í해 service / controller수정
+
+[33mcommit 148f65b4574c8a563b912a736d70d7098b34ab78[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 10:31:21 2024 +0900
+
+    ãschedule mapper update
+
+[33mcommit fde008b3a82f75848cf59a13403b971f1985516d[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 10:29:01 2024 +0900
+
+    예약 insert를 위한 mapper구현
+
+[33mcommit af5de8549376b43cee10c7500bf5c7cc961fd5f0[m
+Merge: ea8d86e b8f27be
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 10:25:55 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit b8f27bea8232f250c24c2f5f882c5a40466b675f[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 10:24:25 2024 +0900
+
+    goodmorninggggggg
+
+[33mcommit cb25b89d994eb00779b5928a3add01e5a6f22991[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 10:15:56 2024 +0900
+
+    goodmorningggg
+
+[33mcommit ea8d86eb04e2856680968603e6c33ae08a7cc148[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 09:42:16 2024 +0900
+
+    스케줄 매퍼와 VO추가사항 있음 / 스í케줄 테이블 변동 있음
+
+[33mcommit 1b562cb8861bdf01131d54a4798cf6d02b35cfa1[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 09:38:24 2024 +0900
+
+    nomorningg
+
+[33mcommit f7866d59417902714930ac091b64d8c137e9220b[m
+Merge: 3bd0734 ce1b691
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 09:37:34 2024 +0900
+
+    nomorning
+
+[33mcommit 3bd0734780a84866e5b39de196d53f9f28ad6511[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 09:36:02 2024 +0900
+
+    goodmorning
+
+[33mcommit ce1b691a9adac28bd3280c0b9d2faa9ee3c6c29f[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 09:34:09 2024 +0900
+
+    스케줄 매퍼  ë 수정
+
+[33mcommit 6c9a53d5cb26c96440eb845487d14205b6cf741f[m
+Merge: aaa3dc3 257664f
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 09:25:30 2024 +0900
+
+    충ë돌 해결
+
+[33mcommit ac37e02952e26d0583bba6c052230a0b1f03691a[m
+Merge: 2261ab7 257664f
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 09:24:16 2024 +0900
+
+    goodmorning
+
+[33mcommit aaa3dc31a7ded11bd059c071f3b3d73531f1b551[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 09:21:30 2024 +0900
+
+    충돌
+
+[33mcommit 2261ab7e6b5c6d92b506d597a1efe599bd6a8f56[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Tue Aug 27 09:19:51 2024 +0900
+
+    goodmorning
+
+[33mcommit 9eb43e02d0aef8d38d938dbbd1db414dd1730ef1[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Tue Aug 27 09:12:51 2024 +0900
+
+    merging?
+
+[33mcommit 257664fb07877f90f31be0fb70edbc1bd804b65a[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Aug 26 17:52:19 2024 +0900
+
+    kfdjskdfjskdfjsdf
+
+[33mcommit ce093306ded6873ce0dafbe713f85b5a4dbe2568[m
+Merge: 359ef87 4324d45
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Aug 26 17:49:42 2024 +0900
+
+    dsdsdsadfsafjdafk
+
+[33mcommit 359ef871334bdd750ff10d0dd0c6ac3ae35f9626[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Aug 26 17:48:11 2024 +0900
+
+    08/26 의사 진료과 저장
+
+[33mcommit 4324d4584e38ede9734869c5a87ea757b61e207a[m
+Merge: 3a62a19 e7d9067
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Aug 26 17:35:50 2024 +0900
+
+    수정완료.......
+
+[33mcommit 3a62a19cbdbadccb8adcdd67e768429c343ffb61[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Aug 26 17:30:40 2024 +0900
+
+    아직남음 커밋
+
+[33mcommit e7d9067c758fb05f4d91551e3b1230668f97b4b0[m
+Merge: 9138b6a e8edd48
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Aug 26 17:25:02 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit e8edd48fee950f9cf5046eb51bd9988dbb6a61a6[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Aug 26 17:24:17 2024 +0900
+
+    예약예약 정보 하나로 ë합침
+
+[33mcommit 9138b6a2a5e0b76f227dfabe3217673b7afb85de[m
+Merge: 2366732 69c0684
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Aug 26 17:04:31 2024 +0900
+
+    doctorvo
+
+[33mcommit 80562123791339ec915c8df31a514b2a25e2476b[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Aug 26 17:03:21 2024 +0900
+
+    예약 기능 구현중1
+
+[33mcommit 69c06843de91dd61787e9131a1a3f4fa100a1253[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Aug 26 16:52:39 2024 +0900
+
+    memList1
+
+[33mcommit 236c2668e30ee9be6082d226babc9e404f9dee75[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Aug 26 16:47:37 2024 +0900
+
+    ì예약 정보 취합중2
+
+[33mcommit cbbebb971a4b5296f5cf76ee768c7acc620102fb[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Mon Aug 26 16:35:21 2024 +0900
+
+    ì ì 예약 정보 취합중
+
+[33mcommit 2366732f45aa90522a3096ec2bf4aa83010d636a[m
+Merge: 72e6b0d c0b3170
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Aug 26 16:23:06 2024 +0900
+
+    Your commit message
+
+[33mcommit 72e6b0d2352764679bbbc96d4b0cb5713ee7db57[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Mon Aug 26 16:21:24 2024 +0900
+
+    Your commit message
+
+[33mcommit c0b31709e4a5e6d8f824e083971cbc915a471971[m
+Merge: 37cf723 a63a22a
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Aug 26 16:18:11 2024 +0900
+
+    :exiMerge branch 'SES'
+
+[33mcommit a63a22a278bef0303690807fa3d914d82a966970[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Mon Aug 26 16:16:55 2024 +0900
+
+    의사 진료진 정보 조회 ë©임시저장
+
+[33mcommit c517a775a5b3dde816fa5317cf2cae92028dd15b[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Aug 26 15:46:05 2024 +0900
+
+    listreact
+
+[33mcommit 37cf723a24b89e878e6274cb513280796633c00d[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Aug 26 15:42:57 2024 +0900
+
+    memListjava
+
+[33mcommit 3c86d8efdc9b99ac83fa61c0d39e9be03d625707[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Mon Aug 26 12:24:33 2024 +0900
+
+    loginnn
+
+[33mcommit 91311b617ee40b1d8d65a7e11f086b79eae6bc28[m
+Merge: 43a8abe 3be5080
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 17:51:24 2024 +0900
+
+    Merge branch 'main' into MJH
+
+[33mcommit 3be50809abd02493f20d50aae301b3934f7b823a[m
+Merge: 2fa2b5b 8ad1253
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 23 17:46:48 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 8ad12532c92b9bb38fa349406068a4c3f263eb91[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 17:45:59 2024 +0900
+
+    달력 커스텀1차
+
+[33mcommit 2fa2b5b9b378df67affd6e27f9366aee6fa6307e[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 23 17:45:33 2024 +0900
+
+    08-23 진료 과 의사 마무리
+
+[33mcommit 43a8abe900126f0f56fafe201bcc7bf646e3dd7b[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 17:45:32 2024 +0900
+
+    회원가입 아직 수정해야됨
+
+[33mcommit d555e795dfd1419db8f92f4f723f8b33a9b35c74[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 16:58:17 2024 +0900
+
+    table 선 취소
+
+[33mcommit 9b7c9c5f1558d438b96ce007b3ab43eaf339ac26[m
+Merge: 38e4e34 c384d8d
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 16:57:22 2024 +0900
+
+    Merge branch 'khk'
+
+[33mcommit c384d8dcdb9d6ded64a060e139a78045c03d56fe[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 16:46:33 2024 +0900
+
+    예확 페이지 화면 구구현 1차
+
+[33mcommit 38e4e3418b588383f1b11a9b71c5178b4f5ba710[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 16:38:17 2024 +0900
+
+    login2
+
+[33mcommit 4e564f39543decceea9f6b60fd51d2b2baf929e3[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:53:13 2024 +0900
+
+    appLogin
+
+[33mcommit e6fcfa787f355822e06fa364b3f8f09ae64bc822[m
+Merge: c706497 b3dde07
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:44:11 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit c7064976e571d605de27c5f8818b109e7232c986[m
+Merge: fb4d693 7303428
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:27:42 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit fb4d6939ba7348fa3832a28b63b0db779255ca72[m
+Merge: b877548 7e7cd71
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:26:10 2024 +0900
+
+    B
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+    .
+
+[33mcommit b3dde07ede2860b07a32ad1fa3d201db478e730e[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 15:24:59 2024 +0900
+
+    App 파일 ìãimpot 수정
+
+[33mcommit 7303428a861812d3c3d18e6036840ad20114a5e3[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:22:36 2024 +0900
+
+    loginForm
+
+[33mcommit 2e551fd7584d2002c4d6414e2cf16d3d3f3c29b8[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 15:19:28 2024 +0900
+
+    main 오타 수정
+
+[33mcommit 7e7cd71c36feb7ae883124bc5fadeba69e1552a4[m
+Merge: fccb27b ac3f4d8
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 15:11:23 2024 +0900
+
+    충동해겨결
+
+[33mcommit ac3f4d8a8583f484d4bab27bd1bc3b362f71625d[m
+Merge: a1104eb 6b6d2a8
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 15:09:03 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit a1104eb534542620b139b3eacd655f8a5544624e[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 15:08:42 2024 +0900
+
+    main
+
+[33mcommit b877548facfb5dd40b1dfe01e66d7ddb8ae2632f[m
+Merge: 6b6d2a8 3a512c9
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 15:05:56 2024 +0900
+
+    B
+    Merge branch 'yjh'
+    :exit
+
+[33mcommit fccb27b47a75217576230e27f3d4e07fb6e65f6e[m
+Merge: 87dbc92 6b6d2a8
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:56:15 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick into khk
+
+[33mcommit 6b6d2a88230120fabe23099e41927b1b0e5aea09[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 23 14:51:30 2024 +0900
+
+    JoinForm app.js에 추가
+
+[33mcommit 87dbc92a84f7cf0c73357e9410aa88c8e7bbab44[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:49:49 2024 +0900
+
+    안돼
+
+[33mcommit 82a8e46aef5dd3f92c03e1090ae704d4249cfbc1[m
+Merge: 7abbc8e a3126bc
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:48:06 2024 +0900
+
+    commit test
+
+[33mcommit 3a512c9be54bb24bdc7b049e43a16bb9938e911b[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 14:47:25 2024 +0900
+
+    loginformjs
+
+[33mcommit a3126bcfe99e7a6b1af2000cabb862b61a0cbcff[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 23 14:38:05 2024 +0900
+
+    페이지 생성
+
+[33mcommit fc9fe832dcbcd62c7282c8b77455c7284b8fcd75[m
+Merge: a0fa66e bc26fbd
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 14:34:34 2024 +0900
+
+    Merge branch 'MJH'
+
+[33mcommit 7abbc8e0b164057d665cf98c19be5d0704e182ed[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:34:09 2024 +0900
+
+    예약 ì페이지 삭제 
+
+[33mcommit bc26fbd1ad37dbdda95b96955c0ad9c0b8b1e92d[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 14:33:29 2024 +0900
+
+    회원가입 파일 삭제
+
+[33mcommit a0fa66ea07bbad4b1b1f6213c751275693b5182c[m
+Merge: 6289bb4 345e396
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 14:22:34 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 74cdf6d44fa36951f9fb5ec6e58e0a7c300463ac[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 14:22:17 2024 +0900
+
+    mmmmmmmmmmmmmmmmmmmm
+
+[33mcommit ce05f06f21f107acf37dea00b3cff1f41e955bca[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Fri Aug 23 14:21:30 2024 +0900
+
+    loginjava
+
+[33mcommit 7986a27c7df13571d2d01ca1756c0890094fbfae[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:20:17 2024 +0900
+
+    스케줄 페이지 생성
+
+[33mcommit 345e396713f9fb575ca9faf975e81d92bd2097a8[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Fri Aug 23 14:20:12 2024 +0900
+
+    Route 생성
+
+[33mcommit c802754f51a5249db6119e4e7202b9b5c592e9e9[m
+Merge: 4d586e8 40e1530
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Fri Aug 23 14:03:46 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit 6289bb4cad08ae60a68cd7a4c8a5ba0889b003e3[m
+Merge: 8f211d7 40e1530
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Fri Aug 23 11:48:09 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 40e153024b0ab8e973c868ea04d6ba649db7c5e4[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 22 18:44:48 2024 +0900
+
+    1844
+
+[33mcommit 4d586e829fcd38612d991e028f2d8e62f6332094[m
+Merge: f93bd78 83854c1
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 17:50:26 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick into khk
+
+[33mcommit 07e4c653981afa7aa227156007c5b89118678d00[m
+Merge: 7aeb848 83854c1
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 22 17:50:24 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 8f211d733960d8224088026f1037f21c2520574a[m
+Merge: a5d32ab 83854c1
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 22 17:50:23 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit 7aeb848d31c47b4609fa46bcfc2bf7a5695baf68[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 22 17:50:15 2024 +0900
+
+    1750
+
+[33mcommit a5d32ab32b2ca7d8c741b801ab4f913d56e3b9be[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 22 17:50:12 2024 +0900
+
+    ststst커밋
+
+[33mcommit f93bd7811af4aee01398f70c94cde0481420520c[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 17:50:09 2024 +0900
+
+    commit
+
+[33mcommit 8fe51ff102bc49a23fb90cb298fcc82c78765353[m
+Merge: cedb91d 10d2c32
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 17:43:22 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit 83854c1f4a1319a8d1a807bd5596dc1c0770d6c7[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 22 17:41:56 2024 +0900
+
+    react 배너 수정
+
+[33mcommit 10d2c32679559db185e3427724d0a84ec2b95ac1[m
+Merge: e042f3b 6dd3d53
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 22 15:46:05 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick into SES
+
+[33mcommit cedb91db74cec9f2349e3935abc67c4a7a37d2c9[m
+Merge: 3e16e7a 6dd3d53
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 15:45:10 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit 6dd3d53f0398e6c7d389dfc570eecbcf8e39eccf[m
+Merge: 4de4cb6 011387f
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 22 15:42:57 2024 +0900
+
+    Merge branch 'yjh'
+
+[33mcommit 3e16e7a8f06a116df432dc0edb0a84decd6508f9[m
+Merge: 806448e 4de4cb6
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 15:39:24 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit e042f3b95e3458ccadded4efc2b1dc594b33bb95[m
+Merge: a953f00 4de4cb6
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 22 15:38:33 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick into SES
+
+[33mcommit 4de4cb6c9606e69c014e88b03417cbec9df9dc03[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 22 15:34:17 2024 +0900
+
+    memberinsert OK
+
+[33mcommit 011387fafa8acb30b9a220f5e833c14555900b76[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Thu Aug 22 15:33:53 2024 +0900
+
+    1530
+
+[33mcommit 806448e748c885a410a6e462f0f89eab941b19cb[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Thu Aug 22 15:30:23 2024 +0900
+
+    테이블 수정
+
+[33mcommit 6280a330eb7453c868cfda77b2765216816e4935[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Thu Aug 22 15:23:59 2024 +0900
+
+     회원가입 code 작성 ì
+
+[33mcommit a953f00b57b66d1f205c9d99ec5c24a2db3d6e7f[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 22 15:05:57 2024 +0900
+
+    mapperã insert ã삭제
+
+[33mcommit 12f3a67e8c7664232a8c0e6c11c2cc0e0eebc3df[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Thu Aug 22 15:01:13 2024 +0900
+
+    의료진 insert select
+
+[33mcommit c6188b7d7c59dc52584240319ed1cf43dc24a69d[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 15:27:52 2024 +0900
+
+    찐찐찐막 수정
+
+[33mcommit 110deb82fa71d8f4c10c4067c4acd3f6379a0c8f[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 15:25:38 2024 +0900
+
+    service Service수정
+
+[33mcommit c6077c03872b4b66325094c675bde228bcfd29ba[m
+Merge: 7d2bcc2 6b97f21
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 15:18:25 2024 +0900
+
+    Merge branch 'main' into MJH
+
+[33mcommit 6b97f2183bf902db5a6d5ab6cb1439f70397309c[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 15:17:05 2024 +0900
+
+    수정완료
+
+[33mcommit 7d2bcc2fcf83129c9c3c0832a3482b33b0b32aca[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 15:13:16 2024 +0900
+
+    수정완료
+
+[33mcommit 7aef1a13f2a73073b80e5dc504b2801aeccd1552[m
+Author: penguinnhi <tork1355@gmail.com>
+Date:   Wed Aug 21 15:03:22 2024 +0900
+
+    layout
+
+[33mcommit df18fcd757be43b4ecbe87fb296e0964a958b294[m
+Merge: cc4c46c 86b3f48
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 14:23:53 2024 +0900
+
+    Merge branc 'MJH'
+
+[33mcommit 86b3f487506bf18770af8db1cc0d3e96267edd0d[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 14:22:21 2024 +0900
+
+    의사 ê정보 및 진료과
+
+[33mcommit cc4c46c3685bad93e2b87486081064b13ba87583[m
+Merge: eb48222 bcd70d2
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 14:18:13 2024 +0900
+
+    Merge branch 'main' of https://github.com/hyoni91/MediClick
+
+[33mcommit bcd70d2454e260ad60688e4455562409950d9522[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Aug 21 14:15:14 2024 +0900
+
+    예약ㅈ정보 기본 틀 작업
+
+[33mcommit eb48222b6277a7ae1a86f269f556075746330d5a[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 14:08:21 2024 +0900
+
+    member package setting ok
+
+[33mcommit 7493c852c285a25cc030000e5908ec424da64e9d[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 12:49:50 2024 +0900
+
+    íVMemberVO
+
+[33mcommit 2feced585fbfadbc6b6485884b551186d13fa54c[m
+Merge: b63a5c2 e59abbe
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 12:45:32 2024 +0900
+
+    Merge branch 'main' into khk
+
+[33mcommit b63a5c221ee58404eb48b941592e249f1cd1c3c3[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 12:43:44 2024 +0900
+
+    memberVO
+
+[33mcommit e59abbe8be9207607c7c54b4142283f6c8486b1a[m
+Author: hotmnil5 <hotmnil5@gmail.com>
+Date:   Wed Aug 21 12:42:16 2024 +0900
+
+    mapper 공유
+
+[33mcommit 52c660a3f31bddd584f17a1c056d22096c9c7de1[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 12:41:50 2024 +0900
+
+    member package
+
+[33mcommit 9683cd8831939d47f581e9ca31877e26cd595527[m
+Author: ajw29k <alswjdgma12@gmail.com>
+Date:   Wed Aug 21 11:39:37 2024 +0900
+
+    DB crreate table
+
+[33mcommit f5dab774778c436fb86d169e3e549a4175236182[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 10:43:59 2024 +0900
+
+    db 계정 수정
+
+[33mcommit fb51836ddc426943dedeb895d9ddaa5098687d05[m
+Author: hyoni91 <hyoni.green@gmail.com>
+Date:   Wed Aug 21 10:13:30 2024 +0900
+
+    first

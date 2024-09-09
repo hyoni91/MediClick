@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line,
   LineChart,
   CartesianGrid,
@@ -11,6 +11,10 @@ const ExampleComponent = () => {
   const handleClick = (e) => {
     
   };
+  const [timeList, setTimeList] = useState([])//시간
+  const [temList, setTemList] = useState([])//온도
+  //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
+
   const data = [
     { name: '2017', react: 32, angular: 37, vue: 60 },
     { name: '2018', react: 42, angular: 42, vue: 54 },
@@ -33,7 +37,7 @@ const ExampleComponent = () => {
       {/* Y선 */}
       <YAxis />
       <Tooltip />
-      <Legend />
+      <Legend display={false}/>
       <Line type="monotone" dataKey="react" stroke="#0CD3FF" strokeWidth={2} />
       <Line type="monotone" dataKey="angular" stroke="#a6120d" strokeWidth={2} />
       <Line type="monotone" dataKey="vue" stroke="#FFCA29" strokeWidth={2} />
