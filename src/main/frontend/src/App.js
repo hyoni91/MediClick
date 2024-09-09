@@ -22,6 +22,7 @@ import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
 import KakaoTest from './user/schedule/KakaoTest';
+import BloodRefrigerator from './admin/BloodRefrigerator';
 
 function App() {
   const navigate=useNavigate()
@@ -137,6 +138,8 @@ function App() {
             <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
             {/* 진료차트 */}
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
+            {/* 혈액냉장고관리 페이지 */}
+            <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
           </Route>
         </Routes>
 
