@@ -22,6 +22,7 @@ import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
 import KakaoTest from './user/schedule/KakaoTest';
+import ExampleComponent from './user/test';
 
 function App() {
   const navigate=useNavigate()
@@ -96,7 +97,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* ?? */}
-            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
+            <Route path='/??' element={<ExampleComponent/>} />
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
