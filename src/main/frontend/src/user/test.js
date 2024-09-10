@@ -20,12 +20,10 @@ import { useQuery } from '@tanstack/react-query';
 
 
 const ExampleComponent = () => {
-  const handleClick = (e) => {
-    
-  };
   //폼데이터 함수정의
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
+  const formatDate = (e) => {
+    //객체 데이트값 생성
+    const date = new Date(e);
     const options = {
       month: '2-digit',
       day: '2-digit',
@@ -33,6 +31,7 @@ const ExampleComponent = () => {
       minute: '2-digit',
       hour12 : false //24시간
     };
+    // 객체를 문자열로 변환 후 ',' 제거
     return date.toLocaleString('en-US', options).replace(',', '');
   };
   //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
@@ -50,9 +49,11 @@ const ExampleComponent = () => {
   if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
   if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
   
+  // 오름차순 정렬
+  const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
 
-  const timeList = data.map((e) => formatDate(e.tempTime));
-  const temList = data.map((e) => e.currentTemp);
+  const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
+  const temList = sortedDataAsc.map((e) => e.currentTemp);
   const sum = temList.reduce((a, b) => a + b, 0);
   const avg = sum / temList.length;
   //데이터 조회
