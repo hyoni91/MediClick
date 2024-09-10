@@ -16,6 +16,24 @@ const BloodRefrigerator = () => {
     setTemp(tempRef.current.value)
     setIsSetTemp(!isSetTemp)
   }
+  
+  //업 다운 아이콘
+  const upDownIcon = (temp)=>{
+    if(temp == 22.6){
+      return (
+        <i class="fa-solid fa-window-minimize"></i>
+      )
+    } else if (temp > 22.6 ){
+      return (
+        <i class="fa-solid fa-caret-up"></i>
+      )
+    } else {
+      return (
+        <i class="fa-solid fa-caret-down"></i>
+      )
+    }
+  
+    }
 
   //날씨 api
   const cityName = 'Ulsan'
@@ -161,7 +179,7 @@ const BloodRefrigerator = () => {
                     <tr>
                       <td>{temp.tempTime}</td>
                       <td>{temp.currentTemp}</td>
-                      <td></td>
+                      <td>{upDownIcon(temp.currentTemp)}</td>
                     </tr>
                   )
                 })
