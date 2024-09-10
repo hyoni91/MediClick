@@ -87,7 +87,7 @@ const BloodRefrigerator = () => {
               </p>
               <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
                 최저:{(weather.minTemp -273.15).toFixed(0)}°C 
-                / 최고: {(weather.maxTemp-273.15).toFixed(0)}°C
+                최고: {(weather.maxTemp-273.15).toFixed(0)}°C
               
             </div>
             <div>
@@ -187,6 +187,7 @@ const BloodRefrigerator = () => {
             </div>
             <div>
               <h4>이동경로</h4>
+              <div></div>
             </div>
             <div>
               <h4>소요시간</h4>

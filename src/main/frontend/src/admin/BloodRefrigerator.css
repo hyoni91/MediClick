@@ -78,6 +78,7 @@
 .graph-table > thead{
   color: rgb(255, 255, 255);
   background-color:#0050B5;
+  background: linear-gradient(#4CB8C4,skyBlue);
   border: none;
   font-weight: 600;
 }
@@ -121,6 +122,7 @@
   padding: 20px;
 }
 
+/* 박스 안 타이틀 */
 .weather-div > p,
 .graph-weather > p,
 .header-graph > p{
@@ -136,7 +138,7 @@
   margin-bottom: 50px;
 }
 
-
+/* 차량이동정보 박스 */
 .bloodcar{
   display: flex;
   gap: 20px;
@@ -144,7 +146,7 @@
   margin: auto;
 }
 
-
+/* 차량이동 정보 박스 div */
 .bloodcar > div{
   margin-top: 50px;
   width: 500px;
@@ -165,7 +167,6 @@
 /* 애니메이션 */
 .p-100{ width: 300px; animation:p-100 2s forwards; }
 @keyframes p-100{from{width:0px}to{height: 20px}}
-
 .p-50{ width: 100px; animation:p-50 2s forwards; }
 @keyframes p-50{from{width:0px}to{height: 20px}}
 
@@ -176,7 +177,7 @@
   position: relative;
 }
 
-/* 온도조절 */
+/* 온도 조절 div */
 .setting-input{
 background-color:#FFFFFF;
 box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(99, 99, 99, 0.2);
@@ -187,6 +188,7 @@ top: 285px;
 left: 180px;
 }
 
+/* 온도조절 input 디자인 */
 .setting-input input{
   width: 70px;
   height: 30px;
@@ -195,10 +197,17 @@ left: 180px;
   margin-top: 15px;
   border: none;
   padding: 10px;
-  background-color: #f1fbff;
+  background-color: #fafbfc;
   box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(196, 196, 196, 0.2);
 }
 
+.setting-input input::-webkit-inner-spin-button,
+.setting-input input::-webkit-outer-spin-button {
+	-webkit-appearance: inner-spin-button;
+    opacity: 1;
+}
+
+/* 온도조절 확인 버튼 */
 .setting-input button{
   margin-left: 10px;
   width: 60px;
