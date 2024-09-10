@@ -24,6 +24,8 @@ import StatChart from './user/StatChart';
 import KakaoTest from './user/schedule/KakaoTest';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
+import TempData from './admin/TempData';
+
 
 function App() {
   const navigate=useNavigate()
@@ -141,7 +143,9 @@ function App() {
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
             {/* 혈액냉장고관리 페이지 */}
             <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
-          </Route>
+            {/* 온도 차트 연습 */}
+            <Route path='tempdata' element={<TempData/>}/>
+</Route>
         </Routes>
 
 
