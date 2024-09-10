@@ -53,7 +53,7 @@ const BloodRefrigerator = () => {
 
       
   return (
-    <div className='graph-container'>
+    <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
       <div className='graph-headerr'>
         <h1>BLOOD REFRIGERATOR</h1>
       </div>
@@ -61,7 +61,7 @@ const BloodRefrigerator = () => {
         <div className='header-content'>
             <div>
               <p>
-                <span>온도설정<span className='setting-btn' onClick={()=>{setIsSetTemp(!isSetTemp)}}> <i class="fa-solid fa-ellipsis-vertical"></i></span>
+                <span>온도설정<span className='setting-btn' onClick={(e)=>{setIsSetTemp(!isSetTemp , e.stopPropagation()) }}> <i class="fa-solid fa-ellipsis-vertical"></i></span>
                 </span>
                 <span className='icon-span'>
                 <i class="fa-solid fa-hospital"></i>
@@ -70,9 +70,9 @@ const BloodRefrigerator = () => {
               <span>{temp}°C</span>
               { isSetTemp ? 
                 <div className='setting-input'>
-                  <input type='number' ref={tempRef} min={-10} max={5} /> 
+                  <input type='number' ref={tempRef} min={-10} max={5} onClick={(e)=>{e.stopPropagation()}} /> 
                   <button type='button' 
-                  onClick={()=>{tempSetting()} }>
+                  onClick={(e)=>{tempSetting()} }>
                     설정
                   </button>
                 </div>
