@@ -11,6 +11,8 @@ const BloodRefrigerator = () => {
     const apiKey = process.env.REACT_APP_Weather_Key
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
+    
+
     // 날씨 정보 담을 변수 
     const [weather, setWeather] = useState({})
 
@@ -19,11 +21,14 @@ const BloodRefrigerator = () => {
         axios.get(url)
         .then((res)=>{
           console.log(res.data)
+          const weatherIcon = res.data.weather[0].icon;
+          const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
           const weather = {
             cityName : res.data.name,
             temp : res.data.main.temp,
             maxTemp : res.data.main.temp_max,
-            minTemp : res.data.main.temp_min
+            minTemp : res.data.main.temp_min,
+            icon : weatherIconAdrs
           }
           console.log(weather)
           setWeather(weather)
@@ -52,10 +57,8 @@ const BloodRefrigerator = () => {
             </div>
             <div>
               <p>
-                <span>날씨 ({weather.cityName})</span>
-                <span className='icon-span'>
-                <i class="fa-solid fa-cloud-sun"></i>
-                </span>
+                <span>날씨({weather.cityName})</span>
+                <span><img className='weathericon' src={weather.icon}/></span>
               </p>
               <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
                 최저:{(weather.minTemp -273.15).toFixed(0)}°C 
@@ -83,7 +86,11 @@ const BloodRefrigerator = () => {
           </div>
         <div className='header-graph'>
         <div>
-          평균온도랑 현재온도 그래프로 나타내기 <i class="fa-solid fa-rotate-right"></i>
+          <span>
+            평균온도랑 현재온도 그래프로 나타내기
+          </span> 
+          {/* <i class="fa-solid fa-rotate-right">
+          </i> */}
         </div>
         </div>
       </div>
