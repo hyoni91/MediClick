@@ -152,7 +152,7 @@
         )
     </insert>
 
-    <!-- 예약유무 확인 (모든 조건 삭제예정)-->
+    <!-- 예약유무 확인 (모든 조건 삭제예정 )-->
     <select id="checkAppo" resultMap="schedule">
         SELECT SCH_NUM
         FROM medical_schedule
