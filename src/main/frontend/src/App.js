@@ -145,8 +145,10 @@ function App() {
             <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
             {/* 온도 차트 연습 */}
             <Route path='tempdata' element={<TempData/>}/>
-</Route>
-        </Routes>
+            {/* 지도 api 연습 */}
+            <Route path='mapTest' element={<mapTest/>}/>
+        </Route>
+      </Routes>
 
 
       </div>
