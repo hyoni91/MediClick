@@ -23,8 +23,9 @@ const DoctorUpdate = () => {
   }
 
   useEffect(()=>{
-    axios.get(`/admin/doctorUpdate/${docNum}`)
+    axios.get(`/selectDoctor/${docNum}`)
     .then((res)=>{
+      console.log(res.data)
       setDoctorUpdate(res.data);
       setUpdateData({
         ...updateData,

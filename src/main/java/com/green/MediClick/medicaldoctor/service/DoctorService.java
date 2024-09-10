@@ -29,4 +29,6 @@ public interface DoctorService {
     // 이미지 저장
     void insertDocImg(DoctorImgVO imgVO);
 
+    // 의사 정보 수정
+    void updateDoctor(DoctorVO doctorVO);
 }

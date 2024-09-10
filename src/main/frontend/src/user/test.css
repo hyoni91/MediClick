@@ -2,3 +2,9 @@
   width: 100%;
   height: 300px;
 }
+.center{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

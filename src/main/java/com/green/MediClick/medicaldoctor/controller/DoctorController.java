@@ -82,4 +82,10 @@ public class DoctorController {
         System.out.println(docNum);
         doctorService.deleteDoctor(docNum);
     }
+
+    // 관리자 정보수정
+    @PostMapping("updateDoctor")
+    public void updateDoctor(@RequestBody DoctorVO doctorVO){
+        doctorService.updateDoctor(doctorVO);
+    }
 }
