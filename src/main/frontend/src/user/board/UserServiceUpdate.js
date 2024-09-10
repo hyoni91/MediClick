@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import './UserServiceUpdate.css'
 
 const UserServiceUpdate = () => {
   const {boardNum} = useParams();
@@ -53,20 +54,19 @@ const UserServiceUpdate = () => {
       <div className='userServiceUpdate-table-div'>
         <table>
           <colgroup>
-            <col width='10%'/>
-            <col width='*'/>
-            <col width='20%'/>
-            <col width='25%'/>
+            <col width='330px'/>
+            <col width='150px'/>
+            <col width='440px'/>
           </colgroup>
             <thead>
-              <tr>
+              <tr className='thead-div'>
                 {/* <td>No</td> */}
                 <td>제 목</td>
                 <td>작성자</td>
                 <td>작성일</td>
                 
               </tr>
-              <tr>
+              <tr className='tbody-div'>
                 {/* <td>{BoardDetail.boardNum}</td> */}
                 <td>{BoardDetail.title}</td>
                 <td>{BoardDetail.writer}</td>
@@ -75,15 +75,15 @@ const UserServiceUpdate = () => {
             </thead>
             <tbody>
               <tr>
-                <td>내용 <span className='userService-notNull'>*</span></td>
-                <td><textarea value={updateData.content} maxLength={1000} name='content' onChange={(e)=>{changeUpdateData(e)}}/></td>
+                <td className='thead-div userServiceContent'>내용 <span className='userService-notNull'>*</span></td>
+                <td className='tbody-div' colSpan={2}><textarea className='update-textarea' value={updateData.content} maxLength={1000} name='content' onChange={(e)=>{changeUpdateData(e)}}/></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div className='userServiceUpdate-btn-div'>
-          <button type='button' onClick={(e)=>{navigate(-1)}}>뒤로가기</button>
-          <button type='button' onClick={(e)=>{updateBoard()}}>게시글 수정</button>
+          <button type='button' onClick={(e)=>{navigate(-1)}} className='btn'>뒤로가기</button>
+          <button className='btn' type='button' onClick={(e)=>{updateBoard()}}>게시글 수정</button>
         </div>
     </div>
   )

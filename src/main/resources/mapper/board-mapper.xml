@@ -42,6 +42,7 @@
             , WRITER
             , CONTENT
             , CREATE_DATE
+            , MEM_NUM
         FROM USER_BOARD
         WHERE BOARD_NUM = #{boardNum};
     </select>

@@ -36,6 +36,7 @@ public class BoardServiceImpl implements BoardService {
         sqlSession.delete("boardMapper.deletePost", boardNum);
     }
 
+    // 게시글 수정
     @Override
     public void updateBoard(BoardVO boardVO) {
         sqlSession.update("boardMapper.updateBoard", boardVO);

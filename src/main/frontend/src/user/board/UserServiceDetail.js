@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import './UserServiceDetail.css'
 
 const UserServiceDetail = ({loginInfo}) => {
   const navigate = useNavigate();
@@ -25,25 +26,25 @@ const UserServiceDetail = ({loginInfo}) => {
     .catch((error)=>{console.log(error)})
   }
 
+  console.log(loginInfo);
+  console.log(BoardDetail);
   return (
     <div>
       <div className='userServiceDetail-table-div'>
         <table>
           <colgroup>
-            <col width='10%'/>
-            <col width='*'/>
-            <col width='20%'/>
-            <col width='25%'/>
+            <col width='330px'/>
+            <col width='150px'/>
+            <col width='440px'/>
           </colgroup>
           <thead>
-            <tr>
+            <tr className='thead-div'>
               {/* <td>No</td> */}
               <td>제 목</td>
               <td>작성자</td>
               <td>작성일</td>
-              
             </tr>
-            <tr>
+            <tr className='tbody-div'>
               {/* <td>{BoardDetail.boardNum}</td> */}
               <td>{BoardDetail.title}</td>
               <td>{BoardDetail.writer}</td>
@@ -52,19 +53,19 @@ const UserServiceDetail = ({loginInfo}) => {
           </thead>
           <tbody>
             <tr>
-              <td>내용</td>
-              <td>{BoardDetail.content}</td>
+              <td className='thead-div'>내용</td>
+              <td colSpan={2} className='tbody-div'>{BoardDetail.content}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div className='userServiceDetail-btn-div'>
-        <button type='button' onClick={(e)=>{navigate(-1)}}>목록</button>
+        <button type='button' onClick={(e)=>{navigate(-1)}} className='btn'>목록</button>
         {
-          loginInfo.memRole == 'ADMIN' || loginInfo.memId == BoardDetail.memId ? 
+          loginInfo.memRole == 'ADMIN' || loginInfo.memNum == BoardDetail.memNum ? 
           <>
-          <button type='button' onClick={(e)=>{navigate(`/userServiceUpdate/${BoardDetail.boardNum}`)}}>게시글 수정</button>
-          <button type='button' onClick={(e)=>{deletePost(BoardDetail.boardNum)}}>게시글 삭제</button>
+          <button type='button' className='btn' onClick={(e)=>{navigate(`/userServiceUpdate/${BoardDetail.boardNum}`)}}>게시글 수정</button>
+          <button type='button' className='btn' onClick={(e)=>{deletePost(BoardDetail.boardNum)}}>게시글 삭제</button>
           </>
           :
           null

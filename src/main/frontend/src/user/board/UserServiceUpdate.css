@@ -1,0 +1,13 @@
+.userServiceUpdate-table-div table{
+  margin: 100px auto;
+}
+.userServiceUpdate-table-div table tr td{
+  border: 2.5px solid white;
+  padding: 10px;
+}
+.update-textarea{
+  width: 550px;
+}
+.userServiceContent{
+  vertical-align: top;
+}
