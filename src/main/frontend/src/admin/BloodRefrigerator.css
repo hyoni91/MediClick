@@ -166,6 +166,50 @@
 .p-100{ width: 300px; animation:p-100 2s forwards; }
 @keyframes p-100{from{width:0px}to{height: 20px}}
 
-.p-50{ width: 150px; animation:p-100 2s forwards; }
-@keyframes p-100{from{width:0px}to{height: 20px}}
+.p-50{ width: 100px; animation:p-50 2s forwards; }
+@keyframes p-50{from{width:0px}to{height: 20px}}
 
+
+/* 온동설정 아이콘  */
+.setting-btn{
+  cursor: pointer;
+  position: relative;
+}
+
+/* 온도조절 */
+.setting-input{
+background-color:#FFFFFF;
+box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(99, 99, 99, 0.2);
+width: 180px;
+height: 80px;
+position: absolute;
+top: 285px;
+left: 180px;
+}
+
+.setting-input input{
+  width: 70px;
+  height: 30px;
+  font-size: 25px;
+  margin-left: 10px;
+  margin-top: 15px;
+  border: none;
+  padding: 10px;
+  background-color: #f1fbff;
+  box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(196, 196, 196, 0.2);
+}
+
+.setting-input button{
+  margin-left: 10px;
+  width: 60px;
+  padding: 10px;
+  border: none;
+  background-color: #4EC0E9;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.setting-input button:hover{
+  background-color: #2ca3ce;
+}

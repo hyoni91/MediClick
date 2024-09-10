@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './BloodRefrigerator.css'
 import { json } from 'react-router-dom'
 import axios from 'axios';
@@ -6,12 +6,25 @@ import axios from 'axios';
 
 const BloodRefrigerator = () => {
 
+  //온도설정 버튼 숨김
+  const [isSetTemp, setIsSetTemp] = useState(false)
+
+  const tempRef = useRef();
+
+    //temp 변수(임의)
+    const [temp,setTemp] = useState(2);
+
+    //온도 설정 
+    const tempSetting = ()=>{
+      setTemp(tempRef.current.value)
+      setIsSetTemp(!isSetTemp)
+    }
+
     //날씨 api
     const cityName = 'Seoul'
     const apiKey = process.env.REACT_APP_Weather_Key
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
-    
 
     // 날씨 정보 담을 변수 
     const [weather, setWeather] = useState({})
@@ -20,7 +33,7 @@ const BloodRefrigerator = () => {
       useEffect(()=>{
         axios.get(url)
         .then((res)=>{
-          console.log(res.data)
+          // console.log(res.data)
           const weatherIcon = res.data.weather[0].icon;
           const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
           const weather = {
@@ -30,13 +43,14 @@ const BloodRefrigerator = () => {
             minTemp : res.data.main.temp_min,
             icon : weatherIconAdrs
           }
-          console.log(weather)
+          // console.log(weather)
           setWeather(weather)
         })
         .catch((error)=>{
           console.log(error)
         })
       },[])
+
       
   return (
     <div className='graph-container'>
@@ -47,13 +61,24 @@ const BloodRefrigerator = () => {
         <div className='header-content'>
             <div>
               <p>
-                <span>온도설정
+                <span>온도설정<span className='setting-btn' onClick={()=>{setIsSetTemp(!isSetTemp)}}> <i class="fa-solid fa-ellipsis-vertical"></i></span>
                 </span>
                 <span className='icon-span'>
                 <i class="fa-solid fa-hospital"></i>
                 </span>
               </p>
-              <span>2°C</span>
+              <span>{temp}°C</span>
+              { isSetTemp ? 
+                <div className='setting-input'>
+                  <input type='number' ref={tempRef} min={-10} max={5} /> 
+                  <button type='button' 
+                  onClick={()=>{tempSetting()} }>
+                    설정
+                  </button>
+                </div>
+                :
+                <></>
+              }
             </div>
             <div>
               <p>
