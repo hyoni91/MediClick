@@ -8,48 +8,60 @@ const BloodRefrigerator = () => {
 
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
-
   const tempRef = useRef();
+  //temp 변수(임의)
+  const [temp,setTemp] = useState(2);
+  //온도 설정 
+  const tempSetting = ()=>{
+    setTemp(tempRef.current.value)
+    setIsSetTemp(!isSetTemp)
+  }
 
-    //temp 변수(임의)
-    const [temp,setTemp] = useState(2);
-
-    //온도 설정 
-    const tempSetting = ()=>{
-      setTemp(tempRef.current.value)
-      setIsSetTemp(!isSetTemp)
-    }
-
-    //날씨 api
-    const cityName = 'Seoul'
-    const apiKey = process.env.REACT_APP_Weather_Key
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+  //날씨 api
+  const cityName = 'Seoul'
+  const apiKey = process.env.REACT_APP_Weather_Key
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 
-    // 날씨 정보 담을 변수 
-    const [weather, setWeather] = useState({})
+  // 날씨 정보 담을 변수 
+  const [weather, setWeather] = useState({})
 
-      //마운트시, 날씨 api에서 정보 받아오기
-      useEffect(()=>{
-        axios.get(url)
-        .then((res)=>{
-          // console.log(res.data)
-          const weatherIcon = res.data.weather[0].icon;
-          const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
-          const weather = {
-            cityName : res.data.name,
-            temp : res.data.main.temp,
-            maxTemp : res.data.main.temp_max,
-            minTemp : res.data.main.temp_min,
-            icon : weatherIconAdrs
-          }
-          // console.log(weather)
-          setWeather(weather)
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-      },[])
+    //마운트시, 날씨 api에서 정보 받아오기
+    useEffect(()=>{
+      axios.get(url)
+      .then((res)=>{
+        // console.log(res.data)
+        const weatherIcon = res.data.weather[0].icon;
+        const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+        const weather = {
+          cityName : res.data.name,
+          temp : res.data.main.temp,
+          maxTemp : res.data.main.temp_max,
+          minTemp : res.data.main.temp_min,
+          icon : weatherIconAdrs
+        }
+        // console.log(weather)
+        setWeather(weather)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[])
+
+
+    const [tempData, setTempData] = useState([])
+
+    //temp 데이터 받기
+    useEffect(()=>{
+      axios.get("/temp/nowTemps")
+      .then((res)=>{
+        setTempData(res.data)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[])
+    console.log(tempData)
 
       
   return (
@@ -139,41 +151,21 @@ const BloodRefrigerator = () => {
               <tr>
                 <td>시간</td>
                 <td>온도</td>
-                <td>종류</td>
-                <td>오차온도</td>
+                <td>오차(설정온도-온도)</td>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>2.2</td>
-                <td>혈액</td>
-                <td>0.2</td>
-              </tr>
+              {
+                tempData.map((temp,i)=>{
+                  return(
+                    <tr>
+                      <td>{temp.tempTime}</td>
+                      <td>{temp.currentTemp}</td>
+                      <td></td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
