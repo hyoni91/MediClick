@@ -21,15 +21,15 @@ const BloodRefrigerator = () => {
   const upDownIcon = (temp)=>{
     if(temp == 22.6){
       return (
-        <i class="fa-solid fa-window-minimize"></i>
+        <div className='Iconequls'><i class="fa-solid fa-window-minimize"></i></div>
       )
-    } else if (temp > 22.6 ){
+    } else if (temp > 23 ){
       return (
-        <i class="fa-solid fa-caret-up"></i>
+        <div className='iconUp'><i class="fa-solid fa-caret-up"></i></div>
       )
-    } else {
+    } else if (temp < 23){
       return (
-        <i class="fa-solid fa-caret-down"></i>
+        <div className='iconDown'><i class="fa-solid fa-caret-down"></i></div>
       )
     }
   
@@ -67,7 +67,11 @@ const BloodRefrigerator = () => {
     },[])
 
 
-    const [tempData, setTempData] = useState([])
+    const [tempData, setTempData] = useState([
+      {
+        currentTemp : ''
+      }
+    ])
 
     //temp 데이터 받기
     useEffect(()=>{
@@ -127,7 +131,8 @@ const BloodRefrigerator = () => {
                   <i class="fa-solid fa-temperature-empty"></i>
                 </span>
               </p>
-              <span>2.3°C 
+              <span>
+                {tempData[0].currentTemp}
                 <div className='graphWrap'>
                   <div className='graph'>
                     <div id='item1' className='p-100' />
@@ -143,7 +148,7 @@ const BloodRefrigerator = () => {
                 </span>
               </p>
               <span>
-                2°C
+                {tempData[0].currentTemp}
                 <div className='graphWrap'>
                   <div className='graph'>
                     <div id='item2' className='p-50' />

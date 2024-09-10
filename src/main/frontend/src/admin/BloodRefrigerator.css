@@ -230,3 +230,15 @@ left: 180px;
 .setting-input button:hover{
   background-color: #2ca3ce;
 }
+
+.iconUp{
+  color: red;
+}
+
+.iconDown{
+  color: blue;
+}
+
+.Iconequls{
+  color: green;
+}
