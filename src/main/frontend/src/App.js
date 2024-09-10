@@ -22,6 +22,7 @@ import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
 import KakaoTest from './user/schedule/KakaoTest';
+import TempData from './admin/TempData';
 
 function App() {
   const navigate=useNavigate()
@@ -137,6 +138,8 @@ function App() {
             <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
             {/* 진료차트 */}
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
+            {/* 온도 차트 연습 */}
+            <Route path='tempdata' element={<TempData/>}/>
           </Route>
         </Routes>
 
