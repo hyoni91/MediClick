@@ -15,117 +15,117 @@ import { Line,
 } from "recharts";
 import './test.css';
 import axios from 'axios';
+import { CategoryScale, LinearScale, LineElement, PointElement, Title } from 'chart.js';
+import { useQuery } from '@tanstack/react-query';
+
+
 const ExampleComponent = () => {
   const handleClick = (e) => {
     
   };
-  const [timeList, setTimeList] = useState([])//시간
-  const [temList, setTemList] = useState([])//온도
+  //폼데이터 함수정의
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12 : false //24시간
+    };
+    return date.toLocaleString('en-US', options).replace(',', '');
+  };
   //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
+  const fetchTemperatureData = async () => {
+    const response = await axios.get('/temp/nowTemps');
+    return response.data;  // API로부터 온도 데이터를 반환
+  };
+  // useQuery 훅을 사용하여 데이터 가져오기
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['temperatureData'],
+    queryFn: fetchTemperatureData,
+    refetchInterval: 5000, // 5초마다 데이터 갱신
+  });
 
-  const data = [
-    {time : 15 , tem:20},
-    {time : 30 , tem:18},
-    {time : 45 , tem:21},
-    {time : 60 , tem:21},
-  ];
-  const data1 = [
-    {name : '09.01', curTem : 2.2 , avgTem: 1.9},
-    {name : '09.02', curTem : 1.9 , avgTem: 2.0},
-    {name : '09.03', curTem : 2.0 , avgTem: 2.2},
-    {name : '09.04', curTem : 2.2 , avgTem: 1.9},
-    {name : '09.05', curTem : 2.1 , avgTem: 1.9},
-  ]
+  if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
+  if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
+  
+
+  const timeList = data.map((e) => formatDate(e.tempTime));
+  const temList = data.map((e) => e.currentTemp);
+  const sum = temList.reduce((a, b) => a + b, 0);
+  const avg = sum / temList.length;
+  //데이터 조회
   const formatXAxis = (e) => {
     return `${e}분`
   }
-  const data3 = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+  const data2 = ['January', 'February', 'March', 'April']; // 예시 배열
+  
+  const labels = [];
+  timeList.forEach((time) => labels.push(time));
+  
+  const data3 = {
+    labels: labels, // labels 배열 사용
+    datasets: [{
+      type: 'bar',
+      label: '현재 온도',
+      data: temList,
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      hoverBackgroundColor: "rgba(255, 99, 132, 0.8)", // 호버 시 색상 설정
+      
+    }, {
+      type: 'line',
+      label: '평균온도',
+      data: temList.map(() => avg.toFixed(2)), // 각 포인트에 평균온도값 설정
+      borderColor: 'rgb(54, 162, 235)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      hoverBackgroundColor: "rgba(54, 162, 235, 0.8)", // 호버 시 색상 설정
+    }]
+  };
+  
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Bar Chart Example", // 제목
+      },
+      tooltip: {
+        mode: "index", // 같은 X축 인덱스의 모든 데이터를 표시
+        intersect: false, //바있는 화면에 가져다 대면 데이터나옴
+        callbacks: {
+          // 커스터마이징된 툴팁 내용을 반환하는 함수
+          label: function (tooltipItem) {
+            const dataset = tooltipItem.dataset; // 현재 데이터셋 가져오기
+            const label = dataset.label || ""; // 데이터셋 라벨 가져오기
+            const value = dataset.data[tooltipItem.dataIndex]; // 현재 데이터 값 가져오기
+            return `${label}: ${value}`; // 라벨과 값으로 텍스트 반환
+          },
+        },
+      },
+      
     },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+    hover: {
+      mode: "index",
+      intersect: false, // 막대에 겹칠 때 툴팁이 나타나도록 설정
     },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-  // 막대 핸들러
-  const [handleBar , setHandleBar] = useState(null)
-console.log(data1)
-  //막대 손올리면 바뀌는 함수
-  const efectBar = (e) => {
-
-  }
+  };
+  
+  console.log(avg)
   return ( 
     <div className='center' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      
       <div>
-        <ResponsiveContainer>
-        <BarChart
-        width={500}
-        height={300}
-        data={data3}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar
-          dataKey="uv"
-          fill="#B3CDAD"
-          shape={<Rectangle fill="pink" stroke="blue" />}
-        />
-        <Bar
-          dataKey="pv"
-          fill="#FF5F5E"
-          shape={<Rectangle fill="gold" stroke="purple" />}
-        />
-      </BarChart>
-        </ResponsiveContainer>
+      <Bar data={data3}  options={options} className='center'></Bar>
+      <Line data={data3} options={options} className=''></Line>  
       </div>
       <div>
         <ResponsiveContainer>
-          <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 30, left: 30 }} >
+          <LineChart width={600} height={300} data={data2} margin={{ top: 5, right: 20, bottom: 30, left: 30 }} >
           {/* CartesianGrid 추가 */}
           <CartesianGrid stroke="#ccc" // 그래프 밑에 색깔
                          strokeDasharray="5 5"// 그래프 선 (점선 수,선사이 간격)

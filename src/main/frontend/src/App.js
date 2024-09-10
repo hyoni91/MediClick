@@ -34,7 +34,7 @@ function App() {
   //로그인 정보를 저장할 수 있는 state변수
   const [loginInfo,setLoginInfo]=useState({})
 
-
+  
   const loginInfoString=window.sessionStorage.getItem('loginInfo')
 
   useEffect(()=>{
@@ -80,7 +80,7 @@ function App() {
                   <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                 }
                 
-                <li><span onClick={(e)=>{navigate('/admin/doctorUpdate')}}>정보수정하기</span></li>
+                <li><span onClick={(e)=>{navigate(`/admin/doctorUpdate/${loginInfo.memNum}`)}}>정보수정하기</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
             }
@@ -100,7 +100,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* ?? */}
-            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
+            <Route path='/??' element={<ExampleComponent/>} />
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
@@ -138,7 +138,7 @@ function App() {
             {/* 담당환자 상세정보 */}
             <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
             {/* 의사 정보수정 페이지 */}
-            <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
+            <Route path='doctorUpdate/:docNum' element={<DoctorUpdate/>}/>
             {/* 진료차트 */}
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
             {/* 혈액냉장고관리 페이지 */}

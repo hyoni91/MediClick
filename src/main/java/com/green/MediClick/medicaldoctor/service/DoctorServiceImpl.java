@@ -59,6 +59,11 @@ public class DoctorServiceImpl implements DoctorService{
         sqlSession.insert("doctorMapper.insertDocImg",imgVO);
     }
 
+    @Override
+    public void updateDoctor(DoctorVO doctorVO) {
+        sqlSession.update("doctorMapper.updateDoctor",doctorVO);
+    }
+
     // 회원가입할때 "ADMIN"이면 의사정보도 추가
     @Override
     public void insertDoctor(DoctorVO doctorVO) {
