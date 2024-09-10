@@ -25,6 +25,7 @@ import KakaoTest from './user/schedule/KakaoTest';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
+import MapTest from './admin/MapTest';
 
 
 function App() {
@@ -146,7 +147,7 @@ function App() {
             {/* 온도 차트 연습 */}
             <Route path='tempdata' element={<TempData/>}/>
             {/* 지도 api 연습 */}
-            <Route path='mapTest' element={<mapTest/>}/>
+            <Route path='mapTest' element={<MapTest/>}/>
         </Route>
       </Routes>
 
@@ -213,6 +214,7 @@ function KakaoMap(){
     })
   
     usermarker.setMap(map)
+ 
 
   },[])
 
