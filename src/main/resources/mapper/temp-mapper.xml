@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="tempMapper">
+    <resultMap id="temp" type="com.green.MediClick.temp.vo.TempVO">
+        <id column="TEMP_NUM" property="tempNum"/>
+        <result column="CURRENT_TEMP" property="currentTemp"/>
+        <result column="TEMP_TIME" property="tempTime"/>
+    </resultMap>
+
+    <!--입력되는 온도 조회 : 5분마다 10개-->
+    <select id="nowTemps" resultMap="temp">
+        SELECT TEMP_NUM
+            ,CURRENT_TEMP
+            ,TEMP_TIME
+        FROM TEMP_DATA
+        ORDER BY TEMP_TIME DESC
+        <!--처음부터 어디까지 가져올지-->
+        LIMIT 10
+
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
