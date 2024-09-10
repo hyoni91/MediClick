@@ -154,7 +154,15 @@
   background-color: #faf8f8;
   text-align: center;
   padding: 15px;
+  box-shadow: 0 1px 2px #FAFBFE, 0 1px 2px rgba(99, 99, 99, 0.23);
 }
+
+.bloodcar-title{
+  display: flex;
+  color: #6C757D;
+  gap: 5px;
+}
+
 
 
 /* 온도 막대기 바 */

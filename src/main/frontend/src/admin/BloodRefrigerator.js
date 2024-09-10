@@ -18,7 +18,7 @@ const BloodRefrigerator = () => {
   }
 
   //날씨 api
-  const cityName = 'Seoul'
+  const cityName = 'Ulsan'
   const apiKey = process.env.REACT_APP_Weather_Key
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
@@ -151,7 +151,7 @@ const BloodRefrigerator = () => {
               <tr>
                 <td>시간</td>
                 <td>온도</td>
-                <td>오차(설정온도-온도)</td>
+                <td>오차</td>
               </tr>
             </thead>
             <tbody>
@@ -172,14 +172,16 @@ const BloodRefrigerator = () => {
       </div>
       <div className='graph-content'>
         <div className='weather-div'>
-          <p>혈액 운송 차량정보</p>
+          <div className='bloodcar-title'>
+            <p>혈액 운송 차량정보</p>
+            <span><i class="fa-solid fa-truck-droplet"></i></span>
+          </div>
           <div className='bloodcar'>
             <div>
               <h4>차량번호</h4>
             </div>
             <div>
               <h4>이동경로</h4>
-              <div></div>
             </div>
             <div>
               <h4>소요시간</h4>
@@ -187,7 +189,10 @@ const BloodRefrigerator = () => {
           </div>
         </div>
         <div className='graph-weather'>
-          <p>차량 실시간 정보</p>
+          <div className='bloodcar-title'>
+            <p>차량 실시간 정보</p>
+            <span><i class="fa-solid fa-rotate-right"></i></span>
+          </div>
         </div>
       </div>
     </div>
