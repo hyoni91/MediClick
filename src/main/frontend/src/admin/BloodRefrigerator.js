@@ -72,7 +72,13 @@ const BloodRefrigerator = () => {
                   <i class="fa-solid fa-temperature-empty"></i>
                 </span>
               </p>
-              <span>2.3°C</span>
+              <span>2.3°C 
+                <div className='graphWrap'>
+                  <div className='graph'>
+                    <div id='item1' className='p-100' />
+                  </div>
+                </div>
+              </span>
             </div>
             <div>
               <p>
@@ -81,22 +87,26 @@ const BloodRefrigerator = () => {
                   <i class="fa-solid fa-temperature-empty"></i>
                 </span>
               </p>
-              <span>2°C</span>
+              <span>
+                2°C
+                <div className='graphWrap'>
+                  <div className='graph'>
+                    <div id='item2' className='p-50' />
+                  </div>
+                </div>
+              </span>
             </div>
           </div>
         <div className='header-graph'>
-        <div>
-          <span>
+          <p>
             평균온도랑 현재온도 그래프로 나타내기
-          </span> 
-          {/* <i class="fa-solid fa-rotate-right">
-          </i> */}
-        </div>
+          </p>
+          <div>그래프div</div>
         </div>
       </div>
       <div className='graph-content'>
         <div className='graph-div'>
-          실시간 그래프 그려넣기 
+          <p>실시간 온도 차트</p>
         </div>
         <div className='text-div'>
           <table className='graph-table'>
@@ -145,10 +155,21 @@ const BloodRefrigerator = () => {
       </div>
       <div className='graph-content'>
         <div className='weather-div'>
-          지도 뜨우면 보여줄 정보
+          <p>혈액 운송 차량정보</p>
+          <div className='bloodcar'>
+            <div>
+              <h4>차량번호</h4>
+            </div>
+            <div>
+              <h4>이동경로</h4>
+            </div>
+            <div>
+              <h4>소요시간</h4>
+            </div>
+          </div>
         </div>
         <div className='graph-weather'>
-          지도 api로 띄우기 
+          <p>차량 실시간 정보</p>
         </div>
       </div>
     </div>
