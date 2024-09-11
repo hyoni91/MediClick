@@ -12,6 +12,7 @@ import { Line,
   BarChart,
   ScatterChart,
   Rectangle,
+  AreaChart,
 } from "recharts";
 import './test.css';
 import axios from 'axios';
@@ -56,6 +57,16 @@ const ExampleComponent = () => {
   const temList = sortedDataAsc.map((e) => e.currentTemp);
   const sum = temList.reduce((a, b) => a + b, 0);
   const avg = sum / temList.length;
+  console.log(timeList)
+  console.log(temList)
+  //배열 데이터 객체화
+  const Objecttime = timeList.map((time , i) => {  
+    return {
+    time : time ,
+    tem : temList[i]
+    }
+  })
+  console.log(Objecttime)
   //데이터 조회
   const formatXAxis = (e) => {
     return `${e}분`
@@ -125,36 +136,43 @@ const ExampleComponent = () => {
       <Line data={data3} options={options} className=''></Line>  
       </div>
       <div>
-        <ResponsiveContainer>
-          <LineChart width={600} height={300} data={data2} margin={{ top: 5, right: 20, bottom: 30, left: 30 }} >
-          {/* CartesianGrid 추가 */}
-          <CartesianGrid stroke="#ccc" // 그래프 밑에 색깔
-                         strokeDasharray="5 5"// 그래프 선 (점선 수,선사이 간격)
-                         horizontal={true} vertical={false} />
+      
+        <ResponsiveContainer width="100%" height="100%">
+          {/* 선밑에 채워지는 차트 */}
+        <AreaChart
+          width={500}
+          height={400}
+          data={Objecttime}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" 
+          stroke="#ccc" // 그래프 밑에 색깔
+          horizontal={true} vertical={false}
+          />
           {/* X선 */}
-          <XAxis dataKey="time" //data안에 담긴 변수 name의 값
-          tickFormatter={formatXAxis} // X축 값 포맷팅
+          <XAxis dataKey="time" 
           label={{ value: '시간', position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
+          //tickFormatter={formatXAxis} // X축 값 포맷팅
+          // angle={-45} // x축 기울기
           />
           {/* Y선 */}
-          <YAxis dataKey="tem"
-          />
+          <YAxis />
           {/* 마우스 올리면 데이터 나타남 */}
           <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="tem"
-            stroke="#0CD3FF"
-            fill="#0CD3FF" // 선 아래에 색을 채우기
-            fillOpacity={0.3}
-            yAxisId="left"
+          <Area 
+          type="monotone" //부드러운 곡선
+          dataKey="tem"  //나타낼 데이터
+          stroke="#8884d8" //그래프 선 색깔
+          fill="#8884d8" // 선 아래에 색을 채우기
+          dot={true}//점을 표시 (ture) 표시 X (false)
           />
-          {/* <Legend display={false}/> */}
-          <Line type="monotone" dataKey="tem" stroke="#0CD3FF" strokeWidth={2}  
-          dot={false} // 점을 표시하지 않음
-          />
-        </LineChart>
-        </ResponsiveContainer>
+        </AreaChart>
+      </ResponsiveContainer>
       </div>
     </div>
   );
