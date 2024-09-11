@@ -145,7 +145,7 @@ function App() {
             <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
             {/* 온도 차트 연습 */}
             <Route path='tempdata' element={<TempData/>}/>
-</Route>
+          </Route>
         </Routes>
 
 
