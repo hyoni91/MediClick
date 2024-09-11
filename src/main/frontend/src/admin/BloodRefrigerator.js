@@ -197,24 +197,31 @@ const BloodRefrigerator = () => {
         <div className='weather-div'>
           <div className='bloodcar-title'>
             <p>혈액 운송 차량정보</p>
-            <span><i class="fa-solid fa-truck-droplet"></i></span>
+            <span onClick={'재랜더링'}><i class="fa-solid fa-truck-droplet"></i></span>
           </div>
           <div className='bloodcar'>
             <div>
-              <h4>차량번호</h4>
+              <h4>차량정보</h4>
+              <div>
+                <p>담당자:김뭐시기</p>
+                <p>차량번호:가1234</p>
+                <p>연락처:010-1111-2222</p>
+              </div>
             </div>
             <div>
               <h4>이동경로</h4>
+              <div>서울 ~ 울산</div>
             </div>
             <div>
-              <h4>소요시간</h4>
+              <h4>도착시간</h4>
+              <div>오후 6:00</div>
             </div>
           </div>
         </div>
         <div className='graph-weather'>
           <div className='bloodcar-title'>
             <p>차량 실시간 정보</p>
-            <span><i class="fa-solid fa-rotate-right"></i></span>
+            <span id='replay'><i class="fa-solid fa-rotate-right"></i></span>
           </div>
         </div>
       </div>

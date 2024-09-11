@@ -126,8 +126,6 @@ function App() {
             <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 차트 */}
             <Route path='statChart' element={<StatChart/>}/>
-            {/* 카카오 문자 */}
-            <Route path='message' element={<KakaoTest />}/>
           </Route>
   
   
