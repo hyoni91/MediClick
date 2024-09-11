@@ -14,6 +14,7 @@ import './Modal.css'
 const Schedule = () => {
   //모달창
   const [modalOpen, setModalOpen] = useState(false)
+
   const showModal = () => {
     setModalOpen(!modalOpen)
   }
@@ -23,8 +24,8 @@ const Schedule = () => {
     emailjs.init(process.env.REACT_APP_Public_key)
   },[]);
 
-  //toemail주소
-  const [toEmail, setToEmail] = useState()
+  // //toemail주소
+  // const [toEmail, setToEmail] = useState()
 
     //(수정중)이메일 보내기 ////////////////////////////////////////////////////////
     const form = useRef();
@@ -44,6 +45,7 @@ const Schedule = () => {
           },
         );
     };
+
     ////////////////////////////////////////////////////////////////////////
 
   const navigate = useNavigate()
@@ -82,7 +84,8 @@ const Schedule = () => {
     schDate: moment(value).format("YYYY-MM-DD"), //다음날을 기준일로 초기값
     schTime : '',
     detail:'',
-    deptName:''
+    deptName:'',
+    to_email : ''
   })
 
 
@@ -208,9 +211,8 @@ const Schedule = () => {
         //문제없으면 예약 테이블에 insert
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
-      alert('예약이 완료되었습니다.')
+      showModal()
       //예약 완료 후 본인 예약 확인페이지로 넘어가기
-      navigate(`/mySch/${appo.memNum}`)
     })
     .catch((error)=>{
       console.log(error)
@@ -334,25 +336,15 @@ const Schedule = () => {
               <div className='sch-footer'>
                 <h5 className='h5tag'>*당일 예약은 전화로 문의주세요</h5>
                 <div>상기 내용으로 예약하시겠습니까?</div>
-                <button  type='button' onClick={()=>{goAppo(appo.memNum) }}>예약하기 </button>
+                <button  type='button' 
+                onClick={()=>{ 
+                  goAppo(appo.memNum)
+                }}
+                >예약하기 </button>
               </div>
             </div>
         </div>
       </div>
-      
-      {/* 확정 메일 from */}
-      <form ref={form}>
-        <input type='hidden' name='memName' value={loginInfo? loginInfo.memName : ""}/>
-        <input type='hidden' name='regDate' value={'오늘날짜'}/>
-        <input type='hidden' name='schDate' value={appo.schDate}/>
-        <input type='hidden' name='schTime'  value={appo.schTime}/>
-        <input type='hidden' name='deptName' value={appo.deptName}/>
-        <input type='hidden' name='memRrn' value={loginInfo? loginInfo.memRrn : ""}/>
-        <input type='hidden' name='from_name' value={'그린최고암센터'}/>
-        <input type='hidden' name='reply_to' value={'MediClick@mail'}/>
-        <input type='hidden' name='to_email' value={'hyoni.green@gmail.com'}/>
-      </form>
-      <button type='button' onClick={showModal}>modal</button>
       {
         modalOpen ? 
         <ReactModal
@@ -394,12 +386,40 @@ const Schedule = () => {
               <div className='modal-content'>
                   예약이 완료되었습니다. <br/>
                   예약 메일을 받아보시려면 아래에 메일을 입력해 주세요.
-                <div>
-                  메일<input type='email' />  
+                <div>       
+                {/* 확정 메일 from */}
+                <form ref={form}>
+                  <input type='hidden' name='memName' 
+                  value={loginInfo? loginInfo.memName : ""}/>
+                  <input type='hidden' name='regDate' 
+                  value={'오늘날짜'}/>
+                  <input type='hidden' name='schDate' 
+                  value={appo.schDate}/>
+                  <input type='hidden' name='schTime'  
+                  value={appo.schTime}/>
+                  <input type='hidden' name='deptName' 
+                  value={appo.deptName}/>
+                  <input type='hidden' name='memRrn' 
+                  value={loginInfo? loginInfo.memRrn : ""}/>
+                  <input type='hidden' name='from_name' 
+                  value={'그린최고암센터'}/>
+                  <input type='hidden' name='reply_to' 
+                  value={'MediClick@email.com'}/>
+                  메일주소 : <input type='text' name='to_email' 
+                  onChange={(e)=>{
+                    setAppo({
+                    ...appo,
+                    [e.target.name] : e.target.value})
+                    }} />  
+                </form>
                 </div>
               </div>
-              <button type='button'>확인</button>
-              <button type='button'>취소</button>
+              <button type='button' 
+                onClick={(e)=>{
+                  navigate(`/mySch/${appo.memNum}`)
+                  sendEmail(e)
+                  }}>확인</button>
+              <button type='button' onClick={navigate(`/mySch/${appo.memNum}`)}>취소</button>
             </div>
           </div>
         </ReactModal>
