@@ -95,11 +95,11 @@ const formatDate = (e) => {
 //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
-  console.log(response.data)
+  // console.log(response.data)
   setTempData(response.data)
   return response.data;  // API로부터 온도 데이터를 반환
 };
-console.log(tempData)
+
 // useQuery 훅을 사용하여 데이터 가져오기
 const { data, isLoading, error } = useQuery({
   queryKey: ['temperatureData'],
@@ -122,10 +122,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
       tem : temList[i]
       }
     })
-    console.log(Objecttime)
-
-
-
+    // console.log(Objecttime)
 
 
       
@@ -165,7 +162,6 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
               <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
                 최저:{(weather.minTemp -273.15).toFixed(0)}°C 
                 최고: {(weather.maxTemp-273.15).toFixed(0)}°C
-              
             </div>
             <div>
               <p>
@@ -202,7 +198,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           </div>
         <div className='header-graph'>
           <p>
-            평균온도랑 현재온도 그래프로 나타내기
+            그래프제목넣기
           </p>
           <div>그래프 넣을 div</div>
         </div>
@@ -223,7 +219,8 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
             bottom: 10,
           }}
         >
-          <CartesianGrid strokeDasharray="6 10" 
+          <CartesianGrid 
+          strokeDasharray="1" 
           stroke="#EBEEF0" // 그래프 밑에 색깔
           horizontal={true} vertical={false}
           />
@@ -244,8 +241,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           dataKey="tem"  //나타낼 데이터
           stroke="#3276ff" //그래프 선 색깔
           strokeWidth={2} // 선 두께
-          fill="#a5c3ff" // 선 아래에 색을 채우기
-          dot={false}//점을 표시 (ture) 표시 X (false)
+          // strokeDasharray={0}
+          fill="#d8e5ff" // 선 아래에 색을 채우기
+          dot={true}//점을 표시 (ture) 표시 X (false)
           />
         </AreaChart>
       </ResponsiveContainer>

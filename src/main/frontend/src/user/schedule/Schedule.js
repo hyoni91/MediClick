@@ -5,51 +5,48 @@ import 'react-calendar/dist/Calendar.css'
 import moment from "moment";
 import './Schedule.css'
 import axios from 'axios';
-import { now } from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import './Modal.css'
-
+import { now } from 'moment/moment';
 
 const Schedule = () => {
+
+  const nowDate = moment(now).locale
+  console.log(nowDate)
+
+  const navigate = useNavigate()
+
   //모달창
   const [modalOpen, setModalOpen] = useState(false)
-
   const showModal = () => {
     setModalOpen(!modalOpen)
   }
-  //이메일 보내기 추가 20240906
+
+  //이메일 보내기
   useEffect(()=>{
-    //메일
     emailjs.init(process.env.REACT_APP_Public_key)
   },[]);
 
-  // //toemail주소
-  // const [toEmail, setToEmail] = useState()
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-    //(수정중)이메일 보내기 ////////////////////////////////////////////////////////
-    const form = useRef();
-    const sendEmail = (e) => {
-      e.preventDefault();
-  
-      emailjs.sendForm('service_opia6hi', 'mediClick_tamplate', form.current, {
-          publicKey: process.env.REACT_APP_Public_key,
-        })
-        .then(
-          () => {
-            console.log('SUCCESS!');
-          },
-          (error) => {
-            console.log('FAILED...')
-            console.log(error);
-          },
-        );
-    };
+    emailjs.sendForm('service_opia6hi', 'mediClick_tamplate', form.current, {
+        publicKey: process.env.REACT_APP_Public_key,
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...')
+          console.log(error);
+        },
+      );
+  };
 
-    ////////////////////////////////////////////////////////////////////////
 
-  const navigate = useNavigate()
-  
   // 날짜를 계산
   const minDate = new Date(); // 현재 날짜
   minDate.setDate(minDate.getDate()+1) // 내일 날짜 
@@ -57,25 +54,23 @@ const Schedule = () => {
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
 
   // 선택한 날짜 update
-  const [value, onChange] = useState(minDate) //초기값은 현재날짜
-
+  const [value, onChange] = useState(minDate) //초기값설정
 
   //주말만 가져오기 
   const isWeekend = (date) => {
     const day = date.getDay();
-    return day == 6 || day == 0; // 6: Saturday, 0: Sunday
+    return day == 6 || day == 0; // 6:토,0:일
   };
 
    // tileDisabled 속성을 사용하여 주말 날짜를 비활성화
   const tileDisabled = ({ date }) => {
-    
-    return isWeekend(date); // 주말 날짜를 비활성화
+     //주말 날짜를 비활성화
+    return isWeekend(date);
   };
 
   // 환자정보 불러오기
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   
-
   //예약 내용 저장할 변수
   const [appo, setAppo] = useState({
     docNum :'',
@@ -85,24 +80,8 @@ const Schedule = () => {
     schTime : '',
     detail:'',
     deptName:'',
-    to_email : ''
+    to_email : ''  //확정메일주소
   })
-
-
-  // 진료과 의사 정보를 담을 변수 선언
-  const [docInfo, setDocInfo] = useState([])
-
-  // //의료진 진료과 정보 불러오기
-  useEffect(()=>{
-    axios.get('/schedule/getDocInfo')
-    .then((res)=>{
-      setDocInfo(res.data)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  },[])
-
 
 
   // schDate를 선택하면 appo정보도 바뀌도록 설정(실시간으로 schDate갱신)
@@ -135,6 +114,20 @@ const Schedule = () => {
     [timeInput.current.name] : e.target.value
     })
   }
+
+    // 진료과 의사 정보를 담을 변수 선언
+    const [docInfo, setDocInfo] = useState([])
+
+    // //의료진 진료과 정보 불러오기
+    useEffect(()=>{
+      axios.get('/schedule/getDocInfo')
+      .then((res)=>{
+        setDocInfo(res.data)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[])
 
   // 진료과 클릭 선택(의사,진료과정보 넘기기)
   function changeDocInfo(e){
@@ -198,7 +191,6 @@ const Schedule = () => {
   //예약정보 console
   console.log(appo)
 
-
   //클릭하면 예약 실행
   function goAppo(){
     //증상 이외의 정보가 다 들어가 있는지 확인
@@ -211,8 +203,8 @@ const Schedule = () => {
         //문제없으면 예약 테이블에 insert
     axios.post('/schedule/schInput', appo)
     .then((res)=>{
+      //모달창띄우기
       showModal()
-      //예약 완료 후 본인 예약 확인페이지로 넘어가기
     })
     .catch((error)=>{
       console.log(error)
@@ -363,7 +355,7 @@ const Schedule = () => {
             },
             content: {
               position: 'absolute',
-              width: '480px',
+              width: '440px',
               height: '300px',
               top: '180px',
               left: '700px',
@@ -392,7 +384,7 @@ const Schedule = () => {
                   <input type='hidden' name='memName' 
                   value={loginInfo? loginInfo.memName : ""}/>
                   <input type='hidden' name='regDate' 
-                  value={'오늘날짜'}/>
+                  value={now}/>
                   <input type='hidden' name='schDate' 
                   value={appo.schDate}/>
                   <input type='hidden' name='schTime'  
@@ -405,7 +397,8 @@ const Schedule = () => {
                   value={'그린최고암센터'}/>
                   <input type='hidden' name='reply_to' 
                   value={'MediClick@email.com'}/>
-                  메일주소 : <input type='text' name='to_email' 
+                  <input type='text' placeholder='이곳에 메일주소를 입력해 주세요.'
+                  name='to_email' 
                   onChange={(e)=>{
                     setAppo({
                     ...appo,
@@ -419,7 +412,7 @@ const Schedule = () => {
                   navigate(`/mySch/${appo.memNum}`)
                   sendEmail(e)
                   }}>확인</button>
-              <button type='button' onClick={navigate(`/mySch/${appo.memNum}`)}>취소</button>
+              <button type='button' onClick={()=>{navigate(`/mySch/${appo.memNum}`)}}>취소</button>
             </div>
           </div>
         </ReactModal>
