@@ -8,7 +8,7 @@ import axios from 'axios';
 import { now } from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
-import { Modal } from 'bootstrap';
+import './Modal.css'
 
 
 const Schedule = () => {
@@ -221,7 +221,6 @@ const Schedule = () => {
 
   return (
     <div className='sch-container'>
-      <button type='button' onClick={showModal}>modal</button>
       <div className='sch-header'>
         <div>
           <h3>진료예약</h3>
@@ -353,16 +352,56 @@ const Schedule = () => {
         <input type='hidden' name='reply_to' value={'MediClick@mail'}/>
         <input type='hidden' name='to_email' value={'hyoni.green@gmail.com'}/>
       </form>
+      <button type='button' onClick={showModal}>modal</button>
       {
         modalOpen ? 
         <ReactModal
           isOpen={true}
           ariaHideApp={false}
           onRequestClose={() => setModalOpen(false)}
+          style={{
+            overlay: {
+              position: 'fixed',
+              borderRadius : 10,
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0,0,0, 0.6)'
+            },
+            content: {
+              position: 'absolute',
+              width: '480px',
+              height: '300px',
+              top: '180px',
+              left: '700px',
+              right: '40px',
+              bottom: '40px',
+              border: '1px solid #ccc',
+              background: '#fff',
+              overflow: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              borderRadius: '4px',
+              outline: 'none',
+              // padding: '20px'
+            }
+          }}
         >
-          <>
-            <h1>test</h1>
-          </>
+          <div className='modal-div'>
+            <div>
+              <h3>예약 완료</h3>
+              <hr />
+              <div className='modal-content'>
+                  예약이 완료되었습니다. <br/>
+                  예약 메일을 받아보시려면 아래에 메일을 입력해 주세요.
+                <div>
+                  메일<input type='email' />  
+                </div>
+              </div>
+              <button type='button'>확인</button>
+              <button type='button'>취소</button>
+            </div>
+          </div>
         </ReactModal>
         :
         null

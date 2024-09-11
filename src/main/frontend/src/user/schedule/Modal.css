@@ -1,0 +1,33 @@
+.modal-div{
+  margin: auto;
+  text-align: center;
+}
+
+.modal-div > div > h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-content{
+  text-align: center;
+}
+
+.modal-content input{
+  margin-top: 25px;
+  width: 350px;
+  height: 30px;
+}
+
+.modal-div button{
+  margin-right: 10px;
+  border: none;
+  background-color: #0050B5;
+  color: white;
+  width: 100px;
+  padding: 10px;
+  font-size: 0.8rem;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: 600;
+}
