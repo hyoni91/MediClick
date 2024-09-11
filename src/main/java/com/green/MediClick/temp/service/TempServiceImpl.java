@@ -17,4 +17,9 @@ public class TempServiceImpl implements TempService {
     public List<TempVO> selectTempAll() {
         return sqlSession.selectList("tempMapper.nowTemps");
     }
+
+    @Override
+    public List<TempVO> oneHourData() {
+        return sqlSession.selectList("tempMapper.oneHourData");
+    }
 }

@@ -232,7 +232,8 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
             bottom: 0,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" 
+          <CartesianGrid 
+          strokeDasharray="3 3" 
           stroke="#ccc" // 그래프 밑에 색깔
           horizontal={true} vertical={false}
           />

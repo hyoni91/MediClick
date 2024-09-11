@@ -20,6 +20,14 @@
         LIMIT 10
     </select>
 
+    <!-- 정시부터 1시간 이후까지 온도-->
+    <select id="oneHourData" resultMap="temp">
+        SELECT *
+        FROM temp_data
+        WHERE temp_time >= DATE_FORMAT(NOW(),'%Y-%m-%d %H:00:00')
+        AND temp_time &lt; DATE_FORMAT(NOW() + INTERVAL(1) HOUR,'%Y-%m-%d %H:00:00');
+    </select>
+
 </mapper>
 
 

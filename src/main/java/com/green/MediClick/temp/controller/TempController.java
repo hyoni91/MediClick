@@ -21,4 +21,9 @@ public class TempController {
         return tempService.selectTempAll();
     }
 
+    @GetMapping("/oneHourData")
+    public List<TempVO> oneHourData(){
+        return tempService.oneHourData();
+    }
+
 }
