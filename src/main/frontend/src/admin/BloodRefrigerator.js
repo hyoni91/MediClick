@@ -18,7 +18,21 @@ const BloodRefrigerator = () => {
     setTemp(tempRef.current.value)
     setIsSetTemp(!isSetTemp)
   }
+
+  // 초기 width 값 설정(현재온도랑 평균온도 따로하기? 지금은 같이 붙어 있음)
+  const [width, setWidth] = useState([100,100]);
+  // width를 증감시키는 함수(온도가 일정 수준 이상이면 크기 증가)
+  const settingWidth = (temp) => {
+    if(temp > 22.7){
+      setWidth(prevWidth => prevWidth + 50)
+    }else if(temp < 22.4){
+      setWidth(prevWidth => Math.max(prevWidth - 50, 0)); // 최소값을 0으로 설정
+    }
+  };
   
+  console.log(width)
+  
+
   //데이터의 업 다운 아이콘 유무 (테이블)
   const upDownIcon = (temp)=>{
     if(temp > 22.7){
@@ -97,6 +111,7 @@ const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   // console.log(response.data)
   setTempData(response.data)
+  settingWidth(response.data[0].currentTemp) 
   return response.data;  // API로부터 온도 데이터를 반환
 };
 
@@ -174,7 +189,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 {tempData[0].currentTemp}
                 <div className='graphWrap'>
                   <div className='graph'>
-                    <div id='item1' className='p-100' />
+                    <div style={{ width: `${width[0]}px`}} id='item1' className='p-100' />
                   </div>
                 </div>
               </span>
@@ -188,9 +203,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
               </p>
               <span>
                 {tempData[0].currentTemp}
-                <div className='graphWrap'>
+                <div className='graphWrap' >
                   <div className='graph'>
-                    <div id='item2' className='p-50' />
+                    <div  style={{ width: `${width[1]}px`}} id='item2' className='p-50' />
                   </div>
                 </div>
               </span>

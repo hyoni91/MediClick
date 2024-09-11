@@ -175,7 +175,8 @@
 
 /* 온도 막대기 바 */
 .graphWrap { position: relative; }
-.graphWrap .graph > div { position: absolute; bottom: 3px; width: 100px; }
+.graphWrap .graph > div#item1 { position: absolute; bottom: 3px;  }
+.graphWrap .graph > div#item2 { position: absolute; bottom: 3px;  }
 .graphWrap .graph > div#item1 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 .graphWrap .graph > div#item2 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 
