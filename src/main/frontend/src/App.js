@@ -21,7 +21,6 @@ import UserServiceDetail from './user/board/UserServiceDetail';
 import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
-import KakaoTest from './user/schedule/KakaoTest';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
