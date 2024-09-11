@@ -171,6 +171,13 @@ const ExampleComponent = () => {
           fill="#8884d8" // 선 아래에 색을 채우기
           dot={true}//점을 표시 (ture) 표시 X (false)
           />
+          <Area 
+          type="step" //부드러운 곡선
+          dataKey="tem"  //나타낼 데이터
+          stroke="#8884d8" //그래프 선 색깔
+          fill="#8884d8" // 선 아래에 색을 채우기
+          dot={true}//점을 표시 (ture) 표시 X (false)
+          />
         </AreaChart>
       </ResponsiveContainer>
       </div>

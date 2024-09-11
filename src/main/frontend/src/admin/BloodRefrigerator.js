@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import './BloodRefrigerator.css'
 import { json } from 'react-router-dom'
 import axios from 'axios';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip} from 'recharts';
+import { useQuery } from '@tanstack/react-query';
 
 
 const BloodRefrigerator = () => {
@@ -21,16 +23,16 @@ const BloodRefrigerator = () => {
   const upDownIcon = (temp)=>{
     if(temp > 22.8){
       return (
-        <div className='iconUp'><i class="fa-solid fa-caret-up"></i></div>
+        <div className='iconUp'><i className="fa-solid fa-caret-up"></i></div>
       )
       
     } else if (temp < 22.3  ){
       return (
-        <div className='iconDown'><i class="fa-solid fa-caret-down"></i></div>
+        <div className='iconDown'><i className="fa-solid fa-caret-down"></i></div>
       )
     } else{
       return (
-        <div className='Iconequls'><i class="fa-solid fa-window-minimize"></i></div>
+        <div className='Iconequls'><i className="fa-solid fa-window-minimize"></i></div>
       )
     }
   
@@ -86,6 +88,56 @@ const BloodRefrigerator = () => {
     },[])
     console.log(tempData)
 
+
+    //실시간 온도 그래프
+//폼데이터 함수정의
+const formatDate = (e) => {
+  //객체 데이트값 생성
+  const date = new Date(e);
+  const options = {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12 : false //24시간
+  };
+  // 객체를 문자열로 변환 후 ',' 제거
+  return date.toLocaleString('en-US', options).replace(',', '');
+};
+//화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
+const fetchTemperatureData = async () => {
+  const response = await axios.get('/temp/nowTemps');
+  console.log(response.data)
+  return response.data;  // API로부터 온도 데이터를 반환
+};
+// useQuery 훅을 사용하여 데이터 가져오기
+const { data, isLoading, error } = useQuery({
+  queryKey: ['temperatureData'],
+  queryFn: fetchTemperatureData,
+  refetchInterval: 5000, // 5초마다 데이터 갱신
+});
+
+if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
+if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
+
+// 오름차순 정렬
+const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+
+const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
+const temList = sortedDataAsc.map((e) => e.currentTemp);
+    //배열 데이터 객체화
+    const Objecttime = timeList.map((time , i) => {  
+      return {
+      time : time ,
+      tem : temList[i]
+      }
+    })
+    console.log(Objecttime)
+
+
+
+
+
       
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
@@ -96,10 +148,10 @@ const BloodRefrigerator = () => {
         <div className='header-content'>
             <div>
               <p>
-                <span>온도설정<span className='setting-btn' onClick={(e)=>{setIsSetTemp(!isSetTemp , e.stopPropagation()) }}> <i class="fa-solid fa-ellipsis-vertical"></i></span>
+                <span>온도설정<span className='setting-btn' onClick={(e)=>{setIsSetTemp(!isSetTemp , e.stopPropagation()) }}> <i className="fa-solid fa-ellipsis-vertical"></i></span>
                 </span>
                 <span className='icon-span'>
-                <i class="fa-solid fa-hospital"></i>
+                <i className="fa-solid fa-hospital"></i>
                 </span>
               </p>
               <span>{temp}°C</span>
@@ -129,7 +181,7 @@ const BloodRefrigerator = () => {
               <p>
                 <span>현재 온도</span> 
                 <span className='icon-span'>
-                  <i class="fa-solid fa-temperature-empty"></i>
+                  <i className="fa-solid fa-temperature-empty"></i>
                 </span>
               </p>
               <span>
@@ -145,7 +197,7 @@ const BloodRefrigerator = () => {
               <p>
                 <span>평균 온도</span>
                 <span className='icon-span'>
-                  <i class="fa-solid fa-temperature-empty"></i>
+                  <i className="fa-solid fa-temperature-empty"></i>
                 </span>
               </p>
               <span>
@@ -167,7 +219,44 @@ const BloodRefrigerator = () => {
       </div>
       <div className='graph-content'>
         <div className='graph-div'>
-          <p>실시간 온도 차트</p>
+        <ResponsiveContainer width="100%" height="100%">
+          {/* 선밑에 채워지는 차트 */}
+        <AreaChart
+          width={500}
+          height={400}
+          data={Objecttime}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" 
+          stroke="#ccc" // 그래프 밑에 색깔
+          horizontal={true} vertical={false}
+          />
+          {/* X선 */}
+          <XAxis dataKey="time" 
+          label={{ value: `${''}/${''}`, position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
+          //tickFormatter={formatXAxis} // X축 값 포맷팅
+          // angle={-45} // x축 기울기
+          />
+          {/* Y선 */}
+          <YAxis />
+          {/* 마우스 올리면 데이터 나타남 */}
+          <Tooltip 
+          formatter={(value, name, props) => [value, name === 'tem' ? '온도' : name]} 
+          />
+          <Area 
+          type="monotone" //부드러운 곡선
+          dataKey="tem"  //나타낼 데이터
+          stroke="#8884d8" //그래프 선 색깔
+          fill="#8884d8" // 선 아래에 색을 채우기
+          dot={false}//점을 표시 (ture) 표시 X (false)
+          />
+        </AreaChart>
+      </ResponsiveContainer>
         </div>
         <div className='text-div'>
           <table className='graph-table'>
@@ -182,7 +271,7 @@ const BloodRefrigerator = () => {
               {
                 tempData.map((temp,i)=>{
                   return(
-                    <tr>
+                    <tr key={i}>
                       <td>{temp.tempTime}</td>
                       <td>{temp.currentTemp}</td>
                       <td>{upDownIcon(temp.currentTemp)}</td>
@@ -198,7 +287,7 @@ const BloodRefrigerator = () => {
         <div className='weather-div'>
           <div className='bloodcar-title'>
             <p>혈액 운송 차량정보</p>
-            <span><i class="fa-solid fa-truck-droplet"></i></span>
+            <span><i className="fa-solid fa-truck-droplet"></i></span>
           </div>
           <div className='bloodcar'>
             <div>
@@ -222,7 +311,7 @@ const BloodRefrigerator = () => {
         <div className='graph-weather'>
           <div className='bloodcar-title'>
             <p>차량 실시간 정보</p>
-            <span id='replay'><i class="fa-solid fa-rotate-right"></i></span>
+            <span id='replay'><i className="fa-solid fa-rotate-right"></i></span>
           </div>
         </div>
       </div>
