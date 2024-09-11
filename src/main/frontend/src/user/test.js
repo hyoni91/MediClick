@@ -18,6 +18,18 @@ import { useQuery } from '@tanstack/react-query';
 
 
 const ExampleComponent = () => {
+  const [data2, setDate2] = useState([]); // 예시 배열
+  //데이터 조회
+  useEffect(() => {
+    axios.get('/temp/oneHourData')
+    .then((res) => {
+      console.log(res.data)
+      return setDate2(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    },[])
   //폼데이터 함수정의
   const formatDateTime  = (e) => {
     //객체 데이트값 생성
@@ -55,9 +67,9 @@ const ExampleComponent = () => {
     queryFn: fetchTemperatureData,
     refetchInterval: 5000, // 5초마다 데이터 갱신
   });
-  
   if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
   if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
+  
   
   // 오름차순 정렬
   const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
@@ -82,29 +94,35 @@ const ExampleComponent = () => {
   const formatXAxis = (e) => {
     return `${e}분`
   }
-  const data2 = ['January', 'February', 'March', 'April']; // 예시 배열
   
   const labels1 = [];
   timeList.forEach((time) => labels.push(time));
-  
+  const sortedDataAsc1 = data2.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+  // 날짜
+  const timeList1 = sortedDataAsc1.map((e) => formatDate(e.tempTime));
+  // 온도
+  const temList1 = sortedDataAsc1.map((e) => e.currentTemp);
+console.log(data2)
   const data3 = {
-    labels: labels1, // labels 배열 사용
+    labels: timeList1, //배열 사용
     datasets: [{
       type: 'bar',
       label: '현재 온도',
-      data: temList,
+      data: temList1,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       hoverBackgroundColor: "rgba(255, 99, 132, 0.8)", // 호버 시 색상 설정
-      
-    }, {
-      type: 'line',
-      label: '평균온도',
-      data: temList.map(() => avg.toFixed(2)), // 각 포인트에 평균온도값 설정
-      borderColor: 'rgb(54, 162, 235)',
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      hoverBackgroundColor: "rgba(54, 162, 235, 0.8)", // 호버 시 색상 설정
-    }]
+    }
+    
+    // , {
+    //   type: 'line',
+    //   label: '평균온도',
+    //   data: temList.map(() => avg.toFixed(2)), // 각 포인트에 평균온도값 설정
+    //   borderColor: 'rgb(54, 162, 235)',
+    //   backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    //   hoverBackgroundColor: "rgba(54, 162, 235, 0.8)", // 호버 시 색상 설정
+    // }
+  ]
   };
   
   const options = {
@@ -136,15 +154,24 @@ const ExampleComponent = () => {
       mode: "index",
       intersect: false, // 막대에 겹칠 때 툴팁이 나타나도록 설정
     },
+    scales: {
+      y: {
+        min: 22,  // Y축 최소값
+        max: 23,  // Y축 최대값
+        ticks: {
+          callback: (value) => `${value.toFixed(1)}°C`, // Y축 눈금 포맷
+        },
+      }
+    }
   };
   
   console.log(avg)
   return ( 
-    <div className='center' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className='center' >
       
       <div>
       <Bar data={data3}  options={options} className='center'></Bar>
-      <Line data={data3} options={options} className=''></Line>  
+      {/* <Line data={data3} options={options} className='center'></Line>   */}
       </div>
       <div>
       
@@ -172,12 +199,17 @@ const ExampleComponent = () => {
             const date = new Date(e);
             return formatDate(date); // HH:MM 형식으로 반환
           }}
-          label={{ value: '', position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
+          label={{ 
+            value: '월/일', position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
           //tickFormatter={formatXAxis} // X축 값 포맷팅
           // angle={-45} // x축 기울기
           />
           {/* Y선 */}
-          <YAxis />
+          <YAxis 
+          domain={[22, 23]}
+          tickFormatter={(value) => `${value.toFixed(1)}°C`} 
+          />
+          
           {/* 마우스 올리면 데이터 나타남 */}
           <Tooltip 
           
