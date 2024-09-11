@@ -211,7 +211,6 @@ const Schedule = () => {
     })
     }
   }
-  
 
   return (
     <div className='sch-container'>

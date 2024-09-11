@@ -152,15 +152,6 @@
         )
     </insert>
 
-    <!-- 예약유무 확인 (모든 조건 삭제예정 )-->
-    <select id="checkAppo" resultMap="schedule">
-        SELECT SCH_NUM
-        FROM medical_schedule
-        WHERE DOC_NUM = #{docNum}
-        AND SCH_DATE = #{schDate}
-        AND SCH_TIME = #{schTime}
-    </select>
-
     <!-- 예약유무 확인 (진료과와 날짜를 선택했을때) -->
     <select id="checkSchtime" resultMap="schedule">
         SELECT SCH_TIME
@@ -168,6 +159,13 @@
         WHERE DEPT_NUM = #{deptNum}
         AND SCH_DATE = #{schDate}
     </select>
+
+    <!-- 과거(오늘기준)예약 자동 삭제 -->
+    <delete id="autoDelete">
+        DELETE FROM medical_schedule WHERE SCH_DATE &lt; CURRENT_DATE()
+    </delete>
+
+
 </mapper>
 
 
