@@ -7,14 +7,24 @@ import './Schedule.css'
 import axios from 'axios';
 import { now } from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
+import ReactModal from 'react-modal';
+import { Modal } from 'bootstrap';
 
 
 const Schedule = () => {
+  //모달창
+  const [modalOpen, setModalOpen] = useState(false)
+  const showModal = () => {
+    setModalOpen(!modalOpen)
+  }
   //이메일 보내기 추가 20240906
   useEffect(()=>{
     //메일
     emailjs.init(process.env.REACT_APP_Public_key)
   },[]);
+
+  //toemail주소
+  const [toEmail, setToEmail] = useState()
 
     //(수정중)이메일 보내기 ////////////////////////////////////////////////////////
     const form = useRef();
@@ -34,9 +44,6 @@ const Schedule = () => {
           },
         );
     };
-  
-    console.log(form.current)
-
     ////////////////////////////////////////////////////////////////////////
 
   const navigate = useNavigate()
@@ -210,10 +217,11 @@ const Schedule = () => {
     })
     }
   }
-
   
+
   return (
     <div className='sch-container'>
+      <button type='button' onClick={showModal}>modal</button>
       <div className='sch-header'>
         <div>
           <h3>진료예약</h3>
@@ -345,7 +353,20 @@ const Schedule = () => {
         <input type='hidden' name='reply_to' value={'MediClick@mail'}/>
         <input type='hidden' name='to_email' value={'hyoni.green@gmail.com'}/>
       </form>
-
+      {
+        modalOpen ? 
+        <ReactModal
+          isOpen={true}
+          ariaHideApp={false}
+          onRequestClose={() => setModalOpen(false)}
+        >
+          <>
+            <h1>test</h1>
+          </>
+        </ReactModal>
+        :
+        null
+      }
 
     </div>
   )

@@ -19,17 +19,18 @@ const BloodRefrigerator = () => {
   
   //업 다운 아이콘
   const upDownIcon = (temp)=>{
-    if(temp == 22.6){
-      return (
-        <div className='Iconequls'><i class="fa-solid fa-window-minimize"></i></div>
-      )
-    } else if (temp > 23 ){
+    if(temp > 22.8){
       return (
         <div className='iconUp'><i class="fa-solid fa-caret-up"></i></div>
       )
-    } else if (temp < 23){
+      
+    } else if (temp < 22.3  ){
       return (
         <div className='iconDown'><i class="fa-solid fa-caret-down"></i></div>
+      )
+    } else{
+      return (
+        <div className='Iconequls'><i class="fa-solid fa-window-minimize"></i></div>
       )
     }
   
@@ -197,7 +198,7 @@ const BloodRefrigerator = () => {
         <div className='weather-div'>
           <div className='bloodcar-title'>
             <p>혈액 운송 차량정보</p>
-            <span onClick={'재랜더링'}><i class="fa-solid fa-truck-droplet"></i></span>
+            <span><i class="fa-solid fa-truck-droplet"></i></span>
           </div>
           <div className='bloodcar'>
             <div>
