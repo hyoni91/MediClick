@@ -124,7 +124,7 @@ const { data, isLoading, error } = useQuery({
 
 if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
 if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
-
+const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 // 오름차순 정렬
 const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
 
@@ -138,6 +138,10 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
       }
     })
     // console.log(Objecttime)
+    console.log(Objecttime)
+    timeList.forEach((time) => labels.push(time));
+
+
 
 
       
@@ -235,18 +239,25 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           }}
         >
           <CartesianGrid 
-          strokeDasharray="1" 
-          stroke="#EBEEF0" // 그래프 밑에 색깔
+          strokeDasharray="3 3" 
+          stroke="#ccc" // 그래프 밑에 색깔
           horizontal={true} vertical={false}
           />
           {/* X선 */}
-          <XAxis dataKey="time"  stroke='#6C757D'
-          label={{ value: `${''}/${''}`, position: 'insideBottomRight', offset: 0, margin: '1'} } // X축 레이블 추가
-          //tickFormatter={formatXAxis} // X축 값 포맷팅
+          <XAxis dataKey="time" 
+          tickFormatter={(e) => {
+            // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
+            const date = new Date(e);
+            return formatDate(date); // HH:MM 형식으로 반환
+          }}
+          label={{ value: `${''}/${''}`, position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
           // angle={-45} // x축 기울기
           />
           {/* Y선 */}
-          <YAxis stroke='#6C757D'/>
+          <YAxis 
+          domain={[22, 23]}
+          tickFormatter={(value) => `${value.toFixed(1)}°C`} 
+          />
           {/* 마우스 올리면 데이터 나타남 */}
           <Tooltip 
           formatter={(value, name, props) => [value, name === 'tem' ? '온도' : name]} 
