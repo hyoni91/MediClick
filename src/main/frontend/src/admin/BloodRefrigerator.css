@@ -175,14 +175,14 @@
 
 /* 온도 막대기 바 */
 .graphWrap { position: relative; }
-.graphWrap .graph > div#item1 { position: absolute; bottom: 3px;  }
+.graphWrap .graph > div#item1 { position: absolute; bottom: 3px; }
 .graphWrap .graph > div#item2 { position: absolute; bottom: 3px;  }
 .graphWrap .graph > div#item1 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 .graphWrap .graph > div#item2 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 
 
 /* 애니메이션 */
-.p-100{ width: 300px; animation:p-100 2s forwards; }
+.p-100{ width: 100px; animation:p-100 2s forwards; }
 @keyframes p-100{from{width:0px}to{height: 20px}}
 .p-50{ width: 100px; animation:p-50 2s forwards; }
 @keyframes p-50{from{width:0px}to{height: 20px}}
