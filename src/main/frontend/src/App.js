@@ -21,21 +21,32 @@ import UserServiceDetail from './user/board/UserServiceDetail';
 import UserServiceUpdate from './user/board/UserServiceUpdate';
 import markerImage from './assets/marker.png';
 import StatChart from './user/StatChart';
-import KakaoTest from './user/schedule/KakaoTest';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
 import MapTest from './admin/MapTest';
+import axios from 'axios';
+
 
 
 function App() {
   const navigate=useNavigate()
   const {kakao}=window;
+  
+  // 홈페이지를 열었을때, 과거 예약 자동삭제
+    useEffect(()=>{
+      axios.delete(`/schedule/delete`)
+      .then((res)=>{
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[])
 
   //로그인 정보를 저장할 수 있는 state변수
   const [loginInfo,setLoginInfo]=useState({})
 
-
+  
   const loginInfoString=window.sessionStorage.getItem('loginInfo')
 
   useEffect(()=>{
@@ -81,7 +92,7 @@ function App() {
                   <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                 }
                 
-                <li><span onClick={(e)=>{navigate('/admin/doctorUpdate')}}>정보수정하기</span></li>
+                <li><span onClick={(e)=>{navigate(`/admin/doctorUpdate/${loginInfo.memNum}`)}}>정보수정하기</span></li>
                 <li><span onClick={(e)=>{goLogout()}}>로그아웃</span></li>
               </ul>
             }
@@ -101,7 +112,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* ?? */}
-            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
+            <Route path='/??' element={<ExampleComponent/>} />
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
@@ -127,8 +138,6 @@ function App() {
             <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 차트 */}
             <Route path='statChart' element={<StatChart/>}/>
-            {/* 카카오 문자 */}
-            <Route path='message' element={<KakaoTest />}/>
           </Route>
   
   
@@ -139,7 +148,7 @@ function App() {
             {/* 담당환자 상세정보 */}
             <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
             {/* 의사 정보수정 페이지 */}
-            <Route path='doctorUpdate' element={<DoctorUpdate/>}/>
+            <Route path='doctorUpdate/:docNum' element={<DoctorUpdate/>}/>
             {/* 진료차트 */}
             <Route path='patientChart/:schNum' element={<PatientChart/>}/>
             {/* 혈액냉장고관리 페이지 */}
@@ -214,7 +223,7 @@ function KakaoMap(){
     })
   
     usermarker.setMap(map)
- 
+
 
   },[])
 

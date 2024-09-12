@@ -85,7 +85,7 @@
 
 .graph-table > thead td,
 .graph-table > tbody td{
-  padding: 21px;
+  padding: 8px;
   text-align: center;
 }
 
@@ -125,8 +125,11 @@
 /* 박스 안 타이틀 */
 .weather-div > p,
 .graph-weather > p,
-.header-graph > p{
+.header-graph > p,
+.graph-div > p,
+.bloodcar-title > p {
   color: #6C757D;
+  font-weight: 600;
 }
 
 .graph-weather{
@@ -154,12 +157,26 @@
   background-color: #faf8f8;
   text-align: center;
   padding: 15px;
+  box-shadow: 0 1px 2px #FAFBFE, 0 1px 2px rgba(99, 99, 99, 0.23);
 }
+
+
+.bloodcar-title{
+  display: flex;
+  color: #6C757D;
+  gap: 5px;
+}
+
+#replay{
+  cursor: pointer;
+}
+
 
 
 /* 온도 막대기 바 */
 .graphWrap { position: relative; }
-.graphWrap .graph > div { position: absolute; bottom: 3px; width: 100px; }
+.graphWrap .graph > div#item1 { position: absolute; bottom: 3px;  }
+.graphWrap .graph > div#item2 { position: absolute; bottom: 3px;  }
 .graphWrap .graph > div#item1 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 .graphWrap .graph > div#item2 { left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
 
@@ -180,12 +197,13 @@
 /* 온도 조절 div */
 .setting-input{
 background-color:#FFFFFF;
-box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(99, 99, 99, 0.2);
+/* box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(99, 99, 99, 0.2); */
 width: 180px;
 height: 80px;
 position: absolute;
 top: 285px;
 left: 180px;
+border: 1px solid lightgray;
 }
 
 /* 온도조절 input 디자인 */
@@ -198,7 +216,7 @@ left: 180px;
   border: none;
   padding: 10px;
   background-color: #fafbfc;
-  box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(196, 196, 196, 0.2);
+  /* box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(196, 196, 196, 0.2); */
 }
 
 .setting-input input::-webkit-inner-spin-button,
@@ -213,12 +231,24 @@ left: 180px;
   width: 60px;
   padding: 10px;
   border: none;
-  background-color: #4EC0E9;
-  color: white;
+  /* background-color: #4EC0E9; */
+  color:black;
   border-radius: 12px;
   cursor: pointer;
 }
 
 .setting-input button:hover{
-  background-color: #2ca3ce;
+  background-color:#dfdfdf;
+}
+
+.iconUp{
+  color: red;
+}
+
+.iconDown{
+  color: blue;
+}
+
+.Iconequls{
+  color: green;
 }

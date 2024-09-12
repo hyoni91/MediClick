@@ -8,8 +8,4 @@ public class TempVO {
     private double currentTemp;
     private String tempTime;
 
-    private int offset;
-
-
-
 }

@@ -154,7 +154,7 @@ const handlePhoneChange = (e) => {
           <tbody>
             <tr>
               <td>회원이름</td>
-              <td><input name='memName' type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)
+              <td><input name='memName'value={memberData.memName} type='text' placeholder="이름을 입력하세요" onChange={(e) => {changeData(e)
                 console.log(memberData)
 
               }

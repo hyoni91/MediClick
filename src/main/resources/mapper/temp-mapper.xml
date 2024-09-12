@@ -18,7 +18,21 @@
         ORDER BY TEMP_TIME DESC
         <!--처음부터 어디까지 가져올지-->
         LIMIT 10
+    </select>
 
+    <!--2시간 전 데이터 자동 삭제-->
+    <delete id="keepDel">
+        DELETE FROM TEMP_DATA
+        WHERE TEMP_TIME &lt; CURRENT_TIMESTAMP() - INTERVAL 2 HOUR;
+    </delete>
+
+
+    <!-- 정시부터 1시간 이후까지 온도-->
+    <select id="oneHourData" resultMap="temp">
+        SELECT *
+        FROM temp_data
+        WHERE temp_time >= DATE_FORMAT(NOW(),'%Y-%m-%d %H:00:00')
+        AND temp_time &lt; DATE_FORMAT(NOW() + INTERVAL(1) HOUR,'%Y-%m-%d %H:00:00');
     </select>
 
 </mapper>

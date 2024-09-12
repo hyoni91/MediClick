@@ -73,11 +73,6 @@ public class ScheduleServiceImpl implements ScheduleService{
         sqlSession.insert("scheduleMapper.insertsch", scheduleVO);
     }
 
-    //예약 유무 확인(모든 조건 선택)
-    @Override
-    public ScheduleVO checkAppo(ScheduleVO scheduleVO) {
-        return sqlSession.selectOne("scheduleMapper.checkAppo", scheduleVO);
-    }
 
     //예약 유무 확인(진료과와 날짜 선택)
     @Override
@@ -85,7 +80,11 @@ public class ScheduleServiceImpl implements ScheduleService{
         return sqlSession.selectList("scheduleMapper.checkSchtime", scheduleVO);
     }
 
-
+    //과거 예약 자동 삭제
+    @Override
+    public void autoDelete() {
+        sqlSession.delete("scheduleMapper.autoDelete");
+    }
 
 
 }
