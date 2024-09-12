@@ -110,7 +110,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* ?? */}
-            <Route path='/??' element={<ExampleComponent/>} />
+            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}

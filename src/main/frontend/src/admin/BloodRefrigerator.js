@@ -4,6 +4,7 @@ import { json } from 'react-router-dom'
 import axios from 'axios';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip} from 'recharts';
 import { useQuery } from '@tanstack/react-query';
+import WeatherDate from '../custom/WeatherDate';
 
 
 const BloodRefrigerator = () => {
@@ -20,13 +21,12 @@ const BloodRefrigerator = () => {
   }
 
   // 초기 width 값 설정(현재온도랑 평균온도 따로하기? 지금은 같이 붙어 있음)
-  const [width, setWidth] = useState([100,100]);
+  const [width, setWidth] = useState(100);
   // width를 증감시키는 함수(온도가 일정 수준 이상이면 크기 증가)
   const settingWidth = (temp) => {
     if(temp > 22.7){
-      setWidth(prevWidth => prevWidth + 50)
-    }else if(temp < 22.4){
-      setWidth(prevWidth => Math.max(prevWidth - 50, 0)); // 최소값을 0으로 설정
+      setWidth(width => width + 50)
+      document.querySelector('#item1').width = width
     }
   };
   
@@ -50,39 +50,6 @@ const BloodRefrigerator = () => {
       )
     }
     }
-
-  //날씨 api
-  const cityName = 'Ulsan'
-  const apiKey = process.env.REACT_APP_Weather_Key
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-
-
-  // 날씨 정보 담을 변수 
-  const [weather, setWeather] = useState({})
-
-    //마운트시, 날씨 api에서 정보 받아오기
-    useEffect(()=>{
-      axios.get(url)
-      .then((res)=>{
-        // console.log(res.data)
-        const weatherIcon = res.data.weather[0].icon;
-        const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
-        const weather = {
-          cityName : res.data.name,
-          temp : res.data.main.temp,
-          maxTemp : res.data.main.temp_max,
-          minTemp : res.data.main.temp_min,
-          icon : weatherIconAdrs
-        }
-        // console.log(weather)
-        setWeather(weather)
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
-    },[])
-
-
 
 //실시간 온도 데이터 받을 함수
 const [tempData, setTempData] = useState([
@@ -109,9 +76,8 @@ const formatDate = (e) => {
 //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
-  // console.log(response.data)
+  console.log(response.data)
   setTempData(response.data)
-  settingWidth(response.data[0].currentTemp) 
   return response.data;  // API로부터 온도 데이터를 반환
 };
 
@@ -124,9 +90,10 @@ const { data, isLoading, error } = useQuery({
 
 if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
 if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
-const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
+
 // 오름차순 정렬
 const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]);  // MM/DD 형식으로 분리
 
 const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
 const temList = sortedDataAsc.map((e) => e.currentTemp);
@@ -137,14 +104,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
       tem : temList[i]
       }
     })
-    // console.log(Objecttime)
     console.log(Objecttime)
-    timeList.forEach((time) => labels.push(time));
+    // timeList.forEach((time) => labels.push(time));
 
-
-
-
-      
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
       <div className='graph-headerr'>
@@ -173,15 +135,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 <></>
               }
             </div>
-            <div>
-              <p>
-                <span>날씨({weather.cityName})</span>
-                <span><img className='weathericon' src={weather.icon}/></span>
-              </p>
-              <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
-                최저:{(weather.minTemp -273.15).toFixed(0)}°C 
-                최고: {(weather.maxTemp-273.15).toFixed(0)}°C
-            </div>
+            <WeatherDate />
             <div>
               <p>
                 <span>현재 온도</span> 
@@ -193,7 +147,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 {tempData[0].currentTemp}
                 <div className='graphWrap'>
                   <div className='graph'>
-                    <div style={{ width: `${width[0]}px`}} id='item1' className='p-100' />
+                    <div id='item1' className='p-100' />
                   </div>
                 </div>
               </span>
