@@ -90,10 +90,9 @@ const { data, isLoading, error } = useQuery({
 
 if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
 if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
-
 // 오름차순 정렬
 const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
-const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]);  // MM/DD 형식으로 분리
+const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 
 const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
 const temList = sortedDataAsc.map((e) => e.currentTemp);
@@ -104,8 +103,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
       tem : temList[i]
       }
     })
-    console.log(Objecttime)
-    // timeList.forEach((time) => labels.push(time));
+    timeList.forEach((time) => labels.push(time));
 
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
