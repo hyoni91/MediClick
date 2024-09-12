@@ -24,7 +24,7 @@ import StatChart from './user/StatChart';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
-import MapTest from './admin/MapTest';
+// import MapTest from './admin/MapTest';
 import MiniBoard from './user/board/MiniBoard';
 import axios from 'axios';
 
@@ -159,7 +159,7 @@ function App() {
             {/* 온도 차트 연습 */}
             <Route path='tempdata' element={<TempData/>}/>
             {/* 지도 api 연습 */}
-            <Route path='mapTest' element={<MapTest/>}/>
+            {/* <Route path='mapTest' element={<MapTest/>}/> */}
         </Route>
       </Routes>
 

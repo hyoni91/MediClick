@@ -12,8 +12,8 @@ import { now } from 'moment/moment';
 
 const Schedule = () => {
 
-  const nowDate = moment(now).locale
-  console.log(nowDate)
+  // const nowDate = moment(now).locale
+  // console.log(nowDate)
 
   const navigate = useNavigate()
 
@@ -395,7 +395,7 @@ const Schedule = () => {
                   <input type='hidden' name='from_name' 
                   value={'그린최고암센터'}/>
                   <input type='hidden' name='reply_to' 
-                  value={'MediClick@email.com'}/>
+                  value={'mediclick@email.com'}/>
                   <input type='text' placeholder='이곳에 메일주소를 입력해 주세요.'
                   name='to_email' 
                   onChange={(e)=>{
