@@ -27,6 +27,7 @@ const MapTest = () => {
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
   }
+  //
 const navigate = useNavigate
   return (
     <div>
