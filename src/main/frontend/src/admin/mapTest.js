@@ -35,6 +35,7 @@ const navigate = useNavigate
         <button onClick={()=> setCenter({lat: 33.452613, lng: 126.570888})}>지도 중심좌표 이동</button>
         <button onClick={()=> panTo({lat: 33.45058, lng:126.574942})}>지도 중심좌표 부드럽게 이동</button>
       </div>
+      
     </div>
   )
 }
