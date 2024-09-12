@@ -1,0 +1,20 @@
+.main-miniBoard-div{
+  width: 550px;
+  margin: 30px auto;
+}
+
+.main-miniBoard{
+  width: 100%;
+  border: 1px solid #eeeeee;
+  
+}
+
+.main-miniBoard td{
+  padding: 5px;
+  text-align: left;
+}
+
+.main-miniBoard td>span{
+  cursor: pointer;
+
+}

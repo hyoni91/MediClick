@@ -253,7 +253,7 @@ body{
 
 .main-plus{
   display: flex;
-  /* border: 1px solid black; */
+  /* border: 1px solid red; */
   justify-content: space-around;
   /* align-items: center; */
 }
@@ -266,9 +266,17 @@ body{
   border: 2px solid #eeeeee;
 }
 
+.miniMap{
+  text-align: left;
+}
+
 #map{
   width: 500px;
   height: 400px;
+}
+
+.main-detail h3{
+  text-align: left;
 }
 
 

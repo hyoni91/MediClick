@@ -41,4 +41,10 @@ public class BoardController {
         boardService.updateBoard(boardVO);
     }
 
+    //메인 미니 게시판
+    @GetMapping("/miniBoard")
+    public List<BoardVO> getMiniBoard(){
+        return boardService.getMiniBoard();
+    }
+
 }
