@@ -37,6 +37,11 @@
         limit 15
     </select>
 
+    <!-- 전체 온도 데이터(평균)-->
+    <select id="tempListData" resultMap="temp">
+        select * from temp_data
+        order by temp_time desc
+    </select>
 </mapper>
 
 

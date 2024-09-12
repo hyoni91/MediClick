@@ -5,10 +5,24 @@ import axios from 'axios';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip} from 'recharts';
 import { useQuery } from '@tanstack/react-query';
 import WeatherDate from '../custom/WeatherDate';
+import { Bar } from 'react-chartjs-2';
 
 
 const BloodRefrigerator = () => {
-
+//실시간 온도 데이터 받을 함수
+const [tempData, setTempData] = useState([
+  {
+    currentTemp: '',
+    tempTime: ''
+  }
+])
+useEffect(() => {
+  axios.get('/temp/tempListData')
+  .then((res) => {
+    console.log(res.data)
+    setTempData(res.data)
+  })
+},[])
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
@@ -51,16 +65,15 @@ const BloodRefrigerator = () => {
     }
     }
 
-//실시간 온도 데이터 받을 함수
-const [tempData, setTempData] = useState([
-  {
-    currentTemp : ''
-  }
-])
 
+const tempList = tempData.map((temp,i) => {
+  return(temp.currentTemp)})
+const sum = tempList.reduce((a, b) => a + b, 0);
+const avg = sum / tempList.length;
+console.log(avg)
 //실시간 온도 그래프
 //폼데이터 함수정의
-const formatDate = (e) => {
+const formatDate  = (e) => {
   //객체 데이트값 생성
   const date = new Date(e);
   const options = {
@@ -73,38 +86,130 @@ const formatDate = (e) => {
   // 객체를 문자열로 변환 후 ',' 제거
   return date.toLocaleString('en-US', options).replace(',', '');
 };
+
+  // 시간만 형식화하는 함수
+  const formatDateTime = (e) => {
+    const date = new Date(e);
+    const options = {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12 : false //24시간
+    };
+    return date.toLocaleString('en-US', options); // 'HH:MM' 형식으로 반환
+  };
+  
 //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
-  console.log(response.data)
-  setTempData(response.data)
   return response.data;  // API로부터 온도 데이터를 반환
 };
-
-// useQuery 훅을 사용하여 데이터 가져오기
+// useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
 const { data, isLoading, error } = useQuery({
   queryKey: ['temperatureData'],
   queryFn: fetchTemperatureData,
   refetchInterval: 5000, // 5초마다 데이터 갱신
 });
 
-if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
-if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
-// 오름차순 정렬
+// bar차트 데이터 조회를위한 함수
+const fetchBarChartData = async () => {
+  const response = await axios.get('/temp/oneHourData')
+  return response.data
+}
+// useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
+const {
+  data : barChartData,
+  isLoading : isLoadingBar,
+  error : errorBar
+} = useQuery({
+  queryKey : ['barChartData'],
+  queryFn : fetchBarChartData,
+  refetchInterval : 5000 
+})
+
+
+if (isLoading || isLoadingBar) return <div>Loading...</div>;  // 로딩 중일 때의 UI
+if (error || errorBar) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
+
+
+// 오름차순 정렬 10개만 조회하는 데이터
 const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
-const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 
 const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
 const temList = sortedDataAsc.map((e) => e.currentTemp);
-    //배열 데이터 객체화
-    const Objecttime = timeList.map((time , i) => {  
-      return {
-      time : time ,
-      tem : temList[i]
-      }
-    })
-    timeList.forEach((time) => labels.push(time));
 
+console.log(timeList)
+console.log(temList)
+//배열 데이터 객체화
+const Objecttime = timeList.map((time , i) => {  
+  return {
+  time : time ,
+  tem : temList[i]
+  }
+})
+console.log(Objecttime)
+// X축 레이블 데이터 (MM/DD 형식)
+const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
+
+timeList.forEach((time) => labels.push(time));
+
+//한시간데이터르 저장하는 변수
+const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+// 날짜
+const timeList1 = sortedDataAsc1.map((e) => formatDateTime(e.tempTime));
+// 온도
+const temList1 = sortedDataAsc1.map((e) => e.currentTemp);
+// 바차트 데이터
+const barData = {
+  labels: timeList1, //배열 사용
+  datasets: [{
+    type: 'bar',
+    label: '현재 온도',
+    data: temList1,
+    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgba(0, 99, 132, 0.2)',
+    hoverBackgroundColor: "rgba(0, 88, 232, 0.6)" // 호버 시 색상 설정
+  }]
+};
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "bottom"
+    },
+    title: {
+      display: true,
+      text: "한시간 온도" // 제목
+    },
+    tooltip: {
+      mode: "index", // 같은 X축 인덱스의 모든 데이터를 표시
+      intersect: false, //바있는 화면에 가져다 대면 데이터나옴
+      callbacks: {
+        // 커스터마이징된 툴팁 내용을 반환하는 함수
+        label: function (tooltipItem) {
+          const dataset = tooltipItem.dataset; // 현재 데이터셋 가져오기
+          const label = dataset.label || ""; // 데이터셋 라벨 가져오기
+          const value = dataset.data[tooltipItem.dataIndex]; // 현재 데이터 값 가져오기
+          return `${label}: ${value}`; // 라벨과 값으로 텍스트 반환
+        },
+      },
+    },
+    
+  },
+  hover: {
+    mode: "index",
+    intersect: false, // 막대에 겹칠 때 툴팁이 나타나도록 설정
+  },
+  scales: {
+    y: {
+      min: 22,  // Y축 최소값
+      max: 24,  // Y축 최대값
+      ticks: {
+        callback: (value) => `${value.toFixed(1)}°C`, // Y축 눈금 포맷
+      },
+    }
+  }
+};
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
       <div className='graph-headerr'>
@@ -142,7 +247,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp}
+                {tempData[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <div id='item1' className='p-100' />
@@ -158,7 +263,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp}
+                {avg.toFixed(1)}°C
                 <div className='graphWrap' >
                   <div className='graph'>
                     <div  style={{ width: `${width[1]}px`}} id='item2' className='p-50' />
@@ -171,7 +276,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           <p>
             그래프제목넣기
           </p>
-          <div>그래프 넣을 div</div>
+          <div>
+            <Bar data={barData}  options={options} className='center'></Bar>
+          </div>
         </div>
       </div>
       <div className='graph-content'>
@@ -212,7 +319,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           />
           {/* 마우스 올리면 데이터 나타남 */}
           <Tooltip 
-          formatter={(value, name, props) => [value, name === 'tem' ? '온도' : name]} 
+          formatter={(value, name) => [value, name === 'tem' ? '온도' : name]} 
           />
           <Area 
           type="monotone" //부드러운 곡선
