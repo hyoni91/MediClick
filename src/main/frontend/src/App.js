@@ -159,11 +159,7 @@ function App() {
             {/* 온도 차트 연습 */}
             <Route path='tempdata' element={<TempData/>}/>
             {/* 지도 api 연습 */}
-<<<<<<< HEAD
             <Route path='mapTest' element={<MapTest1/>}/>
-=======
-            {/* <Route path='mapTest' element={<MapTest/>}/> */}
->>>>>>> khk
         </Route>
       </Routes>
 
