@@ -175,6 +175,16 @@ const ExampleComponent = () => {
   };
   
   console.log(avg)
+  const formatDate1  = (e) => {
+    //객체 데이트값 생성
+    const date = new Date(e);
+    const options = {
+      month: '2-digit',
+      day: '2-digit',
+    };
+    // 객체를 문자열로 변환 후 ',' 제거
+    return date.toLocaleString('en-US', options).replace(',', '');
+  };
   return ( 
     <div className='center' >
       
@@ -235,6 +245,62 @@ const ExampleComponent = () => {
         </AreaChart>
       </ResponsiveContainer>
       </div>
+      <div className='graph-div'>
+          <div className='flex-temp'>
+            <div>실시간 온도</div>
+            <div>{formatDate1(new Date)}</div>
+          </div>
+        <ResponsiveContainer width="100%" height="100%">
+          {/* 선밑에 채워지는 차트 */}
+        <AreaChart
+          width={500}
+          height={400}
+          data={Objecttime}
+          margin={{
+            top: 25,
+            right: 30,
+            left: 0,
+            bottom: 10,
+          }}
+        >
+          <CartesianGrid 
+          strokeDasharray="3 3" 
+          stroke="#ccc" // 그래프 밑에 색깔
+          horizontal={true} vertical={false}
+          />
+          {/* X선 */}
+          <XAxis dataKey="time" 
+          tickFormatter={(e) => {
+            // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
+            const date = new Date(e);
+            return formatDateTime(date); // HH:MM 형식으로 반환
+          }}
+          label={{ 
+            }} // X축 레이블 추가
+          // angle={-45} // x축 기울기
+          
+          />
+          {/* Y선 */}
+          <YAxis 
+          domain={[22, 23]}
+          tickFormatter={(value) => `${value.toFixed(1)}°C`} 
+          />
+          {/* 마우스 올리면 데이터 나타남 */}
+          <Tooltip 
+          formatter={(value, name) => [value, name === 'tem' ? '온도' : name]} 
+          />
+          <Area 
+          type="monotone" //부드러운 곡선
+          dataKey="tem"  //나타낼 데이터
+          stroke="#3276ff" //그래프 선 색깔
+          strokeWidth={2} // 선 두께
+          // strokeDasharray={0}
+          fill="#d8e5ff" // 선 아래에 색을 채우기
+          dot={true}//점을 표시 (ture) 표시 X (false)
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+        </div>
     </div>
   );
 };
