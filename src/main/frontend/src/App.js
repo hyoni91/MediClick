@@ -24,6 +24,7 @@ import StatChart from './user/StatChart';
 import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
+import MiniBoard from './user/board/MiniBoard';
 
 
 function App() {
@@ -99,7 +100,7 @@ function App() {
           {/* 유저용 */}
           <Route path='/' element={<UserLayout/>}>
             {/* ?? */}
-            <Route path='/??' element={<ExampleComponent/>} />
+            {/* <Route path='/??' element={<ExampleComponent/>} /> */}
             {/* 메인페이지 */}
             <Route path='/' element={<Home loginInfo={loginInfo}/>}/>
             {/* 로그인 페이지 */}
@@ -125,6 +126,8 @@ function App() {
             <Route path='userServiceUpdate/:boardNum' element={<UserServiceUpdate loginInfo={loginInfo} setLoginInfo={setLoginInfo}/>}/>
             {/* 차트 */}
             <Route path='statChart' element={<StatChart/>}/>
+            {/* 메인, 최근 게시글 */}
+            <Route path='miniBoard' element={<MiniBoard/>}/>
           </Route>
   
   
@@ -281,16 +284,17 @@ const Home=({loginInfo})=>{
 
           {/* 버스 */}
 
-          <div>
+          <div className='main-detail'>
             
             {/* 게시판 */}
+            
             <div>
-              <h3>게시판</h3>
-              <div></div>
+              <h3>고객 서비스</h3>
+              <div><MiniBoard/></div>
             </div>
             {/* 차트 */}
             <div>
-              <h3>보건의료통계</h3>
+              <h3>보건 의료 통계</h3>
               <div><StatChart/></div>
             </div>
           </div>

@@ -42,4 +42,10 @@ public class BoardServiceImpl implements BoardService {
         sqlSession.update("boardMapper.updateBoard", boardVO);
     }
 
+    //메인 미니 게시판
+    @Override
+    public List<BoardVO> getMiniBoard() {
+        return sqlSession.selectList("boardMapper.getMainBoard");
+    }
+
 }

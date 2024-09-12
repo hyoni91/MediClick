@@ -20,4 +20,7 @@ public interface BoardService {
 
     // 게시글 수정
     void updateBoard(BoardVO boardVO);
+
+    //메인 미니 게시판
+    List<BoardVO> getMiniBoard();
 }

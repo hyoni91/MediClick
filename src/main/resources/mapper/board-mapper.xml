@@ -59,6 +59,17 @@
         WHERE BOARD_NUM = #{boardNum}
     </update>
 
+
+    <!--메인에 띄울 최근 게시글 5개-->
+    <select id="getMainBoard" resultMap="board">
+        SELECT BOARD_NUM
+            ,TITLE
+            ,DATE_FORMAT(CREATE_DATE,'%Y-%m-%d') AS CREATE_DATE
+        FROM USER_BOARD
+        ORDER BY CREATE_DATE DESC
+        LIMIT 5
+    </select>
+
 </mapper>
 
 
