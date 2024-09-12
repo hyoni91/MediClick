@@ -9,6 +9,8 @@ import { Bar } from 'react-chartjs-2';
 
 
 const BloodRefrigerator = () => {
+  //실시간 그래프 옆에 지표
+  const [temp1, setTemp1] = useState([])
 //실시간 온도 데이터 받을 함수
 const [tempData, setTempData] = useState([
   {
@@ -22,7 +24,7 @@ useEffect(() => {
     console.log(res.data)
     setTempData(res.data)
   })
-},[])
+},[tempData])
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
@@ -72,6 +74,9 @@ const sum = tempList.reduce((a, b) => a + b, 0);
 const avg = sum / tempList.length;
 console.log(avg)
 //실시간 온도 그래프
+
+
+
 //폼데이터 함수정의
 const formatDate  = (e) => {
   //객체 데이트값 생성
@@ -101,6 +106,7 @@ const formatDate  = (e) => {
 //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
+  setTemp1(response.data)
   return response.data;  // API로부터 온도 데이터를 반환
 };
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -273,11 +279,9 @@ const options = {
             </div>
           </div>
         <div className='header-graph'>
-          <p>
-            그래프제목넣기
-          </p>
+          
           <div>
-            <Bar data={barData}  options={options} className='center'></Bar>
+            <Bar data={barData}  options={options} ></Bar>
           </div>
         </div>
       </div>
@@ -307,10 +311,12 @@ const options = {
           tickFormatter={(e) => {
             // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
             const date = new Date(e);
-            return formatDate(date); // HH:MM 형식으로 반환
+            return formatDateTime(date); // HH:MM 형식으로 반환
           }}
-          label={{ value: `${''}/${''}`, position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
+          label={{ 
+            }} // X축 레이블 추가
           // angle={-45} // x축 기울기
+          
           />
           {/* Y선 */}
           <YAxis 
@@ -344,7 +350,7 @@ const options = {
             </thead>
             <tbody>
               {
-                tempData.map((temp,i)=>{
+                temp1.map((temp,i)=>{
                   return(
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
