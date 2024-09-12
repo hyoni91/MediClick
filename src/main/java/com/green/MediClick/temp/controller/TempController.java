@@ -37,4 +37,10 @@ public class TempController {
         return tempService.oneHourData();
     }
 
+    // 온도데이터 (평균 온도)
+    @GetMapping("/tempListData")
+    public List<TempVO> tempListData(){
+        return tempService.tempListData();
+    }
+
 }

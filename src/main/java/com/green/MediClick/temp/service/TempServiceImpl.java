@@ -13,6 +13,7 @@ public class TempServiceImpl implements TempService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    //실시간 온도 데이터 10개
     @Override
     public List<TempVO> selectTempAll() {
         return sqlSession.selectList("tempMapper.nowTemps");
@@ -23,8 +24,15 @@ public class TempServiceImpl implements TempService {
         sqlSession.delete("tempMapper.keepDel");
     }
 
+    //한시간 온도데이터
     @Override
     public List<TempVO> oneHourData() {
         return sqlSession.selectList("tempMapper.oneHourData");
+    }
+
+    //온도데이터 (평균)
+    @Override
+    public List<TempVO> tempListData() {
+        return sqlSession.selectList("tempMapper.tempListData");
     }
 }

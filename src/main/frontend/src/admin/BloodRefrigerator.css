@@ -38,6 +38,7 @@
 
 .header-graph{
   width: 52%;
+  /* height: 200px; */
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
   color: #6C757D;
@@ -251,4 +252,10 @@ border: 1px solid lightgray;
 
 .Iconequls{
   color: green;
+}
+
+.graph-title-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

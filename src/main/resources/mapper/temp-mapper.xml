@@ -31,10 +31,17 @@
     <select id="oneHourData" resultMap="temp">
         SELECT *
         FROM temp_data
-        WHERE temp_time >= DATE_FORMAT(NOW(),'%Y-%m-%d %H:00:00')
-        AND temp_time &lt; DATE_FORMAT(NOW() + INTERVAL(1) HOUR,'%Y-%m-%d %H:00:00');
+        WHERE temp_time &lt;= NOW()
+        AND temp_time > NOW() - INTERVAL(1) HOUR
+        ORDER BY TEMP_TIME DESC
+        limit 15
     </select>
 
+    <!-- 전체 온도 데이터(평균)-->
+    <select id="tempListData" resultMap="temp">
+        select * from temp_data
+        order by temp_time desc
+    </select>
 </mapper>
 
 
