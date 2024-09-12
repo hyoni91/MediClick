@@ -4,7 +4,7 @@ import './MapTest.css'
 import markerImage from '../assets/marker.png';
 import { useNavigate } from 'react-router-dom';
 
-const MapTest = () => {
+const MapTest1 = () => {
   const {kakao}=window
   
   // 지도이동 state
@@ -41,4 +41,4 @@ const navigate = useNavigate
   )
 }
 
-export default MapTest;
+export default MapTest1;
