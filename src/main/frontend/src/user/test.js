@@ -9,20 +9,29 @@ import { Line,
   Legend,
   Area,
   ResponsiveContainer,
-  BarChart,
-  ScatterChart,
   Rectangle,
   AreaChart,
 } from "recharts";
 import './test.css';
 import axios from 'axios';
-import { CategoryScale, LinearScale, LineElement, PointElement, Title } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
 
 
 const ExampleComponent = () => {
+  const [data2, setDate2] = useState([]); // 예시 배열
+  //데이터 조회
+  useEffect(() => {
+    axios.get('/temp/oneHourData')
+    .then((res) => {
+      console.log(res.data)
+      return setDate2(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    },[])
   //폼데이터 함수정의
-  const formatDate = (e) => {
+  const formatDateTime  = (e) => {
     //객체 데이트값 생성
     const date = new Date(e);
     const options = {
@@ -35,6 +44,18 @@ const ExampleComponent = () => {
     // 객체를 문자열로 변환 후 ',' 제거
     return date.toLocaleString('en-US', options).replace(',', '');
   };
+
+    // 시간만 형식화하는 함수
+    const formatDate = (e) => {
+      const date = new Date(e);
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12 : false //24시간
+      };
+      return date.toLocaleString('en-US', options); // 'HH:MM' 형식으로 반환
+    };
+    
   //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
   const fetchTemperatureData = async () => {
     const response = await axios.get('/temp/nowTemps');
@@ -46,14 +67,14 @@ const ExampleComponent = () => {
     queryFn: fetchTemperatureData,
     refetchInterval: 5000, // 5초마다 데이터 갱신
   });
-
   if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
   if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
   
+  
   // 오름차순 정렬
   const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
-
-  const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
+  
+  const timeList = sortedDataAsc.map((e) => formatDateTime(e.tempTime));
   const temList = sortedDataAsc.map((e) => e.currentTemp);
   const sum = temList.reduce((a, b) => a + b, 0);
   const avg = sum / temList.length;
@@ -67,33 +88,41 @@ const ExampleComponent = () => {
     }
   })
   console.log(Objecttime)
+  // X축 레이블 데이터 (MM/DD 형식)
+  const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
   //데이터 조회
   const formatXAxis = (e) => {
     return `${e}분`
   }
-  const data2 = ['January', 'February', 'March', 'April']; // 예시 배열
   
-  const labels = [];
+  const labels1 = [];
   timeList.forEach((time) => labels.push(time));
-  
+  const sortedDataAsc1 = data2.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+  // 날짜
+  const timeList1 = sortedDataAsc1.map((e) => formatDate(e.tempTime));
+  // 온도
+  const temList1 = sortedDataAsc1.map((e) => e.currentTemp);
+console.log(data2)
   const data3 = {
-    labels: labels, // labels 배열 사용
+    labels: timeList1, //배열 사용
     datasets: [{
       type: 'bar',
       label: '현재 온도',
-      data: temList,
+      data: temList1,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       hoverBackgroundColor: "rgba(255, 99, 132, 0.8)", // 호버 시 색상 설정
-      
-    }, {
-      type: 'line',
-      label: '평균온도',
-      data: temList.map(() => avg.toFixed(2)), // 각 포인트에 평균온도값 설정
-      borderColor: 'rgb(54, 162, 235)',
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      hoverBackgroundColor: "rgba(54, 162, 235, 0.8)", // 호버 시 색상 설정
-    }]
+    }
+    
+    // , {
+    //   type: 'line',
+    //   label: '평균온도',
+    //   data: temList.map(() => avg.toFixed(2)), // 각 포인트에 평균온도값 설정
+    //   borderColor: 'rgb(54, 162, 235)',
+    //   backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    //   hoverBackgroundColor: "rgba(54, 162, 235, 0.8)", // 호버 시 색상 설정
+    // }
+  ]
   };
   
   const options = {
@@ -125,15 +154,24 @@ const ExampleComponent = () => {
       mode: "index",
       intersect: false, // 막대에 겹칠 때 툴팁이 나타나도록 설정
     },
+    scales: {
+      y: {
+        min: 22,  // Y축 최소값
+        max: 23,  // Y축 최대값
+        ticks: {
+          callback: (value) => `${value.toFixed(1)}°C`, // Y축 눈금 포맷
+        },
+      }
+    }
   };
   
   console.log(avg)
   return ( 
-    <div className='center' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className='center' >
       
       <div>
       <Bar data={data3}  options={options} className='center'></Bar>
-      <Line data={data3} options={options} className=''></Line>  
+      {/* <Line data={data3} options={options} className='center'></Line>   */}
       </div>
       <div>
       
@@ -156,23 +194,28 @@ const ExampleComponent = () => {
           />
           {/* X선 */}
           <XAxis dataKey="time" 
-          label={{ value: '시간', position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
+          tickFormatter={(e) => {
+            // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
+            const date = new Date(e);
+            return formatDate(date); // HH:MM 형식으로 반환
+          }}
+          label={{ 
+            value: '월/일', position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
           //tickFormatter={formatXAxis} // X축 값 포맷팅
           // angle={-45} // x축 기울기
           />
           {/* Y선 */}
-          <YAxis />
+          <YAxis 
+          domain={[22, 23]}
+          tickFormatter={(value) => `${value.toFixed(1)}°C`} 
+          />
+          
           {/* 마우스 올리면 데이터 나타남 */}
-          <Tooltip />
-          <Area 
-          type="monotone" //부드러운 곡선
-          dataKey="tem"  //나타낼 데이터
-          stroke="#8884d8" //그래프 선 색깔
-          fill="#8884d8" // 선 아래에 색을 채우기
-          dot={true}//점을 표시 (ture) 표시 X (false)
+          <Tooltip 
+          
           />
           <Area 
-          type="step" //부드러운 곡선
+          type="monotone" //부드러운 곡선
           dataKey="tem"  //나타낼 데이터
           stroke="#8884d8" //그래프 선 색깔
           fill="#8884d8" // 선 아래에 색을 채우기

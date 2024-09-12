@@ -25,11 +25,22 @@ import ExampleComponent from './user/test';
 import BloodRefrigerator from './admin/BloodRefrigerator';
 import TempData from './admin/TempData';
 import MiniBoard from './user/board/MiniBoard';
+import axios from 'axios';
 
 
 function App() {
   const navigate=useNavigate()
   const {kakao}=window;
+  
+  // 홈페이지를 열었을때, 과거 예약 자동삭제
+    useEffect(()=>{
+      axios.delete(`/schedule/delete`)
+      .then((res)=>{
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[])
 
   //로그인 정보를 저장할 수 있는 state변수
   const [loginInfo,setLoginInfo]=useState({})

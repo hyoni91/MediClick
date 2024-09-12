@@ -115,16 +115,16 @@ public class ScheduleController {
         scheduleService.schInput(scheduleVO);
     }
 
-    // 예약 유무 확인(모든 조건)
-    @PostMapping("/checkAppo")
-    public ScheduleVO checkAppo(@RequestBody ScheduleVO scheduleVO){
-        return scheduleService.checkAppo(scheduleVO);
-    }
-
     //예약 유무 확인(진료과와 날짜선택)
     @PostMapping("/checkSchTime")
     public List<ScheduleVO> checkSchTime(@RequestBody ScheduleVO scheduleVO){
         return scheduleService.checkSchtime(scheduleVO);
+    }
+
+    //과거 예약 자동 삭제
+    @DeleteMapping("/delete")
+    public void autoDelete(){
+        scheduleService.autoDelete();
     }
 
 }

@@ -25,10 +25,16 @@ public class TempController {
     }
 
     //24시간 전 데이터 자동 삭제
-    @Scheduled(fixedRate = 3600000) //1시간마다 자동 실행
-    public void keepDel(){
+    @Scheduled(fixedRate = 3600000)
+    public void keepDel() {
         System.out.println("2시간 전 데이터 삭제 중");
         tempService.keepDel();
+    }
+
+    //1시간마다 자동 실행
+    @GetMapping("/oneHourData")
+    public List<TempVO> oneHourData(){
+        return tempService.oneHourData();
     }
 
 }

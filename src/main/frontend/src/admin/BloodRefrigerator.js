@@ -11,22 +11,36 @@ const BloodRefrigerator = () => {
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
-  //temp 변수(임의)
+  //온도 설정 변수 
   const [temp,setTemp] = useState(2);
   //온도 설정 
   const tempSetting = ()=>{
     setTemp(tempRef.current.value)
     setIsSetTemp(!isSetTemp)
   }
+
+  // 초기 width 값 설정(현재온도랑 평균온도 따로하기? 지금은 같이 붙어 있음)
+  const [width, setWidth] = useState([100,100]);
+  // width를 증감시키는 함수(온도가 일정 수준 이상이면 크기 증가)
+  const settingWidth = (temp) => {
+    if(temp > 22.7){
+      setWidth(prevWidth => prevWidth + 50)
+    }else if(temp < 22.4){
+      setWidth(prevWidth => Math.max(prevWidth - 50, 0)); // 최소값을 0으로 설정
+    }
+  };
   
-  //업 다운 아이콘
+  console.log(width)
+  
+
+  //데이터의 업 다운 아이콘 유무 (테이블)
   const upDownIcon = (temp)=>{
-    if(temp > 22.8){
+    if(temp > 22.7){
       return (
         <div className='iconUp'><i className="fa-solid fa-caret-up"></i></div>
       )
       
-    } else if (temp < 22.3  ){
+    } else if (temp < 22.4  ){
       return (
         <div className='iconDown'><i className="fa-solid fa-caret-down"></i></div>
       )
@@ -35,7 +49,6 @@ const BloodRefrigerator = () => {
         <div className='Iconequls'><i className="fa-solid fa-window-minimize"></i></div>
       )
     }
-  
     }
 
   //날씨 api
@@ -70,26 +83,15 @@ const BloodRefrigerator = () => {
     },[])
 
 
-    const [tempData, setTempData] = useState([
-      {
-        currentTemp : ''
-      }
-    ])
 
-    //temp 데이터 받기
-    useEffect(()=>{
-      axios.get("/temp/nowTemps")
-      .then((res)=>{
-        setTempData(res.data)
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
-    },[])
-    console.log(tempData)
+//실시간 온도 데이터 받을 함수
+const [tempData, setTempData] = useState([
+  {
+    currentTemp : ''
+  }
+])
 
-
-    //실시간 온도 그래프
+//실시간 온도 그래프
 //폼데이터 함수정의
 const formatDate = (e) => {
   //객체 데이트값 생성
@@ -107,9 +109,12 @@ const formatDate = (e) => {
 //화면이 재랜더링 될때 db를 조회하여 시간값과 온도값을 가져와서 데이터를 넣어줌
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
-  console.log(response.data)
+  // console.log(response.data)
+  setTempData(response.data)
+  settingWidth(response.data[0].currentTemp) 
   return response.data;  // API로부터 온도 데이터를 반환
 };
+
 // useQuery 훅을 사용하여 데이터 가져오기
 const { data, isLoading, error } = useQuery({
   queryKey: ['temperatureData'],
@@ -119,7 +124,7 @@ const { data, isLoading, error } = useQuery({
 
 if (isLoading) return <div>Loading...</div>;  // 로딩 중일 때의 UI
 if (error) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
-
+const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 // 오름차순 정렬
 const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
 
@@ -132,8 +137,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
       tem : temList[i]
       }
     })
+    // console.log(Objecttime)
     console.log(Objecttime)
-
+    timeList.forEach((time) => labels.push(time));
 
 
 
@@ -175,7 +181,6 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
               <span>{(weather.temp -273.15).toFixed(0)}°C <br /> </span>
                 최저:{(weather.minTemp -273.15).toFixed(0)}°C 
                 최고: {(weather.maxTemp-273.15).toFixed(0)}°C
-              
             </div>
             <div>
               <p>
@@ -188,7 +193,7 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
                 {tempData[0].currentTemp}
                 <div className='graphWrap'>
                   <div className='graph'>
-                    <div id='item1' className='p-100' />
+                    <div style={{ width: `${width[0]}px`}} id='item1' className='p-100' />
                   </div>
                 </div>
               </span>
@@ -202,9 +207,9 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
               </p>
               <span>
                 {tempData[0].currentTemp}
-                <div className='graphWrap'>
+                <div className='graphWrap' >
                   <div className='graph'>
-                    <div id='item2' className='p-50' />
+                    <div  style={{ width: `${width[1]}px`}} id='item2' className='p-50' />
                   </div>
                 </div>
               </span>
@@ -212,13 +217,14 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           </div>
         <div className='header-graph'>
           <p>
-            평균온도랑 현재온도 그래프로 나타내기
+            그래프제목넣기
           </p>
-          <div>그래프div</div>
+          <div>그래프 넣을 div</div>
         </div>
       </div>
       <div className='graph-content'>
         <div className='graph-div'>
+          <p>실시간 온도</p>
         <ResponsiveContainer width="100%" height="100%">
           {/* 선밑에 채워지는 차트 */}
         <AreaChart
@@ -226,24 +232,32 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           height={400}
           data={Objecttime}
           margin={{
-            top: 10,
+            top: 25,
             right: 30,
             left: 0,
-            bottom: 0,
+            bottom: 10,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" 
+          <CartesianGrid 
+          strokeDasharray="3 3" 
           stroke="#ccc" // 그래프 밑에 색깔
           horizontal={true} vertical={false}
           />
           {/* X선 */}
           <XAxis dataKey="time" 
+          tickFormatter={(e) => {
+            // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
+            const date = new Date(e);
+            return formatDate(date); // HH:MM 형식으로 반환
+          }}
           label={{ value: `${''}/${''}`, position: 'insideBottomRight', offset: 0, margin: '1'}} // X축 레이블 추가
-          //tickFormatter={formatXAxis} // X축 값 포맷팅
           // angle={-45} // x축 기울기
           />
           {/* Y선 */}
-          <YAxis />
+          <YAxis 
+          domain={[22, 23]}
+          tickFormatter={(value) => `${value.toFixed(1)}°C`} 
+          />
           {/* 마우스 올리면 데이터 나타남 */}
           <Tooltip 
           formatter={(value, name, props) => [value, name === 'tem' ? '온도' : name]} 
@@ -251,9 +265,11 @@ const temList = sortedDataAsc.map((e) => e.currentTemp);
           <Area 
           type="monotone" //부드러운 곡선
           dataKey="tem"  //나타낼 데이터
-          stroke="#8884d8" //그래프 선 색깔
-          fill="#8884d8" // 선 아래에 색을 채우기
-          dot={false}//점을 표시 (ture) 표시 X (false)
+          stroke="#3276ff" //그래프 선 색깔
+          strokeWidth={2} // 선 두께
+          // strokeDasharray={0}
+          fill="#d8e5ff" // 선 아래에 색을 채우기
+          dot={true}//점을 표시 (ture) 표시 X (false)
           />
         </AreaChart>
       </ResponsiveContainer>
