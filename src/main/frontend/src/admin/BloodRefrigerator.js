@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import WeatherDate from '../custom/WeatherDate';
 import { Bar } from 'react-chartjs-2';
 import SettingWidth from '../custom/SettingWidth';
+import UpDownIcon from '../custom/UpDownIcon';
+import SettinWidthAvg from '../custom/SettinWidthAvg';
 
 
 const BloodRefrigerator = () => {
@@ -43,32 +45,11 @@ useEffect(() => {
     setIsSetTemp(!isSetTemp)
   }
 
-
-  //데이터의 업 다운 아이콘 유무 (테이블)
-  const upDownIcon = (temp)=>{
-    if(temp > 22.7){
-      return (
-        <div className='iconUp'><i className="fa-solid fa-caret-up"></i></div>
-      )
-      
-    } else if (temp < 22.4  ){
-      return (
-        <div className='iconDown'><i className="fa-solid fa-caret-down"></i></div>
-      )
-    } else{
-      return (
-        <div className='Iconequls'><i className="fa-solid fa-window-minimize"></i></div>
-      )
-    }
-    }
-
-
 const tempList = tempData.map((temp,i) => {
 return(temp.currentTemp)})
 const sum = tempList.reduce((a, b) => a + b, 0);
 const avg = sum / tempList.length;
 // console.log(avg)
-//실시간 온도 그래프
 
 
 //폼데이터 함수정의
@@ -283,7 +264,7 @@ const formatDate1  = (e) => {
                 {avg.toFixed(1)}°C
                 <div className='graphWrap' >
                   <div className='graph'>
-                    <SettingWidth 
+                    <SettinWidthAvg 
                     currentTemp={temp1[0].currentTemp}
                     avg={avg}
                     />
@@ -376,7 +357,7 @@ const formatDate1  = (e) => {
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
                       <td>{temp.currentTemp}</td>
-                      <td>{upDownIcon(temp.currentTemp)}</td>
+                      <td>{<UpDownIcon temp={temp.currentTemp}/>}</td>
                     </tr>
                   )
                 })
