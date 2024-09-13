@@ -27,6 +27,7 @@ import TempData from './admin/TempData';
 import MiniBoard from './user/board/MiniBoard';
 import axios from 'axios';
 import MapTest1 from './admin/MapTest1';
+import ChartList from './admin/ChartList';
 
 
 
@@ -152,8 +153,10 @@ function App() {
             <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
             {/* 의사 정보수정 페이지 */}
             <Route path='doctorUpdate/:docNum' element={<DoctorUpdate/>}/>
+            {/* 환자차트항목 */}
+            <Route path='chartList' element={<ChartList />}/>
             {/* 진료차트 */}
-            <Route path='patientChart/:schNum' element={<PatientChart/>}/>
+            <Route path='patientChart/:memNum' element={<PatientChart/>}/>
             {/* 혈액냉장고관리 페이지 */}
             <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
             {/* 온도 차트 연습 */}

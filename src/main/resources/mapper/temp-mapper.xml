@@ -7,6 +7,8 @@
         <id column="TEMP_NUM" property="tempNum"/>
         <result column="CURRENT_TEMP" property="currentTemp"/>
         <result column="TEMP_TIME" property="tempTime"/>
+        <result column="TIME_DATE" property="timeDate"/>
+        <result column="AVG_TEMP" property="avgTemp"/>
     </resultMap>
 
     <!--입력되는 온도 조회 : 5분마다 10개-->
@@ -27,13 +29,19 @@
     </delete>
 
 
-    <!-- 정시부터 1시간 이후까지 온도-->
-    <select id="oneHourData" resultMap="temp">
-        SELECT *
+    <!-- 10분간격 온도평균 데이터 -->
+    <select id="timeAvgDate" resultMap="temp">
+        SELECT
+            round(AVG(CURRENT_TEMP),1) AS avg_Temp
+            ,concat(
+                    floor(hour(temp_time))
+                    ,':'
+                    ,FLOOR(MINUTE(temp_time)/10)*10) AS time_Date
         FROM temp_data
-        WHERE temp_time &lt;= NOW()
-        AND temp_time > NOW() - INTERVAL(1) HOUR
-        ORDER BY TEMP_TIME DESC
+        GROUP BY
+            date(temp_time)
+            ,FLOOR(HOUR(temp_time))
+            ,FLOOR(MINUTE(temp_time)/10)*10
         limit 15
     </select>
 

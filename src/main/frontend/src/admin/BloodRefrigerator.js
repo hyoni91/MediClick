@@ -6,25 +6,36 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tool
 import { useQuery } from '@tanstack/react-query';
 import WeatherDate from '../custom/WeatherDate';
 import { Bar } from 'react-chartjs-2';
+import SettingWidth from '../custom/SettingWidth';
+import UpDownIcon from '../custom/UpDownIcon';
+import SettinWidthAvg from '../custom/SettinWidthAvg';
 
 
 const BloodRefrigerator = () => {
   //실시간 그래프 옆에 지표
-  const [temp1, setTemp1] = useState([])
+  const [temp1, setTemp1] = useState([
+    {
+      currentTemp: '',
+      tempTime: ''
+    }
+  ])
 //실시간 온도 데이터 받을 함수
 const [tempData, setTempData] = useState([
   {
     currentTemp: '',
-    tempTime: ''
+    tempTime: '',
+    tempTime : '',
+    timeDate : ''
   }
 ])
 useEffect(() => {
   axios.get('/temp/tempListData')
   .then((res) => {
-    console.log(res.data)
+    // console.log(res.data)
     setTempData(res.data)
   })
-},[tempData])
+},[])
+
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
@@ -36,45 +47,11 @@ useEffect(() => {
     setIsSetTemp(!isSetTemp)
   }
 
-  // 초기 width 값 설정(현재온도랑 평균온도 따로하기? 지금은 같이 붙어 있음)
-  const [width, setWidth] = useState(100);
-  // width를 증감시키는 함수(온도가 일정 수준 이상이면 크기 증가)
-  const settingWidth = (temp) => {
-    if(temp > 22.7){
-      setWidth(width => width + 50)
-      document.querySelector('#item1').width = width
-    }
-  };
-  
-  console.log(width)
-  
-
-  //데이터의 업 다운 아이콘 유무 (테이블)
-  const upDownIcon = (temp)=>{
-    if(temp > 22.7){
-      return (
-        <div className='iconUp'><i className="fa-solid fa-caret-up"></i></div>
-      )
-      
-    } else if (temp < 22.4  ){
-      return (
-        <div className='iconDown'><i className="fa-solid fa-caret-down"></i></div>
-      )
-    } else{
-      return (
-        <div className='Iconequls'><i className="fa-solid fa-window-minimize"></i></div>
-      )
-    }
-    }
-
-
 const tempList = tempData.map((temp,i) => {
-  return(temp.currentTemp)})
+return(temp.currentTemp)})
 const sum = tempList.reduce((a, b) => a + b, 0);
 const avg = sum / tempList.length;
-console.log(avg)
-//실시간 온도 그래프
-
+// console.log(avg)
 
 
 //폼데이터 함수정의
@@ -118,7 +95,8 @@ const { data, isLoading, error } = useQuery({
 
 // bar차트 데이터 조회를위한 함수
 const fetchBarChartData = async () => {
-  const response = await axios.get('/temp/oneHourData')
+  const response = await axios.get('/temp/timeAvgDate')
+  console.log(response.data)
   return response.data
 }
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -143,8 +121,8 @@ const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.temp
 const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
 const temList = sortedDataAsc.map((e) => e.currentTemp);
 
-console.log(timeList)
-console.log(temList)
+// console.log(timeList)
+// console.log(temList)
 //배열 데이터 객체화
 const Objecttime = timeList.map((time , i) => {  
   return {
@@ -152,24 +130,25 @@ const Objecttime = timeList.map((time , i) => {
   tem : temList[i]
   }
 })
-console.log(Objecttime)
+// console.log(Objecttime)
 // X축 레이블 데이터 (MM/DD 형식)
 const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 
 timeList.forEach((time) => labels.push(time));
 
 //한시간데이터르 저장하는 변수
-const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.timeDate) - new Date(b.timeDate));
 // 날짜
-const timeList1 = sortedDataAsc1.map((e) => formatDateTime(e.tempTime));
+const timeList1 = sortedDataAsc1.map((e) => (e.timeDate));
 // 온도
-const temList1 = sortedDataAsc1.map((e) => e.currentTemp);
+const temList1 = sortedDataAsc1.map((e) => e.avgTemp);
 // 바차트 데이터
+console.log(timeList1)
 const barData = {
   labels: timeList1, //배열 사용
   datasets: [{
     type: 'bar',
-    label: '현재 온도',
+    label: '평균 온도',
     data: temList1,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(0, 99, 132, 0.2)',
@@ -267,16 +246,19 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp}°C
+                {tempData[0].currentTemp == null ? <></> : tempData[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
-                    <div id='item1' className='p-100' />
+                    <SettingWidth 
+                    currentTemp={temp1[0].currentTemp}
+                    avg={avg}
+                    />
                   </div>
                 </div>
               </span>
             </div>
             <div>
-              <p>
+              <p> 
                 <span>평균 온도</span>
                 <span className='icon-span'>
                   <i className="fa-solid fa-temperature-empty"></i>
@@ -286,7 +268,10 @@ const formatDate1  = (e) => {
                 {avg.toFixed(1)}°C
                 <div className='graphWrap' >
                   <div className='graph'>
-                    <div  style={{ width: `${width[1]}px`}} id='item2' className='p-50' />
+                    <SettinWidthAvg 
+                    currentTemp={temp1[0].currentTemp}
+                    avg={avg}
+                    />
                   </div>
                 </div>
               </span>
@@ -376,7 +361,7 @@ const formatDate1  = (e) => {
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
                       <td>{temp.currentTemp}</td>
-                      <td>{upDownIcon(temp.currentTemp)}</td>
+                      <td>{<UpDownIcon temp={temp.currentTemp}/>}</td>
                     </tr>
                   )
                 })
