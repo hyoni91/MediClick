@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './LoginForm.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -11,14 +11,15 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
     memRrn:'',
     memRole:''
   })
-  
-  const regex_memName=/^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/
+
 
   function insertData(e){
-    setInputData({
+    const textData={
       ...inputData,
       [e.target.name]:e.target.value
-    })
+    }
+  
+    setInputData(textData)
     
   }
 
@@ -45,23 +46,11 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         //로그인정보 저장
         window.sessionStorage.setItem('loginInfo',JSON.stringify(loginInfo))
 
-
         setLoginInfo(loginInfo)
 
         alert(`${loginInfo.memName}님 반갑습니다.`)
-
-        
-
         
         navigate('/')
-
-        // if(loginInfo.memRole=='USER'){
-        //   navigate('/')
-        // }
-        // else if(loginInfo.memRole=='ADMIN'){
-        //   navigate('/admin')
-        // }
-
 
       }
       else{
@@ -72,8 +61,6 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
     .catch((error)=>{
       console.log(error)
     })
-
-
 
   }
 
@@ -87,8 +74,10 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
           <thead></thead>
           <tbody>
             <tr>
-              <td><input type='text' name='memName' placeholder='성함을 입력하세요.' 
-              onChange={(e)=>{insertData(e)}}></input></td>
+              <td>
+                <input type='text' name='memName' placeholder='성함을 입력하세요.' 
+                onChange={(e)=>{insertData(e)}}></input>
+              </td>
             </tr>
 
             <tr>

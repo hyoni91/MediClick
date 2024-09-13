@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { DefaultLegendContent } from 'recharts'
 import './MapTest.css'
+import axios from 'axios'
+import { debounce } from 'chart.js/helpers'
 
 const MapTest1 = () => {
   const {kakao}=window
-  
+
+
   // 지도이동 state
   const [map, setMap] = useState(null);
 
   // 마커 state
   const [pointObj, setPointObj] = useState({
     startPoint : {marker: null, lat: null, lng: null},
-    endPoint : {marker: null, lat: null, lng: null}
+    endPoint : {marker: null, lat: 35.54210, lng: 129.3382}
   });
 
   // 지도
@@ -22,7 +25,20 @@ const MapTest1 = () => {
       level : 3
     };
     const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
-    setMap(kakaoMap);
+
+  // 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(35.54210, 129.3382); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(kakaoMap);
+
+    //setMap(kakaoMap);
+    
   }, []);
 
   // 마커 변경 
@@ -38,6 +54,7 @@ const MapTest1 = () => {
   function setCenter({lat, lng}){
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
+    //setPoint({lat: 35.54210, lng: 129.3382}, 'endPoint')
   }
   
   function setPoint({lat, lng}, pointType){
@@ -54,7 +71,8 @@ const MapTest1 = () => {
 
   // 경로
   async function getCarDirection() {
-    const REST_API_KEY = process.env.REACT_APP_KAKAO_API_KEY;
+    const REST_API_KEY = process.env.REACT_APP_Kakao_api_key;
+
     // 호출방식 url
     const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
@@ -62,36 +80,20 @@ const MapTest1 = () => {
     const origin = `${pointObj.startPoint.lng}, ${pointObj.startPoint.lat}`;
     const destination = `${pointObj.endPoint.lng}, ${pointObj.endPoint.lat}`;
 
-    // 요청 헤더
-    const headers = {
-      Authorization: `kakaoAK ${REST_API_KEY}`,
-      'Content-Type' : 'application/json'
-    };
-
-    console.log(REST_API_KEY)
-    
-    const queryParams = new URLSearchParams({
-      origin : origin,
-      destination : destination
-    });
-
-    // 피라미터 포함 전체 url
-    const requestUrl = `${url}?${queryParams}`;
-
-    try {
-      const response = await fetch(requestUrl, {
-        method : 'GET',
-        headers : headers
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status : ${response.status}`);
+    axios.get(url, {
+      headers: {
+        'Authorization': `KakaoAK ${REST_API_KEY}`,  // 헤더에 API 키를 포함합니다.
+        'Content-Type' : 'application/json'
+      },
+      params: {
+        origin: origin,
+        destination: destination
       }
+    }).then((res) => {
+      console.log(res.data);
 
-      const data = await response.json();
-      console.log(data)
       const linePath = [];
-      data.routes[0].sections[0].roads.forEach(router => {
+      res.data.routes[0].sections[0].roads.forEach(router => {
         router.vertexes.forEach((vertex, index)=>{
           if (index % 2 === 0){
             linePath.push(new kakao.maps.LatLng(router.vertexes[index + 1], router.vertexes[index]));
@@ -99,25 +101,48 @@ const MapTest1 = () => {
         });
       });
 
-        const  polyline = new kakao.maps.Polyline({
+      const  polyline = new kakao.maps.Polyline({
         path : linePath,
         strokeWeight : 5,
         strokeColor : '#000000',
         strokeOpacity : 0.7,
         strokeStyle : 'solid'
       });
+
       polyline.setMap(map);
 
-    } catch (error) {
-      console.error('Error: ',error);
-    }
+    })
+    .catch((error) => {console.log(error)});
+  }
+
+  function getLocation(){
+    const REST_API_KEY = process.env.REACT_APP_Kakao_api_key;
+    // 호출방식 url
+    const url = 'https://dapi.kakao.com/v2/local/search/address.json';
+
+    axios.get(url, {
+      headers: {
+        'Authorization': `KakaoAK ${REST_API_KEY}`,
+        'Content-Type' : 'application/json;charset=UTF-8'
+      },
+      params: {
+        query: '전북 삼성동 100'
+      }
+    }).then((res) => {
+     const lng = res.data.documents[0].x;
+     const lat = res.data.documents[0].y;
+      setPoint({lat: lat, lng: lng}, 'startPoint')
+    })
+    .catch((error) => {console.log(error)});
   }
   
   return (
     <div>
+      
       <div id='map' style={{width: "450px", height: "450px"}}/>
       <div style={{display: "flex", gap: "10px"}}>
-        <button onClick={()=>setPoint({lat: 35.5383773, lng: 129.3113596}, 'startPoint')}>출발지</button>
+        {/* <button onClick={()=>setPoint({lat: 35.5383773, lng: 129.3113596}, 'startPoint')}>출발지</button> */}
+        <button onClick={()=>getLocation()}>출발지</button>
         <button onClick={()=>setPoint({lat: 35.54210, lng: 129.3382}, 'endPoint')}>목적지</button>
         <button onClick={getCarDirection}>경로 구하기</button>
       </div>
