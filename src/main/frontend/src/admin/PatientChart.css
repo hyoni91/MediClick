@@ -1,33 +1,97 @@
 
+.p-chart{
+  background-color: #FAFBFE;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.p-chart-memInfo{
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+  /* width: 1840px; */
+  padding: 20px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-left: 10px;
+  text-align: left;
+}
+
 .p-chart-container{
   display: flex;
   padding: 10px;
-  gap: 10px;
+  gap: 5px;
 }
 
 .p-chart-side{
-  border: 1px solid red;  
-  width: 500px;
-  height: 500px;
-}
-
-.p-chart-content{
-  border: 1px solid red;  
-  width: 900px;
+  width: 250px;  
 }
 
 .p-chart-rigthside{
-  border: 1px solid red;  
-  width: 500px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+  width: 250px;
+  /* width: 50%; */
+  padding: 13px;
 }
 .p-chart-side{
   display: flex;
   flex-direction: column;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
   gap: 10px;
+  width: 250px;
+  /* width: 50%; */
+  padding: 13px;
 }
-.p-chart-side-content{
-  border: 1px solid blue;
-  padding: 5px;
-  height: 33.3%;
+
+.p-chart-side > h3{
   text-align: left;
+  font-size: 18px;
+  color: #494949;
+}
+
+.p-chart-side > h4{
+  text-align: left;
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
+.p-chart-side-content{
+  text-align: left;
+  border: 1px solid lightgray;
+  width: 250px;
+}
+
+.p-chart-side-content > p {
+  padding: 2px;
+  font-size: 14px;
+}
+
+.p-chart-side-content > p:nth-child(1){
+  background-color:#eef1fa;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.p-chart-content{
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
+  width: 1100px;
+  /* width: 100%; */
+  height: 70vh;
+  padding: 13px;
+}
+
+.p-chart-content > div:nth-child(1){
+  display: flex;
+  justify-content: space-between;
+  /* background-color:#eef1fa; */
+  border: none;
+  padding: 5px;
+}
+.p-chart-content > div{
+  border: 1px solid lightgray;
+  margin-bottom: 5px;
 }

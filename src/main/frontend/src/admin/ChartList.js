@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import './ChartList.css'
+import { useNavigate } from 'react-router-dom'
 
 const ChartList = props => {
-
+  const navigate = useNavigate()
   const [memberList, setMemberList] = useState([])
   const [searchValue , setSearchValue] = useState({})
 
@@ -75,7 +76,12 @@ const ChartList = props => {
                 return(
                   <tr>
                     <td>{mem.memName}</td>
-                    <td>{mem.memNum}</td>
+                    <td><span 
+                    onClick={()=>{
+                      navigate(`/admin/patientChart/${mem.memNum}`)
+                    }}>
+                      {mem.memNum}
+                    </span></td>
                     <td>{mem.memRrn}</td>
                     <td></td>
                   </tr>

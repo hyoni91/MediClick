@@ -176,8 +176,17 @@
 
 /* 온도 막대기 바 */
 .graphWrap { position: relative; }
-.graphWrap .graph > div#item1 { position: absolute; bottom: 3px; left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
-.graphWrap .graph > div#item2 { position: absolute; bottom: 3px;  left: 70px; background: linear-gradient(lightCyan, skyBlue, deepSkyBlue); }
+.graphWrap .graph > div#item1,
+.graphWrap .graph > div#item2 {
+    position: absolute; 
+    bottom: 3px; 
+    left: 70px; 
+    background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
+/* .graphWrap .graph > div#item2 { 
+  position: absolute; 
+  bottom: 3px;  
+  left: 70px;
+  background: linear-gradient(lightCyan, skyBlue, deepSkyBlue); } */
 
 
 /* 애니메이션 */

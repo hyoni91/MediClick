@@ -28,6 +28,7 @@
         <select id="select" resultMap="p_chart">
                 SELECT * FROM patient_chart
                 WHERE MEM_NUM = #{memNum}
+                ORDER BY CHART_DATE ASC
         </select>
 </mapper>
 
