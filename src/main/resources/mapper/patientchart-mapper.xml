@@ -13,17 +13,21 @@
         <result column="CHECKUP" property="checkUp"/>
         <result column="DISEASE" property="disease"/>
         <result column="PRESCRIPTION" property="prescription"/>
-        <association property="schList" resultMap="scheduleMapper.schedule"></association>
     </resultMap>
 
-        <!-- 진료차트 정보 조회 -->
-        <select id="p-select" resultMap="p_chart">
-                SELECT E.DEPT_NAME, D.DOC_NAME, M.MEM_NAME, M.MEM_NUM, M.MEM_RRN
-                FROM medical_member M , medical_dept E, medical_doctor D, medical_schedule S
-                WHERE S.MEM_NUM = M.MEM_NUM
-                AND S.DEPT_NUM = D.DEPT_NUM
-                AND S.DEPT_NUM = E.DEPT_NUM
-                AND SCH_NUM = #{schNum}
+        <!--모든 환자 정보-->
+        <select id="allMember" resultMap="member.member">
+            SELECT * FROM medical_member
+            WHERE MEM_NUM LIKE CONCAT('%', 'CTL', '%')
+            <if test="searchValue != null and !searchValue.isEmpty()">
+                AND MEM_NAME LIKE CONCAT('%', #{searchValue}, '%')
+            </if>
+        </select>
+
+        <!-- 해당 환자 진료차트 조회-->
+        <select id="select" resultMap="p_chart">
+                SELECT * FROM patient_chart
+                WHERE MEM_NUM = #{memNum}
         </select>
 </mapper>
 
