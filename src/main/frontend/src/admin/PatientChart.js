@@ -5,109 +5,65 @@ import { useParams } from 'react-router-dom';
 import { now } from 'moment';
 
 const PatientChart = () => {
-  const {schNum} = useParams()
-  console.log(schNum)
-  const today = new Date();
-  const formatDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`
+  const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
+  const memNum = loginInfo.memNum
 
-  const [pselect , setPselect] = useState({
-    chartNum: 0,
-    chartDate: formatDate,
-    schList: [
-      {
-        memberVO: {
-          memNum: '',
-          memName: '',
-          memRrn: '',
-        },
-        doctorVO: {
-          docName: '',
-          medicalDept: {
-            deptName: ''
-          },
-        }
-      }
-    ]
-  })
+  //예시를 위한
+  const [charts, setChats] = useState([])
 
-
+  //화면 좌측에 표시될 진료 기록들
   useEffect(()=>{
-    axios.get(`/patientChart/p_select/${schNum}`)
+    axios.get(`/patientChart/memberSelect/${memNum}`)
     .then((res)=>{
-      setPselect(res.data)
-      console.log(pselect)
+      setChats(res.data)
+      console.log(res.data)
     })
     .catch((error)=>{
       console.log(error)
-    });
-
+      alert(error)
+    })
   },[])
 
 
   return (
-    <div className='p-chart-container'>
-      <div>진료차트</div>
-      <div className='p-chart-content'>
-        <table className='p-chart-table'>
-          <colgroup>
-            <col width={'20%'}/>
-            <col width={'30%'}/>
-            <col width={'20%'}/>
-            <col width={'30%'}/>
-          </colgroup>
-          <tbody>
-            <tr>
-              <td>진료번호</td>
-              <td>{pselect.chartNum +1}</td>
-              <td>진료날짜</td>
-              <td>{formatDate}</td>
-            </tr>
-            <tr>
-              <td>진료과</td>
-              <td>{pselect.schList[0].doctorVO.medicalDept.deptName}</td>
-              <td>담당의사</td>
-              <td>{pselect.schList[0].doctorVO.docName}</td>
-            </tr>
-            <tr>
-              <td className='td-style' colSpan={4}>환자정보</td>
-            </tr>
-            <tr>
-              <td>환자번호</td>
-              <td colSpan={3}>{pselect.schList[0].memberVO.memNum}</td>
-            </tr>
-            <tr>
-              <td>환자이름</td>
-              <td colSpan={3}>{pselect.schList[0].memberVO.memName}</td>
-            </tr>
-            <tr>
-              <td>주민번호</td>
-              <td colSpan={3}>{pselect.schList[0].memberVO.memRrn}</td>
-            </tr>
-            <tr>
-              <td className='td-style' colSpan={4}>진료내용</td>
-            </tr>
-            <tr rowSpan={2}>
-              <td>증상</td>
-              <td colSpan={3}><textarea cols={40} rows={7}/></td>
-            </tr>
-            <tr>
-              <td className='td-style' colSpan={4}>검사내용</td>
-            </tr>
-            <tr >
-              <td colSpan={4}><textarea cols={50} rows={7}/></td>
-            </tr>
-            <tr>
-              <td>병명</td>
-              <td colSpan={3}><input type='text' name=''/></td>
-            </tr>
-            <tr>
-              <td className='td-style' colSpan={4}>처방내용</td>
-            </tr>
-            <tr>
-              <td colSpan={4}><textarea cols={50} rows={7}/></td>
-            </tr>
-          </tbody>
-        </table>
+    <div className='p-chart'>
+      <div>
+        진료차트
+        
+      </div>
+      <div className='p-chart-container'>
+        <div className='p-chart-side'>
+          <div className='p-chart-side-content'>
+            <p>진료날짜:2024-09-13</p>
+            <p>진료번호:01</p>
+            <p>증상:머리가아파요</p>
+            <p>검사:x-ray</p>
+            <p>처방:oooooo 7일분</p>
+          </div>
+          <div className='p-chart-side-content'>
+            <p>진료날짜:2024-09-13</p>
+            <p>진료번호:01</p>
+            <p>증상:머리가아파요</p>
+            <p>검사:x-ray</p>
+            <p>처방:oooooo 7일분</p>
+          </div>
+          <div className='p-chart-side-content'>
+            <p>진료날짜:2024-09-13</p>
+            <p>진료번호:01</p>
+            <p>증상:머리가아파요</p>
+            <p>검사:x-ray</p>
+            <p>처방:oooooo 7일분</p>
+          </div>
+        </div>
+        <div className='p-chart-content'>
+          <div>진료내용</div>
+          <div>검사결과</div>
+        </div>
+        <div className='p-chart-rigthside'>
+          <div>처방내용</div>
+          <div>뭐넣지</div>
+          <div>뭐넣지</div>
+        </div>
       </div>
     </div>
   )

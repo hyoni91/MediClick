@@ -1,0 +1,11 @@
+
+
+.chart-list-header{
+  display:  flex;
+  gap: 5px;
+}
+
+.chart-list-header > h4{
+  margin-right: 480px ;
+}
+
