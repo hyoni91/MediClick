@@ -28,22 +28,32 @@
   border-bottom: 1px solid #eeeeee;
 }
 
+.meminfo-table tbody td:nth-child(2){
+  display: flex;
+}
+
+.meminfo-table tbody td{
+  justify-content: space-between;
+}
+
+.meminfo-table tbody td i{
+  cursor: pointer;
+  color: #0254AF;
+}
+
 .meminfo-table tbody tr td:first-child{
   font-weight: bold;
   background-color: #eeeeee52;
 }
 
 .meminfo-table input{
-  
   width: 90%;
   height: 18px;
-
 }
 
 .meminfo-table textarea{
   width: 90%;
   height: 50px;
-
 }
 
 .infoBtns{
@@ -65,4 +75,91 @@
 .infoBtn:hover{
   background-color: #013d81;
   cursor: pointer;
+}
+
+
+/* 모달 */
+.schDetail-modal-div{
+  text-align: center;
+}
+
+.schDetail-modal-div:nth-child(1){
+  /* margin: 0 auto; */
+  /* border: 1px solid red; */
+  /* width: 440px; */
+  height: 87%;
+}
+
+.schDetail-modal-div h3{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.schDetail-modal-div>button{
+  /* margin-right: 15px; */
+  border: none;
+  background-color: #0050B5;
+  color: white;
+  /* width: 150px; */
+  /* padding: 10px; */
+  font-size: 0.8rem;
+  /* margin-top: 45px; */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* datepicker */
+.datePicker{
+  padding: 6px;
+  box-shadow: 1px 1px 5px lightgray;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.react-datepicker__day--outside-month{
+  visibility: hidden;
+}
+
+/* 드롭다운 */
+
+.custom-select{
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.selected{
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.options li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #f0f0f0;
 }

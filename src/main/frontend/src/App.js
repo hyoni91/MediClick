@@ -27,6 +27,7 @@ import TempData from './admin/TempData';
 import MiniBoard from './user/board/MiniBoard';
 import axios from 'axios';
 import MapTest1 from './admin/MapTest1';
+import DocSchManage from './admin/DocSchManage';
 
 
 
@@ -160,6 +161,8 @@ function App() {
             <Route path='tempdata' element={<TempData/>}/>
             {/* 지도 api 연습 */}
             <Route path='mapTest' element={<MapTest1/>}/>
+            {/* 의사 스케줄관리 */}
+            <Route path='docSch' element={<DocSchManage/>}/>
         </Route>
       </Routes>
 
