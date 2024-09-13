@@ -6,11 +6,17 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tool
 import { useQuery } from '@tanstack/react-query';
 import WeatherDate from '../custom/WeatherDate';
 import { Bar } from 'react-chartjs-2';
+import SettingWidth from '../custom/SettingWidth';
 
 
 const BloodRefrigerator = () => {
   //실시간 그래프 옆에 지표
-  const [temp1, setTemp1] = useState([])
+  const [temp1, setTemp1] = useState([
+    {
+      currentTemp: '',
+      tempTime: ''
+    }
+  ])
 //실시간 온도 데이터 받을 함수
 const [tempData, setTempData] = useState([
   {
@@ -21,10 +27,11 @@ const [tempData, setTempData] = useState([
 useEffect(() => {
   axios.get('/temp/tempListData')
   .then((res) => {
-    console.log(res.data)
+    // console.log(res.data)
     setTempData(res.data)
   })
-},[tempData])
+},[])
+
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
@@ -36,18 +43,6 @@ useEffect(() => {
     setIsSetTemp(!isSetTemp)
   }
 
-  // 초기 width 값 설정(현재온도랑 평균온도 따로하기? 지금은 같이 붙어 있음)
-  const [width, setWidth] = useState(100);
-  // width를 증감시키는 함수(온도가 일정 수준 이상이면 크기 증가)
-  const settingWidth = (temp) => {
-    if(temp > 22.7){
-      setWidth(width => width + 50)
-      document.querySelector('#item1').width = width
-    }
-  };
-  
-  console.log(width)
-  
 
   //데이터의 업 다운 아이콘 유무 (테이블)
   const upDownIcon = (temp)=>{
@@ -69,12 +64,11 @@ useEffect(() => {
 
 
 const tempList = tempData.map((temp,i) => {
-  return(temp.currentTemp)})
+return(temp.currentTemp)})
 const sum = tempList.reduce((a, b) => a + b, 0);
 const avg = sum / tempList.length;
-console.log(avg)
+// console.log(avg)
 //실시간 온도 그래프
-
 
 
 //폼데이터 함수정의
@@ -143,8 +137,8 @@ const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.temp
 const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
 const temList = sortedDataAsc.map((e) => e.currentTemp);
 
-console.log(timeList)
-console.log(temList)
+// console.log(timeList)
+// console.log(temList)
 //배열 데이터 객체화
 const Objecttime = timeList.map((time , i) => {  
   return {
@@ -152,7 +146,7 @@ const Objecttime = timeList.map((time , i) => {
   tem : temList[i]
   }
 })
-console.log(Objecttime)
+// console.log(Objecttime)
 // X축 레이블 데이터 (MM/DD 형식)
 const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
 
@@ -267,16 +261,19 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp}°C
+                {temp1[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
-                    <div id='item1' className='p-100' />
+                    <SettingWidth 
+                    currentTemp={temp1[0].currentTemp}
+                    avg={avg}
+                    />
                   </div>
                 </div>
               </span>
             </div>
             <div>
-              <p>
+              <p> 
                 <span>평균 온도</span>
                 <span className='icon-span'>
                   <i className="fa-solid fa-temperature-empty"></i>
@@ -286,7 +283,10 @@ const formatDate1  = (e) => {
                 {avg.toFixed(1)}°C
                 <div className='graphWrap' >
                   <div className='graph'>
-                    <div  style={{ width: `${width[1]}px`}} id='item2' className='p-50' />
+                    <SettingWidth 
+                    currentTemp={temp1[0].currentTemp}
+                    avg={avg}
+                    />
                   </div>
                 </div>
               </span>
