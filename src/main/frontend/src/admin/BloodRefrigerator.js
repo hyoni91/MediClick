@@ -15,7 +15,9 @@ const BloodRefrigerator = () => {
 const [tempData, setTempData] = useState([
   {
     currentTemp: '',
-    tempTime: ''
+    tempTime: '',
+    tempTime : '',
+    timeDate : ''
   }
 ])
 useEffect(() => {
@@ -118,7 +120,8 @@ const { data, isLoading, error } = useQuery({
 
 // bar차트 데이터 조회를위한 함수
 const fetchBarChartData = async () => {
-  const response = await axios.get('/temp/oneHourData')
+  const response = await axios.get('/temp/timeAvgDate')
+  console.log(response.data)
   return response.data
 }
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -159,17 +162,18 @@ const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형�
 timeList.forEach((time) => labels.push(time));
 
 //한시간데이터르 저장하는 변수
-const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.timeDate) - new Date(b.timeDate));
 // 날짜
-const timeList1 = sortedDataAsc1.map((e) => formatDateTime(e.tempTime));
+const timeList1 = sortedDataAsc1.map((e) => (e.timeDate));
 // 온도
-const temList1 = sortedDataAsc1.map((e) => e.currentTemp);
+const temList1 = sortedDataAsc1.map((e) => e.avgTemp);
 // 바차트 데이터
+console.log(timeList1)
 const barData = {
   labels: timeList1, //배열 사용
   datasets: [{
     type: 'bar',
-    label: '현재 온도',
+    label: '평균 온도',
     data: temList1,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(0, 99, 132, 0.2)',
@@ -267,7 +271,7 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp}°C
+                {tempData[0].currentTemp == null ? <></> : tempData[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <div id='item1' className='p-100' />

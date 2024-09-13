@@ -143,9 +143,44 @@ const handlePhoneChange = (e) => {
   useEffect(() => {
     axios.get('/doctorList').then((res) => {console.log(res.data)}).catch()
   }, [memberData])
-  
+
+    // 전체 동의
+const [allCheck, setAllCheck] = useState(false); 
+// 개인회원 약관에 동의
+const [privacyCheck, setPrivacyCheck] = useState(false); 
+  // 개인정보 수집 및 이용 동의
+const [serviceCheck, setServiceCheck] = useState(false);
+// 마케팅 수신 동의 (선택)
+const [marketingCheck, setMarketingCheck] = useState(false); 
+
+// 전체선택 
+const allChange = (e) => {
+  const ischk = e.target.checked
+    setAllCheck(ischk)
+    setPrivacyCheck(ischk)
+    setServiceCheck(ischk)
+    setMarketingCheck(ischk)
+}
+// 상태를 토글하는 일반 함수
+ // 전체 선택
+ const toggleAllCheck = () => {
+  const newValue = !allCheck;  // 현재 상태와 반대의 값을 설정
+  allChange(newValue);
+};
+const togglePrivacyCheck = () => setPrivacyCheck(e => !e);
+const toggleServiceCheck = () => setServiceCheck(e => !e);
+const toggleMarketingCheck = () => setMarketingCheck(e => !e);
+
+useEffect(() => {
+  if(privacyCheck && serviceCheck&& marketingCheck ){
+    setAllCheck(true)
+  }
+  else{
+    setAllCheck(false)
+  }
+},[privacyCheck,serviceCheck,marketingCheck])
   return (
-    <div>
+    <div className='join'>
         
       <div className='join-div'>
         <div><i class="bi bi-people-fill"></i></div>
@@ -193,6 +228,18 @@ const handlePhoneChange = (e) => {
             </tr>
           </tbody>
         </table>
+        {/* 약관 동의 */}
+        <div className='join-checkbox'>
+          <div>약관 동의</div>
+            <div>
+              <input type='checkbox' checked={allCheck} onChange={(e) => {allChange(e)}}/>
+              <span onClick={(e) => {toggleAllCheck(e)}}>전체선택</span>
+            </div>
+          <div><input type='checkbox' checked={privacyCheck}  onChange={(e) => {setPrivacyCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {togglePrivacyCheck(e)}}><span>[필수]</span> 개인회원 약관에 동의</span> <i class="bi bi-caret-right"></i></div>
+          <div><input type='checkbox' checked={serviceCheck}  onChange={(e) => {setServiceCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleServiceCheck(e)}}><span>[필수]</span> 개인정보 수집및 이용에 동의</span></div>
+          <div><input type='checkbox' checked={marketingCheck}  onChange={(e) => {setMarketingCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleMarketingCheck(e)}}><span>[선택]</span> 마케팅 정보 수신 동의</span></div>
+
+        </div>
           <div><button className='join-btn' onClick={() => {insertJoin()}}>가입하기</button></div>
 
         <div className='relative-container'>

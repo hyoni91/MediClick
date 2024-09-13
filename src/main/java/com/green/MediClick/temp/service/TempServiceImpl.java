@@ -26,8 +26,8 @@ public class TempServiceImpl implements TempService {
 
     //한시간 온도데이터
     @Override
-    public List<TempVO> oneHourData() {
-        return sqlSession.selectList("tempMapper.oneHourData");
+    public List<TempVO> timeAvgDate() {
+        return sqlSession.selectList("tempMapper.timeAvgDate");
     }
 
     //온도데이터 (평균)

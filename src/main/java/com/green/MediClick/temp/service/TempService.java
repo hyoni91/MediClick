@@ -12,7 +12,7 @@ public interface TempService {
     void keepDel();
 
     // 한시간마다 최신 온도
-    List<TempVO> oneHourData();
+    List<TempVO> timeAvgDate();
 
     // 전체온도 데이터(평균)
     List<TempVO> tempListData();

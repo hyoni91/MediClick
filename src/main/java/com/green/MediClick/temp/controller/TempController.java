@@ -31,10 +31,11 @@ public class TempController {
         tempService.keepDel();
     }
 
-    //1시간마다 자동 실행
-    @GetMapping("/oneHourData")
-    public List<TempVO> oneHourData(){
-        return tempService.oneHourData();
+    // 10분간격 온도 평균 데이터
+    @GetMapping("/timeAvgDate")
+    public List<TempVO> timeAvgDate(){
+        System.out.println(tempService.timeAvgDate());
+        return tempService.timeAvgDate();
     }
 
     // 온도데이터 (평균 온도)

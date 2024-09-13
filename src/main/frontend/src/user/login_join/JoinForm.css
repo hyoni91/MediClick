@@ -1,4 +1,7 @@
 
+
+
+
 .join-div{
   width: 720px;
   height: 400px;
@@ -86,4 +89,12 @@
 .error1{
   height: 15px;
   margin: 0px;
+}
+
+.box-span{
+  cursor: pointer;
+}
+
+.join-checkbox input{
+ cursor: pointer;
 }
