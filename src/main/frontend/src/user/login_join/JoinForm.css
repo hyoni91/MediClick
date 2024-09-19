@@ -140,3 +140,10 @@
 .join-modalH2{
   margin-top: 15px;
 }
+
+.modalBtn{
+  border: none;
+  background-color: white;
+  text-align: center;
+  font-size: 1.1rem
+}

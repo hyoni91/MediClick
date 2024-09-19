@@ -7,7 +7,7 @@ const JoinModal = ({isOpen, onRequestClose, content}) => {
       <ReactModal
       isOpen={isOpen}
       ariaHideApp={false}
-      onRequestClose={() => onRequestClose}
+      onRequestClose={() => onRequestClose()}
       className="ReactModal__Content"
       style={{
         overlay: {
@@ -39,9 +39,10 @@ const JoinModal = ({isOpen, onRequestClose, content}) => {
     >
       <div className='join-modal'>
         {content}
-        <i className="bi bi-x-lg" onClick={onRequestClose}/>
+        <i className="bi bi-x-lg" onClick={() =>{onRequestClose()}}/>
       </div>
-    </ReactModal>
+      <div className='modalBtn' onClick={() => {onRequestClose()}}><button type='button' className='modalBtn'>닫기</button></div>
+      </ReactModal>
   )
 }
 
