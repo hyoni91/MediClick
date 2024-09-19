@@ -56,6 +56,7 @@
             ,DATE_FORMAT(SCH_TIME,'%H:%i') AS SCH_TIME
             ,D.DOC_NUM
             ,DOC_NAME
+            ,S.DEPT_NUM
             ,(
             SELECT DEPT_NAME
             FROM medical_dept P
