@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './JoinForm.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import ReactModal from 'react-modal'
+import JoinModal from './JoinModal'
+import Agreement from './Agreement'
 const JoinForm = () => {
+
   //회원가입 담을 변수
   const [memberData, setMemberData] = useState({
     memNum : '',
@@ -124,13 +128,16 @@ const handlePhoneChange = (e) => {
     return isValid;
   }
   const insertJoin = () => {
-
+    //약관동의
+    if(!privacyCheck || !serviceCheck){
+      alert('약관 동의해주세요')
+      return;
+    }
     console.log(memberData)
     // 유효성 검사
     if (validate()){
     axios.post('/member/insertMember',memberData)
     .then((res) => {
-      console.log(res.data)
       if(res.data.memRole === 'ADMIN'){
       navigate(`/adminJoinForm/${res.data.memNum}`)
       }
@@ -141,7 +148,7 @@ const handlePhoneChange = (e) => {
   }
   
   useEffect(() => {
-    axios.get('/doctorList').then((res) => {console.log(res.data)}).catch()
+    axios.get('/doctorList').then((res) => {}).catch()
   }, [memberData])
 
     // 전체 동의
@@ -163,9 +170,13 @@ const allChange = (e) => {
 }
 // 상태를 토글하는 일반 함수
  // 전체 선택
- const toggleAllCheck = () => {
+  const toggleAllCheck = (e) => {
   const newValue = !allCheck;  // 현재 상태와 반대의 값을 설정
-  allChange(newValue);
+  setAllCheck(newValue);
+  setPrivacyCheck(newValue);
+  setServiceCheck(newValue);
+  setMarketingCheck(newValue);
+  
 };
 const togglePrivacyCheck = () => setPrivacyCheck(e => !e);
 const toggleServiceCheck = () => setServiceCheck(e => !e);
@@ -179,11 +190,23 @@ useEffect(() => {
     setAllCheck(false)
   }
 },[privacyCheck,serviceCheck,marketingCheck])
+
+// 약관동의 모달
+const [modalOpen, setModalOpen] = useState(false)
+const [modalContent , setModalContent] = useState(null)
+
+const openModal = (e) => {
+  setModalContent(<Agreement type = {e} />)
+  setModalOpen(true)
+}
+const closeModal = () => {setModalOpen(false)}
+
+
   return (
     <div className='join'>
         
       <div className='join-div'>
-        <div><i class="bi bi-people-fill"></i></div>
+        <div><i className="bi bi-people-fill"></i></div>
         <div><h1>회원가입</h1></div>
         <table className='join-table'>
           <tbody>
@@ -231,13 +254,30 @@ useEffect(() => {
         {/* 약관 동의 */}
         <div className='join-checkbox'>
           <div>약관 동의</div>
+          
             <div>
               <input type='checkbox' checked={allCheck} onChange={(e) => {allChange(e)}}/>
-              <span onClick={(e) => {toggleAllCheck(e)}}>전체선택</span>
+              <span  className='box-span' onClick={(e) => {toggleAllCheck(e)}}>전체선택</span>
             </div>
-          <div><input type='checkbox' checked={privacyCheck}  onChange={(e) => {setPrivacyCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {togglePrivacyCheck(e)}}><span>[필수]</span> 개인회원 약관에 동의</span> <i class="bi bi-caret-right"></i></div>
-          <div><input type='checkbox' checked={serviceCheck}  onChange={(e) => {setServiceCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleServiceCheck(e)}}><span>[필수]</span> 개인정보 수집및 이용에 동의</span></div>
-          <div><input type='checkbox' checked={marketingCheck}  onChange={(e) => {setMarketingCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleMarketingCheck(e)}}><span>[선택]</span> 마케팅 정보 수신 동의</span></div>
+            <div className='join-check'>
+              <div>
+                <input type='checkbox' checked={privacyCheck}  onChange={(e) => {setPrivacyCheck(e.target.checked)}}/>
+                <span className='box-span' onClick={(e) => {togglePrivacyCheck(e)}}><span>[필수]</span> 개인회원 약관에 동의</span>
+              </div> 
+              <i className="bi bi-caret-right" onClick={() => {openModal('privacy')}}></i>
+            </div>
+          <div className='join-check'>
+            <div>
+              <input type='checkbox' checked={serviceCheck}  onChange={(e) => {setServiceCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleServiceCheck(e)}}><span>[필수]</span> 개인정보 수집및 이용에 동의</span>
+            </div>
+            <i className="bi bi-caret-right" onClick={() => {openModal('service')}}></i>
+          </div>
+          <div className='join-check'>
+            <div>
+              <input type='checkbox' checked={marketingCheck}  onChange={(e) => {setMarketingCheck(e.target.checked)}}/><span className='box-span' onClick={(e) => {toggleMarketingCheck(e)}}><span>[선택]</span> 마케팅 정보 수신 동의</span>
+            </div>
+            <i className="bi bi-caret-right" onClick={() => {openModal('marketing')}}></i>
+          </div>
 
         </div>
           <div><button className='join-btn' onClick={() => {insertJoin()}}>가입하기</button></div>
@@ -256,7 +296,11 @@ useEffect(() => {
 
         
       </div>
-
+          <JoinModal 
+            isOpen={modalOpen}
+            onRequestClose={closeModal}
+            content={modalContent}
+          />
     </div>
   )
 }
