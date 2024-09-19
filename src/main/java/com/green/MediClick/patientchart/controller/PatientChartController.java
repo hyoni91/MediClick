@@ -5,6 +5,7 @@ import com.green.MediClick.member.vo.MemberVO;
 import com.green.MediClick.patientchart.service.PatientChartService;
 import com.green.MediClick.patientchart.vo.PatientChartVO;
 import com.green.MediClick.patientchart.vo.SearchVO;
+import com.green.MediClick.schedule.vo.ScheduleVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,12 @@ public class PatientChartController {
     @GetMapping("memberSelect/{memNum}")
     List<PatientChartVO> memberSelect(@PathVariable("memNum") String memNum){
         return patientChartService.memberSelect(memNum);
+    }
+
+    //해당 멤버 해당 진료과의 오늘 예약
+    @PostMapping("/nowSchedule")
+    ScheduleVO nowSchedule(@RequestBody ScheduleVO scheduleVO){
+        return patientChartService.nowSchedule(scheduleVO);
     }
 
 }

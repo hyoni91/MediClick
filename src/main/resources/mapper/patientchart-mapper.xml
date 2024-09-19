@@ -15,7 +15,7 @@
         <result column="PRESCRIPTION" property="prescription"/>
     </resultMap>
 
-        <!--모든 환자 정보-->
+        <!--모든 환자 정보 and 이름으로 검색-->
         <select id="allMember" resultMap="member.member">
             SELECT * FROM medical_member
             WHERE MEM_NUM LIKE CONCAT('%', 'CTL', '%')
@@ -30,6 +30,16 @@
                 WHERE MEM_NUM = #{memNum}
                 ORDER BY CHART_DATE ASC
         </select>
+
+        <!-- 해당 진료과의 해당 환자의 오늘 예약 정보-->
+        <select id="nowSchedule" resultMap="scheduleMapper.schedule">
+            SELECT * FROM medical_schedule
+            WHERE SCH_DATE = DATE_FORMAT(NOW(), '%Y-%m-%d')
+            AND MEM_NUM = #{memNum}
+            AND DOC_NUM = #{docNum}
+        </select>
+
+        <!-- 진료 insert  -->
 </mapper>
 
 
