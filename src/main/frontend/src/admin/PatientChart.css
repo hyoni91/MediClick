@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   text-align: left;
+  height: 770px;
 }
 
 .p-chart-container{
@@ -16,6 +17,13 @@
   width: 250px;  
 }
 
+.p-chart-side > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+}
+
 
 .p-chart-side{
   display: flex;
@@ -23,7 +31,7 @@
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
   gap: 10px;
-  width: 250px;
+  width: 280px;
   padding: 13px;
 }
 
@@ -54,22 +62,26 @@
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
   width: 1000px;
-  /* height: 70vh; */
   padding: 13px;
 }
 
 .p-chart-content > div{
   padding: 13px;
+  border-radius: 10px;
 }
 
-.p-chart-content > div textarea{
+.p-chart-content > div textarea,
+.p-chart-rigthside > div textarea{
   margin-top: 5px;
   width: 98%;
-  height: 130px;
+  height: 180px;
   border: none;
   resize: none;
   background-color: #f7f7f7;
-  padding: 9px;
+  padding: 8px;
+}
+.p-chart-rigthside > div textarea{
+  height: 50px;
 }
 
 
@@ -92,13 +104,18 @@
 }
 
 .p-chart-rigthside > div {
-  margin-bottom: 5px;
+  margin-top: 5px;
   border: 1px solid lightgray;
   padding: 13px;
+  border-radius: 10px;
+}
+
+.p-chart-rigthside > div:nth-child(3){
+  height: 50%;
 }
 
 .p-chart-btn{
-  margin-top: 80%;
+  margin-top: 15%;
   margin-left: 35%;
   width: 165px;
   padding: 8px;

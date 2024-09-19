@@ -18,4 +18,7 @@ public interface PatientChartService {
     //해당 환자와 진료과의 오늘 예약 정보
     ScheduleVO nowSchedule(ScheduleVO scheduleVO);
 
+    //차트 입력
+    void chartInsert(PatientChartVO patientChartVO);
+
 }

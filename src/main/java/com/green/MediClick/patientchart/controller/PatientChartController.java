@@ -37,4 +37,10 @@ public class PatientChartController {
         return patientChartService.nowSchedule(scheduleVO);
     }
 
+    //차트 입력
+    @PutMapping("/chartInsert")
+    public void chartInsert(@RequestBody PatientChartVO patientChartVO){
+        patientChartService.chartInsert(patientChartVO);
+    }
+
 }

@@ -10,7 +10,7 @@
         <result column="MEM_NUM" property="memNum"/>
         <result column="DEPT_NUM" property="deptNum"/>
         <result column="SYMPTOM" property="symptom"/>
-        <result column="CHECKUP" property="checkUp"/>
+        <result column="CHECK_UP" property="checkUp"/>
         <result column="DISEASE" property="disease"/>
         <result column="PRESCRIPTION" property="prescription"/>
     </resultMap>
@@ -28,7 +28,7 @@
         <select id="select" resultMap="p_chart">
                 SELECT * FROM patient_chart
                 WHERE MEM_NUM = #{memNum}
-                ORDER BY CHART_DATE ASC
+                ORDER BY CHART_DATE DESC
         </select>
 
         <!-- 해당 진료과의 해당 환자의 오늘 예약 정보-->
@@ -40,6 +40,35 @@
         </select>
 
         <!-- 진료 insert  -->
+        <insert id="chartInsert">
+            INSERT INTO patient_chart(
+            DOC_NUM
+            ,MEM_NUM
+            ,DEPT_NUM
+            ,SYMPTOM
+            ,CHECK_UP
+            ,DISEASE
+            ,PRESCRIPTION
+            ) VALUES(
+            #{docNum}
+            ,#{memNum}
+            ,#{deptNum}
+            ,#{symptom}
+            ,#{checkUp}
+            ,#{disease}
+            ,#{prescription}
+            );
+        </insert>
+
+        <update id="chartUpdate">
+            UPDATE patient_chart
+            SET SYMPTOM = #{symptom}
+                ,CHECK_UP = #{checkUp}
+                ,DISEASE = #{disease}
+                ,PRESCRIPTION = #{prescription}
+            WHERE CHART_NUM = #{chartNum}
+        </update>
+
 </mapper>
 
 

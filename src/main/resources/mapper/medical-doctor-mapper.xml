@@ -38,7 +38,7 @@
             ( SELECT DEPT_NAME
             FROM medical_dept P
             WHERE D.DEPT_NUM=P.DEPT_NUM
-            ) AS DEPT_NAME
+            ) AS DEPT_NAME , DEPT_NUM
         FROM MEDICAL_DOCTOR D
         WHERE DOC_NUM=#{docNum}
     </select>

@@ -30,4 +30,9 @@ public class PatientChartServiceImpl implements  PatientChartService{
     public ScheduleVO nowSchedule(ScheduleVO scheduleVO) {
         return sqlSession.selectOne("patientChartMapper.nowSchedule",scheduleVO);
     }
+
+    @Override
+    public void chartInsert(PatientChartVO patientChartVO) {
+        sqlSession.insert("patientChartMapper.chartInsert", patientChartVO);
+    }
 }

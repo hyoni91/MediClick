@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react'
 import './PatientChart.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { now } from 'moment';
+import moment, { now } from 'moment';
 
 const PatientChart = () => {
   const {memNum} = useParams()
-  //의사 정보 불러오기
+
+  //날짜 계산 
+  const now = new Date()
+  const week = ['일','월','화','수','목','금','토','일']
+  let dayOfWeek = week[now.getDay()]
+  const today = moment(now).format('YYYY-MM-DD')
+  
+  //의사(admin) 정보 
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   const docNum = loginInfo.memNum
 
@@ -17,20 +24,26 @@ const PatientChart = () => {
     docNum : docNum,
     memNum : memNum,
     detail : '',
-    schNum : 0
+    schNum : 0,
   })
-  //진료차트입력
-  const [newChart, setNewChart] = useState({})
-  //처방전입력
-  const [medicine, setMedicine] = useState({})
 
+
+  //진료차트입력
+  const [newChart, setNewChart] = useState({
+    docNum : docNum,
+    memNum : memNum,
+    deptNum : 0,
+    symptom : '',
+    checkUp : '',
+    disease : '',
+    prescription : ''
+  })
 
   //화면 좌측:진료기록리스트
   useEffect(()=>{
     axios.get(`/patientChart/memberSelect/${memNum}`)
     .then((res)=>{
       setChats(res.data)
-      console.log(res.data)
     })
     .catch((error)=>{
       console.log(error)
@@ -46,7 +59,7 @@ const PatientChart = () => {
         docNum : res.data.docNum,
         detail : res.data.detail,
         schNum : res.data.schNum,
-        memNum : res.data.memNum
+        memNum : res.data.memNum,
       }
       )
     })
@@ -55,7 +68,39 @@ const PatientChart = () => {
       console.log(error)
     })
   },[])
-  console.log(schedule)
+
+    //의사정보
+    useEffect(()=>{
+      axios
+      .get(`/oneDoctor/${docNum}`)
+      .then((res)=>{
+        setNewChart({
+          ...newChart,
+          deptNum : res.data.medicalDept.deptNum
+        })
+      })
+      .catch((error)=>{console.log(error)})
+    },[docNum])
+
+
+  //차트 입력
+  function handleNewChart(e){
+    setNewChart({
+      ...newChart,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  function insertChart(){
+    axios.put(`/patientChart/chartInsert`,newChart)
+    .then((res)=>{})
+    .catch((error)=>{
+      alert('error!')
+      console.log(error)
+    })
+  }
+
+  console.log(newChart)
 
   return (
     <div className='p-chart'>
@@ -69,6 +114,7 @@ const PatientChart = () => {
             CTL_00001 유자씨 
           </h4> 
           <h3>내원이력</h3>
+          <div>
           {
             charts.length == 0?
             <div>내원 이력이 없습니다.</div>
@@ -85,28 +131,36 @@ const PatientChart = () => {
               )
             })
           }
+          </div>
         </div>
         <div className='p-chart-content'>
           <div>
-              <p>날짜 :YYYY-MM-DD(day)</p>
-              <span>접수정보</span>
+            <p>날짜 : {today} ({dayOfWeek})</p>
+            <span>접수정보</span>
           </div>
           <div>
-              <h4>증상</h4>
-              <div>{schedule.detail}</div>
+            <h4>증상</h4>
+            <div>{schedule.detail}</div>
           </div>
           <div>
             <h4>진료</h4>
             <div>
-              <textarea name=''>
-                </textarea>
+              <textarea 
+                name='symptom' 
+                placeholder='증상 및 기타 의료 기록'
+                onChange={(e)=>{handleNewChart(e)}}
+                >
+              </textarea>
             </div>
           </div>
           <div>
             <h4>검사 및 결과</h4>
             <div>
-              <textarea name=''>
-                
+              <textarea 
+                name='checkUp' 
+                placeholder='검사 및 검사결과 입력'
+                onChange={(e)=>{handleNewChart(e)}}
+                >
               </textarea>
             </div>
           </div>
@@ -115,6 +169,14 @@ const PatientChart = () => {
           <h3>진단 및 처방</h3>
             <div>
               <h4>진단</h4>
+              <div>
+                <textarea 
+                  name='disease' 
+                  placeholder='진단명을 입력'
+                  onChange={(e)=>{handleNewChart(e)}}
+                  >
+                </textarea>
+              </div>
             </div>
             <div>
               <h4>처방</h4>
@@ -122,21 +184,54 @@ const PatientChart = () => {
                 <p>
                   <i class="fa-regular fa-pen-to-square"></i>
                   <span>보건의료원 내 의과</span>
-                  <input className='p-chart-input' type='text' value={1}/>
-                  </p>
+                  <input 
+                    className='p-chart-input' 
+                    type='text' 
+                    value={1}
+                  />
+                </p>
               </div>
               <div className='p-chart-medicine'>
                 <p>
                   <i className="bi bi-capsule"></i> 
                   <span>약이름 쏼라쏼라쏼라(어쩌고) </span>
-                  <input className='p-chart-input' type='text' name='' value={1}/>
-                  <input className='p-chart-input' type='text' name='' value={1}/>
-                  <input className='p-chart-input' type='text' name='' value={10}/>
-                  <input className='p-chart-input' type='text' name='' placeholder='용법'/>
+                  <input 
+                    className='p-chart-input' 
+                    type='text' 
+                    name='' 
+                    value={1}
+                  />
+                  <input 
+                    className='p-chart-input' 
+                    type='text' 
+                    name='' 
+                    value={1}
+                  />
+                  <input 
+                    className='p-chart-input' 
+                    type='text' 
+                    name='' 
+                    value={10}
+                  />
+                  <input 
+                    className='p-chart-input' 
+                    type='text' 
+                    name='' 
+                    placeholder='용법'
+                  />
                 </p>
               </div>
             </div>
-          <button className='p-chart-btn' type='button'>등록하기</button>        
+          <input type='hidden' 
+          value={schedule.deptNum} name='deptNum'
+          onChange={(e)=>{handleNewChart(e)}}
+          /> 
+          <button 
+            className='p-chart-btn'
+            type='button'
+            onClick={()=>{insertChart()}}>  
+            등록하기
+          </button>        
         </div>
       </div>
     </div>
