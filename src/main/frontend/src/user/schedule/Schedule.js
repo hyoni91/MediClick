@@ -151,7 +151,7 @@ const Schedule = () => {
     })
   }
 
-
+  console.log(appo)
 
   // 증상(detail) 정보 저장
   function changeDetail(e){
@@ -187,9 +187,6 @@ const Schedule = () => {
       console.log(error)
     })
   },[appo])
-
-  //예약정보 console
-  console.log(appo)
 
   //클릭하면 예약 실행
   function goAppo(){
@@ -241,8 +238,10 @@ const Schedule = () => {
                   return(
                     <div key={i}>
                       <img src={(`http://localhost:8080/images/${i}.png`)}/>
-                      <button type='button' onClick={(e)=>{
-                      changeDocInfo(e)
+                      <button 
+                        type='button' 
+                        onClick={(e)=>{
+                        changeDocInfo(e)
                       }}  name='docInfo' className='button' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
                         {doc.medicalDept.deptName}
                         </button>
@@ -272,7 +271,11 @@ const Schedule = () => {
                 <div className='sch-btn'>
                       {schTimes.map((time,i) => (
                         <button
-                        key={time} type='button' className='sch-button' disabled={chkAppoTime[i]} value={time} onClick={clickTime}>
+                        key={time} 
+                        type='button' className='sch-button' 
+                        disabled={chkAppoTime[i]} 
+                        value={time} 
+                        onClick={clickTime}>
                       {time}</button>))
                       }
                 </div>
@@ -296,7 +299,13 @@ const Schedule = () => {
                   </tr>
                   <tr>
                     <td>예약시간 : </td>
-                    <td><input type='text' name='schTime' value={appo.schTime}  ref={timeInput} onChange={(e)=>{}}/></td>
+                    <td>
+                      <input 
+                      type='text' 
+                      name='schTime' 
+                      value={appo.schTime} 
+                      ref={timeInput} 
+                      onChange={(e)=>{}}/></td>
                   </tr>
                   <tr>
                     <td>예약자명 : </td>

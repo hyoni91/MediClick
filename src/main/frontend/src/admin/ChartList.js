@@ -74,7 +74,7 @@ const ChartList = props => {
             {
               memberList.map((mem,i)=>{
                 return(
-                  <tr>
+                  <tr key={i}>
                     <td>{mem.memName}</td>
                     <td><span 
                     onClick={()=>{

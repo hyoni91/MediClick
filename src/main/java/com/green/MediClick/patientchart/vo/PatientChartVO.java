@@ -12,7 +12,7 @@ public class PatientChartVO {
     private String docNum;
     private String memNum;
     private String deptNum;
-    private String symptom; //증상
+    private String symptom; //증상 진료차트의 진료란 input
     private String checkUp; //검사
     private String disease; //병명
     private String prescription; //처방
