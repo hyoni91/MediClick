@@ -78,7 +78,7 @@
 }
 
 
-/* 모달 */
+/* 모달------------------------------------ */
 .schDetail-modal-div{
   text-align: center;
 }
@@ -108,21 +108,43 @@
   font-weight: 600;
 }
 
-/* datepicker */
+
+/* datepicker--------------------------- */
 .datePicker{
-  padding: 6px;
-  box-shadow: 1px 1px 5px lightgray;
+  width: 180px;
+  font-size: 1rem;
+  padding: 10px;
+  /* box-shadow: 1px 1px 5px lightgray; */
   border: 1px solid lightgray;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  margin-bottom: 25px;
   cursor: pointer;
 }
 
-
+/* 해당 월이 아닐시 안보임 */
 .react-datepicker__day--outside-month{
   visibility: hidden;
 }
 
-/* 드롭다운 */
+/* 일요일 */
+.react-datepicker__day-name:first-child{
+  color: red;
+}
+.react-datepicker__week>.sunday{
+  color: lightgray;
+}
+
+/* 토요일 */
+.react-datepicker__day-name:last-child{
+  color: blue;
+}
+
+.react-datepicker__week>.saturday{
+  color: lightgray;
+}
+
+
+/* 드롭다운-------------------------------- */
 
 .custom-select{
   position: relative;
@@ -151,15 +173,33 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 200px;
+  max-height: 120px;
   overflow-y: auto;
 }
 
 .options li {
-  padding: 10px;
+  /* padding: 10px; */
   cursor: pointer;
+  height: 30px;
 }
 
 .options li:hover {
   background-color: #f0f0f0;
+}
+
+.options li:disabled,
+.options li:disabled:hover{
+  color: #f0f0f0;
+}
+
+.options li>button{
+  border: none;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+.options li>button:hover{
+  background-color: #f0f0f0;
+  cursor: pointer;
+
 }

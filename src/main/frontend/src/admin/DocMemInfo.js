@@ -3,22 +3,22 @@ import './DocMemInfo.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal, { Modal } from 'react-modal';
-import { Overlay } from 'react-bootstrap';
 import Calendar from 'react-calendar';
-import DatePicker,{ subDays } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/locale'
-// import { getDate } from 'react-datepicker/dist/date_utils';
-// import { subDays } from 'react-datepicker/dist/date_utils';
 
 const DocMemInfo = () => {
   const navigate=useNavigate()
   const [memInfo,setMemInfo]=useState({
     schNum:'',
+    schDate:'',
+    schTime:'',
     doctorVO:{
       docNum:'',
       docName:'',
       medicalDept:{
+        deptNum:0,
         deptName:''
       }
     },
@@ -33,12 +33,16 @@ const DocMemInfo = () => {
   //현 환자의 정보를 가져오고 싶은데 memInfo.doctorVO.medicalDept.deptName 안됨
   const [selectedOption,setSelectedOption]=useState('선택')
 
+  //드롭다운으로 띄울 예약 시간대 리스트
+  const schTimeList=['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
+
   //드롭다운으로 띄울 진료과 리스트
   const deptList=[] 
   docInfoList.forEach((doc,i)=>{
-    const deptName= doc.medicalDept.deptName
-    deptList.push(deptName)
+    const dept= doc.medicalDept
+    deptList.push(dept)
   })
+  
   //드롭다운으로 띄울 의사 리스트
   const docList=[]
   docInfoList.forEach((doc,i)=>{
@@ -49,10 +53,14 @@ const DocMemInfo = () => {
   const [isDropOpen,setIsDropOpen]=useState(false)
 
   const toggleDropdown=()=>setIsDropOpen(!isDropOpen)
+
   const selectOption =(option)=>{
     setSelectedOption(option)
+    // console.log(option)
     setIsDropOpen(false)
+    setMemInfo({...memInfo})
   }
+
 
   //드롭다운 외부클릭
   const dropDownRef=useRef(null)
@@ -67,18 +75,45 @@ const DocMemInfo = () => {
     return ()=> document.removeEventListener('mousedown',handleClickOutside)
   },[])
 
+  //수정될 예약 시간
+  const [updateSchTime,setUpdateSchTime]=useState('')
 
-  // //수정할 정보
-  function insertData(e){
+  //수정될 진료과
+  const [updateDept,setUpdateDept]=useState('')
+
+  //수정될 담당의
+  const [updateDoc,setUpdateDoc]=useState('')
+
+  //수정할 정보
+  //수정된 값으로 화면이 바뀌고 수정을 눌러야 수정 완
+  function insertDate(){
     setMemInfo({
       ...memInfo,
-      [e.target.name]:e.target.value
+      schDate:startDate.toLocaleDateString()
+    })
+  }
+  function insertTime(e){
+    setMemInfo({
+      ...memInfo,
+      schTime:e.target.value
+    })
+  }
+  function insertDept(e){
+    setMemInfo({
+      ...memInfo,
+      deptNum:e.target.value,
+      doctorVO:{
+        medicalDept:{
+          deptNum:e.target.value
+        }
+      }
     })
   }
 
-  // console.log(memInfo)
+  console.log(memInfo)
 
   //정보 수정 후 보내기
+  
   function updateData(){
 
     // axios
@@ -100,111 +135,174 @@ const DocMemInfo = () => {
     setModalOpen(!modalOpen)
   }
 
-  const [startDate,setStartDate]=useState(new Date())
+  //당일 선택불가
+  const today=new Date()
+  const notToday = new Date(today.getTime()+1*24*60*60*1000)
+  //초기값
+  const [startDate,setStartDate]=useState(notToday)
+  // console.log(startDate)
 
-  // //요일반환
-  // const getDayName = (date) => {
-        
-  //   return date.toLocaleDateString('ko-KR', {
-  //     weekday: 'long',
-  //   }).substr(0, 1);
-  // }
+  //요일반환
+  const getDayName = (date) => {
+    return date.toLocaleDateString('ko-KR', {weekday: 'long',}).substr(0, 1);
+  }
 
-  // //날짜 비교시 연,월,일까지만 비교하게끔
-  // const createDate = (date) => {
-  //   return new Date(new Date(date.getFullYear()
-  //     , date.getMonth()
-  //     , date.getDate()
-  //     , 0
-  //     , 0
-  //     , 0));
-  // }
+  //날짜 비교시 연,월,일까지만 비교하게끔
+  const createDate = (date) => {
+    return new Date(new Date(date.getFullYear()
+      , date.getMonth()
+      , date.getDate()
+      , 0, 0, 0));
+  }
 
-  // const [formattedTime,setFormattedTime]=useState<Date>(minTime)
+  //공휴일
+  const set_holiday=["1001","1003","1009","1225"]
 
-  //datepicker시간 time 이벤트 핸들러
-  // const handleTimeChange=(selectedTime,any)=>{
-  //   const hours=selectedTime.getHours()
-  //   const minutes=selectedTime.getMinutes()
-  //   const fTime=`${hours}:${minutes<10?'0':''}${minutes}`
+  //캘린더 비활성화 유무판단 함수
+  const disabledWeekends=(date)=>{
+    let isDisabled = true; // 비활성화 유무
+    let dayOfWeek = date.getDay() //주마다 number로 반환됨
+    let day = date.getDate() //날짜가 number로 반환됨
 
-  //   const timeStringToDate=(timeString,string) Date=>{
-  //     const today=new Date()
-  //     const [hours,minutes]=timeString.split(':').map(Number)
-  //     const dateWithTime=new Date(today.getFullYear(),today.getMonth(),today/getDate(),hours,minutes)
-  //     return dateWithTime
-  //   }
-  //   const st=timeStringToDate(fTime)
-  //   setFormattedTime(st)
+    //주말 구하기
+    if (dayOfWeek===0 || dayOfWeek==6){
+      isDisabled=false
+    }
+    //공휴일
+    else{
+      let month = date.getMonth()+1 // ? 
+      month=month>=10?month:"0"+month // month가 10보다 적으면 01,02 이렇게 표시 
+      day=day>=10?day:"0"+day // dd
+      let set_disabled = String(month)+String(day) // MMdd 
+      let get_holiday = set_holiday.includes(set_disabled)
+      // includes === indexOf 대체 가능 
+
+      if (get_holiday){
+        isDisabled=false
+      }
+      
+    }
+
+    return isDisabled 
     
-  // }
+  }
+
+
+  //schTimeList 길이만큼 false값 주기
+  const [chkSchTime,setChkSetTime]=useState(new Array(schTimeList.length).fill(false))
+
+
+  //예약 유무 확인(예약된 시간 True > 비활성화)
+  useEffect(()=>{
+    axios
+    .post('/schedule/checkSchTime',memInfo)
+    .then((res)=>{
+      // console.log(res.data)
+      //예약이 있는 데이터 뽑아내기
+      const availableTimes=res.data.map(time=>{
+        //초 제외 분단위만 남기기
+        const [hours,minutes]=time.schTime.split(':')
+        return `${hours}:${minutes}`
+      })
+
+      //schTimeList와 비교하여 예약 가능한 시간이 포함되어 있는지 확인
+      const updateedChkSchtTime=schTimeList.map(time=>availableTimes.includes(time))
+      // console.log(updateedChkSchtTime)
+      setChkSetTime(updateedChkSchtTime)
+    })
+    .catch((error)=>{console.log(error)})
+  },[startDate])
 
 
   //모달 콘텐츠
   const renderModalContent=()=>{
     switch(modalContent){
 
-      case 'date':
+      case 'date': 
+        // 예약 날짜, 예약 시간
         return <div className='schDetail-modal-div'>
-          <h3>예약일</h3>
           <div>
-            <DatePicker className='datePicker' 
-              selected={startDate} onChange={date=>setStartDate(date)}
-              locale={ko} //언어
-              dateFormat={'yyyy/MM/dd'}
-              minDate={new Date()} //선택불가날짜
-              disabledKeyboardNavigation //다른 월의 같은 날짜 자동선택 방지
-              // dayClassName={date=>
-              //   getDayName(createDate(date))==='토'?"saturday"
-              //   :
-              //   getDayName(createDate(date))==='일'?"sunday":undefined
-              // }
-              />
+            <h3>예약일</h3>
+            <div>
+              <DatePicker className='datePicker' name='schDate' 
+                selected={startDate} onChange={(date)=>{setStartDate(date);}}
+                locale={ko} //언어
+                dateFormat={'yyyy/MM/dd'} //박스 안 포맷
+                dateFormatCalendar='yyyy년 MM월' //캘린더 안 포맷
+                minDate={notToday} //선택불가날짜
+                disabledKeyboardNavigation //다른 월의 같은 날짜 자동선택 방지
+                dayClassName={date=>
+                  getDayName(createDate(date))==='토'?"saturday"
+                  :
+                  getDayName(createDate(date))==='일'?"sunday":undefined
+                }
+                filterDate={disabledWeekends} //선택불가날짜
+                />
+            </div>
+          </div>
+
+          <div>
+            <h3>예약시간</h3>
+            {/* 모달창에 입력된 값이 info창 값으로 바뀌고 그 내용으로 수정을 하는 거면
+            모달창에서 update하고 info창을 재렌더링하는건가 */}
+            <div>
+              {/* 원래 선택된 값 띄우고 */}
+              {/* 이미 예약된 시간대 불가능 checkSchtime 쿼리 불러와서 */}
+              <div className='custom-select' ref={dropDownRef}>
+            <div className='selected' onClick={toggleDropdown}>
+              {selectedOption}
+              <span className='arrow'>
+                {isDropOpen?
+                <i className="bi bi-caret-up-fill"></i>
+                :
+                <i className="bi bi-caret-down-fill"></i>
+                }</span>
+            </div>
+            {
+              isDropOpen&&
+              (<ul className='options' 
+                >
+                  {schTimeList.map((time,i)=>{
+                    return(
+                    <li key={i}>
+                      <button type='button' name='schTime' value={time}
+                      onClick={(e)=>{selectOption(time);
+                        insertTime(e); setUpdateSchTime(time)}}
+                      disabled={chkSchTime[i]}>{time}</button>
+                    </li>
+                    )
+                  })}
+              </ul>)
+            }
+          </div>
+            </div>
           </div>
         </div>
 
-      case 'time':
-        return <div className='schDetail-modal-div'>
-          {/* 드롭다운 안되는 시간대 회색처리 */}
-          {/* 아니면 datepicker time으로  */}
-
-          <h3>예약날짜</h3>
-          <input value={memInfo.schTime}
-            onChange={(e)=>{insertData(e)}}></input>
-          {/* 모달창에 입력된 값이 info창 값으로 바뀌고 그 내용으로 수정을 하는 거면
-          모달창에서 update하고 info창을 재렌더링하는건가 */}
-          <div>
-            <DatePicker
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={60}
-              timeCaption='Time'
-              dateFormat={"HH:mm"}
-              minTime={"09:00"}
-              maxTime={"17:00"}
-            />
-          </div>
-        </div>
-
-      case 'dept':
+      case 'dept': 
+      // deptnum으로 왔다갔다 해야하지 않을까 
         return <div className='schDetail-modal-div'>
           <h3>진료과</h3>
           <div className='custom-select' ref={dropDownRef}>
             <div className='selected' onClick={toggleDropdown}>
               {selectedOption}
-              <span className='arrow'>{isDropOpen?
-              <i class="bi bi-caret-up-fill"></i>
-              :
-              <i class="bi bi-caret-down-fill"></i>
-              }</span>
+              <span className='arrow'>
+                {isDropOpen?
+                <i className="bi bi-caret-up-fill"></i>
+                :
+                <i className="bi bi-caret-down-fill"></i>
+                }</span>
             </div>
             {
               isDropOpen&&
-              (<ul className='options' name='deptName' onChange={(e)=>{insertData(e)}}>
+              (<ul className='options' >
                 {deptList.map((dept,i)=>{
                   return(
-                  <li key={i} onClick={()=>{selectOption(dept)}} value={dept}>
-                    {dept}
+                  <li key={i}>
+                    <button type='button' name='deptNum' value={dept.deptNum}
+                      onClick={(e)=>{selectOption(dept.deptName);
+                        insertDept(e); setUpdateDept(dept.deptName)}}
+                    >{dept.deptName}</button>
                   </li>
                   )
                 })}
@@ -214,34 +312,6 @@ const DocMemInfo = () => {
           </div>
           
         </div>
-
-      case 'doctor':
-        return <div className='schDetail-modal-div'>
-          <h3>담당의</h3>
-          <div className='custom-select' ref={dropDownRef}>
-            <div className='selected' onClick={toggleDropdown}>
-              {selectedOption}
-              <span className='arrow'>{isDropOpen?
-              <i class="bi bi-caret-up-fill"></i>
-              :
-              <i class="bi bi-caret-down-fill"></i>
-              }</span>
-            </div>
-            {
-              isDropOpen&&
-              (<ul className='options' name='docName' onChange={(e)=>{insertData(e)}}>
-                {docList.map((doc,i)=>{
-                  return(
-                  <li key={i} onClick={()=>{selectOption(doc)}} value={doc}>
-                    {doc}
-                  </li>
-                  )
-                })}
-              </ul>)
-            }
-
-          </div>
-          </div>
 
 
       default : return null
@@ -264,32 +334,7 @@ const DocMemInfo = () => {
       setDocInfoList(res.data)
     })
     .catch((error)=>{console.log(error)})
-    // axios
-    // .get('/schedule/getDocInfo')
-    // .then((res)=>{
-    //   console.log(res.data)
-    //   setDocDept(res.data)})
-    // .catch((error)=>{console.log(error)})
-
   },[])
-
-//   const [docDept,setDocDept]=useState([
-//     {
-//     docName:memInfo.doctorVO.docName,
-//     medicalDept:[{
-//       deptName:memInfo.doctorVO.medicalDept[0].deptName
-//     }]
-//   }
-// ])
-
-
-
-
-  // const [selectDept,setSelectDept]=useState(memInfo.doctorVO.medicalDept[0].deptName)
-
-  // const handleChange=(e)=>{
-  //   setSelectDept(e.target.value)
-  // }
 
 
   return (
@@ -373,29 +418,60 @@ const DocMemInfo = () => {
             <tr>
               <td>예약 날짜</td>
               <td>
-                <span>{memInfo.schDate}</span>
-                <span onClick={()=>{showModal('date')}}><i class="bi bi-pencil-square"></i></span>
+                <span>
+                  {/* 선택된 날짜가 없으면 원래 예약 날짜
+                  선택된 날짜가 있으면 선택된 날짜  */}
+                  {
+                    startDate.toLocaleDateString()===notToday.toLocaleDateString()
+                    ?
+                    memInfo.schDate
+                    :
+                    startDate.toLocaleDateString()
+                  }
+                  {/* {memInfo.schDate} */}
+                  </span>
+                <span onClick={()=>{showModal('date')}}><i className="bi bi-pencil-square"></i></span>
               </td>
             </tr>
             <tr>
               <td>예약 시간</td>
               <td>
-                <span>{memInfo.schTime}</span>
-                <span onClick={()=>{showModal('time')}}><i class="bi bi-pencil-square"></i></span>
+                <span>
+                  {
+                    updateSchTime==''?
+                    memInfo.schTime
+                    :
+                    updateSchTime
+                  }
+                </span>
               </td>
             </tr>
             <tr>
               <td>진료과</td>
               <td>
-                <span>{memInfo.doctorVO.medicalDept.deptName}</span>
-                <span onClick={()=>{showModal('dept')}}><i class="bi bi-pencil-square"></i></span>
+                <span>
+                  {
+                    updateDept==''?
+                    memInfo.doctorVO.medicalDept.deptName
+                    :
+                    updateDept
+                  }
+                  </span>
+                <span onClick={()=>{showModal('dept')}}><i className="bi bi-pencil-square"></i></span>
               </td>
             </tr>
             <tr>
               <td>담당의</td>
               <td>
-                <span>{memInfo.doctorVO.docName}</span>
-                <span onClick={()=>{showModal('doctor')}}><i class="bi bi-pencil-square"></i></span>
+                <span>
+                  {
+                    updateDoc==''?
+                    memInfo.doctorVO.docName
+                    :
+                    updateDoc
+                  }
+                  </span>
+                {/* <span onClick={()=>{showModal('doctor')}}><i className="bi bi-pencil-square"></i></span> */}
               </td>
             </tr>
             <tr>
