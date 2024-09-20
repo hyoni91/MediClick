@@ -12,7 +12,6 @@
         <result column="SYMPTOM" property="symptom"/>
         <result column="CHECK_UP" property="checkUp"/>
         <result column="DISEASE" property="disease"/>
-        <result column="PRESCRIPTION" property="prescription"/>
     </resultMap>
 
         <!--모든 환자 정보 and 이름으로 검색-->
@@ -48,7 +47,7 @@
             ,SYMPTOM
             ,CHECK_UP
             ,DISEASE
-            ,PRESCRIPTION
+            ,CHART_NUM
             ) VALUES(
             #{docNum}
             ,#{memNum}
@@ -56,18 +55,23 @@
             ,#{symptom}
             ,#{checkUp}
             ,#{disease}
-            ,#{prescription}
-            );
+            ,#{chartNum}
+            )
         </insert>
 
-        <update id="chartUpdate">
-            UPDATE patient_chart
-            SET SYMPTOM = #{symptom}
-                ,CHECK_UP = #{checkUp}
-                ,DISEASE = #{disease}
-                ,PRESCRIPTION = #{prescription}
-            WHERE CHART_NUM = #{chartNum}
-        </update>
+<!--        <update id="chartUpdate">-->
+<!--            UPDATE patient_chart-->
+<!--            SET SYMPTOM = #{symptom}-->
+<!--                ,CHECK_UP = #{checkUp}-->
+<!--                ,DISEASE = #{disease}-->
+<!--            WHERE CHART_NUM = #{chartNum}-->
+<!--        </update>-->
+
+        <!-- 마지막차트번호 조회 -->
+        <select id="chartNum" resultType="int">
+            SELECT MAX(CHART_NUM) AS CHART_NUM
+            FROM patient_chart
+        </select>
 
 </mapper>
 

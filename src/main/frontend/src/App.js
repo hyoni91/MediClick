@@ -158,7 +158,7 @@ function App() {
             {/* 환자차트항목 */}
             <Route path='chartList' element={<ChartList />}/>
             {/* 진료차트 */}
-            <Route path='patientChart/:memNum' element={<PatientChart/>}/>
+            <Route path='patientChart/:memNum/:memName' element={<PatientChart/>}/>
             {/* 혈액냉장고관리 페이지 */}
             <Route path='BloodRefrigerator' element={<BloodRefrigerator />}/>
             {/* 온도 차트 연습 */}

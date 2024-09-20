@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="medicineMapper">
+	<resultMap id="medicine" type="com.green.MediClick.patientchart.vo.MedicineVO">
+        <id column="M_NUM" property="mNum"/>
+        <result column="M_NAME" property="mName"/>
+        <result column="DOSAGE" property="dosage"/>
+    </resultMap>
+
+    <select id="medicineList" resultMap="medicine">
+        SELECT * FROM MEDICINE
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

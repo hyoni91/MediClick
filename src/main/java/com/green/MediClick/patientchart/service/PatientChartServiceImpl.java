@@ -35,4 +35,9 @@ public class PatientChartServiceImpl implements  PatientChartService{
     public void chartInsert(PatientChartVO patientChartVO) {
         sqlSession.insert("patientChartMapper.chartInsert", patientChartVO);
     }
+
+    @Override
+    public int chartNum() {
+        return sqlSession.selectOne("patientChartMapper.chartNum");
+    }
 }

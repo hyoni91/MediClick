@@ -2,7 +2,9 @@ package com.green.MediClick.patientchart.controller;
 
 
 import com.green.MediClick.member.vo.MemberVO;
+import com.green.MediClick.patientchart.service.MedicineService;
 import com.green.MediClick.patientchart.service.PatientChartService;
+import com.green.MediClick.patientchart.vo.MedicineVO;
 import com.green.MediClick.patientchart.vo.PatientChartVO;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.schedule.vo.ScheduleVO;
@@ -17,6 +19,9 @@ public class PatientChartController {
 
     @Resource(name = "patientChartService")
     private PatientChartService patientChartService;
+
+    @Resource(name = "medicineService")
+    private MedicineService medicineService;
 
     //모든 환자 정보 조회
     @PostMapping("/memberList")
@@ -41,6 +46,18 @@ public class PatientChartController {
     @PutMapping("/chartInsert")
     public void chartInsert(@RequestBody PatientChartVO patientChartVO){
         patientChartService.chartInsert(patientChartVO);
+    }
+
+    //약정보
+    @GetMapping("/medicineList")
+    public List<MedicineVO> medicineList(){
+       return medicineService.medicineList();
+    }
+
+    //마지막 차트 번호
+    @GetMapping("/chartNum")
+    public int chartNum(){
+        return patientChartService.chartNum();
     }
 
 }
