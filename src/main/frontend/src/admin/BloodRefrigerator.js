@@ -40,7 +40,7 @@ useEffect(() => {
   const [isSetTemp, setIsSetTemp] = useState(false)
   const tempRef = useRef();
   //온도 설정 변수 
-  const [temp,setTemp] = useState(2);
+  const [temp,setTemp] = useState(30);
   //온도 설정 
   const tempSetting = ()=>{
     setTemp(tempRef.current.value)
@@ -218,16 +218,16 @@ const formatDate1  = (e) => {
         <div className='header-content'>
             <div>
               <p>
-                <span>온도설정<span className='setting-btn' onClick={(e)=>{setIsSetTemp(!isSetTemp , e.stopPropagation()) }}> <i className="fa-solid fa-ellipsis-vertical"></i></span>
+                <span>위험온도<span className='setting-btn' onClick={(e)=>{setIsSetTemp(!isSetTemp , e.stopPropagation()) }}> <i className="fa-solid fa-ellipsis-vertical"></i></span>
                 </span>
                 <span className='icon-span'>
-                <i className="fa-solid fa-hospital"></i>
+                <i class="fa-solid fa-land-mine-on"></i>
                 </span>
               </p>
               <span>{temp}°C</span>
               { isSetTemp ? 
                 <div className='setting-input'>
-                  <input type='number' ref={tempRef} min={-10} max={5} onClick={(e)=>{e.stopPropagation()}} /> 
+                  <input type='number' ref={tempRef} min={25} max={32} onClick={(e)=>{e.stopPropagation()}} /> 
                   <button type='button' 
                   onClick={(e)=>{tempSetting()} }>
                     설정
@@ -246,7 +246,7 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp == null ? <></> : tempData[0].currentTemp}°C
+                {temp1[0].currentTemp == null ? <></> : temp1[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <SettingWidth 
@@ -278,7 +278,7 @@ const formatDate1  = (e) => {
             </div>
           </div>
         <div className='header-graph'>
-          한시간온도
+          10분당 평균 온도
           <div>
             <Bar data={barData}  options={options}  width={50} height={10}/>
           </div>

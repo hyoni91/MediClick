@@ -76,16 +76,15 @@
         AND S.MEM_NUM=M.MEM_NUM;
     </select>
 
-    <!--담당환자 차트에서 예약정보 변경-->
-<!--    <update id="updateSchCart">-->
-<!--        UPDATE medical_schedule-->
-<!--        SET SCH_DATE=#{schDate}-->
-<!--            ,SCH_TIME=#{schTime}-->
-<!--            ,DETAIL=#{detail}-->
-<!--            ,DOC_NUM=#{docNum}-->
-<!--            ,DEPT_NUM=#{deptNum}-->
-<!--        WHERE MEM_NUM=#{memNum}-->
-<!--    </update>-->
+<!--    담당환자 차트에서 예약정보 변경-->
+    <update id="updateSchChart">
+        UPDATE medical_schedule
+        SET SCH_DATE=#{schDate}
+            ,SCH_TIME=#{schTime}
+            ,DOC_NUM=#{docNum}
+            ,DEPT_NUM=#{deptNum}
+        WHERE SCH_NUM=#{schNum}
+    </update>
 
     <!--예약취소-->
 <!--    <update id="updateSchStatus">-->

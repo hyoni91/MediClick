@@ -170,6 +170,7 @@ const Schedule = () => {
   useEffect(()=>{
     axios.post('schedule/checkSchTime',appo)
     .then((res)=>{
+      console.log(res.data)
       // 예약이 있는 데이터 뽑아내기 
       const availableTimes = res.data.map(time => {
         // 초를 제외하고 분 단위만 남기기
@@ -363,12 +364,12 @@ const Schedule = () => {
             },
             content: {
               position: 'absolute',
-              width: '440px',
-              height: '300px',
+              width: '550px',
+              height: '40%',
               top: '180px',
-              left: '700px',
-              right: '40px',
-              bottom: '40px',
+              left: '40%',
+              right: '60%',
+              bottom: '50%',
               border: '1px solid #ccc',
               background: '#fff',
               overflow: 'auto',
