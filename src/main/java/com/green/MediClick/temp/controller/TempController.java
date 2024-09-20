@@ -24,10 +24,10 @@ public class TempController {
         return tempService.selectTempAll();
     }
 
-    //24시간 전 데이터 자동 삭제
-    @Scheduled(fixedRate = 3600000)
+    //12시간 전 데이터 자동 삭제
+    @Scheduled(fixedRate = 43200000)
     public void keepDel() {
-        System.out.println("2시간 전 데이터 삭제 중");
+        System.out.println("12시간 전 데이터 삭제 중");
         tempService.keepDel();
     }
 
