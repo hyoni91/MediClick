@@ -70,11 +70,20 @@
   border-radius: 10px;
 }
 
+.p-chart-content > div > span > span{
+  cursor: pointer;
+  margin-left: 2px;
+}
+
+.p-chart-contetn-textarea4{
+  height: 80px;
+}
+
 .p-chart-content > div textarea,
 .p-chart-rigthside > div textarea{
   margin-top: 5px;
   width: 98%;
-  height: 180px;
+  height: 120px;
   border: none;
   resize: none;
   background-color: #f7f7f7;
@@ -83,6 +92,7 @@
 .p-chart-rigthside > div textarea{
   height: 50px;
 }
+
 
 
 .p-chart-content > div:nth-child(1){
@@ -115,7 +125,7 @@
 }
 
 .p-chart-btn{
-  margin-top: 15%;
+  margin-top: 5%;
   margin-left: 35%;
   width: 165px;
   padding: 8px;
@@ -130,6 +140,7 @@
   font-size: 15px;
   margin-top: 3px;
   margin-bottom: 2px;
+  height: 23px;
 }
 
 .p-chart-input{
@@ -156,6 +167,19 @@
   margin-left: 10px;
 }
 
+.rightside-flex{
+  display: flex;
+  justify-content: space-between;
+}
 
+.rightside-flex > span {
+  cursor: pointer;
+}
 
-
+.p-chart-select{
+  padding: 1px;
+  border: none;
+  appearance:none;
+  width: 250px;
+  margin-left: 2px;
+}
