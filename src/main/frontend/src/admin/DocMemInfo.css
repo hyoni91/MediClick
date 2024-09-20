@@ -187,10 +187,6 @@
   background-color: #f0f0f0;
 }
 
-.options li:disabled,
-.options li:disabled:hover{
-  color: #f0f0f0;
-}
 
 .options li>button{
   border: none;
@@ -201,5 +197,13 @@
 .options li>button:hover{
   background-color: #f0f0f0;
   cursor: pointer;
+}
 
+.options li>button:disabled{
+  color: #f0f0f0;
+}
+
+.options li>button:disabled:hover{
+  background-color: white;
+  cursor: not-allowed;
 }

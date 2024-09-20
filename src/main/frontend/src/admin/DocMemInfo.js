@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './DocMemInfo.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { json, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal, { Modal } from 'react-modal';
 import Calendar from 'react-calendar';
@@ -28,6 +28,7 @@ const DocMemInfo = () => {
     }
   })
 
+  // docNum,docName,deptNum,deptName
   const [docInfoList,setDocInfoList]=useState([])
 
   //현 환자의 정보를 가져오고 싶은데 memInfo.doctorVO.medicalDept.deptName 안됨
@@ -39,16 +40,16 @@ const DocMemInfo = () => {
   //드롭다운으로 띄울 진료과 리스트
   const deptList=[] 
   docInfoList.forEach((doc,i)=>{
-    const dept= doc.medicalDept
+    const dept= doc
     deptList.push(dept)
   })
   
   //드롭다운으로 띄울 의사 리스트
-  const docList=[]
-  docInfoList.forEach((doc,i)=>{
-    const docName=doc.docName
-    docList.push(docName)
-  })
+  // const docList=[]
+  // docInfoList.forEach((doc,i)=>{
+  //   const docName=doc.docName
+  //   docList.push(docName)
+  // })
 
   const [isDropOpen,setIsDropOpen]=useState(false)
 
@@ -86,10 +87,12 @@ const DocMemInfo = () => {
 
   //수정할 정보
   //수정된 값으로 화면이 바뀌고 수정을 눌러야 수정 완
-  function insertDate(){
+  function insertDate(e){
+    const real_date = e.getFullYear() + '-' + String(e.getMonth()+ 1).padStart(2, '0') +'-' + String(e.getDate()).padStart(2, '0');
+
     setMemInfo({
       ...memInfo,
-      schDate:startDate.toLocaleDateString()
+      schDate:real_date
     })
   }
   function insertTime(e){
@@ -99,12 +102,15 @@ const DocMemInfo = () => {
     })
   }
   function insertDept(e){
+    const selectedValue=e.target.value //밸류값 문자열로 받기
+    const {deptNum,docNum}=JSON.parse(selectedValue) // JSON값 객체로 다시 바꾸기
+
     setMemInfo({
       ...memInfo,
-      deptNum:e.target.value,
+      docNum:docNum,
       doctorVO:{
         medicalDept:{
-          deptNum:e.target.value
+          deptNum:deptNum
         }
       }
     })
@@ -113,15 +119,15 @@ const DocMemInfo = () => {
   console.log(memInfo)
 
   //정보 수정 후 보내기
-  
   function updateData(){
 
-    // axios
-    // .put(`/schedule/updateSchChart`,memInfo)
-    // .then((res)=>{
-
-    // })
-    // .catch((error)=>{console.log(error)})
+    axios
+    .put(`/schedule/updateSchChart`,memInfo)
+    .then((res)=>{
+      alert('수정완')
+      navigate(`/admin/docMemList/${memInfo.doctorVO.docNum}`)
+    })
+    .catch((error)=>{console.log(error)})
 
   }
 
@@ -140,7 +146,7 @@ const DocMemInfo = () => {
   const notToday = new Date(today.getTime()+1*24*60*60*1000)
   //초기값
   const [startDate,setStartDate]=useState(notToday)
-  // console.log(startDate)
+  //const [startDate,setStartDate]=useState('')
 
   //요일반환
   const getDayName = (date) => {
@@ -194,6 +200,7 @@ const DocMemInfo = () => {
 
   //예약 유무 확인(예약된 시간 True > 비활성화)
   useEffect(()=>{
+    
     axios
     .post('/schedule/checkSchTime',memInfo)
     .then((res)=>{
@@ -211,7 +218,7 @@ const DocMemInfo = () => {
       setChkSetTime(updateedChkSchtTime)
     })
     .catch((error)=>{console.log(error)})
-  },[startDate])
+  },[memInfo])
 
 
   //모달 콘텐츠
@@ -225,7 +232,8 @@ const DocMemInfo = () => {
             <h3>예약일</h3>
             <div>
               <DatePicker className='datePicker' name='schDate' 
-                selected={startDate} onChange={(date)=>{setStartDate(date);}}
+                selected={startDate} 
+                onChange={(date)=>{setStartDate(date);insertDate(date)}}
                 locale={ko} //언어
                 dateFormat={'yyyy/MM/dd'} //박스 안 포맷
                 dateFormatCalendar='yyyy년 MM월' //캘린더 안 포맷
@@ -266,9 +274,10 @@ const DocMemInfo = () => {
                     return(
                     <li key={i}>
                       <button type='button' name='schTime' value={time}
-                      onClick={(e)=>{selectOption(time);
+                        onClick={(e)=>{selectOption(time);
                         insertTime(e); setUpdateSchTime(time)}}
-                      disabled={chkSchTime[i]}>{time}</button>
+                        disabled={chkSchTime[i]}>
+                          {time}</button>
                     </li>
                     )
                   })}
@@ -299,10 +308,15 @@ const DocMemInfo = () => {
                 {deptList.map((dept,i)=>{
                   return(
                   <li key={i}>
-                    <button type='button' name='deptNum' value={dept.deptNum}
-                      onClick={(e)=>{selectOption(dept.deptName);
-                        insertDept(e); setUpdateDept(dept.deptName)}}
-                    >{dept.deptName}</button>
+                    <button type='button' name='docInfo' 
+                      value={JSON.stringify({deptNum:dept.medicalDept.deptNum, docNum:dept.docNum})}
+                      onClick={(e)=>{selectOption(dept.medicalDept.deptName);
+                        insertDept(e); 
+                        setUpdateDept(dept.medicalDept.deptName)
+                        setUpdateDoc(dept.docName)
+                        // console.log(dept)
+                      }}
+                    >{dept.medicalDept.deptName}</button>
                   </li>
                   )
                 })}
@@ -325,7 +339,7 @@ const DocMemInfo = () => {
 
     axios
     .get(`/schedule/getMemChart/${schNum}`)
-    .then((res)=>{setMemInfo(res.data)})
+    .then((res)=>{setMemInfo(res.data); setStartDate(new Date(res.data.schDate))})
     .catch((error)=>{console.log(error)})
         
     axios
@@ -381,7 +395,7 @@ const DocMemInfo = () => {
           {renderModalContent()}
           <div className='schDetail-modal-div'>
             <button type='button' className='infoBtn'
-              onClick={()=>{setModalOpen(false); updateData()}}>확인</button>
+              onClick={()=>{setModalOpen(false);}}>확인</button>
           </div>
           </ReactModal>
           :
@@ -416,6 +430,35 @@ const DocMemInfo = () => {
               <td>{memInfo.memberVO.memTel}</td>
             </tr>
             <tr>
+              <td>진료과</td>
+              <td>
+                <span>
+                  {
+                    updateDept==''?
+                    memInfo.doctorVO.medicalDept.deptName
+                    :
+                    updateDept
+                  }
+                  </span>
+                <span onClick={()=>{showModal('dept')}}><i className="bi bi-pencil-square"></i></span>
+              </td>
+            </tr>
+            <tr>
+              <td>담당의</td>
+              <td>
+                <span> 
+                  {/* deptNum에 해당되는 의료진 띄우기 */}
+                  {
+                    updateDoc==''?
+                    memInfo.doctorVO.docName
+                    :
+                    updateDoc
+                  }
+                    
+                  </span>
+              </td>
+            </tr>
+            <tr>
               <td>예약 날짜</td>
               <td>
                 <span>
@@ -446,34 +489,7 @@ const DocMemInfo = () => {
                 </span>
               </td>
             </tr>
-            <tr>
-              <td>진료과</td>
-              <td>
-                <span>
-                  {
-                    updateDept==''?
-                    memInfo.doctorVO.medicalDept.deptName
-                    :
-                    updateDept
-                  }
-                  </span>
-                <span onClick={()=>{showModal('dept')}}><i className="bi bi-pencil-square"></i></span>
-              </td>
-            </tr>
-            <tr>
-              <td>담당의</td>
-              <td>
-                <span>
-                  {
-                    updateDoc==''?
-                    memInfo.doctorVO.docName
-                    :
-                    updateDoc
-                  }
-                  </span>
-                {/* <span onClick={()=>{showModal('doctor')}}><i className="bi bi-pencil-square"></i></span> */}
-              </td>
-            </tr>
+
             <tr>
               <td>증상</td>
               <td>{memInfo.detail}</td>
@@ -482,7 +498,8 @@ const DocMemInfo = () => {
         </table>
 
         <div className='infoBtns'>
-          <div><button type='button' className='infoBtn'>수정</button></div>
+          <div><button type='button' className='infoBtn' 
+            onClick={()=>{updateData()}}>수정</button></div>
           <div><button type='button' className='infoBtn'
           onClick={(e)=>{navigate(-1)}}>확인</button></div>
         </div>
