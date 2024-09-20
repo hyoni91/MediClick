@@ -385,7 +385,7 @@ const DocMemInfo = () => {
               border: '1px solid #ccc',
               background: '#fff',
               overflow: 'auto',
-              WebkitOverflowScrolling: 'touch',
+              // WebkitOverflowScrolling: 'touch',
               borderRadius: '4px',
               outline: 'none',
               // padding: '20px'
