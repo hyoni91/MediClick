@@ -1,19 +1,61 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useRef, useState } from 'react'
 
 const PchartMedicine = () => {
 
-    //연습 약 종류
-  const medicine = ['가나톤정50mg Ganaton Tab50mg','가나톤정50mg Ganaton Tab50mg','가나톤정50mg Ganaton Tab50mg','가나톤정50mg Ganaton Tab50mg']
+  const [medicine, setMedicine] = useState([])
+
+  useEffect(()=>{
+    axios.get("/patientChart/medicineList")
+    .then((res)=>{
+      setMedicine(res.data)
+    })
+    .catch((error)=>{
+      alert('error!')
+      console.log(error)
+    })
+  },[])
+
+  const [selectMedicine, setSelectMedicine] = useState({
+    dosage : '3알',
+    mNum : 0,
+    mName : ''
+  })
+
+
+  function selectedMedicine(e){
+    const selectedMedicine = e.target.value
+    const {dosage,mNum,mName} = JSON.parse(selectedMedicine)
+    setSelectMedicine({
+      ...selectMedicine,
+      dosage : dosage,
+      mNum : mNum,
+      mName : mName
+    })
+  }
+
 
   return (
     <div className='p-chart-medicine'>
                 <p>
                   <i className="bi bi-capsule"></i> 
-                  <select name='' className='p-chart-select'>
+                  <select 
+                    name='selectMedicine' 
+                    className='p-chart-select'
+                    onChange={(e)=>{
+                      selectedMedicine(e)
+                  }}
+                  
+                  >
                     {
                       medicine.map((m,i)=>{
                         return(
-                          <option value={''}>{m}</option>
+                            <option 
+                              key={i}
+                              value={JSON.stringify({dosage:m.dosage, mNum : m.mnum, mName : m.mname})  } 
+                            >
+                              {m.mname}
+                            </option>
                         )
                       })
                     }
@@ -22,27 +64,8 @@ const PchartMedicine = () => {
                     className='p-chart-input' 
                     type='text' 
                     name='' 
-                    value={1}
+                    value={selectMedicine.dosage}
                   />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    value={1}
-                  />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    value={10}
-                  />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    placeholder='용법'
-                  >
-                  </input>
                 </p>
               </div>
   )

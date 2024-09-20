@@ -21,4 +21,7 @@ public interface PatientChartService {
     //차트 입력
     void chartInsert(PatientChartVO patientChartVO);
 
+    //마지막 차트 번호
+    int chartNum();
+
 }

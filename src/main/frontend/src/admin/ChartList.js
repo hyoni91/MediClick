@@ -78,7 +78,7 @@ const ChartList = props => {
                     <td>{mem.memName}</td>
                     <td><span 
                     onClick={()=>{
-                      navigate(`/admin/patientChart/${mem.memNum}`)
+                      navigate(`/admin/patientChart/${mem.memNum}/${mem.memName}`)
                     }}>
                       {mem.memNum}
                     </span></td>

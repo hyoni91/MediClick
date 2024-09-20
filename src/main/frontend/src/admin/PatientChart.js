@@ -6,25 +6,22 @@ import moment, { now } from 'moment';
 import PchartMedicine from '../custom/PchartMedicine';
 
 const PatientChart = () => {
-  const {memNum} = useParams()
-
-  //약 추가 버튼 
-  const [add , setAdd] = useState([1])
-
-
-  //날짜 계산 
-  const now = new Date()
-  const week = ['일','월','화','수','목','금','토','일']
-  let dayOfWeek = week[now.getDay()]
-  const today = moment(now).format('YYYY-MM-DD')
-  
+  const {memNum, memName} = useParams()
   //의사(admin) 정보 
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   const docNum = loginInfo.memNum
 
+  //약 추가 버튼 
+  const [add , setAdd] = useState([1])
   //과거진료정보 
   const [charts, setChats] = useState([])
-  //예약정보가 있으면 입력
+  //처방전 입력
+  const [chartMedicine, setChartMedicine] = useState({})
+  //차트번호
+  const [chartNumber, setChartNumber] = useState(null)
+
+
+  //예약정보
   const [schedule, setScedule] = useState({
     docNum : docNum,
     memNum : memNum,
@@ -41,8 +38,29 @@ const PatientChart = () => {
     symptom : '',
     checkUp : '',
     disease : '',
-    prescription : ''
+    chartNum: chartNumber,
   })
+
+  //날짜 계산 
+  const now = new Date()
+  const week = ['일','월','화','수','목','금','토','일']
+  let dayOfWeek = week[now.getDay()]
+  const today = moment(now).format('YYYY-MM-DD')
+
+//차트번호
+  useEffect(()=>{
+    axios.get('/patientChart/chartNum')
+    .then((res)=>{
+      setChartNumber(res.data+1)
+      
+    })
+    .catch((error)=>{
+      alert('error!')
+      console.log(error)
+    })
+  },[])
+
+
 
   //화면 좌측:진료기록리스트
   useEffect(()=>{
@@ -92,17 +110,24 @@ const PatientChart = () => {
   function handleNewChart(e){
     setNewChart({
       ...newChart,
+      chartNum : chartNumber,
       [e.target.name] : e.target.value
     })
   }
 
   function insertChart(){
-    axios.put(`/patientChart/chartInsert`,newChart)
-    .then((res)=>{})
-    .catch((error)=>{
-      alert('error!')
-      console.log(error)
-    })
+    if(newChart.symptom == ''){
+      alert('차트내용을 확인해 주세요.')
+    }else if(window.confirm('저장하시겠습니까?')){
+      axios.put(`/patientChart/chartInsert`,newChart)
+      .then((res)=>{})
+      .catch((error)=>{
+        alert('error!')
+        console.log(error)
+      })
+    }else{
+      return;
+    }
   }
 
   console.log(newChart)
@@ -116,7 +141,7 @@ const PatientChart = () => {
           <h3>환자정보</h3>
           <h4> 
           <i className="fa-regular fa-user"></i>
-            CTL_00001 유자씨 
+            {memNum} {memName}님 
           </h4> 
           <h3>내원이력</h3>
           <div>
@@ -131,7 +156,6 @@ const PatientChart = () => {
                 <p>진료날짜 : {chart.chartDate}</p>
                 <p>진료 : {chart.symptom}</p>
                 <p>검사 : {chart.checkUp}</p>
-                <p>처방 : {chart.prescription}</p>
               </div>
               )
             })
@@ -142,8 +166,8 @@ const PatientChart = () => {
           <div>
             <p>날짜 : {today} ({dayOfWeek})</p>
             <span>
-              접수정보 
-              <span>
+              접수번호 : {chartNumber}
+              <span onClick={()=>{insertChart()}}>
                 <i className="fa-solid fa-folder-plus"/>
               </span>
             </span>
@@ -214,7 +238,7 @@ const PatientChart = () => {
               {
                 add.map((m,i)=>{
                   return(
-                    <PchartMedicine />
+                    <PchartMedicine key={i}/>
                   )
                 })
               }
@@ -227,7 +251,7 @@ const PatientChart = () => {
           <button 
             className='p-chart-btn'
             type='button'
-            onClick={()=>{insertChart()}}>  
+          >  
             등록하기
           </button>     
         </div>
