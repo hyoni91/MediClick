@@ -29,6 +29,7 @@ import axios from 'axios';
 import MapTest1 from './admin/MapTest1';
 import ChartList from './admin/ChartList';
 import DocSchManage from './admin/DocSchManage';
+import ProviderLayout from './provider/ProviderLayout';
 
 
 
@@ -152,7 +153,7 @@ function App() {
             {/* 의사별 담당환자 확인 */}
             <Route path='docMemList/:docNum' element={<DocMemList/>}/>
             {/* 담당환자 상세정보 */}
-            <Route path='docMemInfo/:schNum' element={<DocMemInfo/>}/>
+            <Route path='docMemInfo/:schNum' element={<DocMemInfo loginInfo={loginInfo}/>}/>
             {/* 의사 정보수정 페이지 */}
             <Route path='doctorUpdate/:docNum' element={<DoctorUpdate/>}/>
             {/* 환자차트항목 */}
@@ -167,31 +168,21 @@ function App() {
             <Route path='mapTest' element={<MapTest1/>}/>
             {/* 의사 스케줄관리 */}
             <Route path='docSch' element={<DocSchManage/>}/>
-        </Route>
+          </Route>
+
+          
+          {/* 공급자 계정 */}
+          <Route path='/provider' element={<ProviderLayout/>}>
+
+          </Route>
+
       </Routes>
 
 
       </div>
 
 
-      <div className='footer-mid'>
 
-          <div className='mid-div'>
-            <div>
-              <h3>대표전화</h3>
-              <p>052-716-3199</p>
-            </div>
-            <div>
-              <h4>그린 최고 암센터</h4>
-              <p>울산 남구 삼산중로100번길 26 케이엠빌딩 1~4층</p>
-            </div>
-          </div>
-
-
-      </div>
-      <div className='footer-bottom'>
-        <div>환자의 권리와 의무 | 개인정보처리방침 | 웹 이용약관</div>
-      </div>
 
     </div>
   );

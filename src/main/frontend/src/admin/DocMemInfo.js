@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './DocMemInfo.css';
-import { json, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal, { Modal } from 'react-modal';
 import Calendar from 'react-calendar';
@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/locale'
 
-const DocMemInfo = () => {
+const DocMemInfo = ({loginInfo}) => {
   const navigate=useNavigate()
   const [memInfo,setMemInfo]=useState({
     schNum:'',
@@ -31,8 +31,8 @@ const DocMemInfo = () => {
   // docNum,docName,deptNum,deptName
   const [docInfoList,setDocInfoList]=useState([])
 
-  //현 환자의 정보를 가져오고 싶은데 memInfo.doctorVO.medicalDept.deptName 안됨
-  const [selectedOption,setSelectedOption]=useState('선택')
+  const [selectedDeptOption,setSelectedDeptOption]=useState('')
+  const [selectedTimeOption,setSelectedTimeOption]=useState('')
 
   //드롭다운으로 띄울 예약 시간대 리스트
   const schTimeList=['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
@@ -55,8 +55,16 @@ const DocMemInfo = () => {
 
   const toggleDropdown=()=>setIsDropOpen(!isDropOpen)
 
-  const selectOption =(option)=>{
-    setSelectedOption(option)
+  //진료과 드롭다운함수
+  const selectDetpOption =(option)=>{
+    setSelectedDeptOption(option)
+    // console.log(option)
+    setIsDropOpen(false)
+    setMemInfo({...memInfo})
+  }
+  //예약시간 
+  const selectTimeOption =(option)=>{
+    setSelectedTimeOption(option)
     // console.log(option)
     setIsDropOpen(false)
     setMemInfo({...memInfo})
@@ -103,12 +111,14 @@ const DocMemInfo = () => {
   }
   function insertDept(e){
     const selectedValue=e.target.value //밸류값 문자열로 받기
-    const {deptNum,docNum}=JSON.parse(selectedValue) // JSON값 객체로 다시 바꾸기
+    const {deptNum,docNum,docName}=JSON.parse(selectedValue) // JSON값 객체로 다시 바꾸기
 
     setMemInfo({
       ...memInfo,
-      docNum:docNum,
+      deptNum:deptNum,
       doctorVO:{
+        docNum:docNum,
+        docName:docName,
         medicalDept:{
           deptNum:deptNum
         }
@@ -116,7 +126,7 @@ const DocMemInfo = () => {
     })
   }
 
-  console.log(memInfo)
+  // console.log(memInfo)
 
   //정보 수정 후 보내기
   function updateData(){
@@ -124,8 +134,9 @@ const DocMemInfo = () => {
     axios
     .put(`/schedule/updateSchChart`,memInfo)
     .then((res)=>{
-      alert('수정완')
-      navigate(`/admin/docMemList/${memInfo.doctorVO.docNum}`)
+      // alert('예약 정보가 수정되었습니다.')
+
+      
     })
     .catch((error)=>{console.log(error)})
 
@@ -146,7 +157,6 @@ const DocMemInfo = () => {
   const notToday = new Date(today.getTime()+1*24*60*60*1000)
   //초기값
   const [startDate,setStartDate]=useState(notToday)
-  //const [startDate,setStartDate]=useState('')
 
   //요일반환
   const getDayName = (date) => {
@@ -258,7 +268,7 @@ const DocMemInfo = () => {
               {/* 이미 예약된 시간대 불가능 checkSchtime 쿼리 불러와서 */}
               <div className='custom-select' ref={dropDownRef}>
             <div className='selected' onClick={toggleDropdown}>
-              {selectedOption}
+              {selectedTimeOption}
               <span className='arrow'>
                 {isDropOpen?
                 <i className="bi bi-caret-up-fill"></i>
@@ -274,7 +284,7 @@ const DocMemInfo = () => {
                     return(
                     <li key={i}>
                       <button type='button' name='schTime' value={time}
-                        onClick={(e)=>{selectOption(time);
+                        onClick={(e)=>{selectTimeOption(time);
                         insertTime(e); setUpdateSchTime(time)}}
                         disabled={chkSchTime[i]}>
                           {time}</button>
@@ -294,7 +304,7 @@ const DocMemInfo = () => {
           <h3>진료과</h3>
           <div className='custom-select' ref={dropDownRef}>
             <div className='selected' onClick={toggleDropdown}>
-              {selectedOption}
+              {selectedDeptOption}
               <span className='arrow'>
                 {isDropOpen?
                 <i className="bi bi-caret-up-fill"></i>
@@ -309,8 +319,8 @@ const DocMemInfo = () => {
                   return(
                   <li key={i}>
                     <button type='button' name='docInfo' 
-                      value={JSON.stringify({deptNum:dept.medicalDept.deptNum, docNum:dept.docNum})}
-                      onClick={(e)=>{selectOption(dept.medicalDept.deptName);
+                      value={JSON.stringify({deptNum:dept.medicalDept.deptNum, docNum:dept.docNum, docName:dept.docName})}
+                      onClick={(e)=>{selectDetpOption(dept.medicalDept.deptName);
                         insertDept(e); 
                         setUpdateDept(dept.medicalDept.deptName)
                         setUpdateDoc(dept.docName)
@@ -327,11 +337,51 @@ const DocMemInfo = () => {
           
         </div>
 
+      case 'update':
+        
+        return <div className='schDetail-modal-div'>
+
+          <h3>예약 정보가 변경되었습니다.</h3>
+          <div className='sch-mini'>
+            <table className='sch-minitable'>
+              <colgroup>
+                <col width={'40%'}/>
+                <col width={'*'}/>
+              </colgroup>
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>환자명 </td>
+                  <td>{memInfo.memberVO.memName}</td>
+                </tr>
+                <tr>
+                  <td>예약일 </td>
+                  <td>{memInfo.schDate}</td>
+                </tr>
+                <tr>
+                  <td>예약시 </td>
+                  <td>{memInfo.schTime}</td>
+                </tr>
+                <tr>
+                  <td>담당의 </td>
+                  <td>{memInfo.doctorVO.docName}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+
 
       default : return null
     }  
   }
 
+  function handleBtn(){
+
+    navigate(`/admin/docMemList/${loginInfo.memNum}`)
+
+  }
   
   const {schNum}=useParams();
 
@@ -339,7 +389,12 @@ const DocMemInfo = () => {
 
     axios
     .get(`/schedule/getMemChart/${schNum}`)
-    .then((res)=>{setMemInfo(res.data); setStartDate(new Date(res.data.schDate))})
+    .then((res)=>{
+      setMemInfo(res.data); 
+      setStartDate(new Date(res.data.schDate))
+      setSelectedDeptOption(res.data.doctorVO.medicalDept.deptName)
+      setSelectedTimeOption(res.data.schTime)
+    })
     .catch((error)=>{console.log(error)})
         
     axios
@@ -357,6 +412,7 @@ const DocMemInfo = () => {
           modalOpen?
           <ReactModal
           isOpen={true}
+          clickCloseBtn={handleBtn}
           ariaHideApp={false}
           onRequestClose={() => setModalOpen(false)}
           style={{
@@ -373,22 +429,24 @@ const DocMemInfo = () => {
               backgroundColor: 'rgba(0,0,0, 0.6)'
             },
             content: {
+              margin:0,
               position: 'absolute',
               width: '440px',
-              height: '350px',
+              minHeight:'320px',
+              maxHeight:'40vh',
+              // height: '320px',
               zIndex:'150',
               top: '50%',
               left: '50%',
               // right: '50%',
               // bottom: '40px',
-              transform: 'translate(-50%, -50%)',
-              border: '1px solid #ccc',
+              transform: 'translate(-50%,-50%)',
+              // border: '1px solid #ccc',
               background: '#fff',
-              overflow: 'auto',
+              // overflow: 'auto',
               // WebkitOverflowScrolling: 'touch',
               borderRadius: '4px',
-              outline: 'none',
-              // padding: '20px'
+              outline: 'none'
             }
           }}
           >
@@ -499,7 +557,7 @@ const DocMemInfo = () => {
 
         <div className='infoBtns'>
           <div><button type='button' className='infoBtn' 
-            onClick={()=>{updateData()}}>수정</button></div>
+            onClick={()=>{updateData(); showModal('update')}}>수정</button></div>
           <div><button type='button' className='infoBtn'
           onClick={(e)=>{navigate(-1)}}>확인</button></div>
         </div>
