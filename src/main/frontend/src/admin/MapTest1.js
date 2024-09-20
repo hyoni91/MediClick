@@ -1,12 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { DefaultLegendContent } from 'recharts'
 import './MapTest.css'
 import axios from 'axios'
 import { debounce } from 'chart.js/helpers'
+import DaumPostcodeEmbed, { useDaumPostcodePopup } from 'react-daum-postcode'
+import { useNavigate } from 'react-router-dom'
+import MapTestModal from './MapTestModal'
+import ReactModal from 'react-modal'
+
+
 
 const MapTest1 = () => {
   const {kakao}=window
-
 
   // 지도이동 state
   const [map, setMap] = useState(null);
@@ -36,10 +41,14 @@ var marker = new kakao.maps.Marker({
 
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(kakaoMap);
-
-    //setMap(kakaoMap);
-    
+    setMap(kakaoMap);
   }, []);
+
+  useEffect(() => {
+    if(map != null){
+      setPoint(35.54210, 129.3382, 'endPoint')
+    }
+  }, [map]);
 
   // 마커 변경 
   useEffect(()=>{
@@ -51,14 +60,14 @@ marker.setMap(kakaoMap);
   }, [pointObj]);
 
   // 지도 이동
-  function setCenter({lat, lng}){
+  function setCenter(lat, lng){
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
     //setPoint({lat: 35.54210, lng: 129.3382}, 'endPoint')
   }
   
-  function setPoint({lat, lng}, pointType){
-    setCenter({lat, lng});
+  function setPoint(lat, lng, pointType){
+    setCenter(lat, lng);
     let marker = new kakao.maps.Marker({position: new kakao.maps.LatLng(lat, lng)});
     setPointObj(prev=>{
       if(pointObj[pointType].marker !== null){
@@ -115,6 +124,36 @@ marker.setMap(kakaoMap);
     .catch((error) => {console.log(error)});
   }
 
+  // 주소입력 모달
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalContent, setModalContent] = useState(null)
+
+  // 주소 검색
+  const [searchAddress, setSearchAddress] = useState();
+  const [changeSearchAddress, setChangeSearchAddress] = useState();
+
+  // 검색버튼 실행시
+  // function searchAddress(){
+    
+  // }
+  
+  function addressModalContent(){
+    return (
+      <div>
+        <input type='text' name='searchAddress' onChange={(e)=>{changeSearchAddress(e)}}/>
+        <button type='button' onClick={(e)=>{searchAddress(e)}}>검색</button>
+      </div>
+    );
+  }
+
+  const openModal = (e) => {
+    setModalContent(addressModalContent)
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
   function getLocation(){
     const REST_API_KEY = process.env.REACT_APP_Kakao_api_key;
     // 호출방식 url
@@ -129,24 +168,32 @@ marker.setMap(kakaoMap);
         query: '전북 삼성동 100'
       }
     }).then((res) => {
-     const lng = res.data.documents[0].x;
-     const lat = res.data.documents[0].y;
-      setPoint({lat: lat, lng: lng}, 'startPoint')
+    console.log(res.data);
+    const lng = res.data.documents[0].x;
+    const lat = res.data.documents[0].y;
+      //setPoint({lat: lat, lng: lng}, 'startPoint')
     })
     .catch((error) => {console.log(error)});
   }
-  
+
   return (
     <div>
-      
       <div id='map' style={{width: "450px", height: "450px"}}/>
       <div style={{display: "flex", gap: "10px"}}>
-        {/* <button onClick={()=>setPoint({lat: 35.5383773, lng: 129.3113596}, 'startPoint')}>출발지</button> */}
-        <button onClick={()=>getLocation()}>출발지</button>
-        <button onClick={()=>setPoint({lat: 35.54210, lng: 129.3382}, 'endPoint')}>목적지</button>
+        <button onClick={()=>{
+          //모달창 띄운다.
+          {openModal('')}
+          getLocation()
+          // setPoint(35.9766482774572,126.99597495347,'startPoint');
+        }}>출발지</button>
+        <button onClick={()=>{}}>목적지</button>
         <button onClick={getCarDirection}>경로 구하기</button>
       </div>
-      
+      <MapTestModal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        content={modalContent}
+      />
     </div>
   )
 }
