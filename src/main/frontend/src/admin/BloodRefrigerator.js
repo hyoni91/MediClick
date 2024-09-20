@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './BloodRefrigerator.css'
 import { json } from 'react-router-dom'
 import axios from 'axios';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip} from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, Dot} from 'recharts';
 import { useQuery } from '@tanstack/react-query';
 import WeatherDate from '../custom/WeatherDate';
 import { Bar } from 'react-chartjs-2';
@@ -12,6 +12,8 @@ import SettinWidthAvg from '../custom/SettinWidthAvg';
 
 
 const BloodRefrigerator = () => {
+  const [tempdd, setTempdd] = useState(true)
+
   //실시간 그래프 옆에 지표
   const [temp1, setTemp1] = useState([
     {
@@ -84,6 +86,7 @@ const formatDate  = (e) => {
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   setTemp1(response.data)
+  response.data[0].currentTemp > 30 ? setTempdd(false) : setTempdd(true)
   return response.data;  // API로부터 온도 데이터를 반환
 };
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -207,7 +210,6 @@ const formatDate1  = (e) => {
   // 객체를 문자열로 변환 후 ',' 제거
   return date.toLocaleString('en-US', options).replace(',', '');
 };
-
 
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
@@ -333,15 +335,25 @@ const formatDate1  = (e) => {
               <Tooltip 
                 formatter={(value, name) => [value, name === 'tem' ? '온도' : name]} 
               />
-              <Area 
-                type="monotone" //부드러운 곡선
-                dataKey="tem"  //나타낼 데이터
-                stroke="#3276ff" //그래프 선 색깔
-                strokeWidth={2} // 선 두께
-                // strokeDasharray={0}
-                fill="#d8e5ff" // 선 아래에 색을 채우기
-                dot={true}//점을 표시 (ture) 표시 X (false)
-              />
+{/* 기본 Area (모든 데이터) */}
+  <Area 
+    type="monotone"
+    dataKey="tem"
+    stroke="" // 기본 선 색상
+    fill=  {tempdd  ? "#3276ff" : '#ff0000'} // 기본 채우기 색상
+    dot={(props) => {
+      // 특정 조건을 만족하는 점에 대해 색상을 변경
+      // props = {payload,value,index}
+      // payload: {
+      // tem: 28, // 온도 값
+      // time: '09/20 14:00' // 시간 정보
+      // },
+      if (props.payload.tem >= 30) {
+        return <Dot {...props} fill="#ff4d4d" />; // 30도 이상일 때 빨간색
+      }
+      return <Dot {...props} fill="#3276ff" />; // 기본은 파란색
+    }}
+  />
             </AreaChart>
           </ResponsiveContainer>
         </div>
