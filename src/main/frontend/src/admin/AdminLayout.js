@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, useNavigate, useParams } from 'react-router-dom'
 
-const AdminLayout = () => {
+const AdminLayout = ({loginInfo}) => {
   const navigate=useNavigate();
   const {docNum}=useParams();
 
@@ -20,10 +20,10 @@ const AdminLayout = () => {
         <div className='menu-bar'>
   
           <ul>
-            <li><span onClick={(e)=>{navigate(`/admin/docMemList/${docNum}`)}}>예약차트</span></li>
+            <li><span onClick={(e)=>{navigate(`/admin/docMemList/${loginInfo.memNum}`)}}>예약차트</span></li>
             <li><span onClick={()=>{navigate(`/admin/chartList`)}}>환자차트</span></li>
             <li><span>스케줄 관리</span></li>
-            <li><span>마이페이지</span></li>
+            <li><span>발주</span></li>
           </ul>
   
         </div>

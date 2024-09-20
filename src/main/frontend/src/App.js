@@ -92,7 +92,7 @@ function App() {
               <ul>
                 {
                   loginInfo.memNum.includes('DOC')?
-                  <li><span onClick={(e)=>{navigate(`/admin/DocMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                  <li><span onClick={(e)=>{navigate(`/admin/docMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                   :
                   <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                 }
@@ -149,7 +149,7 @@ function App() {
   
   
           {/* 관리자용 */}
-          <Route path='/admin' element={<AdminLayout/>}>
+          <Route path='/admin' element={<AdminLayout loginInfo={loginInfo}/>}>
             {/* 의사별 담당환자 확인 */}
             <Route path='docMemList/:docNum' element={<DocMemList/>}/>
             {/* 담당환자 상세정보 */}
