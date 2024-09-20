@@ -3,9 +3,14 @@ import './PatientChart.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment, { now } from 'moment';
+import PchartMedicine from '../custom/PchartMedicine';
 
 const PatientChart = () => {
   const {memNum} = useParams()
+
+  //약 추가 버튼 
+  const [add , setAdd] = useState([1])
+
 
   //날짜 계산 
   const now = new Date()
@@ -136,7 +141,12 @@ const PatientChart = () => {
         <div className='p-chart-content'>
           <div>
             <p>날짜 : {today} ({dayOfWeek})</p>
-            <span>접수정보</span>
+            <span>
+              접수정보 
+              <span>
+                <i className="fa-solid fa-folder-plus"/>
+              </span>
+            </span>
           </div>
           <div>
             <h4>증상</h4>
@@ -163,14 +173,11 @@ const PatientChart = () => {
                 >
               </textarea>
             </div>
-          </div>
-        </div>
-        <div className='p-chart-rigthside'>
-          <h3>진단 및 처방</h3>
             <div>
               <h4>진단</h4>
               <div>
                 <textarea 
+                  className='p-chart-contetn-textarea4'
                   name='disease' 
                   placeholder='진단명을 입력'
                   onChange={(e)=>{handleNewChart(e)}}
@@ -178,11 +185,24 @@ const PatientChart = () => {
                 </textarea>
               </div>
             </div>
+          </div>
+        </div>
+        <div className='p-chart-rigthside'>
+          <h3>처방</h3>
             <div>
-              <h4>처방</h4>
+              <span className='rightside-flex'>
+                <h4>처방</h4>
+                <span
+                  onClick={()=>{
+                    setAdd([...add,add.push(1)])
+                  }}
+                > 
+                  <i className="fa-solid fa-circle-plus"/>
+                </span>
+              </span>
               <div>
                 <p>
-                  <i class="fa-regular fa-pen-to-square"></i>
+                  <i className="fa-regular fa-pen-to-square"/>
                   <span>보건의료원 내 의과</span>
                   <input 
                     className='p-chart-input' 
@@ -191,36 +211,14 @@ const PatientChart = () => {
                   />
                 </p>
               </div>
-              <div className='p-chart-medicine'>
-                <p>
-                  <i className="bi bi-capsule"></i> 
-                  <span>약이름 쏼라쏼라쏼라(어쩌고) </span>
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    value={1}
-                  />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    value={1}
-                  />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    value={10}
-                  />
-                  <input 
-                    className='p-chart-input' 
-                    type='text' 
-                    name='' 
-                    placeholder='용법'
-                  />
-                </p>
-              </div>
+              {
+                add.map((m,i)=>{
+                  return(
+                    <PchartMedicine />
+                  )
+                })
+              }
+              
             </div>
           <input type='hidden' 
           value={schedule.deptNum} name='deptNum'
@@ -231,7 +229,7 @@ const PatientChart = () => {
             type='button'
             onClick={()=>{insertChart()}}>  
             등록하기
-          </button>        
+          </button>     
         </div>
       </div>
     </div>

@@ -182,15 +182,10 @@
     bottom: 3px; 
     left: 70px; 
     background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);}
-/* .graphWrap .graph > div#item2 { 
-  position: absolute; 
-  bottom: 3px;  
-  left: 70px;
-  background: linear-gradient(lightCyan, skyBlue, deepSkyBlue); } */
 
 
 /* 애니메이션 */
-.p-100{ animation:p-100 2s forwards; }
+.p-100{ width: 100px; animation:p-100 2s forwards; }
 @keyframes p-100{from{width:0px}to{height: 20px}}
 .p-50{ width: 100px; animation:p-50 2s forwards; }
 @keyframes p-50{from{width:0px}to{height: 20px}}
@@ -205,7 +200,6 @@
 /* 온도 조절 div */
 .setting-input{
 background-color:#FFFFFF;
-/* box-shadow: 0 2px 2px #FAFBFE, 0 2px 2px rgba(99, 99, 99, 0.2); */
 width: 180px;
 height: 80px;
 position: absolute;
