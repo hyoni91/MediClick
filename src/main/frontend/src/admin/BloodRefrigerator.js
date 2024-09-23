@@ -92,7 +92,7 @@ const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   setTemp1(response.data)
   response.data[0].currentTemp >= 30 ? setTempdd(false) : setTempdd(true)
-  return response.data;  // API로부터 온도 데이터를 반환
+  return response.data.reverse();  // API로부터 온도 데이터를 반환
 };
 
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -124,14 +124,10 @@ if (isLoading || isLoadingBar) return <div>Loading...</div>;  // 로딩 중일 �
 if (error || errorBar) return <div>Error loading data.</div>;  // 에러가 발생했을 때의 UI
 
 
-// 오름차순 정렬 10개만 조회하는 데이터
-const sortedDataAsc = data.sort((a, b) => new Date(a.tempTime) - new Date(b.tempTime));
+// 10개만 조회하는 데이터 담을 변수
+const timeList = data.map((e) => formatDate(e.tempTime));
+const temList = data.map((e) => e.currentTemp);
 
-const timeList = sortedDataAsc.map((e) => formatDate(e.tempTime));
-const temList = sortedDataAsc.map((e) => e.currentTemp);
-
-// console.log(timeList)
-// console.log(temList)
 //배열 데이터 객체화
 const Objecttime = timeList.map((time , i) => {  
   return {
@@ -140,20 +136,12 @@ const Objecttime = timeList.map((time , i) => {
   }
 })
 // console.log(Objecttime)
-// X축 레이블 데이터 (MM/DD 형식)
-const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형식으로 분리
-
-timeList.forEach((time) => labels.push(time));
 
 //10분당 평균 데이터를 저장하는 변수
-const sortedDataAsc1 = barChartData.sort((a, b) => {
-  return new Date(a.timeDate)-new Date(b.timeDate)
-}
-);
 // 날짜
-const timeList1 = sortedDataAsc1.map((e) => e.timeDate);
+const timeList1 = barChartData.map((e) => e.timeDate);
 // 온도
-const temList1 = sortedDataAsc1.map((e) => e.avgTemp);
+const temList1 = barChartData.map((e) => e.avgTemp);
 
 // 바차트 데이터
 console.log(timeList1)

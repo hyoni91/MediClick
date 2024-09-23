@@ -35,13 +35,13 @@
             TEMP_NUM,
             round(AVG(CURRENT_TEMP),1) AS avg_Temp
             ,concat(
-                    floor(hour(temp_time))
+                    hour(temp_time)
                     ,':'
                     ,FLOOR(MINUTE(temp_time)/10)*10) AS time_Date
         FROM temp_data
         GROUP BY
             date(temp_time)
-            ,FLOOR(HOUR(temp_time))
+            ,HOUR(temp_time)
             ,FLOOR(MINUTE(temp_time)/10)*10
         ORDER BY TEMP_TIME DESC
         limit 15
