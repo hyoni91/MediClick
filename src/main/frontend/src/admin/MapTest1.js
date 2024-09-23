@@ -128,32 +128,52 @@ marker.setMap(kakaoMap);
   const [modalContent, setModalContent] = useState(null)
 
   // 주소 검색
-  const [searchAddress, setSearchAddress] = useState();
-  const [changeSearchAddress, setChangeSearchAddress] = useState();
+  const [searchAddress, setSearchAddress] = useState('');
 
-  // 검색버튼 실행시
-  // function searchAddress(){
-    
-  // }
-  
-  function addressModalContent(){
-    return (
-      <div>
-        <input type='text' name='searchAddress' onChange={(e)=>{changeSearchAddress(e)}}/>
-        <button type='button' onClick={(e)=>{searchAddress(e)}}>검색</button>
-      </div>
-    );
+  //검색한 위도, 경도 목록을 저장할 변수
+  const [resultList, setResultList] = useState([]);
+
+  console.log(searchAddress);
+
+  const changeSearchAddress = (e) => {
+    setSearchAddress(e.target.value);
   }
 
+  const clickSearchBtn = (searchAddress1) => {
+    console.log(searchAddress1)
+    getLocation(searchAddress1);
+  }
+  // const addressModalContent = () => {
+  //   <div>
+  //     <input type='text'
+  //     name='searchAddress'
+  //     value={searchAddress}
+  //     onChange={onChange}
+  //     />
+  //     <button type='button' onClick={onClick}>검색</button>
+  //   </div>
+  // };
   const openModal = (e) => {
-    setModalContent(addressModalContent)
-    setModalOpen(true)
+    setModalOpen(true);
   }
   const closeModal = () => {
-    setModalOpen(false)
+    setModalOpen(false);
   }
 
-  function getLocation(){
+  // function addressModalContent(){
+  //   return (
+  //     <div>
+  //       <input type='text' name='searchAddress' onChange={(e) => {changeSearchAddress(e)}} />
+  //       <button type='button' onClick={() => {clickSearchBtn(searchAddress)}}>검색</button>
+  //     </div>
+  //   );
+  // }
+
+
+  function getLocation(address){
+
+    
+
     const REST_API_KEY = process.env.REACT_APP_Kakao_api_key;
     // 호출방식 url
     const url = 'https://dapi.kakao.com/v2/local/search/address.json';
@@ -164,10 +184,11 @@ marker.setMap(kakaoMap);
         'Content-Type' : 'application/json;charset=UTF-8'
       },
       params: {
-        query: '전북 삼성동 100'
+        query: address
       }
     }).then((res) => {
     console.log(res.data);
+    setResultList(res.data.documents);
     const lng = res.data.documents[0].x;
     const lat = res.data.documents[0].y;
       //setPoint({lat: lat, lng: lng}, 'startPoint')
@@ -176,23 +197,28 @@ marker.setMap(kakaoMap);
   }
 
   return (
-    <div>
+    <div id='mapMain'>
       <div id='map' style={{width: "450px", height: "450px"}}/>
       <div style={{display: "flex", gap: "10px"}}>
-        <button onClick={()=>{
-          //모달창 띄운다.
-          {openModal('')}
-          getLocation()
-          // setPoint(35.9766482774572,126.99597495347,'startPoint');
-        }}>출발지</button>
-        <button onClick={()=>{}}>목적지</button>
-        <button onClick={getCarDirection}>경로 구하기</button>
+        <button onClick={openModal} className='btn'>출발지</button>
+        {/* //35.534383997573 129.307504996189 */}
+        {/* <button onClick={()=>{setPoint(35.534383997573,  129.307504996189, 'startPoint')}}>출발지</button> */}
+        {/* <button onClick={()=>{}}>목적지</button> */}
+        <button onClick={getCarDirection} className='btn' >경로 구하기</button>
       </div>
+
       <MapTestModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
-        content={modalContent}
-      />
+        
+        clickSearchBtn={clickSearchBtn}
+        changeSearchAddress={changeSearchAddress}
+        searchAddress={searchAddress}
+
+        resultList={resultList}
+        setPoint={setPoint}
+
+      /> 
     </div>
   )
 }
