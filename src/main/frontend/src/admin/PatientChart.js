@@ -9,7 +9,7 @@ const PatientChart = () => {
   const {memNum, memName} = useParams()
   //의사(admin) 정보 
   const loginInfo = JSON.parse(window.sessionStorage.getItem('loginInfo'))
-  const docNum = loginInfo.memNum
+  const docNum =  loginInfo? loginInfo.memNum : null
 
   //약 추가 버튼 
   const [add , setAdd] = useState([1])
