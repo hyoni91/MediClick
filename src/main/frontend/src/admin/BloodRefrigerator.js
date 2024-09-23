@@ -26,14 +26,15 @@ const [tempData, setTempData] = useState([
   {
     currentTemp: '',
     tempTime: '',
-    tempTime : '',
     timeDate : ''
   }
 ])
+
+// 데이터 평균
 useEffect(() => {
   axios.get('/temp/tempListData')
   .then((res) => {
-    // console.log(res.data)
+    console.log(res.data)
     setTempData(res.data)
   })
 },[])
@@ -49,10 +50,14 @@ useEffect(() => {
     setIsSetTemp(!isSetTemp)
   }
 
+  //평균 온도
 const tempList = tempData.map((temp,i) => {
-return(temp.currentTemp)})
+return(temp.currentTemp)}) //tempList에 온도를 배열로 
+//모든 온도의 합
 const sum = tempList.reduce((a, b) => a + b, 0);
+// 평균온도 계산
 const avg = sum / tempList.length;
+
 // console.log(avg)
 
 
@@ -86,9 +91,10 @@ const formatDate  = (e) => {
 const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   setTemp1(response.data)
-  response.data[0].currentTemp > 30 ? setTempdd(false) : setTempdd(true)
+  response.data[0].currentTemp >= 30 ? setTempdd(false) : setTempdd(true)
   return response.data;  // API로부터 온도 데이터를 반환
 };
+
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
 const { data, isLoading, error } = useQuery({
   queryKey: ['temperatureData'],
@@ -99,7 +105,7 @@ const { data, isLoading, error } = useQuery({
 // bar차트 데이터 조회를위한 함수
 const fetchBarChartData = async () => {
   const response = await axios.get('/temp/timeAvgDate')
-  console.log(response.data)
+  response.data.reverse()
   return response.data
 }
 // useQuery 훅을 사용하여 데이터 가져오기 (AreaChart 데이터 갱신)
@@ -139,12 +145,16 @@ const labels = sortedDataAsc.map((e) => e.tempTime.split(' ')[0]); // MM/DD 형�
 
 timeList.forEach((time) => labels.push(time));
 
-//한시간데이터르 저장하는 변수
-const sortedDataAsc1 = barChartData.sort((a, b) => new Date(a.timeDate) - new Date(b.timeDate));
+//10분당 평균 데이터를 저장하는 변수
+const sortedDataAsc1 = barChartData.sort((a, b) => {
+  return new Date(a.timeDate)-new Date(b.timeDate)
+}
+);
 // 날짜
-const timeList1 = sortedDataAsc1.map((e) => (e.timeDate));
+const timeList1 = sortedDataAsc1.map((e) => e.timeDate);
 // 온도
 const temList1 = sortedDataAsc1.map((e) => e.avgTemp);
+
 // 바차트 데이터
 console.log(timeList1)
 const barData = {
@@ -166,10 +176,6 @@ const options = {
     legend: {
       position: "bottom"
     },
-    // title: {
-    //   display: true,
-    //   text: "한시간 온도" // 제목
-    // },
     tooltip: {
       mode: "index", // 같은 X축 인덱스의 모든 데이터를 표시
       intersect: false, //바있는 화면에 가져다 대면 데이터나옴
@@ -183,7 +189,6 @@ const options = {
         },
       },
     },
-    
   },
   hover: {
     mode: "index",
@@ -208,6 +213,7 @@ const formatDate1  = (e) => {
     day: '2-digit',
   };
   // 객체를 문자열로 변환 후 ',' 제거
+  console.log(date.toLocaleString('en-US', options).replace(',', ''))
   return date.toLocaleString('en-US', options).replace(',', '');
 };
 
@@ -267,7 +273,7 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {avg.toFixed(1)}°C
+                {avg.toFixed(1)}°C {/* 소수점 한자리 */}
                 <div className='graphWrap' >
                   <div className='graph'>
                     <SettinWidthAvg 
@@ -320,12 +326,7 @@ const formatDate1  = (e) => {
                 // 문자열을 날짜 객체로 변환한 후, 시간과 분만 추출
                 const date = new Date(e);
                 return formatDateTime(date); // HH:MM 형식으로 반환
-              }}
-                label={{ 
-                }} // X축 레이블 추가
-              // angle={-45} // x축 기울기
-              
-              />
+              }}/> // X축 레이블 추가
               {/* Y선 */}
               <YAxis 
                 domain={[22, 23]}
@@ -335,30 +336,29 @@ const formatDate1  = (e) => {
               <Tooltip 
                 formatter={(value, name) => [value, name === 'tem' ? '온도' : name]} 
               />
-{/* 기본 Area (모든 데이터) */}
-  <Area 
-    type="monotone"
-    dataKey="tem"
-    stroke="" // 기본 선 색상
-    fill=  {tempdd  ? "#3276ff" : '#ff0000'} // 기본 채우기 색상
-    dot={(props) => {
-      // 특정 조건을 만족하는 점에 대해 색상을 변경
-      // props = {payload,value,index}
-      // payload: {
-      // tem: 28, // 온도 값
-      // time: '09/20 14:00' // 시간 정보
-      // },
-      if (props.payload.tem >= 30) {
-        return <Dot {...props} fill="#ff4d4d" />; // 30도 이상일 때 빨간색
-      }
-      return <Dot {...props} fill="#3276ff" />; // 기본은 파란색
-    }}
-  />
+              <Area 
+                type="monotone"
+                dataKey="tem"
+                stroke="" // 기본 선 색상
+                fill=  {tempdd  ? "#3276ff" : '#ff0000'} // 기본 채우기 색상
+                dot={(props) => {
+                  if (props.payload.tem >= 30) {
+                    return <Dot {...props} fill="#ff4d4d" />; // 30도 이상일 때 빨간색
+                  }
+                  return <Dot {...props} fill="#3276ff" />; // 기본은 파란색
+                }}
+              />
             </AreaChart>
           </ResponsiveContainer>
         </div>
         <div className='text-div'>
-          <table className='graph-table'>
+          <table className='graph-table' // 특정 조건을 만족하는 점에 대해 색상을 변경
+                  // props = {payload,value,index}
+                  // payload: {
+                  // tem: 28, // 온도 값
+                  // time: '09/20 14:00' // 시간 정보
+                  // },
+                  >
             <thead>
               <tr>
                 <td>시간</td>
@@ -367,6 +367,7 @@ const formatDate1  = (e) => {
               </tr>
             </thead>
             <tbody>
+              
               {
                 temp1.map((temp,i)=>{
                   return(
