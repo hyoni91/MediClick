@@ -11,6 +11,7 @@ import com.green.MediClick.schedule.vo.ScheduleVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController
