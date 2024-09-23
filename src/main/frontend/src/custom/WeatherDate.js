@@ -11,7 +11,7 @@ const WeatherDate = () => {
   
   // 날씨 정보 담을 변수 
   const [weather, setWeather] = useState({})
-
+  
   //마운트시, 날씨 api에서 정보 받아오기
   useEffect(()=>{
     axios.get(url)
