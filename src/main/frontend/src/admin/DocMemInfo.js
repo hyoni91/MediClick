@@ -116,6 +116,7 @@ const DocMemInfo = ({loginInfo}) => {
     setMemInfo({
       ...memInfo,
       deptNum:deptNum,
+      docNum:docNum,
       doctorVO:{
         docNum:docNum,
         docName:docName,
@@ -319,7 +320,7 @@ const DocMemInfo = ({loginInfo}) => {
                   return(
                   <li key={i}>
                     <button type='button' name='docInfo' 
-                      value={JSON.stringify({deptNum:dept.medicalDept.deptNum, docNum:dept.docNum, docName:dept.docName})}
+                      value={JSON.stringify({deptNum:dept.deptNum, docNum:dept.docNum, docName:dept.docName})}
                       onClick={(e)=>{selectDetpOption(dept.medicalDept.deptName);
                         insertDept(e); 
                         setUpdateDept(dept.medicalDept.deptName)
