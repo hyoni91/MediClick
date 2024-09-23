@@ -33,8 +33,9 @@ import { useQuery } from '@tanstack/react-query';
 // });
 
 const ExampleComponent = () => {
+  const [aa ,setAa] = useState('')
+  const [bb ,setBb] = useState()
   
-
   return ( 
     <div>
       dd
