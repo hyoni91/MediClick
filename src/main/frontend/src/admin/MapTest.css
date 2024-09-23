@@ -2,3 +2,10 @@
   width:500px;
   height:400px;
 }
+.mapBtn:hover{
+  cursor: pointer;
+}
+.mapInput{
+  height: 28px;
+  width: 350px;
+}
