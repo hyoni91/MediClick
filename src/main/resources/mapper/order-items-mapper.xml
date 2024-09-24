@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="orderItemsMapper">
+    <resultMap id="items" type="com.green.MediClick.orderitems.vo.OrderItemsVO">
+        <id column="PRODUCT_NUM" property="productNum"/>
+        <result column="PRODUCT_NAME" property="productName"/>
+        <result column="CATE_NUM" property="cateNum"/>
+        <result column="PRODUCT_PRICE" property="productPrice"/>
+        <result column="STOCK" property="stock"/>
+        <result column="DETAIL" property="detail"/>
+        <association property="cateVO" resultMap="cate"/>
+    </resultMap>
+
+    <resultMap id="cate" type="com.green.MediClick.orderitems.vo.CateVO">
+        <id column="CATE_NUM" property="cateNum"/>
+        <result column="CATE_NAME" property="cateName"/>
+    </resultMap>
+
+    <resultMap id="request" type="com.green.MediClick.orderitems.vo.OrderRequestVO">
+        <id column="REQUEST_NUM" property="requestNum"/>
+        <result column="PRODUCT_NUM" property="productNum"/>
+        <result column="CUSTOMER_NUM" property="customerNum"/>
+        <result column="QUANTITY" property="quantity"/>
+        <result column="REQUEST_STATUS" property="requestStatus"/>
+        <result column="REQUEST_DATE" property="requestDate"/>
+        <collection property="orderItemsVO" resultMap="items"/>
+    </resultMap>
+
+    <!--전체조회 + 검색-->
+    <select id="getAllItems" resultMap="items">
+        SELECT PRODUCT_NUM,
+            PRODUCT_NAME,
+            P.CATE_NUM,
+            C.CATE_NAME,
+            PRODUCT_PRICE,
+            DETAIL
+        FROM PRODUCTS P,CATEGORY C
+        WHERE C.CATE_NUM=P.CATE_NUM
+<!--        <if test='searchValue!=null and !searchValue.equals("")'>-->
+<!--            WHERE ${searchType} LIKE CONCAT ('%',#{searchValue},'%')-->
+<!--        </if>-->
+        ORDER BY CATE_NUM
+    </select>
+
+    <!--주문-->
+    <insert id="getOrder">
+        INSERT INTO ORDER_REQUESTS (
+            PRODUCT_NUM,
+            CUSTOMER_NUM,
+            QUANTITY
+        ) VALUES (
+            #{productNum},
+            #{customerNum},
+            #{quantity}
+        )
+    </insert>
+
+    <!--주문 내역-->
+    <select id="getOrderList" resultMap="request">
+        SELECT REQUEST_NUM,
+            C.CATE_NUM,
+            C.CATE_NAME,
+            P.PRODUCT_NUM,
+            P.PRODUCT_NAME,
+            P.DETAIL,
+            R.QUANTITY,
+            P.PRODUCT_PRICE,
+            DATE_FORMAT(REQUEST_DATE,'%Y-%m-%d') AS REQUEST_DATE,
+            R.REQUEST_STATUS
+        FROM ORDER_REQUESTS R, PRODUCTS P, CATEGORY C
+        WHERE P.PRODUCT_NUM=R.PRODUCT_NUM
+        AND P.CATE_NUM=C.CATE_NUM
+        ORDER BY REQUEST_NUM DESC
+    </select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
