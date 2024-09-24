@@ -21,16 +21,10 @@ const BloodRefrigerator = () => {
       tempTime: ''
     }
   ])
-//실시간 온도 데이터 받을 함수
-const [tempData, setTempData] = useState([
-  {
-    currentTemp: '',
-    tempTime: '',
-    timeDate : ''
-  }
-])
+
 // 평균 온도 상태 변수 추가
 const [avgTemp, setAvgTemp] = useState(0);
+
 
 // 데이터 평균을 계산하는 함수
 const calculateAverage = (data) => {
@@ -38,14 +32,7 @@ const calculateAverage = (data) => {
   const sum = tempList.reduce((a, b) => a + b, 0);
   return sum / tempList.length || 0; // 0으로 나누는 경우 방지
 };
-// 데이터 평균
-useEffect(() => {
-  axios.get('/temp/tempListData')
-  .then((res) => {
-    console.log(res.data)
-    setTempData(res.data)
-  })
-},[])
+
 
   //온도설정 버튼 숨김
   const [isSetTemp, setIsSetTemp] = useState(false)
