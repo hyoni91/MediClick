@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="customerMapper">
+	<resultMap id="customer" type="com.green.MediClick.provider.customers.vo.CustomersVO">
+        <id column="CUSTOMER_NUM" property="customerNum"/>
+        <result column="CUSTOMER_NAME" property="customerName" />
+        <result column="CUSTOMER_OWNER" property="customerOwner" />
+        <result column="BUSINESS_NUMBER" property="businessNumber" />
+        <result column="CUSTOMER_ADDR" property="customerAddr" />
+        <result column="CUSTOMER_TEL" property="customerTel" />
+        <result column="CUSTOMER_EMAIL" property="customerEmail" />
+    </resultMap>
+
+
+    <select id="customers" resultMap="customer">
+        SELECT * FROM CUSTOMERS
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

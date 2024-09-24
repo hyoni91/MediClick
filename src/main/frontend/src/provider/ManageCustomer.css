@@ -1,0 +1,99 @@
+
+.manage-contailner{
+  width: 85vw;
+  height: 80vh;
+  margin: auto;
+}
+
+.manage-main{
+  display: flex;
+  flex-direction: column;
+  width: 1500px;
+  height: 100%;
+}
+
+.magage-header{
+  /* background-color: rgb(247, 244, 244); */
+  border-radius: 15px;
+  width: 100%;
+  height: 10%;
+  text-align: left;
+  margin-bottom: 35px;
+  margin-top: 50px;
+}
+
+.manage-content{
+  width: 100%;
+  height: 90%;
+  text-align: left;
+}
+
+
+/* managemai의 header부분 */
+
+
+.header-div >  input{
+  padding: 5px;
+  width: 280px;
+}
+
+.header-div > h3 {
+  margin-bottom: 15px;
+}
+
+.header-div > h3 > i{
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.header-div > h3 > span{
+  font-size: 15px;
+  margin-left: 0px;
+  font-weight: 500;
+}
+
+.content-btn > button{
+  margin-bottom: 5px;
+  border: 1px solid;
+  padding: 5px;
+  margin-right: 3px;
+  width: 70px;
+  cursor: pointer;
+  background-color: white;
+}
+
+
+.content-table{
+  width: 100%;
+  text-align: center;
+}
+
+.content-table td{
+  padding: 7px;
+}
+
+.content-table > thead{
+  border-bottom: 2px double lightgray;
+  border-top: 1px solid lightgray;
+}
+
+.content-table > tbody > tr:nth-child(even){
+  background-color: rgb(243, 241, 241);
+}
+
+
+
+/* 모달 */
+
+.customer-modal  h5{
+  padding: 5px;
+
+}
+
+.customer-modal  input{
+  width: 250px;
+  margin-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid ;
+  font-size: 16px;
+}
