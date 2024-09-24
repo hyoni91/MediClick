@@ -18,6 +18,24 @@
         SELECT * FROM CUSTOMERS
     </select>
 
+    <insert id="addCustomer">
+        INSERT INTO CUSTOMERS(
+            CUSTOMER_NAME
+            ,CUSTOMER_ADDR
+            ,CUSTOMER_TEL
+            ,CUSTOMER_EMAIL
+            ,CUSTOMER_OWNER
+            ,BUSINESS_NUMBER
+        ) VALUES(
+            #{customerName}
+            ,#{customerAddr}
+            ,#{customerTel}
+            ,#{customerEmail}
+            ,#{customerOwner}
+            ,#{businessNumber}
+        )
+    </insert>
+
 </mapper>
 
 
