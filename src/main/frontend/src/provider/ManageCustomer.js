@@ -50,7 +50,7 @@ const ManageCustomer = () => {
     .then((res)=>{
       setCustomers(res.data)
       let chkarr = new Array(res.data.length)
-      chkarr.fill(true)
+      chkarr.fill(false)
       setChks(chkarr)
     })
     .catch((error)=>{
@@ -110,9 +110,24 @@ const ManageCustomer = () => {
   }
 
   //체크박스 설정
-  const [chks, setChks] = useState([])
-  const [chkAll, setChkAll] = useState(true)
+  const [chks, setChks] = useState([{}])
+  const [chkAll, setChkAll] = useState(false)
   console.log(chks)
+
+  const handleCheckedChange = (e)=>{
+    const [name, checked] = e.target;
+    setChks({
+      ...chks,
+      [name] : checked
+    })
+  }
+
+  // 체크박스 상태에따라 전체 체크박스  업데이트
+
+  useEffect(()=>{
+    const allChecked = Object.values(chks).every(Boolean);
+    setChkAll(allChecked)
+  },[chks])
 
 
 
@@ -167,8 +182,7 @@ const ManageCustomer = () => {
                   <input 
                     type='checkbox'
                     checked={chkAll}
-                    onChange={(e)=>{
-                      setChkAll(!chkAll)}}
+                    onChange={handleCheckedChange}
                   />
                 </td>
                 <td>거래처명</td>
@@ -189,13 +203,7 @@ const ManageCustomer = () => {
                       <input 
                         type='checkbox'
                         checked={chks[i]}
-                        onChange={(e)=>{
-                          const copyChk = [...chks];
-                          copyChk[i] = !copyChk[i];
-                          setChks(copyChk);
-                          //하나하나의 체크박스가 변경되면 all은 false로 풀어주기
-                          setChkAll(false)
-                        }}
+                        onChange={handleCheckedChange}
                       />
                     </td>
                     <td>{customer.customerName}</td>
