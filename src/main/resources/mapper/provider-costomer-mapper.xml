@@ -16,6 +16,9 @@
 
     <select id="customers" resultMap="customer">
         SELECT * FROM CUSTOMERS
+        <if test="searchValue != null and !searchValue.isEmpty()">
+            WHERE CUSTOMER_NAME LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
     </select>
 
     <insert id="addCustomer">

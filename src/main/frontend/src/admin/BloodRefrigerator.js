@@ -259,7 +259,7 @@ console.log(temp1)
                   <div className='graph'>
                     <SettingWidth 
                     currentTemp={temp1[9].currentTemp}
-                    avg={avgTemp}
+                    avgTemp={avgTemp}
                     />
                   </div>
                 </div>
@@ -277,8 +277,8 @@ console.log(temp1)
                 <div className='graphWrap' >
                   <div className='graph'>
                     <SettinWidthAvg 
-                    currentTemp={temp1[0].currentTemp}
-                    avg={avgTemp}
+                    currentTemp={temp1[9].currentTemp}
+                    avgTemp={avgTemp}
                     />
                   </div>
                 </div>

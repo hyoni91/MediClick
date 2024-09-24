@@ -38,20 +38,21 @@
 
 .seachbar >input{
   width: 80%;
+  padding: 5px;
 }
 
 .seachbar > span{
   position : absolute;
-  right: 35px;
+  right: 32px;
   top: 2px;
   color: grey;
+  cursor: pointer;
 }
 
-
-.header-div >  input{
-  padding: 5px;
-  width: 280px;
+.seachbar > span:hover{
+  color: black;
 }
+
 
 .header-div > h3 {
   margin-bottom: 15px;
