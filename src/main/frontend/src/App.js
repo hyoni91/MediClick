@@ -32,6 +32,8 @@ import DocSchManage from './admin/DocSchManage';
 import ProviderLayout from './provider/ProviderLayout';
 import Order from './admin/Order';
 import ManageCustomer from './provider/ManageCustomer';
+import MSCategory from './provider/MSCategory';
+import MedicalSupplies from './provider/MedicalSupplies';
 
 
 
@@ -179,7 +181,9 @@ function App() {
             {/* 거래처/ 매출처 관리 */}
             <Route path='manageCustomer' element={<ManageCustomer/>}/>
             {/* 품목 / 카테고리관리 */}
+            <Route path='msCategory' element={<MSCategory/>} />
             {/* 품목 / 제품 관리 */}
+            <Route path='medicalSupplies' element={<MedicalSupplies/>} />
             {/* 품목 / 입고 등록 */}
             {/* 주소 / 주문(수주) 입력 */}
             {/* 주소 / 수주 주문서 */}
