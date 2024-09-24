@@ -29,7 +29,15 @@ const [tempData, setTempData] = useState([
     timeDate : ''
   }
 ])
+// 평균 온도 상태 변수 추가
+const [avgTemp, setAvgTemp] = useState(0);
 
+// 데이터 평균을 계산하는 함수
+const calculateAverage = (data) => {
+  const tempList = data.map((temp) => temp.currentTemp);
+  const sum = tempList.reduce((a, b) => a + b, 0);
+  return sum / tempList.length || 0; // 0으로 나누는 경우 방지
+};
 // 데이터 평균
 useEffect(() => {
   axios.get('/temp/tempListData')
@@ -50,13 +58,13 @@ useEffect(() => {
     setIsSetTemp(!isSetTemp)
   }
 
-  //평균 온도
-const tempList = tempData.map((temp,i) => {
-return(temp.currentTemp)}) //tempList에 온도를 배열로 
-//모든 온도의 합
-const sum = tempList.reduce((a, b) => a + b, 0);
-// 평균온도 계산
-const avg = sum / tempList.length;
+//   //평균 온도
+// const tempList = tempData.map((temp,i) => {
+// return(temp.currentTemp)}) //tempList에 온도를 배열로 
+// //모든 온도의 합
+// const sum = tempList.reduce((a, b) => a + b, 0);
+// // 평균온도 계산
+// const avg = sum / tempList.length;
 
 // console.log(avg)
 
@@ -92,6 +100,10 @@ const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   setTemp1(response.data)
   response.data[0].currentTemp >= 30 ? setTempdd(false) : setTempdd(true)
+
+  // 평균 온도 계산 및 상태 업데이트
+  const average = calculateAverage(response.data);
+  setAvgTemp(average);
   return response.data.reverse();  // API로부터 온도 데이터를 반환
 };
 
@@ -242,12 +254,12 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {temp1[0].currentTemp == null ? <></> : temp1[0].currentTemp}°C
+                {tempData[0].currentTemp == null ? <></> : tempData[0].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <SettingWidth 
-                    currentTemp={temp1[0].currentTemp}
-                    avg={avg}
+                    currentTemp={tempData[0].currentTemp}
+                    avg={avgTemp}
                     />
                   </div>
                 </div>
@@ -261,12 +273,12 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {avg.toFixed(1)}°C {/* 소수점 한자리 */}
+                {avgTemp.toFixed(1)}°C {/* 소수점 한자리 */}
                 <div className='graphWrap' >
                   <div className='graph'>
                     <SettinWidthAvg 
                     currentTemp={temp1[0].currentTemp}
-                    avg={avg}
+                    avg={avgTemp}
                     />
                   </div>
                 </div>
@@ -357,7 +369,7 @@ const formatDate1  = (e) => {
             <tbody>
               
               {
-                temp1.map((temp,i)=>{
+                temp1.slice().reverse().map((temp,i)=>{
                   return(
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
