@@ -259,7 +259,7 @@ const formatDate1  = (e) => {
                   <div className='graph'>
                     <SettingWidth 
                     currentTemp={temp1[9].currentTemp}
-                    avg={avgTemp}
+                    avgTemp={avgTemp}
                     />
                   </div>
                 </div>
@@ -277,8 +277,8 @@ const formatDate1  = (e) => {
                 <div className='graphWrap' >
                   <div className='graph'>
                     <SettinWidthAvg 
-                    currentTemp={temp1[0].currentTemp}
-                    avg={avgTemp}
+                    currentTemp={temp1[9].currentTemp}
+                    avgTemp={avgTemp}
                     />
                   </div>
                 </div>

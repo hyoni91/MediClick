@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ManageCustomer.css'
 import axios from 'axios'
 import ReactModal from 'react-modal'
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 const ManageCustomer = () => {
   //모달창
@@ -9,7 +10,6 @@ const ManageCustomer = () => {
   const showModal = () => {
   setModalOpen(!modalOpen)
   }
-
 
   //거래처 목록
   const [customers, setCustomers] = useState([])
@@ -23,10 +23,45 @@ const ManageCustomer = () => {
     customerTel : ''
     })
 
+  //검색
+  const [searchValue , setSearchValue] = useState({})
+
+  //daum 주소 api 팝업창을 띄우기 위한 함수선언 
+  const open =  useDaumPostcodePopup();
+  //주소 검색 팝업창이 닫힐 때 실행되는 함수 
+  function handleComplete(data){
+    //우편 번호와 도로명주소 가져오기
+    //input태그에 검색한 내용 넣어주기
+    setInputCustomer(
+      {
+        ...inputCustomer,
+        customerAddr: data.roadAddress
+      })
+  }
+  //주소 검색 클릭시 실행되는 함수 
+  function handleClick(){
+    open({onComplete : handleComplete});
+  }
+
   
   //거래처 목록 
   useEffect(()=>{
-    axios.get(`/customer/customerList`)
+    axios.post(`/customer/customerList`, searchValue)
+    .then((res)=>{
+      setCustomers(res.data)
+      let chkarr = new Array(res.data.length)
+      chkarr.fill(true)
+      setChks(chkarr)
+    })
+    .catch((error)=>{
+      alert('error!')
+      console.log(error)
+    })
+  },[inputCustomer])
+
+  //검색
+  function seachCustomer(){
+    axios.post(`/customer/customerList`, searchValue)
     .then((res)=>{
       setCustomers(res.data)
     })
@@ -34,7 +69,7 @@ const ManageCustomer = () => {
       alert('error!')
       console.log(error)
     })
-  },[inputCustomer])
+  }
 
 
   //거래처 등록
@@ -74,7 +109,11 @@ const ManageCustomer = () => {
     }
   }
 
-  console.log(inputCustomer)
+  //체크박스 설정
+  const [chks, setChks] = useState([])
+  const [chkAll, setChkAll] = useState(true)
+  console.log(chks)
+
 
 
   return (
@@ -91,10 +130,19 @@ const ManageCustomer = () => {
                 <input 
                   type='text' 
                   placeholder='거래처명을 입력하세요.'
-                  name=''
-                  value={''}
+                  name='searchValue'
+                  onChange={(e)=>{
+                    setSearchValue({
+                      ...searchValue,
+                      [e.target.name] : e.target.value
+                    })
+                  }}
                 />
-                <span><i className="fa-solid fa-magnifying-glass" /></span>
+                <span
+                  onClick={()=>{seachCustomer()}}
+                >
+                  <i className="fa-solid fa-magnifying-glass" />
+                </span>
               </div>
           </div>
         </div>
@@ -115,7 +163,14 @@ const ManageCustomer = () => {
           <table className='content-table'>
             <thead>
               <tr>
-                <td><input type='checkbox'/></td>
+                <td>
+                  <input 
+                    type='checkbox'
+                    checked={chkAll}
+                    onChange={(e)=>{
+                      setChkAll(!chkAll)}}
+                  />
+                </td>
                 <td>거래처명</td>
                 <td>대표자 이름</td>
                 <td>사업자 번호</td>
@@ -130,7 +185,19 @@ const ManageCustomer = () => {
                 customers.map((customer,i)=>{
                   return(
                   <tr key={i}>
-                    <td><input type='checkbox'/></td>
+                    <td>
+                      <input 
+                        type='checkbox'
+                        checked={chks[i]}
+                        onChange={(e)=>{
+                          const copyChk = [...chks];
+                          copyChk[i] = !copyChk[i];
+                          setChks(copyChk);
+                          //하나하나의 체크박스가 변경되면 all은 false로 풀어주기
+                          setChkAll(false)
+                        }}
+                      />
+                    </td>
                     <td>{customer.customerName}</td>
                     <td>{customer.customerOwner}</td>
                     <td>{customer.businessNumber}</td>
@@ -214,8 +281,10 @@ const ManageCustomer = () => {
                 <input 
                   type='text'
                   name='customerAddr'
+                  value={inputCustomer.customerAddr}
                   onChange={(e)=>{ onchageCustomer(e)}}
-                />
+                  onClick={()=>{handleClick()}}
+                /> 
               </div>
               <div>
                 <h5><i class="fa-solid fa-phone" /> 거래처 전화</h5>
@@ -255,33 +324,3 @@ const ManageCustomer = () => {
 }
 
 export default ManageCustomer
-
-
-
-// <div>
-//               <h4>거래처 등록</h4>
-//               <table>
-//                 <tbody>
-//                   <tr>
-//                     <td>거래처명</td>
-//                     <td><input /></td>
-//                     <td>대표자 이름</td>
-//                     <td><input /></td>
-//                     <td>사업자번호</td>
-//                     <td><input /></td>
-//                   </tr>
-//                   <tr>
-//                     <td>거래처 주소</td>
-//                     <td><input /></td>
-//                     <td>거래처 번호</td>
-//                     <td><input /></td>
-//                     <td>거래처 메일</td>
-//                     <td><input /></td>
-//                   </tr>
-//                   <tr>
-//                     <td>비고란</td>
-//                     <td colSpan={5}><input /></td>
-//                   </tr>
-//                 </tbody>
-//               </table>
-//             </div>
