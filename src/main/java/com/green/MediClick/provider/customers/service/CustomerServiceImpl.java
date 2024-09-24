@@ -18,4 +18,9 @@ public class CustomerServiceImpl implements CustomerServise{
         return sqlSession.selectList("customerMapper.customers");
 
     }
+
+    @Override
+    public void addCustomer(CustomersVO customersVO) {
+        sqlSession.insert("customerMapper.addCustomer", customersVO);
+    }
 }

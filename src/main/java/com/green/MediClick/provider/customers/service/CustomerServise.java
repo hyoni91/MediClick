@@ -8,4 +8,6 @@ public interface CustomerServise {
 
     List<CustomersVO> customerList();
 
+    void addCustomer(CustomersVO customersVO);
+
 }

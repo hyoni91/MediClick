@@ -31,6 +31,22 @@
 
 /* managemai의 header부분 */
 
+.seachbar {
+  position: relative;
+  width: 200px
+}
+
+.seachbar >input{
+  width: 80%;
+}
+
+.seachbar > span{
+  position : absolute;
+  right: 35px;
+  top: 2px;
+  color: grey;
+}
+
 
 .header-div >  input{
   padding: 5px;
@@ -85,15 +101,44 @@
 
 /* 모달 */
 
+.costomer-add-div{
+  margin: auto;
+  margin-left: 50px;
+  margin-top: 20px;
+  
+}
+
+.costomer-add-div > div{
+  margin-top: 10px;
+}
+
 .customer-modal  h5{
   padding: 5px;
-
+  font-size: 14px;
+  color: rgb(114, 114, 114);
 }
 
 .customer-modal  input{
-  width: 250px;
+  width: 380px;
+  padding: 5px;
   margin-bottom: 5px;
   border: none;
-  border-bottom: 1px solid ;
-  font-size: 16px;
+  border-bottom: 1px solid rgb(133, 133, 133); ;
+  font-size: 17px;
+font-weight: 700;
+}
+
+.cutomer-modal-btn{
+  text-align: center;
+}
+
+.cutomer-modal-btn button{
+  width: 150px;
+  padding: 8px;
+  margin-top: 10%;
+  cursor: pointer;
+  border: none;
+  background-color: #384B70;
+  color: white;
+  margin-right: 3px;
 }
