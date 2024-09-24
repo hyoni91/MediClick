@@ -1,12 +1,12 @@
 .order-sidebar{
   /* border: 1px solid blue; */
-  width: 150px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   text-align: center;
-  margin-top: 100px;
-  padding-top: 50px;
-  border: 1px solid #eeeeee;
-  
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
 }
 
 .order-sidebar li{
@@ -14,39 +14,63 @@
   cursor: pointer;
 }
 
+.order-sidebar li:hover{
+  text-decoration: underline;
+}
+
+.order-sidebar li>span{
+  font-size: 0.9rem;
+  
+}
+.getBold.active{
+  font-weight: bold;
+}
+
+.getBold:visited{
+  font-weight: bold;
+}
+
 .order-div{
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
-  /* border: 1px solid red; */
 }
 
 .order-main{
-  width: 70%;
+  width: 1100px;
   height: 90vh;
+}
+
+
+.order-main>h3{
+  margin-bottom: 50px;
 }
 
 .item-search{
   width: 1000px;
-  margin: 10px auto;
+  margin: 20px auto;
   text-align: right;
 }
 
+
 .item-search input{
-  width: 100px;
-  height: 21px;
-  margin-right: 8px;
+  width: 120px;
+  height: 20px;
+  background-color: #eeeeee;
+  border: none;
 }
 
 .item-search button{
   border: none;
-  padding: 5px;
-  width: 50px;
+  font-size: 0.7rem;
+  width: 42px;
+  height: 22px;
   background-color: #0254AF;
+  border-radius: 2px;
   color: white;
   cursor: pointer;
-  border-radius: 2px;
+  box-shadow: 2px 2px 2px #eeeeee;
 }
 
 .item-search button:hover{
@@ -66,7 +90,9 @@
 
 .itemList-table thead tr{
   background-color: #eeeeee;
-  border-top: 2px solid black;
+  border-bottom: 1px solid lightgray;
+  color: dimgrey;
+  /* border-top: 2px solid black; */
 }
 
 .itemList-table thead td{
@@ -86,22 +112,39 @@
 
 .itemList-table tbody td button{
   border: none;
-  color: white;
   width: 45px;
   padding: 4px;
-  background-color: #0254AF;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
   cursor: pointer;
 }
 
 .itemList-table tbody td button:hover{
-  background-color: #013d81;
+  background-color: #eeeeee;
+}
+
+.order-btns{
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  margin: 50px auto;
 }
 
 .order-btn{
   border: none;
-  color: white;
   width: 80px;
   padding: 4px;
-  background-color: #0254AF;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
   cursor: pointer;
 }
+
+.order-btn:hover{
+  background-color: #eeeeee;
+}
+
