@@ -254,11 +254,11 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {tempData[0].currentTemp == null ? <></> : tempData[0].currentTemp}°C
+                {temp1[9].currentTemp == null ? <></> : temp1[9].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <SettingWidth 
-                    currentTemp={tempData[0].currentTemp}
+                    currentTemp={temp1[9].currentTemp}
                     avg={avgTemp}
                     />
                   </div>
