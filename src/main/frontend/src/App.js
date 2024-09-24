@@ -30,7 +30,8 @@ import MapTest1 from './admin/MapTest1';
 import ChartList from './admin/ChartList';
 import DocSchManage from './admin/DocSchManage';
 import ProviderLayout from './provider/ProviderLayout';
-
+import Order from './admin/Order';
+import ManageCustomer from './provider/ManageCustomer';
 
 
 
@@ -168,12 +169,24 @@ function App() {
             <Route path='mapTest' element={<MapTest1/>}/>
             {/* 의사 스케줄관리 */}
             <Route path='docSch' element={<DocSchManage/>}/>
+            {/* 발주페이지 */}
+            <Route path='order' element={<Order/>}/>
           </Route>
 
           
           {/* 공급자 계정 */}
           <Route path='/provider' element={<ProviderLayout/>}>
-
+            {/* 거래처/ 매출처 관리 */}
+            <Route path='manageCustomer' element={<ManageCustomer/>}/>
+            {/* 품목 / 카테고리관리 */}
+            {/* 품목 / 제품 관리 */}
+            {/* 품목 / 입고 등록 */}
+            {/* 주소 / 주문(수주) 입력 */}
+            {/* 주소 / 수주 주문서 */}
+            {/* 주소 / 공급받는 용도 납품서 */}
+            {/* 주소 / 수주(납품) 현황 */}
+            {/* 현황 / 월별 매출 현황 */}
+            {/* 현황 / 현 재고 현황 */}
           </Route>
 
       </Routes>
