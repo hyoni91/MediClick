@@ -63,7 +63,7 @@ useEffect(() => {
 // return(temp.currentTemp)}) //tempList에 온도를 배열로 
 // //모든 온도의 합
 // const sum = tempList.reduce((a, b) => a + b, 0);
-// // 평균온도 계산
+// // 평균온도 계산???????
 // const avg = sum / tempList.length;
 
 // console.log(avg)
