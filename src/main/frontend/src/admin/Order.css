@@ -1,0 +1,107 @@
+.order-sidebar{
+  /* border: 1px solid blue; */
+  width: 150px;
+  height: 200px;
+  text-align: center;
+  margin-top: 100px;
+  padding-top: 50px;
+  border: 1px solid #eeeeee;
+  
+}
+
+.order-sidebar li{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.order-div{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.order-main{
+  width: 70%;
+  height: 90vh;
+}
+
+.item-search{
+  width: 1000px;
+  margin: 10px auto;
+  text-align: right;
+}
+
+.item-search input{
+  width: 100px;
+  height: 21px;
+  margin-right: 8px;
+}
+
+.item-search button{
+  border: none;
+  padding: 5px;
+  width: 50px;
+  background-color: #0254AF;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.item-search button:hover{
+  background-color: #013d81;
+}
+
+/* .itemList-div{
+  width: 100%;
+  height: 90%;
+} */
+
+
+.itemList-table{
+  width: 1000px;
+  margin: 10px auto;
+}
+
+.itemList-table thead tr{
+  background-color: #eeeeee;
+  border-top: 2px solid black;
+}
+
+.itemList-table thead td{
+  padding: 5px;
+  font-weight: bold;
+}
+
+.itemList-table tbody td{
+  padding: 5px;
+  border-bottom: 1px solid #eeeeee;
+  /* border: 1px solid red; */
+}
+
+.itemList-table tbody td input{
+  width: 30px;
+}
+
+.itemList-table tbody td button{
+  border: none;
+  color: white;
+  width: 45px;
+  padding: 4px;
+  background-color: #0254AF;
+  cursor: pointer;
+}
+
+.itemList-table tbody td button:hover{
+  background-color: #013d81;
+}
+
+.order-btn{
+  border: none;
+  color: white;
+  width: 80px;
+  padding: 4px;
+  background-color: #0254AF;
+  cursor: pointer;
+}

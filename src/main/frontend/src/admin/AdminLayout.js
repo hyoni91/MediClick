@@ -23,7 +23,7 @@ const AdminLayout = ({loginInfo}) => {
             <li><span onClick={(e)=>{navigate(`/admin/docMemList/${loginInfo.memNum}`)}}>예약차트</span></li>
             <li><span onClick={()=>{navigate(`/admin/chartList`)}}>환자차트</span></li>
             <li><span>스케줄 관리</span></li>
-            <li><span>발주</span></li>
+            <li><span onClick={()=>{navigate('/admin/order')}}>발주</span></li>
           </ul>
   
         </div>
