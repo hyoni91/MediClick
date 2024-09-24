@@ -370,11 +370,7 @@ const formatDate1  = (e) => {
             <tbody>
               
               {
-<<<<<<< HEAD
-                temp1.reverse().map((temp,i)=>{
-=======
                 temp1.slice().reverse().map((temp,i)=>{
->>>>>>> main
                   return(
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
