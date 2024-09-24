@@ -216,7 +216,7 @@ const formatDate1  = (e) => {
   console.log(date.toLocaleString('en-US', options).replace(',', ''))
   return date.toLocaleString('en-US', options).replace(',', '');
 };
-
+console.log(temp1)
   return (
     <div className='graph-container'onClick={()=>{setIsSetTemp(false)}} >
       <div className='graph-headerr'>
