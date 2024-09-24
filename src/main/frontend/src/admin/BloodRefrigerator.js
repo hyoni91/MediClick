@@ -242,11 +242,11 @@ const formatDate1  = (e) => {
                 </span>
               </p>
               <span>
-                {temp1[0].currentTemp == null ? <></> : temp1[0].currentTemp}°C
+                {temp1[9].currentTemp == null ? <></> : temp1[9].currentTemp}°C
                 <div className='graphWrap'>
                   <div className='graph'>
                     <SettingWidth 
-                    currentTemp={temp1[0].currentTemp}
+                    currentTemp={temp1[9].currentTemp}
                     avg={avg}
                     />
                   </div>
@@ -357,7 +357,7 @@ const formatDate1  = (e) => {
             <tbody>
               
               {
-                temp1.map((temp,i)=>{
+                temp1.reverse().map((temp,i)=>{
                   return(
                     <tr key={i}>
                       <td>{temp.tempTime}</td>
