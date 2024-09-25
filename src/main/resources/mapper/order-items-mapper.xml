@@ -45,7 +45,7 @@
     </select>
 
     <!--주문-->
-    <insert id="getOrder">
+    <insert id="getOrderChecked">
         INSERT INTO ORDER_REQUESTS (
             PRODUCT_NUM,
             CUSTOMER_NUM,

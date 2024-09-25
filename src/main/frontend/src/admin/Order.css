@@ -56,24 +56,32 @@
   margin-bottom: 50px;
 }
 
+/* 검색창 */
+
 .item-search{
   width: 1000px;
   margin: 20px auto;
-  text-align: right;
+  text-align: center;
 }
 
 
 .item-search input{
-  width: 120px;
-  height: 20px;
-  margin-right: 5px;
+  width: 310px;
+  height: 30px;
+  margin-right: 10px;
   background-color: #eeeeee;
   border: none;
+  border-radius: 3px;
+  padding-left: 10px;
 }
 
 .item-search>span>i{
   cursor: pointer;
 }
+
+
+
+/* 상품 목록,주문 */
 
 .itemList-div{
   margin: 0 auto;
@@ -130,6 +138,15 @@
   cursor: pointer;
 }
 
+.priceNum{
+  font-weight: 700;
+}
+
+.eachNum{
+    color: cornflowerblue;
+    font-weight: 700;
+}
+
 
 /* 주문버튼 */
 
@@ -156,3 +173,99 @@
   background-color: #eeeeee;
 }
 
+
+/* 주문 모달창 */
+
+.order-modal-div{
+  width: 90%;
+  /* height: 100%; */
+  margin: 10px auto;
+}
+
+.order-modal-div>h3{
+  /* border: 1px solid red; */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.order-modal-table{
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 2px 2px 10px #eeeeee;
+}
+
+.order-modal-table tbody td{
+  padding: 5px;
+  font-size: 0.95rem;
+}
+
+.order-modal-table tbody td:first-child{
+  background-color: #eeeeeea2;
+  font-family: 'SUITE-Regular';
+}
+
+
+.order-modal-table tbody td:nth-child(2){
+  text-align: center;
+
+}
+
+.order-modal-table tbody td>input{
+  width: 40px;
+
+}
+
+.order-modal-table-checked{
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 2px 2px 10px #eeeeee;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.order-modal-table-checked td{
+  padding: 5px;
+  font-size: 0.95rem;
+}
+
+.order-modal-table-checked thead>tr{
+  background-color: #eeeeee;
+  font-family: 'SUITE-Regular';
+}
+
+.order-modal-detail{
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.inputCustomerNum-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px;
+}
+
+.inputCustomerNum{
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+
+.inputCustomerNum-div>button{
+  width: 45px;
+  border-radius: 3px;
+  border: none;
+  background-color: #0253afb9;
+  color: white;
+  cursor: pointer;
+}
+
+.inputCustomerNum-div>button:hover{
+  background-color: #034999c5;
+}
