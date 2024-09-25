@@ -20,7 +20,8 @@ const MedicalSupplies = () => {
   const categoryChange = (e) => {
     setMsCategory({
       ...msCategory,
-      cateName : e.target.value
+      
+      cateNum : e.target.value
     })
   }
   const [category,setCategory]=useState([])
@@ -61,9 +62,10 @@ const MedicalSupplies = () => {
         });
     }
   }
-  
+  const [deleteCate, setDeleteCate] = useState('')
   const deleteCategory = () => {
-    axios.get('/')
+    console.log(deleteCate)
+    axios.get(`/item/deleteCate/${deleteCate}`)
     .then((res) => {})
     .catch((error) => {console.log(error)})
   }
@@ -80,22 +82,27 @@ const MedicalSupplies = () => {
 
     <div>
       <div>
-        <select name='cateNum' onChange={() => {}}>
+        <select name='cateNum' onChange={(e) => setDeleteCate(e.target.value)
+          
+        }>
           { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
           </option>
           :
           category.map((cate,i) => {
             return(
                 <>
-                  <option key={i} value={cate.cateName}>{cate.cateName}</option>
+                  <option key={i} value={cate.cateNum}>{cate.cateName}</option>
                 </>
             )
           })}
         </select>
         <div><button type='button' onClick={() => {deleteCategory()}}>카테고리 삭제</button></div>
       </div>
+
+
+
       <div>
-        <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
+        <input type='text' name='cateName' value={msCategory.cateNum} onChange={(e) => {categoryChange(e)}} />
       </div>
         <div>
         <button type='button' onClick={() => {insertCategory()}}>카테고리 등록</button>

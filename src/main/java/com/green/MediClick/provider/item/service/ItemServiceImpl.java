@@ -20,4 +20,11 @@ public class ItemServiceImpl implements ItemService{
     public void cateInsert(CategoryVO categoryVO) {
         sqlSession.insert("itemMapper.cateInsert",categoryVO);
     }
+
+    @Override
+    public void deleteCate(int cateNum) {
+        sqlSession.delete("itemMapper.cateDelete",cateNum);
+    }
+
+
 }

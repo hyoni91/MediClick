@@ -29,7 +29,8 @@
     </insert>
 
     <delete id="cateDelete">
-        DELETE
+        DELETE FROM CATEGORY
+        WHERE CATE_NUM = #{cateNum}
     </delete>
 </mapper>
 
