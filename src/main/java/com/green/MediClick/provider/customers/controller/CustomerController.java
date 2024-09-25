@@ -1,6 +1,7 @@
 package com.green.MediClick.provider.customers.controller;
 
 import com.green.MediClick.patientchart.vo.SearchVO;
+import com.green.MediClick.provider.customers.service.CustomerServiceImpl;
 import com.green.MediClick.provider.customers.service.CustomerServise;
 import com.green.MediClick.provider.customers.vo.CustomersVO;
 import jakarta.annotation.Resource;
@@ -24,6 +25,12 @@ public class CustomerController {
     public void addCustomer(@RequestBody CustomersVO customersVO){
         System.out.println("============================="+ customersVO);
         customerServise.addCustomer(customersVO);
+    }
+
+    @DeleteMapping("/deleteCustomer")
+    public void deleteCustomer(@RequestBody List<Integer> customerNumList){
+        System.out.println("======================="+customerNumList);
+        customerServise.deleteCustomer(customerNumList);
     }
 
 }

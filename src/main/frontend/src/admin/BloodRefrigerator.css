@@ -164,7 +164,7 @@
 
 
 .bloodcar-title {
-  /* display: flex; Flexbox로 레이아웃 */
+  /* display: flex;  */
   justify-content: space-between; /* 요소들 간의 공간 균등 배치 */
   align-items: center; /* 수직 중앙 정렬 */
   width: 100%; /* 부모 폭에 맞춤 */
@@ -261,4 +261,8 @@ border: 1px solid lightgray;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.bloodcar  p {
+  margin-top: 15px;
 }

@@ -2,6 +2,9 @@ package com.green.MediClick.provider.customers.vo;
 
 import lombok.Data;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Data
 public class CustomersVO {
     private int customerNum;
@@ -11,4 +14,5 @@ public class CustomersVO {
     private String customerAddr;
     private String customerTel;
     private String customerEmail;
+    private List<Integer> customerNumList;
 }

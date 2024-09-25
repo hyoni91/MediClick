@@ -4,6 +4,7 @@ import axios from 'axios'
 import ReactModal from 'react-modal'
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { Prev } from 'react-bootstrap/esm/PageItem';
+import { useRef } from 'react';
 
 const ManageCustomer = () => {
   //모달창
@@ -12,11 +13,16 @@ const ManageCustomer = () => {
   setModalOpen(!modalOpen)
   }
 
+  //삭제버튼
+  const [deleteCustomer, setDeleteCustomer] = useState(true)
+
   //체크박스 설정
   const [chks, setChks] = useState([])
   const [chkAll, setChkAll] = useState(false)
-  console.log(chks)
 
+  //체크 값 받기 
+  const [customerNum, setCustomerNum] = useState([])
+  console.log(customerNum)
 
   //거래처 목록
   const [customers, setCustomers] = useState([])
@@ -50,6 +56,23 @@ const ManageCustomer = () => {
     open({onComplete : handleComplete});
   }
 
+
+  //삭제버튼
+  function removeCustomer(){
+    axios.delete(`/customer/deleteCustomer`,{
+      data: customerNum, // 삭제할 고객 ID 목록
+  })
+    .then((res)=>{
+  
+    })
+    .catch((error)=>{
+      alert('error!')
+      console.error('Error Data:', error.response.data);
+      console.error('Error Status:', error.response.status);
+    })
+
+  }
+
   
   //거래처 목록 
   useEffect(()=>{
@@ -68,7 +91,7 @@ const ManageCustomer = () => {
 
   //검색
   function seachCustomer(){
-    axios.post(`/customer/customerList`, searchValue)
+    axios.post(`/customer/customerList`, )
     .then((res)=>{
       setCustomers(res.data)
     })
@@ -83,7 +106,7 @@ const ManageCustomer = () => {
   const onchageCustomer = (e) =>{
     setInputCustomer({
       ...inputCustomer,
-      [e.target.name] : e.target.value
+      customerNum : e.target.value
     })
   }
 
@@ -118,19 +141,38 @@ const ManageCustomer = () => {
 
     //체크박스 함수 
     const handleCheckAll = () => {
-      // 체크박스
-
-      // chkAll이 true일 때 newChks는 모든 체크박스가 false인 배열이 되고, chkAll이 false일 때는 모든 체크박스가 true인 배열이 됨
       const newChks = chks.map(() => !chkAll);
       setChks(newChks);
       setChkAll(!chkAll);
     };
   
-    const handleCheck = (index) => {
+    const handleCheck = (index,e) => {
+      //불변성유지를 위해 배열 복사
       const newChks = [...chks];
+      // 특정 인덱스의 상태 변환 후 chks상태 업데이트
       newChks[index] = !newChks[index];
       setChks(newChks);
-      setChkAll(newChks.every(chk => chk)); // 전체 체크박스 상태 업데이트
+      //newChks.every(chk => chk)는 배열의 모든 요소가 true일 때만 true를 반환
+      setChkAll(newChks.every(chk => chk)); 
+
+        // 하나라도 체크되어 있는지 확인
+      const hasChecked = newChks.some(chk => chk);
+      setDeleteCustomer(!hasChecked); // 상태 업데이트
+
+      // 체크된 거래처 상태 업데이트
+      if (newChks[index]) {
+      // 체크된 경우
+        setCustomerNum(prev => [
+        ...prev,
+         e.target.value  // 객체 형태로 추가
+        ]);
+          } else {
+            // 체크 해제된 경우
+              setCustomerNum(prev => 
+                  prev.filter(
+                    num => num !== e.target.value
+                  ));
+        }
     };
 
   return (
@@ -173,7 +215,8 @@ const ManageCustomer = () => {
             </button>
             <button 
               type='button' 
-              disabled={true}
+              disabled={deleteCustomer}
+              onClick={()=>{removeCustomer()}}
             >삭제 <i className="fa-regular fa-trash-can" />
             </button>
           </div>
@@ -184,7 +227,7 @@ const ManageCustomer = () => {
                   <input 
                     type='checkbox'
                     checked={chkAll} 
-                    onChange={handleCheckAll} 
+                    onChange={()=>{handleCheckAll()}} 
                   />
                 </td>
                 <td>거래처명</td>
@@ -203,9 +246,11 @@ const ManageCustomer = () => {
                   <tr key={i}>
                     <td>
                       <input 
+                        value={customer.customerNum}
                         type='checkbox'
+                        name='customerNum'
                         checked={chks[i]} 
-                        onChange={() => handleCheck(i)}
+                        onChange={(e) => handleCheck(i,e)}
                       />
                     </td>
                     <td>{customer.customerName}</td>

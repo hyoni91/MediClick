@@ -39,6 +39,14 @@
         )
     </insert>
 
+        <delete id="deleteCustomer">
+            DELETE FROM CUSTOMERS
+            WHERE CUSTOMER_NUM IN
+            <foreach collection="customerNumList" item="customerNum" open="(" separator="," close=")">
+                #{customerNum}
+            </foreach>
+        </delete>
+
 </mapper>
 
 
