@@ -1,0 +1,21 @@
+.medicalSupplies-flex{
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.category-div{
+  width: 20%;
+  margin: auto;
+}
+
+.medicalSupplies-div{
+  width: 40%;
+}
+.cate-divBtn{
+  margin: auto;
+}
+.cate-divBtn{
+  margin: 20px auto;
+}

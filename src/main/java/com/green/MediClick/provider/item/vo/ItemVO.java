@@ -11,5 +11,5 @@ public class ItemVO {
     private int productPrice;
     private int stock;
     private String detail;
-
+    private CategoryVO categoryVO;
 }

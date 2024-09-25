@@ -10,6 +10,7 @@
         <result column="PRODUCT_PRICE" property="productPrice"/>
         <result column="STOCK" property="stock"/>
         <result column="DETAIL" property="detail"/>
+        <association property="categoryVO" resultMap="cateCode"/>
     </resultMap>
     <resultMap id="cateCode" type="com.green.MediClick.provider.item.vo.CategoryVO">
         <id column="CATE_NUM" property="cateNum" />
@@ -29,8 +30,30 @@
     </insert>
 
     <delete id="cateDelete">
-        DELETE
+        DELETE FROM CATEGORY
+        WHERE CATE_NUM = #{cateNum}
     </delete>
+
+    <insert id="productInsert">
+        INSERT INTO PRODUCTS (
+            PRODUCT_NAME
+            ,CATE_NUM
+            ,PRODUCT_PRICE
+            ,STOCK
+            ,DETAIL
+        ) VALUES(
+            #{productName}
+            ,#{cateNum}
+            ,#{productPrice}
+            ,#{stock}
+            ,#{detail}
+        )
+    </insert>
+    
+    <select id="medicalSuppliesList" resultMap="item">
+        SELECT * FROM PRODUCTS ,CATEGORY
+        WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
+    </select>
 </mapper>
 
 
