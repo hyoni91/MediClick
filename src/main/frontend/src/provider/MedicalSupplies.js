@@ -76,20 +76,12 @@ const MedicalSupplies = () => {
         });
     }
   }
-<<<<<<< HEAD
-  const [deleteCate, setDeleteCate] = useState('')
-  const deleteCategory = () => {
-    console.log(deleteCate)
-    axios.get(`/item/deleteCate/${deleteCate}`)
-    .then((res) => {})
-=======
   
   const deleteCategory = (cateNum) => {
     axios.get(`/item/cateDelete/${cateNum}`)
     .then((res) => {
       updateCategory()
     })
->>>>>>> mjh
     .catch((error) => {console.log(error)})
   }
   const updateCategory = () => {
@@ -108,31 +100,6 @@ const MedicalSupplies = () => {
 
   return (
 
-<<<<<<< HEAD
-    <div>
-      <div>
-        <select name='cateNum' onChange={(e) => setDeleteCate(e.target.value)
-          
-        }>
-          { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
-          </option>
-          :
-          category.map((cate,i) => {
-            return(
-                <>
-                  <option key={i} value={cate.cateNum}>{cate.cateName}</option>
-                </>
-            )
-          })}
-        </select>
-        <div><button type='button' onClick={() => {deleteCategory()}}>카테고리 삭제</button></div>
-      </div>
-
-
-
-      <div>
-        <input type='text' name='cateName' value={msCategory.cateNum} onChange={(e) => {categoryChange(e)}} />
-=======
     <div className='medicalSupplies-container'>
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
@@ -212,7 +179,6 @@ const MedicalSupplies = () => {
           </tbody>
         </table>
 
->>>>>>> mjh
       </div>
     </div>
   )
