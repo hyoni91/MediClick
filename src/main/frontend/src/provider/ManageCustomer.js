@@ -3,6 +3,7 @@ import './ManageCustomer.css'
 import axios from 'axios'
 import ReactModal from 'react-modal'
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 const ManageCustomer = () => {
   //모달창
@@ -10,6 +11,12 @@ const ManageCustomer = () => {
   const showModal = () => {
   setModalOpen(!modalOpen)
   }
+
+  //체크박스 설정
+  const [chks, setChks] = useState([])
+  const [chkAll, setChkAll] = useState(false)
+  console.log(chks)
+
 
   //거래처 목록
   const [customers, setCustomers] = useState([])
@@ -109,27 +116,22 @@ const ManageCustomer = () => {
     }
   }
 
-  //체크박스 설정
-  const [chks, setChks] = useState([{}])
-  const [chkAll, setChkAll] = useState(false)
-  console.log(chks)
+    //체크박스 함수 
+    const handleCheckAll = () => {
+      // 체크박스
 
-  const handleCheckedChange = (e)=>{
-    const [name, checked] = e.target;
-    setChks({
-      ...chks,
-      [name] : checked
-    })
-  }
-
-  // 체크박스 상태에따라 전체 체크박스  업데이트
-
-  useEffect(()=>{
-    const allChecked = Object.values(chks).every(Boolean);
-    setChkAll(allChecked)
-  },[chks])
-
-
+      // chkAll이 true일 때 newChks는 모든 체크박스가 false인 배열이 되고, chkAll이 false일 때는 모든 체크박스가 true인 배열이 됨
+      const newChks = chks.map(() => !chkAll);
+      setChks(newChks);
+      setChkAll(!chkAll);
+    };
+  
+    const handleCheck = (index) => {
+      const newChks = [...chks];
+      newChks[index] = !newChks[index];
+      setChks(newChks);
+      setChkAll(newChks.every(chk => chk)); // 전체 체크박스 상태 업데이트
+    };
 
   return (
     <div className='manage-contailner'>
@@ -181,8 +183,8 @@ const ManageCustomer = () => {
                 <td>
                   <input 
                     type='checkbox'
-                    checked={chkAll}
-                    onChange={handleCheckedChange}
+                    checked={chkAll} 
+                    onChange={handleCheckAll} 
                   />
                 </td>
                 <td>거래처명</td>
@@ -202,8 +204,8 @@ const ManageCustomer = () => {
                     <td>
                       <input 
                         type='checkbox'
-                        checked={chks[i]}
-                        onChange={handleCheckedChange}
+                        checked={chks[i]} 
+                        onChange={() => handleCheck(i)}
                       />
                     </td>
                     <td>{customer.customerName}</td>
