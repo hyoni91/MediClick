@@ -22,11 +22,4 @@ public class ItemController {
     public void cateInsert(@RequestBody CategoryVO categoryVO){
         itemService.cateInsert(categoryVO);
     }
-
-    @GetMapping("/deleteCate/{cateNum}")
-    public void deleteCate(@PathVariable("cateNum") int cateNum){
-        System.out.println("dddddd"+cateNum);
-        itemService.deleteCate(cateNum);
-    }
-
 }

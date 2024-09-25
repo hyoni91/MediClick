@@ -28,10 +28,9 @@
         )
     </insert>
 
-    <delete id="cateDelete">
-        DELETE FROM CATEGORY
-        WHERE CATE_NUM = #{cateNum}
-    </delete>
+<!--    <delete id="cateDelete">-->
+<!--        DELETE fr-->
+<!--    </delete>-->
 </mapper>
 
 

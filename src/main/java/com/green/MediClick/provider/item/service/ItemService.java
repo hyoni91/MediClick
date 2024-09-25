@@ -10,7 +10,4 @@ public interface ItemService {
 
     //카테고리 등록
     void cateInsert(CategoryVO categoryVO);
-
-    //삭제
-    void deleteCate(int cateNum);
 }
