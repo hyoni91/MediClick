@@ -374,32 +374,28 @@ console.log(temp1)
       <div className='graph-content'>
         <div className='weather-div'>
           <div className='bloodcar-title'>
-            <p>혈액 운송 차량정보</p>
-            <span><i className="fa-solid fa-truck-droplet"></i></span>
+            <p>혈액 운송 차량정보 <i className="fa-solid fa-truck-droplet"></i></p>
           </div>
           <div className='bloodcar'>
             <div>
-              <h4>차량정보</h4>
+              <h4>혈액 정보</h4>
               <div>
-                <p>담당자:김뭐시기</p>
-                <p>차량번호:가1234</p>
-                <p>연락처:010-1111-2222</p>
+                <p>RH+B</p>
+                <p>RH+A</p>
+                <p>RH-A</p>
               </div>
             </div>
             <div>
-              <h4>이동경로</h4>
-              <div>서울 ~ 울산</div>
+              <h4>차량정보</h4>
+              <p>담당 : 박기량</p>
+              <p>연락처 : 010-1234-1234</p>
             </div>
-            <div>
-              <h4>도착시간</h4>
-              <div>오후 6:00</div>
-            </div>
+
           </div>
         </div>
         <div className='graph-weather'>
           <div className='bloodcar-title'>
-            <p>차량 실시간 정보</p>
-            <span id='replay'><i className="fa-solid fa-rotate-right"></i></span>
+            <p>차량 이동 경로</p>
             <div><MapTest1/></div>
           </div>
         </div>

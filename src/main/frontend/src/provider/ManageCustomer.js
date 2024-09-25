@@ -4,6 +4,7 @@ import axios from 'axios'
 import ReactModal from 'react-modal'
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { Prev } from 'react-bootstrap/esm/PageItem';
+import { useRef } from 'react';
 
 const ManageCustomer = () => {
   //모달창
@@ -17,6 +18,10 @@ const ManageCustomer = () => {
   const [chkAll, setChkAll] = useState(false)
   console.log(chks)
 
+  //체크 값 받기 
+  const [chkCustomer, setChkCustomer] = useState([])
+
+  console.log(chkCustomer)
 
   //거래처 목록
   const [customers, setCustomers] = useState([])
@@ -83,7 +88,7 @@ const ManageCustomer = () => {
   const onchageCustomer = (e) =>{
     setInputCustomer({
       ...inputCustomer,
-      [e.target.name] : e.target.value
+      customerNum : e.target.value
     })
   }
 
@@ -116,21 +121,40 @@ const ManageCustomer = () => {
     }
   }
 
-    //체크박스 함수 
-    const handleCheckAll = () => {
-      // 체크박스
 
+    //체크박스 함수 
+    const handleCheckAll = (index,e) => {
+      // 체크박스
       // chkAll이 true일 때 newChks는 모든 체크박스가 false인 배열이 되고, chkAll이 false일 때는 모든 체크박스가 true인 배열이 됨
       const newChks = chks.map(() => !chkAll);
       setChks(newChks);
       setChkAll(!chkAll);
     };
   
-    const handleCheck = (index) => {
+    const handleCheck = (index,e) => {
+      //불변성유지를 위해 배열 복사
       const newChks = [...chks];
+      // 특정 인덱스의 상태 변환 후 chks상태 업데이트
       newChks[index] = !newChks[index];
       setChks(newChks);
-      setChkAll(newChks.every(chk => chk)); // 전체 체크박스 상태 업데이트
+      // 모든 체크박스가 선택되었는지 확인
+      //예) newChks.every(chk => chk)는 배열의 모든 요소가 true일 때만 true를 반환
+      setChkAll(newChks.every(chk => chk)); 
+
+      // 체크된 거래처 상태 업데이트
+      if (newChks[index]) {
+      // 체크된 경우
+        setChkCustomer(prev => [
+        ...prev,
+        {[e.target.name] : e.target.value}  // 객체 형태로 추가
+        ]);
+          } else {
+            // 체크 해제된 경우
+                setChkCustomer(prev => 
+                  prev.filter(
+                    item => item[e.target.name] !== e.target.value
+                  ));
+        }
     };
 
   return (
@@ -184,7 +208,7 @@ const ManageCustomer = () => {
                   <input 
                     type='checkbox'
                     checked={chkAll} 
-                    onChange={handleCheckAll} 
+                    onChange={()=>{handleCheckAll()}} 
                   />
                 </td>
                 <td>거래처명</td>
@@ -203,9 +227,11 @@ const ManageCustomer = () => {
                   <tr key={i}>
                     <td>
                       <input 
+                        value={customer.customerNum}
                         type='checkbox'
+                        name='customerNum'
                         checked={chks[i]} 
-                        onChange={() => handleCheck(i)}
+                        onChange={(e) => handleCheck(i,e) }
                       />
                     </td>
                     <td>{customer.customerName}</td>
