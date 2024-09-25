@@ -19,51 +19,37 @@ const Order = () => {
   })
   // customerNum을 어떻게 할건데
 
-  // 체크박스
-  const [checkItems,setCheckItems]=useState({})
-
-  const [isChecked,setIsChecked]=useState(false)
-  const [isAllChecked,setisAllChecked]=useState(false)
-
-
-  // 체크박스 개별 선택하기
-  const selectChecked = (id,isChecked)=>{
-    if(isChecked){
-      checkItems.add(id)
-      setCheckItems(checkItems)
-      console.log(checkItems)
-    }
-    else if(!isChecked){
-      checkItems.delete(id)
-      setCheckItems(checkItems)
-    }
-  }
+  // 체크박스, 체크한 아이템들
+  const [checkItems,setCheckItems]=useState([])
     
-  const checkHandled=(e)=>{
-    const {id,checked}=e.target
-    setCheckItems((prev)=>({
-      ...prev,
-      [id]:checked
-    }))
-    // setIsChecked(!isChecked)
-    // selectChecked(target.id,target.checked)
+  const checkHandled=(checked,id)=>{
+    // const {id,checked}=e.target
+    if (checked){
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckItems((prev)=>(
+      [...prev,id]
+      ))}
+    else{
+      // 단일 선택해제 시 체크된 아이템을 제외한 배열 (필터)
+      setCheckItems(checkItems.filter((el)=>el !== id))
+    }
   }
 
   // 체크박스 전체 선택하기
-
-  const allCheckedHandler =()=>{
-    const newChecked=!isChecked
-    setIsChecked(newChecked)
-    const newCheckedItems=itemList.reduce((acc,i)=>{
-      acc[i.productNum]=newChecked
-      return acc
-    },[])
-    setCheckItems(newCheckedItems)
+  const allCheckedHandler =(checked)=>{
+    if(checked){
+      //전체 선택 클릭 시 데이터의 모든 id를 담은 배열로 checkItems 상태 업데이트
+      const idArray=[]
+      itemList.forEach((el)=>idArray.push(el.productNum))
+      setCheckItems(idArray)
+    }
+    else{
+      //전체 선택 해제 시 checkItems를 빈 배열로 상태 업데이트
+      setCheckItems([])
+    }
   }
 
-
-  // 체크한 아이템
-  const [checkedItem,setCheckedItem]=useState([])
+  console.log(checkItems)
 
   //모달 창
   const [modalOpen,setModalOpen]=useState(false)
@@ -139,7 +125,7 @@ const Order = () => {
     .catch((error)=>{console.log(error)})
   },[])
 
-  console.log(orderList)
+  // console.log(orderList)
 
   // 사이드 바, 담길 내용
   const showContent=(content)=>{
@@ -175,8 +161,9 @@ const Order = () => {
                 <thead>
                   <tr>
                     <td><input type='checkbox'
-                      checked={isChecked}
-                      onChange={allCheckedHandler}
+                      //데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
+                      checked={checkItems.length === itemList.length ? true : false}
+                      onChange={(e)=>allCheckedHandler(e.target.checked)}
                     ></input></td>
                     <td>카테고리</td>
                     <td>품목코드</td>
@@ -194,10 +181,13 @@ const Order = () => {
                       return(
                         <tr key={i}>
                           <td><input type='checkbox'
-                            checked={checkItems[item.productNum]||false}
+                            // 체크된 아이템 배열에 해당 아이템이 있을 경우, 선택 활성화 아닐 시 해제 
+                            // checked={checkItems[item.productNum]||false}
+                            checked={checkItems.includes(item.productNum)? true:false}
+                            name={`select-${item.productNum}`}
                             id={item.productNum}
-                            selectChecked={selectChecked}
-                            onChange={checkHandled}
+                            // selectChecked={selectChecked}
+                            onChange={(e)=>checkHandled(e.target.checked,item.productNum)}
                           ></input></td>
                           <td>{item.cateVO.cateName}</td>
                           <td><span name='productNum' >{item.productNum}</span></td>
