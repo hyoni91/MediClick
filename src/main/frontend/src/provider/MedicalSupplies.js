@@ -39,7 +39,6 @@ const MedicalSupplies = () => {
     })
   }
   const insertItem = () => {
-    
     axios.post('/',medicalSupplies)
     .then((res) => {
       navigate('/order')
@@ -48,9 +47,19 @@ const MedicalSupplies = () => {
   }
 
   const insertCategory = () => {
-    axios.post('/item/cateInsert',msCategory)
-    .then((res) => {})
-    .catch((error) => {console.log(error)})
+    if (msCategory.cateName == '' ) {
+      alert('카테고리를 입력하세요');
+    } else {
+      axios.post('/item/cateInsert', msCategory)
+        .then((res) => {
+          setMsCategory({cateName : ''}); 
+          updateCategory(); // 카테고리 리스트 갱신
+          alert('카테고리 등록 완료!');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
   
   const deleteCategory = () => {
@@ -58,6 +67,15 @@ const MedicalSupplies = () => {
     .then((res) => {})
     .catch((error) => {console.log(error)})
   }
+  const updateCategory = () => {
+    axios.get('/item/cateList')
+      .then((res) => {
+        setCategory(res.data); // category 상태 업데이트
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
 
     <div>
@@ -77,7 +95,7 @@ const MedicalSupplies = () => {
         <div><button type='button' onClick={() => {deleteCategory()}}>카테고리 삭제</button></div>
       </div>
       <div>
-        <input type='text' onChange={(e) => {categoryChange(e)}} />
+        <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
       </div>
         <div>
         <button type='button' onClick={() => {insertCategory()}}>카테고리 등록</button>

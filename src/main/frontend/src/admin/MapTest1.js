@@ -198,8 +198,8 @@ marker.setMap(kakaoMap);
 
   return (
     <div id='mapMain'>
-      <div id='map' style={{width: "450px", height: "450px"}}/>
-      <div style={{display: "flex", gap: "10px"}}>
+      <div id='map' style={{width: "100%", height: "450px"}}/>
+      <div className='mapmargin'>
         <button onClick={openModal} className='btn'>출발지</button>
         {/* //35.534383997573 129.307504996189 */}
         {/* <button onClick={()=>{setPoint(35.534383997573,  129.307504996189, 'startPoint')}}>출발지</button> */}

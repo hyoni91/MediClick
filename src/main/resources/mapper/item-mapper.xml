@@ -27,6 +27,10 @@
         #{cateName}
         )
     </insert>
+
+    <delete id="cateDelete">
+        DELETE
+    </delete>
 </mapper>
 
 

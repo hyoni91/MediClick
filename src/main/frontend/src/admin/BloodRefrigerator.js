@@ -9,6 +9,7 @@ import { Bar } from 'react-chartjs-2';
 import SettingWidth from '../custom/SettingWidth';
 import UpDownIcon from '../custom/UpDownIcon';
 import SettinWidthAvg from '../custom/SettinWidthAvg';
+import MapTest1 from './MapTest1';
 
 
 const BloodRefrigerator = () => {
@@ -399,6 +400,7 @@ console.log(temp1)
           <div className='bloodcar-title'>
             <p>차량 실시간 정보</p>
             <span id='replay'><i className="fa-solid fa-rotate-right"></i></span>
+            <div><MapTest1/></div>
           </div>
         </div>
       </div>

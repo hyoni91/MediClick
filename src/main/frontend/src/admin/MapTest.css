@@ -1,6 +1,6 @@
-.mapTest{
-  width:500px;
-  height:400px;
+.mapTest {
+  width: 100%; /* 부모 요소의 너비에 맞춤 */
+  height: 100%; /* 부모 요소의 높이에 맞춤 */
 }
 .mapBtn:hover{
   cursor: pointer;
@@ -8,4 +8,11 @@
 .mapInput{
   height: 28px;
   width: 350px;
+  
+}
+
+.mapmargin{
+  display: flex;
+  gap: 10px;
+  justify-content: center; /* 가운데 정렬 */
 }

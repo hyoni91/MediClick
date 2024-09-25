@@ -133,13 +133,14 @@
   font-weight: 600;
 }
 
-.graph-weather{
-  width: 60%;
-  height: 300px;
-  padding: 20px;
+.graph-weather {
+  width: 100%; /* 부모 요소의 100% 폭을 사용 */
+  max-width: 800px; /* 최대 폭 설정 */
+  height: auto; /* 높이를 자동으로 조정 */
+  padding: 20px; /* 내부 여백 */
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px #FAFBFE, 0 3px 6px rgba(99, 99, 99, 0.23);
-  margin-bottom: 50px;
+  margin: 0 auto; /* 중앙 정렬 */
 }
 
 /* 차량이동정보 박스 */
@@ -162,10 +163,11 @@
 }
 
 
-.bloodcar-title{
-  display: flex;
-  color: #6C757D;
-  gap: 5px;
+.bloodcar-title {
+  /* display: flex; Flexbox로 레이아웃 */
+  justify-content: space-between; /* 요소들 간의 공간 균등 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 100%; /* 부모 폭에 맞춤 */
 }
 
 #replay{
