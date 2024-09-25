@@ -21,7 +21,7 @@ public class OrderItemsServiceImpl implements OrderItemsService {
 
     @Override
     public void insertGetOrder(OrderRequestVO orderRequestVO) {
-        sqlSession.insert("orderItemsMapper.getOrder",orderRequestVO);
+        sqlSession.insert("orderItemsMapper.getOrderChecked",orderRequestVO);
     }
 
     @Override
