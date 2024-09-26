@@ -11,12 +11,18 @@
         <result column="STOCK" property="stock"/>
         <result column="DETAIL" property="detail"/>
         <association property="categoryVO" resultMap="cateCode"/>
+        <association property="imgVO" resultMap="img"/>
     </resultMap>
     <resultMap id="cateCode" type="com.green.MediClick.provider.item.vo.CategoryVO">
         <id column="CATE_NUM" property="cateNum" />
         <result column="CATE_NAME" property="cateName" />
     </resultMap>
-
+    <resultMap id="img" type="com.green.MediClick.provider.item.vo.ItemImgVO">
+        <id column="IMG_CODE" property="imgCode" />
+        <result column="ORIGIN_FILE_NAME" property="originFileName" />
+        <result column="ATTACHED_FILE_NAME" property="attachedFileName" />
+        <result column="PRODUCT_NUM" property="productNum" />
+    </resultMap>
     <select id="cateList" resultMap="cateCode">
         SELECT * FROM CATEGORY
     </select>
@@ -53,6 +59,27 @@
     <select id="medicalSuppliesList" resultMap="item">
         SELECT * FROM PRODUCTS ,CATEGORY
         WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
+    </select>
+    <insert id="insertItemImg">
+        INSERT INTO ITEM_IMG (
+            ORIGIN_FILE_NAME
+            ,ATTACHED_FILE_NAME
+            ,PRODUCT_NUM
+        ) VALUES(
+            #{originFileName}
+            ,#{attachedFileName}
+            ,#{productNum}
+        )
+    </insert>
+
+    <!--다음에 들어갈 item-code 조회-->
+    <select id="getNextItemCode" resultType="int">
+    SELECT IFNULL(MAX(productNum),0)  + 1
+    FROM item_img
+    </select>
+    <select id="getNextNum" resultType="int">
+        SELECT IFNULL(MAX(productNum),0)  + 1
+        FROM PRODUCTS
     </select>
 </mapper>
 

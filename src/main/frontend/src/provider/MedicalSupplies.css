@@ -27,6 +27,7 @@
 
 .ms-imgdiv{
   margin-right: 20px;
+  display: flex;
 }
 
 .medicalSupplies-itemtable{
@@ -34,3 +35,35 @@
   margin: auto;
   height: 150px;
 }
+
+.adminfile-placeholder{
+  /* position: absolute; */
+  top: -250px;
+  left: 200px;
+  width: 200px; /* 이미지 너비와 동일하게 설정 */
+  height: 200px; /* 이미지 높이와 동일하게 설정 */
+  border: 1px dashed #000000; /* 스타일 변경 */
+  display: flex; /* Flexbox 사용으로 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  color: #999; /* 텍스트 색상 */
+  background-color: #f9f9f9; /* 배경색 */
+  white-space: nowrap;
+  }
+  .ad-input {
+    /* position: absolute;
+    top: -50px;
+    right: 50px; */
+    text-align: center;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    margin-top: 20px;
+    width: 100px; /* 파일 등록 버튼의 너비 설정 */
+    height: 25px; /* 파일 등록 버튼의 높이 설정 */
+    display: flex; /* 중앙 정렬을 위해 flex 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    cursor: pointer;
+  }

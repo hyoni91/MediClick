@@ -1,6 +1,7 @@
 package com.green.MediClick.provider.item.service;
 
 import com.green.MediClick.provider.item.vo.CategoryVO;
+import com.green.MediClick.provider.item.vo.ItemImgVO;
 import com.green.MediClick.provider.item.vo.ItemVO;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface ItemService {
     void productInsert(ItemVO itemVO);
 
     List<ItemVO> medicalSuppliesList();
+
+    int getNextItemCode(int itemCode);
+    int getNextNum(int itemCode);
+
+    void insertItemImg(ItemImgVO imgVO);
 }

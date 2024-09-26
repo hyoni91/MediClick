@@ -1,6 +1,7 @@
 package com.green.MediClick.provider.item.service;
 
 import com.green.MediClick.provider.item.vo.CategoryVO;
+import com.green.MediClick.provider.item.vo.ItemImgVO;
 import com.green.MediClick.provider.item.vo.ItemVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,21 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public List<ItemVO> medicalSuppliesList() {
         return sqlSession.selectList("itemMapper.medicalSuppliesList");
+    }
+
+    @Override
+    public int getNextItemCode(int itemCode) {
+        return sqlSession.selectOne("itemMapper.getNextItemCode",itemCode);
+    }
+
+    @Override
+    public int getNextNum(int itemCode) {
+        return sqlSession.selectOne("itemMapper.getNextNum",itemCode);
+    }
+
+
+    @Override
+    public void insertItemImg(ItemImgVO imgVO) {
+        sqlSession.insert("itemMapper.insertItemImg",imgVO);
     }
 }
