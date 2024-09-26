@@ -13,6 +13,7 @@ import MapTest1 from './MapTest1';
 
 
 const BloodRefrigerator = () => {
+  //온도 30도 이상 경보
   const [tempdd, setTempdd] = useState(true)
 
   //실시간 그래프 옆에 지표

@@ -14,4 +14,5 @@ public class OrderRequestVO {
     private String requestStatus;
     private String requestDate;
     private OrderItemsVO orderItemsVO;
+    private List<Object> orderDatas;
 }

@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './Order.css'
 import axios from 'axios'
 import ReactModal from 'react-modal'
+import { useNavigate } from 'react-router-dom'
 
 const Order = () => {
-  // 사이드 바로 메뉴 이동
-  const [showContents,setShowContents]=useState('itemList')
-  
+  const navigate=useNavigate()
+
   // 상품 리스트
   const [itemList,setItemList]=useState([])
-  // 주문 리스트
-  const [orderList,setOrderList]=useState([])
   // 주문 데이터 임시 저장
   const [selectData,setSelectData]=useState({})
   // 주문 데이터들 임시 저장
@@ -28,6 +26,35 @@ const Order = () => {
     quantity:1
   }])
 
+  //검색 조건 저장 변수
+  const [searchBox,setSearchBox]=useState({
+    searchValue:''
+  })
+
+  // 검색창
+  function insertSearch(e){
+    setSearchBox({
+      ...searchBox,
+      [e.target.name]:e.target.value
+    })
+  }
+
+  console.log(searchBox)
+
+
+  // 검색하기
+  function clickSearch(){
+
+    axios
+    .post('/orderItems/list',searchBox)
+    .then((res)=>{
+      setItemList(res.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+
+  }
 
 
   // 체크박스, 체크한 아이템들 - 체크박스 ui
@@ -36,15 +63,24 @@ const Order = () => {
   // 체크박스 개별 선택
   const checkHandled=(checked,id)=>{
     // const {id,checked}=e.target
-    if (checked){
+    // if (checked){
       // 단일 선택 시 체크된 아이템을 배열에 추가
-      setCheckItems((prev)=>(
-      [...prev,id]
-      ))}
-    else{
+      // setCheckItems((prev)=>(
+      // [...prev,id]
+      // ))}
+    // else{
       // 단일 선택해제 시 체크된 아이템을 제외한 배열 (필터)
-      setCheckItems(checkItems.filter((el)=>el !== id))
-    }
+      // setCheckItems(checkItems.filter((el)=>el !== id))
+    // }
+
+    setCheckItems((prev)=>{
+      if(checked){
+        return [...prev,id] // 체크된 경우 아이템 추가
+      } else {
+        return prev.filter((el)=> el!==id) // 체크 해제된 경우 아이템 제거
+      }
+    })
+
   }
 
   // 체크박스 전체 선택하기
@@ -120,7 +156,12 @@ const Order = () => {
                   onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}></input>
                 {/* <button type='button'>확인</button> */}
             </div>
-
+            <div className='order-btns'>
+              <button type='button' className='order-btn'
+                onClick={()=>{setModalOpen(false); goOrderData()}}>주문</button>
+              <button type='button' className='order-btn'
+                onClick={()=>{setModalOpen(false);}}>취소</button>
+            </div>
           </div>
         </div>
 
@@ -150,8 +191,8 @@ const Order = () => {
                     return(
                       <tr key={i}>
                         <td>{item.productName}</td>
-                        <td>{orderDatas.quantity}</td>
-                        <td>{((item.productPrice)*(orderDatas.quantity))}</td>
+                        <td>{orderDatas[0].quantity}</td>
+                        <td>{((item.productPrice)*(orderDatas[0].quantity))}</td>
                       </tr>
                     )
                   })
@@ -169,7 +210,12 @@ const Order = () => {
               <p>총 <span className='eachNum'>{checkItems.length}</span> 개의 상품을 주문하겠습니다.</p>
               <p>총 결제 금액은 <span className='priceNum'>{}</span>입니다.</p>
             </div>
-
+            <div className='order-btns'>
+              <button type='button' className='order-btn'
+                onClick={()=>{setModalOpen(false); goOrderDatas()}}>주문</button>
+              <button type='button' className='order-btn'
+                onClick={()=>{setModalOpen(false);}}>취소</button>
+            </div>
           </div>
         </div>
 
@@ -188,8 +234,6 @@ const Order = () => {
       }
     })
   }
-
-
 
   // console.log(orderData)
 
@@ -224,26 +268,17 @@ const Order = () => {
       alert('주문할 상품을 선택해주세요')
       return
     }
-    else{
-      itemList.forEach((item,i)=>{
-        if(item.productNum===parseInt(checkItems)){
-          setSelectDatas([{
-            ...item
-          }])
-          // console.log(selectDatas)
-          return
-        }
-        else{
-          console.log('일치 ㄴㄴ')
-        }
-      })
+    const selectedItems=itemList.filter(item=>
+      checkItems.includes(item.productNum)
+    )
+
+    if(selectedItems.length>0){
+      setSelectDatas(selectedItems) //선택된 아이템들을 상태로 저장
     }
-    // console.log(checkItems)
 
-
+    console.log(selectDatas)
 
   }
-
 
   
   // 개별 - 주문 데이터 입력
@@ -263,15 +298,27 @@ const Order = () => {
 
   // 선택 - 주문 데이터 입력
   function insertOrderDatas(e){
+    const {name,value}=e.target
+    //마지막 데이터가 빈 값인지 확인하고 제거 후 새로운 데이터 추가
+    
+      setOrderDatas((prev)=>{
+        const filterPrev=prev.filter(order=>order.customerNum!==""&&order.productNum!=="")
 
-    setOrderDatas([{
-      ...orderDatas,
-      [e.target.name]:e.target.value,
-      productNum:selectDatas.productNum
-    }])
+        return[
+        ...filterPrev,
+        {
+          ...prev[prev.length-1],  //마지막 주문 데이터 복사
+          [name]:value, //새로 입력된 값으로 업데이트 
+          productNum:selectDatas.map(item=>item.productNum) // 선택된 상품 번호 배열
+        }
+        ]
+      })
+    
   }
 
   console.log(orderDatas)
+
+
 
   function goOrderData(){
     axios
@@ -282,12 +329,24 @@ const Order = () => {
     .catch((error)=>{console.log(error)})
   }
 
+  function goOrderDatas(){
+    axios
+    .put('/orderItems/insertOrder',orderDatas)
+    .then((res)=>{
+      alert('주문 완료')
+    })
+    .catch((error)=>{console.log(error)})
+  }
 
 
   useEffect(()=>{
+    
+    // 만약 현재 주소가 list라면 상품 주문에 bold
+
+
     // 상품 리스트
     axios
-    .get('/orderItems/list')
+    .post('/orderItems/list',searchBox)
     .then((res)=>{
       setItemList(res.data)
     })
@@ -295,194 +354,9 @@ const Order = () => {
       console.log(error)
     })
 
-    // 상품 주문
-
-
-    // 주문 내역
-    axios
-    .get('/orderItems/orderList')
-    .then((res)=>{
-      setOrderList(res.data)
-    })
-    .catch((error)=>{console.log(error)})
-
-
   },[])
 
   // console.log(orderList)
-
-  // 사이드 바, 담길 내용
-  const showContent=(content)=>{
-    setShowContents(content)
-  }
-
-  const mainContent=()=>{
-    switch(showContents){
-
-      case 'itemList':
-        return <div className='order-main'>
-            <h3>상품 주문</h3>
-            {/* 품목 검색 */}
-            <div className='item-search'>
-              <input type='text'></input>
-              <span><i className="bi bi-search"></i></span>
-            </div> 
-            
-            {/* 품목 리스트 */}
-            <div className='itemList-div'>
-              <table className='itemList-table'>
-                <colgroup>
-                  <col width={'5%'}/>
-                  <col width={'10%'}/>
-                  <col width={'10%'}/>
-                  <col width={'30%'}/>
-                  <col width={'10%'}/>
-                  <col width={'15%'}/>
-                  <col width={'10%'}/>
-                  <col width={'5%'}/>
-                </colgroup>
-      
-                <thead>
-                  <tr>
-                    <td><input type='checkbox'
-                      //데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
-                      checked={checkItems.length === itemList.length ? true : false}
-                      onChange={(e)=>allCheckedHandler(e.target.checked)}
-                    ></input></td>
-                    <td>카테고리</td>
-                    <td>품목코드</td>
-                    <td>품목명</td>
-                    <td>설명</td>
-                    <td>수량</td>
-                    <td>구매단가</td>
-                    <td></td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* 상품명 누르면 모달로 상세정보? */}
-                  {
-                    itemList.map((item,i)=>{
-                      return(
-                        <tr key={i}>
-                          <td><input type='checkbox'
-                            // 체크된 아이템 배열에 해당 아이템이 있을 경우, 선택 활성화 아닐 시 해제 
-                            // checked={checkItems[item.productNum]||false}
-                            checked={checkItems.includes(item.productNum)? true:false}
-                            name={`select-${item.productNum}`}
-                            id={item.productNum}
-                            // selectChecked={selectChecked}
-                            onChange={(e)=>checkHandled(e.target.checked,item.productNum)}
-                          ></input></td>
-                          <td>{item.cateVO.cateName}</td>
-                          <td><span name='productNum' >{item.productNum}</span></td>
-                          <td><span className='order-pName'
-                            onClick={()=>{}}>{item.productName}</span></td>
-                          <td>{item.detail}</td>
-                          <td><input type='number' name='quantity' 
-                            defaultValue={1}
-                            onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}
-                            ></input> 개</td>
-                          <td><span className='priceNum'>{item.productPrice.toLocaleString()}</span> 원</td>
-                          <td><button type='button' value={item.productNum}
-                            onClick={(e)=>{goOrder(e); showModal('one')}}
-                          >주문</button></td>
-                        </tr>
-                      )
-                    })
-                  }
-                </tbody>
-              </table>
-            </div>
-
-            <div className='order-btns'>
-              <button type='button' className='order-btn' 
-                onClick={()=>{goOrderChecked(); showModal('more')}}>선택주문</button>
-              <button type='button' className='order-btn'>??</button>
-            </div>
-
-          </div>
-
-      case 'orderList':
-        return <div className='order-main'>
-          <h3>주문 내역</h3>
-          {/* 품목 리스트 */}
-          <div className='itemList-div'>
-            <table className='itemList-table'>
-              <colgroup>
-                {/* no */}
-                <col width={'5%'}/> 
-                {/* 카테 */}
-                <col width={'10%'}/> 
-                {/* 품목코드 */}
-                <col width={'10%'}/> 
-                {/* 발주일 */}
-                <col width={'10%'}/>
-                {/* 품목명 */}
-                <col width={'25%'}/>
-                {/* 설명 */}
-                <col width={'10%'}/>
-                {/* 수량 */}
-                <col width={'5%'}/>
-                {/* 단가 */}
-                <col width={'10%'}/>
-                {/* 총 금액 */}
-                <col width={'10%'}/>
-                {/* 현황 */}
-                <col width={'5%'}/>
-              </colgroup>
-    
-              <thead>
-                <tr>
-                  <td>No.</td>
-                  <td>카테고리</td>
-                  <td>품목코드</td>
-                  <td>발주일</td>
-                  <td>품목명</td>
-                  <td>설명</td>
-                  <td>수량</td>
-                  <td>단가</td>
-                  <td>총 금액</td>
-                  <td>현황</td>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  orderList.map((order,i)=>{
-                    return(
-                      <tr key={i}>
-                        <td>{i+1}</td>
-                        <td>{order.orderItemsVO.cateVO.cateName}</td>
-                        <td>{order.productNum}</td>
-                        <td>{order.requestDate}</td>
-                        <td>{order.orderItemsVO.productName}</td>
-                        <td>{order.orderItemsVO.detail}</td>
-                        <td><span className='eachNum'>{order.quantity}</span> 개</td>
-                        <td><span>{order.orderItemsVO.productPrice.toLocaleString()}</span> 원</td>
-                        <td><span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원</td>
-                        <td>
-                          {
-                            order.requestStatus=='Pending'?
-                            '접수'
-                            :
-                            '배송 중'
-                          }
-                          </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      // case 'orderState':
-      //   return <div className='order-main'>
-      //     <h3>주문 현황</h3>
-      //   </div>
-
-    }
-  }
 
 
   return (
@@ -531,44 +405,111 @@ const Order = () => {
           }}
         >
           {renderModalContent()}
-          <div className='order-btns'>
-            <button type='button' className='order-btn'
-              onClick={()=>{setModalOpen(false); goOrderData()}}>주문</button>
-            <button type='button' className='order-btn'
-              onClick={()=>{setModalOpen(false);}}>취소</button>
-          </div>          
+          
         </ReactModal>:null
       }
-
-      {/* 사이드바 */}
-      <div className='order-sidebar'>
-        <ul>
-          <li><span className='getBold' 
-          onClick={(e)=>{showContent('itemList'); changeBold(e)}}>
-            <i className="bi bi-caret-right-fill"></i>
-            <span> 상품 주문</span>
-            </span></li>
-          <li><span className='getBold' 
-          onClick={(e)=>{showContent('orderList'); changeBold(e)}}>
-            <i className="bi bi-caret-right-fill"></i>
-            <span>주문 내역</span>
-            </span></li>
-          {/* <li><span className='getBold' 
-          onClick={(e)=>{showContent('orderState'); changeBold(e)}}>
-            <i className="bi bi-caret-right-fill"></i>
-            <span>주문 현황</span>
-            </span></li> */}
-        </ul>
+    <div className='orderList-div'>
+  
+        {/* 사이드바 */}
+        <div className='order-sidebar'>
+          <ul>
+            <li><span className='getBold' 
+            onClick={(e)=>{navigate('/admin/order'); changeBold(e)}}>
+              <i className="bi bi-caret-right-fill"></i>
+              <span> 상품 주문</span>
+              </span></li>
+            <li><span className='getBold' 
+            onClick={(e)=>{navigate('/admin/orderList'); changeBold(e)}}>
+              <i className="bi bi-caret-right-fill"></i>
+              <span> 주문 내역</span>
+              </span></li>
+          </ul>
+        </div>
+        
+        <div className='order-main'>
+              <h3>상품 주문</h3>
+              {/* 품목 검색 */}
+              <div className='item-search'>
+                <input type='text' name='searchValue' 
+                  onChange={(e)=>{insertSearch(e)}}></input>
+                <span onClick={()=>{clickSearch()}}><i className="bi bi-search"></i></span>
+              </div> 
+              
+              {/* 품목 리스트 */}
+              <div className='itemList-div'>
+                <table className='itemList-table'>
+                  <colgroup>
+                    <col width={'5%'}/>
+                    <col width={'10%'}/>
+                    <col width={'10%'}/>
+                    <col width={'30%'}/>
+                    <col width={'10%'}/>
+                    <col width={'15%'}/>
+                    <col width={'10%'}/>
+                    <col width={'5%'}/>
+                  </colgroup>
+        
+                  <thead>
+                    <tr>
+                      <td><input type='checkbox'
+                        //데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
+                        checked={checkItems.length === itemList.length ? true : false}
+                        onChange={(e)=>allCheckedHandler(e.target.checked)}
+                      ></input></td>
+                      <td>카테고리</td>
+                      <td>품목코드</td>
+                      <td>품목명</td>
+                      <td>설명</td>
+                      <td>수량</td>
+                      <td>구매단가</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* 상품명 누르면 모달로 상세정보? */}
+                    {
+                      itemList.map((item,i)=>{
+                        return(
+                          <tr key={i}>
+                            <td><input type='checkbox'
+                              // 체크된 아이템 배열에 해당 아이템이 있을 경우, 선택 활성화 아닐 시 해제 
+                              // checked={checkItems[item.productNum]||false}
+                              checked={checkItems.includes(item.productNum)? true:false}
+                              name={`select-${item.productNum}`}
+                              id={item.productNum}
+                              // selectChecked={selectChecked}
+                              onChange={(e)=>checkHandled(e.target.checked,item.productNum)}
+                            ></input></td>
+                            <td>{item.cateVO.cateName}</td>
+                            <td><span name='productNum' >{item.productNum}</span></td>
+                            <td><span className='order-pName'
+                              onClick={()=>{}}>{item.productName}</span></td>
+                            <td>{item.detail}</td>
+                            <td><input type='number' name='quantity' 
+                              defaultValue={1}
+                              onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}
+                              ></input> 개</td>
+                            <td><span className='priceNum'>{item.productPrice.toLocaleString()}</span> 원</td>
+                            <td><button type='button' value={item.productNum}
+                              onClick={(e)=>{goOrder(e); showModal('one')}}
+                            >주문</button></td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+  
+              <div className='order-btns'>
+                <button type='button' className='order-btn' 
+                  onClick={()=>{goOrderChecked(); showModal('more');}}>선택주문</button>
+                <button type='button' className='order-btn'>??</button>
+              </div>
+  
+            </div>
       </div>
 
-      
-      {/* 메인 */}
-      {
-        mainContent()
-      }
-      <div>
-
-      </div>
       
       
 
