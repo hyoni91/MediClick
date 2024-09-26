@@ -5,13 +5,13 @@ import ReactModal from 'react-modal'
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 import { useRef } from 'react';
+import ManageCustomerContent from './ManageCustomerContent';
 
 const ManageCustomer = () => {
   //모달창
   const [modalOpen, setModalOpen] = useState(false)
-  const showModal = () => {
-  setModalOpen(!modalOpen)
-  }
+  const [modalOpenDetail, setModalOpenDetail] = useState(false)
+  const showModal = () => {setModalOpen(!modalOpen)}
 
   //삭제버튼
   const [deleteCustomer, setDeleteCustomer] = useState(true)
@@ -56,7 +56,6 @@ const ManageCustomer = () => {
     open({onComplete : handleComplete});
   }
 
-
   //삭제버튼
   function removeCustomer(){
     axios.delete(`/customer/deleteCustomer`,{
@@ -91,7 +90,7 @@ const ManageCustomer = () => {
 
   //검색
   function seachCustomer(){
-    axios.post(`/customer/customerList`, )
+    axios.post(`/customer/customerList`, searchValue)
     .then((res)=>{
       setCustomers(res.data)
     })
@@ -101,12 +100,11 @@ const ManageCustomer = () => {
     })
   }
 
-
   //거래처 등록
   const onchageCustomer = (e) =>{
     setInputCustomer({
       ...inputCustomer,
-      customerNum : e.target.value
+      [e.target.name] : e.target.value
     })
   }
 
@@ -138,6 +136,7 @@ const ManageCustomer = () => {
     })
     }
   }
+
 
     //체크박스 함수 
     const handleCheckAll = () => {
@@ -204,6 +203,10 @@ const ManageCustomer = () => {
                 </span>
               </div>
           </div>
+          <div className='manage-sales'>
+            <div>총 매출액</div>
+            <div>총 미수금</div>
+          </div>
         </div>
         <div className='manage-content'>
           <div className='content-btn'>
@@ -236,6 +239,7 @@ const ManageCustomer = () => {
                 <td>거래처 주소</td>
                 <td>거래처 번호</td>
                 <td>거래처 메일</td>
+                <td>수정</td>
               </tr>
             </thead>
             <tbody>
@@ -259,6 +263,17 @@ const ManageCustomer = () => {
                     <td>{customer.customerAddr}</td>
                     <td>{customer.customerTel}</td>
                     <td>{customer.customerEmail}</td>
+                    <td>
+                      <button 
+                        type='button'
+                        onClick={(e)=>{
+                          setModalOpenDetail(true)
+                          setCustomerNum(customer.customerNum)
+                        }}
+                      >
+                        수정
+                      </button>
+                    </td>
                   </tr>
                   )
                 })
@@ -272,110 +287,152 @@ const ManageCustomer = () => {
       {
         modalOpen? 
         <ReactModal 
-          isOpen={true}
-          ariaHideApp={false}
-          // onRequestClose={() => setModalOpen(false)}
-          style={{
-            overlay: {
-              position: 'fixed',
-              borderRadius : 10,
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(0,0,0, 0.6)'
-            },
-            content: {
-              position: 'absolute',
-              width: '580px',
-              height: '70%',
-              top: '180px',
-              left: '30%',
-              right: '80%',
-              bottom: '50%',
-              border: '1px solid #ccc',
-              background: '#fff',
-              overflow: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              borderRadius: '4px',
-              outline: 'none',
-              padding: '20px'
-            }
-        }}
-        
-        >
+        isOpen={true}
+        ariaHideApp={false}
+        // onRequestClose={() => setModalOpen(false)}
+        style={{
+          overlay: {
+            position: 'fixed',
+            borderRadius : 10,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0, 0.6)'
+          },
+          content: {
+            position: 'absolute',
+            width: '580px',
+            height: '70%',
+            top: '180px',
+            left: '30%',
+            right: '80%',
+            bottom: '50%',
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '4px',
+            outline: 'none',
+            padding: '20px'
+          }
+      }}
+      
+      >
           <div className='customer-modal'>
-            <h3> ◻거래처 정보</h3>
-            <div className='costomer-add-div'>
-              <div>
-                <h5><i class="fa-regular fa-building" /> 거래처명</h5>
-                <input 
-                  type='text'
-                  name='customerName'
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                />
-              </div>
-              <div>
-                <h5><i className="fa-regular fa-user" /> 대표자 이름</h5>
-                <input 
-                  type='text'
-                  name='customerOwner'
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                />
-              </div>
-              <div>
-                <h5><i class="fa-regular fa-file-lines" /> 사업자 번호</h5>
-                <input 
-                  type='text'
-                  name='businessNumber'
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                />
-              </div>
-              <div>
-                <h5><i class="fa-solid fa-map-location-dot" /> 거래처 주소</h5>
-                <input 
-                  type='text'
-                  name='customerAddr'
-                  value={inputCustomer.customerAddr}
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                  onClick={()=>{handleClick()}}
-                /> 
-              </div>
-              <div>
-                <h5><i class="fa-solid fa-phone" /> 거래처 전화</h5>
-                <input  
-                  type='text'
-                  name='customerTel'
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                />
-              </div>
-              <div>
-                <h5><i class="fa-solid fa-envelope-open" />거래처 메일</h5>
-                <input 
-                  type='text'
-                  name='customerEmail'
-                  onChange={(e)=>{ onchageCustomer(e)}}
-                />
-              </div>
+          <h3> ◻거래처 정보</h3>
+          <div className='costomer-add-div'>
+            <div>
+              <h5><i class="fa-regular fa-building" /> 거래처명</h5>
+              <input 
+                type='text'
+                name='customerName'
+                onChange={(e)=>{ onchageCustomer(e)}}
+              />
             </div>
-            <div className='cutomer-modal-btn'>
-              <button 
-                type='button'
-                onClick={()=>{addCustomer()}}
-              >등록하기
-              </button>
-              <button 
-                type='button'
-                onClick={()=>{setModalOpen(false)}}
-              >닫기
-              </button>
+            <div>
+              <h5><i className="fa-regular fa-user" /> 대표자 이름</h5>
+              <input 
+                type='text'
+                name='customerOwner'
+                onChange={(e)=>{ onchageCustomer(e)}}
+              />
+            </div>
+            <div>
+              <h5><i class="fa-regular fa-file-lines" /> 사업자 번호</h5>
+              <input 
+                type='text'
+                name='businessNumber'
+                onChange={(e)=>{ onchageCustomer(e)}}
+              />
+            </div>
+            <div>
+              <h5><i class="fa-solid fa-map-location-dot" /> 거래처 주소</h5>
+              <input 
+                type='text'
+                name='customerAddr'
+                value={inputCustomer.customerAddr}
+                onChange={(e)=>{ onchageCustomer(e)}}
+                onClick={()=>{handleClick()}}
+              /> 
+            </div>
+            <div>
+              <h5><i class="fa-solid fa-phone" /> 거래처 전화</h5>
+              <input  
+                type='text'
+                name='customerTel'
+                onChange={(e)=>{ onchageCustomer(e)}}
+              />
+            </div>
+            <div>
+              <h5><i class="fa-solid fa-envelope-open" />거래처 메일</h5>
+              <input 
+                type='text'
+                name='customerEmail'
+                onChange={(e)=>{ onchageCustomer(e)}}
+              />
             </div>
           </div>
-        </ReactModal>
+          <div className='cutomer-modal-btn'>
+            <button 
+              type='button'
+              onClick={()=>{addCustomer()}}
+            >등록하기
+            </button>
+            <button 
+              type='button'
+              onClick={()=>{setModalOpen(false)}}
+            >닫기
+            </button>
+          </div>
+        </div>
+      </ReactModal>
+        :null
+      }
+      {
+        modalOpenDetail? 
+        <ReactModal 
+        isOpen={true}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            position: 'fixed',
+            borderRadius : 10,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0, 0.6)'
+          },
+          content: {
+            position: 'absolute',
+            width: '580px',
+            height: '70%',
+            top: '180px',
+            left: '30%',
+            right: '80%',
+            bottom: '50%',
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '4px',
+            outline: 'none',
+            padding: '20px'
+          }
+      }}
+      
+      >
+        <ManageCustomerContent 
+          customerNum={customerNum}
+          setModalOpenDetail={setModalOpenDetail}
+          />
+      </ReactModal>
         :null
       }
     </div>
   )
 }
+
 
 export default ManageCustomer

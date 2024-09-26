@@ -47,6 +47,31 @@
             </foreach>
         </delete>
 
+    <select id="detailCustomer" resultMap="customer">
+        SELECT * FROM CUSTOMERS
+        WHERE CUSTOMER_NUM = #{customerNum}
+    </select>
+
+
+    <update id="updateCustomer">
+        UPDATE CUSTOMERS
+        SET CUSTOMER_NAME = #{customerName}
+        ,CUSTOMER_ADDR = #{customerAddr}
+        ,CUSTOMER_TEL = #{customerTel}
+        ,CUSTOMER_EMAIL = #{customerEmail}
+        ,CUSTOMER_OWNER = #{customerOwner}
+        ,BUSINESS_NUMBER = #{businessNumber}
+        WHERE CUSTOMER_NUM = #{customerNum}
+    </update>
+
+    <!--거래처별당 주문내용-->
+    <select id="order" resultMap="orderItemsMapper.request">
+        SELECT R.REQUEST_DATE, P.PRODUCT_NAME, R.QUANTITY, (P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
+        FROM order_requests R , products P
+        WHERE R.PRODUCT_NUM = P.PRODUCT_NUM
+        AND R.CUSTOMER_NUM = #{customerNum}
+    </select>
+
 </mapper>
 
 

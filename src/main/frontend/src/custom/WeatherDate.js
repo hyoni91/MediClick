@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 const WeatherDate = () => {
   
   //날씨 api
-  const cityName = 'Ulsan'
+  const cityName = 'Seoul'
   const apiKey = process.env.REACT_APP_Weather_Key
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
   

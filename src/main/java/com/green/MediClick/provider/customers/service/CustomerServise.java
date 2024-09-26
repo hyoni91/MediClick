@@ -13,4 +13,10 @@ public interface CustomerServise {
 
     void deleteCustomer(List<Integer> customerNumList);
 
+    void updateCustomer(CustomersVO customersVO);
+
+    CustomersVO detailCustomer(int customerNum);
+
+    List<CustomersVO> order(int customerNum);
+
 }

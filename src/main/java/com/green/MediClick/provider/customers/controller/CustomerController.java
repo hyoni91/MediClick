@@ -33,4 +33,20 @@ public class CustomerController {
         customerServise.deleteCustomer(customerNumList);
     }
 
+    @PutMapping("/updateCustomer")
+    public void updateCustomer(@RequestBody CustomersVO customersVO){
+        customerServise.updateCustomer(customersVO);
+    }
+
+    @GetMapping("/detailCustomer/{customerNum}")
+    public CustomersVO detailCustomer(@PathVariable("customerNum") int customerNum ){
+        return customerServise.detailCustomer(customerNum);
+    }
+
+    @GetMapping("/orders/{customerNum}")
+    public List<CustomersVO> orders(@PathVariable("customerNum") int customerNum){
+        System.out.println("=================================="+customerNum);
+        return customerServise.order(customerNum);
+    }
+
 }

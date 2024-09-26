@@ -1,5 +1,7 @@
 package com.green.MediClick.provider.customers.vo;
 
+import com.green.MediClick.orderitems.vo.OrderItemsVO;
+import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import lombok.Data;
 
 import java.util.Arrays;
@@ -15,4 +17,5 @@ public class CustomersVO {
     private String customerTel;
     private String customerEmail;
     private List<Integer> customerNumList;
+//    private List<OrderRequestVO> orderRequest;
 }

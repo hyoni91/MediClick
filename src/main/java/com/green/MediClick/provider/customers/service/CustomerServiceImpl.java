@@ -34,5 +34,20 @@ public class CustomerServiceImpl implements CustomerServise{
         sqlSession.delete("customerMapper.deleteCustomer",params);
     }
 
+    @Override
+    public void updateCustomer(CustomersVO customersVO) {
+        sqlSession.update("customerMapper.updateCustomer", customersVO);
+    }
+
+    @Override
+    public CustomersVO detailCustomer(int customerNum) {
+        return sqlSession.selectOne("customerMapper.detailCustomer", customerNum);
+    }
+
+    @Override
+    public List<CustomersVO> order(int customerNum) {
+        return sqlSession.selectList("customerMapper.order", customerNum);
+    }
+
 
 }

@@ -16,7 +16,7 @@
   /* background-color: rgb(247, 244, 244); */
   border-radius: 15px;
   width: 100%;
-  height: 10%;
+  /* height: 30%; */
   text-align: left;
   margin-bottom: 35px;
   margin-top: 50px;
@@ -24,7 +24,7 @@
 
 .manage-content{
   width: 100%;
-  height: 90%;
+  /* height: 90%; */
   text-align: left;
 }
 
@@ -39,6 +39,7 @@
 .seachbar >input{
   width: 80%;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .seachbar > span{
@@ -77,6 +78,18 @@
   width: 70px;
   cursor: pointer;
   background-color: white;
+}
+
+.content-table button{
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 2px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.content-table button:hover{
+  background-color: rgb(226, 226, 226);
 }
 
 
@@ -142,4 +155,16 @@ font-weight: 700;
   background-color: #384B70;
   color: white;
   margin-right: 3px;
+}
+
+.manage-sales{
+  display: flex;
+  gap: 10px;
+}
+
+
+.manage-sales > div{
+  border: 1px solid black;
+  width: 300px;
+  height:100px;
 }
