@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './MedicalSupplies.css';
 const MedicalSupplies = () => {
+  const [mainImg, setMainImg] = useState(null)
   const navigate = useNavigate()
+  const [previewUrl, setPreviewUrl] = useState('');
+  //아이템
   const [medicalSupplies, setMedicalSupplies] = useState({
     productNum : '',
     productName : '',
@@ -12,20 +15,14 @@ const MedicalSupplies = () => {
     stock : '',
     detail : ''
   })
+  //카테
   const [msCategory, setMsCategory] = useState({
     cateNum : '',
     cateName : ''
   })
-
-  const [cateNum, setCateNum] =useState('')
-  const categoryChange = (e) => {
-    setMsCategory({
-      ...msCategory,
-      
-      [e.target.name] : e.target.value
-    })
-  }
+  //카테 리스트
   const [category,setCategory]=useState([])
+  //아이템 리스트
   const [item, setItem] = useState([])
   useEffect(() => {
     axios.all([
@@ -45,6 +42,16 @@ const MedicalSupplies = () => {
     }))
     .catch((error) => {console.log(error)})
   },[])
+  const [cateNum, setCateNum] =useState('')
+  const categoryChange = (e) => {
+    setMsCategory({
+      ...msCategory,
+      
+      [e.target.name] : e.target.value
+    })
+  }
+
+
   const mschange = (e) => {
     setMedicalSupplies({
       ...medicalSupplies,
@@ -52,30 +59,44 @@ const MedicalSupplies = () => {
       [e.target.name] : e.target.value
     })
   }
-  const insertItem = () => {
-    axios.post('/item/productInsert',medicalSupplies)
-    .then((res) => {
-      window.location.reload()
-    })
-    .catch((error) => {console.log(error)})
-  }
-
+  
   const insertCategory = () => {
     if (msCategory.cateName == '' ) {
       alert('카테고리를 입력하세요');
     } else {
       console.log(msCategory)
       axios.post('/item/cateInsert', msCategory)
-        .then((res) => {
-          
-          setMsCategory({cateName : ''}); 
-          updateCategory(); // 카테고리 리스트 갱신
-          alert('카테고리 등록 완료!');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .then((res) => {
+        
+        setMsCategory({cateName : ''}); 
+        updateCategory(); // 카테고리 리스트 갱신
+        alert('카테고리 등록 완료!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
+  }
+  
+  console.log(mainImg)
+  const insertItem = () => {
+    console.log(mainImg)
+      //이미지
+    const fileConfig = {headers : {'Content-Type' : 'multipart/form-data'}}
+    const itemForm = new FormData();
+
+    itemForm.append('productName', medicalSupplies.productName)
+    itemForm.append('cateNum', medicalSupplies.cateNum)
+    itemForm.append('productPrice', medicalSupplies.productPrice)
+    itemForm.append('stock', medicalSupplies.stock)
+    itemForm.append('detail', medicalSupplies.detail)
+    itemForm.append('mainImg', mainImg)
+    
+    axios.post('/item/productInsert',itemForm,fileConfig)
+    .then((res) => {
+      window.location.reload()
+    })
+    .catch((error) => {console.log(error)})
   }
   
   const deleteCategory = (cateNum) => {
@@ -86,15 +107,22 @@ const MedicalSupplies = () => {
     .catch((error) => {console.log(error)})
   }
   const updateCategory = () => {
-    axios.get('/item/cateList')
-      .then((res) => {
-        setCategory(res.data); // category 상태 업데이트
-        // if()
-        setCateNum(res.data[0].cateNum);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.all([
+      axios.get('/item/cateList'),
+      axios.get('/item/medicalSuppliesList')
+    ])
+    .then(axios.spread((res1,res2) => {
+      console.log(res1.data)
+      //카테고리
+      setCategory(res1.data)
+      setCateNum(res1.data[0].cateNum);
+      //아이템
+      setItem(res2.data)
+      console.log(res2.data)
+    }))
+    .catch((error) => {
+      console.log(error);
+    });
   };
   
 
@@ -104,23 +132,23 @@ const MedicalSupplies = () => {
     <div className='medicalSupplies-container'>
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
-          <div>
-            <select name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+          <div >
+            <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
               category.map((cate,i) => {
                 return(
-                    <>
+                    
                       <option key={i} value={cate.cateNum}>{cate.cateName}</option>
-                    </>
+                    
                 )
               })}
             </select>
               <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
           </div>
             <div className='cate-flex'>
-              <div cate-divBtn>
+              <div className='cate-divBtn'>
                 <button type='button' onClick={() => {deleteCategory(cateNum)}}>카테고리 삭제</button>
               </div>
               <div className='cate-divBtn'>
@@ -132,12 +160,24 @@ const MedicalSupplies = () => {
           </div>
         <div className='medicalSupplies-div'>
           <div className='ms-imgdiv'>
-              {cateNum ? (
-              <img className="MSfile-img" src={''} alt="미리보기" />
-            ) : 
-            (
-            <div className="MSfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
-            )}
+          {previewUrl ? (
+            <img className="adminfile-img" src={previewUrl} alt="미리보기" />
+          ) : (
+          <div className="adminfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
+        )}
+            <div>
+            <input
+          className='ad-input'
+          name='mainImg'
+          type='file'
+          accept='image/*'
+          onChange={(e) => {
+            console.log(1)
+        setMainImg(e.target.files[0]); // 파일을 상태에 설정
+        setPreviewUrl(URL.createObjectURL(e.target.files[0])); // 미리보기 URL 설정
+    }}
+/>
+            </div>
           </div>
           <div>
             <div>상품 이름</div>

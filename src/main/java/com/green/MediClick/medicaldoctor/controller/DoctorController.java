@@ -56,7 +56,7 @@ public class DoctorController {
         //파일이 들어있을 경우 업로드
         if (docImg != null && !docImg.isEmpty()) {
             //메인이 되는 이미지 첨부 후 첨부된 원본 파일명, 첨부된 파일명을 리턴 받음
-            mainImgVO = FileUploadUtil.fileUpload(docImg);
+            mainImgVO = (DoctorImgVO) FileUploadUtil.fileUpload(docImg,"doctor" ,doctorVO.getDocNum(),0);
         }
 
 

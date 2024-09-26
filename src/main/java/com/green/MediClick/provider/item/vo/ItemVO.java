@@ -12,4 +12,5 @@ public class ItemVO {
     private int stock;
     private String detail;
     private CategoryVO categoryVO;
+    private ItemImgVO imgVO;
 }
