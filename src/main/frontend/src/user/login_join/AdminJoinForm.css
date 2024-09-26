@@ -39,7 +39,7 @@
   width: 80%; /* 입력 필드 전체 너비 사용 */
 }
 
-.file-div{
+.adminfile-div{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,17 +48,17 @@
   position: relative;
   
 }
-.file-div > div:first-child{
+.adminfile-div > div:first-child{
   position: relative;
 }
-.file-img{
+.adminfile-img{
   position: absolute;
   height: 200px;
   top: -250px;
   left: 200px;
   border: 1px solid;
 }
-.file-placeholder{
+.adminfile-placeholder{
 position: absolute;
 top: -250px;
 left: 200px;
@@ -82,7 +82,7 @@ white-space: nowrap;
   padding-top: 5px;
   cursor: pointer;
 } */
-.file-label {
+.adminfile-label {
   position: absolute;
   top: -50px;
   right: 50px;
@@ -98,10 +98,12 @@ white-space: nowrap;
   justify-content: center; /* 수평 중앙 정렬 */
   cursor: pointer;
 }
-.file-input{
+.adminfile-input{
   /* 파일선택 안보이게 */
   opacity: 0; 
   position: absolute;
   cursor: pointer;
 }
+
+
 

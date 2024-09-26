@@ -22,10 +22,11 @@ const MedicalSupplies = () => {
     setMsCategory({
       ...msCategory,
       
-      cateNum : e.target.value
+      [e.target.name] : e.target.value
     })
   }
   const [category,setCategory]=useState([])
+  const [item, setItem] = useState([])
   useEffect(() => {
     axios.all([
       axios.get('/item/cateList'),
@@ -39,7 +40,7 @@ const MedicalSupplies = () => {
       setCategory(res1.data)
       setCateNum(res1.data[0].cateNum);
       //아이템
-      setMedicalSupplies(res2.data)
+      setItem(res2.data)
       console.log(res2.data)
     }))
     .catch((error) => {console.log(error)})
@@ -54,7 +55,7 @@ const MedicalSupplies = () => {
   const insertItem = () => {
     axios.post('/item/productInsert',medicalSupplies)
     .then((res) => {
-      navigate('/provider')
+      window.location.reload()
     })
     .catch((error) => {console.log(error)})
   }
@@ -103,50 +104,74 @@ const MedicalSupplies = () => {
     <div className='medicalSupplies-container'>
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
-          <select name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
-            { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
-            </option>
-            :
-            category.map((cate,i) => {
-              return(
-                  <>
-                    <option key={i} value={cate.cateNum}>{cate.cateName}</option>
-                  </>
-              )
-            })}
-          </select>
-            <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
+          <div>
+            <select name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+              { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
+              </option>
+              :
+              category.map((cate,i) => {
+                return(
+                    <>
+                      <option key={i} value={cate.cateNum}>{cate.cateName}</option>
+                    </>
+                )
+              })}
+            </select>
+              <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
+          </div>
+            <div className='cate-flex'>
+              <div cate-divBtn>
+                <button type='button' onClick={() => {deleteCategory(cateNum)}}>카테고리 삭제</button>
+              </div>
+              <div className='cate-divBtn'>
+                <button type='button' onClick={() => {insertCategory()}}>카테고리 등록</button>
+              </div>
+            </div>
         </div>
           <div className='cate-divBtn'>
-            <div cate-divBtn><button type='button' onClick={() => {deleteCategory(cateNum)}}>카테고리 삭제</button></div>
-            <div className='cate-divBtn'>
-              <button type='button' onClick={() => {insertCategory()}}>카테고리 등록</button>
-            </div>
           </div>
         <div className='medicalSupplies-div'>
-          <div>상품 이름</div>
-          <input type='text' name='productName' onChange={(e) => {mschange(e)}} />
-          
-          <div>가격</div>
-          <input type='text' name='productPrice' onChange={(e) => {mschange(e)}} />
-          
-          <div>수량</div>
-          <input type='text' name='stock' onChange={(e) => {mschange(e)}} />
-          
-          <div>상세정보</div>
-          <input type='text' name='detail' onChange={(e) => {mschange(e)}} />
-        
+          <div className='ms-imgdiv'>
+              {cateNum ? (
+              <img className="MSfile-img" src={''} alt="미리보기" />
+            ) : 
+            (
+            <div className="MSfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
+            )}
+          </div>
           <div>
-            <button type='button' onClick={() => {
-              insertItem()
-            }}>상품 등록</button>
+            <div>상품 이름</div>
+            <input type='text' name='productName' onChange={(e) => {mschange(e)}} />
+            
+            <div>가격</div>
+            <input type='text' name='productPrice' onChange={(e) => {mschange(e)}} />
+            
+            <div>수량</div>
+            <input type='text' name='stock' onChange={(e) => {mschange(e)}} />
+            
+            <div>상세정보</div>
+            <input type='text' name='detail' onChange={(e) => {mschange(e)}} />
+          
+            <div>
+              <button type='button' onClick={() => {
+                insertItem()
+              }}>상품 등록</button>
+            </div>
           </div>
           {/* 아이템 테이블 */}
           
         </div>
       </div>
       <div className='medicalSupplies-item'>
-        <table>
+        <table className='medicalSupplies-itemtable'>
+          <colgroup>
+          <col width={'10%'}/>
+          <col width={'10%'}/>
+          <col width={'20%'}/>
+          <col width={'20%'}/>
+          <col width={'10%'}/>
+          <col width={'*0%'}/>
+          </colgroup>
           <thead>
             <tr>
               <td>종류</td>
@@ -159,8 +184,8 @@ const MedicalSupplies = () => {
           </thead>
           <tbody>
           {
-            medicalSupplies.length > 0 ? (
-            medicalSupplies.map((item,i) => {
+            item.length > 0 ? (
+              item.map((item,i) => {
               return(
                 <tr key={i}>
                   <td>{item.categoryVO.cateName}</td>

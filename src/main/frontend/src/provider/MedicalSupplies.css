@@ -8,14 +8,29 @@
 .category-div{
   width: 20%;
   margin: auto;
+  display: flex;
 }
 
 .medicalSupplies-div{
+  display: flex;
+  align-items: center;
   width: 40%;
+}
+.cate-flex{
 }
 .cate-divBtn{
   margin: auto;
 }
 .cate-divBtn{
   margin: 20px auto;
+}
+
+.ms-imgdiv{
+  margin-right: 20px;
+}
+
+.medicalSupplies-itemtable{
+  width: 70%;
+  margin: auto;
+  height: 150px;
 }

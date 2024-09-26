@@ -142,17 +142,17 @@ const AdminJoinForm = () => {
           </tbody>
         </table>
         {/* 의사 이미지 */}
-        <div className='file-div'>
+        <div className='adminfile-div'>
           
           <div>
             {previewUrl ? (
-            <img className="file-img" src={previewUrl} alt="미리보기" />
+            <img className="adminfile-img" src={previewUrl} alt="미리보기" />
           ) : (
-          <div className="file-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
+          <div className="adminfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
         )}
           </div>
-          <babel className='file-label'>사진등록
-            <input className='file-input' type='file' accept='image/*' onChange={(e) => {
+          <babel className='adminfile-label'>사진등록
+            <input className='adminfile-input' type='file' accept='image/*' onChange={(e) => {
               setDocImg(e.target.files[0]) 
             }}/>
           </babel>

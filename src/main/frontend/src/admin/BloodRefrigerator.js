@@ -26,6 +26,7 @@ const BloodRefrigerator = () => {
 // 평균 온도 상태 변수 추가
 const [avgTemp, setAvgTemp] = useState(0);
 
+const [tempOver] = useState(30)
 
 // 데이터 평균을 계산하는 함수
 const calculateAverage = (data) => {
@@ -88,7 +89,9 @@ const fetchTemperatureData = async () => {
   const response = await axios.get('/temp/nowTemps');
   setTemp1(response.data)
   response.data[0].currentTemp >= 30 ? setTempdd(false) : setTempdd(true)
-
+  if(response.data[0].currentTemp >= 30){
+    alert(`온도가 ${tempOver}°C를 초과했습니다`)
+  }
   // 평균 온도 계산 및 상태 업데이트
   const average = calculateAverage(response.data);
   setAvgTemp(average);
@@ -136,6 +139,8 @@ const Objecttime = timeList.map((time , i) => {
   }
 })
 // console.log(Objecttime)
+
+
 
 //10분당 평균 데이터를 저장하는 변수
 // 날짜
