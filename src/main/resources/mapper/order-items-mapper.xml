@@ -31,17 +31,18 @@
     <!--전체조회 + 검색-->
     <select id="getAllItems" resultMap="items">
         SELECT PRODUCT_NUM,
-            PRODUCT_NAME,
+            P.PRODUCT_NAME,
             P.CATE_NUM,
             C.CATE_NAME,
             PRODUCT_PRICE,
             DETAIL
         FROM PRODUCTS P,CATEGORY C
         WHERE C.CATE_NUM=P.CATE_NUM
-<!--        <if test='searchValue!=null and !searchValue.equals("")'>-->
-<!--            WHERE ${searchType} LIKE CONCAT ('%',#{searchValue},'%')-->
-<!--        </if>-->
-        ORDER BY CATE_NUM
+        <if test=' searchValue != null and !searchValue.equals("") '>
+            AND (C.CATE_NAME LIKE CONCAT('%', #{searchValue}, '%')
+            OR P.PRODUCT_NAME LIKE CONCAT('%', #{searchValue}, '%'))
+        </if>
+        ORDER BY C.CATE_NUM
     </select>
 
     <!--주문-->
@@ -50,11 +51,14 @@
             PRODUCT_NUM,
             CUSTOMER_NUM,
             QUANTITY
-        ) VALUES (
+        ) VALUES
+        <foreach collection="orderDatas" item="order" separator=",">
+            (
             #{productNum},
             #{customerNum},
             #{quantity}
-        )
+            )
+        </foreach>
     </insert>
 
     <!--주문 내역-->

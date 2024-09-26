@@ -34,6 +34,7 @@ import Order from './admin/Order';
 import ManageCustomer from './provider/ManageCustomer';
 import MSCategory from './provider/MSCategory';
 import MedicalSupplies from './provider/MedicalSupplies';
+import OrderList from './admin/OrderList';
 
 
 
@@ -171,8 +172,10 @@ function App() {
             <Route path='mapTest' element={<MapTest1/>}/>
             {/* 의사 스케줄관리 */}
             <Route path='docSch' element={<DocSchManage/>}/>
-            {/* 발주페이지 */}
+            {/* 발주페이지 : 상품 주문 */}
             <Route path='order' element={<Order/>}/>
+            {/* 발주페이지 : 주문 내역*/}
+            <Route path='orderList' element={<OrderList/>}/>
           </Route>
 
           

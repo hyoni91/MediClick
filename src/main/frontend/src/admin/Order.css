@@ -100,6 +100,7 @@
   border-bottom: 1px solid lightgray;
   color: dimgrey;
   font-family: 'SUITE-Regular';
+  border-top: 2px solid rgb(141, 141, 141);
   /* border-top: 2px solid black; */
 }
 
@@ -197,11 +198,13 @@
 .order-modal-table tbody td{
   padding: 5px;
   font-size: 0.95rem;
+  border: 1px solid lightgray;
 }
 
 .order-modal-table tbody td:first-child{
   background-color: #eeeeeea2;
   font-family: 'SUITE-Regular';
+  /* border-right: 2px solid lightgray; */
 }
 
 
@@ -268,4 +271,10 @@
 
 .inputCustomerNum-div>button:hover{
   background-color: #034999c5;
+}
+
+
+.orderList-div{
+  display: flex;
+  justify-content: center;
 }
