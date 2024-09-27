@@ -33,16 +33,16 @@
     <!--전체조회 + 검색-->
     <select id="getAllItems" resultMap="items">
         SELECT PRODUCT_NUM,
-            P.PRODUCT_NAME,
+            PRODUCT_NAME,
             P.CATE_NUM,
             C.CATE_NAME,
             PRODUCT_PRICE,
             DETAIL
-        FROM PRODUCTS P,CATEGORY C
+        FROM PRODUCTS P, CATEGORY C
         WHERE C.CATE_NUM=P.CATE_NUM
-        <if test=' searchValue != null and !searchValue.equals("") '>
+        <if test=" searchValue != null and !searchValue.equals('') ">
             AND (C.CATE_NAME LIKE CONCAT('%', #{searchValue}, '%')
-            OR P.PRODUCT_NAME LIKE CONCAT('%', #{searchValue}, '%'))
+            OR PRODUCT_NAME LIKE CONCAT('%', #{searchValue}, '%'))
         </if>
         ORDER BY C.CATE_NUM
     </select>
@@ -54,13 +54,13 @@
             CUSTOMER_NUM,
             QUANTITY
         ) VALUES
-        <foreach collection="orderDatas" item="order" separator=",">
+<!--        <foreach collection="orderDatas" item="order" separator=",">-->
             (
             #{productNum},
             #{customerNum},
             #{quantity}
             )
-        </foreach>
+<!--        </foreach>-->
     </insert>
 
     <!--주문 내역-->
@@ -80,6 +80,12 @@
         AND P.CATE_NUM=C.CATE_NUM
         ORDER BY REQUEST_NUM DESC
     </select>
+
+    <!--주문 취소-->
+    <delete id="delOrder">
+        DELETE FROM ORDER_REQUESTS
+        WHERE REQUEST_NUM=#{requestNum}
+    </delete>
 
 
 </mapper>

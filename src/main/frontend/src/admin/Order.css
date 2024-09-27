@@ -43,12 +43,12 @@
   height: 100vh;
   display: flex;
   justify-content: center;
+  /* background-color: #eeeeee31; */
 }
 
 .order-main{
-  width: 1100px;
+  width: 1200px;
   height: 90vh;
-  /* background-color: gainsboro; */
 }
 
 
@@ -85,7 +85,7 @@
 
 .itemList-div{
   margin: 0 auto;
-  width: 91%;
+  /* width: 95%; */
   /* background-color: white; */
 }
 
@@ -275,6 +275,7 @@
 
 
 .orderList-div{
+  width: 100%;
   display: flex;
   justify-content: center;
 }
