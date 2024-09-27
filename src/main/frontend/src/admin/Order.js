@@ -9,22 +9,29 @@ const Order = () => {
 
   // 상품 리스트
   const [itemList,setItemList]=useState([])
+
+
   // 주문 데이터 임시 저장
   const [selectData,setSelectData]=useState({})
   // 주문 데이터들 임시 저장
   const [selectDatas,setSelectDatas]=useState([])
+
+
   // 주문 데이터
   const [orderData,setOrderData]=useState({
     productNum:'',
     customerNum:'',
-    quantity:1
+    quantity:10
   })
+
   // 선택 주문 데이터들 - 상태관리
-  const [orderDatas,setOrderDatas]=useState([{
+  const [orderDatas,setOrderDatas]=useState([
+    {
     productNum:'',
     customerNum:'',
-    quantity:1
-  }])
+    quantity:10
+    }
+  ])
 
   //검색 조건 저장 변수
   const [searchBox,setSearchBox]=useState({
@@ -39,11 +46,12 @@ const Order = () => {
     })
   }
 
-  console.log(searchBox)
+  // console.log(searchBox)
 
 
   // 검색하기
   function clickSearch(){
+    console.log(searchBox)
 
     axios
     .post('/orderItems/list',searchBox)
@@ -167,7 +175,7 @@ const Order = () => {
 
       case 'more':
         return <div>
-          {/* 체크된 모든 상품 주문 */}
+          {/* 체크된 모든 상품 주문 : 선택 주문*/}
           <div className='order-modal-div'>
             <h3>주문 확인</h3>
             <table className='order-modal-table-checked'>
@@ -185,16 +193,15 @@ const Order = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* 맵으로 돌려서 띄우기 */}
                 {
                   selectDatas.map((item,i)=>{
-                    return(
-                      <tr key={i}>
-                        <td>{item.productName}</td>
-                        <td>{orderDatas[0].quantity}</td>
-                        <td>{((item.productPrice)*(orderDatas[0].quantity))}</td>
-                      </tr>
-                    )
+                      return(
+                        <tr key={i}>
+                          <td>{item.productName}</td>
+                          <td><span className='eachNum'>{orderDatas[0].quantity}</span> 개</td>
+                          <td><span className='priceNum'>{((item.productPrice)*(orderDatas[0].quantity)).toLocaleString()}</span> 원</td>
+                        </tr>
+                      )
                   })
                 }
               </tbody>
@@ -276,10 +283,11 @@ const Order = () => {
       setSelectDatas(selectedItems) //선택된 아이템들을 상태로 저장
     }
 
-    console.log(selectDatas)
+
 
   }
 
+  // console.log(selectDatas)
   
   // 개별 - 주문 데이터 입력
   function insertOrderData(e){
@@ -296,6 +304,8 @@ const Order = () => {
 
   }
 
+  // console.log(orderDatas)
+
   // 선택 - 주문 데이터 입력
   function insertOrderDatas(e){
     const {name,value}=e.target
@@ -305,12 +315,14 @@ const Order = () => {
         const filterPrev=prev.filter(order=>order.customerNum!==""&&order.productNum!=="")
 
         return[
-        ...filterPrev,
-        {
-          ...prev[prev.length-1],  //마지막 주문 데이터 복사
-          [name]:value, //새로 입력된 값으로 업데이트 
-          productNum:selectDatas.map(item=>item.productNum) // 선택된 상품 번호 배열
-        }
+          ...filterPrev,
+          {
+            ...filterPrev[filterPrev.length-1],  //마지막 주문 데이터 복사
+            [name]:value, //새로 입력된 값으로 업데이트 
+            productNum:selectDatas.map(item=>item.productNum), // 선택된 상품 번호 배열
+            quantity:filterPrev.map(order=>order.quantity),
+          }
+
         ]
       })
     
@@ -485,9 +497,10 @@ const Order = () => {
                             <td><span className='order-pName'
                               onClick={()=>{}}>{item.productName}</span></td>
                             <td>{item.detail}</td>
-                            <td><input type='number' name='quantity' 
-                              defaultValue={1}
-                              onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}
+                            <td>
+                              <input type='number' name='quantity' 
+                              defaultValue={10} min={10} max={100} step={10}
+                              onChange={(e)=>{insertOrderData(e); insertOrderDatas(e)}}
                               ></input> 개</td>
                             <td><span className='priceNum'>{item.productPrice.toLocaleString()}</span> 원</td>
                             <td><button type='button' value={item.productNum}

@@ -9,9 +9,16 @@ import java.util.Map;
 
 public interface OrderItemsService {
 
+    //상품 목록
     List<OrderItemsVO> getAllItems(SearchVO searchVO);
 
-    void insertGetOrder(List<Map<String, Object>> orderDatas);
+    //주문
+    void insertGetOrder(OrderRequestVO orderRequestVO);
 
+    //주문 내역
     List<OrderRequestVO> getOrderList();
+
+    //주문 취소
+    void delOrder(int requestNum);
+
 }

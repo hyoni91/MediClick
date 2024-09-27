@@ -20,24 +20,29 @@ public class OrderItemsController {
     @PostMapping("/list")
     public List<OrderItemsVO> getAllItems(@RequestBody(required = false) SearchVO searchVO){
 
-        //검색 또는 전체 데이터를 서비스로부터 가져옴
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+searchVO);
-
-
-        return orderItemsService.getAllItems(searchVO);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+searchVO.getSearchValue());
+        List<OrderItemsVO> items=orderItemsService.getAllItems(searchVO);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!itmes:"+items);
+        return items;
     }
 
     //상품 주문
     @PutMapping("/insertOrder")
-    public void insertGetOrder(@RequestBody List<Map<String, Object>> orderDatas){
-        System.out.println("!!!!!!!!!!!!!!!"+orderDatas);
-        orderItemsService.insertGetOrder(orderDatas);
+    public void insertGetOrder(@RequestBody OrderRequestVO orderRequestVO){
+        System.out.println("!!!!!!!!!!!!!!!"+orderRequestVO);
+        orderItemsService.insertGetOrder(orderRequestVO);
     }
 
     //주문 내역
     @GetMapping("/orderList")
     public List<OrderRequestVO> getOrderList(){
         return orderItemsService.getOrderList();
+    }
+
+    //주문 취소
+    @DeleteMapping("/del/{requestNum}")
+    public void delOrder(@PathVariable("requestNum") int requestNum){
+        orderItemsService.delOrder(requestNum);
     }
 
 }
