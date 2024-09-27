@@ -6,7 +6,7 @@
 }
 
 .category-div{
-  width: 20%;
+  width: 100%;
   margin: auto;
   display: flex;
 }
@@ -14,63 +14,103 @@
 .medicalSupplies-div{
   display: flex;
   align-items: center;
-  width: 40%;
+  width: 50%;
+  border: 1px solid black;
 }
 .cate-flex{
+  border: 1px solid;
+  
 }
+/* 카테고리버튼 크기 */
 .cate-divBtn{
   margin: auto;
+  width: 250px;
 }
-.cate-divBtn{
-  margin: 20px auto;
+/* 카테고리 버튼 */
+.cate-divBtn button{
+  height: 50px;
 }
-
 .ms-imgdiv{
   margin-right: 20px;
   display: flex;
+  
 }
 
 .medicalSupplies-itemtable{
   width: 70%;
   margin: auto;
   height: 150px;
+  border: 1px solid black;
+}
+.medicalSupplies-itemtable td,tr{
+  border: 1px solid black;
+  vertical-align: middle;
 }
 
-.adminfile-placeholder{
-  /* position: absolute; */
-  top: -250px;
-  left: 200px;
-  width: 200px; /* 이미지 너비와 동일하게 설정 */
-  height: 200px; /* 이미지 높이와 동일하게 설정 */
-  border: 1px dashed #000000; /* 스타일 변경 */
-  display: flex; /* Flexbox 사용으로 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: center; /* 수평 중앙 정렬 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  color: #999; /* 텍스트 색상 */
-  background-color: #f9f9f9; /* 배경색 */
-  white-space: nowrap;
+  
+  .td-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
+  
+  .img-td {
+    flex: 0 0 40%; /* 40% 비율 */
+  }
+  
+  .img-div {
+    flex: 0 0 60%; /* 60% 비율 */
+  }
+  
+  .product-img {
+    width: 100%;  /* 이미지가 부모 컨테이너 크기에 맞게 조정됨 */
+    height: auto; /* 이미지 비율 유지를 위해 height는 auto */
+  }
+
+
+  /* 파일 미리보기 */
+  .ms-imgdiv {
+    position: relative;
+    width: 300px; /* 미리보기 영역 너비 */
+    height: 200px; /* 미리보기 영역 높이 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc; /* 미리보기 영역 테두리 */
+  }
+  
+  .adminfile-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* div의 너비에 맞게 조정 */
+    height: 100%; /* div의 높이에 맞게 조정 */
+    object-fit: cover; /* 이미지를 영역에 맞게 비율을 유지하면서 조정 */
+    border: 1px solid #ccc;
+    z-index: 1; /* input 위에 표시되도록 설정 */
+  }
+  
+  .adminfile-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* div의 너비에 맞게 조정 */
+    height: 100%; /* div의 높이에 맞게 조정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #ccc;
+    color: #888;
+    font-size: 14px;
+    z-index: 0; /* input 아래에 배치 */
+  }
+  
   .ad-input {
-    /* position: absolute;
-    top: -50px;
-    right: 50px; */
-    text-align: center;
-    border: 1px solid #007bff;
-    background-color: #007bff;
-    color: white;
-    margin-top: 20px;
-    width: 100px; /* 파일 등록 버튼의 너비 설정 */
-    height: 25px; /* 파일 등록 버튼의 높이 설정 */
-    display: flex; /* 중앙 정렬을 위해 flex 사용 */
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
+    position: relative;
+    z-index: 2; /* 파일 선택 인풋이 클릭 가능하도록 이미지보다 위에 표시 */
+    opacity: 0; /* 파일 선택 버튼을 숨김 */
+    width: 100%;
+    height: 100%;
     cursor: pointer;
-  }
-.td-flex{
-  display: flex;
-}
-  .img-td{
-    width: 40%;
-
   }
