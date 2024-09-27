@@ -203,10 +203,10 @@ const ManageCustomer = () => {
                 </span>
               </div>
           </div>
-          <div className='manage-sales'>
+          {/* <div className='manage-sales'>
             <div>총 매출액</div>
             <div>총 미수금</div>
-          </div>
+          </div> */}
         </div>
         <div className='manage-content'>
           <div className='content-btn'>

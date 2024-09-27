@@ -72,6 +72,22 @@
         AND R.CUSTOMER_NUM = #{customerNum}
     </select>
 
+    <!-- 수주리스트 -->
+    <select id="orderlist" resultMap="orderItemsMapper.request">
+        SELECT REQUEST_NUM
+        ,REQUEST_DATE
+        ,REQUEST_STATUS
+        ,C.CUSTOMER_NUM
+        ,C.CUSTOMER_NAME
+        ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
+<!--        ,R.QUANTITY-->
+<!--        ,P.PRODUCT_PRICE-->
+        FROM order_requests R, customers C, products P
+        WHERE R.CUSTOMER_NUM = C.CUSTOMER_NUM
+        AND R.PRODUCT_NUM = P.PRODUCT_NUM
+        ORDER BY REQUEST_NUM DESC
+    </select>
+
 </mapper>
 
 

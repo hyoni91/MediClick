@@ -5,16 +5,30 @@ const Orders = () => {
   const [orders, setOrders] = useState([])
 
   const customerNum = 1
+  // 총액 구하기
+  const [sumPrice, setSumPrice] = useState(0)
+
+
+
+
 
   useEffect(()=>{
-    axios.get(`/customer/orders/${customerNum}`)
+    axios.get(`/customer/orderlist`)
     .then((res)=>{
       setOrders(res.data)
+      let sum = 0;
+      res.data.forEach((p,i)=>{
+        sum = sum +p.totalPrice
+      })
+      setSumPrice(sum)
+
     })
     .catch((error)=>{
       console.log(error)
     })
   },[])
+
+  console.log(orders)
 
 
   return (
@@ -23,32 +37,13 @@ const Orders = () => {
         <div className='magage-header'>
           <div className='header-div'>
             <h3>수주 / 납품현황</h3>
-            <div>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>거래처명</td>
-                    <td></td>
-                    <td>대표자명</td>
-                    <td></td>
-                    <td>사업자번호</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>주소</td>
-                    <td></td>
-                    <td>전화번호</td>
-                    <td></td>
-                    <td>메일주소</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
           <div className='manage-sales'>
-            <div>해당 거래처의 매출액</div>
-            <div>해당 거래처의 미수금</div>
+            <div>
+              <h4>총 매출액</h4>
+              <h2>{sumPrice.toLocaleString()}원</h2>
+            </div>
+            <div>총미수금</div>
           </div>
         </div>
         <div className='manage-content'>
@@ -72,14 +67,11 @@ const Orders = () => {
             <thead>
               <tr>
                 <td><input type='checkbox'/></td>
+                <td>구분</td>
+                <td>거래처명</td>
                 <td>주문일자</td>
-                <td>품목명</td>
-                <td>수량</td>
-                <td>금액</td>
-                <td>부가세</td>
-                <td>합계</td>
-                <td>배송현황</td>
-                <td>결제현황</td>
+                <td>총 주문액</td>
+                <td>현황</td>
               </tr>
             </thead>
             <tbody>
@@ -88,14 +80,11 @@ const Orders = () => {
                   return(
                   <tr key={i}>
                     <td><input type='checkbox'/></td>
+                    <td>{orders.length - i}</td>
+                    <td>{order.customerName}</td>
                     <td>{order.requestDate}</td>
-                    <td>{order.orderItemsVO.productName}</td>
-                    <td>{order.quantity}</td>
-                    <td>{order.orderItemsVO.productPrice}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{order.totalPrice.toLocaleString()}원</td>
+                    <td>{order.requestStatus == 'Pending'? <>접수완료</> : <></>}</td>
                   </tr>
                   )
                 })

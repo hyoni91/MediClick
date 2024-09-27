@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.customers.controller;
 
+import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.service.CustomerServiceImpl;
 import com.green.MediClick.provider.customers.service.CustomerServise;
@@ -49,4 +50,8 @@ public class CustomerController {
         return customerServise.order(customerNum);
     }
 
+    @GetMapping("/orderlist")
+    public List<OrderRequestVO> orderList(){
+        return customerServise.orderList();
+    }
 }

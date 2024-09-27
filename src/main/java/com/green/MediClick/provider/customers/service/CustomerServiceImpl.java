@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.customers.service;
 
+import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.vo.CustomersVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,6 +48,11 @@ public class CustomerServiceImpl implements CustomerServise{
     @Override
     public List<CustomersVO> order(int customerNum) {
         return sqlSession.selectList("customerMapper.order", customerNum);
+    }
+
+    @Override
+    public List<OrderRequestVO> orderList() {
+        return sqlSession.selectList("customerMapper.orderlist");
     }
 
 

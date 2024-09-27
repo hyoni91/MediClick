@@ -25,6 +25,8 @@
         <result column="QUANTITY" property="quantity"/>
         <result column="REQUEST_STATUS" property="requestStatus"/>
         <result column="REQUEST_DATE" property="requestDate"/>
+        <result column="CUSTOMER_NAME" property="customerName"/>
+        <result column="TOTALPRICE" property="totalPrice"/>
         <collection property="orderItemsVO" resultMap="items"/>
     </resultMap>
 
