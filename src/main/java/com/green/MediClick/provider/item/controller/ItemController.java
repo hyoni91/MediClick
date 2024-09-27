@@ -33,10 +33,6 @@ public class ItemController {
         itemService.cateDelete(cateNum);
     }
 
-//    @PostMapping("/productInsert")
-//    public void productInsert(@RequestBody ItemVO itemVO){
-//        itemService.productInsert(itemVO);
-//    }
     @PostMapping("/productInsert")
     public void insertItem(ItemVO itemVO,
                            @RequestParam("mainImg") MultipartFile mainImg) {
@@ -44,24 +40,26 @@ public class ItemController {
             throw new IllegalArgumentException("File 'mainImg' is required."); // 사용자 정의 예외 처리
         }
         System.out.println(itemVO);
+        int nextNum = itemService.getNextNum();
+        itemVO.setProductNum(nextNum);
+        // 아이템 정보 등록
+        itemService.productInsert(itemVO);
         // 파일 빈 객체 설정
         ItemImgVO itemImgVO = null;
-//        itemService.getNextNum();
+
         // 파일이 들어있을 경우 업로드
         if (mainImg != null && !mainImg.isEmpty()) {
-            itemImgVO = (ItemImgVO) FileUploadUtil.fileUpload(mainImg, "item", null, itemVO.getProductNum());
+            int nextItemCode = itemService.getNextItemCode();
+
+            itemImgVO = (ItemImgVO) FileUploadUtil.fileUpload(mainImg, "item", null, nextNum);
+
+            itemImgVO.setImgCode(nextItemCode);
         }
 
-        // 아이템 정보 등록
         if (itemImgVO != null) {
-            itemVO.setImgVO(itemImgVO);
+            // 아이템 이미지 정보 저장
+            itemService.insertItemImg(itemImgVO);
         }
-        itemService.productInsert(itemVO);
-
-        System.out.println(itemVO.getProductNum());
-        // 아이템 이미지 정보 저장
-        itemImgVO.setProductNum(itemVO.getProductNum());
-        itemService.insertItemImg(itemImgVO);
 
     }
     @GetMapping("/medicalSuppliesList")

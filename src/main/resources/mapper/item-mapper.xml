@@ -42,13 +42,15 @@
 
     <insert id="productInsert">
         INSERT INTO PRODUCTS (
-            PRODUCT_NAME
+            PRODUCT_NUM
+            ,PRODUCT_NAME
             ,CATE_NUM
             ,PRODUCT_PRICE
             ,STOCK
             ,DETAIL
         ) VALUES(
-            #{productName}
+            #{productNum}
+            ,#{productName}
             ,#{cateNum}
             ,#{productPrice}
             ,#{stock}
@@ -57,8 +59,9 @@
     </insert>
     
     <select id="medicalSuppliesList" resultMap="item">
-        SELECT * FROM PRODUCTS ,CATEGORY
+        SELECT * FROM PRODUCTS ,CATEGORY ,item_img
         WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
+
     </select>
     <insert id="insertItemImg">
         INSERT INTO ITEM_IMG (
@@ -74,11 +77,11 @@
 
     <!--다음에 들어갈 item-code 조회-->
     <select id="getNextItemCode" resultType="int">
-    SELECT IFNULL(MAX(productNum),0)  + 1
-    FROM item_img
+        SELECT IFNULL(MAX(PRODUCT_NUM),0)  + 1
+        FROM item_img
     </select>
     <select id="getNextNum" resultType="int">
-        SELECT IFNULL(MAX(productNum),0)  + 1
+        SELECT IFNULL(MAX(PRODUCT_NUM),0)  + 1
         FROM PRODUCTS
     </select>
 </mapper>

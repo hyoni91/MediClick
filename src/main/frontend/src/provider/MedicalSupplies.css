@@ -67,3 +67,10 @@
     justify-content: center; /* 수평 중앙 정렬 */
     cursor: pointer;
   }
+.td-flex{
+  display: flex;
+}
+  .img-td{
+    width: 40%;
+
+  }

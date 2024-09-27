@@ -46,13 +46,16 @@ const MedicalSupplies = () => {
   const categoryChange = (e) => {
     setMsCategory({
       ...msCategory,
-      
+      cateNum : cateNum,
       [e.target.name] : e.target.value
     })
+    console.log(cateNum)
   }
 
 
   const mschange = (e) => {
+console.log(cateNum)
+
     setMedicalSupplies({
       ...medicalSupplies,
       cateNum : cateNum,
@@ -78,7 +81,6 @@ const MedicalSupplies = () => {
     }
   }
   
-  console.log(mainImg)
   const insertItem = () => {
     console.log(mainImg)
       //이미지
@@ -125,7 +127,6 @@ const MedicalSupplies = () => {
     });
   };
   
-
 
   return (
 
@@ -202,10 +203,14 @@ const MedicalSupplies = () => {
             <input type='text' name='stock' onChange={(e) => {mschange(e)}} />
             
             <div>상세정보</div>
-            <input type='text' name='detail' onChange={(e) => {mschange(e)}} />
+            <input type='text' name='detail' onChange={(e) => {mschange(e)
+              console.log(medicalSupplies)
+            }} />
           
             <div>
               <button type='button' onClick={() => {
+                console.log(mainImg)
+                console.log(item)
                 insertItem()
               }}>상품 등록</button>
             </div>
@@ -218,7 +223,6 @@ const MedicalSupplies = () => {
         <table className='medicalSupplies-itemtable'>
           <colgroup>
           <col width={'10%'}/>
-          <col width={'10%'}/>
           <col width={'20%'}/>
           <col width={'20%'}/>
           <col width={'10%'}/>
@@ -227,10 +231,9 @@ const MedicalSupplies = () => {
           <thead>
             <tr>
               <td>종류</td>
-              <td>상품번호</td>
-              <td>상품이름</td>
-              <td>상품가격</td>
-              <td>상품수량</td>
+              <td>상품</td>
+              <td>가격</td>
+              <td>수량</td>
               <td>상품설명</td>
             </tr>
           </thead>
@@ -241,8 +244,10 @@ const MedicalSupplies = () => {
               return(
                 <tr key={i}>
                   <td>{item.categoryVO.cateName}</td>
-                  <td>{item.productNum}</td>
-                  <td>{item.productName}</td>
+                  <td className ='td-flex'>
+                    <div><img className='img-td' src={`http://localhost:8080/upload/${item.imgVO.attachedFileName}`} /></div>
+                    <div>{item.productName}</div>
+                  </td>
                   <td>{item.productPrice}</td>
                   <td>{item.stock}</td>
                   <td>{item.detail}</td>

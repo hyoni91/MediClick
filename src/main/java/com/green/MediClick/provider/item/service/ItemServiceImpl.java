@@ -39,13 +39,13 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public int getNextItemCode(int itemCode) {
-        return sqlSession.selectOne("itemMapper.getNextItemCode",itemCode);
+    public int getNextItemCode() {
+        return sqlSession.selectOne("itemMapper.getNextItemCode");
     }
 
     @Override
-    public int getNextNum(int itemCode) {
-        return sqlSession.selectOne("itemMapper.getNextNum",itemCode);
+    public int getNextNum() {
+        return sqlSession.selectOne("itemMapper.getNextNum");
     }
 
 
