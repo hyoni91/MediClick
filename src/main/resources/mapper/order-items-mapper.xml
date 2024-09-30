@@ -52,13 +52,13 @@
             CUSTOMER_NUM,
             QUANTITY
         ) VALUES
-<!--        <foreach collection="orderDatas" item="order" separator=",">-->
+        <foreach collection="list" item="order" separator=",">
             (
-            #{productNum},
-            #{customerNum},
-            #{quantity}
+            #{order.productNum},
+            #{order.customerNum},
+            #{order.quantity}
             )
-<!--        </foreach>-->
+        </foreach>
     </insert>
 
     <!--주문 내역-->
