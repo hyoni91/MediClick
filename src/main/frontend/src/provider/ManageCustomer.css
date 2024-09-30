@@ -99,9 +99,13 @@
   box-shadow: 0 3px 6px rgba(0,0,0,0.02), 0 3px 6px rgba(0,0,0,0.04);
 }
 
-.content-table td{
+.content-table td,
+.content-table tr{
   padding: 7px;
+  border: none;
 }
+
+
 
 .content-table > thead{
   border-bottom: 2px double lightgray;
@@ -112,6 +116,13 @@
   background-color: rgb(243, 241, 241);
 }
 
+.content-table span{
+  cursor: pointer;
+}
+
+.content-table span:hover{
+  font-weight: 800;
+}
 
 
 /* 모달 */

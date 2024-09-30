@@ -44,10 +44,10 @@ public class CustomerController {
         return customerServise.detailCustomer(customerNum);
     }
 
-    @GetMapping("/orders/{customerNum}")
-    public List<CustomersVO> orders(@PathVariable("customerNum") int customerNum){
-        System.out.println("=================================="+customerNum);
-        return customerServise.order(customerNum);
+    @GetMapping("/orders/{requestNum}")
+    public List<CustomersVO> orders(@PathVariable("requestNum") int requestNum){
+        System.out.println("=================================="+requestNum);
+        return customerServise.order(requestNum);
     }
 
     @GetMapping("/orderlist")

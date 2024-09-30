@@ -18,7 +18,7 @@ public interface CustomerServise {
 
     CustomersVO detailCustomer(int customerNum);
 
-    List<CustomersVO> order(int customerNum);
+    List<CustomersVO> order(int requestNum);
 
     List<OrderRequestVO> orderList();
 

@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import ReactModal from 'react-modal'
+import { useNavigate } from 'react-router-dom'
 
 const Orders = () => {
   const [orders, setOrders] = useState([])
+  const navigate = useNavigate()
 
-  const customerNum = 1
   // 총액 구하기
   const [sumPrice, setSumPrice] = useState(0)
 
@@ -71,7 +73,8 @@ const Orders = () => {
                 <td>거래처명</td>
                 <td>주문일자</td>
                 <td>총 주문액</td>
-                <td>현황</td>
+                <td>결제현황</td>
+                <td>주문현황</td>
               </tr>
             </thead>
             <tbody>
@@ -81,8 +84,13 @@ const Orders = () => {
                   <tr key={i}>
                     <td><input type='checkbox'/></td>
                     <td>{orders.length - i}</td>
-                    <td>{order.customerName}</td>
+                    <td>
+                      <span onClick={()=>{navigate(`/provider/order_detail/${order.requestNum}`)}}>
+                        {order.customerName}
+                      </span>
+                    </td>
                     <td>{order.requestDate}</td>
+                    <td>{order.totalPrice.toLocaleString()}원</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
                     <td>{order.requestStatus == 'Pending'? <>접수완료</> : <></>}</td>
                   </tr>
@@ -94,7 +102,7 @@ const Orders = () => {
         </div>
           
       </div>
-
+        
 
     </div>
   )

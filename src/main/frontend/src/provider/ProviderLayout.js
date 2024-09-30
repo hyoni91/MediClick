@@ -22,9 +22,9 @@ const ProviderLayout = () => {
           <ul>
             <li><span onClick={()=>{navigate('/provider/manageCustomer')}}>거래처</span></li>
             {/* 매출처 관리 */}
-            <li><span onClick={()=>{navigate('/provider/orders')}}>품목</span></li>
+            <li><span >품목</span></li>
             {/* 카테고리,제품관리, 입고등록 */}
-            <li><span>수주</span></li>
+            <li><span onClick={()=>{navigate('/provider/orders')}}>수주</span></li>
             {/* 주문(수주)입력, 주문서(수주), 납품서(공급받는자), 수주/납품현황 */}
             <li><span>현황</span></li>
             {/* 월별 매출현황,현 재고현황 */}

@@ -64,12 +64,19 @@
         WHERE CUSTOMER_NUM = #{customerNum}
     </update>
 
-    <!--거래처별당 주문내용-->
+    <!--해당 주문 -->
     <select id="order" resultMap="orderItemsMapper.request">
-        SELECT R.REQUEST_DATE, P.PRODUCT_NAME, R.QUANTITY, (P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
-        FROM order_requests R , products P
+        SELECT C.CUSTOMER_NAME
+        ,R.REQUEST_DATE
+        ,P.PRODUCT_NAME
+        ,R.QUANTITY
+        ,(P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
+        ,REQUEST_STATUS
+        FROM order_requests R , products P , customers C
         WHERE R.PRODUCT_NUM = P.PRODUCT_NUM
-        AND R.CUSTOMER_NUM = #{customerNum}
+        AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
+        AND R.REQUEST_NUM = #{requestNum}
+
     </select>
 
     <!-- 수주리스트 -->
