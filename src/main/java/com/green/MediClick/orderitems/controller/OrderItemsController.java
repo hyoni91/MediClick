@@ -20,20 +20,17 @@ public class OrderItemsController {
     @PostMapping("/list")
     public List<OrderItemsVO> getAllItems(@RequestBody(required = false) SearchVO searchVO){
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+searchVO.getSearchValue());
-        List<OrderItemsVO> items=orderItemsService.getAllItems(searchVO);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!itmes:"+items);
-        return items;
+        return orderItemsService.getAllItems(searchVO);
     }
 
     //상품 주문
     @PutMapping("/insertOrder")
-    public void insertGetOrder(@RequestBody OrderRequestVO orderRequestVO){
-        System.out.println("!!!!!!!!!!!!!!!"+orderRequestVO);
-        orderItemsService.insertGetOrder(orderRequestVO);
+    public void insertGetOrder(@RequestBody List<OrderRequestVO> orderDatas){
+        System.out.println("!!!!!!!!!!!!!!!"+orderDatas);
+        orderItemsService.insertGetOrder(orderDatas);
     }
 
-    //주문 내역
+    //주문 내역 (개별+선택)
     @GetMapping("/orderList")
     public List<OrderRequestVO> getOrderList(){
         return orderItemsService.getOrderList();
