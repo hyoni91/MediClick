@@ -36,6 +36,7 @@ import MSCategory from './provider/MSCategory';
 import MedicalSupplies from './provider/MedicalSupplies';
 import Orders from './provider/providerCustom/Orders';
 import OrderList from './admin/OrderList';
+import Inventory from './provider/Inventory';
 
 
 
@@ -178,6 +179,8 @@ function App() {
             <Route path='order' element={<Order/>}/>
             {/* 발주페이지 : 주문 내역*/}
             <Route path='orderList' element={<OrderList/>}/>
+            {/* 발주페이지 : 재고 현황 */}
+            <Route path='inventory' element={<Inventory/>}/>
           </Route>
 
           
