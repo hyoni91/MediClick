@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.customers.controller;
 
+import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.service.CustomerServiceImpl;
 import com.green.MediClick.provider.customers.service.CustomerServise;
@@ -43,10 +44,14 @@ public class CustomerController {
         return customerServise.detailCustomer(customerNum);
     }
 
-    @GetMapping("/orders/{customerNum}")
-    public List<CustomersVO> orders(@PathVariable("customerNum") int customerNum){
-        System.out.println("=================================="+customerNum);
-        return customerServise.order(customerNum);
+    @GetMapping("/orders/{requestNum}")
+    public List<CustomersVO> orders(@PathVariable("requestNum") int requestNum){
+        System.out.println("=================================="+requestNum);
+        return customerServise.order(requestNum);
     }
 
+    @GetMapping("/orderlist")
+    public List<OrderRequestVO> orderList(){
+        return customerServise.orderList();
+    }
 }

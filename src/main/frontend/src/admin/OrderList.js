@@ -23,6 +23,26 @@ const OrderList = () => {
   },[])
 
 
+  // 주문취소
+  function godelete(requestNum){
+    
+    axios
+    .delete(`/orderItems/del/${requestNum}`)
+    .then((res)=>{
+      alert('주문이 취소되었습니다.')
+
+      const del=orderList.filter((order)=>{
+        return(
+          order.requestNum!=requestNum
+        )
+      })
+      setOrderList([...del])
+
+    })
+    .catch((error)=>{console.log(error)})
+  }
+
+
   return (
 
 
@@ -57,8 +77,6 @@ const OrderList = () => {
               <col width={'10%'}/>
               {/* 카테 */}
               <col width={'10%'}/> 
-              {/* 품목코드 */}
-              <col width={'7%'}/> 
               {/* 품목명 */}
               <col width={'20%'}/>
               {/* 설명 */}
@@ -71,6 +89,8 @@ const OrderList = () => {
               <col width={'10%'}/>
               {/* 현황 */}
               <col width={'7%'}/>
+              {/* 주문 취소 */}
+              <col width={'7%'}/> 
             </colgroup>
   
             <thead>
@@ -78,13 +98,13 @@ const OrderList = () => {
                 <td>주문번호</td>
                 <td>발주일</td>
                 <td>카테고리</td>
-                <td>품목코드</td>
                 <td>품목명</td>
                 <td>설명</td>
                 <td>수량</td>
                 <td>단가</td>
                 <td>총 금액</td>
                 <td>현황</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -95,7 +115,6 @@ const OrderList = () => {
                       <td>{order.requestNum}</td>
                       <td>{order.requestDate}</td>
                       <td>{order.orderItemsVO.cateVO.cateName}</td>
-                      <td>{order.productNum}</td>
                       <td>{order.orderItemsVO.productName}</td>
                       <td>{order.orderItemsVO.detail}</td>
                       <td><span className='eachNum'>{order.quantity}</span> 개</td>
@@ -109,6 +128,9 @@ const OrderList = () => {
                           '배송 중'
                         }
                         </td>
+                      <td><button type='button'
+                        onClick={()=>{godelete(order.requestNum)}}
+                        >취소</button></td>
                     </tr>
                   )
                 })

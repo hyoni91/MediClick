@@ -19,8 +19,8 @@ public interface ItemService {
 
     List<ItemVO> medicalSuppliesList();
 
-    int getNextItemCode(int itemCode);
-    int getNextNum(int itemCode);
+    int getNextItemCode();
+    int getNextNum();
 
     void insertItemImg(ItemImgVO imgVO);
 }

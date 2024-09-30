@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './MedicalSupplies.css';
 const MedicalSupplies = () => {
+  const [searchValue ,setSearchValue] = useState('')
   const [mainImg, setMainImg] = useState(null)
   const navigate = useNavigate()
   const [previewUrl, setPreviewUrl] = useState('');
@@ -46,13 +47,16 @@ const MedicalSupplies = () => {
   const categoryChange = (e) => {
     setMsCategory({
       ...msCategory,
-      
+      cateNum : cateNum,
       [e.target.name] : e.target.value
     })
+    console.log(cateNum)
   }
 
 
   const mschange = (e) => {
+console.log(cateNum)
+
     setMedicalSupplies({
       ...medicalSupplies,
       cateNum : cateNum,
@@ -78,7 +82,6 @@ const MedicalSupplies = () => {
     }
   }
   
-  console.log(mainImg)
   const insertItem = () => {
     console.log(mainImg)
       //이미지
@@ -126,7 +129,6 @@ const MedicalSupplies = () => {
   };
   
 
-
   return (
 
     <div className='medicalSupplies-container'>
@@ -156,30 +158,37 @@ const MedicalSupplies = () => {
               </div>
             </div>
         </div>
-          <div className='cate-divBtn'>
-          </div>
         <div className='medicalSupplies-div'>
-          <div className='ms-imgdiv'>
-          {previewUrl ? (
-            <img className="adminfile-img" src={previewUrl} alt="미리보기" />
-          ) : (
-          <div className="adminfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
-        )}
-            <div>
-            <input
-          className='ad-input'
-          name='mainImg'
-          type='file'
-          accept='image/*'
-          onChange={(e) => {
-            console.log(1)
-        setMainImg(e.target.files[0]); // 파일을 상태에 설정
-        setPreviewUrl(URL.createObjectURL(e.target.files[0])); // 미리보기 URL 설정
+        <div className='ms-imgdiv'>
+  {previewUrl ? (
+    <img className="adminfile-img" src={previewUrl} alt="미리보기" />
+  ) : (
+    <div className="adminfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
+  )}
+  <input
+    className='ad-input'
+    name='mainImg'
+    type='file'
+    accept='image/*'
+    onChange={(e) => {
+      setMainImg(e.target.files[0]); // 파일을 상태에 설정
+      setPreviewUrl(URL.createObjectURL(e.target.files[0])); // 미리보기 URL 설정
     }}
-/>
-            </div>
-          </div>
+  />
+</div>
           <div>
+          <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+              { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
+              </option>
+              :
+              category.map((cate,i) => {
+                return(
+                    
+                      <option key={i} value={cate.cateNum}>{cate.cateName}</option>
+                    
+                )
+              })}
+            </select>
             <div>상품 이름</div>
             <input type='text' name='productName' onChange={(e) => {mschange(e)}} />
             
@@ -190,24 +199,30 @@ const MedicalSupplies = () => {
             <input type='text' name='stock' onChange={(e) => {mschange(e)}} />
             
             <div>상세정보</div>
-            <input type='text' name='detail' onChange={(e) => {mschange(e)}} />
+            <input type='text' name='detail' onChange={(e) => {mschange(e)
+              console.log(medicalSupplies)
+            }} />
           
             <div>
               <button type='button' onClick={() => {
+                console.log(mainImg)
+                console.log(item)
                 insertItem()
               }}>상품 등록</button>
             </div>
           </div>
-          {/* 아이템 테이블 */}
           
         </div>
+      </div>
+          {/* 아이템 테이블 */}
+      <div>
+        <input type='text'/>
       </div>
       <div className='medicalSupplies-item'>
         <table className='medicalSupplies-itemtable'>
           <colgroup>
           <col width={'10%'}/>
-          <col width={'10%'}/>
-          <col width={'20%'}/>
+          <col width={'30%'}/>
           <col width={'20%'}/>
           <col width={'10%'}/>
           <col width={'*0%'}/>
@@ -215,10 +230,9 @@ const MedicalSupplies = () => {
           <thead>
             <tr>
               <td>종류</td>
-              <td>상품번호</td>
-              <td>상품이름</td>
-              <td>상품가격</td>
-              <td>상품수량</td>
+              <td>상품</td>
+              <td>가격</td>
+              <td>수량</td>
               <td>상품설명</td>
             </tr>
           </thead>
@@ -229,8 +243,12 @@ const MedicalSupplies = () => {
               return(
                 <tr key={i}>
                   <td>{item.categoryVO.cateName}</td>
-                  <td>{item.productNum}</td>
-                  <td>{item.productName}</td>
+                  <td className="td-flex">
+                    <div className="img-td">
+                      <img className="product-img" src={`http://localhost:8080/upload/${item.imgVO.attachedFileName}`} />
+                    </div>
+                    <div className="img-div">{item.productName}</div>
+                  </td>
                   <td>{item.productPrice}</td>
                   <td>{item.stock}</td>
                   <td>{item.detail}</td>

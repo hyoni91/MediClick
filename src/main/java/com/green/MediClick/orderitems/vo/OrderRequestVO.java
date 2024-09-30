@@ -15,4 +15,6 @@ public class OrderRequestVO {
     private String requestDate;
     private OrderItemsVO orderItemsVO;
     private List<Object> orderDatas;
+    private String customerName;  //join데이터를 가져오기위해서 추가
+    private int totalPrice; // 주문 총액
 }
