@@ -35,7 +35,13 @@
   display: flex;
   
 }
-
+/* 검색 */
+.searchItem-div{
+  width: 85%;
+  text-align: right;
+  margin: 30px 0;
+}
+/* 아이템 리스트 테이블 */
 .medicalSupplies-itemtable{
   width: 70%;
   margin: auto;
@@ -47,70 +53,69 @@
   vertical-align: middle;
 }
 
+.td-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
   
-  .td-flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .img-td {
-    flex: 0 0 40%; /* 40% 비율 */
-  }
-  
-  .img-div {
-    flex: 0 0 60%; /* 60% 비율 */
-  }
-  
-  .product-img {
-    width: 100%;  /* 이미지가 부모 컨테이너 크기에 맞게 조정됨 */
-    height: auto; /* 이미지 비율 유지를 위해 height는 auto */
-  }
+.img-td {
+  flex: 0 0 40%; /* 40% 비율 */
+}
+
+.img-div {
+  flex: 0 0 60%; /* 60% 비율 */
+}
+
+.product-img {
+  width: 100%;  /* 이미지가 부모 컨테이너 크기에 맞게 조정됨 */
+  height: auto; /* 이미지 비율 유지를 위해 height는 auto */
+}
 
 
-  /* 파일 미리보기 */
-  .ms-imgdiv {
-    position: relative;
-    width: 300px; /* 미리보기 영역 너비 */
-    height: 200px; /* 미리보기 영역 높이 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc; /* 미리보기 영역 테두리 */
-  }
-  
-  .adminfile-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* div의 너비에 맞게 조정 */
-    height: 100%; /* div의 높이에 맞게 조정 */
-    object-fit: cover; /* 이미지를 영역에 맞게 비율을 유지하면서 조정 */
-    border: 1px solid #ccc;
-    z-index: 1; /* input 위에 표시되도록 설정 */
-  }
-  
-  .adminfile-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* div의 너비에 맞게 조정 */
-    height: 100%; /* div의 높이에 맞게 조정 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed #ccc;
-    color: #888;
-    font-size: 14px;
-    z-index: 0; /* input 아래에 배치 */
-  }
-  
-  .ad-input {
-    position: relative;
-    z-index: 2; /* 파일 선택 인풋이 클릭 가능하도록 이미지보다 위에 표시 */
-    opacity: 0; /* 파일 선택 버튼을 숨김 */
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
+/* 파일 미리보기 */
+.ms-imgdiv {
+  position: relative;
+  width: 300px; /* 미리보기 영역 너비 */
+  height: 200px; /* 미리보기 영역 높이 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc; /* 미리보기 영역 테두리 */
+}
+
+.adminfile-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* div의 너비에 맞게 조정 */
+  height: 100%; /* div의 높이에 맞게 조정 */
+  object-fit: cover; /* 이미지를 영역에 맞게 비율을 유지하면서 조정 */
+  border: 1px solid #ccc;
+  z-index: 1; /* input 위에 표시되도록 설정 */
+}
+
+.adminfile-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* div의 너비에 맞게 조정 */
+  height: 100%; /* div의 높이에 맞게 조정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #ccc;
+  color: #888;
+  font-size: 14px;
+  z-index: 0; /* input 아래에 배치 */
+}
+
+.ad-input {
+  position: relative;
+  z-index: 2; /* 파일 선택 인풋이 클릭 가능하도록 이미지보다 위에 표시 */
+  opacity: 0; /* 파일 선택 버튼을 숨김 */
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
