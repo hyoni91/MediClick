@@ -38,25 +38,26 @@ const DeliryveryCheck = () => {
           <table className='content-table'>
             <thead>
               <tr>
-                <td>주문날짜</td>
-                <td>거래처명</td>
+                <td>배송번호</td>
                 <td>아이템</td>
                 <td>수량</td>
                 <td>금액</td>
                 <td>총금액</td>
-                <td>주문현황</td>
+                <td colSpan={2}>배송상태</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>원
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>
+                        배송출발
                       </td>
-                      <td></td>
+                      <td>배송중</td>
                     </tr>                
                 
             </tbody>
