@@ -1,0 +1,31 @@
+
+.orderDetail-btn{
+  text-align: right;
+  margin-top: 20px;
+  width: 98%;
+
+}
+
+.orderDetail-btn button{
+  cursor: pointer;
+  padding: 7px;
+  width: 130px;
+  border: none;
+  background-color: #6AD2C6;
+  color: white;
+
+}
+
+.detail-header{
+  display: flex;
+  width: 98%;
+  background-color: #DDE1E9;
+}
+
+.detail-header div{
+  width: 20%;
+  padding: 5px;
+  font-weight: 700;
+  height: 70px;
+  text-align: center;
+}

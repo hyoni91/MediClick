@@ -36,6 +36,7 @@ import MSCategory from './provider/MSCategory';
 import MedicalSupplies from './provider/MedicalSupplies';
 import Orders from './provider/providerCustom/Orders';
 import OrderList from './admin/OrderList';
+import OrderDetail from './provider/providerCustom/OrderDetail';
 
 
 
@@ -192,6 +193,7 @@ function App() {
             {/* 품목 / 입고 등록 */}
             {/* 주소 / 주문(수주) 입력 */}
             <Route path='orders' element={<Orders />}/>
+            <Route path='order_detail/:requestNum' element={<OrderDetail />}/>
             {/* 주소 / 수주 주문서 */}
             {/* 주소 / 공급받는 용도 납품서 */}
             {/* 주소 / 수주(납품) 현황 */}

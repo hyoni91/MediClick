@@ -1,0 +1,24 @@
+
+
+.status{
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+.status.pending{
+  background-color: #7952B3;
+  color: white;
+}
+
+.status.completed{
+  background-color: #00eb6a;
+  color: white;
+}
+
+.status.failed{
+  background-color: #ff4e4e;
+  color: white;
+}
