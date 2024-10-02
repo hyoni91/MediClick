@@ -5,11 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import './Orders.css'
 
 const Orders = () => {
-  const [orders, setOrders] = useState([])
-  const navigate = useNavigate()
-
-  // 총액 구하기
-  const [sumPrice, setSumPrice] = useState(0)
 
   //현황 css 
   const statusTag = useRef([]);
@@ -32,20 +27,12 @@ const Orders = () => {
   useEffect(()=>{
     axios.get(`/customer/orderlist`)
     .then((res)=>{
-      setOrders(res.data)
-      let sum = 0;
-      res.data.forEach((p,i)=>{
-        sum = sum +p.totalPrice
-      })
-      setSumPrice(sum)
-
     })
     .catch((error)=>{
       console.log(error)
     })
   },[])
 
-  console.log(orders)
 
 
   return (
@@ -58,7 +45,7 @@ const Orders = () => {
           <div className='manage-sales'>
             <div>
               <h4>총 매출액</h4>
-              <h2>{sumPrice.toLocaleString()}원</h2>
+              <h2>원</h2>
             </div>
             <div>총미수금</div>
           </div>
@@ -93,33 +80,18 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                orders.map((order,i)=>{
-                  return(
-                  <tr key={i}>
+                  <tr>
                     <td><input type='checkbox'/></td>
-                    <td>{orders.length - i}</td>
+                    <td></td>
                     <td>
-                      <span onClick={()=>{navigate(`/provider/order_detail/${order.requestNum}`)}}>
-                        {order.customerName}
+                      <span onClick={()=>{}}>
                       </span>
                     </td>
-                    <td>{order.requestDate}</td>
-                    <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>
-                      <span  
-                        className='status'
-                        ref={statusTag}
-                      >
-                        {whatStatus(order)}
-                        {/* {order.requestStatus == 'Pending'? <>접수완료</> : <></>} */}
-                      </span>
-                      </td>
+                    <td></td>
+                    <td>원</td>
+                    <td>원</td>
+                    <td>== 'Pending'? <>접수완료</> : <></></td>
                   </tr>
-                  )
-                })
-              }
             </tbody>
           </table>
         </div>
