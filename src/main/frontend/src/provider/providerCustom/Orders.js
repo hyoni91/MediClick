@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
+import './Orders.css'
 
 const Orders = () => {
   const [orders, setOrders] = useState([])
@@ -10,8 +11,22 @@ const Orders = () => {
   // 총액 구하기
   const [sumPrice, setSumPrice] = useState(0)
 
+  //현황 css 
+  const statusTag = useRef([]);
 
-
+  const whatStatus = (order) =>{
+        if(order.requestStatus == 'Pending'){
+        statusTag.current.className = `status pending`
+        return <>접수중</>
+        }else if(order.requestStatus == 'Completed'){
+          statusTag.current.className = `status completed`
+          return <>처리완료</>
+        } else if(order.requestStatus == 'Failed'){
+          statusTag.current.className = `status failed`
+          return <>접수취소</>
+        }
+    
+  }
 
 
   useEffect(()=>{
@@ -92,7 +107,15 @@ const Orders = () => {
                     <td>{order.requestDate}</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>{order.requestStatus == 'Pending'? <>접수완료</> : <></>}</td>
+                    <td>
+                      <span  
+                        className='status'
+                        ref={statusTag}
+                      >
+                        {whatStatus(order)}
+                        {/* {order.requestStatus == 'Pending'? <>접수완료</> : <></>} */}
+                      </span>
+                      </td>
                   </tr>
                   )
                 })
