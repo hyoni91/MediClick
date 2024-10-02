@@ -50,8 +50,9 @@ public class CustomerController {
         return customerServise.order(requestNum);
     }
 
-    @GetMapping("/orderlist")
-    public List<OrderRequestVO> orderList(){
-        return customerServise.orderList();
+    // orderscontoller로 대처되면 삭제예정
+    @PostMapping("/orderlist")
+    public List<OrderRequestVO> orderList(@RequestBody  SearchVO searchVO){
+        return customerServise.orderList(searchVO);
     }
 }
