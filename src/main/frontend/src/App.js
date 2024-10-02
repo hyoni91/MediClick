@@ -201,12 +201,9 @@ function App() {
             {/* 주소 / 수주(납품) 현황 */}
             {/* 현황 / 월별 매출 현황 */}
             {/* 현황 / 현 재고 현황 */}
-<<<<<<< HEAD
             <Route path='inventory' element={<Inventory/>}/>
-=======
             {/* 배달 현황 */}
             <Route path='deliveryCheck' element={<DeliryveryCheck/>} />
->>>>>>> mjh
           </Route>
 
       </Routes>
