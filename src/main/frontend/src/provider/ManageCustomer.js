@@ -86,7 +86,7 @@ const ManageCustomer = () => {
       alert('error!')
       console.log(error)
     })
-  },[inputCustomer])
+  },[searchValue])
 
   //검색
   function seachCustomer(){
@@ -187,7 +187,7 @@ const ManageCustomer = () => {
               <div className='seachbar'>
                 <input 
                   type='text' 
-                  placeholder='거래처명을 입력하세요.'
+                  placeholder='거래처명'
                   name='searchValue'
                   onChange={(e)=>{
                     setSearchValue({

@@ -11,18 +11,22 @@ const Orders = () => {
   // 총액 구하기
   const [sumPrice, setSumPrice] = useState(0)
 
+   //검색
+    const [searchValue , setSearchValue] = useState({})
+
+
   //현황 css 
   const statusTag = useRef([]);
 
   const whatStatus = (order) =>{
-        if(order.requestStatus == 'Pending'){
-        statusTag.current.className = `status pending`
+        if(order.requestStatus == '배송대기'){
+        // statusTag.current.className = `status pending`
         return <>접수중</>
-        }else if(order.requestStatus == 'Completed'){
-          statusTag.current.className = `status completed`
+        }else if(order.requestStatus == '배송완료'){
+          // statusTag.current.className = `status completed`
           return <>처리완료</>
-        } else if(order.requestStatus == 'Failed'){
-          statusTag.current.className = `status failed`
+        } else if(order.requestStatus == '주문취소'){
+          // statusTag.current.className = `status failed`
           return <>접수취소</>
         }
     
@@ -30,20 +34,37 @@ const Orders = () => {
 
 
   useEffect(()=>{
-    axios.get(`/customer/orderlist`)
+    axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
-      setOrders(res.data)
-      let sum = 0;
-      res.data.forEach((p,i)=>{
-        sum = sum +p.totalPrice
-      })
-      setSumPrice(sum)
+      console.log(res.data)
+      // setOrders(res.data)
+      // let sum = 0;
+      // res.data.forEach((p,i)=>{
+      //   sum = sum +p.totalPrice
+      // })
+      // setSumPrice(sum)
 
     })
     .catch((error)=>{
       console.log(error)
     })
-  },[])
+  },[searchValue])
+
+  function searchOrder(){
+    axios.post(`/orders/orderlist`,searchValue)
+    .then((res)=>{
+      // setOrders(res.data)
+      // let sum = 0;
+      // res.data.forEach((p,i)=>{
+      //   sum = sum +p.totalPrice
+      // })
+      // setSumPrice(sum)
+
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
   console.log(orders)
 
@@ -64,21 +85,28 @@ const Orders = () => {
           </div>
         </div>
         <div className='manage-content'>
-          <div className='content-btn'>
+          {/* <div className='content-btn'>
             <button>버튼</button>  
-            <button>버튼</button>  
+            <button>버튼</button>   */}
             <div className='seachbar'>
                 <input 
                   type='text' 
-                  placeholder='주문일자'
+                  placeholder='주문일자/주문현황'
+                  name='searchValue'
+                  onChange={(e)=>{
+                    setSearchValue({
+                      ...searchValue,
+                      [e.target.name] : e.target.value
+                    })
+                  }}
                 />
                 <span
-                  onClick={()=>{}}
+                  onClick={()=>{searchOrder()}}
                 >
                   <i className="fa-solid fa-magnifying-glass" />
                 </span>
               </div>              
-          </div>
+          {/* </div> */}
           
           <table className='content-table'>
             <thead>
@@ -112,8 +140,7 @@ const Orders = () => {
                         className='status'
                         ref={statusTag}
                       >
-                        {whatStatus(order)}
-                        {/* {order.requestStatus == 'Pending'? <>접수완료</> : <></>} */}
+                        {order.requestStatus}
                       </span>
                       </td>
                   </tr>

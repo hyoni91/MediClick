@@ -87,11 +87,15 @@
         ,C.CUSTOMER_NUM
         ,C.CUSTOMER_NAME
         ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
-<!--        ,R.QUANTITY-->
-<!--        ,P.PRODUCT_PRICE-->
         FROM order_requests R, customers C, products P
         WHERE R.CUSTOMER_NUM = C.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
+        <if test="searchValue != null and !searchValue.isEmpty()">
+            AND (
+            REQUEST_DATE LIKE CONCAT('%', #{searchValue}, '%')
+            OR REQUEST_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
+            )
+        </if>
         ORDER BY REQUEST_NUM DESC
     </select>
 

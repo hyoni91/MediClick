@@ -48,7 +48,8 @@
   height: 150px;
   border: 1px solid black;
 }
-.medicalSupplies-itemtable td,tr{
+.medicalSupplies-itemtable td,
+.medicalSupplies-itemtable tr{
   border: 1px solid black;
   vertical-align: middle;
 }

@@ -51,8 +51,8 @@ public class CustomerServiceImpl implements CustomerServise{
     }
 
     @Override
-    public List<OrderRequestVO> orderList() {
-        return sqlSession.selectList("customerMapper.orderlist");
+    public List<OrderRequestVO> orderList(SearchVO searchVO) {
+        return sqlSession.selectList("customerMapper.orderlist", searchVO);
     }
 
 

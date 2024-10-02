@@ -13,7 +13,19 @@
   border: none;
   background-color: #6AD2C6;
   color: white;
+  margin-right: 5px;
+}
 
+.orderDetail-btn button:hover{
+  background-color: #35bbab;
+}
+
+.orderDetail-btn button:nth-child(1){
+  background-color: gray;
+}
+
+.orderDetail-btn button:nth-child(1):hover{
+  background-color: rgb(90, 89, 89);
 }
 
 .detail-header{
@@ -26,6 +38,6 @@
   width: 20%;
   padding: 5px;
   font-weight: 700;
-  height: 70px;
+  height: 120px;
   text-align: center;
 }

@@ -20,6 +20,6 @@ public interface CustomerServise {
 
     List<CustomersVO> order(int requestNum);
 
-    List<OrderRequestVO> orderList();
+    List<OrderRequestVO> orderList(SearchVO searchVO);
 
 }
