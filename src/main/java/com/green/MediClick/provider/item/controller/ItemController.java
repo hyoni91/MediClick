@@ -4,6 +4,7 @@ import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.item.service.ItemService;
 import com.green.MediClick.provider.item.vo.CategoryVO;
 import com.green.MediClick.provider.item.vo.ItemImgVO;
+import com.green.MediClick.provider.item.vo.ItemListData;
 import com.green.MediClick.provider.item.vo.ItemVO;
 import com.green.MediClick.schedule.vo.PageVO;
 import com.green.MediClick.util.FileUploadUtil;
@@ -67,12 +68,38 @@ public class ItemController {
 
     }
     @PostMapping("/medicalSuppliesList")
-    public  List<ItemVO> medicalSuppliesList(@RequestBody Map<String, Object> mapData) {
+    public  Map<String, Object> medicalSuppliesList(@RequestBody Map<String, Object> mapData) {
         System.out.println(mapData);
 
-        SearchVO searchVO = new SearchVO();
-        searchVO.setSearchType(mapData.get("searchType").toString());
-        searchVO.setSearchValue(mapData.get("searchValue").toString());
+        ItemListData itemListData = new ItemListData();
+        itemListData.setSearchType(mapData.get("searchType").toString());
+        itemListData.setSearchValue(mapData.get("searchValue").toString());
+
+        //전체 데이터의 수를 조회
+        int totalDataCnt = itemService.getItemCount(itemListData);
+
+        PageVO pageVO = new PageVO(totalDataCnt);
+
+        //현재 선택한 페이지
+
+        int nowPage = Integer.parseInt(mapData.get("nowPage").toString());
+        pageVO.setNowPage(nowPage);
+
+        //초기 세팅된 데이터로 모든 페이지 정보를 연산
+        pageVO.setPageInfo();
+
+        itemListData.setPageVO(pageVO);
+
+
+        //List<ItemVO> items = itemService.medicalSuppliesList(searchVO);
+        List<ItemVO> items = itemService.medicalSuppliesList(itemListData);
+
+        //상품 목록 & 페이지 정보
+        Map<String, Object> result = new HashMap<>();
+        result.put("items", items);
+        result.put("pageInfo", pageVO);
+
+        return result;
 
 
 
@@ -90,7 +117,7 @@ public class ItemController {
 
         // 검색 결과 조회
         //List<ItemVO> items = itemService.medicalSuppliesList(searchVO, pageVO);
-        List<ItemVO> items = itemService.medicalSuppliesList(searchVO);
+
 
         // 전체 아이템 수 조회
         //int totalCount = itemService.getItemCount();
@@ -100,7 +127,7 @@ public class ItemController {
         //response.put("items", items);
         //response.put("totalCount", totalCount);
 
-        return items;
+
     }
 
 
