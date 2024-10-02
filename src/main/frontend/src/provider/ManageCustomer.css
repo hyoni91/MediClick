@@ -6,25 +6,23 @@
 }
 
 .manage-main{
+  margin: auto;
   display: flex;
   flex-direction: column;
-  width: 1500px;
+  width: 1430px;
   height: 100%;
 }
 
 .magage-header{
-  /* background-color: rgb(247, 244, 244); */
   border-radius: 15px;
   width: 100%;
-  /* height: 30%; */
   text-align: left;
   margin-bottom: 35px;
   margin-top: 50px;
 }
 
 .manage-content{
-  width: 100%;
-  /* height: 90%; */
+  width: 98%;
   text-align: left;
 }
 
@@ -101,20 +99,26 @@
 
 .content-table td,
 .content-table tr{
-  padding: 7px;
+  padding: 10px;
   border: none;
+  border-bottom: 1px solid lightgrey;
 }
 
 
 
 .content-table > thead{
-  border-bottom: 2px double lightgray;
-  border-top: 1px solid lightgray;
+  /* border-bottom: 2px double lightgray; */
+  /* border-top: 1px solid lightgray; */
+  background-color: #F1F5F9;
+  font-weight: 700;
+}
+
+/* .content-table > tbody {
 }
 
 .content-table > tbody > tr:nth-child(even){
-  background-color: rgb(243, 241, 241);
-}
+
+} */
 
 .content-table span{
   cursor: pointer;
@@ -177,8 +181,13 @@ font-weight: 700;
 
 .manage-sales > div{
   background: #373B44;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #4286f4, #3d414b);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #4286f4, #3d414b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* background: -webkit-linear-gradient(to right, #4286f4, #3d414b);  */
+ /* Chrome 10-25, Safari 5.1-6 */
+/* background: linear-gradient(to right, #4286f4, #3d414b);  */
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+background: linear-gradient(to bottom, #36b2cd, #6164c4);
+
 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   color: white;
   padding: 11px;
