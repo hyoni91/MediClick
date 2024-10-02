@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class InventoryVO {
     private int inventoryNum;
-    private CategoryVO cateNum;
+    private int cateNum;
     private int productNum;
     private String productName;
     private String stockDate;
@@ -14,4 +14,5 @@ public class InventoryVO {
     private int initialStock;
     private int incomingQty;
     private int outgoingQty;
+    //private CategoryVO categoryVO;
 }
