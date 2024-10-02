@@ -6,6 +6,7 @@ import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import com.green.MediClick.orderitems.vo.SearchVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.tags.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,14 +24,24 @@ public class OrderItemsController {
         return orderItemsService.getAllItems(searchVO);
     }
 
-    //상품 주문
-    @PutMapping("/insertOrder")
-    public void insertGetOrder(@RequestBody List<OrderRequestVO> orderDatas){
-        System.out.println("!!!!!!!!!!!!!!!"+orderDatas);
+    //선택주문
+    @PutMapping("/insertOrderChecked")
+    public void insertGetOrderChecked(@RequestBody List<OrderRequestVO> orderDatas){
+        System.out.println("!!!!!!!!!!!!!!! 선택 : "+orderDatas);
+
         orderItemsService.insertGetOrder(orderDatas);
+
     }
 
-    //주문 내역 (개별+선택)
+    //개별주문
+    @PutMapping("/insertOrder")
+    public void insertGetOrder(@RequestBody OrderRequestVO orderRequestVO){
+        System.out.println("!!!!!!!!!!!!!!! 개별 : "+orderRequestVO);
+
+        orderItemsService.insertSingleOrder(orderRequestVO);
+    }
+
+    //주문 내역
     @GetMapping("/orderList")
     public List<OrderRequestVO> getOrderList(){
         return orderItemsService.getOrderList();
