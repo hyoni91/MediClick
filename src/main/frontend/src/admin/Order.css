@@ -85,14 +85,20 @@
 
 .itemList-div{
   margin: 0 auto;
-  /* width: 95%; */
-  /* background-color: white; */
+  width: 1020px;
+  height: 620px;
+  overflow-y: auto;
 }
 
 
 .itemList-table{
   width: 1000px;
   margin: 10px auto;
+  
+}
+
+.itemList-table tr{
+  border: none;
 }
 
 .itemList-table thead tr{
@@ -224,6 +230,10 @@
   box-shadow: 2px 2px 10px #eeeeee;
   text-align: center;
   margin-bottom: 30px;
+}
+
+.order-modal-table-checked tr{
+  border: none;
 }
 
 .order-modal-table-checked td{

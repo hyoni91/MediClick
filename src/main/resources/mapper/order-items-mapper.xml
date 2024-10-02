@@ -47,8 +47,8 @@
         ORDER BY C.CATE_NUM
     </select>
 
-    <!--주문-->
-    <insert id="getOrderChecked">
+    <!--선택 주문-->
+    <insert id="getOrderChecked" parameterType="java.util.List">
         INSERT INTO ORDER_REQUESTS (
             PRODUCT_NUM,
             CUSTOMER_NUM,
@@ -61,6 +61,20 @@
             #{order.quantity}
             )
         </foreach>
+
+    </insert>
+
+    <!-- 개별주문-->
+    <insert id="getOrderOne">
+        INSERT INTO ORDER_REQUESTS (
+            PRODUCT_NUM,
+            CUSTOMER_NUM,
+            QUANTITY
+        ) VALUES (
+            #{productNum},
+            #{customerNum},
+            #{quantity}
+        )
     </insert>
 
     <!--주문 내역-->
