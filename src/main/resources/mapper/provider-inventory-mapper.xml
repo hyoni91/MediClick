@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="inventoryMapper">
+	<resultMap id="inventory" type="com.green.MediClick.provider.inventory.vo.InventoryVO">
+        <id column="INVENTORY_NUM" property="inventoryNum"/>
+        <result column="CATE_NUM" property="cateNum" />
+        <result column="PRODUCT_NUM" property="productNum" />
+        <result column="PRODUCT_NAME" property="productName" />
+        <result column="STOCK_DATE" property="stockDate" />
+        <result column="OUT_DATE" property="outDate" />
+        <result column="INITIAL_STOCK" property="initialStock" />
+        <result column="INCOMING_QTY" property="incomingQty" />
+        <result column="OUTGOING_QTY" property="outgoingQty" />
+    </resultMap>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
