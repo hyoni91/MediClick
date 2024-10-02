@@ -66,11 +66,14 @@
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
         </if>
         ORDER BY item_img.PRODUCT_NUM DESC
-<!--        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}-->
+        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
     </select>
 
     <select id="itemListCount" resultType="int">
         SELECT COUNT(PRODUCT_NUM) FROM PRODUCTS
+        <if test="searchValue != null and !searchValue.isEmpty()">
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
     </select>
     <insert id="insertItemImg">
         INSERT INTO ITEM_IMG (

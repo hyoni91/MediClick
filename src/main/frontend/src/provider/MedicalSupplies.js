@@ -3,16 +3,33 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './MedicalSupplies.css';
 const MedicalSupplies = () => {
-  const [searchValue ,setSearchValue] = useState('')
+
+  //검색 및 페이지 정보를 자바로 가져갈 때 사용하는 변수
+  const [itemListData, setItemListData] = useState({
+    searchType : 'CATE_NAME',
+    searchValue : '',
+    nowPage : 1
+  });
+
+  //조회 결과를 저장핧 변수
+  const [resultList, setResultList] = useState({
+    items : [],
+    pageInfo : {}
+  })
+
+
+
+  //const [searchValue ,setSearchValue] = useState('')
   const [mainImg, setMainImg] = useState(null)
   const navigate = useNavigate()
   const [previewUrl, setPreviewUrl] = useState('');
-  const [searchData, setSearchData] = useState({
-    searchType : 'CATE_NAME',
-    searchValue : ''
-  })
-  const [page,setPage]=useState({})
-  const [currentPage,setCurrentPage]=useState(1)
+  //const [searchData, setSearchData] = useState({
+  //  searchType : 'CATE_NAME',
+  //  searchValue : ''
+  //})
+  //const [page,setPage]=useState({})
+  //const [currentPage,setCurrentPage]=useState(1)
+
   //아이템
   const [medicalSupplies, setMedicalSupplies] = useState({
     productNum : '',
@@ -34,7 +51,7 @@ const MedicalSupplies = () => {
   useEffect(() => {
     axios.all([
       axios.get('/item/cateList'),
-      axios.post('/item/medicalSuppliesList', searchData)
+      axios.post('/item/medicalSuppliesList', itemListData)
     ])
     
     
@@ -43,8 +60,10 @@ const MedicalSupplies = () => {
       //카테고리
       setCategory(res1.data)
       setCateNum(res1.data[0].cateNum);
-      //아이템
-      setItem(res2.data)
+
+      //조회된 상품 목록 및 페이지 정보 세팅
+      setResultList(res2.data)
+
       console.log(res2.data)
     }))
     .catch((error) => {console.log(error)})
@@ -136,60 +155,62 @@ console.log(cateNum)
   
 
   const search = (e) => {
-    setSearchData({
-      ...searchData,
+    setItemListData({
+      ...itemListData,
       [e.target.name] : e.target.value
     })
-    console.log(searchData)
+    console.log(itemListData)
   }
+  
   const searchItem = () => {
-    axios.post('/item/medicalSuppliesList',searchData)
+    axios.post('/item/medicalSuppliesList',itemListData)
     .then((res) => {
-      setItem(res.data)
+      setResultList(res.data);
+
     })
     .catch((error) => {console.log(error)})
   }
 
+
   //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
   function getList(pageNo=1){
-    const params = {
-      ...searchData, // 검색 정보 추가
-      pageVO: {
-        ...page,
-        nowPage: pageNo // 현재 페이지 번호 설정
-      }
-    };
-    axios
-    .post('/item/medicalSuppliesList', params) // 요청 시 params를 전송
-    .then((res) => {
-      setItem(res.data); // 아이템 리스트 업데이트
-      setPage(res.data.pageInfo); // 페이지 정보 업데이트
-      setCurrentPage(pageNo); // 현재 페이지 업데이트
-    })
-    .catch((error)=>{console.log(error)})  
-    
+    setItemListData({
+      ...itemListData,
+      nowPage : pageNo
+    });
   }
-    //페이징 그리기
-    function drawPagination(){
-      const pagesArr=[]
-      if(page.prev){
-        pagesArr.push(<span key="prev" className='page-span'
-        onClick={(e)=>{getList(page.beginPage-1)}}>이전</span>)
-      }
-  
-      for(let a=page.beginPage; a<=page.endPage; a++){
-        pagesArr.push(<span key={`page-${a}`} className={`page-span num ${a === currentPage ? 'active' : ''}`}
-          onClick={() => getList(a)}>{a}</span>)
-      }
-  
-      if(page.next){
-        pagesArr.push(<span key="next" className='page-span'
-        onClick={(e)=>{getList(page.endPage+1)}}>다음</span>)
-      }
-  
-      return pagesArr
-  
+
+  useEffect(() => {
+      axios
+      .post('/item/medicalSuppliesList', itemListData) // 요청 시 params를 전송
+      .then((res) => {
+        setResultList(res.data);
+      })
+      .catch((error)=>{console.log(error)})  ;
+    //}
+  }, [itemListData.nowPage]);
+
+  //페이징 그리기
+  function drawPagination(){
+    const pagesArr=[]
+    if(resultList.pageInfo.prev){
+      pagesArr.push(<span key="prev" className='page-span'
+      onClick={(e)=>{getList(resultList.pageInfo.beginPage-1)}}>이전</span>)
     }
+
+    for(let a=resultList.pageInfo.beginPage; a<=resultList.pageInfo.endPage; a++){
+      pagesArr.push(<span key={`page-${a}`} className={`page-span num ${a === resultList.pageInfo.beginPage ? 'active' : ''}`}
+        onClick={() => getList(a)}>{a}</span>)
+    }
+
+    if(resultList.pageInfo.next){
+      pagesArr.push(<span key="next" className='page-span'
+      onClick={(e)=>{getList(resultList.pageInfo.endPage+1)}}>다음</span>)
+    }
+
+    return pagesArr
+
+  }
   
   return (
 
@@ -308,8 +329,8 @@ console.log(cateNum)
           </thead>
           <tbody>
           {
-            item.length > 0 ? (
-              item.map((item,i) => {
+            resultList.items.length > 0 ? (
+              resultList.items.map((item,i) => {
               return(
                 <tr key={i}>
                   <td>{item.categoryVO.cateName}</td>
