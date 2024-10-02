@@ -25,12 +25,12 @@ public class OrderItemsServiceImpl implements OrderItemsService {
 
     //주문 : 개별주문,선택주문
     @Override
-    public void insertGetOrder(OrderRequestVO orderRequestVO) {
+    public void insertGetOrder(List<OrderRequestVO> orderDatas) {
         // SQL 쿼리에 직접 orderDatas를 전달
 //        Map<String,Object> params = new HashMap<>();
 //        params.put("orderDatas",orderRequestVO);
 
-        sqlSession.insert("orderItemsMapper.getOrderChecked",orderRequestVO);
+        sqlSession.insert("orderItemsMapper.getOrderChecked",orderDatas);
     }
 
     //주문 내역

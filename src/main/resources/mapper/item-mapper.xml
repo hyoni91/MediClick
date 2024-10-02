@@ -61,7 +61,16 @@
     <select id="medicalSuppliesList" resultMap="item">
         SELECT * FROM PRODUCTS ,CATEGORY ,item_img
         WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
+        AND item_img.PRODUCT_NUM = PRODUCTS.PRODUCT_NUM
+        <if test="searchValue != null and !searchValue.isEmpty()">
+            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+        ORDER BY item_img.PRODUCT_NUM DESC
+<!--        LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}-->
+    </select>
 
+    <select id="itemListCount" resultType="int">
+        SELECT COUNT(PRODUCT_NUM) FROM PRODUCTS
     </select>
     <insert id="insertItemImg">
         INSERT INTO ITEM_IMG (
@@ -84,6 +93,7 @@
         SELECT IFNULL(MAX(PRODUCT_NUM),0)  + 1
         FROM PRODUCTS
     </select>
+
 </mapper>
 
 

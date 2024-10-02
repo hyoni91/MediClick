@@ -12,8 +12,8 @@ public interface OrderItemsService {
     //상품 목록
     List<OrderItemsVO> getAllItems(SearchVO searchVO);
 
-    //주문
-    void insertGetOrder(OrderRequestVO orderRequestVO);
+    //주문 (개별+선택)
+    void insertGetOrder(List<OrderRequestVO> orderDatas);
 
     //주문 내역
     List<OrderRequestVO> getOrderList();

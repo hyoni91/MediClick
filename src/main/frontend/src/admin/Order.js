@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Order.css'
 import axios from 'axios'
 import ReactModal from 'react-modal'
@@ -9,7 +9,6 @@ const Order = () => {
 
   // 상품 리스트
   const [itemList,setItemList]=useState([])
-
 
   // 주문 데이터 임시 저장
   const [selectData,setSelectData]=useState({})
@@ -30,7 +29,7 @@ const Order = () => {
     productNum:'',
     customerNum:'',
     quantity:10
-    }
+    },
   ])
 
   //검색 조건 저장 변수
@@ -46,7 +45,6 @@ const Order = () => {
     })
   }
 
-  // console.log(searchBox)
 
 
   // 검색하기
@@ -70,16 +68,6 @@ const Order = () => {
     
   // 체크박스 개별 선택
   const checkHandled=(checked,id)=>{
-    // const {id,checked}=e.target
-    // if (checked){
-      // 단일 선택 시 체크된 아이템을 배열에 추가
-      // setCheckItems((prev)=>(
-      // [...prev,id]
-      // ))}
-    // else{
-      // 단일 선택해제 시 체크된 아이템을 제외한 배열 (필터)
-      // setCheckItems(checkItems.filter((el)=>el !== id))
-    // }
 
     setCheckItems((prev)=>{
       if(checked){
@@ -90,6 +78,7 @@ const Order = () => {
     })
 
   }
+
 
   // 체크박스 전체 선택하기
   const allCheckedHandler =(checked)=>{
@@ -161,7 +150,7 @@ const Order = () => {
                 <input type='text' className='inputCustomerNum'
                   name='customerNum'
                   placeholder='고객번호를 입력해주세요'
-                  onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}></input>
+                  onChange={(e)=>{insertOrderData(e);}}></input>
                 {/* <button type='button'>확인</button> */}
             </div>
             <div className='order-btns'>
@@ -194,12 +183,31 @@ const Order = () => {
               </thead>
               <tbody>
                 {
+                // orderDatas도 map을 돌려야 하는데 
                   selectDatas.map((item,i)=>{
                       return(
                         <tr key={i}>
                           <td>{item.productName}</td>
-                          <td><span className='eachNum'>{orderDatas[0].quantity}</span> 개</td>
-                          <td><span className='priceNum'>{((item.productPrice)*(orderDatas[0].quantity)).toLocaleString()}</span> 원</td>
+                          <td><span className='eachNum'>
+                          {
+                            orderDatas.map((data,i)=>{
+                              return(
+                                data.productNum==item.productNum?
+                                data.quantity
+                                : null
+                              )
+                            })
+                          }</span> 개</td>
+                          <td><span className='priceNum'>
+                          {
+                            orderDatas.map((data,i)=>{
+                              return(
+                                data.productNum===item.productNum?
+                                ((item.productPrice)*(data.quantity)).toLocaleString()
+                                : null
+                              )
+                            })
+                          }</span> 원</td>
                         </tr>
                       )
                   })
@@ -210,7 +218,7 @@ const Order = () => {
                 <input type='text' className='inputCustomerNum'
                   name='customerNum'
                   placeholder='고객번호를 입력해주세요'
-                  onChange={(e)=>{insertOrderData(e);insertOrderDatas(e)}}></input>
+                  onChange={(e)=>{insertOrderDatas(e)}}></input>
                 {/* <button type='button'>확인</button> */}
             </div>
             <div className='order-modal-detail'>
@@ -283,8 +291,6 @@ const Order = () => {
       setSelectDatas(selectedItems) //선택된 아이템들을 상태로 저장
     }
 
-
-
   }
 
   // console.log(selectDatas)
@@ -304,32 +310,102 @@ const Order = () => {
 
   }
 
-  // console.log(orderDatas)
 
   // 선택 - 주문 데이터 입력
-  function insertOrderDatas(e){
-    const {name,value}=e.target
-    //마지막 데이터가 빈 값인지 확인하고 제거 후 새로운 데이터 추가
+  function insertOrderDatas(e,eNum){
     
-      setOrderDatas((prev)=>{
-        const filterPrev=prev.filter(order=>order.customerNum!==""&&order.productNum!=="")
+    //마지막 데이터가 빈 값인지 확인하고 제거 후 새로운 데이터 추가
+      // setOrderDatas((prev)=>{
+      //   const filterPrev=prev.filter(order=>order.customerNum!==""&&order.productNum!=="")
 
-        return[
-          ...filterPrev,
-          {
-            ...filterPrev[filterPrev.length-1],  //마지막 주문 데이터 복사
-            [name]:value, //새로 입력된 값으로 업데이트 
-            productNum:selectDatas.map(item=>item.productNum), // 선택된 상품 번호 배열
-            quantity:filterPrev.map(order=>order.quantity),
-          }
+      //   return[
+      //     ...filterPrev,
+      //     {
+      //       // ...filterPrev[filterPrev.length-1],  //마지막 주문 데이터 복사
+      //       [e.target.name]:e.target.value, //새로 입력된 값으로 업데이트 
+      //       productNum:selectDatas.map(item=>item.productNum), // 선택된 상품 번호 배열
+            
+      //     }
+      //   ]
 
-        ]
-      })
+      // })
+
+
+
+      // //orderDatas 배열 업데이트
+      // setOrderDatas(prev=>{
+      //   // 선택된 상품 번호 리스트
+      //   // const selectProductNums=selectDatas.map(item=>item.productNum)
+
+      //   //새로운 주문 데이터 생성 (productNum, quantity 각각 입력)
+      //   // const updatedOrders=selectProductNums.map(productNum=>{
+
+      //     //기존 데이터에서 같은 productNum이 있는지 확인
+      //     const existngOrder=prev.find(order=>order.productNum === productNum)
+
+      //     // if(parseInt(existngOrder.productNum)===parseInt(orderDatas.productNum)){
+      //     //   let quantity=orderDatas.quantity
+      //     //   return{
+      //     //     ...existngOrder, // 기존 데이터가 있으면 복사
+      //     //     [e.target.name]:e.target.value, // customerNum 또는 quantity 값을 동적으로 업데이트 
+      //     //     productNum, //상품 번호는 유지 
+      //     //     quantity
+      //     //   }
+
+      //     // }
+      //     // else{
+
+      //     // }
+
+
+
+      //     if(existngOrder){
+      //       return prev.map(order=>
+      //         order.productNum===productNum
+      //         ? { ...order, quantity: value}
+      //         : order
+      //       )
+          
+            
+      //       // {
+      //         // ...existngOrder, // 기존 데이터가 있으면 복사
+      //         // [e.target.name]:e.target.value, // customerNum 또는 quantity 값을 동적으로 업데이트 
+      //         // productNum, //상품 번호는 유지
+      //         // quantity:
+      //         //   checkItems.map((chk,i)=>{
+      //         //     orderDatas.map((data,i)=>{
+      //         //       if(chk.productNum===existngOrder.productNum){
+      //         //         return data.quantity
+      //         //       }
+      //         //     })
+      //         //   })
+      //       // }
+      //     }
+      //     else {
+      //       // return [...prev,{productNum,quantity:value,customerNum:"1"}]
+            
+            
+            
+      //       // {
+      //         // productNum,
+      //         // [e.target.name]:e.target.value
+      //       // }
+      //     }
+
+
+
+
+      //   })
+        
+      //   return updatedOrders;
+
+      // })
+
     
   }
 
+  // console.log(checkItems)
   console.log(orderDatas)
-
 
 
   function goOrderData(){
@@ -349,6 +425,7 @@ const Order = () => {
     })
     .catch((error)=>{console.log(error)})
   }
+
 
 
   useEffect(()=>{
@@ -398,8 +475,8 @@ const Order = () => {
               padding:'10px',
               position: 'absolute',
               width: '560px',
-              minHeight:'300px',
-              maxHeight:'80vh',
+              minHeight:'470px',
+              maxHeight:'800px',
               // height: '320px',
               zIndex:'150',
               top: '50%',
@@ -498,9 +575,9 @@ const Order = () => {
                               onClick={()=>{}}>{item.productName}</span></td>
                             <td>{item.detail}</td>
                             <td>
-                              <input type='number' name='quantity' 
+                              <input type='number' name='quantity'
                               defaultValue={10} min={10} max={100} step={10}
-                              onChange={(e)=>{insertOrderData(e); insertOrderDatas(e)}}
+                              onChange={(e)=>{insertOrderData(e); insertOrderDatas(e,item.productNum)}}
                               ></input> 개</td>
                             <td><span className='priceNum'>{item.productPrice.toLocaleString()}</span> 원</td>
                             <td><button type='button' value={item.productNum}

@@ -7,6 +7,12 @@ const MedicalSupplies = () => {
   const [mainImg, setMainImg] = useState(null)
   const navigate = useNavigate()
   const [previewUrl, setPreviewUrl] = useState('');
+  const [searchData, setSearchData] = useState({
+    searchType : 'CATE_NAME',
+    searchValue : ''
+  })
+  const [page,setPage]=useState({})
+  const [currentPage,setCurrentPage]=useState(1)
   //아이템
   const [medicalSupplies, setMedicalSupplies] = useState({
     productNum : '',
@@ -28,7 +34,7 @@ const MedicalSupplies = () => {
   useEffect(() => {
     axios.all([
       axios.get('/item/cateList'),
-      axios.get('/item/medicalSuppliesList')
+      axios.post('/item/medicalSuppliesList', searchData)
     ])
     
     
@@ -129,6 +135,62 @@ console.log(cateNum)
   };
   
 
+  const search = (e) => {
+    setSearchData({
+      ...searchData,
+      [e.target.name] : e.target.value
+    })
+    console.log(searchData)
+  }
+  const searchItem = () => {
+    axios.post('/item/medicalSuppliesList',searchData)
+    .then((res) => {
+      setItem(res.data)
+    })
+    .catch((error) => {console.log(error)})
+  }
+
+  //페이징 처리한 곳에서 숫자(페이지 번호)를 클릭하면 다시 게시글 조회
+  function getList(pageNo=1){
+    const params = {
+      ...searchData, // 검색 정보 추가
+      pageVO: {
+        ...page,
+        nowPage: pageNo // 현재 페이지 번호 설정
+      }
+    };
+    axios
+    .post('/item/medicalSuppliesList', params) // 요청 시 params를 전송
+    .then((res) => {
+      setItem(res.data); // 아이템 리스트 업데이트
+      setPage(res.data.pageInfo); // 페이지 정보 업데이트
+      setCurrentPage(pageNo); // 현재 페이지 업데이트
+    })
+    .catch((error)=>{console.log(error)})  
+    
+  }
+    //페이징 그리기
+    function drawPagination(){
+      const pagesArr=[]
+      if(page.prev){
+        pagesArr.push(<span key="prev" className='page-span'
+        onClick={(e)=>{getList(page.beginPage-1)}}>이전</span>)
+      }
+  
+      for(let a=page.beginPage; a<=page.endPage; a++){
+        pagesArr.push(<span key={`page-${a}`} className={`page-span num ${a === currentPage ? 'active' : ''}`}
+          onClick={() => getList(a)}>{a}</span>)
+      }
+  
+      if(page.next){
+        pagesArr.push(<span key="next" className='page-span'
+        onClick={(e)=>{getList(page.endPage+1)}}>다음</span>)
+      }
+  
+      return pagesArr
+  
+    }
+  
   return (
 
     <div className='medicalSupplies-container'>
@@ -215,8 +277,16 @@ console.log(cateNum)
         </div>
       </div>
           {/* 아이템 테이블 */}
-      <div>
-        <input type='text'/>
+      <div className='searchItem-div'>
+        <select name='searchType' onChange={(e) => {
+          console.log(e.target.value)
+          search(e)}
+        }>
+          <option value={'CATE_NAME'}>카테고리</option>
+          <option value={'PRODUCT_NAME'}>제품명</option>
+        </select>
+        <input type='text' name='searchValue' onChange={(e) => {search(e)}}/>
+        <button type='button' onClick={() => {searchItem()}}>검색</button>
       </div>
       <div className='medicalSupplies-item'>
         <table className='medicalSupplies-itemtable'>
@@ -261,7 +331,10 @@ console.log(cateNum)
           }
           </tbody>
         </table>
-
+          
+      </div>
+      <div>
+      {drawPagination()}
       </div>
     </div>
   )

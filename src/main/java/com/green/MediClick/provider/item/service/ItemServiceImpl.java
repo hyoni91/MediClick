@@ -1,13 +1,18 @@
 package com.green.MediClick.provider.item.service;
 
+import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.item.vo.CategoryVO;
 import com.green.MediClick.provider.item.vo.ItemImgVO;
 import com.green.MediClick.provider.item.vo.ItemVO;
+import com.green.MediClick.schedule.vo.PageVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service("itemService")
 public class ItemServiceImpl implements ItemService{
     @Autowired
@@ -33,9 +38,21 @@ public class ItemServiceImpl implements ItemService{
         sqlSession.insert("itemMapper.productInsert",itemVO);
     }
 
+//    @Override
+//    public List<ItemVO> medicalSuppliesList(SearchVO searchVO, PageVO pageVO) {
+//        Map<String ,Object> map = new HashMap<>();
+//        map.put("searchVO",searchVO);
+//        map.put("pageVO",pageVO);
+//        return sqlSession.selectList("itemMapper.medicalSuppliesList",map);
+//    }
     @Override
-    public List<ItemVO> medicalSuppliesList() {
-        return sqlSession.selectList("itemMapper.medicalSuppliesList");
+    public List<ItemVO> medicalSuppliesList(SearchVO searchVO) {
+        return sqlSession.selectList("itemMapper.medicalSuppliesList", searchVO);
+    }
+
+    @Override
+    public int getItemCount() {
+        return sqlSession.selectOne("itemMapper.itemListCount");
     }
 
     @Override

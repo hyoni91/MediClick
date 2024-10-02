@@ -1,8 +1,10 @@
 package com.green.MediClick.provider.item.service;
 
+import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.item.vo.CategoryVO;
 import com.green.MediClick.provider.item.vo.ItemImgVO;
 import com.green.MediClick.provider.item.vo.ItemVO;
+import com.green.MediClick.schedule.vo.PageVO;
 
 import java.util.List;
 
@@ -17,8 +19,10 @@ public interface ItemService {
 
     void productInsert(ItemVO itemVO);
 
-    List<ItemVO> medicalSuppliesList();
+    //List<ItemVO> medicalSuppliesList(SearchVO searchVO, PageVO pageVO);
+    List<ItemVO> medicalSuppliesList(SearchVO searchVO);
 
+    int getItemCount();
     int getNextItemCode();
     int getNextNum();
 
