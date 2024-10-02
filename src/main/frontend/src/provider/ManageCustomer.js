@@ -323,7 +323,7 @@ const ManageCustomer = () => {
           <h3> ◻거래처 정보</h3>
           <div className='costomer-add-div'>
             <div>
-              <h5><i class="fa-regular fa-building" /> 거래처명</h5>
+              <h5><i className="fa-regular fa-building" /> 거래처명</h5>
               <input 
                 type='text'
                 name='customerName'
@@ -339,7 +339,7 @@ const ManageCustomer = () => {
               />
             </div>
             <div>
-              <h5><i class="fa-regular fa-file-lines" /> 사업자 번호</h5>
+              <h5><i className="fa-regular fa-file-lines" /> 사업자 번호</h5>
               <input 
                 type='text'
                 name='businessNumber'
@@ -347,7 +347,7 @@ const ManageCustomer = () => {
               />
             </div>
             <div>
-              <h5><i class="fa-solid fa-map-location-dot" /> 거래처 주소</h5>
+              <h5><i className="fa-solid fa-map-location-dot" /> 거래처 주소</h5>
               <input 
                 type='text'
                 name='customerAddr'
@@ -357,7 +357,7 @@ const ManageCustomer = () => {
               /> 
             </div>
             <div>
-              <h5><i class="fa-solid fa-phone" /> 거래처 전화</h5>
+              <h5><i className="fa-solid fa-phone" /> 거래처 전화</h5>
               <input  
                 type='text'
                 name='customerTel'
@@ -365,7 +365,7 @@ const ManageCustomer = () => {
               />
             </div>
             <div>
-              <h5><i class="fa-solid fa-envelope-open" />거래처 메일</h5>
+              <h5><i className="fa-solid fa-envelope-open" />거래처 메일</h5>
               <input 
                 type='text'
                 name='customerEmail'
