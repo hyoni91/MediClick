@@ -3,6 +3,7 @@ package com.green.MediClick.provider.item.service;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.item.vo.CategoryVO;
 import com.green.MediClick.provider.item.vo.ItemImgVO;
+import com.green.MediClick.provider.item.vo.ItemListData;
 import com.green.MediClick.provider.item.vo.ItemVO;
 import com.green.MediClick.schedule.vo.PageVO;
 import org.apache.ibatis.session.SqlSession;
@@ -46,13 +47,13 @@ public class ItemServiceImpl implements ItemService{
 //        return sqlSession.selectList("itemMapper.medicalSuppliesList",map);
 //    }
     @Override
-    public List<ItemVO> medicalSuppliesList(SearchVO searchVO) {
-        return sqlSession.selectList("itemMapper.medicalSuppliesList", searchVO);
+    public List<ItemVO> medicalSuppliesList(ItemListData itemListData) {
+        return sqlSession.selectList("itemMapper.medicalSuppliesList", itemListData);
     }
 
     @Override
-    public int getItemCount() {
-        return sqlSession.selectOne("itemMapper.itemListCount");
+    public int getItemCount(ItemListData itemListData) {
+        return sqlSession.selectOne("itemMapper.itemListCount", itemListData);
     }
 
     @Override

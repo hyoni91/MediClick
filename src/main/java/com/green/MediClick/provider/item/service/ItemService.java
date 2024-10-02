@@ -3,6 +3,7 @@ package com.green.MediClick.provider.item.service;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.item.vo.CategoryVO;
 import com.green.MediClick.provider.item.vo.ItemImgVO;
+import com.green.MediClick.provider.item.vo.ItemListData;
 import com.green.MediClick.provider.item.vo.ItemVO;
 import com.green.MediClick.schedule.vo.PageVO;
 
@@ -19,10 +20,9 @@ public interface ItemService {
 
     void productInsert(ItemVO itemVO);
 
-    //List<ItemVO> medicalSuppliesList(SearchVO searchVO, PageVO pageVO);
-    List<ItemVO> medicalSuppliesList(SearchVO searchVO);
+    List<ItemVO> medicalSuppliesList(ItemListData itemListData);
 
-    int getItemCount();
+    int getItemCount(ItemListData itemListData);
     int getNextItemCode();
     int getNextNum();
 
