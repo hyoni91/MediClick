@@ -18,26 +18,26 @@ public class PatientChartServiceImpl implements  PatientChartService{
 
     @Override
     public List<MemberVO> memberList(SearchVO searchVO) {
-        return sqlSession.selectList("patientChartMapper.allMember",searchVO);
+        return sqlSession.selectList("mappers.generalMapper.patientChartMapper.allMember",searchVO);
     }
 
     @Override
     public List<PatientChartVO> memberSelect(String memNum) {
-        return sqlSession.selectList("patientChartMapper.select", memNum);
+        return sqlSession.selectList("mappers.generalMapper.patientChartMapper.select", memNum);
     }
 
     @Override
     public ScheduleVO nowSchedule(ScheduleVO scheduleVO) {
-        return sqlSession.selectOne("patientChartMapper.nowSchedule",scheduleVO);
+        return sqlSession.selectOne("mappers.generalMapper.patientChartMapper.nowSchedule",scheduleVO);
     }
 
     @Override
     public void chartInsert(PatientChartVO patientChartVO) {
-        sqlSession.insert("patientChartMapper.chartInsert", patientChartVO);
+        sqlSession.insert("mappers.generalMapper.patientChartMapper.chartInsert", patientChartVO);
     }
 
     @Override
     public int chartNum() {
-        return sqlSession.selectOne("patientChartMapper.chartNum");
+        return sqlSession.selectOne("mappers.generalMapper.patientChartMapper.chartNum");
     }
 }
