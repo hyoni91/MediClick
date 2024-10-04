@@ -36,7 +36,6 @@ public class OrderItemsController {
     //개별주문
     @PutMapping("/insertOrder")
     public void insertGetOrder(@RequestBody OrderRequestVO orderRequestVO){
-        System.out.println("!!!!!!!!!!!!!!! 개별 : "+orderRequestVO);
 
         orderItemsService.insertSingleOrder(orderRequestVO);
     }
