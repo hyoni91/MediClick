@@ -61,7 +61,6 @@
             #{order.quantity}
             )
         </foreach>
-
     </insert>
 
     <!-- 개별주문-->

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import './Order.css'
+import './OrderList.css'
 
 const OrderList = () => {
   const navigate = useNavigate()
@@ -116,6 +116,32 @@ const OrderList = () => {
         <h3>주문 내역</h3>
         {/* 품목 리스트 */}
         <div className='itemList-div'>
+          <div className='orderList-table'>
+            {
+              orderList.map((order,i)=>{
+                return(
+                  <div key={i}>
+                    <div>{order.requestDate}</div>
+                    <div className='itemList-main'>
+                      <div>이미지</div>
+                      <div>
+                        <span>[{order.orderItemsVO.cateVO.cateName}]</span>
+                        <span>{order.orderItemsVO.productName}</span>
+                        <div><span className='eachNum'>{order.quantity}</span> 개</div>
+                        <div>{order.orderItemsVO.detail}</div>
+                        <div><span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원</div>
+                        <div style={order.requestStatus==='주문취소'?cancelLine:null}>{requestState(order.requestStatus)}</div>
+                      </div>
+                    </div>
+                    <div><button type='button'
+                        onClick={()=>{goUpdate(order.requestNum)}}
+                        >취소</button></div>
+                  </div>
+                )
+              })
+            }
+          </div>
+
           <table className='itemList-table'>
             <colgroup>
               {/* 주문번호 */}
@@ -141,7 +167,7 @@ const OrderList = () => {
             </colgroup>
   
             <thead>
-              <tr>
+              {/* <tr>
                 <td>주문번호</td>
                 <td>발주일</td>
                 <td>카테고리</td>
@@ -152,10 +178,10 @@ const OrderList = () => {
                 <td>총 금액</td>
                 <td>현황</td>
                 <td></td>
-              </tr>
+              </tr> */}
             </thead>
             <tbody>
-              {
+              {/* {
                 orderList.map((order,i)=>{
                   return(
                     <tr key={i}>
@@ -178,7 +204,7 @@ const OrderList = () => {
                     </tr>
                   )
                 })
-              }
+              } */}
             </tbody>
           </table>
         </div>
