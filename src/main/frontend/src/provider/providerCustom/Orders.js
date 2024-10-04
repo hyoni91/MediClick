@@ -17,6 +17,27 @@ const Orders = () => {
   const [chks, setChks] = useState([])
   const [chkAll, setChkAll] = useState(false)
 
+
+  //체크박스 함수 
+  const handleCheckAll = () => {
+    const newChks = chks.map(() => !chkAll);
+    setChks(newChks);
+    setChkAll(!chkAll);
+  };
+
+  const handleCheck = (index) => {
+    //불변성유지를 위해 배열 복사
+    const newChks = [...chks];
+    // 특정 인덱스의 상태 변환 후 chks상태 업데이트
+    newChks[index] = !newChks[index];
+    setChks(newChks);
+    //newChks.every(chk => chk)는 배열의 모든 요소가 true일 때만 true를 반환
+    setChkAll(newChks.every(chk => chk)); 
+
+  };
+
+
+  //test 배송완료 버튼
   function changeStatus(orderNum){
     axios.put(`/orders/statusUpdate/${orderNum}`)
     .then((res)=>{
@@ -113,6 +134,7 @@ const Orders = () => {
                   <input 
                     type='checkbox'
                     checked={chkAll}
+                    onClick={()=>{handleCheckAll()}}
                   />
                 </td>
                 <td>구분</td>
@@ -132,6 +154,7 @@ const Orders = () => {
                       <input 
                         type='checkbox'
                         checked={chks[i]}
+                        onClick={()=>{handleCheck(i)}}
                       />
                     </td>
                     <td>{i+1}</td>
