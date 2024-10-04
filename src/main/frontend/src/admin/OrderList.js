@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import './OrderList.css'
 
 const OrderList = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
 
   // 주문 리스트
@@ -20,27 +22,70 @@ const OrderList = () => {
     })
     .catch((error)=>{console.log(error)})
 
-  },[])
+    changeBold(location.pathname)
+
+  },[location.pathname])
 
 
-  // 주문취소
-  function godelete(requestNum){
-    
-    axios
-    .delete(`/orderItems/del/${requestNum}`)
-    .then((res)=>{
-      alert('주문이 취소되었습니다.')
-
-      const del=orderList.filter((order)=>{
-        return(
-          order.requestNum!=requestNum
+  // 주문취소 상태로 변경
+  function goUpdate(requestNum){
+    if(window.confirm('주문을 취소하시겠습니까?')){
+      axios
+      .delete(`/orderItems/update/${requestNum}`)
+      .then((res)=>{
+        alert('주문이 취소되었습니다.')
+  
+        setOrderList((prev)=>
+          prev.map((order)=>
+            order.requestNum===requestNum ?
+            {...order,requestStatus:'주문취소'}:order
+          )
         )
+  
       })
-      setOrderList([...del])
+      .catch((error)=>{console.log(error)})
 
-    })
-    .catch((error)=>{console.log(error)})
+    }
   }
+
+  // 현황이 주문취소일 때 텍스트 변경
+  const cancelLine={color:'lightgray'}
+
+  //선택한 li bold 유지
+  function changeBold(currentPath){
+    let bold=document.querySelectorAll('.getBold')
+    // let currentPath=location.pathname // 현재페이지의 경로
+
+    bold.forEach((b,i)=>{
+      let targetPath=b.getAttribute('data-path')
+
+      if(currentPath===targetPath){
+        b.classList.add('active')
+      } else{
+        b.classList.remove('active')
+      }
+    })
+  }
+
+  // 현황
+  function requestState(e){
+    switch(e){
+
+      case '배송대기':
+        return(
+        <span>배송대기</span>
+        )
+      case '배송완료':
+        return (
+        <span>배송완료</span>
+        )
+      case '주문취소':
+        return(
+        <span>주문취소</span>
+        )
+    }
+  }
+
 
 
   return (
@@ -51,16 +96,18 @@ const OrderList = () => {
         {/* 사이드바 */}
         <div className='order-sidebar'>
         <ul>
-          <li><span className='getBold' 
-          onClick={(e)=>{navigate('/admin/order');}}>
+          <li><div className='getBold' 
+            data-path="/admin/order"
+            onClick={(e)=>{navigate('/admin/order');}}>
             <i className="bi bi-caret-right-fill"></i>
             <span> 상품 주문</span>
-            </span></li>
-          <li><span className='getBold' 
-          onClick={(e)=>{(navigate('/admin/orderList'));}}>
+            </div></li>
+          <li><div className='getBold' 
+            data-path="/admin/orderList"
+            onClick={(e)=>{(navigate('/admin/orderList'));}}>
             <i className="bi bi-caret-right-fill"></i>
             <span> 주문 내역</span>
-            </span></li>
+            </div></li>
         </ul>
       </div>
 
@@ -69,6 +116,32 @@ const OrderList = () => {
         <h3>주문 내역</h3>
         {/* 품목 리스트 */}
         <div className='itemList-div'>
+          <div className='orderList-table'>
+            {
+              orderList.map((order,i)=>{
+                return(
+                  <div key={i}>
+                    <div>{order.requestDate}</div>
+                    <div className='itemList-main'>
+                      <div>이미지</div>
+                      <div>
+                        <span>[{order.orderItemsVO.cateVO.cateName}]</span>
+                        <span>{order.orderItemsVO.productName}</span>
+                        <div><span className='eachNum'>{order.quantity}</span> 개</div>
+                        <div>{order.orderItemsVO.detail}</div>
+                        <div><span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원</div>
+                        <div style={order.requestStatus==='주문취소'?cancelLine:null}>{requestState(order.requestStatus)}</div>
+                      </div>
+                    </div>
+                    <div><button type='button'
+                        onClick={()=>{goUpdate(order.requestNum)}}
+                        >취소</button></div>
+                  </div>
+                )
+              })
+            }
+          </div>
+
           <table className='itemList-table'>
             <colgroup>
               {/* 주문번호 */}
@@ -94,7 +167,7 @@ const OrderList = () => {
             </colgroup>
   
             <thead>
-              <tr>
+              {/* <tr>
                 <td>주문번호</td>
                 <td>발주일</td>
                 <td>카테고리</td>
@@ -105,10 +178,10 @@ const OrderList = () => {
                 <td>총 금액</td>
                 <td>현황</td>
                 <td></td>
-              </tr>
+              </tr> */}
             </thead>
             <tbody>
-              {
+              {/* {
                 orderList.map((order,i)=>{
                   return(
                     <tr key={i}>
@@ -120,21 +193,18 @@ const OrderList = () => {
                       <td><span className='eachNum'>{order.quantity}</span> 개</td>
                       <td><span>{order.orderItemsVO.productPrice.toLocaleString()}</span> 원</td>
                       <td><span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원</td>
-                      <td>
+                      <td style={order.requestStatus==='주문취소'?cancelLine:null}>
                         {
-                          order.requestStatus=='Pending'?
-                          '접수'
-                          :
-                          '배송 중'
+                          requestState(order.requestStatus)
                         }
                         </td>
                       <td><button type='button'
-                        onClick={()=>{godelete(order.requestNum)}}
+                        onClick={()=>{goUpdate(order.requestNum)}}
                         >취소</button></td>
                     </tr>
                   )
                 })
-              }
+              } */}
             </tbody>
           </table>
         </div>

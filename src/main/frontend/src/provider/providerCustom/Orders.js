@@ -5,55 +5,62 @@ import { useNavigate } from 'react-router-dom'
 import './Orders.css'
 
 const Orders = () => {
+  const navigate = useNavigate()
+  const [orders , setOrders] = useState([])
+  const [sumPrice ,setSumPrice] = useState(0)
 
-   //검색
-    const [searchValue , setSearchValue] = useState({})
+  //검색
+  const [searchValue , setSearchValue] = useState({})
 
 
-  //현황 css 
-  const statusTag = useRef([]);
+  //체크박스 설정
+  const [chks, setChks] = useState([])
+  const [chkAll, setChkAll] = useState(false)
 
-  // const whatStatus = (order) =>{
-  //       if(order.requestStatus == '배송대기'){
-  //       // statusTag.current.className = `status pending`
-  //       return <>접수중</>
-  //       }else if(order.requestStatus == '배송완료'){
-  //         // statusTag.current.className = `status completed`
-  //         return <>처리완료</>
-  //       } else if(order.requestStatus == '주문취소'){
-  //         // statusTag.current.className = `status failed`
-  //         return <>접수취소</>
-  //       }
-    
-  // }
+  function changeStatus(orderNum){
+    axios.put(`/orders/statusUpdate/${orderNum}`)
+    .then((res)=>{
+      
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
 
   useEffect(()=>{
     axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
       console.log(res.data)
-      // setOrders(res.data)
-      // let sum = 0;
-      // res.data.forEach((p,i)=>{
-      //   sum = sum +p.totalPrice
-      // })
-      // setSumPrice(sum)
+      setOrders(res.data)
+      let sum = 0;
+      res.data.forEach((p,i)=>{
+        sum = sum +p.totalPrice
+      })
+
+      let chkarr = new Array(res.data.length)
+      chkarr.fill(false)
+      setChks(chkarr)
+
+      setSumPrice(sum)
 
     })
     .catch((error)=>{
       console.log(error)
     })
+
+
   },[searchValue])
 
   function searchOrder(){
     axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
-      // setOrders(res.data)
-      // let sum = 0;
-      // res.data.forEach((p,i)=>{
-      //   sum = sum +p.totalPrice
-      // })
-      // setSumPrice(sum)
+      setOrders(res.data)
+      let sum = 0;
+      res.data.forEach((p,i)=>{
+        sum = sum +p.totalPrice
+      })
+      setSumPrice(sum)
 
     })
     .catch((error)=>{
@@ -73,19 +80,16 @@ const Orders = () => {
           <div className='manage-sales'>
             <div>
               <h4>총 매출액</h4>
-              <h2>원</h2>
+              <h2>{sumPrice.toLocaleString()}원</h2>
             </div>
             <div>총미수금</div>
           </div>
         </div>
         <div className='manage-content'>
-          {/* <div className='content-btn'>
-            <button>버튼</button>  
-            <button>버튼</button>   */}
             <div className='seachbar'>
                 <input 
                   type='text' 
-                  placeholder='주문일자/주문현황'
+                  placeholder='날짜/현황/거래처명'
                   name='searchValue'
                   onChange={(e)=>{
                     setSearchValue({
@@ -105,45 +109,60 @@ const Orders = () => {
           <table className='content-table'>
             <thead>
               <tr>
-                <td><input type='checkbox'/></td>
+                <td>
+                  <input 
+                    type='checkbox'
+                    checked={chkAll}
+                  />
+                </td>
                 <td>구분</td>
                 <td>거래처명</td>
                 <td>주문일자</td>
                 <td>총 주문액</td>
-                <td>결제현황</td>
                 <td>주문현황</td>
+                <td>test버튼</td>
               </tr>
             </thead>
             <tbody>
-                  <tr>
-                    <td><input type='checkbox'/></td>
-                    <td></td>
+              {
+                orders.map((order,i)=>{
+                  return(
+                  <tr key={i}>
                     <td>
-                      <span onClick={()=>{}}>
+                      <input 
+                        type='checkbox'
+                        checked={chks[i]}
+                      />
+                    </td>
+                    <td>{i+1}</td>
+                    <td>
+                      <span 
+                    onClick={()=>{
+                      navigate(`/provider/order_detail/${order.requestNum}`)
+                      }}>{order.customerName}
                       </span>
                     </td>
-                    <td></td>
-                    <td>원</td>
-                    <td>원</td>
-                    {/* <td>== 'Pending'? <>접수완료</> : <></></td> */}
-                    {/* <td>{order.requestDate}</td>
+                    <td>{order.orderDate}</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>{order.totalPrice.toLocaleString()}원</td> */}
+                    <td>{order.orderStatus}</td>
                     <td>
-                      <span  
-                        className='status'
-                        ref={statusTag}
+                      <button
+                        type='button'
+                        onClick={()=>{changeStatus(order.orderNum)}}
                       >
-                        {/* {order.requestStatus} */}
-                      </span>
-                      </td>
+                        완료
+                      </button>
+                    </td>
                   </tr>
+                  )
+                })
+              }
+                
             </tbody>
           </table>
         </div>
           
       </div>
-        
 
     </div>
   )

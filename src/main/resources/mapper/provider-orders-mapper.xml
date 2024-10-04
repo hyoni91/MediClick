@@ -4,17 +4,20 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="ordersMapper">
 	<resultMap id="orders" type="com.green.MediClick.provider.customers.vo.OrdersVO">
-        <id column="ORDERS_NUM" property="orderNum"/>
+        <id column="ORDER_NUM" property="orderNum"/>
         <result column="REQUEST_NUM" property="requestNum"/>
         <result column="ORDER_DATE" property="orderDate"/>
         <result column="ORDER_STATUS" property="orderStatus"/>
         <result column="TOTALPRICE" property="totalPrice"/>
-        <association property="customersVO" column="customerMapper.customer"/>
+        <result column="CUSTOMER_NAME" property="customerName" />
+<!--        <association property="customersVO" column="customerMapper.customer"/>-->
     </resultMap>
 
-
+    <!--수주 목록 -->
     <select id="orders" resultMap="orders">
-        SELECT O.REQUEST_NUM
+        SELECT
+        ORDER_NUM
+        ,O.REQUEST_NUM
         ,ORDER_DATE
         ,ORDER_STATUS
         ,C.CUSTOMER_NUM
@@ -26,12 +29,19 @@
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
         <if test="searchValue != null and !searchValue.isEmpty()">
             AND (
-            REQUEST_DATE LIKE CONCAT('%', #{searchValue}, '%')
-            OR REQUEST_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
+            ORDER_DATE LIKE CONCAT('%', #{searchValue}, '%')
+            OR ORDER_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
+            OR C.CUSTOMER_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             )
         </if>
         ORDER BY R.REQUEST_NUM DESC
     </select>
+
+    <update id="statusUpdate">
+        UPDATE orders
+        SET ORDER_STATUS = '배송완료'
+        WHERE ORDER_NUM = #{orderNum}
+    </update>
 
 </mapper>
 

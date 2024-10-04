@@ -2,20 +2,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import './Order.css'
 import axios from 'axios'
 import ReactModal from 'react-modal'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Order = () => {
   const navigate=useNavigate()
+  const location=useLocation()
 
   // 상품 리스트
   const [itemList,setItemList]=useState([])
+
+  // 체크박스, 체크한 아이템들 - 체크박스 ui
+  const [checkItems,setCheckItems]=useState([])
 
   // 주문 데이터 임시 저장
   const [selectData,setSelectData]=useState({})
   // 주문 데이터들 임시 저장
   const [selectDatas,setSelectDatas]=useState([])
-
-
 
   // 주문 데이터
   const [orderData,setOrderData]=useState(
@@ -66,8 +68,6 @@ const Order = () => {
   }
 
 
-  // 체크박스, 체크한 아이템들 - 체크박스 ui
-  const [checkItems,setCheckItems]=useState([])
     
   // 체크박스 개별 선택
   const checkHandled=(checked,id)=>{
@@ -79,7 +79,6 @@ const Order = () => {
         return prev.filter((el)=> el!==id) // 체크 해제된 경우 아이템 제거
       }
     })
-
   }
 
 
@@ -97,7 +96,6 @@ const Order = () => {
     }
   }
 
-  // console.log(checkItems)
 
   //모달 창
   const [modalOpen,setModalOpen]=useState(false)
@@ -232,13 +230,16 @@ const Order = () => {
   }
 
   //선택한 li bold 유지
-  function changeBold(e){
+  function changeBold(currentPath){
     let bold=document.querySelectorAll('.getBold')
+    // let currentPath=location.pathname // 현재페이지의 경로
+
     bold.forEach((b,i)=>{
-      if(e.currentTarget==b){
+      let targetPath=b.getAttribute('data-path')
+
+      if(currentPath===targetPath){
         b.classList.add('active')
-      }
-      else{
+      } else{
         b.classList.remove('active')
       }
     })
@@ -270,6 +271,8 @@ const Order = () => {
 
   // 주문 데이터 저장 - 선택 구매
   function goOrderChecked(){
+    // checkItems에 체크된 productNum이랑
+    // 받아온 itemList에 있는 productNum이랑 비교해서 같은 숫자를 selectedItems에 저장
     const selectedItems=itemList.filter(item=>
       checkItems.includes(item.productNum)
     )
@@ -286,7 +289,7 @@ const Order = () => {
   }
 
 
-  // console.log(selectDatas)
+  console.log(selectDatas)
   
   // 개별 - 주문 데이터 입력
   function insertOrderData(e){
@@ -311,7 +314,7 @@ const Order = () => {
 
       //기존 데이터에서 같은 productNum이 있는지 확인 후 동일하면 existingOrder에 저장
       const existingOrder=filterPrev.find(order=>order.productNum===eNum)
-      console.log(existingOrder) // 이게 리스트로 만들어지면 내가 원하는 
+      console.log(existingOrder) // 하나씩 늦게 입력됨 
       
       if(existingOrder){ 
         return filterPrev.map(order =>
@@ -339,7 +342,7 @@ const Order = () => {
     })
   }
 
-  console.log(orderData)
+  console.log(orderDatas)
 
   function goOrderData(){
     axios
@@ -372,7 +375,9 @@ const Order = () => {
       console.log(error)
     })
 
-  },[])
+    changeBold(location.pathname)
+
+  },[location.pathname])
 
   // console.log(orderList)
 
@@ -450,16 +455,18 @@ const Order = () => {
         {/* 사이드바 */}
         <div className='order-sidebar'>
           <ul>
-            <li><span className='getBold' 
-            onClick={(e)=>{navigate('/admin/order'); changeBold(e)}}>
-              <i className="bi bi-caret-right-fill"></i>
-              <span> 상품 주문</span>
-              </span></li>
-            <li><span className='getBold' 
-            onClick={(e)=>{navigate('/admin/orderList'); changeBold(e)}}>
-              <i className="bi bi-caret-right-fill"></i>
-              <span> 주문 내역</span>
-              </span></li>
+            <li><div className='getBold' 
+                data-path="/admin/order"
+                onClick={(e)=>{navigate('/admin/order');}}>
+                <i className="bi bi-caret-right-fill"></i>
+                <span> 상품 주문</span>
+              </div></li>
+            <li><div className='getBold' 
+                data-path="/admin/orderList"
+                onClick={(e)=>{navigate('/admin/orderList');}}>
+                <i className="bi bi-caret-right-fill"></i>
+                <span> 주문 내역</span>
+              </div></li>
           </ul>
         </div>
         
@@ -541,7 +548,7 @@ const Order = () => {
               <div className='order-btns'>
                 <button type='button' className='order-btn' 
                   onClick={()=>{goOrderChecked();}}>선택주문</button>
-                <button type='button' className='order-btn'>??</button>
+                {/* <button type='button' className='order-btn'>??</button> */}
               </div>
 
               </div>
