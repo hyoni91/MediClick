@@ -1,0 +1,35 @@
+
+.orderList-table{
+  width: 1000px;
+  margin: 10px auto;
+}
+
+.orderList-table>div{
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  margin: 20px auto;
+  width: 50%;
+  color: dimgrey;
+  font-family: 'SUITE-Regular';
+}
+
+.orderList-table>div>div:first-child{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+
+.orderList-table div button{
+  border: none;
+  width: 45px;
+  padding: 4px;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+}
+
+.orderList-table div button:hover{
+  background-color: #eeeeee;
+}

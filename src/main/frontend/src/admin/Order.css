@@ -85,8 +85,32 @@
 }
 
 
+/* 주문버튼 */
 
-/* 상품 목록,주문 */
+.order-btns{
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  margin: 50px auto;
+}
+
+.order-btn{
+  border: none;
+  width: 80px;
+  padding: 4px;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+}
+
+.order-btn:hover{
+  background-color: #eeeeee;
+}
+
+/* 상품 목록*/
 
 .itemList-div{
   margin: 0 auto;
@@ -102,9 +126,6 @@
   
 }
 
-.itemList-table tr{
-  border: none;
-}
 
 .itemList-table thead tr{
   background-color: #eeeeee;
@@ -159,31 +180,6 @@
     font-weight: 700;
 }
 
-
-/* 주문버튼 */
-
-.order-btns{
-  display: flex;
-  justify-content: space-around;
-  width: 200px;
-  margin: 50px auto;
-}
-
-.order-btn{
-  border: none;
-  width: 80px;
-  padding: 4px;
-  font-weight: bold;
-  border: 1px solid lightgray;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px #eeeeee;
-  cursor: pointer;
-}
-
-.order-btn:hover{
-  background-color: #eeeeee;
-}
 
 
 /* 주문 모달창 */
