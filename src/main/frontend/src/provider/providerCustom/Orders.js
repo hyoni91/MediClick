@@ -8,10 +8,24 @@ const Orders = () => {
   const navigate = useNavigate()
   const [orders , setOrders] = useState([])
   const [sumPrice ,setSumPrice] = useState(0)
-   //검색
-    const [searchValue , setSearchValue] = useState({})
 
- 
+  //검색
+  const [searchValue , setSearchValue] = useState({})
+
+
+  //체크박스 설정
+  const [chks, setChks] = useState([])
+  const [chkAll, setChkAll] = useState(false)
+
+  function changeStatus(orderNum){
+    axios.put(`/orders/statusUpdate/${orderNum}`)
+    .then((res)=>{
+      
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
 
   useEffect(()=>{
@@ -23,6 +37,11 @@ const Orders = () => {
       res.data.forEach((p,i)=>{
         sum = sum +p.totalPrice
       })
+
+      let chkarr = new Array(res.data.length)
+      chkarr.fill(false)
+      setChks(chkarr)
+
       setSumPrice(sum)
 
     })
@@ -90,12 +109,18 @@ const Orders = () => {
           <table className='content-table'>
             <thead>
               <tr>
-                <td><input type='checkbox'/></td>
+                <td>
+                  <input 
+                    type='checkbox'
+                    checked={chkAll}
+                  />
+                </td>
                 <td>구분</td>
                 <td>거래처명</td>
                 <td>주문일자</td>
                 <td>총 주문액</td>
                 <td>주문현황</td>
+                <td>test버튼</td>
               </tr>
             </thead>
             <tbody>
@@ -103,7 +128,12 @@ const Orders = () => {
                 orders.map((order,i)=>{
                   return(
                   <tr key={i}>
-                    <td><input type='checkbox'/></td>
+                    <td>
+                      <input 
+                        type='checkbox'
+                        checked={chks[i]}
+                      />
+                    </td>
                     <td>{i+1}</td>
                     <td>
                       <span 
@@ -115,6 +145,14 @@ const Orders = () => {
                     <td>{order.orderDate}</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
                     <td>{order.orderStatus}</td>
+                    <td>
+                      <button
+                        type='button'
+                        onClick={()=>{changeStatus(order.orderNum)}}
+                      >
+                        완료
+                      </button>
+                    </td>
                   </tr>
                   )
                 })

@@ -4,6 +4,7 @@ import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.service.OrderService;
 import com.green.MediClick.provider.customers.vo.OrdersVO;
 import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +21,9 @@ public class OrderController {
         return orderService.orders(searchVO);
     }
 
-    @PostMapping("/orderInsert")
-    public void orderInsert(@RequestBody List<Integer> requesNumtList){
-        orderService.orderInsert(requesNumtList);
+    @PutMapping("/statusUpdate/{orderNum}")
+    public void statusUpdate(@PathVariable("orderNum") int orderNum){
+        orderService.statusUpdate(orderNum);
     }
+
 }

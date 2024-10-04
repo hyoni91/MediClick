@@ -13,6 +13,5 @@ public class OrdersVO {
     private String orderStatus;
     private int totalPrice; // 주문 총액
     private String customerName;
-    private List<Integer> requesNumtList;
 
 }

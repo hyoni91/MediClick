@@ -23,9 +23,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void orderInsert(List<Integer> requesNumtList) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("requestNumList", requesNumtList);
-        sqlSession.insert("ordersMapper.orderInsert", params);
+    public void statusUpdate(int orderNum) {
+        sqlSession.update("ordersMapper.statusUpdate", orderNum);
     }
+
 }

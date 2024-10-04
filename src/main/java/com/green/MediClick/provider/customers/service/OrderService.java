@@ -9,5 +9,6 @@ public interface OrderService {
 
     List<OrdersVO> orders(SearchVO searchVO);
 
-    void orderInsert(List<Integer> requestNum);
+    void statusUpdate(int orderNum);
+
 }
