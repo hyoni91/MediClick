@@ -41,10 +41,10 @@ public class OrderItemsServiceImpl implements OrderItemsService {
         return sqlSession.selectList("orderItemsMapper.getOrderList");
     }
 
-    //주문 삭제
+    //주문 취소 상태로 변경
     @Override
-    public void delOrder(int requestNum) {
-        sqlSession.delete("orderItemsMapper.delOrder",requestNum);
+    public void updateOrder(int requestNum) {
+        sqlSession.update("orderItemsMapper.updateOrder",requestNum);
     }
 
 
