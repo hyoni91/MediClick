@@ -63,12 +63,12 @@ const OrderDetail = () => {
                       {deliStatus}
                     </div>
                     <div>총금액</div>
-                    <div>
+                    {/* <div>
                       <h4>결제현황</h4>
                       예시 : 결제완료
                       결제현황은 없앨지도..
                       주문은 결제후 완료되는 걸로
-                    </div>
+                    </div> */}
                   </>
                 )
               })
@@ -113,7 +113,7 @@ const OrderDetail = () => {
                       <td>{detail.customerName}</td>
                       <td>{detail.orderItemsVO.productName}</td>
                       <td>{detail.quantity}</td>
-                      <td>{detail.orderItemsVO.productPrice}</td>
+                      <td>{detail.orderItemsVO.productPrice.toLocaleString()}원</td>
                       <td>{(
                         detail.orderItemsVO.productPrice * 
                         detail.quantity).toLocaleString()}원

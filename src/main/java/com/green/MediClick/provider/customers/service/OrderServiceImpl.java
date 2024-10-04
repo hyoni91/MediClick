@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
@@ -18,5 +20,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrdersVO> orders(SearchVO searchVO) {
         return sqlSession.selectList("ordersMapper.orders", searchVO);
+    }
+
+    @Override
+    public void orderInsert(List<Integer> requesNumtList) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("requestNumList", requesNumtList);
+        sqlSession.insert("ordersMapper.orderInsert", params);
     }
 }

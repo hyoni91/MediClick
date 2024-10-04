@@ -19,4 +19,9 @@ public class OrderController {
     public List<OrdersVO> orders(@RequestBody SearchVO searchVO){
         return orderService.orders(searchVO);
     }
+
+    @PostMapping("/orderInsert")
+    public void orderInsert(@RequestBody List<Integer> requesNumtList){
+        orderService.orderInsert(requesNumtList);
+    }
 }

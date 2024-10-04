@@ -9,7 +9,8 @@
         <result column="ORDER_DATE" property="orderDate"/>
         <result column="ORDER_STATUS" property="orderStatus"/>
         <result column="TOTALPRICE" property="totalPrice"/>
-        <association property="customersVO" column="customerMapper.customer"/>
+        <result column="CUSTOMER_NAME" property="customerName" />
+<!--        <association property="customersVO" column="customerMapper.customer"/>-->
     </resultMap>
 
 
@@ -26,12 +27,24 @@
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
         <if test="searchValue != null and !searchValue.isEmpty()">
             AND (
-            REQUEST_DATE LIKE CONCAT('%', #{searchValue}, '%')
-            OR REQUEST_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
+            ORDER_DATE LIKE CONCAT('%', #{searchValue}, '%')
+            OR ORDER_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
+            OR C.CUSTOMER_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             )
         </if>
         ORDER BY R.REQUEST_NUM DESC
     </select>
+
+    <insert id="orderInsert">
+        INSERT INTO ORDERS(
+        REQUEST_NUM
+        ) VALUES
+        <foreach collection="requesNumtList" item="requesNum" separator=",">
+            (
+            #{requestNum}
+            )
+        </foreach>
+    </insert>
 
 </mapper>
 
