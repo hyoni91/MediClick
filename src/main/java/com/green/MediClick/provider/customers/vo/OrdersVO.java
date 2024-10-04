@@ -12,6 +12,7 @@ public class OrdersVO {
     private String  orderDate;
     private String orderStatus;
     private int totalPrice; // 주문 총액
-    private List<CustomersVO> customersVO;
+    private String customerName;
+    private List<Integer> requesNumtList;
 
 }
