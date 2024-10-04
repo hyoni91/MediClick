@@ -6,6 +6,12 @@
 }
 
 
+.orderList-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .order-sidebar{
   /* border: 1px solid blue; */
   width: 120px;
@@ -26,17 +32,16 @@
   text-decoration: underline;
 }
 
-.order-sidebar li>span{
+.order-sidebar li>div{
   font-size: 0.9rem;
-  
-}
-.getBold.active{
-  font-weight: bold;
 }
 
+
+.getBold.active,
 .getBold:visited{
   font-weight: bold;
 }
+
 
 .order-div{
   width: 100%;
@@ -283,9 +288,3 @@
   background-color: #034999c5;
 }
 
-
-.orderList-div{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}

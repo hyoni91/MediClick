@@ -95,11 +95,12 @@
         ORDER BY REQUEST_NUM DESC
     </select>
 
-    <!--주문 취소-->
-    <delete id="delOrder">
-        DELETE FROM ORDER_REQUESTS
+    <!--주문 취소 상태로 변경-->
+    <update id="updateOrder">
+        UPDATE ORDER_REQUESTS
+        SET REQUEST_STATUS='주문취소'
         WHERE REQUEST_NUM=#{requestNum}
-    </delete>
+    </update>
 
 
 </mapper>
