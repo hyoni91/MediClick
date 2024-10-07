@@ -19,13 +19,11 @@ const OrderDetail = () => {
     orderStatus:''
   })
 
-  const [deliStatus, setDeliStatus] = useState('배송대기')
-
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
   // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
-  function changeStatus(orderNum){
+  function changeStatus(){
     if(window.confirm('배송 신청을 진행하시겠습니까?')){
-      axios.put(`/orders/deli-orders-statusUpdate/${orderNum}`)
+      axios.post(`/orders/deli-orders-statusUpdate`, orderDetail)
       .then((res)=>{
       })
       .catch((error)=>{
@@ -58,9 +56,6 @@ const OrderDetail = () => {
       console.log(error)
     })
   },[])
-
-  console.log(orderDetail)
-
 
   return (
     <div className='manage-contailner'>
@@ -118,7 +113,7 @@ const OrderDetail = () => {
         </div>
         <div className='orderDetail-btn'> 
           <button type='button' onClick={()=>{navigate('/provider/orders')}}>뒤로가기</button>
-          <button type='button' onClick={()=>{changeStatus(orderDetail.orderNum)}}>배송신청</button>
+          <button type='button' onClick={()=>{changeStatus(orderDetail)}}>배송신청</button>
         </div>
       </div>
         

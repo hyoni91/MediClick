@@ -27,9 +27,10 @@ public class OrderController {
     }
 
     //배송과 수주 현황 변경 '배송중'
-    @PutMapping("/deli-orders-statusUpdate/{orderNum}")
-    public void deliOrdersUpdate(@PathVariable("orderNum")int orderNum){
-        orderService.updateStatus(orderNum);
+    @PostMapping("/deli-orders-statusUpdate")
+    public void deliOrdersUpdate(@RequestBody OrdersVO ordersVO){
+        System.out.println("========================================"+ordersVO);
+        orderService.updateStatus(ordersVO);
     }
 
     //상세페이지

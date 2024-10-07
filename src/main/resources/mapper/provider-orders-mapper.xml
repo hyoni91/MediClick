@@ -10,6 +10,7 @@
         <result column="ORDER_STATUS" property="orderStatus"/>
         <result column="TOTALPRICE" property="totalPrice"/>
         <result column="CUSTOMER_NAME" property="customerName" />
+        <result column="CUSTOMER_ADDR" property="customerAddr" />
         <association property="orderRequest" resultMap="orderItemsMapper.request"/>
         <association property="customer" resultMap="customerMapper.customer" />
     </resultMap>
@@ -78,6 +79,22 @@
         SET ORDER_STATUS = '배송중'
         WHERE ORDER_NUM = #{orderNum}
     </update>
+
+    <insert id="deliInsert">
+        INSERT INTO delivery(
+        ORDER_NUM
+        ,DELIVERY_DRIVER_NAME
+        ,DELIVERY_DRIVER_PHONE
+        ,DELIVERY_ADDRESS
+        ,DELIVERY_STATUS
+        ) VALUES(
+        #{orderNum}
+        ,'김배달'
+        ,'010-1234-0000'
+        ,#{customerAddr}
+        ,'배송중'
+        )
+    </insert>
 
 </mapper>
 

@@ -43,8 +43,9 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+  background-color: #f5f7f8;
   border: 1px solid lightgray;
-  background-color: #F1F5F9;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05), 0 3px 6px rgba(0,0,0,0.05);
 }
 
 
