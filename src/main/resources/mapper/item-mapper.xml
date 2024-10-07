@@ -69,6 +69,12 @@
         LIMIT #{pageVO.displayDataCnt} OFFSET #{pageVO.offset}
     </select>
 
+    <select id="inventoriesList" resultMap="item">
+        SELECT * FROM PRODUCTS ,CATEGORY ,item_img
+        WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
+        AND item_img.PRODUCT_NUM = PRODUCTS.PRODUCT_NUM
+    </select>
+
     <select id="itemListCount" resultType="int">
         SELECT COUNT(PRODUCT_NUM) FROM PRODUCTS
         <if test="searchValue != null and !searchValue.isEmpty()">

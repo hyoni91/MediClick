@@ -67,6 +67,12 @@ public class ItemController {
         }
 
     }
+
+    @GetMapping("/inventoriesList")
+    public List<ItemVO> inventoriesList(ItemVO itemVO){
+        return itemService.inventoriesList(itemVO);
+    }
+
     @PostMapping("/medicalSuppliesList")
     public  Map<String, Object> medicalSuppliesList(@RequestBody Map<String, Object> mapData) {
         System.out.println(mapData);
@@ -100,7 +106,6 @@ public class ItemController {
         result.put("pageInfo", pageVO);
 
         return result;
-
 
 
         // map이 null인지 확인

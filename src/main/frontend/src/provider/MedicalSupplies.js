@@ -218,7 +218,7 @@ console.log(cateNum)
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
           <div >
-            <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+            <select className='cateSelect' key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
@@ -230,14 +230,14 @@ console.log(cateNum)
                 )
               })}
             </select>
-              <input type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} />
+              <input className='getCate' type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} placeholder='카테고리를 입력 해주세요.'/>
           </div>
             <div className='cate-flex'>
               <div className='cate-divBtn'>
-                <button type='button' onClick={() => {deleteCategory(cateNum)}}>카테고리 삭제</button>
+                <button type='button' onClick={() => {deleteCategory(cateNum)}}className='btn'>카테고리 삭제</button>
               </div>
               <div className='cate-divBtn'>
-                <button type='button' onClick={() => {insertCategory()}}>카테고리 등록</button>
+                <button type='button' onClick={() => {insertCategory()}}className='btn'>카테고리 등록</button>
               </div>
             </div>
         </div>
@@ -260,7 +260,7 @@ console.log(cateNum)
   />
 </div>
           <div>
-          <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+          <select className='cateSelect' key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
@@ -291,7 +291,7 @@ console.log(cateNum)
                 console.log(mainImg)
                 console.log(item)
                 insertItem()
-              }}>상품 등록</button>
+              }}className='btn'>상품 등록</button>
             </div>
           </div>
           
@@ -307,7 +307,7 @@ console.log(cateNum)
           <option value={'PRODUCT_NAME'}>제품명</option>
         </select>
         <input type='text' name='searchValue' onChange={(e) => {search(e)}}/>
-        <button type='button' onClick={() => {searchItem()}}>검색</button>
+        <button type='button' className='btn' onClick={() => {searchItem()}}>검색</button>
       </div>
       <div className='medicalSupplies-item'>
         <table className='medicalSupplies-itemtable'>

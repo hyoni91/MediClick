@@ -11,6 +11,10 @@
   display: flex;
 }
 
+.cate-flex{
+  margin-top: 40px;
+}
+
 .medicalSupplies-div{
   display: flex;
   align-items: center;
@@ -26,10 +30,18 @@
   margin: auto;
   width: 250px;
 }
-/* 카테고리 버튼 */
-.cate-divBtn button{
-  height: 50px;
+
+.cateSelect{
+  width: 180px;
+  text-align: center;
+  font-size: 16px;
 }
+
+.getCate{
+  margin-top: 20px;
+  height: 100px;
+}
+
 .ms-imgdiv{
   margin-right: 20px;
   display: flex;

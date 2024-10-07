@@ -1,6 +1,28 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Inventory = () => {
+   //카테 리스트
+  const [category,setCategory]=useState([])
+  //아이템 리스트
+  const [item, setItem] = useState([])
+  useEffect(() => {
+    axios.all([
+      axios.get('/item/cateList'),
+      axios.get('/item/inventoriesList')
+    ])
+    
+    .then(axios.spread((res1,res2) => {
+      console.log(res1.data)
+      //카테고리
+      setCategory(res1.data)
+      //조회된 상품 목록 및 페이지 정보 세팅
+      setItem(res2.data)
+
+      console.log(res2.data)
+    }))
+    .catch((error) => {console.log(error)})
+  },[])
   return (
     <div>
       <h1>현 재고 현황</h1>
@@ -21,7 +43,9 @@ const Inventory = () => {
         </thead>
         <tbody>
           <tr>
-            <td></td>
+            <td>
+              
+            </td>
           </tr>
         </tbody>
       </table>

@@ -27,4 +27,6 @@ public interface ItemService {
     int getNextNum();
 
     void insertItemImg(ItemImgVO imgVO);
+
+    List<ItemVO> inventoriesList(ItemVO itemVO);
 }
