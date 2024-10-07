@@ -15,9 +15,11 @@
         <result column="OUTGOING_QTY" property="outgoingQty" />
     </resultMap>
 
-<!--        <select id="inventoryList" resultMap="inventoryList">-->
-<!--                SELECT * FROM inventory-->
-<!--        </select>-->
+
+        <select id="inventoryList" resultMap="inventory">
+                SELECT * FROM inventory
+        </select>
+
 
         <insert id="inventoryInsert">
                 INSERT INTO INVENTORY (
