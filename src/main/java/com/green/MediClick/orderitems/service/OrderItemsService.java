@@ -21,6 +21,6 @@ public interface OrderItemsService {
     //주문 내역
     List<OrderRequestVO> getOrderList();
     
-    //주문 취소
-    void delOrder(int requestNum);
+    //주문 취소 상태로 변경
+    void updateOrder(int requestNum);
 }

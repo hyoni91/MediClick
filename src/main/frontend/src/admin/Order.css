@@ -6,6 +6,12 @@
 }
 
 
+.orderList-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .order-sidebar{
   /* border: 1px solid blue; */
   width: 120px;
@@ -26,17 +32,16 @@
   text-decoration: underline;
 }
 
-.order-sidebar li>span{
+.order-sidebar li>div{
   font-size: 0.9rem;
-  
-}
-.getBold.active{
-  font-weight: bold;
 }
 
+
+.getBold.active,
 .getBold:visited{
   font-weight: bold;
 }
+
 
 .order-div{
   width: 100%;
@@ -80,8 +85,32 @@
 }
 
 
+/* 주문버튼 */
 
-/* 상품 목록,주문 */
+.order-btns{
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  margin: 50px auto;
+}
+
+.order-btn{
+  border: none;
+  width: 80px;
+  padding: 4px;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+}
+
+.order-btn:hover{
+  background-color: #eeeeee;
+}
+
+/* 상품 목록*/
 
 .itemList-div{
   margin: 0 auto;
@@ -97,9 +126,6 @@
   
 }
 
-.itemList-table tr{
-  border: none;
-}
 
 .itemList-table thead tr{
   background-color: #eeeeee;
@@ -154,31 +180,6 @@
     font-weight: 700;
 }
 
-
-/* 주문버튼 */
-
-.order-btns{
-  display: flex;
-  justify-content: space-around;
-  width: 200px;
-  margin: 50px auto;
-}
-
-.order-btn{
-  border: none;
-  width: 80px;
-  padding: 4px;
-  font-weight: bold;
-  border: 1px solid lightgray;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px #eeeeee;
-  cursor: pointer;
-}
-
-.order-btn:hover{
-  background-color: #eeeeee;
-}
 
 
 /* 주문 모달창 */
@@ -283,9 +284,3 @@
   background-color: #034999c5;
 }
 
-
-.orderList-div{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}

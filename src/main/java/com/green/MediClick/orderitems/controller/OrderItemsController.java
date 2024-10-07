@@ -36,7 +36,6 @@ public class OrderItemsController {
     //개별주문
     @PutMapping("/insertOrder")
     public void insertGetOrder(@RequestBody OrderRequestVO orderRequestVO){
-        System.out.println("!!!!!!!!!!!!!!! 개별 : "+orderRequestVO);
 
         orderItemsService.insertSingleOrder(orderRequestVO);
     }
@@ -47,10 +46,10 @@ public class OrderItemsController {
         return orderItemsService.getOrderList();
     }
 
-    //주문 취소
-    @DeleteMapping("/del/{requestNum}")
-    public void delOrder(@PathVariable("requestNum") int requestNum){
-        orderItemsService.delOrder(requestNum);
+    //주문 취소 상태로 변경
+    @DeleteMapping("/update/{requestNum}")
+    public void updateOrder(@PathVariable("requestNum") int requestNum){
+        orderItemsService.updateOrder(requestNum);
     }
 
 }

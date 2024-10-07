@@ -19,6 +19,11 @@ const Inventory = () => {
             <td>현 재고량</td>
           </tr>
         </thead>
+        <tbody>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
       </table>
     </div>
   )

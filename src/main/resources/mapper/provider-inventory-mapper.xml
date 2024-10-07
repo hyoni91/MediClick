@@ -3,7 +3,7 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="inventoryMapper">
-	<resultMap id="inventory" type="com.green.MediClick.provider.inventory.vo.InventoryVO">
+        <resultMap id="inventory" type="com.green.MediClick.provider.inventory.vo.InventoryVO">
         <id column="INVENTORY_NUM" property="inventoryNum"/>
         <result column="CATE_NUM" property="cateNum" />
         <result column="PRODUCT_NUM" property="productNum" />
@@ -14,6 +14,28 @@
         <result column="INCOMING_QTY" property="incomingQty" />
         <result column="OUTGOING_QTY" property="outgoingQty" />
     </resultMap>
+
+        <select id="inventoryList" resultMap="inventoryList">
+                SELECT * FROM inventory
+        </select>
+
+        <insert id="inventoryInsert">
+                INSERT INTO INVENTORY (
+                PRODUCT_NUM
+                ,PRODUCT_NAME
+                ,CATE_NUM
+                ,PRODUCT_PRICE
+                ,STOCK
+                ,DETAIL
+                ) VALUES(
+                #{productNum}
+                ,#{productName}
+                ,#{cateNum}
+                ,#{productPrice}
+                ,#{stock}
+                ,#{detail}
+                )
+        </insert>
 
 </mapper>
 
