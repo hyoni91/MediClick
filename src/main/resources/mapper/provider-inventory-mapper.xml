@@ -15,7 +15,7 @@
         <result column="OUTGOING_QTY" property="outgoingQty" />
     </resultMap>
 
-        <select id="inventoryList" resultMap="inventoryList">
+        <select id="inventoryList" resultMap="inventory">
                 SELECT * FROM inventory
         </select>
 
