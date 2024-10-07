@@ -218,7 +218,7 @@ console.log(cateNum)
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
           <div >
-            <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+            <select key={''} name='cateNum' value={cateNum} onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
@@ -260,7 +260,7 @@ console.log(cateNum)
   />
 </div>
           <div>
-          <select key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+          <select key={''} name='cateNum' value={cateNum} onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
