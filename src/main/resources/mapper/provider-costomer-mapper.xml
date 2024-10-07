@@ -11,6 +11,7 @@
         <result column="CUSTOMER_ADDR" property="customerAddr" />
         <result column="CUSTOMER_TEL" property="customerTel" />
         <result column="CUSTOMER_EMAIL" property="customerEmail" />
+        <result column="ORDER_STATUS" property="orderStatus" />
     </resultMap>
 
 
@@ -64,7 +65,7 @@
         WHERE CUSTOMER_NUM = #{customerNum}
     </update>
 
-    <!--해당 주문 -->
+    <!--해당 주문 (수주테이블로 다시 바꾸기 삭제해야함)-->
     <select id="order" resultMap="orderItemsMapper.request">
         SELECT C.CUSTOMER_NAME
         ,R.REQUEST_DATE
@@ -77,7 +78,6 @@
         WHERE R.PRODUCT_NUM = P.PRODUCT_NUM
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
         AND R.REQUEST_NUM = #{requestNum}
-
     </select>
 
     <!-- 수주리스트 -->

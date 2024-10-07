@@ -44,6 +44,7 @@ public class CustomerController {
         return customerServise.detailCustomer(customerNum);
     }
 
+    // 수주테이블로 대체
     @GetMapping("/orders/{requestNum}")
     public List<CustomersVO> orders(@PathVariable("requestNum") int requestNum){
         System.out.println("=================================="+requestNum);

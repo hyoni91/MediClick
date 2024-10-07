@@ -27,4 +27,19 @@ public class OrderServiceImpl implements OrderService {
         sqlSession.update("ordersMapper.statusUpdate", orderNum);
     }
 
+
+    //배송/수주테이블 '배송중'변경
+    @Override
+    public void updateStatus(int orderNum) {
+        sqlSession.update("ordersMapper.updateDeli",orderNum);
+        sqlSession.update("ordersMapper.updateOrders",orderNum);
+    }
+
+    //상세페이지
+    @Override
+    public OrdersVO detail(int requestNum) {
+
+        return sqlSession.selectOne("ordersMapper.orderDetail", requestNum);
+    }
+
 }

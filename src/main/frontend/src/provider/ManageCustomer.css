@@ -73,7 +73,7 @@
   background-color: white;
 }
 
-.content-table button{
+.content-table > tbody > tr > td > button{
   background-color: white;
   border: 1px solid lightgray;
   padding: 2px;
