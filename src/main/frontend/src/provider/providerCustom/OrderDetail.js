@@ -71,24 +71,27 @@ const OrderDetail = () => {
           </div>
           <div className='detail-header'>
             <div>
-              <h3>거래처정보</h3>
-              <h4>{orderDetail.customerName}</h4>
-              <h4>{orderDetail.customerOwner}</h4>
+              <i className="fa-regular fa-building" />
+              <div>
+                <h4>{orderDetail.customerName}</h4>
+                <h4>{orderDetail.customerOwner}</h4>
+              </div>
             </div>
             <div>
-              <h3>배송정보</h3>
-              <h4>{orderDetail.customerTel}</h4>
-              <h4>{orderDetail.customerAddr}</h4>              
+              <i className="fa-solid fa-truck-fast"/>
+              <div>
+                <h4>{orderDetail.customerTel}</h4>
+                <h4>{orderDetail.customerAddr}</h4>
+              </div>              
             </div>
             <div>
-              <h3>수주현황</h3>
+              <i className="fa-regular fa-circle-check"/>
               <h4>{orderDetail.orderStatus}</h4>
             </div>
             <div>
-              <h3>총금액</h3>
+              <i className="fa-solid fa-won-sign" />
               <h4>{(orderDetail.productPrice * orderDetail.quantity).toLocaleString()}원</h4>
             </div>
-            
           </div>
         </div>
         <div className='manage-content'>
@@ -115,7 +118,7 @@ const OrderDetail = () => {
         </div>
         <div className='orderDetail-btn'> 
           <button type='button' onClick={()=>{navigate('/provider/orders')}}>뒤로가기</button>
-          <button type='button' onClick={()=>{changeStatus()}}>배송신청</button>
+          <button type='button' onClick={()=>{changeStatus(orderDetail.orderNum)}}>배송신청</button>
         </div>
       </div>
         

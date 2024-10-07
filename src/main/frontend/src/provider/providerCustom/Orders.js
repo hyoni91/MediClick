@@ -140,7 +140,7 @@ const Orders = () => {
                 <td>거래처명</td>
                 <td>주문일자</td>
                 <td>총 주문액</td>
-                <td>주문현황</td>
+                <td>수주현황</td>
                 <td>test버튼</td>
                 <td>비고</td>
               </tr>
@@ -167,7 +167,14 @@ const Orders = () => {
                     </td>
                     <td>{order.orderDate}</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>{order.orderStatus}</td>
+                    <td>
+                      {
+                    order.orderStatus == '배송완료'? 
+                      <>완료✅</>
+                      : 
+                      <>{order.orderStatus}</>
+                      }
+                      </td>
                     <td>
                       <button
                         type='button'
