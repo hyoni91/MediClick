@@ -45,15 +45,15 @@ public class CustomerController {
     }
 
     // 수주테이블로 대체
-    @GetMapping("/orders/{requestNum}")
-    public List<CustomersVO> orders(@PathVariable("requestNum") int requestNum){
-        System.out.println("=================================="+requestNum);
-        return customerServise.order(requestNum);
-    }
+//    @GetMapping("/orders/{requestNum}")
+//    public List<CustomersVO> orders(@PathVariable("requestNum") int requestNum){
+//        System.out.println("=================================="+requestNum);
+//        return customerServise.order(requestNum);
+//    }
 
     // orderscontoller로 대처되면 삭제예정
-    @PostMapping("/orderlist")
-    public List<OrderRequestVO> orderList(@RequestBody  SearchVO searchVO){
-        return customerServise.orderList(searchVO);
-    }
+//    @PostMapping("/orderlist")
+//    public List<OrderRequestVO> orderList(@RequestBody  SearchVO searchVO){
+//        return customerServise.orderList(searchVO);
+//    }
 }
