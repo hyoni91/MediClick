@@ -2,15 +2,22 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './OrderList.css'
+import { color } from 'chart.js/helpers'
 
 const OrderList = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const [visibleCount,setVisibleCount]=useState(5) // 기본적으로 5개 표시
 
   // 주문 리스트
   const [orderList,setOrderList]=useState([])
 
+  function handleShowMore(){
+    setVisibleCount(prevCount=>
+      Math.min(prevCount+5,orderList.length) // 5개씩 증가
+    )
+  }
 
   useEffect(()=>{
 
@@ -51,6 +58,9 @@ const OrderList = () => {
   // 현황이 주문취소일 때 텍스트 변경
   const cancelLine={color:'lightgray'}
 
+  // 현황이 배송완료일 때 
+  const deliveryComplete={fontWeight:'bold',color:'cornflowerblue'}
+
   //선택한 li bold 유지
   function changeBold(currentPath){
     let bold=document.querySelectorAll('.getBold')
@@ -66,26 +76,6 @@ const OrderList = () => {
       }
     })
   }
-
-  // 현황
-  function requestState(e){
-    switch(e){
-
-      case '배송대기':
-        return(
-        <span>배송대기</span>
-        )
-      case '배송완료':
-        return (
-        <span>배송완료</span>
-        )
-      case '주문취소':
-        return(
-        <span>주문취소</span>
-        )
-    }
-  }
-
 
 
   return (
@@ -115,32 +105,62 @@ const OrderList = () => {
 
       <div className='order-main'>
         <h3>주문 내역</h3>
-        {/* 품목 리스트 */}
         <div className='itemList-div'>
           <div className='orderList-table'>
             {
-              orderList.map((order,i)=>{
+              orderList.slice(0,visibleCount).map((order,i)=>{
                 return(
-                  <div key={i}>
+                  <div key={i} className='itemList-main'>
                     <div>{order.requestDate}</div>
-                    <div className='itemList-main'>
-                      <div>이미지</div>
+
+                    <div className='itemList-inside'>
+                      <div className='itemList-img'></div>
+
                       <div>
-                        <span>[{order.orderItemsVO.cateVO.cateName}]</span>
-                        <span>{order.orderItemsVO.productName}</span>
-                        <div><span className='eachNum'>{order.quantity}</span> 개</div>
+                        <div className='itemList-name'>
+                          <span>[{order.orderItemsVO.cateVO.cateName}]</span>
+                          <span>{order.orderItemsVO.productName}</span>
+                        </div>
+
                         <div>{order.orderItemsVO.detail}</div>
-                        <div><span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원</div>
-                        <div style={order.requestStatus==='주문취소'?cancelLine:null}>{requestState(order.requestStatus)}</div>
-                      </div>
+
+                        <div className='itemList-quantity'>
+                          <div>
+                            <span className='priceNum'>{((order.quantity)*(order.orderItemsVO.productPrice)).toLocaleString()}</span> 원
+                            / <span className='eachNum'>{order.quantity}</span> 개</div>
+                        </div>
+
+                        <div className='itemList-status'>
+                          <div style={
+                            order.requestStatus==='주문취소'?cancelLine:
+                            order.requestStatus==='배송완료'?deliveryComplete:null
+                            }>
+                            {order.requestStatus}</div>
+                          <div>
+                            {
+                              order.requestStatus==='주문취소'||
+                              order.requestStatus==='배송완료'?
+                              null
+                              :
+                              <button type='button' 
+                                onClick={()=>{goUpdate(order.requestNum)}}>취소</button>
+                            }
+                          </div>
+                        </div>
+                        </div>
                     </div>
-                    <div><button type='button'
-                        onClick={()=>{goUpdate(order.requestNum)}}
-                        >취소</button></div>
                   </div>
                 )
               })
             }
+            
+            {
+              visibleCount < orderList.length &&
+              <button onClick={handleShowMore} className='itemList-more'>
+                더 보기
+              </button>
+            }
+
           </div>
 
           <table className='itemList-table'>
