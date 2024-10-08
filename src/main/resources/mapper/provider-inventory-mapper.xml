@@ -19,7 +19,6 @@
                 SELECT * FROM inventory
         </select>
 
-
         <insert id="inventoryInsert">
                 INSERT INTO INVENTORY (
                 PRODUCT_NUM
@@ -37,7 +36,6 @@
                 ,#{detail}
                 )
         </insert>
-
 </mapper>
 
 
