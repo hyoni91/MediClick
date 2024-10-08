@@ -103,7 +103,11 @@ const Orders = () => {
               <h4>총 매출액</h4>
               <h2>{sumPrice.toLocaleString()}원</h2>
             </div>
-            <div>총미수금</div>
+            <div>
+              <h4>총미수금</h4>
+              <h2>0원</h2>
+            </div>
+              
           </div>
         </div>
         <div className='manage-content'>
@@ -141,7 +145,7 @@ const Orders = () => {
                 <td>주문일자</td>
                 <td>총 주문액</td>
                 <td>수주현황</td>
-                <td>test버튼</td>
+                {/* <td>test버튼</td> */}
                 <td>비고</td>
               </tr>
             </thead>
@@ -175,14 +179,14 @@ const Orders = () => {
                       <>{order.orderStatus}</>
                       }
                       </td>
-                    <td>
+                    {/* <td>
                       <button
                         type='button'
                         onClick={()=>{changeStatus(order.orderNum)}}
                       >
                         완료
                       </button>
-                    </td>
+                    </td> */}
                     <td>
                       재고 확인 요청 
                     </td>

@@ -45,15 +45,15 @@ public class CustomerServiceImpl implements CustomerServise{
         return sqlSession.selectOne("customerMapper.detailCustomer", customerNum);
     }
 
-    @Override
-    public List<CustomersVO> order(int requestNum) {
-        return sqlSession.selectList("customerMapper.order", requestNum);
-    }
+//    @Override
+//    public List<CustomersVO> order(int requestNum) {
+//        return sqlSession.selectList("customerMapper.order", requestNum);
+//    }
 
-    @Override
-    public List<OrderRequestVO> orderList(SearchVO searchVO) {
-        return sqlSession.selectList("customerMapper.orderlist", searchVO);
-    }
+//    @Override
+//    public List<OrderRequestVO> orderList(SearchVO searchVO) {
+//        return sqlSession.selectList("customerMapper.orderlist", searchVO);
+//    }
 
 
 }

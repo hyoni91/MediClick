@@ -18,8 +18,8 @@ public interface CustomerServise {
 
     CustomersVO detailCustomer(int customerNum);
 
-    List<CustomersVO> order(int requestNum);
+//    List<CustomersVO> order(int requestNum);
 
-    List<OrderRequestVO> orderList(SearchVO searchVO);
+//    List<OrderRequestVO> orderList(SearchVO searchVO);
 
 }

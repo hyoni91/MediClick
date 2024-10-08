@@ -16,6 +16,7 @@ const OrderDetail = () => {
     quantity:0,   
     productName : '',
     productPrice :0,
+    productNum:0,
     orderStatus:''
   })
 
@@ -47,6 +48,7 @@ const OrderDetail = () => {
         quantity:res.data.orderRequest.quantity,   
         productName : res.data.orderRequest.orderItemsVO.productName,
         productPrice : res.data.orderRequest.orderItemsVO.productPrice,
+        productNum: res.data.orderRequest.orderItemsVO.productNum,
         orderStatus:res.data.orderStatus
       }
       setOrderDetail(detail)
@@ -56,6 +58,8 @@ const OrderDetail = () => {
       console.log(error)
     })
   },[])
+
+  console.log(orderDetail)
 
   return (
     <div className='manage-contailner'>

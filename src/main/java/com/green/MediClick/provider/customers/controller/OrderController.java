@@ -26,7 +26,7 @@ public class OrderController {
         orderService.statusUpdate(orderNum);
     }
 
-    //배송과 수주 현황 변경 '배송중'
+    //배송과 수주 현황 변경 '배송중' and 배송 insert
     @PostMapping("/deli-orders-statusUpdate")
     public void deliOrdersUpdate(@RequestBody OrdersVO ordersVO){
         System.out.println("========================================"+ordersVO);
