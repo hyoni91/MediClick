@@ -3,15 +3,19 @@ import React, { useEffect, useState } from 'react'
 
 const DeliryveryCheck = () => {
   //배송정보 저장
-  const [delivery,setDelivery] = useState([{
-    deliveryNum : ''
-  }])
-
+  const [delivery,setDelivery] = useState([
+  ])
+  const [order, setOrder] = useState([])
   useEffect(() => {
-    axios.get('/delivery/deliveryList')
-    .then((res) => {
-      setDelivery(res.data)
-    })
+    axios.all([
+      axios.get('/delivery/deliveryList'),
+      axios.get('/delivery/ordersList')
+    ])
+    .then(axios.spread((res1,res2) => {
+      setDelivery(res1.data)
+      console.log(delivery)
+      setOrder(res2.data)
+    }))
     .catch((error) => {
       console.log(error)
     })
@@ -23,6 +27,8 @@ const DeliryveryCheck = () => {
     )})
     setDelivery(updatedDelivery)
   }
+  console.log(order)
+
   return (
     <div className='manage-contailner'>
       <div className='manage-main'>
@@ -75,7 +81,7 @@ const DeliryveryCheck = () => {
               </tr>
             </thead>
             <tbody>
-              {
+              {delivery && delivery.length == 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
                 delivery.map((item ,i) => {
                   return(
                     <tr key={i}>
