@@ -1,0 +1,6 @@
+.inventoryTable td{
+  border: 1px solid;
+}
+.inventoryTable{
+  margin: 0 auto;
+}

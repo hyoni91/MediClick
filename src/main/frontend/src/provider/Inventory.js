@@ -1,11 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import './Inventory.css'
 
 const Inventory = () => {
    //카테 리스트
   const [category,setCategory]=useState([])
   //아이템 리스트
   const [item, setItem] = useState([])
+
   useEffect(() => {
     axios.all([
       axios.get('/item/cateList'),
@@ -18,21 +20,23 @@ const Inventory = () => {
       setCategory(res1.data)
       //조회된 상품 목록 및 페이지 정보 세팅
       setItem(res2.data)
-
       console.log(res2.data)
     }))
     .catch((error) => {console.log(error)})
   },[])
+  const [resultList, setResultList] = useState({
+    items : [],
+    pageInfo : {}
+  })
   return (
     <div>
       <h1>현 재고 현황</h1>
-      <table>
+      <table className='inventoryTable'>
         <thead>
           <tr>
             <td>카테고리</td>
             <td>제품번호</td>
             <td>제품명</td>
-            <td>규격</td>
             <td>입고일자</td>
             <td>출고일자</td>
             <td>최초재고</td>
@@ -44,7 +48,32 @@ const Inventory = () => {
         <tbody>
           <tr>
             <td>
-              
+              {category.map(cat => {return(
+                  <td key={cat.cateNum}>{cat.cateName}</td>
+                )}
+              )}
+            </td>
+            <td>
+              {item.map(pro => {return(
+                    <td key={pro.productNum}>{pro.productNum}</td>
+                  )}
+                )}
+            </td>
+            <td>
+              {item.map(pro => {return(
+                    <td key={pro.productNum}>{pro.productName}</td>
+                  )}
+                )}
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              {item.map(pro => {return(
+                    <td key={pro.productNum}>{pro.stock}</td>
+                  )}
+                )}
             </td>
           </tr>
         </tbody>
