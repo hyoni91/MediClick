@@ -13,8 +13,10 @@ public class OrdersVO {
     private String  orderDate;
     private String orderStatus;
     private int totalPrice; // 주문 총액
-    private String customerName;
-    private String customerAddr;
+    private String customerName; //DATA넘기기위해
+    private String customerAddr; //DATA넘기기위해
+    private int productNum; //DATA넘기기위해
+    private int quantity; //DATA넘기기위해
     private CustomersVO customer;
     private OrderRequestVO orderRequest;
 }

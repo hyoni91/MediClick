@@ -11,6 +11,8 @@
         <result column="TOTALPRICE" property="totalPrice"/>
         <result column="CUSTOMER_NAME" property="customerName" />
         <result column="CUSTOMER_ADDR" property="customerAddr" />
+        <result column="PRODUCT_NUM" property="productNum" />
+        <result column="QUANTITY" property="quantity" />
         <association property="orderRequest" resultMap="orderItemsMapper.request"/>
         <association property="customer" resultMap="customerMapper.customer" />
     </resultMap>
@@ -48,6 +50,7 @@
         ,O.ORDER_NUM
         ,O.ORDER_DATE
         ,P.PRODUCT_NAME
+        ,R.PRODUCT_NUM
         ,R.QUANTITY
         , P.PRODUCT_PRICE
         ,(P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
@@ -67,19 +70,19 @@
 
 
     <!-- 배송/수주테이블 '배송중'변경   트리거 사용 시 삭제예정-->
-    <update id="updateDeli">
-        UPDATE delivery
-        SET DELIVERY_STATUS = '배송중'
-        WHERE ORDER_NUM = #{orderNum}
-    </update>
+<!--    <update id="updateDeli">-->
+<!--        UPDATE delivery-->
+<!--        SET DELIVERY_STATUS = '배송중'-->
+<!--        WHERE ORDER_NUM = #{orderNum}-->
+<!--    </update>-->
 
-    <!--  배송/수주테이블 '배송중'변경   트리거 사용 시 삭제예정 -->
+    <!-- 수주테이블 배송신청 누르면 '배송중'변경-->
     <update id="updateOrders">
         UPDATE ORDERS
         SET ORDER_STATUS = '배송중'
         WHERE ORDER_NUM = #{orderNum}
     </update>
-
+    <!-- 수주 디테일에서 배송신청 누르면 deli테이블 insert-->
     <insert id="deliInsert">
         INSERT INTO delivery(
         ORDER_NUM
@@ -95,6 +98,25 @@
         ,'배송중'
         )
     </insert>
+
+    <!--배송신청시 재고테이블 OUT-->
+    <update id="outgoing">
+        UPDATE inventory
+        SET OUTGOING_QTY = #{quantity}
+        ,OUT_DATE = NOW()
+        ,CURRENT_STOCK = CURRENT_STOCK - #{quantity}
+        WHERE PRODUCT_NUM = #{productNum}
+    </update>
+
+    <!--재고 입고 (아직 MVC없음 2024-10-08-->
+
+    <update id="incoming">
+        UPDATE inventory
+        SET INCOMING_QTY = 100,
+        CURRENT_STOCK = CURRENT_STOCK + 100
+        WHERE INVENTORY_NUM = 6
+    </update>
+
 
 </mapper>
 

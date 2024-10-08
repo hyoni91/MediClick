@@ -66,39 +66,39 @@
     </update>
 
     <!--해당 주문 (수주테이블로 다시 바꾸기 삭제해야함)-->
-    <select id="order" resultMap="orderItemsMapper.request">
-        SELECT C.CUSTOMER_NAME
-        ,R.REQUEST_DATE
-        ,P.PRODUCT_NAME
-        ,R.QUANTITY
-        , P.PRODUCT_PRICE
-        ,(P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
-        ,REQUEST_STATUS
-        FROM order_requests R , products P , customers C
-        WHERE R.PRODUCT_NUM = P.PRODUCT_NUM
-        AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
-        AND R.REQUEST_NUM = #{requestNum}
-    </select>
+<!--    <select id="order" resultMap="orderItemsMapper.request">-->
+<!--        SELECT C.CUSTOMER_NAME-->
+<!--        ,R.REQUEST_DATE-->
+<!--        ,P.PRODUCT_NAME-->
+<!--        ,R.QUANTITY-->
+<!--        , P.PRODUCT_PRICE-->
+<!--        ,(P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE-->
+<!--        ,REQUEST_STATUS-->
+<!--        FROM order_requests R , products P , customers C-->
+<!--        WHERE R.PRODUCT_NUM = P.PRODUCT_NUM-->
+<!--        AND C.CUSTOMER_NUM = R.CUSTOMER_NUM-->
+<!--        AND R.REQUEST_NUM = #{requestNum}-->
+<!--    </select>-->
 
     <!-- 수주리스트 -->
-    <select id="orderlist" resultMap="orderItemsMapper.request">
-        SELECT REQUEST_NUM
-        ,REQUEST_DATE
-        ,REQUEST_STATUS
-        ,C.CUSTOMER_NUM
-        ,C.CUSTOMER_NAME
-        ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
-        FROM order_requests R, customers C, products P
-        WHERE R.CUSTOMER_NUM = C.CUSTOMER_NUM
-        AND R.PRODUCT_NUM = P.PRODUCT_NUM
-        <if test="searchValue != null and !searchValue.isEmpty()">
-            AND (
-            REQUEST_DATE LIKE CONCAT('%', #{searchValue}, '%')
-            OR REQUEST_STATUS LIKE CONCAT ('%', #{searchValue}, '%')
-            )
-        </if>
-        ORDER BY REQUEST_NUM DESC
-    </select>
+<!--    <select id="orderlist" resultMap="orderItemsMapper.request">-->
+<!--        SELECT REQUEST_NUM-->
+<!--        ,REQUEST_DATE-->
+<!--        ,REQUEST_STATUS-->
+<!--        ,C.CUSTOMER_NUM-->
+<!--        ,C.CUSTOMER_NAME-->
+<!--        ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE-->
+<!--        FROM order_requests R, customers C, products P-->
+<!--        WHERE R.CUSTOMER_NUM = C.CUSTOMER_NUM-->
+<!--        AND R.PRODUCT_NUM = P.PRODUCT_NUM-->
+<!--        <if test="searchValue != null and !searchValue.isEmpty()">-->
+<!--            AND (-->
+<!--            REQUEST_DATE LIKE CONCAT('%', #{searchValue}, '%')-->
+<!--            OR REQUEST_STATUS LIKE CONCAT ('%', #{searchValue}, '%')-->
+<!--            )-->
+<!--        </if>-->
+<!--        ORDER BY REQUEST_NUM DESC-->
+<!--    </select>-->
 
 </mapper>
 

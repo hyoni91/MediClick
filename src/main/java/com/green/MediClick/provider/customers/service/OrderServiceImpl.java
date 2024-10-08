@@ -34,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
 //        sqlSession.update("ordersMapper.updateDeli",orderNum);
         sqlSession.insert("ordersMapper.deliInsert", ordersVO);
         sqlSession.update("ordersMapper.updateOrders",ordersVO);
+        sqlSession.update("ordersMapper.outgoing", ordersVO);
     }
 
     //상세페이지
@@ -42,5 +43,6 @@ public class OrderServiceImpl implements OrderService {
 
         return sqlSession.selectOne("ordersMapper.orderDetail", requestNum);
     }
+
 
 }
