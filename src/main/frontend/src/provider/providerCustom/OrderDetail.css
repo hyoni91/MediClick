@@ -30,14 +30,26 @@
 
 .detail-header{
   display: flex;
-  width: 98%;
-  background-color: #DDE1E9;
+  gap: 15px;
+  justify-content: center;
 }
 
-.detail-header div{
+.detail-header > div{
+  display: flex;
   width: 20%;
   padding: 5px;
   font-weight: 700;
   height: 120px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7f8;
+  border: 1px solid lightgray;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05), 0 3px 6px rgba(0,0,0,0.05);
+}
+
+
+.detail-header i{
+  font-size: 1.6rem;
+  margin-right: 10px;
 }

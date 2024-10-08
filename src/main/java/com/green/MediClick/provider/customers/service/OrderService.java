@@ -11,4 +11,10 @@ public interface OrderService {
 
     void statusUpdate(int orderNum);
 
+    //배송/수주테이블 '배송중'변경
+    void updateStatus(OrdersVO ordersVO);
+
+    //주문 상세 페이지
+    OrdersVO detail(int requestNum);
+
 }

@@ -126,7 +126,6 @@ const Orders = () => {
                 </span>
               </div>              
           {/* </div> */}
-          
           <table className='content-table'>
             <thead>
               <tr>
@@ -134,15 +133,16 @@ const Orders = () => {
                   <input 
                     type='checkbox'
                     checked={chkAll}
-                    onClick={()=>{handleCheckAll()}}
+                    onChange={()=>{handleCheckAll()}}
                   />
                 </td>
                 <td>구분</td>
                 <td>거래처명</td>
                 <td>주문일자</td>
                 <td>총 주문액</td>
-                <td>주문현황</td>
+                <td>수주현황</td>
                 <td>test버튼</td>
+                <td>비고</td>
               </tr>
             </thead>
             <tbody>
@@ -154,7 +154,7 @@ const Orders = () => {
                       <input 
                         type='checkbox'
                         checked={chks[i]}
-                        onClick={()=>{handleCheck(i)}}
+                        onChange={()=>{handleCheck(i)}}
                       />
                     </td>
                     <td>{i+1}</td>
@@ -167,7 +167,14 @@ const Orders = () => {
                     </td>
                     <td>{order.orderDate}</td>
                     <td>{order.totalPrice.toLocaleString()}원</td>
-                    <td>{order.orderStatus}</td>
+                    <td>
+                      {
+                    order.orderStatus == '배송완료'? 
+                      <>완료✅</>
+                      : 
+                      <>{order.orderStatus}</>
+                      }
+                      </td>
                     <td>
                       <button
                         type='button'
@@ -175,6 +182,9 @@ const Orders = () => {
                       >
                         완료
                       </button>
+                    </td>
+                    <td>
+                      재고 확인 요청 
                     </td>
                   </tr>
                   )
@@ -184,9 +194,7 @@ const Orders = () => {
             </tbody>
           </table>
         </div>
-          
       </div>
-
     </div>
   )
 }

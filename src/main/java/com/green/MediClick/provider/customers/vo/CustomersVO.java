@@ -17,5 +17,6 @@ public class CustomersVO {
     private String customerTel;
     private String customerEmail;
     private List<Integer> customerNumList;
+    private String orderStatus; //상세조회
 //    private List<OrderRequestVO> orderRequest;
 }

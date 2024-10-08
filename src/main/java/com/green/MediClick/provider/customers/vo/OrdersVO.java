@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.customers.vo;
 
+import com.green.MediClick.orderitems.vo.OrderItemsVO;
 import com.green.MediClick.orderitems.vo.OrderRequestVO;
 import lombok.Data;
 
@@ -13,5 +14,7 @@ public class OrdersVO {
     private String orderStatus;
     private int totalPrice; // 주문 총액
     private String customerName;
-
+    private String customerAddr;
+    private CustomersVO customer;
+    private OrderRequestVO orderRequest;
 }

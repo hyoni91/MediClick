@@ -3,7 +3,7 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="DeliveryMapper">
-    <resultMap id="board" type="com.green.MediClick.board.vo.BoardVO">
+    <resultMap id="delivery" type="com.green.MediClick.board.vo.BoardVO">
         <id column="DELIVERY_NUM" property="deliveryNum"/>
         <result column="ORDER_NUM" property="orders"/>
         <result column="DELIVERY_DRIVER_NAME" property="deliveryDriverName"/>
@@ -13,6 +13,10 @@
         <result column="DELIVERY_END_TIME" property="endTime"/>
         <result column="DELIVERY_STATUS" property="deliveryStatus"/>
     </resultMap>
+
+    <select id="deliveryList" resultMap="delivery">
+        SELECT * FROM DELIVERY
+    </select>
 
 
 </mapper>

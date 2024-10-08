@@ -218,7 +218,9 @@ console.log(cateNum)
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
           <div >
+
             <select className='cateSelect' key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
+            <select key={''} name='cateNum' value={cateNum} onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
@@ -229,6 +231,7 @@ console.log(cateNum)
                     
                 )
               })}
+            </select>
             </select>
               <input className='getCate' type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} placeholder='카테고리를 입력 해주세요.'/>
           </div>
@@ -260,18 +263,6 @@ console.log(cateNum)
   />
 </div>
           <div>
-          <select className='cateSelect' key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
-              { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
-              </option>
-              :
-              category.map((cate,i) => {
-                return(
-                    
-                      <option key={i} value={cate.cateNum}>{cate.cateName}</option>
-                    
-                )
-              })}
-            </select>
             <div>상품 이름</div>
             <input type='text' name='productName' onChange={(e) => {mschange(e)}} />
             

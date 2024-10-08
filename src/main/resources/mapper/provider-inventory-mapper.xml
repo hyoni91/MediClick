@@ -15,6 +15,32 @@
         <result column="OUTGOING_QTY" property="outgoingQty" />
     </resultMap>
 
+<<<<<<< HEAD
+=======
+
+        <select id="inventoryList" resultMap="inventory">
+                SELECT * FROM inventory
+        </select>
+
+
+        <insert id="inventoryInsert">
+                INSERT INTO INVENTORY (
+                PRODUCT_NUM
+                ,PRODUCT_NAME
+                ,CATE_NUM
+                ,PRODUCT_PRICE
+                ,STOCK
+                ,DETAIL
+                ) VALUES(
+                #{productNum}
+                ,#{productName}
+                ,#{cateNum}
+                ,#{productPrice}
+                ,#{stock}
+                ,#{detail}
+                )
+        </insert>
+>>>>>>> 6a05c001e2b888546f6f9e3d7a26a63962e01b45
 
 </mapper>
 
