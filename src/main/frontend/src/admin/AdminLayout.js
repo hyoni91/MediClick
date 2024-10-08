@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import Footer from '../Footer';
 
 const AdminLayout = ({loginInfo}) => {
   const navigate=useNavigate();
@@ -30,7 +31,7 @@ const AdminLayout = ({loginInfo}) => {
       </div>
 
 
-      <Outlet/>
+      <div className='outlet'><Outlet/></div>
 
       <div className='footer-mid'>
 
