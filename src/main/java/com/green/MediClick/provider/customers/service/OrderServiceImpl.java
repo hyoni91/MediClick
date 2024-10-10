@@ -2,6 +2,7 @@ package com.green.MediClick.provider.customers.service;
 
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.vo.OrdersVO;
+import com.green.MediClick.provider.inventory.vo.InventoryVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,21 @@ public class OrderServiceImpl implements OrderService {
 
         return sqlSession.selectOne("ordersMapper.orderDetail", requestNum);
     }
+
+
+    //해당 제품의 현재고량
+    @Override
+    public int currentStock(int productNum) {
+        return sqlSession.selectOne("inventoryMapper.currentStock", productNum);
+    }
+
+    //배송대기 상태의 제품 수량 합계
+    @Override
+    public int sumQnt(int productNum) {
+        return sqlSession.selectOne("ordersMapper.sumQnt" , productNum);
+    }
+
+
 
 
 }

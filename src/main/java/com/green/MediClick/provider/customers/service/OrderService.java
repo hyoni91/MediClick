@@ -2,6 +2,7 @@ package com.green.MediClick.provider.customers.service;
 
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.vo.OrdersVO;
+import com.green.MediClick.provider.inventory.vo.InventoryVO;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public interface OrderService {
     //주문 상세 페이지
     OrdersVO detail(int requestNum);
 
+    //해당 제품의 현재고량
+    int currentStock(int productNum);
 
+    //배송대기 상태의 제품 수량 합계
+    int sumQnt (int productNum);
 
 }
