@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.delivery.service;
 
+import com.green.MediClick.member.vo.MemberVO;
 import com.green.MediClick.provider.customers.vo.OrdersVO;
 import com.green.MediClick.provider.delivery.vo.DeliveryVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,5 +22,10 @@ public class DeliveryServiceImpl implements DeliveryService{
     @Override
     public List<OrdersVO> ordersList() {
         return sqlSession.selectList("deliveryMapper.ordersList");
+    }
+
+    @Override
+    public void insertDriver(MemberVO memberVO) {
+        sqlSession.insert("deliveryMapper.insertDriver",memberVO);
     }
 }

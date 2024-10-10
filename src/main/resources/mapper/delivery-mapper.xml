@@ -33,6 +33,15 @@
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
     </select>
 
+    <insert id="insertDriver">
+        INSERT INTO delivery(
+        DELIVERY_DRIVER_NAME
+        ,DELIVERY_DRIVER_PHONE
+        ) VALUES(
+        #{memName}
+        ,#{memTel}
+        )
+    </insert>
 </mapper>
 
 
