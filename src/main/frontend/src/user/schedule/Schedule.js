@@ -243,7 +243,14 @@ const Schedule = () => {
                         type='button' 
                         onClick={(e)=>{
                         changeDocInfo(e)
-                      }}  name='docInfo' className='button' value={JSON.stringify({deptNum :doc.medicalDept.deptNum, docNum : doc.docNum, deptName : doc.medicalDept.deptName })} >
+                      }}  
+                        name='docInfo' 
+                        className='button' 
+                        value={JSON.stringify({
+                          deptNum :doc.medicalDept.deptNum, 
+                          docNum : doc.docNum, 
+                          deptName : doc.medicalDept.deptName 
+                          })} >
                         {doc.medicalDept.deptName}
                         </button>
                     </div>
@@ -325,12 +332,18 @@ const Schedule = () => {
                     <td>주민번호 : </td>
                     <td>
                       <input type='tel' name='' readOnly 
-                    value={loginInfo? loginInfo.memRrn:""}/>
+                      value={loginInfo? loginInfo.memRrn:""}/>
                     </td>
                   </tr>
                   <tr>
                     <td>증상</td>
-                    <td><textarea placeholder='특이사항이나 증상을 자세히 기입바랍니다.' rows={6} cols={30} name='detail' onChange={(e)=>{changeDetail(e)}} /></td>
+                    <td>
+                      <textarea 
+                        placeholder='특이사항이나 증상을 자세히 기입바랍니다.' 
+                        rows={6} cols={30} name='detail' 
+                        onChange={(e)=>{changeDetail(e)}} 
+                        />
+                    </td>
                   </tr>
                 </tbody>
               </table>

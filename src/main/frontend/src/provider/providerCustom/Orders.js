@@ -3,20 +3,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import './Orders.css'
+import CheckStock from './CheckStock'
 
 const Orders = () => {
   const navigate = useNavigate()
   const [orders , setOrders] = useState([])
   const [sumPrice ,setSumPrice] = useState(0)
 
+  //아이템 물량 확인
+  const [product , setProduct] = useState([])
+
   //검색
   const [searchValue , setSearchValue] = useState({})
-
 
   //체크박스 설정
   const [chks, setChks] = useState([])
   const [chkAll, setChkAll] = useState(false)
-
 
   //체크박스 함수 
   const handleCheckAll = () => {
@@ -38,15 +40,15 @@ const Orders = () => {
 
 
   //test 배송완료 버튼
-  function changeStatus(orderNum){
-    axios.put(`/orders/statusUpdate/${orderNum}`)
-    .then((res)=>{
+  // function changeStatus(orderNum){
+  //   axios.put(`/orders/statusUpdate/${orderNum}`)
+  //   .then((res)=>{
       
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  }
+  //   })
+  //   .catch((error)=>{
+  //     console.log(error)
+  //   })
+  // }
 
 
   useEffect(()=>{
@@ -55,14 +57,16 @@ const Orders = () => {
       console.log(res.data)
       setOrders(res.data)
       let sum = 0;
+      let Numarr= new Array(res.data.length)
       res.data.forEach((p,i)=>{
         sum = sum +p.totalPrice
+        Numarr.push(p.productNum)
       })
 
       let chkarr = new Array(res.data.length)
       chkarr.fill(false)
       setChks(chkarr)
-
+      setProduct(Numarr)
       setSumPrice(sum)
 
     })
@@ -70,8 +74,8 @@ const Orders = () => {
       console.log(error)
     })
 
-
   },[searchValue])
+
 
   function searchOrder(){
     axios.post(`/orders/orderlist`,searchValue)
@@ -107,7 +111,10 @@ const Orders = () => {
               <h4>총미수금</h4>
               <h2>0원</h2>
             </div>
-              
+            <div>
+              <h4>test</h4>
+              <CheckStock product={product} />
+            </div>
           </div>
         </div>
         <div className='manage-content'>
@@ -145,7 +152,6 @@ const Orders = () => {
                 <td>주문일자</td>
                 <td>총 주문액</td>
                 <td>수주현황</td>
-                {/* <td>test버튼</td> */}
                 <td>비고</td>
               </tr>
             </thead>
@@ -179,16 +185,8 @@ const Orders = () => {
                       <>{order.orderStatus}</>
                       }
                       </td>
-                    {/* <td>
-                      <button
-                        type='button'
-                        onClick={()=>{changeStatus(order.orderNum)}}
-                      >
-                        완료
-                      </button>
-                    </td> */}
                     <td>
-                      재고 확인 요청 
+                      {/* <CheckStock productNum = {order.productNum}/>  */}
                     </td>
                   </tr>
                   )
