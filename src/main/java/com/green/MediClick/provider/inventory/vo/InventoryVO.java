@@ -14,5 +14,6 @@ public class InventoryVO {
     private int initialStock;
     private int incomingQty;
     private int outgoingQty;
+    private int currentStock;
     //private CategoryVO categoryVO;
 }

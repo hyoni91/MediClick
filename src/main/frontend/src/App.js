@@ -188,7 +188,6 @@ function App() {
             {/* 거래처/ 매출처 관리 */}
             <Route path='manageCustomer' element={<ManageCustomer/>}/>
             {/* 품목 / 카테고리관리 */}
-            <Route path='msCategory' element={<MSCategory/>} />
             {/* 품목 / 제품 관리 */}
             <Route path='medicalSupplies' element={<MedicalSupplies/>} />
             {/* 품목 / 입고 등록 */}

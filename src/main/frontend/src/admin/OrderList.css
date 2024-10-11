@@ -2,7 +2,9 @@
 
 .orderList-table{
   width: 1000px;
+  /* border: 1px solid blue; */
   margin: 10px auto;
+  padding: 20px 0px;
 }
 
 .orderList-table>div{
@@ -85,7 +87,15 @@
   align-items: center;
 }
 
-/* .itemList-more{
-
-} */
+.itemList-more{
+  border: none;
+  width: 80px;
+  padding: 4px;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+}
 

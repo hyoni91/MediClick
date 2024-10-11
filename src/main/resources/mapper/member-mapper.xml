@@ -62,7 +62,7 @@
 <!--    WHERE MEM_ROLE = #{memRole}-->
 
         SELECT CONCAT(
-            IF(#{memRole} = 'USER', 'CTL_', 'DOC_'),
+            IF(#{memRole} = 'USER', 'CTL_', IF(#{memRole} = 'ADMIN', 'DOC_' , 'DRI_')),
         LPAD(IFNULL(MAX(CAST(SUBSTRING(MEM_NUM, 5) AS UNSIGNED)), 0) + 1, 5, '0')
         ) AS mem_num
         FROM medical_member

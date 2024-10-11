@@ -101,7 +101,6 @@
         WHERE REQUEST_NUM=#{requestNum}
     </update>
 
-
 </mapper>
 
 

@@ -3,6 +3,7 @@ package com.green.MediClick.provider.customers.controller;
 import com.green.MediClick.patientchart.vo.SearchVO;
 import com.green.MediClick.provider.customers.service.OrderService;
 import com.green.MediClick.provider.customers.vo.OrdersVO;
+import com.green.MediClick.provider.inventory.vo.InventoryVO;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,18 @@ public class OrderController {
     @GetMapping("/ordersDetail/{requestNum}")
     public OrdersVO orderDertail(@PathVariable("requestNum")int requestNum){
         return orderService.detail(requestNum);
+    }
+
+    //해당 제품의 현재고량
+    @GetMapping("/CurrentStock/{productNum}")
+    public int currentStock(@PathVariable("productNum") int productNum){
+       return  orderService.currentStock(productNum);
+    }
+
+    //배송대기 상태의 제품의 수량 합계
+    @GetMapping("/sumQnt/{productNum}")
+    public int sumQnt (@PathVariable("productNum") int productNum){
+        return orderService.sumQnt(productNum);
     }
 
 }

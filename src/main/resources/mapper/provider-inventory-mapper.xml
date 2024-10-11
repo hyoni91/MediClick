@@ -10,6 +10,7 @@
         <result column="PRODUCT_NAME" property="productName" />
         <result column="STOCK_DATE" property="stockDate" />
         <result column="OUT_DATE" property="outDate" />
+        <result column="CURRENT_STOCK" property="currentStock"/>
         <result column="INITIAL_STOCK" property="initialStock" />
         <result column="INCOMING_QTY" property="incomingQty" />
         <result column="OUTGOING_QTY" property="outgoingQty" />
@@ -36,6 +37,17 @@
                 ,#{detail}
                 )
         </insert>
+
+
+        <!-- 해당 제품의 현재고량 -->
+        <select id="currentStock" resultType="int">
+                SELECT IFNULL(current_stock,0)
+                FROM inventory
+                WHERE product_num = #{product_num}
+        </select>
+
+
+
 </mapper>
 
 

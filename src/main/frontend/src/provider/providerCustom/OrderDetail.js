@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './OrderDetail.css'
+import CheckStock from './CheckStock'
 
 const OrderDetail = () => {
   const navigate = useNavigate();
@@ -90,6 +91,9 @@ const OrderDetail = () => {
             <div>
               <i className="fa-solid fa-won-sign" />
               <h4>{(orderDetail.productPrice * orderDetail.quantity).toLocaleString()}원</h4>
+            </div>
+            <div>
+              <CheckStock productNum={orderDetail.productNum} />
             </div>
           </div>
         </div>

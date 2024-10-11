@@ -291,6 +291,11 @@ const closeModal = () => {setModalOpen(false)}
             setMemberData({...memberData,memRole : 'ADMIN'})
             console.log(memberData)
           }}>관리자용</button>
+          <button className='join-btn btn-admin' onClick={() => {
+            console.log(memberData)
+            setMemberData({...memberData,memRole : 'DRIVER'})
+            console.log(memberData)
+          }}>운전자</button>
         </div>
 
 

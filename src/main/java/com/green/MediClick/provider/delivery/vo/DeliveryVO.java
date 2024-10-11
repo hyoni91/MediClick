@@ -1,5 +1,6 @@
 package com.green.MediClick.provider.delivery.vo;
 
+import com.green.MediClick.provider.customers.vo.OrdersVO;
 import lombok.Data;
 
 @Data
@@ -12,4 +13,6 @@ public class DeliveryVO {
     private String startTime;
     private String endTime;
     private String deliveryStatus;
+    private OrdersVO ordersVO;
+
 }

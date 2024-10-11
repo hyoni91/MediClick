@@ -27,6 +27,7 @@
         ,C.CUSTOMER_NUM
         ,C.CUSTOMER_NAME
         ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
+        ,P.PRODUCT_NUM
         FROM order_requests R, orders O , customers C, products P
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
@@ -58,6 +59,7 @@
         FROM order_requests R , products P , orders O, customers C
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
+        AND R.PRODUCT_NUM = P.PRODUCT_NUM
         AND R.REQUEST_NUM = #{requestNum}
     </select>
 
@@ -109,7 +111,6 @@
     </update>
 
     <!--재고 입고 (아직 MVC없음 2024-10-08-->
-
     <update id="incoming">
         UPDATE inventory
         SET INCOMING_QTY = 100,
@@ -117,6 +118,14 @@
         WHERE INVENTORY_NUM = 6
     </update>
 
+    <!--수주 : 배송대기 아이템 총 수량 -->
+    <select id="sumQnt" resultType="int">
+        SELECT IFNULL(SUM(QUANTITY), 0)
+        FROM order_requests r , orders o
+        WHERE r.REQUEST_NUM = o.REQUEST_NUM
+        and PRODUCT_NUM = #{product_num}
+        AND o.ORDER_STATUS = '배송대기'
+    </select>
 
 </mapper>
 

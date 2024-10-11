@@ -8,9 +8,11 @@
 
 .orderList-div{
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
+  height: auto;
+  /* min-height: ; */
 }
 
 .order-sidebar{
@@ -54,7 +56,6 @@
 
 .order-main{
   width: 1200px;
-  height: 90vh;
 }
 
 
@@ -116,7 +117,7 @@
 .itemList-div{
   margin: 0 auto;
   width: 1020px;
-  height: 700px;
+  /* height: auto; */
   /* overflow-y: auto; */
 }
 
