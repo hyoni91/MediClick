@@ -1,34 +1,58 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const DeliryveryCheck = () => {
-  //배송정보 저장
-  const [delivery,setDelivery] = useState([
-  ])
+const DeliryveryCheck = ({setLoginInfo}) => {
+  const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
+  
+  const [driver, setDriver] =useState({
+    deliveryNum : ''
+    ,orders :''
+    ,deliveryDriverName : loginData?loginData.memName : <></> 
+    ,deliveryDriverPhone :loginData?loginData.memTel : <></>
+    ,deliveryAddress :''
+    ,startTime :''
+    ,endTime :''
+    ,deliveryStatus :''
+    ,ordersVO :''
+  })
+  console.log(driver)
   const [order, setOrder] = useState([])
   useEffect(() => {
     axios.all([
-      axios.get('/delivery/deliveryList'),
+      axios.get(`/delivery/deliveryList/${driver.deliveryDriverName}`),
       axios.get('/delivery/ordersList')
     ])
     .then(axios.spread((res1,res2) => {
-      setDelivery(res1.data)
-      console.log(delivery)
+      setDriver(res1.data)
+    // driver.map(() => {})
+      console.log(res1.data)
       setOrder(res2.data)
     }))
     .catch((error) => {
       console.log(error)
     })
   },[])
+  //선택
+  const [oneCheck, setOneCheck] = useState([]);
 
   const statusChange = (id,newStatus) => {
-    const updatedDelivery = delivery.map((item, i) => {
+    const updatedDelivery = order.map((item, i) => {
       return(item.deliveryNum == id ? {...item ,newStatus} : item
     )})
-    setDelivery(updatedDelivery)
+    setOneCheck(updatedDelivery)
+    
   }
-  console.log(order)
 
+  //체크변경
+  const changeCheck = (deliveryNum, checked) => {
+    setOneCheck((item) => 
+      checked 
+      ? [...item, deliveryNum] 
+      : item.filter((num) => num !== deliveryNum))
+    
+  }
+
+  console.log(oneCheck)
   return (
     <div className='manage-contailner'>
       <div className='manage-main'>
@@ -48,10 +72,10 @@ const DeliryveryCheck = () => {
         <div className='manage-content'>
           <div className='content-btn'>
             <button onClick={() => {
-              statusChange()
+              statusChange('배송중')
             }}>출발</button>  
             <button onClick={() => {
-              statusChange()
+              statusChange('배송완료')
             }}>도착</button>  
             <div className='seachbar'>
                 <input 
@@ -81,26 +105,26 @@ const DeliryveryCheck = () => {
               </tr>
             </thead>
             <tbody>
-              {delivery && delivery.length == 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
-                delivery.map((item ,i) => {
+              {order && order.length == 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
+                order.map((item ,i) => {
                   return(
                     <tr key={i}>
                       <td>
-                        <input type='checkbox' />
+                        <input type='checkbox' value={item.orderNum} onChange={(e) => setOneCheck(e.target.checked) }/>
                       </td>
                       <td>
-                        {item.deliveryNum}
+                        {item.orderNum}
                       </td>
                       <td>
-                        {item.deliveryNum}
+                        {item.orderNum}
                       </td>
                       <td>
-                        {item.deliveryNum}
+                        {item.orderNum}
                       </td>
                       <td>
-                        {item.deliveryNum}
+                        {item.orderNum}
                       </td>
-                      <td>사사</td>
+                      <td>{}</td>
                       <td>010-----</td>
                       <td>
                         배송출발

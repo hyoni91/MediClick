@@ -139,9 +139,11 @@ const handlePhoneChange = (e) => {
     axios.post('/member/insertMember',memberData)
     .then((res) => {
       if(res.data.memRole === 'ADMIN'){
-      navigate(`/adminJoinForm/${res.data.memNum}`)
+        navigate(`/adminJoinForm/${res.data.memNum}`)
+      }       
+      else {
+        navigate('/loginForm')
       }
-      else{navigate('/loginForm')}
     })
     .catch((error)=>{console.log(error)})
     }
