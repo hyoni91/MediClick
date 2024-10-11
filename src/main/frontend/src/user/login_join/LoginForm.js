@@ -49,8 +49,12 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
         setLoginInfo(loginInfo)
 
         alert(`${loginInfo.memName}님 반갑습니다.`)
-        
-        navigate('/')
+        if(loginInfo.memRole == 'DRIVER'){
+          navigate('/provider/deliveryCheck')
+        }
+        else{
+          navigate('/')
+        }
 
       }
       else{

@@ -16,6 +16,7 @@
 
     <select id="deliveryList" resultMap="delivery">
         SELECT * FROM delivery
+        WHERE DELIVERY_DRIVER_NAME = #{deliveryDriverName}
     </select>
 
     <select id="ordersList" resultMap="ordersMapper.orders">

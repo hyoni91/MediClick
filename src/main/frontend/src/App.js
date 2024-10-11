@@ -201,7 +201,7 @@ function App() {
             {/* 현황 / 현 재고 현황 */}
             <Route path='inventory' element={<Inventory/>}/>
             {/* 배달 현황 */}
-            <Route path='deliveryCheck' element={<DeliryveryCheck/>} />
+            <Route path='deliveryCheck' element={<DeliryveryCheck setLoginInfo={setLoginInfo} loginInfo ={loginInfo}/>} />
           </Route>
 
       </Routes>
