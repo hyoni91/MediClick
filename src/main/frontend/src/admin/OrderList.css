@@ -2,7 +2,9 @@
 
 .orderList-table{
   width: 1000px;
+  /* border: 1px solid blue; */
   margin: 10px auto;
+  padding: 20px 0px;
 }
 
 .orderList-table>div{
