@@ -59,6 +59,7 @@
         FROM order_requests R , products P , orders O, customers C
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
+        AND R.PRODUCT_NUM = P.PRODUCT_NUM
         AND R.REQUEST_NUM = #{requestNum}
     </select>
 
@@ -119,7 +120,7 @@
 
     <!--수주 : 배송대기 아이템 총 수량 -->
     <select id="sumQnt" resultType="int">
-        SELECT SUM(QUANTITY)
+        SELECT IFNULL(SUM(QUANTITY), 0)
         FROM order_requests r , orders o
         WHERE r.REQUEST_NUM = o.REQUEST_NUM
         and PRODUCT_NUM = #{product_num}

@@ -41,7 +41,7 @@
 
         <!-- 해당 제품의 현재고량 -->
         <select id="currentStock" resultType="int">
-                SELECT current_stock
+                SELECT IFNULL(current_stock,0)
                 FROM inventory
                 WHERE product_num = #{product_num}
         </select>

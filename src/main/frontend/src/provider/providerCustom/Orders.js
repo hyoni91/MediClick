@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import './Orders.css'
-import CheckStock from './CheckStock'
 
 const Orders = () => {
   const navigate = useNavigate()
@@ -57,16 +56,16 @@ const Orders = () => {
       console.log(res.data)
       setOrders(res.data)
       let sum = 0;
-      let Numarr= new Array(res.data.length)
+      // let Numarr= new Array(res.data.length)
       res.data.forEach((p,i)=>{
         sum = sum +p.totalPrice
-        Numarr.push(p.productNum)
+        // Numarr.push(p.productNum)
       })
 
       let chkarr = new Array(res.data.length)
       chkarr.fill(false)
       setChks(chkarr)
-      setProduct(Numarr)
+      // setProduct(Numarr)
       setSumPrice(sum)
 
     })
@@ -110,10 +109,6 @@ const Orders = () => {
             <div>
               <h4>총미수금</h4>
               <h2>0원</h2>
-            </div>
-            <div>
-              <h4>test</h4>
-              <CheckStock product={product} />
             </div>
           </div>
         </div>

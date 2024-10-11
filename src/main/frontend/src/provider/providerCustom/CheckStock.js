@@ -1,46 +1,42 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const CheckStock = ({ product, productNum }) => {
+const CheckStock = ({productNum}) => {
+
+  console.log(productNum)
 
   // 해당 제품의 현재고량 
-  const [stock , setStock] = useState([])
+  const [stock , setStock] = useState(0)
 
   // 배송대기 주문 재고합계
-  const [sumQnt, setSumQnt] = useState([])
-
-  console.log(product)
+  const [sumQnt, setSumQnt] = useState(0)
 
   useEffect(()=>{
-    product.forEach((e,i)=> {
-      axios.get(`/orders/CurrentStock/${e}`)
+      axios.get(`/orders/CurrentStock/${productNum}`)
       .then((res)=>{
-        setStock(res.data)
+        setStock( res.data)
       })
       .catch((error)=>{
         console.log(error)
       })
-    }
-    )},[])
+    },[productNum])
 
   useEffect(()=>{
-    product.forEach((e,i)=> {
-      axios.get(`/orders/sumQnt/${e}`)
+      axios.get(`/orders/sumQnt/${productNum}`)
     .then((res)=>{
       setSumQnt(res.data)
     })
     .catch((error)=>{
       console.log(error)
     })
-  }
-  )},[])
+  },[productNum])
 
+
+  console.log(`Stock = ${stock} sumQnt =  ${sumQnt}`)
 
   return (
     <p>
-      <div>stock : {stock}</div> 
-      <div>sumQnt : {sumQnt}</div>
-      {/* <div>stock - sumQnt : {stock - sumQnt}</div>  */}
+      <div>현재고량 - 주문량 : {stock - sumQnt}</div> 
     </p>
   )
 }

@@ -93,8 +93,7 @@ const OrderDetail = () => {
               <h4>{(orderDetail.productPrice * orderDetail.quantity).toLocaleString()}원</h4>
             </div>
             <div>
-              재고 test
-              {/* <CheckStock product={product}/> */}
+              <CheckStock productNum={orderDetail.productNum} />
             </div>
           </div>
         </div>
