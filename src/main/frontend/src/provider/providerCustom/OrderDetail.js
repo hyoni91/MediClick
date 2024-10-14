@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './OrderDetail.css'
 import CheckStock from './CheckStock'
+import { color } from 'chart.js/helpers'
 
 const OrderDetail = () => {
   const navigate = useNavigate();
