@@ -10,6 +10,7 @@
         <result column="PRODUCT_PRICE" property="productPrice"/>
         <result column="STOCK" property="stock"/>
         <result column="DETAIL" property="detail"/>
+        <result column="STOCK_DATE" property="stockDate"/>
         <association property="categoryVO" resultMap="cateCode"/>
         <association property="imgVO" resultMap="img"/>
     </resultMap>

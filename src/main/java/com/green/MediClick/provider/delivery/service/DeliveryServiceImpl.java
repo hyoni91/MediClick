@@ -15,8 +15,8 @@ public class DeliveryServiceImpl implements DeliveryService{
     SqlSessionTemplate sqlSession;
 
     @Override
-    public List<DeliveryVO> deliveryList() {
-        return sqlSession.selectList("deliveryMapper.deliveryList");
+    public DeliveryVO deliveryList(String deliveryDriverName) {
+        return sqlSession.selectOne("deliveryMapper.deliveryList",deliveryDriverName);
     }
 
     @Override

@@ -49,19 +49,19 @@ const Inventory = () => {
           <tr>
             <td>
               {category.map(cat => {return(
-                  <td key={cat.cateNum}>{cat.cateName}</td>
+                  <tr key={cat.cateNum}>{cat.cateName}</tr>
                 )}
               )}
             </td>
             <td>
               {item.map(pro => {return(
-                    <td key={pro.productNum}>{pro.productNum}</td>
+                    <tr key={pro.productNum}>{pro.productNum}</tr>
                   )}
                 )}
             </td>
             <td>
               {item.map(pro => {return(
-                    <td key={pro.productNum}>{pro.productName}</td>
+                    <tr key={pro.productNum}>{pro.productName}</tr>
                   )}
                 )}
             </td>
@@ -71,7 +71,7 @@ const Inventory = () => {
             </td>
             <td>
               {item.map(pro => {return(
-                    <td key={pro.productNum}>{pro.stock}</td>
+                    <tr key={pro.productNum}>{pro.stock}</tr>
                   )}
                 )}
             </td>
