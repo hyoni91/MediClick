@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const CheckStock = ({productNum}) => {
+const CheckStock = ({productNum, orderSatus}) => {
 
   console.log(productNum)
 
@@ -32,12 +32,22 @@ const CheckStock = ({productNum}) => {
   },[productNum])
 
 
+  const result = () => {
+    const result = stock - sumQnt
+
+    if(orderSatus == '배송대기' && result < sumQnt){
+      return(
+        <p className='check-stock'>재고확인</p>
+            )
+    }
+  }
+
   console.log(`Stock = ${stock} sumQnt =  ${sumQnt}`)
 
   return (
-    <p>
-      <div>현재고량 - 주문량 : {stock - sumQnt}</div> 
-    </p>
+    <div>
+      {result()}
+    </div>
   )
 }
 

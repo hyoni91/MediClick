@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import './Orders.css'
+import CheckStock from './CheckStock'
 
 const Orders = () => {
   const navigate = useNavigate()
@@ -181,7 +182,7 @@ const Orders = () => {
                       }
                       </td>
                     <td>
-                      {/* <CheckStock productNum = {order.productNum}/>  */}
+                      <CheckStock productNum = {order.productNum} orderSatus={order.orderStatus}/> 
                     </td>
                   </tr>
                   )

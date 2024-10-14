@@ -93,9 +93,9 @@ const OrderDetail = () => {
               <i className="fa-solid fa-won-sign" />
               <h4>{(orderDetail.productPrice * orderDetail.quantity).toLocaleString()}원</h4>
             </div>
-            <div>
+            {/* <div>
               <CheckStock productNum={orderDetail.productNum} />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='manage-content'>
