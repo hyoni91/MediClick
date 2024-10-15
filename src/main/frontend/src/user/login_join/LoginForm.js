@@ -68,6 +68,12 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
 
   }
 
+  function handleKeyPress(e){
+    if(e.key==='Enter'){
+      goLogin()
+    }
+  }
+
   return (
     <div className='login-div'>
       <div className='login-table-div'>
@@ -87,7 +93,8 @@ const LoginForm = ({loginInfo,setLoginInfo}) => {
             <tr>
               <td><input type='password' name='memRrn' 
               placeholder='주민등록번호를 입력하세요.' maxLength={13}
-              onChange={(e)=>{insertData(e)}}></input></td>
+              onChange={(e)=>{insertData(e)}}
+              onKeyDown={(e)=>{handleKeyPress(e)}}></input></td>
             </tr>
           </tbody>
         </table>

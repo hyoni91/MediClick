@@ -77,6 +77,10 @@ const OrderList = () => {
     })
   }
 
+  console.log(orderList)
+
+
+
 
   return (
 
@@ -102,6 +106,7 @@ const OrderList = () => {
       </div>
 
 
+      
 
       <div className='order-main'>
         <h3>주문 내역</h3>
@@ -114,7 +119,9 @@ const OrderList = () => {
                     <div>{order.requestDate}</div>
 
                     <div className='itemList-inside'>
-                      <div className='itemList-img'></div>
+                      <div className='itemList-img'>
+                        <img src={`http://localhost:8080/upload/${order.orderItemsVO.itemImgVO.attachedFileName}`}></img>
+                      </div>
 
                       <div>
                         <div className='itemList-name'>

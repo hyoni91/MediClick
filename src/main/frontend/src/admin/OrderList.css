@@ -54,10 +54,12 @@
 }
 
 .itemList-img{
+  margin-right: 20px;
+}
+
+.itemList-img>img{
   width: 100px;
   height: 100px;
-  border: 1px solid black;
-  margin-right: 20px;
 }
 
 .itemList-name>span:first-child{

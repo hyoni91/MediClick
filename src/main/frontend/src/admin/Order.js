@@ -67,6 +67,11 @@ const Order = () => {
 
   }
 
+  function handleKeyPress(e){
+    if(e.key==='Enter'){
+      clickSearch()
+    }
+  }
 
     
   // 체크박스 개별 선택
@@ -400,6 +405,8 @@ const Order = () => {
     return result
   }
 
+  
+
 
   return (
     <div className='order-div'>
@@ -475,7 +482,8 @@ const Order = () => {
               {/* 품목 검색 */}
               <div className='item-search'>
                 <input type='text' name='searchValue' 
-                  onChange={(e)=>{insertSearch(e)}}></input>
+                  onChange={(e)=>{insertSearch(e)}} 
+                  onKeyDown={(e)=>{handleKeyPress(e)}}></input>
                 <span onClick={()=>{clickSearch()}}><i className="bi bi-search"></i></span>
               </div> 
               
@@ -486,8 +494,8 @@ const Order = () => {
                     <col width={'5%'}/>
                     <col width={'10%'}/>
                     <col width={'10%'}/>
-                    <col width={'30%'}/>
-                    <col width={'10%'}/>
+                    <col width={'20%'}/>
+                    <col width={'20%'}/>
                     <col width={'15%'}/>
                     <col width={'10%'}/>
                     <col width={'5%'}/>
