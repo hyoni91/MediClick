@@ -84,6 +84,7 @@
         SET ORDER_STATUS = '배송중'
         WHERE ORDER_NUM = #{orderNum}
     </update>
+
     <!-- 수주 디테일에서 배송신청 누르면 deli테이블 insert-->
     <insert id="deliInsert">
         INSERT INTO delivery(

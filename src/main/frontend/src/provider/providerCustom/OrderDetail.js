@@ -28,6 +28,10 @@ const OrderDetail = () => {
     if(window.confirm('배송 신청을 진행하시겠습니까?')){
       axios.post(`/orders/deli-orders-statusUpdate`, orderDetail)
       .then((res)=>{
+        setOrderDetail({
+          ...orderDetail,
+          orderStatus : '배송중'
+        })
       })
       .catch((error)=>{
         console.log(error)
@@ -61,7 +65,7 @@ const OrderDetail = () => {
     })
   },[])
 
-  console.log(orderDetail)
+
 
   return (
     <div className='manage-contailner'>
@@ -107,6 +111,7 @@ const OrderDetail = () => {
                 <td>아이템</td>
                 <td>수량</td>
                 <td>금액</td>
+                <td>재고</td>
               </tr>
             </thead>
             <tbody>
@@ -116,17 +121,31 @@ const OrderDetail = () => {
                 <td>{orderDetail.productName}</td>
                 <td>{orderDetail.quantity}</td>
                 <td>{orderDetail.productPrice.toLocaleString()}원</td>
+                <td>
+                  {
+
+                  
+                  }
+                <CheckStock 
+                  orderSatus={orderDetail.orderStatus} productNum={orderDetail.productNum}/>
+              </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div className='orderDetail-btn'> 
-          <button type='button' onClick={()=>{navigate('/provider/orders')}}>뒤로가기</button>
-          <button type='button' onClick={()=>{changeStatus(orderDetail)}}>배송신청</button>
+          <button 
+            type='button' 
+            onClick={()=>{navigate('/provider/orders')}}>
+              뒤로가기
+          </button>
+          <button 
+            type='button' 
+            onClick={()=>{changeStatus(orderDetail)}}>
+              배송신청
+          </button>
         </div>
       </div>
-        
-
     </div>
   )
 }

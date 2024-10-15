@@ -32,10 +32,9 @@ public class OrderServiceImpl implements OrderService {
     //배송/수주테이블 '배송중'변경
     @Override
     public void updateStatus(OrdersVO ordersVO) {
-//        sqlSession.update("ordersMapper.updateDeli",orderNum);
-        sqlSession.insert("ordersMapper.deliInsert", ordersVO);
-        sqlSession.update("ordersMapper.updateOrders",ordersVO);
-        sqlSession.update("ordersMapper.outgoing", ordersVO);
+            sqlSession.insert("ordersMapper.deliInsert", ordersVO);
+            sqlSession.update("ordersMapper.updateOrders",ordersVO);
+            sqlSession.update("ordersMapper.outgoing", ordersVO);
     }
 
     //상세페이지

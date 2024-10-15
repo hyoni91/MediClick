@@ -31,7 +31,8 @@ public class OrderController {
     @PostMapping("/deli-orders-statusUpdate")
     public void deliOrdersUpdate(@RequestBody OrdersVO ordersVO){
         System.out.println("========================================"+ordersVO);
-        orderService.updateStatus(ordersVO);
+            orderService.updateStatus(ordersVO);
+
     }
 
     //상세페이지
