@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 
 const CheckStock = ({productNum, orderSatus}) => {
 
-  console.log(productNum)
-
   // 해당 제품의 현재고량 
   const [stock , setStock] = useState(0)
 
@@ -31,18 +29,20 @@ const CheckStock = ({productNum, orderSatus}) => {
     })
   },[productNum])
 
-
   const result = () => {
-    const result = stock - sumQnt
-
-    if(orderSatus == '배송대기' && result < sumQnt){
+    const result1 = stock - sumQnt
+    if(orderSatus == '배송대기' && result1 < sumQnt){
       return(
-        <p className='check-stock'>재고확인</p>
-            )
+        <p className='check-stock'><i className="fa-solid fa-circle-exclamation" /></p>
+            ) 
+    }else{
+      return(
+        <>-</>
+      )
     }
   }
 
-  console.log(`Stock = ${stock} sumQnt =  ${sumQnt}`)
+
 
   return (
     <div>
