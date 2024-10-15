@@ -11,6 +11,7 @@
         <result column="STOCK" property="stock"/>
         <result column="DETAIL" property="detail"/>
         <association property="cateVO" resultMap="cate"/>
+        <collection property="itemImgVO" resultMap="itemImg"/>
     </resultMap>
 
     <resultMap id="cate" type="com.green.MediClick.orderitems.vo.CateVO">
@@ -30,6 +31,13 @@
         <collection property="orderItemsVO" resultMap="items"/>
     </resultMap>
 
+    <resultMap id="itemImg" type="com.green.MediClick.provider.item.vo.ItemImgVO">
+        <id column="IMG_CODE" property="imgCode"/>
+        <result column="ORIGIN_FILE_NAME" property="originFileName"/>
+        <result column="ATTACHED_FILE_NAME" property="attachedFileName"/>
+        <result column="PRODUCT_NUM" property="productNum"/>
+    </resultMap>
+
     <!--전체조회 + 검색-->
     <select id="getAllItems" resultMap="items">
         SELECT PRODUCT_NUM,
@@ -44,7 +52,7 @@
             AND (C.CATE_NAME LIKE CONCAT('%', #{searchValue}, '%')
             OR PRODUCT_NAME LIKE CONCAT('%', #{searchValue}, '%'))
         </if>
-        ORDER BY C.CATE_NUM
+        ORDER BY PRODUCT_NUM
     </select>
 
     <!--선택 주문-->
@@ -87,10 +95,12 @@
             R.QUANTITY,
             P.PRODUCT_PRICE,
             DATE_FORMAT(REQUEST_DATE,'%Y-%m-%d') AS REQUEST_DATE,
-            R.REQUEST_STATUS
-        FROM ORDER_REQUESTS R, PRODUCTS P, CATEGORY C
+            R.REQUEST_STATUS,
+            ATTACHED_FILE_NAME
+        FROM ORDER_REQUESTS R, PRODUCTS P, CATEGORY C , ITEM_IMG I
         WHERE P.PRODUCT_NUM=R.PRODUCT_NUM
         AND P.CATE_NUM=C.CATE_NUM
+        AND P.PRODUCT_NUM=I.PRODUCT_NUM
         ORDER BY REQUEST_NUM DESC
     </select>
 
