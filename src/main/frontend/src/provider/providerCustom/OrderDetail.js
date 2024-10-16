@@ -8,6 +8,9 @@ import { color } from 'chart.js/helpers'
 const OrderDetail = () => {
   const navigate = useNavigate();
   const {requestNum} = useParams()
+
+  const [isDisabled, setIsDisabled] = useState(false)
+
   const [orderDetail, setOrderDetail] = useState({
     customerAddr:'',
     customerOwner : '',
@@ -21,6 +24,14 @@ const OrderDetail = () => {
     productNum:0,
     orderStatus:''
   })
+
+  const disabledchk = ()=>{
+    if( orderDetail.orderStatus == '배송대기'){
+      return setIsDisabled(false)
+    }else{
+      return setIsDisabled(true)
+    }
+  }
 
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
   // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
@@ -58,6 +69,11 @@ const OrderDetail = () => {
         orderStatus:res.data.orderStatus
       }
       setOrderDetail(detail)
+      if( res.data.orderStatus == '배송대기'){
+        return setIsDisabled(false)
+      }else{
+        return setIsDisabled(true)
+      }
     })
     .catch((error)=>{
       alert('error!!')
@@ -141,8 +157,14 @@ const OrderDetail = () => {
           </button>
           <button 
             type='button' 
+            disabled={isDisabled}
             onClick={()=>{changeStatus(orderDetail)}}>
-              배송신청
+              {
+                orderDetail.orderStatus == '배송대기'?
+                <>배송신청</>
+                :
+                <>{orderDetail.orderStatus}</>
+              }
           </button>
         </div>
       </div>

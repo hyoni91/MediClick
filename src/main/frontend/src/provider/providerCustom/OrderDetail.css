@@ -21,11 +21,16 @@
 }
 
 .orderDetail-btn button:nth-child(1){
-  background-color: gray;
+  background-color: #5990ff;
 }
 
 .orderDetail-btn button:nth-child(1):hover{
-  background-color: rgb(90, 89, 89);
+  background-color: #3377fd;
+}
+
+.orderDetail-btn button:disabled,
+.orderDetail-btn button:disabled:hover{
+  background-color: grey;
 }
 
 .detail-header{
