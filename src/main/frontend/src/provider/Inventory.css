@@ -1,6 +1,20 @@
 .inventoryTable td{
   border: 1px solid;
+  padding: 10px;
 }
 .inventoryTable{
   margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.02), 0 3px 6px rgba(0,0,0,0.04);
+}
+.inventoryTable tr,
+.inventoryTable td{
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+}
+.inventoryTable thead{
+  background-color: #F1F5F9;
+  font-weight: 700;
 }

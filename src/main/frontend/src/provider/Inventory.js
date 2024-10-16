@@ -4,16 +4,15 @@ import './Inventory.css'
 
 const Inventory = () => {
    //카테 리스트
-  const [category,setCategory]=useState([])
+  const [category,setCategory]=useState([]);
   //아이템 리스트
-  const [item, setItem] = useState([])
+  const [item, setItem] = useState([]);
 
   useEffect(() => {
     axios.all([
       axios.get('/item/cateList'),
       axios.get('/item/inventoriesList')
     ])
-    
     .then(axios.spread((res1,res2) => {
       console.log(res1.data)
       //카테고리
@@ -23,11 +22,11 @@ const Inventory = () => {
       console.log(res2.data)
     }))
     .catch((error) => {console.log(error)})
-  },[])
-  const [resultList, setResultList] = useState({
-    items : [],
-    pageInfo : {}
-  })
+  },[]);
+  // const [resultList, setResultList] = useState({
+  //   items : [],
+  //   pageInfo : {}
+  // })
   return (
     <div>
       <h1>현 재고 현황</h1>
@@ -46,36 +45,22 @@ const Inventory = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              {category.map(cat => {return(
-                  <tr key={cat.cateNum}>{cat.cateName}</tr>
-                )}
-              )}
-            </td>
-            <td>
-              {item.map(pro => {return(
-                    <tr key={pro.productNum}>{pro.productNum}</tr>
-                  )}
-                )}
-            </td>
-            <td>
-              {item.map(pro => {return(
-                    <tr key={pro.productNum}>{pro.productName}</tr>
-                  )}
-                )}
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-              {item.map(pro => {return(
-                    <tr key={pro.productNum}>{pro.stock}</tr>
-                  )}
-                )}
-            </td>
-          </tr>
+          {item.map(pro => {
+            const categoryName = category.find(cat => cat.cateNum === pro.cateNum)?.cateName || '알 수 없음';
+            return (
+                <tr key={pro.productNum}>
+                    <td>{categoryName}</td>
+                    <td>{pro.productNum}</td>
+                    <td>{pro.productName}</td>
+                    <td>{pro.stockDate}</td>
+                    <td></td> {/* 출고일자 여기에 */}
+                    <td>{pro.stock}</td>
+                    <td></td> {/* 입고수량 여기에 */}
+                    <td></td> {/* 출고수량 여기에 */}
+                    <td></td> {/* 현 재고량 여기에 */}
+                </tr>
+              );
+          })}
         </tbody>
       </table>
     </div>
