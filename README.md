@@ -28,13 +28,24 @@
 <h4>공급사 관점 의료용품 수주 프로세스 구현</h3>
 
 <h2>🔨 개발 환경</h2>
-
+<!--
 - **React** <img width=30px src='https://github.com/user-attachments/assets/bc1961c8-272b-4c4f-be80-a0cdac24364f'>
 - **Node.js** <img width=30px src='https://github.com/user-attachments/assets/129e26ba-d580-482d-ad8c-d497d0f8672f'>
 - **Java** <img width=30px src='https://github.com/user-attachments/assets/ef55fe03-c7a7-46db-8096-5a3858144649'>
 - **Spring** <img width=30px margin=0px src='https://github.com/user-attachments/assets/2bc7d323-fa64-4d13-9060-9c56f48d5eae'>
 - **MariaDB** <img width=30px src='https://github.com/user-attachments/assets/abaab39a-9f12-4085-b842-4018c3564b76'> 
-- **MyBatis** <img width=60px src='https://github.com/user-attachments/assets/52dfc5c8-83ca-4689-bf49-3099e3084661'> 
+- **MyBatis** <img width=60px src='https://github.com/user-attachments/assets/52dfc5c8-83ca-4689-bf49-3099e3084661'>
+--!>
+<div style="margin: ; text-align: left;" "text-align: left;"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+          <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+          <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
+          <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=white">
+          <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+          <br/><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+          <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+          <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">
+          </div>
+    </div>
 
 - **IDE/Editor**:
   - **Visual Studio Code**
