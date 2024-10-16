@@ -22,7 +22,7 @@
         LIMIT 10
     </select>
 
-    <!--24시간 전 데이터 자동 삭제-->
+    <!--12시간 전 데이터 자동 삭제-->
     <delete id="keepDel">
         DELETE FROM TEMP_DATA
         WHERE TEMP_TIME &lt; CURRENT_TIMESTAMP() - INTERVAL 12 HOUR;
