@@ -29,16 +29,18 @@
 
 <h2>🔨 개발 환경</h2>
 
-- **React**
-- **Node.js**
-- **Java**
-- **Spring**
-- **MariaDB**
-- **MyBatis**
+- **React** <img width=30px src='https://github.com/user-attachments/assets/bc1961c8-272b-4c4f-be80-a0cdac24364f'>
+- **Node.js** <img width=30px src='https://github.com/user-attachments/assets/129e26ba-d580-482d-ad8c-d497d0f8672f'>
+- **Java** <img width=30px src='https://github.com/user-attachments/assets/ef55fe03-c7a7-46db-8096-5a3858144649'>
+- **Spring** <img width=30px margin=0px src='https://github.com/user-attachments/assets/2bc7d323-fa64-4d13-9060-9c56f48d5eae'>
+- **MariaDB** <img width=30px src='https://github.com/user-attachments/assets/abaab39a-9f12-4085-b842-4018c3564b76'> 
+- **MyBatis** <img width=60px src='https://github.com/user-attachments/assets/52dfc5c8-83ca-4689-bf49-3099e3084661'> 
+
 - **IDE/Editor**:
   - **Visual Studio Code**
-  - **IntelliJ IDEA / Eclipse**
-  - **Spring Boot**:
+  - **IntelliJ IDEA**
+  - **Spring Boot**
+  - **HeidiSQL**
 
 <h2>💁‍♀️ 기능 소개</h2>
 <h4>환자</h4>
