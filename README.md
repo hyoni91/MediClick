@@ -1,3 +1,7 @@
+<div align= "center">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:4556b0,100:a0ff52&height=180&text=MediClick&animation=&fontColor=ffffff&fontSize=70" />
+    </div>
+    
 
 <h1>🩺 MediClick PROJECT</h1>
 
