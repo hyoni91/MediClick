@@ -24,7 +24,7 @@
 
 .orderList-table div button{
   border: none;
-  width: 45px;
+  width: 70px;
   padding: 4px;
   border: 1px solid lightgray;
   background-color: white;
@@ -83,7 +83,7 @@
 
 .itemList-status{
   display: flex;
-  width: 250px;
+  width: 350px;
   height: 40px;
   justify-content: space-around;
   align-items: center;
@@ -101,3 +101,21 @@
   cursor: pointer;
 }
 
+
+/* 배송확인 모달창 */
+
+.deli-btn{
+  border: none;
+  width: 80px;
+  padding: 4px;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+}
+
+.deli-btn:hover{
+  background-color: #eeeeee;
+}
