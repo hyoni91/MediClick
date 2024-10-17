@@ -15,6 +15,7 @@
         <result column="QUANTITY" property="quantity" />
         <association property="orderRequest" resultMap="orderItemsMapper.request"/>
         <association property="customer" resultMap="customerMapper.customer" />
+        <association property="delivery" resultMap="deliveryMapper.delivery"/>
     </resultMap>
 
     <!--수주 목록 -->
