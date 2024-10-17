@@ -29,3 +29,7 @@
   object-fit: cover;
   
 }
+
+.provider-logo-div p:nth-child(1){
+  color: rgb(5, 141, 5);
+}

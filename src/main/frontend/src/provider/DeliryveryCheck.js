@@ -77,7 +77,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
             <button onClick={() => {
               statusChange('배송완료')
             }}>도착</button>  
-            <div className='seachbar'>
+            <div className='seachbar-2'>
                 <input 
                   type='text' 
                   placeholder='주문일자'

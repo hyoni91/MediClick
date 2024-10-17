@@ -39,6 +39,7 @@ import OrderList from './admin/OrderList';
 import OrderDetail from './provider/providerCustom/OrderDetail';
 import DeliryveryCheck from './provider/DeliryveryCheck';
 import Inventory from './provider/Inventory';
+import ProviderMain from './provider/ProviderMain';
 
 
 
@@ -185,6 +186,7 @@ function App() {
           
           {/* 공급자 계정 */}
           <Route path='/provider' element={<ProviderLayout/>}>
+            <Route path='main' element={<ProviderMain />}/>
             {/* 거래처/ 매출처 관리 */}
             <Route path='manageCustomer' element={<ManageCustomer/>}/>
             {/* 품목 / 카테고리관리 */}

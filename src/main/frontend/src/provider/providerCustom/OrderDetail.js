@@ -51,10 +51,13 @@ const OrderDetail = () => {
     }
   }
 
+  console.log(orderDetail)
+
   //상세정보 
   useEffect(()=>{
     axios.get(`/orders/ordersDetail/${requestNum}`)
     .then((res)=>{
+      console.log(res.data)
       const detail ={
         customerAddr:res.data.customer.customerAddr,
         customerOwner : res.data.customer.customerOwner,

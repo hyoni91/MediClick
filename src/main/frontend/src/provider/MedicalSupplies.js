@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './MedicalSupplies.css';
+import ReactModal from 'react-modal';
 const MedicalSupplies = () => {
 
   //검색 및 페이지 정보를 자바로 가져갈 때 사용하는 변수
@@ -215,54 +216,61 @@ console.log(cateNum)
   return (
 
     <div className='medicalSupplies-container'>
+      <h3>아이템 관리</h3>
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
           <div >
-
-            
             <select key={''} className='cateSelect' name='cateNum' value={cateNum} onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
               :
               category.map((cate,i) => {
                 return(
-                    
                       <option key={i} value={cate.cateNum}>{cate.cateName}</option>
-                    
                 )
               })}
             </select>
             
-              <input className='getCate' type='text' name='cateName' value={msCategory.cateName} onChange={(e) => {categoryChange(e)}} placeholder='카테고리를 입력 해주세요.'/>
+              <input 
+              className='getCate' 
+              type='text' name='cateName' 
+              value={msCategory.cateName} 
+              onChange={(e) => {categoryChange(e)}} placeholder='카테고리를 입력 해주세요.'
+              />
           </div>
             <div className='cate-flex'>
               <div className='cate-divBtn'>
                 <button type='button' onClick={() => {deleteCategory(cateNum)}}className='btn'>카테고리 삭제</button>
+                <button type='button' onClick={() => {insertCategory()}}className='btn'>카테고리 등록</button>
               </div>
               <div className='cate-divBtn'>
-                <button type='button' onClick={() => {insertCategory()}}className='btn'>카테고리 등록</button>
               </div>
             </div>
         </div>
         <div className='medicalSupplies-div'>
-        <div className='ms-imgdiv'>
-  {previewUrl ? (
-    <img className="adminfile-img" src={previewUrl} alt="미리보기" />
-  ) : (
-    <div className="adminfile-placeholder">사진 등록해주세요</div> /* 이미지가 없을 때의 빈 영역 */
-  )}
-  <input
-    className='ad-input'
-    name='mainImg'
-    type='file'
-    accept='image/*'
-    onChange={(e) => {
-      setMainImg(e.target.files[0]); // 파일을 상태에 설정
-      setPreviewUrl(URL.createObjectURL(e.target.files[0])); // 미리보기 URL 설정
-    }}
-  />
-</div>
-          <div>
+        <div 
+        className='ms-imgdiv'>
+          {previewUrl ? (
+            <img className="adminfile-img" src={previewUrl} alt="미리보기" />
+          ) 
+          : (
+          <div 
+          className="adminfile-placeholder">
+            사진 등록해주세요
+          </div> /* 이미지가 없을 때의 빈 영역 */
+            )}
+            <input
+              className='ad-input'
+              name='mainImg'
+              type='file'
+              accept='image/*'
+              onChange={(e) => {
+                setMainImg(e.target.files[0]); // 파일을 상태에 설정
+                setPreviewUrl(URL.createObjectURL(e.target.files[0])); // 미리보기 URL 설정
+              }}
+            />
+          </div>
+          <div className='sup-item-div'>
             <select className='cateSelect' key={''} name='cateNum' onChange={(e) => {setCateNum(e.target.value)}}>
             { category =='' || category.length == 0 ? <option>카테고리가 없습니다.
               </option>
@@ -289,12 +297,17 @@ console.log(cateNum)
               console.log(medicalSupplies)
             }} />
           
-            <div>
-              <button type='button' onClick={() => {
+            <div className='sup-btn-div'>
+              <button 
+                type='button' 
+                onClick={() => {
                 console.log(mainImg)
                 console.log(item)
                 insertItem()
-              }}className='btn'>상품 등록</button>
+              }}
+              className='btn'>
+                상품 등록
+              </button>
             </div>
           </div>
           
@@ -324,7 +337,7 @@ console.log(cateNum)
           <thead>
             <tr>
               <td>종류</td>
-              <td>상품</td>
+              <td>상품명</td>
               <td>가격</td>
               <td>수량</td>
               <td>상품설명</td>
@@ -357,7 +370,7 @@ console.log(cateNum)
         </table>
           
       </div>
-      <div>
+      <div className='sup-footer'>
       {drawPagination()}
       </div>
     </div>

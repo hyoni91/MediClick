@@ -10,11 +10,18 @@ const ProviderLayout = () => {
   return (
     <div>
       <div className='layout-bar'>
-        <div className='logoimg-div' onClick={()=>{navigate('/provider')}}>
-          <img className='logo' src='http://localhost:8080/images/providerlogo.png'/>
-          <div>
-            {/* <p>공급처</p> */}
-            {/* <p>수주</p> */}
+        <div 
+          className='logoimg-div' 
+          onClick={()=>{
+            navigate('/provider/main')}}
+        >
+          <img 
+            className='logo' 
+            src='http://localhost:8080/images/providerlogo2.png'/
+          >
+          <div className='provider-logo-div'>
+            <p>그린의료용품</p>
+            <p>수주 관리 프로그램</p>
           </div>
         </div>
 
@@ -35,18 +42,12 @@ const ProviderLayout = () => {
   
         </div>
       </div>
-        <div className='provider-main-img'>
-          {/* 메인이미지 */}
-          <img src='http://localhost:8080/images/providermain.jpeg'/>
-          <div>
-            <p>고객과 함께</p>
-            <p>더 높이 날아오르겠습니다.</p>
-          </div>
-        </div>
+        
       <Outlet/>
 
     </div>
   )
 }
+
 
 export default ProviderLayout
