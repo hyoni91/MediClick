@@ -12,7 +12,7 @@ const ProviderLayout = () => {
         <div className='logoimg-div' onClick={()=>{navigate('/provider')}}>
           <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/>
           <div>
-            <p>공급처</p>
+            <p>Click</p>
             <p>수주</p>
           </div>
         </div>

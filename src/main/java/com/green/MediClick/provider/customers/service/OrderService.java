@@ -13,10 +13,10 @@ public interface OrderService {
     void statusUpdate(int orderNum);
 
     //배송/수주테이블 '배송중'변경
-    void updateStatus(OrdersVO ordersVO);
+    void updateStatus(List<OrdersVO> ordersVO);
 
     //주문 상세 페이지
-    OrdersVO detail(int requestNum);
+    List<OrdersVO> detail(String orderDate);
 
     //해당 제품의 현재고량
     int currentStock(int productNum);

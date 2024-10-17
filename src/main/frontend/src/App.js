@@ -193,11 +193,9 @@ function App() {
             {/* 품목 / 입고 등록 */}
             {/* 주소 / 주문(수주) 입력 */}
             <Route path='orders' element={<Orders />}/>
-            <Route path='order_detail/:requestNum' element={<OrderDetail />}/>
+            <Route path='order_detail/:orderDate' element={<OrderDetail />}/>
             {/* 주소 / 수주 주문서 */}
             {/* 주소 / 공급받는 용도 납품서 */}
-            {/* 주소 / 수주(납품) 현황 */}
-            {/* 현황 / 월별 매출 현황 */}
             {/* 현황 / 현 재고 현황 */}
             <Route path='inventory' element={<Inventory/>}/>
             {/* 배달 현황 */}
