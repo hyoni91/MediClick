@@ -170,7 +170,7 @@ const Orders = () => {
                     <td>
                       <span 
                     onClick={()=>{
-                      navigate(`/provider/order_detail/${order.requestNum}`)
+                      navigate(`/provider/order_detail/${order.orderDate}`)
                       }}>{order.customerName}
                       </span>
                     </td>
@@ -227,7 +227,7 @@ const Orders = () => {
                             <td> 
                               <span 
                                 onClick={()=>{
-                                  navigate(`/provider/order_detail/${e.requestNum}`)
+                                  navigate(`/provider/order_detail/${e.orderDate}`)
                                   }}>{e.customerName}
                               </span>
                             </td>

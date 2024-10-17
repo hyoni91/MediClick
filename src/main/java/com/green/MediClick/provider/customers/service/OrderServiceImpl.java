@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,17 +32,39 @@ public class OrderServiceImpl implements OrderService {
 
     //배송/수주테이블 '배송중'변경
     @Override
-    public void updateStatus(OrdersVO ordersVO) {
-            sqlSession.insert("ordersMapper.deliInsert", ordersVO);
-            sqlSession.update("ordersMapper.updateOrders",ordersVO);
-            sqlSession.update("ordersMapper.outgoing", ordersVO);
+    public void updateStatus(List<OrdersVO> ordersVO) {
+//        List<OrdersVO> deliList=new ArrayList<>();
+        List<OrdersVO> updateList=new ArrayList<>();
+        List<OrdersVO> outList=new ArrayList<>();
+
+        for (OrdersVO or :ordersVO){
+            if (!"배송중".equals(or.getOrderStatus())){
+                updateList.add(or);
+            }
+            else if (or.getQuantity()!=0){
+                outList.add(or);
+            }
+//          else if (or.getCustomerAddr()!=null){
+//            deliList.add(or);}
+        }
+
+        Map<String,Object> params=new HashMap<>();
+        params.put("updateList",updateList);
+        params.put("outList",outList);
+//        params.put("deliList",deliList);
+
+        System.out.println(params);
+
+        sqlSession.update("ordersMapper.updateOrders",params);
+        sqlSession.update("ordersMapper.outgoing", params);
+//        sqlSession.insert("ordersMapper.deliInsert", params);
     }
 
     //상세페이지
     @Override
-    public OrdersVO detail(int requestNum) {
+    public List<OrdersVO> detail(String orderDate) {
 
-        return sqlSession.selectOne("ordersMapper.orderDetail", requestNum);
+        return sqlSession.selectList("ordersMapper.orderDetail", orderDate);
     }
 
 

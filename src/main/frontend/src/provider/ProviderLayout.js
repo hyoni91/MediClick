@@ -10,6 +10,7 @@ const ProviderLayout = () => {
   return (
     <div>
       <div className='layout-bar'>
+<<<<<<< HEAD
         <div 
           className='logoimg-div' 
           onClick={()=>{
@@ -22,6 +23,13 @@ const ProviderLayout = () => {
           <div className='provider-logo-div'>
             <p>그린의료용품</p>
             <p>수주 관리 프로그램</p>
+=======
+        <div className='logoimg-div' onClick={()=>{navigate('/provider')}}>
+          <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/>
+          <div>
+            <p>Click</p>
+            <p>수주</p>
+>>>>>>> yjh
           </div>
         </div>
 

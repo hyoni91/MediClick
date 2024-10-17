@@ -40,6 +40,7 @@
             OR C.CUSTOMER_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             )
         </if>
+        GROUP BY ORDER_DATE
         ORDER BY R.REQUEST_NUM DESC
     </select>
 
@@ -61,7 +62,7 @@
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
-        AND R.REQUEST_NUM = #{requestNum}
+        AND O.ORDER_DATE = #{orderDate}
     </select>
 
 
@@ -81,35 +82,42 @@
 
     <!-- 수주테이블 배송신청 누르면 '배송중'변경-->
     <update id="updateOrders">
-        UPDATE ORDERS
-        SET ORDER_STATUS = '배송중'
-        WHERE ORDER_NUM = #{orderNum}
+        <foreach collection="params.updateList" item="update" separator=",">
+            UPDATE ORDERS
+            SET ORDER_STATUS = '배송중'
+            WHERE ORDER_NUM = #{orderNum}
+        </foreach>
     </update>
 
     <!-- 수주 디테일에서 배송신청 누르면 deli테이블 insert-->
-    <insert id="deliInsert">
-        INSERT INTO delivery(
-        ORDER_NUM
-        ,DELIVERY_DRIVER_NAME
-        ,DELIVERY_DRIVER_PHONE
-        ,DELIVERY_ADDRESS
-        ,DELIVERY_STATUS
-        ) VALUES(
-        #{orderNum}
-        ,'김배달'
-        ,'010-1234-0000'
-        ,#{customerAddr}
-        ,'배송중'
-        )
-    </insert>
+<!--    <insert id="deliInsert">-->
+<!--        INSERT INTO delivery(-->
+<!--        ORDER_NUM-->
+<!--        ,DELIVERY_DRIVER_NAME-->
+<!--        ,DELIVERY_DRIVER_PHONE-->
+<!--        ,DELIVERY_ADDRESS-->
+<!--        ,DELIVERY_STATUS-->
+<!--        ) VALUES-->
+<!--        <foreach collection="params.deliList" item="delivery" separator=",">-->
+<!--            (-->
+<!--            #{orderNum}-->
+<!--            ,'김배달'-->
+<!--            ,'010-1234-0000'-->
+<!--            ,#{customerAddr}-->
+<!--            ,'배송중'-->
+<!--            )-->
+<!--        </foreach>-->
+<!--    </insert>-->
 
     <!--배송신청시 재고테이블 OUT-->
     <update id="outgoing">
-        UPDATE inventory
-        SET OUTGOING_QTY = #{quantity}
-        ,OUT_DATE = NOW()
-        ,CURRENT_STOCK = CURRENT_STOCK - #{quantity}
-        WHERE PRODUCT_NUM = #{productNum}
+        <foreach collection="params.outList" item="out" separator=",">
+            UPDATE inventory
+            SET OUTGOING_QTY = #{quantity}
+            ,OUT_DATE = NOW()
+            ,CURRENT_STOCK = CURRENT_STOCK - #{quantity}
+            WHERE PRODUCT_NUM = #{productNum}
+        </foreach>
     </update>
 
     <!--재고 입고 (아직 MVC없음 2024-10-08-->

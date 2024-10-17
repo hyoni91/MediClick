@@ -29,16 +29,17 @@ public class OrderController {
 
     //배송과 수주 현황 변경 '배송중' and 배송 insert
     @PostMapping("/deli-orders-statusUpdate")
-    public void deliOrdersUpdate(@RequestBody OrdersVO ordersVO){
+    public void deliOrdersUpdate(@RequestBody List<OrdersVO> ordersVO){
         System.out.println("========================================"+ordersVO);
             orderService.updateStatus(ordersVO);
 
     }
 
     //상세페이지
-    @GetMapping("/ordersDetail/{requestNum}")
-    public OrdersVO orderDertail(@PathVariable("requestNum")int requestNum){
-        return orderService.detail(requestNum);
+    @GetMapping("/ordersDetail/{orderDate}")
+    public List<OrdersVO> orderDetail(@PathVariable("orderDate")String orderDate){
+        System.out.println(orderDate);
+        return orderService.detail(orderDate);
     }
 
     //해당 제품의 현재고량
