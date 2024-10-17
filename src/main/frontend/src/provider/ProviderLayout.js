@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import './ProviderLayout.css'
 
 const ProviderLayout = () => {
   const navigate=useNavigate()
@@ -10,10 +11,10 @@ const ProviderLayout = () => {
     <div>
       <div className='layout-bar'>
         <div className='logoimg-div' onClick={()=>{navigate('/provider')}}>
-          <img className='logo' src='http://localhost:8080/images/66135a3db29c4ef5faa06efb.png'/>
+          <img className='logo' src='http://localhost:8080/images/providerlogo.png'/>
           <div>
-            <p>공급처</p>
-            <p>수주</p>
+            {/* <p>공급처</p> */}
+            {/* <p>수주</p> */}
           </div>
         </div>
 
@@ -34,7 +35,14 @@ const ProviderLayout = () => {
   
         </div>
       </div>
-      
+        <div className='provider-main-img'>
+          {/* 메인이미지 */}
+          <img src='http://localhost:8080/images/providermain.jpeg'/>
+          <div>
+            <p>고객과 함께</p>
+            <p>더 높이 날아오르겠습니다.</p>
+          </div>
+        </div>
       <Outlet/>
 
     </div>

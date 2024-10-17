@@ -112,7 +112,7 @@ const ManageCustomer = () => {
     if (
       inputCustomer.businessNumber == '' || 
       inputCustomer.customerAddr == '' ||
-      inputCustomer.customerEmail == '' ||
+      // inputCustomer.customerEmail == '' ||
       inputCustomer.customerOwner == '' ||
       inputCustomer.customerTel == ''
     ) {
