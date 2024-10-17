@@ -103,7 +103,9 @@ function App() {
                   loginInfo.memNum.includes('DOC')?
                   <li><span onClick={(e)=>{navigate(`/admin/docMemList/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
                   :
+                  loginInfo.memNum.includes('CTL')?
                   <li><span onClick={(e)=>{navigate(`/mySch/${loginInfo.memNum}`)}}>{loginInfo.memName}님</span></li>
+                  :<li><span onClick={(e)=>{navigate(`/provider/deliveryCheck`)}}>{loginInfo.memName}님</span></li>
                 }
                 
                 <li><span onClick={(e)=>{navigate(`/admin/doctorUpdate/${loginInfo.memNum}`)}}>정보수정하기</span></li>
