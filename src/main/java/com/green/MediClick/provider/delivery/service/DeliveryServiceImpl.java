@@ -28,4 +28,14 @@ public class DeliveryServiceImpl implements DeliveryService{
     public void insertDriver(MemberVO memberVO) {
         sqlSession.insert("deliveryMapper.insertDriver",memberVO);
     }
+
+    @Override
+    public void updateDriver(DeliveryVO deliveryVO) {
+        sqlSession.update("deliveryMapper.updateDriver",deliveryVO);
+    }
+
+    @Override
+    public void endDriver(int deliveryNum) {
+        sqlSession.update("deliveryMapper.endDriver",deliveryNum);
+    }
 }

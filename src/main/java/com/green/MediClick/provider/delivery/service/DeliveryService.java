@@ -13,4 +13,8 @@ public interface DeliveryService {
 
     //회원가입
     void insertDriver(MemberVO memberVO);
+
+    void updateDriver(DeliveryVO deliveryVO);
+
+    void endDriver(int deliveryNum);
 }

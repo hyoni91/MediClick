@@ -2,6 +2,7 @@ package com.green.MediClick.provider.customers.vo;
 
 import com.green.MediClick.orderitems.vo.OrderItemsVO;
 import com.green.MediClick.orderitems.vo.OrderRequestVO;
+import com.green.MediClick.provider.delivery.vo.DeliveryVO;
 import lombok.Data;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public class OrdersVO {
     private int quantity; //DATA넘기기위해
     private CustomersVO customer;
     private OrderRequestVO orderRequest;
+    private DeliveryVO delivery;
+
 }

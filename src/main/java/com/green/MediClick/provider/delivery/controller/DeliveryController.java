@@ -4,10 +4,7 @@ import com.green.MediClick.provider.customers.vo.OrdersVO;
 import com.green.MediClick.provider.delivery.service.DeliveryService;
 import com.green.MediClick.provider.delivery.vo.DeliveryVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,14 @@ public class DeliveryController {
     @GetMapping("/ordersList")
     public List<OrdersVO> ordersList(){
         return deliveryService.ordersList();
+    }
+
+    @PostMapping("/updateDriver")
+    public void updateDriver(@RequestBody DeliveryVO deliveryVO){
+        deliveryService.updateDriver(deliveryVO);
+    }
+    @PostMapping("/endDriver")
+    public void endDriver(@RequestBody DeliveryVO deliveryVO){
+        deliveryService.endDriver(deliveryVO.getDeliveryNum());
     }
 }
