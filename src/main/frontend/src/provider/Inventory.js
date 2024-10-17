@@ -46,7 +46,7 @@ const Inventory = () => {
         </thead>
         <tbody>
           {item.map(pro => {
-            const categoryName = category.find(cat => cat.cateNum === pro.cateNum)?.cateName || '알 수 없음';
+            const categoryName = category.find(cat => cat.cateNum === pro.cateNum)?.cateName || '없음';
             return (
                 <tr key={pro.productNum}>
                     <td>{categoryName}</td>
