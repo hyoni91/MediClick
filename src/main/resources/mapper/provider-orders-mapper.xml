@@ -87,17 +87,6 @@
             WHERE ORDER_NUM = #{orderNum}
     </update>
 
-<!--    &lt;!&ndash;배송신청시 재고테이블 OUT&ndash;&gt;-->
-<!--    <update id="outgoing">-->
-<!--        <foreach collection="list" item="out" separator=" ">-->
-<!--            UPDATE inventory-->
-<!--            SET OUTGOING_QTY = #{out.quantity}-->
-<!--            ,OUT_DATE = NOW()-->
-<!--            ,CURRENT_STOCK = CURRENT_STOCK - #{out.quantity}-->
-<!--            WHERE PRODUCT_NUM = #{out.productNum}-->
-<!--        </foreach>-->
-<!--    </update>-->
-
 
     <!-- 수주 디테일에서 배송신청 누르면 deli테이블 insert-->
 <!--    <insert id="deliInsert">-->
