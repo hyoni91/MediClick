@@ -9,6 +9,8 @@ const CheckStock = ({productNum, orderSatus}) => {
   // 배송대기 주문 재고합계
   const [sumQnt, setSumQnt] = useState(0)
 
+
+  //해당 제품의 현 재고량
   useEffect(()=>{
       axios.get(`/orders/CurrentStock/${productNum}`)
       .then((res)=>{
@@ -19,6 +21,8 @@ const CheckStock = ({productNum, orderSatus}) => {
       })
     },[productNum])
 
+
+  // 배송대기 상태의 제품의 수량 합계
   useEffect(()=>{
       axios.get(`/orders/sumQnt/${productNum}`)
     .then((res)=>{

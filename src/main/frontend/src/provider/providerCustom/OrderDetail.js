@@ -140,6 +140,7 @@ const OrderDetail = () => {
     })
   },[])
 
+  // 총 주문
   const totalPrice=()=>{
     let result=0
     orderDetail.forEach((o,i)=>{

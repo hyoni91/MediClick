@@ -75,7 +75,6 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-
     //상세페이지
     @Override
     public List<OrdersVO> detail(String orderDate) {
