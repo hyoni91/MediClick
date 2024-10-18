@@ -31,34 +31,50 @@ public class OrderServiceImpl implements OrderService {
 
 
     //배송/수주테이블 '배송중'변경
-    @Override
-    public void updateStatus(List<OrdersVO> ordersVO) {
-//        List<OrdersVO> deliList=new ArrayList<>();
-        List<OrdersVO> updateList=new ArrayList<>();
-        List<OrdersVO> outList=new ArrayList<>();
+//    @Override
+//    public void updateStatus(List<OrdersVO> ordersVO) {
+////        List<OrdersVO> deliList=new ArrayList<>();
+//        List<OrdersVO> updateList=new ArrayList<>();
+//        List<OrdersVO> outList=new ArrayList<>();
+//
+//        for (OrdersVO or :ordersVO){
+//            if (!"배송중".equals(or.getOrderStatus())){
+//                updateList.add(or);
+//            }
+//            else if (or.getQuantity()!=0){
+//                outList.add(or);
+//            }
+//        }
+//
+//        Map<String,Object> params=new HashMap<>();
+//        params.put("updateList",updateList);
+//        params.put("outList",outList);
+//
+//        System.out.println(params);
+//
+//        sqlSession.update("ordersMapper.updateOrders",params);
+//        sqlSession.update("ordersMapper.outgoing", params);
+//
+//    }
 
-        for (OrdersVO or :ordersVO){
-            if (!"배송중".equals(or.getOrderStatus())){
-                updateList.add(or);
-            }
-            else if (or.getQuantity()!=0){
-                outList.add(or);
-            }
-//          else if (or.getCustomerAddr()!=null){
-//            deliList.add(or);}
+    //수주테이블 배송신청 누르면 '배송중'변경
+    @Override
+    public void updateOrders(List<OrdersVO> ordersVO) {
+        for (OrdersVO orders:ordersVO){
+            sqlSession.update("ordersMapper.updateOrders",orders);
         }
 
-        Map<String,Object> params=new HashMap<>();
-        params.put("updateList",updateList);
-        params.put("outList",outList);
-//        params.put("deliList",deliList);
-
-        System.out.println(params);
-
-        sqlSession.update("ordersMapper.updateOrders",params);
-        sqlSession.update("ordersMapper.outgoing", params);
-//        sqlSession.insert("ordersMapper.deliInsert", params);
     }
+
+    //배송신청시 재고테이블 OUT
+    @Override
+    public void outgoing(List<OrdersVO> ordersVO) {
+        for (OrdersVO orders:ordersVO){
+            sqlSession.update("inventoryMapper.outgoing",orders);
+        }
+
+    }
+
 
     //상세페이지
     @Override

@@ -28,11 +28,24 @@ public class OrderController {
     }
 
     //배송과 수주 현황 변경 '배송중' and 배송 insert
-    @PostMapping("/deli-orders-statusUpdate")
-    public void deliOrdersUpdate(@RequestBody List<OrdersVO> ordersVO){
-        System.out.println("========================================"+ordersVO);
-            orderService.updateStatus(ordersVO);
+//    @PostMapping("/deli-orders-statusUpdate")
+//    public void deliOrdersUpdate(@RequestBody List<OrdersVO> ordersVO){
+//        System.out.println("========================================"+ordersVO);
+//            orderService.updateStatus(ordersVO);
+//
+//    }
 
+    //수주테이블 배송신청 누르면 '배송중'변경
+    @PostMapping("/updateOrders")
+    public void updateOrders(@RequestBody List<OrdersVO> ordersVO){
+        System.out.println("@!!!!!!!!!!!!!!!!"+ordersVO);
+        orderService.updateOrders(ordersVO);
+    }
+
+    //배송신청시 재고테이블 OUT
+    @PostMapping("/outgoing")
+    public void outgoing(@RequestBody List<OrdersVO> ordersVO){
+        orderService.outgoing(ordersVO);
     }
 
     //상세페이지
