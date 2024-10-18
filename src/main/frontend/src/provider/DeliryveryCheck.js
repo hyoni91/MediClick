@@ -59,10 +59,9 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     .then((response) => {
       console.log('배송 상태 업데이트 성공:');
       // 상태가 성공적으로 변경되면 주문 목록을 다시 갱신
-      setDriver({...driver,dataToSend})
       console.log(dataToSend)
       // setOrder();
-      
+      window.location.reload();
     })
     .catch((error) => {
       console.error('배송 상태 업데이트 실패:', error);
@@ -151,8 +150,6 @@ const DeliryveryCheck = ({setLoginInfo}) => {
                   )
                 })
               }
-              
-                
             </tbody>
           </table>
         </div>
