@@ -65,7 +65,6 @@ const Orders = () => {
 
   },[searchValue])
 
-
   
 
   function searchOrder(){
@@ -91,7 +90,16 @@ const Orders = () => {
     })
   }
 
-
+  // 총 주문 금액
+  const totalPrice=(orderDate)=>{
+    let result=0
+    orders.forEach((o,i)=>{
+      if(orderDate==o.orderDate){
+        result+=o.totalPrice
+      }
+    })
+    return result
+  }
 
   return (
     <div className='manage-contailner'>
@@ -175,7 +183,7 @@ const Orders = () => {
                       </span>
                     </td>
                     <td>{order.orderDate}</td>
-                    <td>{order.totalPrice.toLocaleString()}원</td>
+                    <td>{totalPrice(order.orderDate).toLocaleString()}원</td>
                     <td>
                       {
                       <>{order.orderStatus}</>
