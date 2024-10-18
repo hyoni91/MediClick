@@ -35,7 +35,18 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    public void sameUpdate(DeliveryVO deliveryVO) {
+        sqlSession.update("deliveryMapper.sameUpdate", deliveryVO);
+    }
+
+    @Override
     public void endDriver(int deliveryNum) {
         sqlSession.update("deliveryMapper.endDriver",deliveryNum);
     }
+
+    @Override
+    public void endSameUpdate(int deliveryNum) {
+        sqlSession.update("deliveryMapper.endSameUpdate", deliveryNum);
+    }
+
 }

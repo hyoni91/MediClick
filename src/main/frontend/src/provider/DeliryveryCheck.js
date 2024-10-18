@@ -1,10 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { set } from 'react-datepicker/dist/date_utils'
 
 const DeliryveryCheck = ({setLoginInfo}) => {
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
-  //배달기사
   const [driver, setDriver] =useState({
     deliveryNum : ''
     ,orderNum :''
@@ -26,8 +24,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     ])
     .then(axios.spread((res1,res2) => {
       setDriver(res1.data)
-    // driver.map(() => {})
-      console.log(res1.data)
+      //console.log(res1.data)
       console.log(res2.data)
       setOrder(res2.data)
       //setOrder(... res1.data,res2.data)
@@ -37,6 +34,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
       console.log(error)
     })
   },[])
+
   //선택
   const statusChange = (newStatus = '') => {
     if (oneCheck.length === 0) {
@@ -50,6 +48,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     deliveryDriverName: driver.deliveryDriverName,
     deliveryDriverPhone : driver.deliveryDriverPhone,
     deliveryStatus: newStatus,
+    orderStatus : newStatus,
     orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
     deliveryAddress: selectedOrder.customerAddr // 배송 주소
     
@@ -147,8 +146,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
                       <td>{item.delivery.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
                       <td>{item.delivery.deliveryStatus == '배송중' ? '배송중' : 
-                          item.orderStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
-                      <td>{item.orderStatus}</td>
+                          item.delivery.deliveryStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
                     </tr>
                   )
                 })

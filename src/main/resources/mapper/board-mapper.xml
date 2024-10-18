@@ -66,7 +66,7 @@
             ,TITLE
             ,DATE_FORMAT(CREATE_DATE,'%Y-%m-%d') AS CREATE_DATE
         FROM USER_BOARD
-        ORDER BY CREATE_DATE DESC
+        ORDER BY BOARD_NUM DESC
         LIMIT 5
     </select>
 
