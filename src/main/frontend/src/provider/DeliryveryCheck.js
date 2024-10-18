@@ -54,10 +54,6 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     deliveryAddress: selectedOrder.customerAddr // 배송 주소
     
   };
-  // order.forEach((item, e) => {
-  //   item.orderNum == dataToSend.orderNum ? setOrder({...order,[] :dataToSend.orderNum})
-  //   :setOrder(...order)
-  // }) 
   console.log(dataToSend)
   const url = (newStatus == '배송중') ? '/delivery/updateDriver' : '/delivery/endDriver'
     axios.post(url, dataToSend)
