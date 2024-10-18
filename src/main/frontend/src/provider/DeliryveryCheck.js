@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { set } from 'react-datepicker/dist/date_utils'
 
 const DeliryveryCheck = ({setLoginInfo}) => {
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
@@ -48,6 +49,10 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
     deliveryAddress: selectedOrder.customerAddr // 배송 주소
   };
+  // order.forEach((item, e) => {
+  //   item.orderNum == dataToSend.orderNum ? setOrder({...order,[] :dataToSend.orderNum})
+  //   :setOrder(...order)
+  // }) 
   console.log(dataToSend)
   const url = (newStatus == '배송중') ? '/delivery/updateDriver' : '/delivery/endDriver'
     axios.post(url, dataToSend)
