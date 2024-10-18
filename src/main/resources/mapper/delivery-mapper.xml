@@ -37,6 +37,8 @@
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
+        AND O.ORDER_NUM = D.ORDER_NUM
+
 
     </select>
 
@@ -55,10 +57,12 @@
             ,DELIVERY_STATUS = '배송중'
             ,DELIVERY_ADDRESS = #{deliveryAddress}
             ,DELIVERY_START_TIME = NOW()
+            ,DELIVERY_DRIVER_NAME = #{deliveryDriverName}
+            ,DELIVERY_DRIVER_PHONE = #{deliveryDriverPhone}
         where DELIVERY_NUM = #{deliveryNum};
     </update>
     <update id="endDriver">
-        UPDATE DELIVERY
+        UPDATE delivery
         SET
         DELIVERY_STATUS = '배송완료',
         DELIVERY_END_TIME = NOW()

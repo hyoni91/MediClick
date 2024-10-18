@@ -4,12 +4,14 @@ import com.green.MediClick.provider.customers.vo.OrdersVO;
 import com.green.MediClick.provider.delivery.service.DeliveryService;
 import com.green.MediClick.provider.delivery.vo.DeliveryVO;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/delivery")
+@Slf4j
 public class DeliveryController {
     @Resource(name = "deliveryService")
     DeliveryService deliveryService;
@@ -29,6 +31,8 @@ public class DeliveryController {
     }
     @PostMapping("/endDriver")
     public void endDriver(@RequestBody DeliveryVO deliveryVO){
+        log.info(deliveryVO+"////////////////");
+
         deliveryService.endDriver(deliveryVO.getDeliveryNum());
     }
 }
