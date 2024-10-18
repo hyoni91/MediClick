@@ -15,6 +15,9 @@ public interface DeliveryService {
     void insertDriver(MemberVO memberVO);
 
     void updateDriver(DeliveryVO deliveryVO);
+    void sameUpdate(DeliveryVO deliveryVO);
 
     void endDriver(int deliveryNum);
+    void endSameUpdate(int deliveryNum);
+
 }

@@ -1,10 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { set } from 'react-datepicker/dist/date_utils'
 
 const DeliryveryCheck = ({setLoginInfo}) => {
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
-  
   const [driver, setDriver] =useState({
     deliveryNum : ''
     ,orderNum :''
@@ -16,7 +14,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     ,deliveryStatus :''
     ,ordersVO :''
   })
-  console.log(driver)
+  //console.log(driver)
   const [order, setOrder] = useState([])
   useEffect(() => {
     axios.all([
@@ -25,8 +23,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     ])
     .then(axios.spread((res1,res2) => {
       setDriver(res1.data)
-    // driver.map(() => {})
-      console.log(res1.data)
+      //console.log(res1.data)
       console.log(res2.data)
       setOrder(res2.data)
 
@@ -35,6 +32,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
       console.log(error)
     })
   },[])
+
   //선택
   const statusChange = (newStatus = '배송중') => {
     if (oneCheck.length === 0) {
@@ -46,11 +44,13 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     deliveryNum : driver.deliveryNum,
     driverName: driver.deliveryDriverName,
     deliveryStatus: newStatus,
+    orderStatus : newStatus,
     orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
     deliveryAddress: selectedOrder.customerAddr // 배송 주소
   };
   // order.forEach((item, e) => {
-  //   item.orderNum == dataToSend.orderNum ? setOrder({...order,[] :dataToSend.orderNum})
+  //   item.orderNum == dataToSend.orderNum ?
+  //   setOrder({...order,delivery : {...dataToSend}})
   //   :setOrder(...order)
   // }) 
   console.log(dataToSend)
@@ -59,8 +59,14 @@ const DeliryveryCheck = ({setLoginInfo}) => {
     .then((response) => {
       console.log('배송 상태 업데이트 성공:', response.data);
       // 상태가 성공적으로 변경되면 주문 목록을 다시 갱신
-      setOrder(response.data);
-      console.log(response.data)
+      //setOrder(response.data);
+      for(let i = 0; i < order.length; i++){
+        if(order[i].orderNum == dataToSend.orderNum){
+          order[i].delivery = dataToSend
+        }
+        //console.log(order[i].delivery)
+      }
+      //setDriver(...driver)
     })
     .catch((error) => {
       console.error('배송 상태 업데이트 실패:', error);
@@ -125,6 +131,7 @@ const DeliryveryCheck = ({setLoginInfo}) => {
                 <td>기사번호</td>
                 <td colSpan={2}>배송상태</td>
                 <td></td>
+                <td>asdasd</td>
               </tr>
             </thead>
             <tbody>
@@ -142,8 +149,9 @@ const DeliryveryCheck = ({setLoginInfo}) => {
                       <td>{item.delivery.deliveryDriverName}</td>
                       <td>{item.delivery.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
-                      <td>{item.orderStatus == '배송중' ? '배송중' : 
-                          item.orderStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
+                      <td>{item.delivery.deliveryStatus == '배송중' ? '배송중' : 
+                          item.delivery.deliveryStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
+                      <td>{item.orderStatus}</td>
                     </tr>
                   )
                 })

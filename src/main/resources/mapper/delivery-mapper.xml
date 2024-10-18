@@ -32,12 +32,12 @@
         ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
         ,D.DELIVERY_DRIVER_NAME
         ,D.DELIVERY_DRIVER_PHONE
+        ,D.DELIVERY_STATUS
         FROM order_requests R, orders O , customers C, products P
         ,delivery D
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
-
     </select>
 
     <insert id="insertDriver">
@@ -52,17 +52,30 @@
     <update id="updateDriver">
         update delivery
         set ORDER_NUM = #{orderNum}
-            ,DELIVERY_STATUS = '배송중'
-            ,DELIVERY_ADDRESS = #{deliveryAddress}
-            ,DELIVERY_START_TIME = NOW()
+        ,DELIVERY_STATUS = '배송중'
+        ,DELIVERY_ADDRESS = #{deliveryAddress}
+        ,DELIVERY_START_TIME = NOW()
         where DELIVERY_NUM = #{deliveryNum};
     </update>
+    <update id="sameUpdate">
+        <!--orders 테이블의 ORDER_STATUS도 함께 '배송중'으로 업데이트-->
+        UPDATE orders O
+        JOIN delivery D ON O.ORDER_NUM = D.ORDER_NUM
+        SET O.ORDER_STATUS = '배송중'
+        WHERE D.DELIVERY_NUM = #{deliveryNum};
+    </update>
     <update id="endDriver">
-        UPDATE DELIVERY
-        SET
-        DELIVERY_STATUS = '배송완료',
-        DELIVERY_END_TIME = NOW()
-        WHERE DELIVERY_NUM = #{deliveryNum}
+        update delivery
+        set DELIVERY_STATUS = '배송완료'
+        ,DELIVERY_END_TIME = NOW()
+        where DELIVERY_NUM = #{deliveryNum};
+    </update>
+    <update id="endSameUpdate">
+        <!--orders 테이블의 ORDER_STATUS도 함께 '배송완료'로 업데이트-->
+        UPDATE orders O
+        JOIN delivery D ON O.ORDER_NUM = D.ORDER_NUM
+        SET O.ORDER_STATUS = '배송완료'
+        WHERE D.DELIVERY_NUM = #{deliveryNum};
     </update>
 </mapper>
 
