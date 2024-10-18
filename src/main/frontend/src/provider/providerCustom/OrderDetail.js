@@ -7,16 +7,10 @@ import { color } from 'chart.js/helpers'
 
 const OrderDetail = () => {
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const {requestNum} = useParams()
 
   const [isDisabled, setIsDisabled] = useState(false)
-
-  const [orderDetail, setOrderDetail] = useState({
-=======
   const {orderDate} = useParams()
   const [orderDetail, setOrderDetail] = useState([{
->>>>>>> yjh
     customerAddr:'',
     customerName:'',
     customer:{
@@ -133,43 +127,12 @@ const OrderDetail = () => {
     axios.get(`/orders/ordersDetail/${orderDate}`)
     .then((res)=>{
       console.log(res.data)
-<<<<<<< HEAD
-      const detail ={
-        customerAddr:res.data.customer.customerAddr,
-        customerOwner : res.data.customer.customerOwner,
-        customerTel : res.data.customer.customerTel,
-        customerName:res.data.customerName,
-        orderDate: res.data.orderDate,
-        orderNum:res.data.orderNum ,
-        quantity:res.data.orderRequest.quantity,   
-        productName : res.data.orderRequest.orderItemsVO.productName,
-        productPrice : res.data.orderRequest.orderItemsVO.productPrice,
-        productNum: res.data.orderRequest.orderItemsVO.productNum,
-        orderStatus:res.data.orderStatus
-      }
-      setOrderDetail(detail)
       if( res.data.orderStatus == '배송대기'){
         return setIsDisabled(false)
       }else{
         return setIsDisabled(true)
       }
-=======
-      // const detail ={
-      //   customerAddr:res.data.customer.customerAddr,
-      //   customerOwner : res.data.customer.customerOwner,
-      //   customerTel : res.data.customer.customerTel,
-      //   customerName:res.data.customerName,
-      //   orderDate: res.data.orderDate,
-      //   orderNum:res.data.orderNum ,
-      //   quantity:res.data.orderRequest.quantity,   
-      //   productName : res.data.orderRequest.orderItemsVO.productName,
-      //   productPrice : res.data.orderRequest.orderItemsVO.productPrice,
-      //   productNum: res.data.orderRequest.orderItemsVO.productNum,
-      //   orderStatus:res.data.orderStatus
-      // }
-      // setOrderDetail(detail)
       setOrderDetail(res.data)
->>>>>>> yjh
     })
     .catch((error)=>{
       alert('error!!')
@@ -279,19 +242,14 @@ const OrderDetail = () => {
           </button>
           <button 
             type='button' 
-<<<<<<< HEAD
             disabled={isDisabled}
-            onClick={()=>{changeStatus(orderDetail)}}>
+            onClick={()=>{orderNums(); changeStatus()}}>
               {
                 orderDetail.orderStatus == '배송대기'?
                 <>배송신청</>
                 :
                 <>{orderDetail.orderStatus}</>
               }
-=======
-            onClick={()=>{orderNums(); changeStatus()}}>
-              배송신청
->>>>>>> yjh
           </button>
         </div>
       </div>
