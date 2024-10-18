@@ -62,7 +62,7 @@ const ManageCustomer = () => {
       data: customerNum, // 삭제할 고객 ID 목록
   })
     .then((res)=>{
-  
+      fecthCustomers()
     })
     .catch((error)=>{
       alert('error!')
@@ -72,9 +72,7 @@ const ManageCustomer = () => {
 
   }
 
-  
-  //거래처 목록 
-  useEffect(()=>{
+  const fecthCustomers=()=>{
     axios.post(`/customer/customerList`, searchValue)
     .then((res)=>{
       setCustomers(res.data)
@@ -86,6 +84,12 @@ const ManageCustomer = () => {
       alert('error!')
       console.log(error)
     })
+  }
+
+  
+  //거래처 목록 
+  useEffect(()=>{
+    fecthCustomers()
   },[searchValue])
 
   //검색
@@ -129,6 +133,7 @@ const ManageCustomer = () => {
         customerOwner : '',
         customerTel : ''
       })
+      fecthCustomers()
     })
     .catch((error)=>{
       alert('error!')
@@ -174,6 +179,8 @@ const ManageCustomer = () => {
         }
     };
 
+  
+
   return (
     <div className='manage-contailner'>
       <div className='manage-main'>
@@ -203,10 +210,6 @@ const ManageCustomer = () => {
                 </span>
               </div>
           </div>
-          {/* <div className='manage-sales'>
-            <div>총 매출액</div>
-            <div>총 미수금</div>
-          </div> */}
         </div>
         <div className='manage-content'>
           <div className='content-btn'>

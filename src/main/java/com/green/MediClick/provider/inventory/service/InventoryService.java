@@ -7,4 +7,5 @@ import com.green.MediClick.provider.item.vo.ItemVO;
 import java.util.List;
 
 public interface InventoryService {
+    List<InventoryVO> inventoryList();
 }

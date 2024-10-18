@@ -13,4 +13,9 @@ import java.util.List;
 public class InventoryServiceImpl implements InventoryService{
     @Autowired
     SqlSession sqlSession;
+
+    @Override
+    public List<InventoryVO> inventoryList() {
+        return sqlSession.selectList("inventoryMapper.inventoryList");
+    }
 }
