@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './OrderDetail.css'
 import CheckStock from './CheckStock'
-import { color } from 'chart.js/helpers'
+import { color, retinaScale } from 'chart.js/helpers'
 
 const OrderDetail = () => {
   const navigate = useNavigate();
@@ -95,21 +95,17 @@ const OrderDetail = () => {
     console.log(checkData)
   }
 
-  console.log(orderDetail)
+  // console.log(orderDetail)
 
-  const disabledchk = ()=>{
-    if( orderDetail.orderStatus == '배송대기'){
-      return setIsDisabled(false)
-    }else{
-      return setIsDisabled(true)
-    }
-  }
 
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
   // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
   function changeStatus(){
     if(window.confirm('배송 신청을 진행하시겠습니까?')){
-      axios.post(`/orders/deli-orders-statusUpdate`, checkData)
+      axios.all([
+        axios.post(`/orders/updateOrders`, checkData),
+        axios.post(`/orders/outgoing`, checkData)
+      ])
       .then((res)=>{
         alert('배송 신청 완료!')
       })
@@ -126,13 +122,17 @@ const OrderDetail = () => {
   useEffect(()=>{
     axios.get(`/orders/ordersDetail/${orderDate}`)
     .then((res)=>{
-      console.log(res.data)
-      if( res.data.orderStatus == '배송대기'){
-        return setIsDisabled(false)
-      }else{
-        return setIsDisabled(true)
-      }
+      // console.log(res.data)
       setOrderDetail(res.data)
+
+      res.data.forEach((r,i)=>{
+        if( r.orderStatus == '배송대기'){
+          return setIsDisabled(false)
+        }else{
+          return setIsDisabled(true)
+        }
+      })
+
     })
     .catch((error)=>{
       alert('error!!')
@@ -149,6 +149,9 @@ const OrderDetail = () => {
     })
     return result
   }
+
+
+  const pendingDelivery=orderDetail.some(o=>o.orderStatus=='배송대기')
 
 
   return (
@@ -245,10 +248,10 @@ const OrderDetail = () => {
             disabled={isDisabled}
             onClick={()=>{orderNums(); changeStatus()}}>
               {
-                orderDetail.orderStatus == '배송대기'?
-                <>배송신청</>
+                pendingDelivery ? 
+                <div>배송신청</div>
                 :
-                <>{orderDetail.orderStatus}</>
+                <div>신청 완료</div>
               }
           </button>
         </div>
