@@ -1,8 +1,23 @@
+
+.inventory-wrap{
+  width: 85vw;
+  height: 80vh;
+  margin: auto;
+
+}
+.inventory-wrap h3{
+  width: 1430px;
+  margin: auto;
+  text-align: left;
+  margin-top: 50px;
+}
+
 .inventoryTable td{
   border: 1px solid;
   padding: 10px;
 }
 .inventoryTable{
+  width: 1430px;
   margin: 0 auto;
   margin-top: 100px;
   text-align: center;
