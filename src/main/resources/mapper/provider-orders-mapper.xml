@@ -154,6 +154,7 @@
         AND o.ORDER_STATUS = '배송대기'
     </select>
 
+
 </mapper>
 
 
