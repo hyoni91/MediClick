@@ -129,7 +129,7 @@ MediClick은 암센터 웹 사이트를 구현한 프로젝트입니다.<br/>
 4. 과거 예약 자동 삭제
 
 <h3>의료용 관리기기 온도 모니터링 시스템</h4>
-<img width=650px src='https://github.com/user-attachments/assets/c984130f-d8ba-403b-bb88-0d4332c7e0ad'>
+<img width=650px src='https://github.com/user-attachments/assets/87a94024-bee5-45d8-862c-d43bd0c8442f'>
 
 
 1. 실시간 온도 측정
