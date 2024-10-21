@@ -12,6 +12,7 @@
         <result column="DELIVERY_START_TIME" property="startTime"/>
         <result column="DELIVERY_END_TIME" property="endTime"/>
         <result column="DELIVERY_STATUS" property="deliveryStatus"/>
+        <collection property="orderList" resultMap="ordersMapper.orders"/>
     </resultMap>
 
     <select id="deliveryList" resultMap="delivery">
@@ -19,7 +20,7 @@
         WHERE DELIVERY_DRIVER_NAME = #{deliveryDriverName}
     </select>
 
-    <select id="ordersList" resultMap="ordersMapper.orders">
+    <select id="ordersList" resultMap="deliveryMapper.delivery">
         SELECT
         P.PRODUCT_NAME
         ,O.ORDER_NUM
@@ -33,11 +34,13 @@
         ,D.DELIVERY_DRIVER_NAME
         ,D.DELIVERY_DRIVER_PHONE
         ,D.DELIVERY_STATUS
+        ,D.DELIVERY_NUM
         FROM order_requests R, orders O , customers C, products P
         ,delivery D
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
+
     </select>
 
     <insert id="insertDriver">

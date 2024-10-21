@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const DeliryveryCheck = ({setLoginInfo}) => {
+const DeliryveryCheck = () => {
+  //로그인 정보
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
+  //배달기사 정보
   const [driver, setDriver] =useState({
     deliveryNum : ''
     ,orderNum :''
@@ -19,7 +21,9 @@ const DeliryveryCheck = ({setLoginInfo}) => {
   const [order, setOrder] = useState([])
   useEffect(() => {
     axios.all([
+      //배달기사
       axios.get(`/delivery/deliveryList/${driver.deliveryDriverName}`),
+      //주문정보
       axios.get('/delivery/ordersList')
     ])
     .then(axios.spread((res1,res2) => {
@@ -72,8 +76,8 @@ const DeliryveryCheck = ({setLoginInfo}) => {
 
   //체크변경
   const changeCheck = (deliveryNum, checked) => {
-    setOneCheck((prevOneCheck) => 
-      checked ? [...prevOneCheck, deliveryNum] : prevOneCheck.filter((num) => num !== deliveryNum)
+    setOneCheck((e) => 
+      checked ? [...e, deliveryNum] : e.filter((num) => num !== deliveryNum)
     );
     console.log(order)
   };
@@ -135,17 +139,18 @@ const DeliryveryCheck = ({setLoginInfo}) => {
                   return(
                     <tr key={i}>
                       <td>
-                        <input type='checkbox' value={item.orderNum} onChange={(e) => changeCheck(item.orderNum, e.target.checked) }/>
+                        <input type='checkbox' value={item.orderNum} onChange={(e) => {
+                          changeCheck(item.orderNum, e.target.checked)} }/>
                       </td>
                       <td>{i+1}</td>
-                      <td>{item.orderRequest.orderItemsVO.productName}</td>
-                      <td>{item.customerAddr}</td>
-                      <td>{item.totalPrice}</td>
-                      <td>{item.delivery.deliveryDriverName}</td>
-                      <td>{item.delivery.deliveryDriverPhone}</td>
+                      <td>{item.orderList[i]?.orderRequest.orderItemsVO.productName}</td>
+                      <td>{item.orderList[i]?.customer.customerAddr}({item.customerName})</td>
+                      <td>{item.orderList[i]?.totalPrice}</td>
+                      <td>{item.deliveryDriverName}</td>
+                      <td>{item.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
-                      <td>{item.delivery.deliveryStatus == '배송중' ? '배송중' : 
-                          item.delivery.deliveryStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
+                      <td>{item.deliveryStatus == '배송중' ? '배송중' : 
+                          item.deliveryStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
                     </tr>
                   )
                 })

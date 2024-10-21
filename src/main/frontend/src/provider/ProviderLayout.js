@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './ProviderLayout.css'
 
 const ProviderLayout = () => {
+  const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   const navigate=useNavigate()
   //사이드 메뉴 정보를 관리하는 state변수
   const [sideMenu,setSideMenu]=useState('')
 
+  const pageDowing = () => {
+    if (loginData && (loginData.memRole == 'DRIVER' || loginData.memRole == 'ADMIN')) {
+      navigate('/provider/deliveryCheck');
+    } else {
+      alert('로그인해주세요');
+      navigate('/provider/main');
+    }
+  }
   return (
     <div>
       <div className='layout-bar'>
@@ -38,7 +47,9 @@ const ProviderLayout = () => {
             <li><span onClick={()=>{navigate('/provider/inventory')}}>현황</span></li>
             {/* 월별 매출현황,현 재고현황 */}
             {/* 배송 */}
-            <li><span onClick={() => {navigate('/provider/deliveryCheck')}}>배송</span></li>
+            <li><span onClick={() => {
+              pageDowing()
+              }}>배송</span></li>
           </ul>
   
         </div>
