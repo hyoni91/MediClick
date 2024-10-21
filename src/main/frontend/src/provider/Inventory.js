@@ -29,7 +29,6 @@ const Inventory = () => {
   // })
   return (
     <div>
-      <h1>현 재고 현황</h1>
       <table className='inventoryTable'>
         <thead>
           <tr>
@@ -45,23 +44,26 @@ const Inventory = () => {
           </tr>
         </thead>
         <tbody>
-          {item.map(pro => {
-            const categoryName = category.find(cat => cat.cateNum === pro.cateNum)?.cateName || '없음';
-            return (
-                <tr key={pro.productNum}>
-                    <td>{categoryName}</td>
-                    <td>{pro.productNum}</td>
-                    <td>{pro.productName}</td>
-                    <td>{pro.stockDate}</td>
-                    <td></td> {/* 출고일자 여기에 */}
-                    <td>{pro.stock}</td>
-                    <td></td> {/* 입고수량 여기에 */}
-                    <td></td> {/* 출고수량 여기에 */}
-                    <td></td> {/* 현 재고량 여기에 */}
-                </tr>
-              );
-          })}
-        </tbody>
+        {item
+        .sort((a, b) => a.productNum - b.productNum) // 제품번호를 기준으로 정렬
+        .map(pro => {
+          const categoryName = category.find(cat => cat.cateNum === pro.cateNum)?.cateName || '없음';
+          return (
+            <tr key={pro.productNum}>
+              <td>{categoryName}</td>
+              <td>{pro.productNum}</td>
+              <td>{pro.productName}</td>
+              <td>{pro.stockDate}</td>
+              <td></td> {/* 출고일자 */}
+              <td>{pro.stock}</td>
+              <td></td> {/* 입고수량 */}
+              <td></td> {/* 출고수량 */}
+              <td></td> {/* 현 재고량 */}
+            </tr>
+          );
+        })}
+</tbody>
+
       </table>
     </div>
   )
