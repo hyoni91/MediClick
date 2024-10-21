@@ -36,7 +36,7 @@ const MedicalSupplies = () => {
     productNum : '',
     productName : '',
     cateNum : '',
-    productPrice : '',
+    productPrice : 0,
     stock : '',
     detail : ''
   })
@@ -339,7 +339,7 @@ console.log(cateNum)
               <td>종류</td>
               <td>상품명</td>
               <td>가격</td>
-              <td>수량</td>
+              {/* <td>수량</td> */}
               <td>상품설명</td>
             </tr>
           </thead>
@@ -356,8 +356,8 @@ console.log(cateNum)
                     </div>
                     <div className="img-div">{item.productName}</div>
                   </td>
-                  <td>{item.productPrice}</td>
-                  <td>{item.stock}</td>
+                  <td>{item.productPrice.toLocaleString()}원</td>
+                  {/* <td>{item.stock}</td> */}
                   <td>{item.detail}</td>
                 </tr>
               )}))
