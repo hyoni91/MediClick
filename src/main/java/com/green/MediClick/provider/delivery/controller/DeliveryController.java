@@ -18,10 +18,12 @@ public class DeliveryController {
 
     @GetMapping("/deliveryList/{deliveryDriverName}")
     public DeliveryVO deliveryList(@PathVariable("deliveryDriverName") String deliveryDriverName){
+
         return deliveryService.deliveryList(deliveryDriverName);
     }
     @GetMapping("/ordersList")
     public List<OrdersVO> ordersList(){
+        log.info("///////////////////////////"+deliveryService.ordersList().toString());
         return deliveryService.ordersList();
     }
 

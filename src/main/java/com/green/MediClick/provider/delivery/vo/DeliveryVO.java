@@ -15,6 +15,6 @@ public class DeliveryVO {
     private String startTime;
     private String endTime;
     private String deliveryStatus;
-    private OrdersVO ordersVO;
+    private List<OrdersVO> orderList;
 
 }

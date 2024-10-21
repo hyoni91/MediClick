@@ -20,6 +20,5 @@ public class OrdersVO {
     private int quantity; //DATA넘기기위해
     private CustomersVO customer;
     private OrderRequestVO orderRequest;
-    private DeliveryVO delivery;
 
 }
