@@ -60,18 +60,22 @@ public class OrderServiceImpl implements OrderService {
     //수주테이블 배송신청 누르면 '배송중'변경
     @Override
     public void updateOrders(List<OrdersVO> ordersVO) {
-        for (OrdersVO orders:ordersVO){
-            sqlSession.update("ordersMapper.updateOrders",orders);
-        }
+        sqlSession.update("ordersMapper.updateOrders",ordersVO);
+
+//        for (OrdersVO orders:ordersVO){
+//            sqlSession.update("ordersMapper.updateOrders",orders);
+//        }
 
     }
 
     //배송신청시 재고테이블 OUT
     @Override
     public void outgoing(List<OrdersVO> ordersVO) {
-        for (OrdersVO orders:ordersVO){
-            sqlSession.update("inventoryMapper.outgoing",orders);
-        }
+        sqlSession.update("inventoryMapper.outgoing",ordersVO);
+
+//        for (OrdersVO orders:ordersVO){
+//            sqlSession.update("inventoryMapper.outgoing",orders);
+//        }
 
     }
 
@@ -80,6 +84,23 @@ public class OrderServiceImpl implements OrderService {
     public List<OrdersVO> detail(String orderDate) {
 
         return sqlSession.selectList("ordersMapper.orderDetail", orderDate);
+    }
+
+    // orderDate값 뽑으려고
+    @Override
+    public List<OrdersVO> detailOrderDate(SearchVO searchVO) {
+        // 먼저 orders 메서드를 호출하여 orderDate 목록을 가져오기
+        List<OrdersVO> orderList=orders(searchVO);
+
+        List<OrdersVO> orderDetails= new ArrayList<>();
+
+        for (OrdersVO order:orderList){
+            // 각 주문의 orderDate로 detail 메서드를 호출하여 세부 정보 가져오기
+            List<OrdersVO> details=detail(order.getOrderDate());
+            orderDetails.addAll(details); // 세부 정보를 리스트에 추가
+        }
+
+        return orderDetails;
     }
 
 

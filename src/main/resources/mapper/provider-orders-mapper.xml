@@ -91,6 +91,7 @@
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
         AND O.ORDER_DATE = #{orderDate}
+        ORDER BY FIELD(ORDER_STATUS, '배송대기' ) DESC
     </select>
 
 
@@ -110,10 +111,14 @@
 
     <!-- 수주테이블 배송신청 누르면 '배송중'변경-->
     <update id="updateOrders">
+        <foreach collection="list" item="update" close=";" separator=";">
             UPDATE ORDERS
             SET ORDER_STATUS = '배송중'
-            WHERE ORDER_NUM = #{orderNum}
+            WHERE ORDER_NUM = #{update.orderNum}
+        </foreach>
     </update>
+
+
 
 
     <!-- 수주 디테일에서 배송신청 누르면 deli테이블 insert-->
