@@ -10,7 +10,6 @@ const Inventory = () => {
 
   const [list,setList] = useState([])
 
-  //재고 
   useEffect(()=>{
     axios.get('/inventory/list')
     .then((res)=>{
@@ -23,32 +22,29 @@ const Inventory = () => {
   },[])
 
 
-  useEffect(() => {
-    axios.all([
-      axios.get('/item/cateList'),
-      axios.get('/item/inventoriesList')
-    ])
-    .then(axios.spread((res1,res2) => {
-      // console.log(res1.data)
-      console.log(res2.data)
-      //카테고리
-      setCategory(res1.data)
-      //조회된 상품 목록 및 페이지 정보 세팅
-      // setItem(res2.data)
-      // console.log(res2.data)
-    }))
-    .catch((error) => {console.log(error)})
-  },[]);
-
-  const [resultList, setResultList] = useState({
-    items : [],
-    pageInfo : {}
-  })
-
-
+  // useEffect(() => {
+  //   axios.all([
+  //     axios.get('/item/cateList'),
+  //     axios.get('/item/inventoriesList')
+  //   ])
+  //   .then(axios.spread((res1,res2) => {
+  //     // console.log(res1.data)
+  //     console.log(res2.data)
+  //     //카테고리
+  //     setCategory(res1.data)
+  //     //조회된 상품 목록 및 페이지 정보 세팅
+  //     setItem(res2.data)
+  //     console.log(res2.data)
+  //   }))
+  //   .catch((error) => {console.log(error)})
+  // },[]);
+  // const [resultList, setResultList] = useState({
+  //   items : [],
+  //   pageInfo : {}
+  // })
   return (
-    <div className='inventory-wrap'>
-      <h3>현 재고 현황</h3>
+    <div>
+      <h1>현 재고 현황</h1>
       <table className='inventoryTable'>
         <thead>
           <tr>
