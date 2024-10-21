@@ -118,7 +118,8 @@ MediClick은 암센터 웹 사이트를 구현한 프로젝트입니다.<br/>
 
 <h2>🧐 프로젝트 수행 결과</h2>
 <h3>병원 실시간 진료 예약 기능 구현</h4>
-
+<img width=650px src='https://github.com/user-attachments/assets/a4d75cb9-bf16-460e-b834-6d02511b8724'>
+    
 1. 환자/의료진 회원가입 및 로그인 기능
 
 2. 실시간 예약 기능
