@@ -52,7 +52,7 @@ MediClick은 암센터 웹 사이트를 구현한 프로젝트입니다.<br/>
 
 <h2>👻팀원 소개</h2>
 
-|KHK|YJH|SES|MJH|
+|[KHK](https://github.com/hyoni91)|[YJH](https://github.com/penguinnhi)|[SES](https://github.com/hotmnil5)|[MJH](https://github.com/ajw29k)|
 |---|---|---|---|
 |실시간 예약 기능|로그인 및 예약 상세페이지|환자 게시판|회원가입|
 |대시보드 설계|라즈베리파이|카카오 api 길찾기 기능|Reactchart 차트 구현|
