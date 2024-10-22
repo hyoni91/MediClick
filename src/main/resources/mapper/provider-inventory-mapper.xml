@@ -38,7 +38,6 @@
                 )
         </insert>
 
-
         <!-- 해당 제품의 현재고량 -->
         <select id="currentStock" resultType="int">
                 SELECT IFNULL(current_stock,0)
