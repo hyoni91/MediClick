@@ -248,8 +248,13 @@ const Orders = () => {
                             
                             const stock=stocks[o.productNum] // 현재 재고 가져오기
 
+                            const totalQuantity=o.quantity
+
+                            console.log(stock)
+
+
                             // 현재재고보다 주문 수량이 많으면
-                            if (stock!=undefined && 20>stock){
+                            if (stock!=undefined && o.quantity > stock){
                               return <span className='check-stock'>
                                 <i className="fa-solid fa-circle-exclamation" /></span>
                             }
