@@ -110,11 +110,9 @@
 
     <!-- 수주테이블 배송신청 누르면 '배송중'변경-->
     <update id="updateOrders">
-        <foreach collection="list" item="update" close=";" separator=";">
-            UPDATE ORDERS
-            SET ORDER_STATUS = '배송중'
-            WHERE ORDER_NUM = #{update.orderNum}
-        </foreach>
+        UPDATE ORDERS
+        SET ORDER_STATUS = '배송중'
+        WHERE ORDER_NUM = #{orderNum}
     </update>
 
 

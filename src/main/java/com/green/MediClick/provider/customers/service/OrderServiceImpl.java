@@ -60,22 +60,22 @@ public class OrderServiceImpl implements OrderService {
     //수주테이블 배송신청 누르면 '배송중'변경
     @Override
     public void updateOrders(List<OrdersVO> ordersVO) {
-        sqlSession.update("ordersMapper.updateOrders",ordersVO);
+//        sqlSession.update("ordersMapper.updateOrders",ordersVO);
 
-//        for (OrdersVO orders:ordersVO){
-//            sqlSession.update("ordersMapper.updateOrders",orders);
-//        }
+        for (OrdersVO orders:ordersVO){
+            sqlSession.update("ordersMapper.updateOrders",orders);
+        }
 
     }
 
     //배송신청시 재고테이블 OUT
     @Override
     public void outgoing(List<OrdersVO> ordersVO) {
-        sqlSession.update("inventoryMapper.outgoing",ordersVO);
+//        sqlSession.update("inventoryMapper.outgoing",ordersVO);
 
-//        for (OrdersVO orders:ordersVO){
-//            sqlSession.update("inventoryMapper.outgoing",orders);
-//        }
+        for (OrdersVO orders:ordersVO){
+            sqlSession.update("inventoryMapper.outgoing",orders);
+        }
 
     }
 
