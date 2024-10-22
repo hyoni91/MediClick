@@ -29,8 +29,16 @@ public class DeliveryController {
 
     @PostMapping("/updateDriver")
     public void updateDriver(@RequestBody DeliveryVO deliveryVO){
-        deliveryService.updateDriver(deliveryVO);
-        deliveryService.sameUpdate(deliveryVO);
+        int deli = deliveryService.selectOrderNum(deliveryVO.getDeliveryNum());
+        if(deli == deliveryVO.getDeliveryNum()) {
+            deliveryService.updateDriver(deliveryVO);
+            deliveryService.sameUpdate(deliveryVO);
+        }
+        else {
+            deliveryService.insertDd(deliveryVO);
+            deliveryService.sameUpdate(deliveryVO);
+        }
+        log.info(deliveryVO+"////////////////");
     }
     @PostMapping("/endDriver")
     public void endDriver(@RequestBody DeliveryVO deliveryVO){

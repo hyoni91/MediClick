@@ -8,13 +8,8 @@ import java.util.List;
 @Data
 public class DeliveryVO {
     private int deliveryNum;
-    private int orderNum;
     private String deliveryDriverName;
     private String deliveryDriverPhone;
-    private String deliveryAddress;
-    private String startTime;
-    private String endTime;
     private String deliveryStatus;
-    private List<OrdersVO> orderList;
 
 }

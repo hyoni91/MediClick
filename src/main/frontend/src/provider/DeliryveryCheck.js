@@ -7,7 +7,6 @@ const DeliryveryCheck = () => {
   //배달기사 정보
   const [driver, setDriver] =useState({
     deliveryNum : ''
-    ,orderNum :''
     ,deliveryDriverName : loginData?loginData.memName : ''
     ,deliveryDriverPhone : ''
     ,deliveryAddress :''
@@ -31,14 +30,29 @@ const DeliryveryCheck = () => {
       //console.log(res1.data)
       console.log(res2.data)
       setOrder(res2.data)
+      driverIs()
       //setOrder(... res1.data,res2.data)
 
     }))
     .catch((error) => {
       console.log(error)
     })
-  },[])
-
+  },[driver.deliveryDriverName])
+  const driverIs = () => {
+    setOrder(prevOrders => 
+      prevOrders.map(item => {
+        // driver.orderNum과 item.orderNum이 일치할 때 값을 업데이트
+        if (item.orderNum === driver.orderNum) {
+          return {
+            ...item,  // 기존의 order 항목을 복사
+            deliveryDriverName: driver.deliveryDriverName,  // 새로운 값 추가
+            deliveryDriverPhone: driver.deliveryDriverPhone // 새로운 값 추가
+          };
+        }
+        return item; // 조건을 만족하지 않는 경우 기존 item 반환
+      })
+    );
+  };
   //선택
   const statusChange = (newStatus = '') => {
     if (oneCheck.length === 0) {
@@ -54,7 +68,6 @@ const DeliryveryCheck = () => {
     deliveryStatus: newStatus,
     orderStatus : newStatus,
     orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
-    deliveryAddress: selectedOrder.customerAddr // 배송 주소
     
   };
   console.log(dataToSend)
@@ -65,7 +78,8 @@ const DeliryveryCheck = () => {
       // 상태가 성공적으로 변경되면 주문 목록을 다시 갱신
       console.log(dataToSend)
       // setOrder();
-      window.location.reload();
+      driverIs()
+      // window.location.reload();
     })
     .catch((error) => {
       console.error('배송 상태 업데이트 실패:', error);
@@ -77,7 +91,7 @@ const DeliryveryCheck = () => {
   //체크변경
   const changeCheck = (deliveryNum, checked) => {
     setOneCheck((e) => 
-      checked ? [...e, deliveryNum] : e.filter((num) => num !== deliveryNum)
+      checked ? [...e, deliveryNum] : e.filter((num) => num != deliveryNum)
     );
     console.log(order)
   };
@@ -134,23 +148,24 @@ const DeliryveryCheck = () => {
               </tr>
             </thead>
             <tbody>
-              {order && order.length == 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
+              {order && order.length === 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
                 order.map((item ,i) => {
                   return(
                     <tr key={i}>
                       <td>
                         <input type='checkbox' value={item.orderNum} onChange={(e) => {
+                          console.log(item.orderNum)
                           changeCheck(item.orderNum, e.target.checked)} }/>
                       </td>
                       <td>{i+1}</td>
-                      <td>{item.orderList[i]?.orderRequest.orderItemsVO.productName}</td>
-                      <td>{item.orderList[i]?.customer.customerAddr}({item.customerName})</td>
-                      <td>{item.orderList[i]?.totalPrice}</td>
+                      <td>{item.orderRequest.orderItemsVO.productName}</td>
+                      <td>{item.customerAddr}({item.customerName})</td>
+                      <td>{item.totalPrice}</td>
                       <td>{item.deliveryDriverName}</td>
                       <td>{item.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
-                      <td>{item.deliveryStatus == '배송중' ? '배송중' : 
-                          item.deliveryStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
+                      <td>{item.orderStatus == '배송중' ? '배송중' : 
+                          item.orderStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
                     </tr>
                   )
                 })

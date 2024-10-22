@@ -5,14 +5,9 @@
 <mapper namespace="deliveryMapper">
     <resultMap id="delivery" type="com.green.MediClick.provider.delivery.vo.DeliveryVO">
         <id column="DELIVERY_NUM" property="deliveryNum"/>
-        <result column="ORDER_NUM" property="orderNum"/>
         <result column="DELIVERY_DRIVER_NAME" property="deliveryDriverName"/>
         <result column="DELIVERY_DRIVER_PHONE" property="deliveryDriverPhone"/>
-        <result column="DELIVERY_ADDRESS" property="deliveryAddress"/>
-        <result column="DELIVERY_START_TIME" property="startTime"/>
-        <result column="DELIVERY_END_TIME" property="endTime"/>
         <result column="DELIVERY_STATUS" property="deliveryStatus"/>
-        <collection property="orderList" resultMap="ordersMapper.orders"/>
     </resultMap>
 
     <select id="deliveryList" resultMap="delivery">
@@ -20,26 +15,32 @@
         WHERE DELIVERY_DRIVER_NAME = #{deliveryDriverName}
     </select>
 
-    <select id="ordersList" resultMap="delivery">
+    <select id="ordersList" resultMap="ordersMapper.orders">
         SELECT
-        P.PRODUCT_NAME
-        ,O.ORDER_NUM
-        ,O.REQUEST_NUM
-        ,O.ORDER_DATE
-        ,O.ORDER_STATUS
-        ,C.CUSTOMER_NUM
-        ,C.CUSTOMER_NAME
-        ,C.CUSTOMER_ADDR
-        ,(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
-        ,D.DELIVERY_DRIVER_NAME
-        ,D.DELIVERY_DRIVER_PHONE
-        ,D.DELIVERY_STATUS
-        ,D.DELIVERY_NUM
-        FROM order_requests R, orders O , customers C, products P
-        ,delivery D
-        WHERE O.REQUEST_NUM = R.REQUEST_NUM
-        AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
-        AND R.PRODUCT_NUM = P.PRODUCT_NUM
+        P.PRODUCT_NAME,
+        O.ORDER_NUM,
+        O.REQUEST_NUM,
+        O.ORDER_DATE,
+        O.ORDER_STATUS,
+        C.CUSTOMER_NUM,
+        C.CUSTOMER_NAME,
+        C.CUSTOMER_ADDR,
+        D.DELIVERY_NUM,
+        IFNULL(D.DELIVERY_DRIVER_NAME,'-'),
+        IFNULL(D.DELIVERY_DRIVER_PHONE,'-'),
+        (R.QUANTITY * P.PRODUCT_PRICE) AS TOTALPRICE
+        FROM
+        orders O
+        JOIN
+        order_requests R ON O.REQUEST_NUM = R.REQUEST_NUM
+        JOIN
+        customers C ON R.CUSTOMER_NUM = C.CUSTOMER_NUM
+        JOIN
+        products P ON R.PRODUCT_NUM = P.PRODUCT_NUM
+        LEFT JOIN
+        delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
+        WHERE
+        O.REQUEST_NUM = R.REQUEST_NUM
     </select>
 
     <insert id="insertDriver">
@@ -51,11 +52,23 @@
         ,#{memTel}
         )
     </insert>
+    <insert id="insertDd">
+        INSERT INTO DELIVERY (
+            DELIVERY_STATUS
+            ,DELIVERY_START_TIME
+            ,DELIVERY_DRIVER_NAME
+            ,DELIVERY_DRIVER_PHONE
+        ) VALUES(
+            '배송중'
+            ,NOW()
+            ,#{deliveryDriverName}
+            ,#{deliveryDriverPhone}
+        )
+
+    </insert>
     <update id="updateDriver">
         update delivery
-        set ORDER_NUM = #{orderNum}
-            ,DELIVERY_STATUS = '배송중'
-            ,DELIVERY_ADDRESS = #{deliveryAddress}
+        set DELIVERY_STATUS = '배송중'
             ,DELIVERY_START_TIME = NOW()
             ,DELIVERY_DRIVER_NAME = #{deliveryDriverName}
             ,DELIVERY_DRIVER_PHONE = #{deliveryDriverPhone}
@@ -64,7 +77,7 @@
     <update id="sameUpdate">
         <!--orders 테이블의 ORDER_STATUS도 함께 '배송중'으로 업데이트-->
         UPDATE orders O
-        JOIN delivery D ON O.ORDER_NUM = D.ORDER_NUM
+        JOIN delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
         SET O.ORDER_STATUS = '배송중'
         WHERE D.DELIVERY_NUM = #{deliveryNum};
     </update>
@@ -78,10 +91,16 @@
     <update id="endSameUpdate">
         <!--orders 테이블의 ORDER_STATUS도 함께 '배송완료'로 업데이트-->
         UPDATE orders O
-        JOIN delivery D ON O.ORDER_NUM = D.ORDER_NUM
+        JOIN delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
         SET O.ORDER_STATUS = '배송완료'
         WHERE D.DELIVERY_NUM = #{deliveryNum};
     </update>
+
+    <select id="orderNum" resultType="int">
+        SELECT * FROM delivery WHERE DELIVERY_NUM = #{DELIVERY_NUM}
+    </select>
+
+
 </mapper>
 
 
