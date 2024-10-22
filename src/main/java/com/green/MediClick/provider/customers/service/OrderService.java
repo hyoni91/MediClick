@@ -29,9 +29,9 @@ public interface OrderService {
     List<OrdersVO> detailOrderDate(SearchVO searchVO);
 
     //해당 제품의 현재고량
-    int currentStock(int productNum);
+    List<Integer> currentStock(int productNum);
 
     //배송대기 상태의 제품 수량 합계
-    int sumQnt (int productNum);
+    List<Integer> sumQnt (int productNum);
 
 }

@@ -23,6 +23,7 @@ const CheckStock = ({productNum, orderSatus}) => {
     },[productNum])
 
 
+    
   // 배송대기 상태의 제품의 수량 합계
   useEffect(()=>{
       axios.get(`/orders/sumQnt/${productNum}`)

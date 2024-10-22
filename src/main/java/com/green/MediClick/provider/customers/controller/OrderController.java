@@ -64,14 +64,14 @@ public class OrderController {
 
     //해당 제품의 현재고량
     @GetMapping("/CurrentStock/{productNum}")
-    public int currentStock(@PathVariable("productNum") int productNum){
+    public List<Integer> currentStock(@PathVariable("productNum") int productNum){
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! productNum "+productNum);
        return  orderService.currentStock(productNum);
     }
 
     //배송대기 상태의 제품의 수량 합계
     @GetMapping("/sumQnt/{productNum}")
-    public int sumQnt (@PathVariable("productNum") int productNum){
+    public List<Integer> sumQnt (@PathVariable("productNum") int productNum){
         System.out.println("=======================" + productNum);
         return orderService.sumQnt(productNum);
     }

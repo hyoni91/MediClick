@@ -96,13 +96,10 @@ const Orders = () => {
     const stockMap={}
 
     orderDetail.forEach((o,i)=>{
-      console.log(o.productNum)
       axios.get(`/orders/CurrentStock/${o.productNum}`)
       .then((res)=>{
         stockMap[o.productNum]=res.data // 제품 번호를 키로 하고 재고를 값으로 설정 
         
-        // console.log(stockMap)
-
         // if(Object.keys(stockMap).length===orderDetail.length){
           setStocks(stockMap)
         // }
@@ -247,15 +244,16 @@ const Orders = () => {
                     </td>
                     <td>
                       {
-
-                        orderDetail.some((o,i)=>{
-                          return o.orderStatus ==='배송대기' && o.orderDate==order.orderDate && stocks[o.productNum]!= undefined && o.quantity > stocks[o.productNum]
-                        }) 
-                        && (
+                        orderDetail.reduce((totalQuantity,i)=>{
+                          if(i.orderStatus==='배송대기' && order.productNum===i.productNum){
+                            return totalQuantity+i.quantity // 배송대기 상태의 수량을 합산
+                          }
+                          return totalQuantity
+                        },0) > stocks[order.productNum] && order.orderStatus=='배송대기' ? ( // 재고와 비교 + 현재상태 배송대기
                           <span className='check-stock'>
                             <i className="fa-solid fa-circle-exclamation" />
                           </span>
-                        )
+                        ) : null
                       }
                     </td>
                   </tr>

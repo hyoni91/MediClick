@@ -30,10 +30,11 @@ const OrderDetail = () => {
     orderStatus:''
   }])
 
+
+
   // 체크박스, 체크박스한 아이템들 
   const [checkItems,setCheckItems]=useState([])
 
-  console.log(checkItems)
 
   // 체크박스 개별 선택
   const checkHandled=(checked,id)=>{
@@ -97,7 +98,7 @@ const OrderDetail = () => {
 
   // console.log(orderDetail)
 
-
+  
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
   // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
   function changeStatus(){
@@ -115,8 +116,6 @@ const OrderDetail = () => {
       })
     }
   }
-
-  console.log(orderDetail)
 
   //상세정보 
   useEffect(()=>{
@@ -224,13 +223,16 @@ const OrderDetail = () => {
                       <td>{o.orderRequest.orderItemsVO.productPrice.toLocaleString()}원</td>
                       <td>{o.orderStatus}</td>
                       <td>
-                        {
-      
-      
-                        
-                        }
-                      <CheckStock 
-                        orderSatus={o.orderStatus} productNum={o.orderRequest.orderItemsVO.productNum}/>
+                        {/* {
+                          o.orderStatus=='배송대기' && o.orderRequest.quantity>o.orderRequest.orderItemsVO.stock
+                          ?
+                          <span className='check-stock'>
+                            <i className="fa-solid fa-circle-exclamation" />
+                          </span>
+                          :
+                          null
+                        } */}
+                      <CheckStock orderSatus={o.orderStatus} productNum={o.orderRequest.orderItemsVO.productNum}/>
                     </td>
                   </tr>
                   )

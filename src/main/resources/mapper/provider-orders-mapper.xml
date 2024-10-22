@@ -82,6 +82,7 @@
         ,P.PRODUCT_NAME
         ,R.PRODUCT_NUM
         ,R.QUANTITY
+        ,STOCK
         , P.PRODUCT_PRICE
         ,(P.PRODUCT_PRICE * QUANTITY) AS PRODUCT_PRICE
         ,O.ORDER_STATUS

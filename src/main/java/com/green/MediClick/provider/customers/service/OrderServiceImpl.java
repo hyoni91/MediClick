@@ -60,7 +60,6 @@ public class OrderServiceImpl implements OrderService {
     //수주테이블 배송신청 누르면 '배송중'변경
     @Override
     public void updateOrders(List<OrdersVO> ordersVO) {
-//        sqlSession.update("ordersMapper.updateOrders",ordersVO);
 
         for (OrdersVO orders:ordersVO){
             sqlSession.update("ordersMapper.updateOrders",orders);
@@ -71,7 +70,6 @@ public class OrderServiceImpl implements OrderService {
     //배송신청시 재고테이블 OUT
     @Override
     public void outgoing(List<OrdersVO> ordersVO) {
-//        sqlSession.update("inventoryMapper.outgoing",ordersVO);
 
         for (OrdersVO orders:ordersVO){
             sqlSession.update("inventoryMapper.outgoing",orders);
@@ -106,14 +104,14 @@ public class OrderServiceImpl implements OrderService {
 
     //해당 제품의 현재고량
     @Override
-    public int currentStock(int productNum) {
-        return sqlSession.selectOne("inventoryMapper.currentStock", productNum);
+    public List<Integer> currentStock(int productNum) {
+        return sqlSession.selectList("inventoryMapper.currentStock", productNum);
     }
 
     //배송대기 상태의 제품 수량 합계
     @Override
-    public int sumQnt(int productNum) {
-        return sqlSession.selectOne("ordersMapper.sumQnt" , productNum);
+    public List<Integer> sumQnt(int productNum) {
+        return sqlSession.selectList("ordersMapper.sumQnt" , productNum);
     }
 
 
