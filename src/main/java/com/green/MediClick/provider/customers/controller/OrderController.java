@@ -65,6 +65,7 @@ public class OrderController {
     //해당 제품의 현재고량
     @GetMapping("/CurrentStock/{productNum}")
     public int currentStock(@PathVariable("productNum") int productNum){
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! productNum "+productNum);
        return  orderService.currentStock(productNum);
     }
 

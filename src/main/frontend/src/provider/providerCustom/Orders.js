@@ -91,13 +91,18 @@ const Orders = () => {
     const stockMap={}
 
     orderDetail.forEach((o,i)=>{
+
       axios.get(`/orders/CurrentStock/${o.productNum}`)
       .then((res)=>{
         stockMap[o.productNum]=res.data // 제품 번호를 키로 하고 재고를 값으로 설정 
+        
+        // console.log(stockMap)
 
-        if(Object.keys(stockMap).length===orderDetail.length){
+        // if(Object.keys(stockMap).length===orderDetail.length){
           setStocks(stockMap)
-          console.log(stocks)
+        // }
+        if(!stocks||Object.keys(stocks).length===0){
+          return null //stocks가 없으면 아무것도 렌더링하지 않음 
         }
       })
       .catch((error)=>{console.log(error)})
@@ -105,13 +110,11 @@ const Orders = () => {
   }
 
   useEffect(()=>{
-    if(orderDetail.length>0){
+    // if(orderDetail.length>0){
       getStock() // 주문 상세 정보가 업데이트되면 재고 데이터 가져오기 
-    }
+    // }
   },[orderDetail])
   
-
-
 
   function searchOrder(){
     axios.post(`/orders/orderlist`,searchValue)
@@ -240,14 +243,21 @@ const Orders = () => {
                     <td>
                       {
                         orderDetail.map((o,i)=>{
-                          if(o.orderStatus=='배송대기'){
-                            const stock=stocks[o.productNum]||0 // 현재 재고 가져오기
+
+                          if(o.orderStatus=='배송대기'&& o.orderDate==order.orderDate){
+                            
+                            const stock=stocks[o.productNum] // 현재 재고 가져오기
+
                             const totalQuantity = o.quantity  // 주문 수량 
 
+                            console.log(stock)
+
                             // 현재재고보다 주문 수량이 많으면
-                            if (totalQuantity>stock){
-                              return <span className='check-stock'><i className="fa-solid fa-circle-exclamation" /></span>
+                            if (stock!=undefined && totalQuantity>stock){
+                              return <span className='check-stock'>
+                                <i className="fa-solid fa-circle-exclamation" /></span>
                             }
+
                           }
                           return null
                         })
