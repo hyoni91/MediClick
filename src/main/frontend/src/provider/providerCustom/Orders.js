@@ -247,25 +247,16 @@ const Orders = () => {
                     </td>
                     <td>
                       {
-                        
-                        orderDetail.map((o,i)=>{
-                          
-                          if(o.orderStatus=='배송대기'&& o.orderDate==order.orderDate){
-                          
-                            const stock=stocks[o.productNum] // 현재 재고 가져오기
-                            console.log("재고: "+ stock)
-                            console.log("수량: "+o.quantity)
-                            // 현재재고보다 주문 수량이 많으면
-                            if (stock!=undefined && o.quantity > stock){
-                              return <span className='check-stock'>
-                                <i className="fa-solid fa-circle-exclamation" /></span>
-                            }
 
-                          }
-                          return null
-                        })
+                        orderDetail.some((o,i)=>{
+                          return o.orderStatus ==='배송대기' && o.orderDate==order.orderDate && stocks[o.productNum]!= undefined && o.quantity > stocks[o.productNum]
+                        }) 
+                        && (
+                          <span className='check-stock'>
+                            <i className="fa-solid fa-circle-exclamation" />
+                          </span>
+                        )
                       }
-                      
                     </td>
                   </tr>
                     :
