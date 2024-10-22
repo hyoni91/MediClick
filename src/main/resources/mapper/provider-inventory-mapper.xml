@@ -49,13 +49,11 @@
 
         <!--배송신청시 재고테이블 OUT-->
         <update id="outgoing">
-            <foreach collection="list" item="out" close=";" separator=";">
-                UPDATE inventory
-                SET OUTGOING_QTY = #{out.quantity}
-                ,OUT_DATE = NOW()
-                ,CURRENT_STOCK = CURRENT_STOCK - #{out.quantity}
-                WHERE PRODUCT_NUM = #{out.productNum}
-            </foreach>
+            UPDATE inventory
+            SET OUTGOING_QTY = #{quantity}
+            ,OUT_DATE = NOW()
+            ,CURRENT_STOCK = CURRENT_STOCK - #{quantity}
+            WHERE PRODUCT_NUM = #{productNum}
         </update>
 
 </mapper>

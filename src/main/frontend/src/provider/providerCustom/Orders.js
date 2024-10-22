@@ -248,9 +248,12 @@ const Orders = () => {
                           if(o.orderStatus=='배송대기'&& o.orderDate==order.orderDate){
                           
                             const stock=stocks[o.productNum] // 현재 재고 가져오기
+
                             console.log(stock)
+
                             // 현재재고보다 주문 수량이 많으면
-                            if (stock !=undefined && o.quantity > stock){
+                            if (stock!=undefined && o.quantity > stock){
+
                               return <span className='check-stock'>
                                 <i className="fa-solid fa-circle-exclamation" /></span>
                             }

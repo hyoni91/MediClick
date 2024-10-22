@@ -226,6 +226,7 @@ const OrderDetail = () => {
                       <td>
                         {
       
+      
                         
                         }
                       <CheckStock 
