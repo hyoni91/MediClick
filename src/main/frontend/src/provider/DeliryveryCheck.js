@@ -54,7 +54,6 @@ const DeliryveryCheck = () => {
     deliveryStatus: newStatus,
     orderStatus : newStatus,
     orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
-    deliveryAddress: selectedOrder.customerAddr // 배송 주소
     
   };
   console.log(dataToSend)
@@ -65,7 +64,7 @@ const DeliryveryCheck = () => {
       // 상태가 성공적으로 변경되면 주문 목록을 다시 갱신
       console.log(dataToSend)
       // setOrder();
-      window.location.reload();
+      // window.location.reload();
     })
     .catch((error) => {
       console.error('배송 상태 업데이트 실패:', error);
@@ -77,7 +76,7 @@ const DeliryveryCheck = () => {
   //체크변경
   const changeCheck = (deliveryNum, checked) => {
     setOneCheck((e) => 
-      checked ? [...e, deliveryNum] : e.filter((num) => num !== deliveryNum)
+      checked ? [...e, deliveryNum] : e.filter((num) => num != deliveryNum)
     );
     console.log(order)
   };
@@ -140,6 +139,7 @@ const DeliryveryCheck = () => {
                     <tr key={i}>
                       <td>
                         <input type='checkbox' value={item.orderNum} onChange={(e) => {
+                          console.log(item.orderNum)
                           changeCheck(item.orderNum, e.target.checked)} }/>
                       </td>
                       <td>{i+1}</td>

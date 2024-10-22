@@ -31,6 +31,7 @@ public class DeliveryController {
     public void updateDriver(@RequestBody DeliveryVO deliveryVO){
         deliveryService.updateDriver(deliveryVO);
         deliveryService.sameUpdate(deliveryVO);
+        log.info(deliveryVO+"////////////////");
     }
     @PostMapping("/endDriver")
     public void endDriver(@RequestBody DeliveryVO deliveryVO){

@@ -56,7 +56,6 @@
         update delivery
         set ORDER_NUM = #{orderNum}
             ,DELIVERY_STATUS = '배송중'
-            ,DELIVERY_ADDRESS = #{deliveryAddress}
             ,DELIVERY_START_TIME = NOW()
             ,DELIVERY_DRIVER_NAME = #{deliveryDriverName}
             ,DELIVERY_DRIVER_PHONE = #{deliveryDriverPhone}
