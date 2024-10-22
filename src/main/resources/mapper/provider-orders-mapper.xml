@@ -13,8 +13,12 @@
         <result column="CUSTOMER_ADDR" property="customerAddr" />
         <result column="PRODUCT_NUM" property="productNum" />
         <result column="QUANTITY" property="quantity" />
+        <result column="DELIVERY_NUM" property="deliveryNum" />
+        <result column="DELIVERY_START_TIME" property="startTime" />
+        <result column="DELIVERY_END_TIME" property="endTime" />
         <association property="orderRequest" resultMap="orderItemsMapper.request"/>
         <association property="customer" resultMap="customerMapper.customer" />
+        <association property="delivery" resultMap="deliveryMapper.delivery" />
     </resultMap>
 
     <!--수주 목록 주문일자별로 묶기 -->

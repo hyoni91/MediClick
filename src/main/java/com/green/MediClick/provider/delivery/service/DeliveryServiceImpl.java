@@ -30,7 +30,19 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    public int selectOrderNum(int deliveryNum) {
+        DeliveryVO deliveryVO = sqlSession.selectOne("deliveryMapper.orderNum", deliveryNum);
+        return deliveryVO != null ? deliveryVO.getDeliveryNum() : -1;
+    }
+
+    @Override
+    public void insertDd(DeliveryVO deliveryVO) {
+        sqlSession.insert("deliveryMapper.insertDd",deliveryVO);
+    }
+
+    @Override
     public void updateDriver(DeliveryVO deliveryVO) {
+        DeliveryVO vo = sqlSession.selectOne("deliveryMapper.orderNum",deliveryVO.getDeliveryNum());
         sqlSession.update("deliveryMapper.updateDriver",deliveryVO);
     }
 

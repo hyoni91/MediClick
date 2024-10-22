@@ -14,6 +14,8 @@ public interface DeliveryService {
     //회원가입
     void insertDriver(MemberVO memberVO);
 
+    int selectOrderNum(int orderNum);
+    void insertDd(DeliveryVO deliveryVO);
     void updateDriver(DeliveryVO deliveryVO);
     void sameUpdate(DeliveryVO deliveryVO);
 
