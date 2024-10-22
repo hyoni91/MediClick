@@ -293,8 +293,6 @@ const Order = () => {
 
   }
 
-
-  console.log(selectDatas)
   
   // 개별 - 주문 데이터 입력
   function insertOrderData(e){
@@ -308,11 +306,9 @@ const Order = () => {
 
   }
 
-
-
   // 선택 - 주문 데이터 입력
-  function insertOrderDatas(e,eNum){
-
+  function insertOrderDatas(e,eNum,quantity){
+    
     setOrderDatas((prev)=>{ // 현재 상태 배열
       // 초기값 필터링
       const filterPrev=prev.filter(order => order.productNum !== "" && order.quantity !== "")
@@ -321,12 +317,15 @@ const Order = () => {
       const existingOrder=filterPrev.find(order=>order.productNum===eNum)
       console.log(existingOrder) // 하나씩 늦게 입력됨 
       
+      const finalQuantity = quantity || 10 
+
       if(existingOrder){ 
         return filterPrev.map(order =>
           order.productNum === eNum? // 동일한걸 찾아 
           {
             // ...order,
             [e.target.name]:e.target.value,
+            quantity:finalQuantity,
             productNum:eNum,
             customerNum:e.target.name==='customerNum'?e.target.value : order.customerNum
           }
@@ -339,6 +338,7 @@ const Order = () => {
           ...filterPrev, // 기존 상태 배열 유지 
           {
             [e.target.name]:e.target.value,
+            quantity:finalQuantity,
             productNum:eNum,
             customerNum: e.target.name === 'cutomerNum'? e.target.value:1
           }
@@ -347,7 +347,9 @@ const Order = () => {
     })
   }
 
+
   console.log(orderDatas)
+
 
   function goOrderData(){
     axios
@@ -518,7 +520,6 @@ const Order = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* 상품명 누르면 모달로 상세정보? */}
                     {
                       itemList.map((item,i)=>{
                         return(
@@ -530,7 +531,12 @@ const Order = () => {
                               name={`select-${item.productNum}`}
                               id={item.productNum}
                               // selectChecked={selectChecked}
-                              onChange={(e)=>checkHandled(e.target.checked,item.productNum)}
+                              onChange={(e)=>{
+                                const isChecked = e.target.checked
+                                const quantity = isChecked ? (document.querySelector(`input[name='quantity']`).value || 10) : 0 // 체크되면 기본값10 해제시 0
+                                checkHandled(e.target.checked,item.productNum)
+                                insertOrderDatas(e,item.productNum,quantity) // 수량 업데이트 
+                                }}
                             ></input></td>
                             <td>{item.cateVO.cateName}</td>
                             <td><span name='productNum' >{item.productNum}</span></td>
@@ -540,7 +546,9 @@ const Order = () => {
                             <td>
                               <input type='number' name='quantity'
                               defaultValue={10} min={10} max={100} step={10}
-                              onChange={(e)=>{insertOrderData(e); insertOrderDatas(e,item.productNum)}}
+                              onChange={(e)=>{
+                                const value = e.target.value ? parseInt(e.target.value,10) : 10 // 입력된 값이 없으면 기본값 10
+                                insertOrderData(e); insertOrderDatas(e,item.productNum,value)}}
                               ></input> 개</td>
                             <td><span className='priceNum'>{item.productPrice.toLocaleString()}</span> 원</td>
                             <td><button type='button' value={item.productNum}
