@@ -68,10 +68,10 @@ const Inventory = () => {
                   <td>{list.productName}</td>
                   <td>{list.stockDate}</td>
                   <td>{list.outDate}</td>
-                  <td>{list.initialStock}</td>
-                  <td>{list.incomingQty}</td>
-                  <td>{list.outgoingQty}</td>
-                  <td>{list.currentStock}</td>
+                  <td>{list.initialStock.toLocaleString()}</td>
+                  <td>{list.incomingQty.toLocaleString()}</td>
+                  <td>{list.outgoingQty.toLocaleString()}</td>
+                  <td>{list.currentStock.toLocaleString()}</td>
                 </tr>
               )
             })

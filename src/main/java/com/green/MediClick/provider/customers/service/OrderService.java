@@ -25,6 +25,9 @@ public interface OrderService {
     //주문 상세 페이지
     List<OrdersVO> detail(String orderDate);
 
+    // orderDate값 뽑으려고
+    List<OrdersVO> detailOrderDate(SearchVO searchVO);
+
     //해당 제품의 현재고량
     int currentStock(int productNum);
 

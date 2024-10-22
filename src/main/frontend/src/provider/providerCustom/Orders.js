@@ -7,7 +7,16 @@ import CheckStock from './CheckStock'
 
 const Orders = () => {
   const navigate = useNavigate()
+
   const [orders , setOrders] = useState([])
+
+  // 주문 상세 정보
+  const [orderDetail,setOrderDetail]=useState([])
+
+  // 제품별 재고 상태 저장
+  const [stocks,setStocks] =useState({})
+
+
   //총 주문액
   const [sumPrice ,setSumPrice] = useState(0)
   //총 매출액(수주완료건)
@@ -42,6 +51,8 @@ const Orders = () => {
   };
 
 
+
+
   useEffect(()=>{
     axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
@@ -65,7 +76,42 @@ const Orders = () => {
 
   },[searchValue])
 
+
+  useEffect(()=>{
+    axios.post('/orders/ordersDate',searchValue)
+    .then((res)=>{
+      setOrderDetail(res.data)
+    })
+    .catch((error)=>{console.log(error)})
+  },[])
+
   
+  // 재고정보 가져오기
+  const getStock=()=>{
+    const stockMap={}
+
+    orderDetail.forEach((o,i)=>{
+      axios.get(`/orders/CurrentStock/${o.productNum}`)
+      .then((res)=>{
+        stockMap[o.productNum]=res.data // 제품 번호를 키로 하고 재고를 값으로 설정 
+
+        if(Object.keys(stockMap).length===orderDetail.length){
+          setStocks(stockMap)
+          console.log(stocks)
+        }
+      })
+      .catch((error)=>{console.log(error)})
+    })
+  }
+
+  useEffect(()=>{
+    if(orderDetail.length>0){
+      getStock() // 주문 상세 정보가 업데이트되면 재고 데이터 가져오기 
+    }
+  },[orderDetail])
+  
+
+
 
   function searchOrder(){
     axios.post(`/orders/orderlist`,searchValue)
@@ -100,6 +146,8 @@ const Orders = () => {
     })
     return result
   }
+
+
 
   return (
     <div className='manage-contailner'>
@@ -188,10 +236,23 @@ const Orders = () => {
                       {
                       <>{order.orderStatus}</>
                       }
-                      </td>
+                    </td>
                     <td>
-                      <CheckStock 
-                      productNum = {order.productNum} orderSatus={order.orderStatus}/> 
+                      {
+                        orderDetail.map((o,i)=>{
+                          if(o.orderStatus=='배송대기'){
+                            const stock=stocks[o.productNum]||0 // 현재 재고 가져오기
+                            const totalQuantity = o.quantity  // 주문 수량 
+
+                            // 현재재고보다 주문 수량이 많으면
+                            if (totalQuantity>stock){
+                              return <span className='check-stock'><i className="fa-solid fa-circle-exclamation" /></span>
+                            }
+                          }
+                          return null
+                        })
+                      }
+                      
                     </td>
                   </tr>
                     :

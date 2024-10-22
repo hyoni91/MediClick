@@ -55,6 +55,13 @@ public class OrderController {
         return orderService.detail(orderDate);
     }
 
+    // orderDate값 뽑으려고
+    @PostMapping("/ordersDate")
+    public List<OrdersVO> ordersDate(@RequestBody SearchVO searchVO){
+
+        return orderService.detailOrderDate(searchVO);
+    }
+
     //해당 제품의 현재고량
     @GetMapping("/CurrentStock/{productNum}")
     public int currentStock(@PathVariable("productNum") int productNum){
