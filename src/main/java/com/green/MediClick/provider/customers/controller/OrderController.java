@@ -72,6 +72,7 @@ public class OrderController {
     //배송대기 상태의 제품의 수량 합계
     @GetMapping("/sumQnt/{productNum}")
     public int sumQnt (@PathVariable("productNum") int productNum){
+        System.out.println("=======================" + productNum);
         return orderService.sumQnt(productNum);
     }
 

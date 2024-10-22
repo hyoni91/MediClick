@@ -13,6 +13,7 @@ const Orders = () => {
   // 주문 상세 정보
   const [orderDetail,setOrderDetail]=useState([])
 
+
   // 제품별 재고 상태 저장
   const [stocks,setStocks] =useState({})
 
@@ -91,7 +92,7 @@ const Orders = () => {
     const stockMap={}
 
     orderDetail.forEach((o,i)=>{
-
+      console.log(o.productNum)
       axios.get(`/orders/CurrentStock/${o.productNum}`)
       .then((res)=>{
         stockMap[o.productNum]=res.data // 제품 번호를 키로 하고 재고를 값으로 설정 
@@ -245,11 +246,11 @@ const Orders = () => {
                         orderDetail.map((o,i)=>{
 
                           if(o.orderStatus=='배송대기'&& o.orderDate==order.orderDate){
-                            
+                          
                             const stock=stocks[o.productNum] // 현재 재고 가져오기
-
+                            console.log(stock)
                             // 현재재고보다 주문 수량이 많으면
-                            if (stock!=undefined && 20>stock){
+                            if (stock !=undefined && o.quantity > stock){
                               return <span className='check-stock'>
                                 <i className="fa-solid fa-circle-exclamation" /></span>
                             }
