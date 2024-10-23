@@ -11,5 +11,6 @@ public class DeliveryVO {
     private String deliveryDriverName;
     private String deliveryDriverPhone;
     private String deliveryStatus;
-
+    private List<OrdersVO> orderList;
+    private int orderNum;
 }

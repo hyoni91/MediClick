@@ -13,7 +13,7 @@ const ProviderLayout = () => {
       navigate('/provider/deliveryCheck');
     } else {
       alert('로그인해주세요');
-      navigate('/provider/main');
+      navigate('/loginForm');
     }
   }
   return (
