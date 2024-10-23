@@ -1,7 +1,9 @@
 import axios from 'axios'
+import { set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 
 const DeliryveryCheck = () => {
+  const [isShow, setIsShow] = useState(false)
   //로그인 정보
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   //배달기사 정보
@@ -13,45 +15,30 @@ const DeliryveryCheck = () => {
     ,startTime :''
     ,endTime :''
     ,deliveryStatus :''
-    ,ordersVO :''
+    ,orderList :[]
   })
   console.log(driver)
   //수주 물품 목록표
   const [order, setOrder] = useState([])
+  // 상태 변경 시 데이터 요청
   useEffect(() => {
+    fetchData();
+  }, [driver.deliveryDriverName]);
+
+  // 데이터 요청 함수
+  const fetchData = () => {
     axios.all([
-      //배달기사
       axios.get(`/delivery/deliveryList/${driver.deliveryDriverName}`),
-      //주문정보
       axios.get('/delivery/ordersList')
     ])
-    .then(axios.spread((res1,res2) => {
-      setDriver(res1.data)
-      //console.log(res1.data)
+    .then(axios.spread((res1, res2) => {
+      setDriver(res1.data);
+      setOrder(res2.data);
       console.log(res2.data)
-      setOrder(res2.data)
-      driverIs()
-      //setOrder(... res1.data,res2.data)
-
     }))
     .catch((error) => {
-      console.log(error)
-    })
-  },[driver.deliveryDriverName])
-  const driverIs = () => {
-    setOrder(prevOrders => 
-      prevOrders.map(item => {
-        // driver.orderNum과 item.orderNum이 일치할 때 값을 업데이트
-        if (item.orderNum === driver.orderNum) {
-          return {
-            ...item,  // 기존의 order 항목을 복사
-            deliveryDriverName: driver.deliveryDriverName,  // 새로운 값 추가
-            deliveryDriverPhone: driver.deliveryDriverPhone // 새로운 값 추가
-          };
-        }
-        return item; // 조건을 만족하지 않는 경우 기존 item 반환
-      })
-    );
+      console.log(error);
+    });
   };
   //선택
   const statusChange = (newStatus = '') => {
@@ -59,31 +46,31 @@ const DeliryveryCheck = () => {
       alert('선택된 주문이 없습니다.');
       return;
     }
-    const selectedOrder = order.find((item) => oneCheck.includes(item.orderNum));
-    console.log(newStatus)
-  const dataToSend = {
-    deliveryNum : driver.deliveryNum,
-    deliveryDriverName: driver.deliveryDriverName,
-    deliveryDriverPhone : driver.deliveryDriverPhone,
-    deliveryStatus: newStatus,
-    orderStatus : newStatus,
-    orderNum: selectedOrder.orderNum, // 선택된 주문 번호 리스트
-    
-  };
+    // 선택된 주문의 정보를 모은다.
+    const dataToSend = oneCheck.map((orderNum) => {
+      const selectedOrder = order.find((item) => item.orderNum === orderNum);
+      console.log(selectedOrder)
+      return {
+        deliveryNum: driver.deliveryNum,
+        deliveryDriverName: driver.deliveryDriverName,
+        deliveryDriverPhone: driver.deliveryDriverPhone,
+        deliveryStatus: newStatus,
+        orderStatus: newStatus,
+        orderNum: selectedOrder.orderNum // 선택된 주문 번호
+      };
+    });
   console.log(dataToSend)
   const url = (newStatus == '배송중') ? '/delivery/updateDriver' : '/delivery/endDriver'
-    axios.post(url, dataToSend)
-    .then((response) => {
-      console.log('배송 상태 업데이트 성공:');
-      // 상태가 성공적으로 변경되면 주문 목록을 다시 갱신
-      console.log(dataToSend)
-      // setOrder();
-      driverIs()
-      // window.location.reload();
-    })
-    .catch((error) => {
-      console.error('배송 상태 업데이트 실패:', error);
-    });
+    // 각 주문에 대해 개별 요청을 보낸다.
+    Promise.all(dataToSend.map(data => axios.post(url, data)))
+      .then((responses) => {
+        console.log('배송 상태 업데이트 성공:', responses);
+        // 모든 주문 상태 업데이트 후 데이터를 다시 가져옴
+        fetchData();
+      })
+      .catch((error) => {
+        console.error('배송 상태 업데이트 실패:', error);
+      });
   };
 
   const [oneCheck, setOneCheck] = useState([]);
@@ -161,8 +148,8 @@ const DeliryveryCheck = () => {
                       <td>{item.orderRequest.orderItemsVO.productName}</td>
                       <td>{item.customerAddr}({item.customerName})</td>
                       <td>{item.totalPrice}</td>
-                      <td>{item.deliveryDriverName}</td>
-                      <td>{item.deliveryDriverPhone}</td>
+                      <td>{item.delivery.deliveryDriverName}</td>
+                      <td>{item.delivery.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
                       <td>{item.orderStatus == '배송중' ? '배송중' : 
                           item.orderStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
@@ -173,9 +160,9 @@ const DeliryveryCheck = () => {
             </tbody>
           </table>
         </div>
+        <span className='show-btn' onClick={() => {setIsShow(!isShow)}}>배달목록</span>
           
       </div>
-        
 
     </div>
   )

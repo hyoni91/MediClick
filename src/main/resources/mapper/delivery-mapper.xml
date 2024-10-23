@@ -26,8 +26,8 @@
         C.CUSTOMER_NAME,
         C.CUSTOMER_ADDR,
         D.DELIVERY_NUM,
-        IFNULL(D.DELIVERY_DRIVER_NAME,'-'),
-        IFNULL(D.DELIVERY_DRIVER_PHONE,'-'),
+        IFNULL(D.DELIVERY_DRIVER_NAME,'-') AS DELIVERY_DRIVER_NAME,
+        IFNULL(D.DELIVERY_DRIVER_PHONE,'-') AS DELIVERY_DRIVER_PHONE,
         (R.QUANTITY * P.PRODUCT_PRICE) AS TOTALPRICE
         FROM
         orders O
@@ -52,53 +52,50 @@
         ,#{memTel}
         )
     </insert>
-    <insert id="insertDd">
-        INSERT INTO DELIVERY (
-            DELIVERY_STATUS
-            ,DELIVERY_START_TIME
-            ,DELIVERY_DRIVER_NAME
-            ,DELIVERY_DRIVER_PHONE
-        ) VALUES(
-            '배송중'
-            ,NOW()
-            ,#{deliveryDriverName}
-            ,#{deliveryDriverPhone}
-        )
-
-    </insert>
     <update id="updateDriver">
-        update delivery
-        set DELIVERY_STATUS = '배송중'
+        update orders
+        set
+            ORDER_STATUS = '배송중'
             ,DELIVERY_START_TIME = NOW()
-            ,DELIVERY_DRIVER_NAME = #{deliveryDriverName}
-            ,DELIVERY_DRIVER_PHONE = #{deliveryDriverPhone}
+            ,DELIVERY_NUM = #{deliveryNum}
+        where ORDER_NUM = #{orderNum};
+    </update>
+    <update id="updateDd" >
+        update delivery
+        set
+            DELIVERY_STATUS = '배송중'
         where DELIVERY_NUM = #{deliveryNum};
     </update>
-    <update id="sameUpdate">
-        <!--orders 테이블의 ORDER_STATUS도 함께 '배송중'으로 업데이트-->
-        UPDATE orders O
-        JOIN delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
-        SET O.ORDER_STATUS = '배송중'
-        WHERE D.DELIVERY_NUM = #{deliveryNum};
-    </update>
     <update id="endDriver">
-        UPDATE delivery
-        SET
-        DELIVERY_STATUS = '배송완료',
-        DELIVERY_END_TIME = NOW()
-        WHERE DELIVERY_NUM = #{deliveryNum}
+        update orders
+        set
+        ORDER_STATUS = '배송완료'
+        ,DELIVERY_START_TIME = NOW()
+        where ORDER_NUM = #{orderNum};
     </update>
     <update id="endSameUpdate">
         <!--orders 테이블의 ORDER_STATUS도 함께 '배송완료'로 업데이트-->
-        UPDATE orders O
-        JOIN delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
-        SET O.ORDER_STATUS = '배송완료'
-        WHERE D.DELIVERY_NUM = #{deliveryNum};
+        update delivery
+        set
+        DELIVERY_STATUS = '배송완료'
+        where DELIVERY_NUM = #{deliveryNum};
     </update>
 
     <select id="orderNum" resultType="int">
-        SELECT * FROM delivery WHERE DELIVERY_NUM = #{DELIVERY_NUM}
+        SELECT *
+        FROM delivery
+        WHERE DELIVERY_NUM = #{DELIVERY_NUM}
     </select>
+
+
+
+
+
+
+
+
+
+
 
 
 </mapper>

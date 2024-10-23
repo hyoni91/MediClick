@@ -28,24 +28,18 @@ public class DeliveryController {
     }
 
     @PostMapping("/updateDriver")
-    public void updateDriver(@RequestBody DeliveryVO deliveryVO){
-        int deli = deliveryService.selectOrderNum(deliveryVO.getDeliveryNum());
-        if(deli == deliveryVO.getDeliveryNum()) {
-            deliveryService.updateDriver(deliveryVO);
-            deliveryService.sameUpdate(deliveryVO);
-        }
-        else {
-            deliveryService.insertDd(deliveryVO);
-            deliveryService.sameUpdate(deliveryVO);
-        }
-        log.info(deliveryVO+"////////////////");
+    public void updateDriver(@RequestBody OrdersVO ordersVO){
+        log.info(ordersVO+"////////////////");
+        deliveryService.updateDriver(ordersVO);
+        log.info(ordersVO+"////////////////");
+        deliveryService.updateDd(ordersVO);
     }
     @PostMapping("/endDriver")
-    public void endDriver(@RequestBody DeliveryVO deliveryVO){
-        log.info(deliveryVO+"////////////////");
+    public void endDriver(@RequestBody OrdersVO ordersVO){
+        log.info(ordersVO+"////////////////");
 
-        deliveryService.endDriver(deliveryVO.getDeliveryNum());
-        deliveryService.endSameUpdate(deliveryVO.getDeliveryNum());
+        deliveryService.endDriver(ordersVO.getOrderNum());
+        deliveryService.endSameUpdate(ordersVO.getDeliveryNum());
     }
 
 }

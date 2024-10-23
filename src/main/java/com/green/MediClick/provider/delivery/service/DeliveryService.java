@@ -15,9 +15,8 @@ public interface DeliveryService {
     void insertDriver(MemberVO memberVO);
 
     int selectOrderNum(int orderNum);
-    void insertDd(DeliveryVO deliveryVO);
-    void updateDriver(DeliveryVO deliveryVO);
-    void sameUpdate(DeliveryVO deliveryVO);
+    void updateDriver(OrdersVO ordersVO);
+    void updateDd(OrdersVO ordersVO);
 
     void endDriver(int deliveryNum);
     void endSameUpdate(int deliveryNum);
