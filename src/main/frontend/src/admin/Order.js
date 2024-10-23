@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const Order = () => {
   const navigate=useNavigate()
   const location=useLocation()
+  
 
   // 상품 리스트
   const [itemList,setItemList]=useState([])
@@ -356,6 +357,7 @@ const Order = () => {
     .put('/orderItems/insertOrder',orderData)
     .then((res)=>{
       alert('주문 완료')
+      navigate('/admin/orderList')
     })
     .catch((error)=>{console.log(error)})
   }
@@ -366,6 +368,7 @@ const Order = () => {
     .put('/orderItems/insertOrderChecked',orderDatas)
     .then((res)=>{
       alert('주문 완료')
+      navigate('/admin/orderList')
     })
     .catch((error)=>{console.log(error)})
   }
