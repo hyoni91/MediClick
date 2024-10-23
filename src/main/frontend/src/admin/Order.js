@@ -24,7 +24,7 @@ const Order = () => {
   const [orderData,setOrderData]=useState(
     {
     productNum:'',
-    customerNum:31,
+    customerNum:1,
     quantity:10
     }
   )
@@ -33,7 +33,7 @@ const Order = () => {
   const [orderDatas,setOrderDatas]=useState([
     {
     productNum:'',
-    customerNum:31,
+    customerNum:1,
     quantity:10
     },
   ])
@@ -566,7 +566,7 @@ const Order = () => {
 
               <div className='order-btns'>
                 <button type='button' className='order-btn' 
-                  onClick={()=>{goOrderChecked();}}>선택주문</button>
+                  onClick={()=>{goOrderChecked();}}>선택 주문</button>
                 {/* <button type='button' className='order-btn'>??</button> */}
               </div>
 
