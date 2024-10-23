@@ -30,6 +30,9 @@ const OrderDetail = () => {
     orderStatus:''
   }])
 
+  const [isDone, setIsDone] = useState(false)
+  const [oDate, setODate] = useState("")
+
 
 
   // 체크박스, 체크박스한 아이템들 
@@ -109,7 +112,6 @@ const OrderDetail = () => {
       ])
       .then((res)=>{
         alert('배송 신청 완료!')
-
         // 주문 상태 업데이트
         setOrderDetail((prev)=>
           prev.map((order)=>
@@ -136,6 +138,9 @@ const OrderDetail = () => {
     }
   }
 
+
+
+  console.log(oDate)
   //상세정보 
   useEffect(()=>{
     axios.get(`/orders/ordersDetail/${orderDate}`)
@@ -143,6 +148,13 @@ const OrderDetail = () => {
 
       console.log(res.data)
       setOrderDetail(res.data)
+      const result = res.data.every(order => order.orderStatus === '배송완료')
+      setIsDone(result)
+      if(result){
+        setODate(res.data[0].orderDate)
+      }
+    
+      console.log(isDone)
 
       res.data.some((r)=>{
         return r.orderStatus==='배송대기'
@@ -153,7 +165,7 @@ const OrderDetail = () => {
       alert('error!!')
       console.log(error)
     })
-  },[])
+  },[isDone])
 
 
 
@@ -177,6 +189,7 @@ const OrderDetail = () => {
         <div className='magage-header'>
           <div className='header-div'>
             <h3>수주 상세 정보</h3>
+            <h4><i className="fa-regular fa-calendar-check" /> {orderDetail[0].orderDate}</h4>
           </div>
           <div className='detail-header'>
             <div>
@@ -216,11 +229,12 @@ const OrderDetail = () => {
                   onChange={(e)=>{
                     orderNums()
                     allCheckedHandler(e.target.checked)}}/></td>
-                <td>주문날짜</td>
-                <td>거래처명</td>
-                <td>아이템</td>
+                {/* <td>주문날짜</td> */}
+                {/* <td>거래처명</td> */}
+                <td>상품명</td>
                 <td>수량</td>
-                <td>금액</td>
+                <td>단가</td>
+                <td>합계</td>
                 <td>배송현황</td>
                 <td>재고</td>
               </tr>
@@ -240,11 +254,12 @@ const OrderDetail = () => {
                             orderNums()
                           }
                           }}/></td>
-                      <td>{orderDetail[0].orderDate}</td>
-                      <td>{orderDetail[0].customerName}</td>
+                      {/* <td>{orderDetail[0].orderDate}</td> */}
+                      {/* <td>{orderDetail[0].customerName}</td> */}
                       <td>{o.orderRequest.orderItemsVO.productName}</td>
                       <td>{o.orderRequest.quantity}</td>
                       <td>{o.orderRequest.orderItemsVO.productPrice.toLocaleString()}원</td>
+                      <td>{(o.orderRequest.quantity * o.orderRequest.orderItemsVO.productPrice).toLocaleString()}원</td>
                       <td>{o.orderStatus}</td>
                       <td>
                         {/* {
