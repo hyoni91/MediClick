@@ -13,6 +13,8 @@ const Orders = () => {
   // 주문 상세 정보
   const [orderDetail,setOrderDetail]=useState([])
 
+  // 강제 재렌더링
+  const [isRendered,setIsRendered]=useState(false)
 
   // 제품별 재고 상태 저장
   const [stocks,setStocks] =useState({})
@@ -73,13 +75,14 @@ const Orders = () => {
       
       setSumPrice(sum)
       setOrderPrice(orderSum)
+      setIsRendered(true) // 상태를 업데이트해 강제 재렌더링 유도
 
     })
     .catch((error)=>{
       console.log(error)
     })
 
-  },[searchValue])
+  },[searchValue,stocks,orderDetail])
 
 
   useEffect(()=>{
@@ -244,12 +247,13 @@ const Orders = () => {
                     </td>
                     <td>
                       {
+                        orderDetail && stocks && // 데이터가 로드 되었는지 확인
                         orderDetail.reduce((totalQuantity,i)=>{
                           if(i.orderStatus==='배송대기' && order.productNum===i.productNum){
                             return totalQuantity+i.quantity // 배송대기 상태의 수량을 합산
                           }
                           return totalQuantity
-                        },0) > stocks[order.productNum] && order.orderStatus=='배송대기' ? ( // 재고와 비교 + 현재상태 배송대기
+                        },0) > stocks[order.productNum] && order.orderStatus=='배송대기' && isRendered? ( // 재고와 비교 + 현재상태 배송대기
                           <span className='check-stock'>
                             <i className="fa-solid fa-circle-exclamation" />
                           </span>

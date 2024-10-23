@@ -62,53 +62,72 @@ const OrderDetail = () => {
 
   // 체크박스로 선택한 주문들 정보가져오기
   const [checkData,setCheckData]=useState([])
+  const [newCheckData,setNewCheckData]=useState([])
 
   const orderNums=()=>{
-    const newCheckData=[]
+    const updatedChecked=[]
 
     checkItems.forEach((chk,i)=>{
       orderDetail.forEach((o,j)=>{
         if(chk===o.orderNum){
-          newCheckData.push({
-            // customerAddr:orderDetail[0].customerAddr,
+          updatedChecked.push({
             orderNum:o.orderNum,
             quantity:o.orderRequest.quantity,
             productNum:o.orderRequest.orderItemsVO.productNum,
           })
-            // setCheckData([{
-            //   ...checkData,
-            //   customerAddr:orderDetail[0].customerAddr,
-            //   orderNum:o.orderNum,
-            //   quantity:o.orderRequest.quantity,
-            //   productNum:o.orderRequest.orderItemsVO.productNum,
-            // }])
         } 
-
       })
     })
 
+    setNewCheckData(updatedChecked)
+
+  }
+
+  useEffect(()=>{
+    orderNums() //checkItems가 변경될 때마다 호출 
+  },[checkItems])
+
+  const confirmCheck=()=>{
     if(newCheckData.length>0){
       setCheckData(newCheckData)
+      changeStatus()
     }else{
       alert('선택된 주문이 없습니다.')
     }
-
-    console.log(checkData)
   }
-
-  // console.log(orderDetail)
-
   
+
+
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
   // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
   function changeStatus(){
+
     if(window.confirm('배송 신청을 진행하시겠습니까?')){
       axios.all([
-        axios.post(`/orders/updateOrders`, checkData),
-        axios.post(`/orders/outgoing`, checkData)
+        axios.post(`/orders/updateOrders`, newCheckData),
+        axios.post(`/orders/outgoing`, newCheckData)
       ])
       .then((res)=>{
         alert('배송 신청 완료!')
+
+        // 주문 상태 업데이트
+        setOrderDetail((prev)=>
+          prev.map((order)=>
+            newCheckData.some((item)=> item.orderNum===order.orderNum)
+          ? {...order,orderStatus:'배송중'} // 상태변경
+          : order
+        ))
+
+        // 배송대기 상태에 따라 버튼 활성화/비활성화
+        if(Array.isArray(res.data)){ // res.data가 배열인지 확인 
+          const hasPending=res.data.some((r)=>r.orderStatus==='배송대기')
+          setIsDisabled(!hasPending) // 배송대기가 하나라도 이으면 false 없으면 true
+        } else {
+          setIsDisabled(true) // 기본적을 ㅗ비활성화 
+        }
+        
+
+
       })
       .catch((error)=>{
         console.log(error)
@@ -121,16 +140,13 @@ const OrderDetail = () => {
   useEffect(()=>{
     axios.get(`/orders/ordersDetail/${orderDate}`)
     .then((res)=>{
-      // console.log(res.data)
+
+      console.log(res.data)
       setOrderDetail(res.data)
 
-      res.data.forEach((r,i)=>{
-        if( r.orderStatus == '배송대기'){
-          return setIsDisabled(false)
-        }else{
-          return setIsDisabled(true)
-        }
-      })
+      res.data.some((r)=>{
+        return r.orderStatus==='배송대기'
+      }) ? setIsDisabled(false) : setIsDisabled(true)
 
     })
     .catch((error)=>{
@@ -138,6 +154,8 @@ const OrderDetail = () => {
       console.log(error)
     })
   },[])
+
+
 
   // 총 주문
   const totalPrice=()=>{
@@ -149,7 +167,6 @@ const OrderDetail = () => {
     })
     return result
   }
-
 
   const pendingDelivery=orderDetail.some(o=>o.orderStatus=='배송대기')
 
@@ -196,7 +213,9 @@ const OrderDetail = () => {
                 <td><input type='checkbox' 
                   // 데이터 개수와 체크된 아이템 개수가 다를 경우 선택 해제
                   checked={checkItems.length===orderDetail.length ? true:false}
-                  onChange={(e)=>{allCheckedHandler(e.target.checked)}}/></td>
+                  onChange={(e)=>{
+                    orderNums()
+                    allCheckedHandler(e.target.checked)}}/></td>
                 <td>주문날짜</td>
                 <td>거래처명</td>
                 <td>아이템</td>
@@ -215,7 +234,12 @@ const OrderDetail = () => {
                         checked={checkItems.includes(o.orderNum)?true:false}
                         name={`select-${o.orderNum}`}
                         id={o.orderNum}
-                        onChange={(e)=>{checkHandled(e.target.checked,o.orderNum)}}/></td>
+                        onChange={(e)=>{
+                          checkHandled(e.target.checked,o.orderNum)
+                          if(e.target.checked){
+                            orderNums()
+                          }
+                          }}/></td>
                       <td>{orderDetail[0].orderDate}</td>
                       <td>{orderDetail[0].customerName}</td>
                       <td>{o.orderRequest.orderItemsVO.productName}</td>
@@ -250,7 +274,7 @@ const OrderDetail = () => {
           <button 
             type='button' 
             disabled={isDisabled}
-            onClick={()=>{orderNums(); changeStatus()}}>
+            onClick={()=>{confirmCheck(); orderNums();}}>
               {
                 pendingDelivery ? 
                 <div>배송신청</div>
@@ -263,5 +287,6 @@ const OrderDetail = () => {
     </div>
   )
 }
+
 
 export default OrderDetail
