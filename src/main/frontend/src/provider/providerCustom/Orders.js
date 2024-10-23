@@ -54,11 +54,6 @@ const Orders = () => {
   };
 
 
-  //현경 test 
-  const [isStock, setIsStock] = useState(new Array(orderDetail.length).fill(false))
-
-
-
 
   useEffect(()=>{
     axios.post(`/orders/orderlist`,searchValue)
