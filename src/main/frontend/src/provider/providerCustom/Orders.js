@@ -83,6 +83,7 @@ const Orders = () => {
   useEffect(()=>{
     axios.post('/orders/ordersDate',searchValue)
     .then((res)=>{
+      console.log(res.data)
       setOrderDetail(res.data)
     })
     .catch((error)=>{console.log(error)})
@@ -221,7 +222,7 @@ const Orders = () => {
             </thead>
             <tbody>
               {
-                orders.map((order,i)=>{
+                orders.filter(order => order.orderStatus === '배송대기' || order.orderStatus === '배송중').map((order,i)=>{
                   return(
                     order.orderStatus != '배송완료' ?
                   <tr key={i}>
@@ -289,9 +290,8 @@ const Orders = () => {
                       </tr>
                     </thead>
                     {
-                      orders.map((e,i)=>{
+                        orders.filter(order => order.orderStatus === '배송완료').map((e,i)=>{
                         return(
-                          e.orderStatus == '배송완료'?
                           <tr key={i}>
                             <td>{i+1}</td>
                             <td> 
@@ -306,8 +306,6 @@ const Orders = () => {
                             <td>{e.orderStatus}</td>
                             <td>완료</td>
                           </tr>
-                          :
-                        <></>
                         )
 
                       })
