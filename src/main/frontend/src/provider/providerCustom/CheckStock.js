@@ -15,7 +15,7 @@ const CheckStock = ({productNum, orderSatus}) => {
       axios.get(`/orders/CurrentStock/${productNum}`)
       .then((res)=>{
         setStock( res.data)
-        console.log("현재고 :" +res.data)
+        // console.log("현재고 :" +res.data)
       })
       .catch((error)=>{
         console.log(error)
@@ -29,7 +29,7 @@ const CheckStock = ({productNum, orderSatus}) => {
       axios.get(`/orders/sumQnt/${productNum}`)
     .then((res)=>{
       setSumQnt(res.data)
-      console.log("배송대기 수량: " + res.data )
+      // console.log("배송대기 수량: " + res.data )
     })
     .catch((error)=>{
       console.log(error)
