@@ -8,8 +8,9 @@ const Inventory = () => {
   useEffect(()=>{
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/provider/inventory');
+        const response = await axios.get('/inventory/list');
         setProducts(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error(error);
       }
@@ -17,13 +18,13 @@ const Inventory = () => {
     fetchProducts();
   }, []);
   return (
-    <div>
-      <h1>현 재고 현황</h1>
+    <div className='inventory-wrap'>
+      <h3>현 재고 현황</h3>
       <table className='inventoryTable'>
         <thead>
           <tr>
-            <td>카테고리</td>
-            <td>제품번호</td>
+            {/* <td>카테고리</td> */}
+            <td>No.</td>
             <td>제품명</td>
             <td>입고일자</td>
             <td>출고일자</td>
@@ -35,16 +36,16 @@ const Inventory = () => {
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.PRODUCT_NUM}>
-              <td>{product.CATE_NUM}</td>
-              <td>{product.PRODUCT_NUM}</td>
-              <td>{product.PRODUCT_NAME}</td>
-              <td>{product.STOCK_DATE}</td>
-              <td>{product.OUTGOING_QTY}</td>
-              <td>{product.INITIAL_STOCK}</td>
-              <td>{product.INCOMING_QTY}</td>
-              <td>{product.OUTGOING_QTY}</td>
-              <td>{product.CURRENT_STOCK}</td>
+            <tr key={product.productNum}>
+              {/* <td>{product.cateNum}</td> */}
+              <td>{product.productNum}</td>
+              <td>{product.productName}</td>
+              <td>{product.stockDate}</td>
+              <td>{product.outgoingqty}</td>
+              <td>{product.initialStock}</td>
+              <td>{product.incomimgQty}</td>
+              <td>{product.outgoingQty}</td>
+              <td>{product.currentStock}</td>
             </tr>
           ))}
         </tbody>

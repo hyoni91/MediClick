@@ -23,7 +23,7 @@ const Order = () => {
   const [orderData,setOrderData]=useState(
     {
     productNum:'',
-    customerNum:1,
+    customerNum:31,
     quantity:10
     }
   )
@@ -32,7 +32,7 @@ const Order = () => {
   const [orderDatas,setOrderDatas]=useState([
     {
     productNum:'',
-    customerNum:1,
+    customerNum:31,
     quantity:10
     },
   ])
