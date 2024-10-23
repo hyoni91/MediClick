@@ -20,6 +20,20 @@ const Inventory = () => {
   return (
     <div className='inventory-wrap'>
       <h3>현 재고 현황</h3>
+          <div className='inverntory-seachbar'>
+            <input 
+              type='text' 
+              placeholder='날짜/현황/거래처명'
+              name='searchValue'
+              onChange={(e)=>{
+                
+              }}
+            />
+            <span
+              onClick={()=>{}}
+            >
+            </span>
+            </div>              
       <table className='inventoryTable'>
         <thead>
           <tr>

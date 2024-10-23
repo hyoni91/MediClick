@@ -12,6 +12,18 @@
   margin-top: 50px;
 }
 
+.inverntory-seachbar{
+  margin-top: 15px;
+  width: 1430px;
+  margin: auto;
+  text-align: left;
+}
+
+.inverntory-seachbar input {
+  padding: 5px;
+  margin-top: 25px;
+}
+
 .inventoryTable td{
   border: 1px solid;
   padding: 10px;
