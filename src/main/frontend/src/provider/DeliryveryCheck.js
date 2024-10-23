@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-
+import './DeliryveryCheck.css'
 const DeliryveryCheck = () => {
   const [isShow, setIsShow] = useState(false)
+  
   //로그인 정보
   const loginData = JSON.parse(window.sessionStorage.getItem('loginInfo'))
   //배달기사 정보
@@ -33,6 +34,14 @@ const DeliryveryCheck = () => {
     ])
     .then(axios.spread((res1, res2) => {
       setDriver(res1.data);
+      // 주문 리스트에서 deliveryNum이 같은 주문 찾기
+    const updatedOrderList = res2.data.filter(order => order.deliveryNum == res1.data.deliveryNum);
+    console.log(updatedOrderList)
+    // driver의 orderList에 업데이트된 리스트 설정
+    setDriver(prevDriver => ({
+      ...prevDriver,
+      orderList: updatedOrderList // deliveryNum이 같은 주문들로 설정
+    }));
       setOrder(res2.data);
       console.log(res2.data)
     }))
@@ -106,7 +115,7 @@ const DeliryveryCheck = () => {
             }}>출발</button>  
             <button onClick={() => {
               statusChange('배송완료')
-            }}>도착</button>  
+            }}>도착</button>  <span className='show-btn' onClick={() => {setIsShow(!isShow)}}>배달목록</span>
             <div className='seachbar-2'>
                 <input 
                   type='text' 
@@ -119,8 +128,45 @@ const DeliryveryCheck = () => {
                 </span>
               </div>              
           </div>
-          
-          <table className='content-table'>
+          {isShow?
+          <>
+            <h3>배송 목록</h3>
+            <table className='content-table'>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <td>배송번호</td>
+                    <td>상품</td>
+                    <td>주소</td>
+                    <td>금액</td>
+                    <td>기사이름</td>
+                    <td>기사번호</td>
+                    <td>배송상태</td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {driver.orderList.map((order,i) => {
+                    return(
+                      <tr>
+                        <td></td>
+                        <td>{i+1}</td>
+                        <td>{order.orderRequest.orderItemsVO.productName}</td>
+                        <td>{order.customerAddr} ({order.customerName})</td>
+                        <td>{order.totalPrice}</td>
+                        <td>{order.delivery.deliveryDriverName}</td>
+                        <td>{order.delivery.deliveryDriverPhone}</td>
+                        <td>{order.orderStatus}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+            </table>
+          </>
+          :
+          <></>
+        }
+          <table className='content-table aaa'>
             <thead>
               <tr>
                 <td></td>
@@ -160,8 +206,7 @@ const DeliryveryCheck = () => {
             </tbody>
           </table>
         </div>
-        <span className='show-btn' onClick={() => {setIsShow(!isShow)}}>배달목록</span>
-          
+        
       </div>
 
     </div>
