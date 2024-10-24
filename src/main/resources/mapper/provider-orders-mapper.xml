@@ -16,6 +16,7 @@
         <result column="DELIVERY_NUM" property="deliveryNum" />
         <result column="DELIVERY_START_TIME" property="startTime" />
         <result column="DELIVERY_END_TIME" property="endTime" />
+        <result column="ORDER_STATUS1" property="orderStatus1" />
         <association property="orderRequest" resultMap="orderItemsMapper.request"/>
         <association property="customer" resultMap="customerMapper.customer" />
         <association property="delivery" resultMap="deliveryMapper.delivery" />
@@ -23,16 +24,42 @@
 
     <!--수주 목록 주문일자별로 묶기 -->
     <select id="orders" resultMap="orders">
+<!--        SELECT-->
+<!--        ORDER_NUM-->
+<!--        ,O.REQUEST_NUM-->
+<!--        ,ORDER_DATE-->
+<!--        ,ORDER_STATUS-->
+<!--        ,C.CUSTOMER_NUM-->
+<!--        ,C.CUSTOMER_NAME-->
+<!--        ,SUM(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE-->
+<!--        ,P.PRODUCT_NUM-->
+<!--        FROM order_requests R, orders O , customers C, products P-->
+<!--        WHERE O.REQUEST_NUM = R.REQUEST_NUM-->
+<!--        AND R.CUSTOMER_NUM = C.CUSTOMER_NUM-->
+<!--        AND R.PRODUCT_NUM = P.PRODUCT_NUM-->
+<!--        <if test="searchValue != null and !searchValue.isEmpty()">-->
+<!--            AND (-->
+<!--            ORDER_DATE LIKE CONCAT('%', #{searchValue}, '%')-->
+<!--            OR ORDER_STATUS LIKE CONCAT ('%', #{searchValue}, '%')-->
+<!--            OR C.CUSTOMER_NAME LIKE CONCAT ('%', #{searchValue}, '%')-->
+<!--            )-->
+<!--        </if>-->
+<!--        GROUP BY ORDER_DATE-->
+<!--        ORDER BY R.REQUEST_NUM DESC-->
+
         SELECT
-        ORDER_NUM
-        ,O.REQUEST_NUM
-        ,ORDER_DATE
-        ,ORDER_STATUS
-        ,C.CUSTOMER_NUM
-        ,C.CUSTOMER_NAME
-        ,SUM(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE
-        ,P.PRODUCT_NUM
-        FROM order_requests R, orders O , customers C, products P
+        ORDER_NUM,
+        O.REQUEST_NUM,
+        ORDER_DATE,
+        ORDER_STATUS,
+        C.CUSTOMER_NUM,
+        C.CUSTOMER_NAME,
+        SUM(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE,
+        P.PRODUCT_NUM,
+        CASE
+        WHEN ORDER_STATUS = '배송완료' THEN 'DONE' ELSE 'ING'
+        END AS ORDER_STATUS1
+        FROM order_requests R, orders O, customers C, products P
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
@@ -43,9 +70,12 @@
             OR C.CUSTOMER_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             )
         </if>
-        GROUP BY ORDER_DATE
+        GROUP BY ORDER_DATE, ORDER_STATUS
         ORDER BY R.REQUEST_NUM DESC
     </select>
+
+
+
 
 
     <!-- 수주 목록 거래처, 배송상태별로 묶기  -->

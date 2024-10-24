@@ -24,4 +24,5 @@ public class OrdersVO {
     private String startTime;
     private String endTime;
     private DeliveryVO delivery;
+    private String orderStatus1;
 }

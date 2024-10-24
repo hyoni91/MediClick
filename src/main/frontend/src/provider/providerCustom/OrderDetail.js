@@ -125,7 +125,7 @@ const OrderDetail = () => {
           const hasPending=res.data.some((r)=>r.orderStatus==='배송대기')
           setIsDisabled(!hasPending) // 배송대기가 하나라도 이으면 false 없으면 true
         } else {
-          setIsDisabled(true) // 기본적을 ㅗ비활성화 
+          setIsDisabled(true) // 기본적으로 비활성화 
         }
         
 
