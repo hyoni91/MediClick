@@ -1,3 +1,24 @@
 .aaa{
   margin-top: 20px;
 }
+.abc{
+
+}
+
+.bb{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.bb button{
+  width: 70px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: #fff;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+.bb button:hover{
+  background-color: aqua;
+}
