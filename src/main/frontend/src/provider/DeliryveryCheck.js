@@ -36,7 +36,9 @@ const DeliryveryCheck = () => {
       setDriver(res1.data);
       // 주문 리스트에서 deliveryNum이 같은 주문 찾기
     const updatedOrderList = res2.data.filter(order => order.deliveryNum == res1.data.deliveryNum);
+    
     console.log(updatedOrderList)
+
     // driver의 orderList에 업데이트된 리스트 설정
     setDriver(prevDriver => ({
       ...prevDriver,
@@ -109,23 +111,18 @@ const DeliryveryCheck = () => {
           </div>
         </div>
         <div className='manage-content'>
-          <div className='content-btn'>
-            <button onClick={() => {
-              statusChange('배송중')
-            }}>출발</button>  
-            <button onClick={() => {
-              statusChange('배송완료')
-            }}>도착</button>  <span className='show-btn' onClick={() => {setIsShow(!isShow)}}>배달목록</span>
-            <div className='seachbar-2'>
-                <input 
-                  type='text' 
-                  placeholder='주문일자'
-                />
-                <span
-                  onClick={()=>{}}
-                >
-                  <i className="fa-solid fa-magnifying-glass" />
-                </span>
+          <div className='content-btn bb'>
+            <div>
+              <button onClick={() => {
+                statusChange('배송중')
+              }}>출발</button>  
+              <button onClick={() => {
+                statusChange('배송완료')
+              }}>도착</button>  
+            </div>
+            <div className='abc'>
+            <span className='show-btn' onClick={() => {setIsShow(!isShow)}}>배달목록</span>
+                
               </div>              
           </div>
           {isShow?

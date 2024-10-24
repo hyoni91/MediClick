@@ -41,6 +41,7 @@
         delivery D ON O.DELIVERY_NUM = D.DELIVERY_NUM
         WHERE
         O.REQUEST_NUM = R.REQUEST_NUM
+        order by o.ORDER_STATUS
     </select>
 
     <insert id="insertDriver">
