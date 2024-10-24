@@ -33,7 +33,10 @@ const Inventory = () => {
               onClick={()=>{}}
             >
             </span>
-            </div>              
+            </div>       
+            {products.length === 0 ? (
+      <p>데이터가 없습니다.</p>
+    ) : (
       <table className='inventoryTable'>
         <thead>
           <tr>
@@ -64,8 +67,9 @@ const Inventory = () => {
           ))}
         </tbody>
       </table>
-    </div>
-  )
+    )}
+  </div>
+  );
 }
 
 export default Inventory
