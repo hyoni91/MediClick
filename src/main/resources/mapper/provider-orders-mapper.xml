@@ -23,7 +23,7 @@
     </resultMap>
 
     <!--수주 목록 주문일자별로 묶기 -->
-    <select id="orders" resultMap="orders">
+    <select id="orders" resultMap="orders" >
 <!--        SELECT-->
 <!--        ORDER_NUM-->
 <!--        ,O.REQUEST_NUM-->
