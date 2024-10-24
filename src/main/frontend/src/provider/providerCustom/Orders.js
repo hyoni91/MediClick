@@ -238,7 +238,11 @@ const Orders = () => {
                     <td>{totalPrice(order.orderDate).toLocaleString()}원</td>
                     <td>
                       {
-                      <>{order.orderStatus}</>
+                      <>{order.orderStatus!='배송완료'?
+                        <p>미완료</p>
+                        :
+                        null
+                      }</>
                       }
                     </td>
                     <td>
@@ -246,6 +250,7 @@ const Orders = () => {
                         orderDetail && stocks && // 데이터가 로드 되었는지 확인
                         orderDetail.reduce((totalQuantity,i)=>{
                           if(i.orderStatus==='배송대기' && order.productNum===i.productNum){
+                            console.log(totalQuantity)
                             return totalQuantity+i.quantity // 배송대기 상태의 수량을 합산
                           }
                           return totalQuantity
