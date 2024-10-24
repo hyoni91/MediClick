@@ -38,12 +38,15 @@ const DeliryveryCheck = () => {
     const updatedOrderList = res2.data.filter(order => order.deliveryNum == res1.data.deliveryNum);
     
     console.log(updatedOrderList)
-
+    const updatedCheckList = updatedOrderList
+      .filter(order => oneCheck.includes(order.orderNum)) // 기존에 체크된 항목만 필터링
+      .map(order => order.orderNum); // 필터링된 항목의 orderNum만 배열로 저장
     // driver의 orderList에 업데이트된 리스트 설정
     setDriver(prevDriver => ({
       ...prevDriver,
       orderList: updatedOrderList // deliveryNum이 같은 주문들로 설정
     }));
+    setOneCheck(updatedCheckList)
       setOrder(res2.data);
       console.log(res2.data)
     }))
@@ -147,7 +150,9 @@ const DeliryveryCheck = () => {
                     return(
                       <tr>
                         <td>
-                        <input type='checkbox' value={order.orderNum} onChange={(e) => {
+                        <input type='checkbox' value={order.orderNum} 
+                        checked={oneCheck.includes(order.orderNum)}
+                        onChange={(e) => {
                           console.log(order.orderNum)
                           changeCheck(order.orderNum, e.target.checked)} }/>
                         </td>
@@ -187,7 +192,9 @@ const DeliryveryCheck = () => {
                   return(
                     <tr key={i}>
                       <td>
-                        <input type='checkbox' value={item.orderNum} onChange={(e) => {
+                        <input type='checkbox' value={item.orderNum} 
+                        checked ={oneCheck.includes(item.orderNum)}
+                        onChange={(e) => {
                           console.log(item.orderNum)
                           changeCheck(item.orderNum, e.target.checked)} }/>
                       </td>
