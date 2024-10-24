@@ -1,14 +1,14 @@
 .aaa{
   margin-top: 20px;
 }
-.abc{
-
+.delivery-h3{
+  margin-bottom: 20px;
 }
 
 .bb{
   display: flex;
   justify-content: space-between;
-  margin: 0 20px;
+  margin: 30px 20px;
 }
 
 .bb button{

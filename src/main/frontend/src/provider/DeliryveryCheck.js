@@ -130,7 +130,7 @@ const DeliryveryCheck = () => {
           </div>
           {isShow?
           <>
-            <h3>배송 목록</h3>
+            <h3 className='delivery-h3'>배송 목록</h3>
             <table className='content-table'>
                 <thead>
                   <tr>
