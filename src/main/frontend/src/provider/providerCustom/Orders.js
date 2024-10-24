@@ -59,6 +59,7 @@ const Orders = () => {
     axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
       setOrders(res.data)
+      console.log(res.data)
       let sum = 0;
       let orderSum = 0;
       res.data.forEach((p,i)=>{
@@ -222,7 +223,7 @@ const Orders = () => {
             </thead>
             <tbody>
               {
-                orders.filter(order => order.orderStatus === '배송대기' || order.orderStatus === '배송중').map((order,i)=>{
+                orders.filter(order => order.orderStatus1 == "ING").map((order,i)=>{
                   return(
                     order.orderStatus != '배송완료' ?
                   <tr key={i}>
@@ -238,7 +239,11 @@ const Orders = () => {
                     <td>{totalPrice(order.orderDate).toLocaleString()}원</td>
                     <td>
                       {
-                      <>{order.orderStatus}</>
+                      <>{order.orderStatus!='배송완료'?
+                        <p>미완료</p>
+                        :
+                        null
+                      }</>
                       }
                     </td>
                     <td>
@@ -246,6 +251,7 @@ const Orders = () => {
                         orderDetail && stocks && // 데이터가 로드 되었는지 확인
                         orderDetail.reduce((totalQuantity,i)=>{
                           if(i.orderStatus==='배송대기' && order.productNum===i.productNum){
+                            console.log(totalQuantity)
                             return totalQuantity+i.quantity // 배송대기 상태의 수량을 합산
                           }
                           return totalQuantity
@@ -290,7 +296,7 @@ const Orders = () => {
                       </tr>
                     </thead>
                     {
-                        orders.filter(order => order.orderStatus === '배송완료').map((e,i)=>{
+                        orders.filter(order => order.orderStatus1 === 'DONE').map((e,i)=>{
                         return(
                           <tr key={i}>
                             <td>{i+1}</td>
