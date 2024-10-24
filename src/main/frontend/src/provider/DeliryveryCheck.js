@@ -146,8 +146,12 @@ const DeliryveryCheck = () => {
                   {driver.orderList.map((order,i) => {
                     return(
                       <tr>
-                        <td></td>
-                        <td>{i+1}</td>
+                        <td>
+                        <input type='checkbox' value={order.orderNum} onChange={(e) => {
+                          console.log(order.orderNum)
+                          changeCheck(order.orderNum, e.target.checked)} }/>
+                        </td>
+                        <td>{i}</td>
                         <td>{order.orderRequest.orderItemsVO.productName}</td>
                         <td>{order.customerAddr} ({order.customerName})</td>
                         <td>{order.totalPrice}</td>
