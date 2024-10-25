@@ -159,7 +159,7 @@ const DeliryveryCheck = () => {
                         <td>{i}</td>
                         <td>{order.orderRequest.orderItemsVO.productName}</td>
                         <td>{order.customerAddr} ({order.customerName})</td>
-                        <td>{order.totalPrice}</td>
+                        <td>{order.totalPrice.toLocaleString()}원</td>
                         <td>{order.delivery.deliveryDriverName}</td>
                         <td>{order.delivery.deliveryDriverPhone}</td>
                         <td>{order.orderStatus}</td>
@@ -187,7 +187,7 @@ const DeliryveryCheck = () => {
               </tr>
             </thead>
             <tbody>
-              {order && order.length === 0 ? <tr><td colSpan={10}>ssssssssssssssss</td></tr>:
+              {order && order.length === 0 ? <tr><td colSpan={10}>주문 데이터가 없습니다.</td></tr>:
                 order.map((item ,i) => {
                   return(
                     <tr key={i}>
