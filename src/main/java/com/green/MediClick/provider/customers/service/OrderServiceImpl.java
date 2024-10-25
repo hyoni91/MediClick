@@ -114,7 +114,10 @@ public class OrderServiceImpl implements OrderService {
         return sqlSession.selectList("ordersMapper.sumQnt" , productNum);
     }
 
-
+    @Override
+    public void delete(int orderNum) {
+        sqlSession.delete("ordersMapper.delete", orderNum);
+    }
 
 
 }

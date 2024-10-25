@@ -205,7 +205,7 @@ const DeliryveryCheck = () => {
                       <td>{item.delivery.deliveryDriverName}</td>
                       <td>{item.delivery.deliveryDriverPhone}</td>
                       <td>{item.deliveryStatus}</td>
-                      <td>{item.orderStatus == '배송중' ? '배송중' : 
+                      <td>{item.orderStatus == '배송중' ? '배송신청' : 
                           item.orderStatus == '배송완료' ? '배송완료' : '배송 대기'}</td>
                     </tr>
                   )

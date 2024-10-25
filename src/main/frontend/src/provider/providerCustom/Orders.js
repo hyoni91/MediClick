@@ -225,7 +225,7 @@ const Orders = () => {
               {
                 orders.filter(order => order.orderStatus1 == "ING").map((order,i)=>{
                   return(
-                    order.orderStatus != '배송완료' ?
+                    // order.orderStatus != '배송완료' ?
                   <tr key={i}>
                     <td>{i+1}</td>
                     <td>
@@ -258,8 +258,8 @@ const Orders = () => {
                       }
                     </td>
                   </tr>
-                    :
-                  <></>
+                    // :
+                  // <></>
                   )
                 })
               }
