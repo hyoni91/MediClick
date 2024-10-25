@@ -175,12 +175,12 @@
 
 
     <!--재고 입고 (아직 MVC없음 2024-10-08-->
-    <update id="incoming">
-        UPDATE inventory
-        SET INCOMING_QTY = 100,
-        CURRENT_STOCK = CURRENT_STOCK + 100
-        WHERE INVENTORY_NUM = 6
-    </update>
+<!--    <update id="incoming">-->
+<!--        UPDATE inventory-->
+<!--        SET INCOMING_QTY = 100,-->
+<!--        CURRENT_STOCK = CURRENT_STOCK + 100-->
+<!--        WHERE INVENTORY_NUM = 6-->
+<!--    </update>-->
 
     <!--수주 : 배송대기 아이템 총 수량 -->
     <select id="sumQnt" resultType="int">
@@ -190,6 +190,15 @@
         and PRODUCT_NUM = #{product_num}
         AND o.ORDER_STATUS = '배송대기'
     </select>
+
+
+    <!--주문취소 삭제-->
+    <delete id="delete">
+        DELETE from orders
+        WHERE ORDER_STATUS = '주문취소'
+        AND ORDER_NUM = #{orderNum}
+
+    </delete>
 
 
 </mapper>

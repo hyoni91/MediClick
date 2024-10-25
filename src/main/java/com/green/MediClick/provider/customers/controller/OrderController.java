@@ -76,4 +76,10 @@ public class OrderController {
         return orderService.sumQnt(productNum);
     }
 
+    //주문취소 삭제
+    @DeleteMapping("/deleteOrder/{orderNum}")
+    public void delete(@PathVariable int orderNum){
+        orderService.delete(orderNum);
+    }
+
 }

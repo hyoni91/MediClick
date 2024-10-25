@@ -18,7 +18,7 @@ const ManageCustomer = () => {
 
   //체크박스 설정
   const [chks, setChks] = useState([])
-  const [chkAll, setChkAll] = useState(false)
+  // const [chkAll, setChkAll] = useState(false)
 
   //체크 값 받기 
   const [customerNum, setCustomerNum] = useState([])
@@ -144,11 +144,11 @@ const ManageCustomer = () => {
 
 
     //체크박스 함수 
-    const handleCheckAll = () => {
-      const newChks = chks.map(() => !chkAll);
-      setChks(newChks);
-      setChkAll(!chkAll);
-    };
+    // const handleCheckAll = () => {
+    //   const newChks = chks.map(() => !chkAll);
+    //   setChks(newChks);
+    //   setChkAll(!chkAll);
+    // };
   
     const handleCheck = (index,e) => {
       //불변성유지를 위해 배열 복사
@@ -157,7 +157,7 @@ const ManageCustomer = () => {
       newChks[index] = !newChks[index];
       setChks(newChks);
       //newChks.every(chk => chk)는 배열의 모든 요소가 true일 때만 true를 반환
-      setChkAll(newChks.every(chk => chk)); 
+      // setChkAll(newChks.every(chk => chk)); 
 
         // 하나라도 체크되어 있는지 확인
       const hasChecked = newChks.some(chk => chk);
@@ -230,11 +230,11 @@ const ManageCustomer = () => {
             <thead>
               <tr>
                 <td>
-                  <input 
+                  {/* <input 
                     type='checkbox'
                     checked={chkAll} 
                     onChange={()=>{handleCheckAll()}} 
-                  />
+                  /> */}
                 </td>
                 <td>거래처명</td>
                 <td>대표자 이름</td>

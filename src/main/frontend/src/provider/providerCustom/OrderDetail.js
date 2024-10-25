@@ -102,7 +102,7 @@ const OrderDetail = () => {
 
 
   // 배송신청 누르면 배송현황을 배송신청중으로 바꾸기
-  // 배송 테이블 생성하면 배송 테이블에 저장하기(db작업)
+  // 배송신청시 재고 수량 업데이트(outgoing)
   function changeStatus(){
 
     if(window.confirm('배송 신청을 진행하시겠습니까?')){
@@ -183,6 +183,27 @@ const OrderDetail = () => {
   const pendingDelivery=orderDetail.some(o=>o.orderStatus=='배송대기')
 
 
+
+  //주문취소 삭제버튼
+  const removeOrder=(orderNum , orderStatus)=>{
+    if(orderStatus == '주문취소'){
+      const result = window.confirm('주문을 취소하시겠습니까?')
+      if(result){
+        axios.delete(`/orders/deleteOrder/${orderNum}`)
+        .then((res)=>{})
+        .catch((error)=>{
+          console.log(error)
+        })
+      }
+    }else{
+      alert('다시한 번 확인해 주세요')
+    }
+  }
+
+
+    
+
+
   return (
     <div className='manage-contailner'>
       <div className='manage-main'>
@@ -221,6 +242,16 @@ const OrderDetail = () => {
         </div>
         <div className='manage-content'>
           <table className='content-table'>
+            <colgroup>
+              <col width={'5%'}/>
+              <col width={'*'}/>
+              <col width={'10%'}/>
+              <col width={'15%'}/>
+              <col width={'15%'}/>
+              <col width={'15%'}/>
+              <col width={'5%'}/>
+              <col width={'10%'}/>
+            </colgroup>
             <thead>
               <tr>
                 <td><input type='checkbox' 
@@ -229,14 +260,13 @@ const OrderDetail = () => {
                   onChange={(e)=>{
                     orderNums()
                     allCheckedHandler(e.target.checked)}}/></td>
-                {/* <td>주문날짜</td> */}
-                {/* <td>거래처명</td> */}
                 <td>상품명</td>
                 <td>수량</td>
                 <td>단가</td>
                 <td>합계</td>
                 <td>배송현황</td>
                 <td>재고</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -254,8 +284,6 @@ const OrderDetail = () => {
                             orderNums()
                           }
                           }}/></td>
-                      {/* <td>{orderDetail[0].orderDate}</td> */}
-                      {/* <td>{orderDetail[0].customerName}</td> */}
                       <td>{o.orderRequest.orderItemsVO.productName}</td>
                       <td>{o.orderRequest.quantity}</td>
                       <td>{o.orderRequest.orderItemsVO.productPrice.toLocaleString()}원</td>
@@ -272,6 +300,20 @@ const OrderDetail = () => {
                           null
                         } */}
                       <CheckStock orderSatus={o.orderStatus} productNum={o.orderRequest.orderItemsVO.productNum}/>
+                    </td>
+                    <td>
+                      {
+                        o.orderStatus == '주문취소'?
+                        <button 
+                        type='button'
+                        onClick={()=>{removeOrder(o.orderNum)}}
+                      >
+                        삭제
+                      </button>
+                        :
+                        null
+                      }
+                      
                     </td>
                   </tr>
                   )

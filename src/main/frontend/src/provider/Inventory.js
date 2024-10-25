@@ -20,7 +20,7 @@ const Inventory = () => {
   return (
     <div className='inventory-wrap'>
       <h3>현 재고 현황</h3>
-          <div className='inverntory-seachbar'>
+          {/* <div className='inverntory-seachbar'>
             <input 
               type='text' 
               placeholder='날짜/현황/거래처명'
@@ -33,7 +33,7 @@ const Inventory = () => {
               onClick={()=>{}}
             >
             </span>
-            </div>       
+            </div>        */}
             {products.length === 0 ? (
       <p>데이터가 없습니다.</p>
     ) : (
@@ -58,7 +58,7 @@ const Inventory = () => {
               <td>{product.productNum}</td>
               <td>{product.productName}</td>
               <td>{product.stockDate}</td>
-              <td>{product.outgoingqty}</td>
+              <td>{product.outDate}</td>
               <td>{product.initialStock}</td>
               <td>{product.incomimgQty}</td>
               <td>{product.outgoingQty}</td>

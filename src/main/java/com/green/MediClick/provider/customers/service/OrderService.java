@@ -34,4 +34,7 @@ public interface OrderService {
     //배송대기 상태의 제품 수량 합계
     List<Integer> sumQnt (int productNum);
 
+    //주문취소 삭제
+    void delete(int orderNum);
+
 }
