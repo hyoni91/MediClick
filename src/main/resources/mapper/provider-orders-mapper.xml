@@ -48,17 +48,17 @@
 <!--        ORDER BY R.REQUEST_NUM DESC-->
 
         SELECT
-        ORDER_NUM,
-        O.REQUEST_NUM,
-        ORDER_DATE,
-        ORDER_STATUS,
-        C.CUSTOMER_NUM,
-        C.CUSTOMER_NAME,
-        SUM(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE,
-        P.PRODUCT_NUM,
-        CASE
-        WHEN ORDER_STATUS = '배송완료' THEN 'DONE' ELSE 'ING'
-        END AS ORDER_STATUS1
+            ORDER_NUM,
+            O.REQUEST_NUM,
+            ORDER_DATE,
+            ORDER_STATUS,
+            C.CUSTOMER_NUM,
+            C.CUSTOMER_NAME,
+            SUM(R.QUANTITY * P.PRODUCT_PRICE) as TOTALPRICE,
+            P.PRODUCT_NUM,
+            CASE
+            WHEN ORDER_STATUS = '배송완료' THEN 'DONE' ELSE 'ING'
+            END AS ORDER_STATUS1
         FROM order_requests R, orders O, customers C, products P
         WHERE O.REQUEST_NUM = R.REQUEST_NUM
         AND R.CUSTOMER_NUM = C.CUSTOMER_NUM
@@ -125,7 +125,7 @@
         AND C.CUSTOMER_NUM = R.CUSTOMER_NUM
         AND R.PRODUCT_NUM = P.PRODUCT_NUM
         AND O.ORDER_DATE = #{orderDate}
-        ORDER BY FIELD(ORDER_STATUS, '배송대기','배송중','배송완료' ) DESC
+        ORDER BY FIELD(ORDER_STATUS, '배송완료','배송중','배송대기' ) DESC
     </select>
 
 
