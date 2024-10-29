@@ -12,7 +12,7 @@ const MedicalSupplies = () => {
     nowPage : 1
   });
 
-  //조회 결과를 저장핧 변수
+  //조회 결과를 저장할 변수
   const [resultList, setResultList] = useState({
     items : [],
     pageInfo : {}
@@ -293,6 +293,7 @@ console.log(cateNum)
             <input type='text' name='stock' onChange={(e) => {mschange(e)}} />
             
             <div>상세정보</div>
+            <pre></pre>
             <input type='text' name='detail' onChange={(e) => {mschange(e)
               console.log(medicalSupplies)
             }} />
@@ -329,10 +330,9 @@ console.log(cateNum)
         <table className='medicalSupplies-itemtable'>
           <colgroup>
           <col width={'10%'}/>
-          <col width={'30%'}/>
+          <col width={'25%'}/>
           <col width={'20%'}/>
-          <col width={'10%'}/>
-          <col width={'*0%'}/>
+          <col width={'*'}/>
           </colgroup>
           <thead>
             <tr>

@@ -77,9 +77,10 @@
     </select>
 
     <select id="itemListCount" resultType="int">
-        SELECT COUNT(PRODUCT_NUM) FROM PRODUCTS
+        SELECT COUNT(PRODUCT_NUM) FROM PRODUCTS,CATEGORY
+        WHERE CATEGORY.CATE_NUM = PRODUCTS.CATE_NUM
         <if test="searchValue != null and !searchValue.isEmpty()">
-            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
         </if>
     </select>
     <insert id="insertItemImg">
