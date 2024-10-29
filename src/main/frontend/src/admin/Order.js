@@ -94,11 +94,22 @@ const Order = () => {
       //전체 선택 클릭 시 데이터의 모든 id를 담은 배열로 checkItems 상태 업데이트
       const idArray=[]
       itemList.forEach((el)=>idArray.push(el.productNum))
+
+      // 수량 업데이트 : 모든 개별 항목의 수량을 10으로 설정
+      // itemList.forEach(item=>{
+      //   insertOrderDatas(item.productNum,10) // 수량 10으로 업데이트
+      // })
+
       setCheckItems(idArray)
     }
     else{
       //전체 선택 해제 시 checkItems를 빈 배열로 상태 업데이트
       setCheckItems([])
+
+      //전체 선택 해제 시 모든 개별 항목의 수량을 0으로 설정
+      // itemList.forEach(item=>{
+      //   insertOrderDatas(item.productNum,0) // 수량 0으로 업데이트 
+      // })
     }
   }
 
@@ -341,13 +352,12 @@ const Order = () => {
             [e.target.name]:e.target.value,
             quantity:finalQuantity,
             productNum:eNum,
-            customerNum: e.target.name === 'cutomerNum'? e.target.value:1
+            customerNum:e.target.name === 'cutomerNum'? e.target.value:1
           }
         ]
       }
     })
   }
-
 
   console.log(orderDatas)
 
@@ -511,7 +521,10 @@ const Order = () => {
                       <td><input type='checkbox'
                         //데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
                         checked={checkItems.length === itemList.length ? true : false}
-                        onChange={(e)=>allCheckedHandler(e.target.checked)}
+                        onChange={(e)=>
+
+                          allCheckedHandler(e.target.checked)
+                        }
                       ></input></td>
                       <td>카테고리</td>
                       <td>품목코드</td>
@@ -535,9 +548,13 @@ const Order = () => {
                               id={item.productNum}
                               // selectChecked={selectChecked}
                               onChange={(e)=>{
-                                const isChecked = e.target.checked
+
+                                const isChecked = e.target.checked // 전체 체크 여부 확인
+
+                                // 모든 개별 항목 체크박스와 수량 업데이트
                                 const quantity = isChecked ? (document.querySelector(`input[name='quantity']`).value || 10) : 0 // 체크되면 기본값10 해제시 0
-                                checkHandled(e.target.checked,item.productNum)
+
+                                checkHandled(isChecked,item.productNum)
                                 insertOrderDatas(e,item.productNum,quantity) // 수량 업데이트 
                                 }}
                             ></input></td>
