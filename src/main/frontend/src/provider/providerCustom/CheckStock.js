@@ -49,7 +49,6 @@ const CheckStock = ({productNum, orderSatus}) => {
   }
 
 
-
   return (
     <div>
       {result()}

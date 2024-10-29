@@ -59,7 +59,6 @@ const Orders = () => {
     axios.post(`/orders/orderlist`,searchValue)
     .then((res)=>{
       setOrders(res.data)
-      console.log(res.data)
       let sum = 0;
       let orderSum = 0;
       res.data.forEach((p,i)=>{
@@ -116,7 +115,7 @@ const Orders = () => {
       getStock() // 주문 상세 정보가 업데이트되면 재고 데이터 가져오기 
     // }
   },[orderDetail])
-  
+
 
   function searchOrder(){
     axios.post(`/orders/orderlist`,searchValue)
@@ -151,8 +150,6 @@ const Orders = () => {
     })
     return result
   }
-
-
 
   return (
     <div className='manage-contailner'>
@@ -227,7 +224,7 @@ const Orders = () => {
                   return(
                     // order.orderStatus != '배송완료' ?
                   <tr key={i}>
-                    <td>{i+1}</td>
+                    <td>{orders.length-i}</td>
                     <td>
                       <span 
                     onClick={()=>{
@@ -239,7 +236,8 @@ const Orders = () => {
                     <td>{totalPrice(order.orderDate).toLocaleString()}원</td>
                     <td>
                       {
-                      <>{order.orderStatus!='배송완료'?
+                      <>{
+                        order.orderStatus!='배송완료'?
                         <p>미완료</p>
                         :
                         null
@@ -250,16 +248,17 @@ const Orders = () => {
                       {
                         orderDetail && stocks && // 데이터가 로드 되었는지 확인
                         orderDetail.reduce((totalQuantity,i)=>{
-                          if(i.orderStatus==='배송대기' && order.productNum===i.productNum){
-                            console.log(totalQuantity)
+
+                          if(i.orderStatus==='배송대기'){
+
                             return totalQuantity+i.quantity // 배송대기 상태의 수량을 합산
                           }
                           return totalQuantity
-                        },0) > stocks[order.productNum] && order.orderStatus=='배송대기' && isRendered? ( // 재고와 비교 + 현재상태 배송대기
-                          <span className='check-stock'>
+                        },0) >= stocks[order.productNum] && order.orderStatus=='배송대기' && isRendered? // 재고와 비교 + 현재상태 배송대기
+                        ( <span className='check-stock'>
                             <i className="fa-solid fa-circle-exclamation" />
-                          </span>
-                        ) : null
+                          </span> )
+                         : null
                       }
                     </td>
                   </tr>
@@ -296,24 +295,23 @@ const Orders = () => {
                       </tr>
                     </thead>
                     {
-                        orders.filter(order => order.orderStatus1 === 'DONE').map((e,i)=>{
-                        return(
-                          <tr key={i}>
-                            <td>{i+1}</td>
-                            <td> 
-                              <span 
-                                onClick={()=>{
-                                  navigate(`/provider/order_detail/${e.orderDate}`)
-                                  }}>{e.customerName}
-                              </span>
-                            </td>
-                            <td>{e.orderDate}</td>
-                            <td>{e.totalPrice.toLocaleString()}원</td>
-                            <td>{e.orderStatus}</td>
-                            <td>완료</td>
-                          </tr>
+                      orders.filter(order => order.orderStatus1 === 'DONE').map((e,i)=>{
+                      return(
+                        <tr key={i}>
+                          <td>{i+1}</td>
+                          <td> 
+                            <span 
+                              onClick={()=>{
+                                navigate(`/provider/order_detail/${e.orderDate}`)
+                                }}>{e.customerName}
+                            </span>
+                          </td>
+                          <td>{e.orderDate}</td>
+                          <td>{e.totalPrice.toLocaleString()}원</td>
+                          <td>{e.orderStatus}</td>
+                          <td>완료</td>
+                        </tr>
                         )
-
                       })
                     }
                     </table>

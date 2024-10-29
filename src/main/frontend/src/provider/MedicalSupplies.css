@@ -179,9 +179,12 @@
   background-color: #F1F5F9;
 }
 
-.medicalSupplies-itemtable td,
+
 .medicalSupplies-itemtable tr{
   border-bottom: 1px solid  rgb(165, 165, 165);
+  vertical-align: middle;
+}
+.medicalSupplies-itemtable td{
   vertical-align: middle;
 }
 
