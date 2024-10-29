@@ -189,7 +189,7 @@ console.log(cateNum)
       })
       .catch((error)=>{console.log(error)})  ;
     //}
-  }, [itemListData.nowPage]);
+  }, [itemListData.nowPage]); 
 
   //페이징 그리기
   function drawPagination(){

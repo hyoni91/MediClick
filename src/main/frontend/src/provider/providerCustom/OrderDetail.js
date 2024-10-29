@@ -201,7 +201,6 @@ const OrderDetail = () => {
   }
 
 
-    
 
 
   return (
@@ -306,7 +305,7 @@ const OrderDetail = () => {
                         o.orderStatus == '주문취소'?
                         <button 
                         type='button'
-                        onClick={()=>{removeOrder(o.orderNum)}}
+                        onClick={()=>{removeOrder( o.orderNum)}}
                       >
                         삭제
                       </button>
