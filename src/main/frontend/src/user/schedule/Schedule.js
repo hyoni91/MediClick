@@ -48,10 +48,14 @@ const Schedule = () => {
 
 
   // 날짜를 계산
+  const today = new Date()
+  let todayFormat = today.getFullYear() + "년" + today.getMonth() + "월" + today.getDay()+ "일"
   const minDate = new Date(); // 현재 날짜
   minDate.setDate(minDate.getDate()+1) // 내일 날짜 
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 3); // 3개월 후
+
+  console.log(todayFormat)
 
   // 선택한 날짜 update
   const [value, onChange] = useState(minDate) //초기값설정
@@ -406,7 +410,7 @@ const Schedule = () => {
                   <input type='hidden' name='memName' 
                   value={loginInfo? loginInfo.memName : ""}/>
                   <input type='hidden' name='regDate' 
-                  value={now}/>
+                  value={todayFormat}/>
                   <input type='hidden' name='schDate' 
                   value={appo.schDate}/>
                   <input type='hidden' name='schTime'  

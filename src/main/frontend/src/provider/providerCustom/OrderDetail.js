@@ -184,22 +184,32 @@ const OrderDetail = () => {
 
 
 
-  //주문취소 삭제버튼
-  const removeOrder=(orderNum , orderStatus)=>{
-    if(orderStatus == '주문취소'){
-      const result = window.confirm('주문을 취소하시겠습니까?')
-      if(result){
-        axios.delete(`/orders/deleteOrder/${orderNum}`)
-        .then((res)=>{})
-        .catch((error)=>{
-          console.log(error)
-        })
-      }
-    }else{
-      alert('다시한 번 확인해 주세요')
-    }
-  }
+  // //주문취소 삭제버튼
+  // const removeOrder=(orderNum , orderStatus)=>{
+  //   if(orderStatus == '주문취소'){
+  //     const result = window.confirm('주문을 취소하시겠습니까?')
+  //     if(result){
+  //       axios.delete(`/orders/deleteOrder/${orderNum}`)
+  //       .then((res)=>{})
+  //       .catch((error)=>{
+  //         console.log(error)
+  //       })
+  //     }
+  //   }else{
+  //     alert('다시한 번 확인해 주세요')
+  //   }
+  // }
 
+    //주문취소 삭제버튼
+    const removeOrder=(orderNum)=>{
+      axios.delete(`/orders/deleteOrder/${orderNum}`)
+      .then((res)=>{
+        alert('삭제가 완료되었습니다.')
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    }
 
 
 
@@ -305,7 +315,7 @@ const OrderDetail = () => {
                         o.orderStatus == '주문취소'?
                         <button 
                         type='button'
-                        onClick={()=>{removeOrder( o.orderNum)}}
+                        onClick={()=>{removeOrder(o.orderNum)}}
                       >
                         삭제
                       </button>

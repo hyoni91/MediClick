@@ -78,7 +78,7 @@ public class OrderController {
 
     //주문취소 삭제
     @DeleteMapping("/deleteOrder/{orderNum}")
-    public void delete(@PathVariable int orderNum){
+    public void delete(@PathVariable("orderNum") int orderNum){
         orderService.delete(orderNum);
     }
 
