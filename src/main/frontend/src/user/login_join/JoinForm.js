@@ -110,19 +110,21 @@ const handlePhoneChange = (e) => {
     let isValid = true;
     let errors = {};
     // 이름 검사
-    if (!memberData.memName) {
+    const koEnRegex = /^[가-힣a-zA-Z]*$/;
+    if (!memberData.memName || koEnRegex) {
+      
       isValid = false;
-      errors.memName = '이름을 입력해주세요.';
+      errors.memName = '한글 또는 영어로만 입력하세요';
     }
     // 주민 검사
-    if (!memberData.memRrn) {
+    if (!memberData.memRrn || memberData.memRrn.length != 13) {
       isValid = false;
-      errors.memRrn = '주민번호를 입력해주세요.';
+      errors.memRrn = '주민번호 13자리 입력해주세요.';
     }
     // 전화번호 검사
-    if (!memberData.memTel) {
+    if (!memberData.memTel || memberData.memTel.length < 10) {
       isValid = false;
-      errors.memTel = '전화번호을 입력해주세요.';
+      errors.memTel = '전화번호가 중복되었거나 올바르지 않습니다.';
     }
     setErrors(errors);
     return isValid;
@@ -136,6 +138,7 @@ const handlePhoneChange = (e) => {
     console.log(memberData)
     // 유효성 검사
     if (validate()){
+      console.log("가입할 회원 데이터:", memberData);
     axios.post('/member/insertMember',memberData)
     .then((res) => {
       if(res.data.memRole === 'ADMIN'){
