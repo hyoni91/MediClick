@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/hyoni91/MediClick.git/static/css/main.2fcac050.css",
-    "main.js": "/hyoni91/MediClick.git/static/js/main.412ac9fe.js",
-    "static/js/453.abd36b29.chunk.js": "/hyoni91/MediClick.git/static/js/453.abd36b29.chunk.js",
-    "static/media/logo.svg": "/hyoni91/MediClick.git/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/hyoni91/MediClick.git/index.html",
-    "main.2fcac050.css.map": "/hyoni91/MediClick.git/static/css/main.2fcac050.css.map",
-    "main.412ac9fe.js.map": "/hyoni91/MediClick.git/static/js/main.412ac9fe.js.map",
-    "453.abd36b29.chunk.js.map": "/hyoni91/MediClick.git/static/js/453.abd36b29.chunk.js.map"
+    "main.css": "/hyoni91/static/css/main.2fcac050.css",
+    "main.js": "/hyoni91/static/js/main.fbc1c926.js",
+    "static/js/453.abd36b29.chunk.js": "/hyoni91/static/js/453.abd36b29.chunk.js",
+    "static/media/logo.svg": "/hyoni91/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/hyoni91/index.html",
+    "main.2fcac050.css.map": "/hyoni91/static/css/main.2fcac050.css.map",
+    "main.fbc1c926.js.map": "/hyoni91/static/js/main.fbc1c926.js.map",
+    "453.abd36b29.chunk.js.map": "/hyoni91/static/js/453.abd36b29.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2fcac050.css",
-    "static/js/main.412ac9fe.js"
+    "static/js/main.fbc1c926.js"
   ]
 }
