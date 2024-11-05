@@ -34,7 +34,7 @@
   justify-content: left;
   align-items: start;
   gap: 0px;
-  margin-right: 500px;
+  /* margin-right: 500px; */
   margin-bottom: 50px;
   /* margin-right: 80px; */
   /* border: 1px solid red; */
@@ -53,6 +53,7 @@
 
 .medicalSupplies-div{
   display: flex;
+  margin: auto;
   align-items: center;
   /* width: 70%; */
   align-items: start;

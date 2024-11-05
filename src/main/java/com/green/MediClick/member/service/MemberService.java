@@ -18,4 +18,6 @@ public interface MemberService {
 
     // 회원가입 후 "ADMIN"이면 의사정보도 추가
     void insertDoctor(DoctorVO doctorVO);
+
+    boolean isCheck(String memRrn);
 }

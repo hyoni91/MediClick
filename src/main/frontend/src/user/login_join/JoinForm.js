@@ -20,6 +20,30 @@ const JoinForm = () => {
   //이동페이지 할수있게 네비게이션
   const navigate = useNavigate()
 
+  //아이디 중복 확인
+  function checkId(){
+    //빈값은 등록 X
+    if(memberData.memRrn == ''){
+      alert('ID를 입력하세요')
+      return;
+    }
+
+    //아이디를 자바로 들고가기
+    axios.get(`/member/isCheck/${memberData.memRrn}`)
+    .then((res)=>{
+      const r = (res.data)
+      console.log(r)
+      
+      if(r){
+        alert('사용가능한 아이디입니다')
+      }
+      else{
+        alert('중복')
+      }
+
+    })
+    .catch((error)=>{console.log(error)})
+  }
   //데이터가 바뀔때마다 저장되는 함수
   const changeData = (e) => {
     const {name, value} = e.target;
@@ -111,7 +135,7 @@ const handlePhoneChange = (e) => {
     let errors = {};
     // 이름 검사
     const koEnRegex = /^[가-힣a-zA-Z]*$/;
-    if (!memberData.memName || koEnRegex) {
+    if (!memberData.memName || !koEnRegex) {
       
       isValid = false;
       errors.memName = '한글 또는 영어로만 입력하세요';
@@ -130,6 +154,7 @@ const handlePhoneChange = (e) => {
     return isValid;
   }
   const insertJoin = () => {
+    checkId()
     //약관동의
     if(!privacyCheck || !serviceCheck){
       alert('약관 동의해주세요')

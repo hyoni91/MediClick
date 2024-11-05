@@ -42,4 +42,9 @@ public class MemberController {
     public MemberVO getOneMem(@PathVariable("memNum")String memNum){
         return memberService.getOneMem(memNum);
     }
+
+    @GetMapping("/isCheck")
+    public void isCheck(@PathVariable MemberVO memberVO){
+        memberService.isCheck(memberVO.getMemRrn());
+    }
 }

@@ -216,9 +216,9 @@ console.log(cateNum)
   return (
 
     <div className='medicalSupplies-container'>
-      <h3>아이템 관리</h3>
       <div className='medicalSupplies-flex'>
         <div className='category-div'>
+          <h3>아이템 관리</h3>
           <div >
             <select key={''} className='cateSelect' name='cateNum' value={cateNum} onChange={(e) => {setCateNum(e.target.value)}}>
               { category =='' || category.length == 0 ? <option>카테고리가 없습니다.

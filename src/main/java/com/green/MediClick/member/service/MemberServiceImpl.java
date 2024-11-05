@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService{
         sqlSession.insert("doctorMapper.insertDoctor",doctorVO);
     }
 
+    @Override
+    public boolean isCheck(String memRrn) {
+        int count = sqlSession.selectOne("member.isCheck",memRrn);
+        return count > 0;
+    }
+
     public MemberVO getOneMem(String memNum) {
         return sqlSession.selectOne("member.getOneMem",memNum);
     }
